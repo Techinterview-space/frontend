@@ -1,0 +1,25 @@
+<div *ngIf="show" class="modal d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog custom-alert modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Markdown content</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="p-1">
+          <div class="p-2">
+            <textarea #markdownContentInput class="form-control" rows="30">{{ interviewMarkdownContent }}</textarea>
+          </div>
+        </div>
+
+        <div class="p-1 d-flex justify-content-between">
+          <button class="btn btn-outline-secondary" (click)="close()">Close</button>
+          <button class="btn btn-outline-dark" (click)="copy(markdownContentInput)">
+            <i class="{{ copyBtnIcon }}"></i> {{ copyBtnTitle }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

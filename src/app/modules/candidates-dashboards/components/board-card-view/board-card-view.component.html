@@ -1,0 +1,7 @@
+<div class="mb-3">{{ title }}</div>
+<div *ngIf="card">
+  <app-employment-status [status]="card.employmentStatus"></app-employment-status>
+  <div class="" *ngIf="card.labels">
+    <app-label *ngFor="let label of card.labels" [label]="label"></app-label>
+  </div>
+</div>

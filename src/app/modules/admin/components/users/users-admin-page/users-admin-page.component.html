@@ -1,0 +1,69 @@
+<app-page-header>All users</app-page-header>
+
+<div class="container my-5" *ngIf="users; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive mb-3" *ngIf="users.length > 0; else nothingToShow">
+        <table class="table table-hover table-sm">
+          <thead>
+            <th>Id</th>
+            <th>Full name</th>
+            <th>Roles</th>
+            <th>Active</th>
+            <th>Registered at</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of users; let i = index">
+              <td>{{ item.id }}</td>
+              <td><app-user-link [css]="'link-as-text'" [user]="item"></app-user-link></td>
+              <td><app-user-roles-label [userRoles]="item.roles"></app-user-roles-label></td>
+              <td><app-status-label [status]="item.isActive"></app-status-label></td>
+              <td>{{ item.createdAt | date: 'yyyy-MM-dd' }}</td>
+              <td>
+                <button type="button" class="btn-link-sm" (click)="openUserRolesForm(item)">Edit roles</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons [source]="source" (pageChange)="loadData($event)"></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">There is no users.</div>
+    </div>
+  </div>
+</ng-template>
+
+<app-dialog [show]="!!userRolesForm" (closed)="onEditModalDlgClose()" [header]="'Edit organization'">
+  <div>
+    <form class="mb-5" *ngIf="!!userRolesForm" [formGroup]="userRolesForm" (ngSubmit)="onFormSubmit()">
+      <div class="mb-3">
+        <label>Roles</label>
+        <select multiple class="form-control" formControlName="roles">
+          <option *ngFor="let option of options" [value]="option.item">{{ option.label }}</option>
+        </select>
+
+        <app-field-error [field]="userRolesForm.get('roles')"></app-field-error>
+      </div>
+
+      <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</app-dialog>

@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<app-admin-navbar *ngIf="showAdminNavbar"></app-admin-navbar>
+
+<div class="app-body d-flex flex-column h-100">
+  <main class="main flex-shrink-0">
+    <div id="body-container">
+      <router-outlet></router-outlet>
+      <app-alert></app-alert>
+    </div>
+  </main>
+  <ngx-spinner
+    [name]="timer"
+    bdOpacity="0.3"
+    bdColor="rgba(51,51,51,0.91)"
+    size="medium"
+    color="#fff"
+    type="timer"
+    [fullScreen]="true"
+  ></ngx-spinner>
+
+  <ngx-spinner
+    [name]="transparent"
+    bdOpacity="0"
+    bdColor="rgba(51,51,51,0)"
+    size="large"
+    color="rgba(255,255,255,0)"
+    type="timer"
+    [fullScreen]="true"
+  ></ngx-spinner>
+</div>

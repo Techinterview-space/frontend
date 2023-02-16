@@ -1,0 +1,27 @@
+<ng-select
+  [items]="labels"
+  [addTag]="onNewLabelAddedFn"
+  [hideSelected]="true"
+  [selectOnTab]="true"
+  [clearOnBackspace]="true"
+  [multiple]="true"
+  bindLabel="title"
+  placeholder="{{ placeholder }}"
+  [(ngModel)]="selectedLabels"
+  [ngModelOptions]="{ standalone: true }"
+  (change)="onSelectChange($event)"
+>
+  <ng-template ng-label-tmp let-item="item">
+    <span [style.backgroundColor]="item.hexColor" class="px-3 ng-value-label">{{ item.title }}</span>
+    <span
+      [style.backgroundColor]="item.hexColor"
+      class="ng-value-icon right border-0"
+      (click)="clearSelectedLabel(item)"
+      aria-hidden="true"
+      >x</span
+    >
+  </ng-template>
+  <ng-template ng-option-tmp let-item="item" let-index="index">
+    <span [style.backgroundColor]="item.hexColor" class="px-3 ng-value-label">{{ item.title }}</span>
+  </ng-template>
+</ng-select>

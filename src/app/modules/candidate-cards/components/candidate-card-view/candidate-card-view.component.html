@@ -1,0 +1,24 @@
+<app-page-header>{{ title }}</app-page-header>
+
+<div class="my-5 container" *ngIf="candidateCard; else dataLoading">
+  <div class="card card-body">
+    <div class="text-muted small mb-2">
+      <span>Candidate card</span>
+    </div>
+    <app-candidate-card-partitial-view
+      [candidateCard]="candidateCard"
+      (cardUpdated)="onCardUpdated($event)"
+      (cardArchived)="onCardArchived($event)"
+      (cardRestored)="onCardRestored($event)"
+      (statusChanged)="onStatusChanged($event)"
+      (commentAdded)="onCommentAdded($event)"
+      (commentDeleted)="onCommentDeleted($event)"
+    ></app-candidate-card-partitial-view>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>

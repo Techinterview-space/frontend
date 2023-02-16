@@ -1,0 +1,35 @@
+<div class="w-100 d-flex justify-content-center" *ngIf="source">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item {{ disablePreviousButton ? 'disabled' : '' }}">
+        <button
+          type="button"
+          [disabled]="disablePreviousButton"
+          class="page-link"
+          aria-label="Previous"
+          [attr.aria-disabled]="disablePreviousButton"
+          (click)="previous()"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+
+      <li *ngFor="let page of pages" class="page-item {{ activePageStyle(page) }}">
+        <button type="button" class="page-link" (click)="pageClicked(page)">{{ page }}</button>
+      </li>
+
+      <li class="page-item {{ disableNextButton ? 'disabled' : '' }}">
+        <button
+          type="button"
+          [disabled]="disableNextButton"
+          class="page-link"
+          aria-label="Next"
+          [attr.aria-disabled]="disableNextButton"
+          (click)="next()"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>

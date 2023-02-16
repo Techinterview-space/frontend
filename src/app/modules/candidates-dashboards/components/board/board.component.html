@@ -1,0 +1,38 @@
+<div *ngIf="board" cdkDropListGroup class="board">
+  <div
+    cdkDropList
+    [cdkDropListData]="board.lists[i].cards"
+    (cdkDropListDropped)="drop($event, list)"
+    *ngFor="let list of board.lists; let i = index"
+    class="list"
+  >
+    <div class="list-header">
+      <strong>{{ list.name }}</strong>
+    </div>
+
+    <div (click)="openModal(card)" cdkDrag *ngFor="let card of list.cards" class="card">
+      <app-board-card-view [card]="card"></app-board-card-view>
+    </div>
+
+    <hr />
+    <button class="card-button add-card" (click)="addCardAction(list.id)">+ Add a card</button>
+  </div>
+</div>
+
+<app-card-modal
+  *ngIf="selectedCandidateCard"
+  (cardUpdated)="onCardUpdated($event)"
+  (closed)="closeModal()"
+  (cardArchived)="archive($event)"
+  (cardRestored)="restore($event)"
+  (statusChanged)="statusChanged($event)"
+  [selectedCard]="selectedCandidateCard"
+></app-card-modal>
+
+<app-add-candidate-card-dialog
+  *ngIf="selectedListId"
+  [selectedListId]="selectedListId"
+  [organizationId]="organizationId"
+  (closed)="closeAddCardAction()"
+  (candidateCardCreated)="candidateCardCreated($event)"
+></app-add-candidate-card-dialog>

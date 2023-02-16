@@ -1,0 +1,15 @@
+<div class="fixed-bottom w-100">
+  <div class="alert-wrapper">
+    <div
+      *ngFor="let alert of alerts"
+      class="alert {{ cssClass(alert) }} alert-dismissible fade show"
+      role="alert"
+      (click)="clearTimeout()"
+    >
+      <div class="container">
+        <span>{{ alert.message }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+</div>

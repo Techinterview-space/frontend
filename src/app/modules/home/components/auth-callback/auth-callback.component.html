@@ -1,0 +1,16 @@
+<div *ngIf="showErrorBlock" class="container">
+  <div class="card">
+    <div class="card-body">
+      <p class="text-danger" role="alert">
+        Oops, there was an error, please try to login again.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="showInfoblock">
+  <div class="text-center mt-5">
+    <div class="display-2">Please wait for a while...</div>
+    <div class="display-4">We are preparing some awesome features for you</div>
+  </div>
+</div>

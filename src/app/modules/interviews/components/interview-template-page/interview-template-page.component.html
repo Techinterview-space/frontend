@@ -1,0 +1,127 @@
+<app-page-header>
+  {{ pageTitle }}
+</app-page-header>
+
+<div class="container mt-5" *ngIf="interviewTemplate; else dataLoading">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="text-muted small">Author</div>
+              <div class="small">
+                {{ interviewTemplate.author?.email }}
+              </div>
+            </li>
+            <li class="list-group-item" *ngIf="interviewTemplate.organization">
+              <div class="text-muted small">Organization</div>
+              <div>
+                <a
+                  routerLink="/organizations/{{ interviewTemplate.organizationId }}"
+                  title="Go to the organization page"
+                >
+                  {{ interviewTemplate.organization.name }}
+                </a>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Subjects</div>
+              <div>
+                {{ interviewTemplate.subjects?.length }}
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Visibility</div>
+              <div>
+                <app-visibility-label [visibility]="interviewTemplate.isPublic"></app-visibility-label>
+              </div>
+            </li>
+
+            <li class="list-group-item" *ngIf="interviewTemplate.labels.length > 0">
+              <div class="text-muted small">Labels</div>
+              <div>
+                <app-label *ngFor="let item of interviewTemplate.labels" [label]="item"></app-label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Last update</div>
+              <div>
+                {{ interviewTemplate.updatedAt | date: 'HH:mm yyyy-MM-dd' }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-body d-flex justify-content-between">
+          <div class="d-inline-block">
+            <app-go-back-button></app-go-back-button>
+          </div>
+          <div class="d-inline-block" *ngIf="showEditButtons">
+            <a
+              routerLink="/interviews/templates/{{ interviewTemplate?.id }}/edit"
+              class="btn-link-sm"
+              title="Edit the template"
+              >Edit</a
+            >
+            <button
+              type="button"
+              class="btn-link-sm btn-link-danger ms-1"
+              title="Delete the template"
+              (click)="delete()"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+      <div class="card">
+        <div class="card-body">
+          <div class="mb-3" *ngIf="interviewTemplate.overallOpinion">
+            <div>
+              <div class="small text-muted">Overall opinion text template</div>
+              <markdown>{{ interviewTemplate.overallOpinion }}</markdown>
+            </div>
+            <hr />
+          </div>
+          <ul
+            class="list-group list-group-flush"
+            *ngIf="interviewTemplate && interviewTemplate.subjects.length > 0; noSubjectsYet"
+          >
+            <li class="list-group-item" *ngFor="let item of interviewTemplate.subjects; let i = index">
+              <div class="d-flex justify-content-between">
+                <div class="d-inline-block">
+                  <span class="text-muted small">{{ i + 1 }}.</span><strong class="ms-1">{{ item.title }}</strong>
+                </div>
+              </div>
+              <div class="ps-3" *ngIf="item.description">
+                <markdown>{{ item.description }}</markdown>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noSubjectsYet>
+  <div class="card">
+    <div class="card-body text-center">
+      <span class="h4">No subjects yet</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>

@@ -1,0 +1,10 @@
+<button
+  [disabled]="waitingResponse"
+  type="submit"
+  (click)="preventDoubleSubmit()"
+  class="{{ css }} {{ additionalCss }}"
+  title="{{ title }}"
+>
+  <span *ngIf="waitingResponse" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+  <ng-content></ng-content>
+</button>

@@ -1,0 +1,235 @@
+<app-page-header>
+  {{ pageTitle }}
+</app-page-header>
+
+<div class="container mt-5 mb-5" *ngIf="formGroup">
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="form-floating mb-3" *ngIf="!disableOrganizationAndCandidateFields; else readonlyCandidateName">
+              <input
+                type="text"
+                class="form-control"
+                id="candidateName"
+                aria-describedby="candidateNameHint"
+                formControlName="candidateName"
+                placeholder="Type a candidate's name"
+              />
+              <label for="candidateName" class="form-label">Candidate name</label>
+              <app-field-error [field]="formGroup.get('candidateName')"></app-field-error>
+            </div>
+
+            <div class="mb-3" *ngIf="disableOrganizationAndCandidateFields; else organizationSelectBox">
+              <div class="text-muted">Organization</div>
+              <div>{{ organization?.name }}</div>
+            </div>
+
+            <div class="mb-3" *ngIf="employmentStatus">
+              <div class="text-muted">Candidate stage</div>
+              <div>
+                <app-employment-status [status]="employmentStatus"></app-employment-status>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <select formControlName="candidateGrade" class="form-select" aria-label="Select a grade">
+                <option [value]="null" selected disabled>Select a grade</option>
+                <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
+              </select>
+              <app-field-error [field]="formGroup.get('candidateGrade')"></app-field-error>
+            </div>
+
+            <div class="mb-3">
+              <app-labels-ng-select
+                [labels]="labels"
+                [(selectedLabels)]="selectedLabels"
+                [placeholder]="'Select tags for your interview'"
+              ></app-labels-ng-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-body">
+            <div class="mb-3 d-flex justify-content-between">
+              <div class="d-inline-block">
+                <app-go-back-button></app-go-back-button>
+              </div>
+              <div class="d-inline-block">
+                <app-submit-button (btnSubmit)="onSave()">Save</app-submit-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-8">
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            placeholder="Type your overall opinion here"
+            id="overallOpinion"
+            style="height: 100px"
+            formControlName="overallOpinion"
+          ></textarea>
+          <label for="overallOpinion">Overall opinion about candidate</label>
+          <app-field-error [field]="formGroup.get('overallOpinion')"></app-field-error>
+          <div class="text-muted small">Markdown is supported</div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-3 d-flex justify-content-between align-items-end">
+              <div class="d-inline-block">
+                <span class="h4">Subjects: {{ subjectsCount }}</span>
+                <button class="btn-link-sm ms-1" type="button" (click)="openAddSubjectsFromTemplateModal()">
+                  Add subjects from template
+                </button>
+              </div>
+
+              <div class="d-inline-block">
+                <button
+                  class="btn-link-sm"
+                  type="button"
+                  (click)="clearSubjects()"
+                  [disabled]="formGroup.subjectsCount === 0"
+                >
+                  Clear all
+                </button>
+                <button type="button" class="btn-link-sm ms-1" (click)="addSubject()" title="Add a new subject">
+                  <i class="bi bi-plus-square"></i> Add new subject
+                </button>
+              </div>
+            </div>
+
+            <ul class="list-group list-group-flush mb3" formArrayName="subjects">
+              <li
+                class="list-group-item"
+                *ngFor="let child of formGroup.subjectsFormArray.controls; let subjectIndex = index"
+              >
+                <div [formGroupName]="subjectIndex">
+                  <div class="mb-3">
+                    <div class="input-group">
+                      <span class="input-group-text">{{ subjectIndex + 1 }}</span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="title"
+                        id="subjectTitle_{{ subjectIndex }}"
+                        placeholder="Subject title"
+                      />
+                      <select formControlName="grade" class="form-select w-10" aria-label="Select a grade">
+                        <option [value]="null">Didn't check</option>
+                        <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
+                      </select>
+
+                      <button
+                        class="btn btn-outline-primary"
+                        type="button"
+                        (click)="formGroup.moveDown(subjectIndex)"
+                        title="Move down"
+                        [disabled]="!formGroup.canBeMovedDown(subjectIndex)"
+                      >
+                        <i class="bi bi-arrow-down"></i>
+                      </button>
+
+                      <button
+                        class="btn btn-outline-primary"
+                        type="button"
+                        (click)="formGroup.moveUp(subjectIndex)"
+                        title="Move up"
+                        [disabled]="!formGroup.canBeMovedUp(subjectIndex)"
+                      >
+                        <i class="bi bi-arrow-up"></i>
+                      </button>
+
+                      <button
+                        class="btn btn-outline-danger"
+                        type="button"
+                        (click)="removeSubject(subjectIndex)"
+                        title="Remove the subject"
+                      >
+                        <i class="bi bi-trash-fill"></i>
+                      </button>
+                    </div>
+                    <div class="mb-1">
+                      <app-field-error [field]="formGroup.getSubjectTitleField(subjectIndex)"></app-field-error>
+                    </div>
+
+                    <div class="text-muted small ps-3" *ngIf="formGroup.subjectDescriptions[subjectIndex]">
+                      <app-text-with-linebreaks
+                        [source]="formGroup.subjectDescriptions[subjectIndex]"
+                      ></app-text-with-linebreaks>
+                    </div>
+                  </div>
+
+                  <div class="ps-5">
+                    <div class="d-flex justify-content-between">
+                      <label>Comments</label>
+                      <span class="text-muted small">Markdown is supported</span>
+                    </div>
+                    <textarea class="form-control" rows="5" formControlName="comments"></textarea>
+                    <app-field-error [field]="formGroup.getSubjectCommentsField(subjectIndex)"></app-field-error>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <div class="mb-3" *ngIf="formGroup.subjectsCount > 0">
+              <hr />
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn-link-sm" (click)="addSubject()" title="Add a new subject">
+                  <i class="bi bi-plus-square"></i> Add subject
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #organizationSelectBox>
+  <div class="mb-3" *ngIf="myOrganizations.length > 0">
+    <select class="form-control" formControlName="organizationId">
+      <option value="">No organization</option>
+      <option *ngFor="let item of myOrganizations" [value]="item.id">
+        {{ item.name }}
+      </option>
+    </select>
+  </div>
+</ng-template>
+
+<ng-template #readonlyCandidateName>
+  <div class="mb-3">
+    <div class="text-muted">Candidate name</div>
+    <div>{{ candidateFullname }}</div>
+  </div>
+</ng-template>
+
+<app-dialog
+  [show]="templates && showAddSubjectsFromTemplateModal"
+  (closed)="onAddSubjectsFromTemplateModalClose()"
+  [header]="'Add subjects from the template'"
+>
+  <div class="mb-3">
+    <select class="form-select" (change)="onInterviewTemplateSelected($event)">
+      <option [value]="null" selected disabled>Select a template</option>
+      <option *ngFor="let option of templates" [value]="option.value">{{ option.label }}</option>
+    </select>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button
+      class="btn btn-outline-dark"
+      type="button"
+      [disabled]="!selectedTemplate"
+      (click)="addSubjectsFromTemplate()"
+    >
+      Add subjects and topics
+    </button>
+  </div>
+</app-dialog>

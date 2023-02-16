@@ -1,0 +1,65 @@
+<app-page-header>Organizations</app-page-header>
+
+<div class="container my-5" *ngIf="organizations; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive mb-3" *ngIf="organizations.length > 0; else nothingToShow">
+        <table class="table table-hover table-sm">
+          <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Manager</th>
+            <th>Active</th>
+            <th>Registered at</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of organizations; let i = index">
+              <td class="text-muted small">{{ i + 1 }}</td>
+              <td>
+                <a routerLink="/organizations/{{ item.id }}">{{ item.name }}</a>
+              </td>
+              <td><app-user-link [css]="'link-as-text'" [user]="item.manager"></app-user-link></td>
+              <td><app-status-label [status]="item.active"></app-status-label></td>
+              <td class="text-muted small">{{ item.createdAt | date: 'HH:mm yyyy-MM-dd' }}</td>
+              <td>
+                <button
+                  *ngIf="item.active"
+                  type="button"
+                  class="btn-link-sm btn-link-danger me-1"
+                  (click)="deleteOrganization(item)"
+                >
+                  Delete
+                </button>
+                <button
+                  *ngIf="!item.active"
+                  type="button"
+                  class="btn-link-sm btn-link-danger me-1"
+                  (click)="removeOrganization(item)"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">There is no organizations.</div>
+    </div>
+  </div>
+</ng-template>
+
+<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>

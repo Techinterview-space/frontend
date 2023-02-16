@@ -1,0 +1,76 @@
+<app-page-header>My organizations</app-page-header>
+
+<div class="container my-5" *ngIf="organizations; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <button type="button" class="btn btn-sm btn-outline-primary me-1" (click)="openCreateDialog()">
+          Create a new organization
+        </button>
+      </div>
+
+      <div class="table-responsive mb-3" *ngIf="organizations.length > 0; else nothingToShow">
+        <table class="table table-hover table-sm">
+          <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Manager</th>
+            <th>Active</th>
+            <th>Registered at</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of organizations; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                {{ item.name }}
+              </td>
+              <td><app-user-link [css]="'link-as-text'" [user]="item.manager"></app-user-link></td>
+              <td><app-status-label [status]="item.active"></app-status-label></td>
+              <td>{{ item.createdAt | date: 'HH:mm yyyy-MM-dd' }}</td>
+              <td>
+                <a routerLink="/organizations/{{ item.id }}" class="btn-link-sm">Open</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">You have no organizations.</div>
+    </div>
+  </div>
+</ng-template>
+
+<app-dialog [show]="!!editForm" (closed)="onEditModalDlgClose()" [header]="'Create organization'">
+  <div>
+    <form class="mb-5" *ngIf="!!editForm" [formGroup]="editForm" (ngSubmit)="onFormSubmit()">
+      <div class="mb-3">
+        <label>Name</label>
+        <input type="text" class="form-control" formControlName="name" />
+        <app-field-error [field]="editForm.get('name')"></app-field-error>
+      </div>
+
+      <div class="mb-3">
+        <label>Desription</label>
+        <textarea class="form-control" rows="5" formControlName="description"></textarea>
+        <app-field-error [field]="editForm.get('description')"></app-field-error>
+      </div>
+
+      <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</app-dialog>

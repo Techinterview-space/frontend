@@ -1,0 +1,27 @@
+<div *ngIf="commentForm">
+  <form [attr.style]="showForm ? '' : 'display: none'" [formGroup]="commentForm">
+    <div class="card textarea-body">
+      <textarea
+        #commentTextArea
+        class="textarea"
+        placeholder="Add your comment here"
+        formControlName="comment"
+        (keyup)="autoGrow($event)"
+      ></textarea>
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-sm btn-light" (click)="cancelComment()">Cancel</button>
+        <app-submit-button (btnSubmit)="commentFormSubmit()" [css]="'btn btn-sm ' + submitButtonColorCss"
+          >Save</app-submit-button
+        >
+      </div>
+    </div>
+  </form>
+
+  <div
+    [attr.style]="!showForm ? '' : 'display: none'"
+    class="card text-muted comment-input-stub"
+    (click)="onStubClicked()"
+  >
+    Add your comment here
+  </div>
+</div>

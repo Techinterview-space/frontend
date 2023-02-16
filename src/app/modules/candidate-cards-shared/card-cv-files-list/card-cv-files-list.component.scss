@@ -1,0 +1,19 @@
+.file-download-link {
+  text-decoration: underline;
+  font-weight: 700;
+  color: inherit;
+  border: 0;
+  background-color: transparent;
+  border-radius: 2px;
+
+  &:hover {
+    background-color: darken($color: #ffffff, $amount: 5%);
+  }
+}
+
+.no-files-yet-block {
+  border-radius: 8px;
+  background-color: darken($color: #ffffff, $amount: 5%);
+  color: #7e7e7e;
+  font-size: 0.9rem;
+}

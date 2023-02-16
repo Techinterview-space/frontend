@@ -1,0 +1,7 @@
+<a *ngIf="user; else noUser" class="{{ css }}" routerLink="/users/{{ user.id }}">
+  {{ user.firstName }} {{ user.lastName }}
+</a>
+
+<ng-template #noUser>
+  <span></span>
+</ng-template>

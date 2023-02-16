@@ -1,0 +1,24 @@
+<div *ngIf="selectedCard" class="modal d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog custom-alert modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="h3 modal-title">{{ title }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="p-1">
+          <app-candidate-card-partitial-view
+            [candidateCard]="selectedCard"
+            (cardUpdated)="onCardUpdated($event)"
+            (cardArchived)="onCardArchived($event)"
+            (cardRestored)="onCardRestored($event)"
+            (statusChanged)="onStatusChanged($event)"
+            (commentAdded)="onCommentAdded($event)"
+            (commentDeleted)="onCommentDeleted($event)"
+          ></app-candidate-card-partitial-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<app-page-header>
+  {{ pageTitle }}
+</app-page-header>
+
+<div *ngIf="interview; else dataLoading" class="container mt-5">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="text-muted small">Interviewer</div>
+              <div class="small">
+                {{ interview.interviewer?.email }}
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Candidate name</div>
+              <div class="small">
+                {{ interview.candidateName }}
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Grade</div>
+              <div class="">
+                <app-developer-grade-label [grade]="interview.candidateGrade"></app-developer-grade-label>
+              </div>
+            </li>
+            <li class="list-group-item" *ngIf="interview.organization">
+              <div class="text-muted small">Organization</div>
+              <div class="small">
+                <a routerLink="/organizations/{{ interview.organization.id }}">
+                  {{ interview.organization.name }}
+                </a>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Subjects</div>
+              <div>
+                {{ interview.subjects?.length }}
+              </div>
+            </li>
+            <li class="list-group-item" *ngIf="interview.labels.length > 0">
+              <div class="text-muted small">Labels</div>
+              <div>
+                <app-label *ngFor="let item of interview.labels" [label]="item"></app-label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Last update</div>
+              <div>
+                {{ interview.updatedAt | date: 'HH:mm yyyy-MM-dd' }}
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Export</div>
+              <div>
+                <app-loading-button [css]="'btn btn-sm btn-outline-dark ms-1'" (clicked)="markdownFromServer()">
+                  Markdown
+                </app-loading-button>
+                <app-loading-button [css]="'btn btn-sm btn-outline-dark ms-1'" (clicked)="exportAsPDF()">
+                  PDF
+                </app-loading-button>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="text-muted small">Actions</div>
+              <div>
+                <a routerLink="/interviews/{{ interview?.id }}/edit" class="btn-link-sm" title="Edit the interview"
+                  >Edit</a
+                >
+                <button
+                  type="button"
+                  class="btn-link-sm btn-link-danger ms-1"
+                  title="Delete the interview"
+                  (click)="delete()"
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-body d-flex justify-content-between">
+          <app-go-back-button></app-go-back-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+      <div class="card">
+        <div class="card-body">
+          <div class="mb-3" *ngIf="interview && interview.overallOpinion">
+            <div>
+              <markdown>{{ interview.overallOpinion }}</markdown>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-body">
+          <div class="h5">Subjects discussed</div>
+
+          <ul class="list-group list-group-flush" *ngIf="interview && interview.subjects.length > 0; noSubjectsYet">
+            <li class="list-group-item" *ngFor="let item of interview.subjects; let i = index">
+              <div class="d-flex justify-content-between">
+                <div class="d-inline-block">
+                  <span class="text-muted small">{{ i + 1 }}.</span><strong class="ms-1">{{ item.title }}</strong>
+                </div>
+                <span><app-developer-grade-label [grade]="item.grade"></app-developer-grade-label></span>
+              </div>
+              <div class="ps-5" *ngIf="item.comments">
+                <div class="small">
+                  <markdown>{{ item.comments }}</markdown>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noSubjectsYet>
+  <div class="card">
+    <div class="card-body text-center">
+      <span class="h4">No subjects were discussed</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
+
+<app-interview-markdown-modal-dialog
+  *ngIf="interviewMarkdownContent"
+  [show]="showMarkdownContentModal"
+  [interview]="interviewMarkdownContent"
+  (closed)="showMarkdownContentModal = !showMarkdownContentModal"
+>
+</app-interview-markdown-modal-dialog>

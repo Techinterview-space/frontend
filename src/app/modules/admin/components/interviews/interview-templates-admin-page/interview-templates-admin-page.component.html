@@ -1,0 +1,52 @@
+<app-page-header> All interview templates </app-page-header>
+
+<div class="container mt-5 mb-5" *ngIf="templates; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive mb-3" *ngIf="templates.results.length > 0; else nothingToShow">
+        <table class="table table-hover table-sm">
+          <thead>
+            <th>#</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Subjects</th>
+            <th>Visibility</th>
+            <th>Last update</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of templates.results; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.title }}</td>
+              <td>{{ item.author?.email }}</td>
+              <td>{{ item.subjects.length }}</td>
+              <td><app-visibility-label [visibility]="item.isPublic"></app-visibility-label></td>
+              <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
+              <td>
+                <a routerLink="/interviews/templates/{{ item.id }}" class="btn-link-sm"> Open </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="" *ngIf="templates && templates.results.length > 0">
+        <app-pagination-buttons [source]="templates" (pageChange)="loadTemplates($event)"></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">There is no templates.</div>
+    </div>
+  </div>
+</ng-template>

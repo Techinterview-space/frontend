@@ -1,0 +1,80 @@
+import { ApplicationUser } from '@models/application-user';
+import Assertion from '@shared/validation/assertion';
+import { UserRole } from '@models/enums';
+import { OrganizationUser } from '@models/organizations/organization-user.model';
+
+export class ApplicationUserExtended implements ApplicationUser {
+  readonly fullName: string;
+  readonly rolesAsString: Array<string> = [];
+
+  get id(): number {
+    return this.instance.id;
+  }
+
+  get firstName(): string | null {
+    return this.instance.firstName;
+  }
+
+  get lastName(): string | null {
+    return this.instance.lastName;
+  }
+
+  get fullname(): string {
+    return this.instance.fullname;
+  }
+
+  get email(): string | null {
+    return this.instance.email;
+  }
+
+  get emailConfirmed(): boolean {
+    return this.instance.emailConfirmed;
+  }
+
+  get identityId(): number | null {
+    return this.instance.identityId;
+  }
+
+  get updatedAt(): Date {
+    return this.instance.updatedAt;
+  }
+
+  get createdAt(): Date {
+    return this.instance.createdAt;
+  }
+
+  get deletedAt(): Date | null {
+    return this.instance.deletedAt;
+  }
+
+  get isActive(): boolean {
+    return this.instance.deletedAt == null;
+  }
+
+  get roles(): Array<UserRole> {
+    return this.instance.roles;
+  }
+
+  get organizations(): Array<OrganizationUser> {
+    return this.instance.organizations;
+  }
+
+  constructor(public readonly instance: ApplicationUser) {
+    Assertion.notNull(instance, 'instance', ApplicationUserExtended.name);
+
+    this.fullName = `${instance.firstName} ${instance.lastName}`;
+    instance.roles.forEach((role) => {
+      this.rolesAsString.push(UserRole[role]);
+    });
+  }
+
+  hasRole(role: UserRole): boolean {
+    return this.instance.roles.includes(role);
+  }
+
+  hasRoleOrFail(role: UserRole): void {
+    if (!this.hasRole(role)) {
+      throw Error('You have no permission to execute this operation');
+    }
+  }
+}

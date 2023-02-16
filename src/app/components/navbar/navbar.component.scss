@@ -1,0 +1,18 @@
+@import '../../../_colors';
+
+.navbar-brand:hover {
+  text-decoration: underline;
+}
+
+.nav-link {
+  &:hover {
+    color: $bg-petrel-dark;
+    background-color: #ffffff;
+    border-radius: 5px;
+    filter: brightness(95%);
+  }
+}
+
+.logo-image {
+  width: 28px;
+}

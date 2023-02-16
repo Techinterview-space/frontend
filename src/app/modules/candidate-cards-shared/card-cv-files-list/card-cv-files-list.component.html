@@ -1,0 +1,64 @@
+<div *ngIf="card">
+  <div class="mb-2 d-flex justify-content-between">
+    <div class="d-inline-block text-muted small">
+      <span class="me-1">Attachments:</span>
+      <span>{{ card.files.length }}</span>
+    </div>
+    <button type="button" class="btn-link-sm" (click)="openUploadDialog()">Upload</button>
+  </div>
+  <div *ngIf="card.files.length > 0; else noFilesYet" class="">
+    <ul class="no-bullets">
+      <li *ngFor="let item of card.files">
+        <div class="d-flex justify-content-between small">
+          <div class="d-inline-block">
+            <button type="button" (click)="downloadFile(item)" class="file-download-link">{{ item.fileName }}</button>
+            <button
+              type="button"
+              class="btn-link-sm btn-link-danger ms-3"
+              (click)="deleteFile(item)"
+              title="Delete the file"
+            >
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <span class="text-muted">2022-10-02</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<app-dialog [show]="!!uploadForm" (closed)="onEditModalDlgClose()" [header]="'Upload CV or any other file'">
+  <div>
+    <form class="mb-5" *ngIf="!!uploadForm" [formGroup]="uploadForm">
+      <div class="mb-3">
+        <label for="attachment">File</label>
+        <input
+          formControlName="file"
+          id="file"
+          type="file"
+          class="form-control"
+          (change)="onFileAttachmentChange($event)"
+        />
+        <div class="text-muted">Allowed extensions: jpg, jpeg, png, pdf, gif</div>
+      </div>
+
+      <div class="mb-3 d-flex justify-content-between">
+        <button type="reset" class="btn-link-sm" (click)="clearFileControl()">Clear</button>
+        <app-submit-button (btnSubmit)="onFormSubmit()" [title]="'Upload the file'" [css]="'btn btn-outline-dark'"
+          >Upload</app-submit-button
+        >
+      </div>
+    </form>
+  </div>
+</app-dialog>
+
+<ng-template #noFilesYet>
+  <div class="no-files-yet-block text-center p-3">
+    <i>No files yet. </i>
+    <button type="button" class="btn-link-sm" (click)="openUploadDialog()">
+      <i>Upload</i>
+    </button>
+    <i> the first one</i>
+  </div>
+</ng-template>

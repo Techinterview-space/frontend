@@ -1,0 +1,121 @@
+/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+@import '_colors';
+
+.footer-wrapper {
+  background-color: $bg-petrel-dark;
+  color: rgb(240, 240, 240);
+}
+
+.bg-petrel-light {
+  background-color: $bg-petrel-light;
+}
+
+.bg-petrel-primary {
+  background-color: $bg-petrel-primary;
+}
+
+.bg-petrel-dark {
+  background-color: $bg-petrel-dark;
+}
+
+input.ng-touched.ng-invalid {
+  @extend .is-invalid;
+}
+
+input.ng-touched.ng-valid {
+  @extend .is-valid;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.6);
+  -webkit-animation: fadein 0.2s;
+  animation: fadein 0.2s;
+}
+
+body {
+  background-color: $bg-petrel-light;
+}
+
+.footer-link {
+  color: $bg-petrel-light !important;
+  text-decoration: none;
+
+  &:hover {
+    color: darken($color: $bg-petrel-light, $amount: 20%) !important;
+    text-decoration: underline;
+  }
+}
+
+.link-as-text {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: darken($color: $bg-petrel-dark, $amount: 20%) !important;
+    text-decoration: underline;
+  }
+}
+
+.btn-huge {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+}
+
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+
+.btn-link-sm {
+  color: inherit;
+  background-color: transparent;
+  border: 0;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+
+  &:disabled {
+    color: $color-grey;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &:hover {
+    color: darken($color: $color-dark, $amount: 20%);
+    text-decoration: underline;
+  }
+
+  &.btn-link-danger {
+    color: $color-danger;
+    &:hover {
+      color: darken($color: $color-danger, $amount: 20%);
+    }
+  }
+
+  &.btn-link-warning {
+    color: $color-warning;
+    &:hover {
+      color: darken($color: $color-warning, $amount: 20%);
+    }
+  }
+
+  &.btn-link-success {
+    color: $color-success;
+    &:hover {
+      color: darken($color: $color-success, $amount: 20%);
+    }
+  }
+
+  &.btn-link-info {
+    color: $color-info;
+    &:hover {
+      color: darken($color: $color-info, $amount: 20%);
+    }
+  }
+}

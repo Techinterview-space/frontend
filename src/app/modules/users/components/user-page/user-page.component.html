@@ -1,0 +1,11 @@
+<app-page-header>{{ user?.firstName }} {{ user?.lastName }}</app-page-header>
+
+<div class="container mt-5 mb-5" *ngIf="user; else dataLoading">
+  <app-user-profile-page [user]="user"></app-user-profile-page>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>

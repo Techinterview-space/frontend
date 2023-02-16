@@ -1,0 +1,20 @@
+<div *ngIf="show" class="modal d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog custom-alert {{ additionalCss }}" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="header" class="modal-title">{{ header }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="p-1">
+          <ng-content></ng-content>
+        </div>
+
+        <div class="p-1 confirm-button">
+          <button class="btn btn-outline-secondary" (click)="close()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

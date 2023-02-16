@@ -1,0 +1,37 @@
+<table class="table table-hover clickable">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" title="">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Items</th>
+      <th scope="col">Elapsed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let item of items; let i = index"
+      class="cursor-pointer {{ item.executing ? 'table-warning' : '' }}"
+      title="{{ item.executing ? 'The job is executing' : 'Click to execute' }}"
+      (click)="item.execute()"
+    >
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ item.title }}</td>
+      <td>
+        <small>{{ item.hint }}</small>
+      </td>
+      <td class="text-center">
+        <span class="small" *ngIf="item.itemsUpdated; else noElapsed">
+          {{ item.itemsUpdated }}
+        </span>
+      </td>
+      <td class="text-center">
+        <span class="small" *ngIf="item.elapsed; else noElapsed"> {{ item.elapsed }} ms </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #noElapsed>
+  <span>-</span>
+</ng-template>

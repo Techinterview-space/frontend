@@ -1,0 +1,68 @@
+<div class="row" *ngIf="user">
+  <div class="col-sm-3">
+    <div class="card card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="small text-muted">Email</div>
+          <div class="small">
+            {{ user?.email }}
+          </div>
+        </li>
+
+        <li class="list-group-item" *ngIf="!user.emailConfirmed">
+          <div class="small text-muted">Email confirmed</div>
+          <div class="">
+            <span class="badge bg-warning text-dark">Not confirmed</span>
+          </div>
+        </li>
+
+        <li class="list-group-item" *ngIf="user.deletedAt">
+          <div class="small text-muted">Status</div>
+          <div class="">
+            <span class="badge bg-danger text-light">Deleted</span>
+          </div>
+        </li>
+
+        <li class="list-group-item">
+          <div class="small text-muted">Roles</div>
+          <div *ngIf="user">
+            <app-user-roles-label [userRoles]="user.roles"></app-user-roles-label>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-sm-9">
+    <div class="card card-body">
+      <div *ngIf="user.organizations && user.organizations.length > 0; else noOrganizations">
+        <div class="mb-3">
+          <span class="h5">Organizations</span>
+        </div>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let item of user.organizations; let i = index">
+            <div class="d-flex justify-content-between">
+              <div class="d-inline-block">
+                <span class="me-1">{{ i + 1 }}.</span>
+                <a *ngIf="item.active" routerLink="/organizations/{{ item.organizationId }}">{{
+                  item.organization.name
+                }}</a>
+                <span *ngIf="!item.active">{{ item.organization.name }}</span>
+              </div>
+
+              <div class="d-inline-block text-muted small">
+                <span class="me-1"> Since {{ item.createdAt | date: 'HH:mm yyyy-MM-dd' }}</span>
+                <span *ngIf="!item.active" class="me-1">till {{ item.deletedAt | date: 'HH:mm yyyy-MM-dd' }}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noOrganizations>
+  <div class="text-muted p-5 text-center">User does not belong to any organization.</div>
+</ng-template>
