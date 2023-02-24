@@ -54,7 +54,6 @@ jobs:
           script_stop: true
           script: |
             cd ~/deploy
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            docker login -u ${{ env.DO_TOKEN }} -p ${{ env.DO_TOKEN }} registry.digitalocean.com/techinterview
             docker-compose -f docker-compose.frontend.yml pull
             docker-compose -f docker-compose.frontend.yml up -d
-
