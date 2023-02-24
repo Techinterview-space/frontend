@@ -13,4 +13,4 @@ RUN rm -rf /usr/share/nginx/html/*
 RUN rm -rf /etc/nginx/conf.d/*
 COPY --from=compile-image /app/default.conf /etc/nginx/conf.d/
 COPY --from=compile-image  /app/dist/petrel.interviewer /usr/share/nginx/html
-EXPOSE 8080
+EXPOSE 80

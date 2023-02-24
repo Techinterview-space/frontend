@@ -11,6 +11,6 @@ services:
     image: {api}
     restart: always
     ports:
-      - 8080:8080
+      - 8080:80
     networks:
       - interviewer-network
