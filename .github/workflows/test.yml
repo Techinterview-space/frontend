@@ -28,7 +28,7 @@ jobs:
       image: docker:stable
     env:
       DO_TOKEN: ${{ secrets.DO_TOKEN }}
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - uses: actions/checkout@v3
