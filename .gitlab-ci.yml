@@ -227,7 +227,7 @@ build containers for prod front:
     - cd src
 
     script:
-        - docker build -f Dockerfile_Frontend_Prod -t ${FRONTEND_IMAGE_PROD}:$CI_COMMIT_SHORT_SHA -t ${FRONTEND_IMAGE_PROD}:latest .
+        - docker build -f Dockerfile -t ${FRONTEND_IMAGE_PROD}:$CI_COMMIT_SHORT_SHA -t ${FRONTEND_IMAGE_PROD}:latest .
     - docker push ${FRONTEND_IMAGE_PROD}
 
     after_script:
