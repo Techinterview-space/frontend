@@ -1,0 +1,16 @@
+version: "3.4"
+
+networks:
+  interviewer-network:
+    driver: bridge
+
+services:
+
+  frontend:
+    container_name: frontend
+    image: {api}
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - interviewer-network

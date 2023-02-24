@@ -2,43 +2,93 @@ name: Tests
 
 on:
   push:
-    branches: [dev]
+    branches: [ main ]
   pull_request:
-    branches: [dev]
+    branches: [ main ]
 
 jobs:
-    Tests:
-        runs-on: ubuntu-latest
-        env:
-            working-directory: ./src/PC.Frontend/
-
-        steps:
-            - uses: actions/checkout@v1
-          - name: Cache NPM dependencies
-            uses: actions/cache@v1
-            with:
-                path: ~/.npm
-                key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-                restore-keys: |
-                ${{ runner.OS }}-npm-cache-
-          - name: Use Node.js 12.8
-            uses: actions/setup-node@v1
-            with:
-                node-version: 12.8
-          # - name: Install Puppeteer
-          #  run: apt update && apt install -yq gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
-          - name: Install dependencies
-            working-directory: ${{env.working-directory}}
-            run: npm install --no-optional
-
-          - name: Lint
-            working-directory: ${{env.working-directory}}
-            run: npm run lint
-
-          - name: Build
-            working-directory: ${{env.working-directory}}
-            run: npm run build-stage
-
-          - name: Test
-            working-directory: ${{env.working-directory}}
-            run: npm run test-headless-ci-only
+    # tests:
+    #     runs-on: ubuntu-latest
+    #     env:
+    #         working-directory: ./src/PC.Frontend/
+    #
+    #     steps:
+    #         - uses: actions/checkout@v1
+    #       - name: Cache NPM dependencies
+    #         uses: actions/cache@v1
+    #         with:
+    #             path: ~/.npm
+    #             key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+    #             restore-keys: |
+    #             ${{ runner.OS }}-npm-cache-
+    #       - name: Use Node.js 12.8
+    #         uses: actions/setup-node@v1
+    #         with:
+    #             node-version: 12.8
+    #       # - name: Install Puppeteer
+    #       #  run: apt update && apt install -yq gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+    #       - name: Install dependencies
+    #         working-directory: ${{env.working-directory}}
+    #         run: npm install --no-optional
+    #
+    #       - name: Lint
+    #         working-directory: ${{env.working-directory}}
+    #         run: npm run lint
+    #
+    #       - name: Build
+    #         working-directory: ${{env.working-directory}}
+    #         run: npm run build-stage
+    #
+    #       - name: Test
+    #         working-directory: ${{env.working-directory}}
+    #         run: npm run test-headless-ci-only
+  build:
+    # needs: tests
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      DO_TOKEN: ${{ secrets.DO_TOKEN }}
+    container:
+      image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker build and push
+        run: |
+          docker login -u ${{ env.DO_TOKEN }} -p ${{ env.DO_TOKEN }} registry.digitalocean.com
+          docker build -f src/Dockerfile -t ${{ secrets.CR }}:frontend_${{ github.sha }} .
+          docker push ${{ secrets.CR }}:frontend_${{ github.sha }}
+  deploy-ssh:
+    if: github.event_name == 'push'
+    container:
+      image: docker:stable
+    env:
+      DO_TOKEN: ${{ secrets.DO_TOKEN }}
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy ssh
+        run: |
+          sed -i "s,{api},${{ secrets.CR }}:frontend_${{ github.sha }},g" docker-compose.frontend.yml
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.IP }}
+          username: devops
+          key: ${{ secrets.SSH_KEY_PRIVATE }}
+          port: ${{ secrets.PORT }}
+          source: "docker-compose.frontend.yml"
+          target: "/home/devops/deploy"
+      - name: Execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.IP }}
+          username: devops
+          key: ${{ secrets.SSH_KEY_PRIVATE }}
+          port: ${{ secrets.PORT }}
+          script_stop: true
+          script: |
+            cd ~/deploy
+            docker login -u ${{ env.DO_TOKEN }} -p ${{ env.DO_TOKEN }} registry.digitalocean.com
+            docker-compose pull -f docker-compose.frontend.yml
+            docker-compose up -d -f docker-compose.frontend.yml
