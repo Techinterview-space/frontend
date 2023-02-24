@@ -1,7 +1,7 @@
 FROM node:17-alpine3.14 AS compile-image
 
 WORKDIR /app
-
+COPY . .
 RUN npm update
 RUN npm install -g @angular/cli@13.2.3
 RUN npm install
