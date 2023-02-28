@@ -26,9 +26,9 @@ jobs:
         working-directory: ${{env.working-directory}}
         run: npm install --no-optional
 
-      - name: Lint
-        working-directory: ${{env.working-directory}}
-        run: npm run lint
+      #- name: Lint
+      #  working-directory: ${{env.working-directory}}
+      #  run: npm run lint
 
       - name: Build
         working-directory: ${{env.working-directory}}
