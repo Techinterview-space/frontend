@@ -4,9 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-local-stage": "ng serve -o --configuration=local2stage",
     "build": "ng build",
-    "build-stage": "ng build --configuration=staging",
     "build-prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
