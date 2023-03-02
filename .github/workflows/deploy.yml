@@ -1,0 +1,56 @@
+name: build && deploy front
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      DO_TOKEN: ${{ secrets.DO_TOKEN }}
+    container:
+      image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker build and push
+        run: |
+          docker login -u ${{ env.DO_TOKEN }} -p ${{ env.DO_TOKEN }} registry.digitalocean.com
+          docker build -f Dockerfile -t ${{ secrets.CR }}/frontend:${{ github.sha }} .
+          docker push ${{ secrets.CR }}/frontend:${{ github.sha }}
+  deploy-ssh:
+    if: github.event_name == 'push'
+    container:
+      image: docker:stable
+    env:
+      DO_TOKEN: ${{ secrets.DO_TOKEN }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy ssh
+        run: |
+          sed -i "s,{api},${{ secrets.CR }}/frontend:${{ github.sha }},g" docker-compose.frontend.yml
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.IP }}
+          username: devops
+          key: ${{ secrets.SSH_KEY_PRIVATE }}
+          port: ${{ secrets.PORT }}
+          source: "docker-compose.frontend.yml"
+          target: "/home/devops/deploy"
+      - name: Execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.IP }}
+          username: devops
+          key: ${{ secrets.SSH_KEY_PRIVATE }}
+          port: ${{ secrets.PORT }}
+          script_stop: true
+          script: |
+            cd ~/deploy
+            docker login -u ${{ env.DO_TOKEN }} -p ${{ env.DO_TOKEN }} registry.digitalocean.com/techinterview
+            docker-compose -f docker-compose.frontend.yml pull
+            docker-compose -f docker-compose.frontend.yml up -d
