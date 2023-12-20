@@ -113,7 +113,6 @@
       }
     }
   },
-  "defaultProject": "petrel.interviewer",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }
