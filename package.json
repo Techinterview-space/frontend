@@ -69,5 +69,10 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "optionalDependencies": {
+    "@nx/nx-darwin-arm64": "17.2.7",
+    "@nx/nx-darwin-x64": "17.2.7",
+    "@nx/nx-linux-x64-gnu": "17.2.7"
   }
 }
