@@ -49,8 +49,8 @@ export class ViewContainerRefStub extends ViewContainerRef {
     return null;
   }
 
-  createEmbeddedView<C>(templateRef: TemplateRef<C>, context?: C, index?: number): EmbeddedViewRef<C> | any {
-    return null;
+  createEmbeddedView<C>(templateRef: TemplateRef<C>, context?: C): EmbeddedViewRef<C> {
+    return null as unknown as EmbeddedViewRef<C>;
   }
 
   insert(viewRef: ViewRef, index?: number): ViewRef | any {

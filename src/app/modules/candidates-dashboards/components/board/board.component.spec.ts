@@ -4,6 +4,7 @@ import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-u
 import { BoardService } from '../models/board.service';
 
 import { BoardComponent } from './board.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -12,7 +13,7 @@ describe('BoardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BoardComponent],
-      imports: [...mostUsedImports],
+      imports: [...mostUsedImports, DragDropModule],
       providers: [...testUtilStubs, ...mostUsedServices, BoardService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

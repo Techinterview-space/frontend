@@ -77,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "petrel.interviewer:build:production"
+              "buildTarget": "petrel.interviewer:build:production"
             },
             "development": {
-              "browserTarget": "petrel.interviewer:build:development"
+              "buildTarget": "petrel.interviewer:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,14 +88,13 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "petrel.interviewer:build"
+            "buildTarget": "petrel.interviewer:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
@@ -113,8 +112,8 @@
       }
     }
   },
-  "defaultProject": "petrel.interviewer",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@angular-eslint/schematics",
+    "analytics": false
   }
 }

@@ -6,6 +6,7 @@ import { MockAuthService, testUtilStubs } from '@shared/test-utils';
 import { CookieService } from 'ngx-cookie-service';
 
 import { NavbarComponent } from './navbar.component';
+import { RouterModule } from '@angular/router';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -13,7 +14,7 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SharedModule],
+      imports: [SharedModule, RouterModule],
       declarations: [NavbarComponent],
       providers: [{ provide: AuthService, useClass: MockAuthService }, ...testUtilStubs, CookieService, SpinnerService]
     }).compileComponents();

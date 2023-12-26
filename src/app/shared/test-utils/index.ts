@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClientStub } from './http-client.stub';
 import { RouterStub } from './router-stub';
 import { ActivatedRouteMock } from './mock-activated-route';
@@ -57,7 +57,8 @@ export const mostUsedImports = [
   BrowserAnimationsModule,
   RouterTestingModule,
   CommonModule,
-  NgSelectModule
+  NgSelectModule,
+  RouterModule
 ];
 
 // tslint:disable-next-line: ban-types

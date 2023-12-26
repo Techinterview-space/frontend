@@ -28,7 +28,7 @@
             <li class="list-group-item">
               <div class="text-muted small">Subjects</div>
               <div>
-                {{ interviewTemplate.subjects?.length }}
+                {{ interviewTemplate.subjects?.length ?? 0 }}
               </div>
             </li>
             <li class="list-group-item">
@@ -61,7 +61,7 @@
           </div>
           <div class="d-inline-block" *ngIf="showEditButtons">
             <a
-              routerLink="/interviews/templates/{{ interviewTemplate?.id }}/edit"
+              routerLink="/interviews/templates/{{ interviewTemplate?.id ?? '-' }}/edit"
               class="btn-link-sm"
               title="Edit the template"
               >Edit</a
