@@ -1,13 +1,13 @@
-FROM node:17-alpine3.14 AS compile-image
+FROM node:21-alpine3.18 AS compile-image
 
 WORKDIR /app
 COPY . .
 RUN npm update
-RUN npm install -g @angular/cli@13.2.3
+RUN npm install -g @angular/cli@17.0.8
 RUN npm install
 RUN npm run build-prod
 
-FROM nginx:1.17-alpine
+FROM nginx:1.25.3-alpine
 
 RUN rm -rf /usr/share/nginx/html/*
 RUN rm -rf /etc/nginx/conf.d/*

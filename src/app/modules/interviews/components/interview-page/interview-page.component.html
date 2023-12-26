@@ -37,7 +37,7 @@
             <li class="list-group-item">
               <div class="text-muted small">Subjects</div>
               <div>
-                {{ interview.subjects?.length }}
+                {{ interview.subjects?.length ?? 0 }}
               </div>
             </li>
             <li class="list-group-item" *ngIf="interview.labels.length > 0">
@@ -66,7 +66,7 @@
             <li class="list-group-item">
               <div class="text-muted small">Actions</div>
               <div>
-                <a routerLink="/interviews/{{ interview?.id }}/edit" class="btn-link-sm" title="Edit the interview"
+                <a routerLink="/interviews/{{ interview?.id ?? '-' }}/edit" class="btn-link-sm" title="Edit the interview"
                   >Edit</a
                 >
                 <button

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminNavbarComponent } from './admin-navbar.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { mostUsedImports, mostUsedServices, testUtilStubs } from '@shared/test-utils';
 
 describe('AdminNavbarComponent', () => {
   let component: AdminNavbarComponent;
@@ -8,7 +10,10 @@ describe('AdminNavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AdminNavbarComponent]
+      declarations: [AdminNavbarComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [...mostUsedImports],
+      providers: [...testUtilStubs, ...mostUsedServices]
     }).compileComponents();
   });
 

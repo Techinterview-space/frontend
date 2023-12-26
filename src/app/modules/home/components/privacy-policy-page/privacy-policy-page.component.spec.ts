@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PrivacyPolicyPageComponent } from './privacy-policy-page.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { mostUsedImports, mostUsedServices, testUtilStubs } from '@shared/test-utils';
 
 describe('PrivacyPolicyPageComponent', () => {
   let component: PrivacyPolicyPageComponent;
@@ -8,7 +10,10 @@ describe('PrivacyPolicyPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PrivacyPolicyPageComponent]
+      declarations: [PrivacyPolicyPageComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [...mostUsedImports],
+      providers: [...testUtilStubs, ...mostUsedServices]
     }).compileComponents();
   });
 
