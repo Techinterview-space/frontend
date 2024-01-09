@@ -34,6 +34,10 @@ const routes: Routes = [
     path: 'candidate-cards',
     loadChildren: () => import('./modules/candidate-cards/candidate-cards.module').then((m) => m.CandidateCardsModule)
   },
+  {
+    path: 'salaries',
+    loadChildren: () => import('./modules/salaries/salaries.module').then((m) => m.SalariesModule)
+  },
 
   // Fallback when no prior route is matched
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' }

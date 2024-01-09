@@ -1,0 +1,15 @@
+<app-page-header>Add your salary</app-page-header>
+
+<div class="container my-5" *ngIf="true; else dataLoading">
+    <div class="card">
+      <div class="card-body">
+        Form goes here
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #dataLoading>
+    <div class="container mt-5">
+      <app-data-loader></app-data-loader>
+    </div>
+  </ng-template>
