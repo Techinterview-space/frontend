@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SalariesChartComponent } from './salaries-chart.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
 
 describe('SalariesChartComponent', () => {
   let component: SalariesChartComponent;
@@ -8,7 +10,10 @@ describe('SalariesChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SalariesChartComponent]
+      declarations: [SalariesChartComponent],
+      imports: [...mostUsedImports],
+      providers: [...testUtilStubs, ...mostUsedServices],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
     
