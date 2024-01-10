@@ -3,7 +3,42 @@
 <div class="container my-5" *ngIf="true; else dataLoading">
     <div class="card">
       <div class="card-body">
-        Form goes here
+        
+        <form
+          *ngIf="addSalaryForm"
+          [formGroup]="addSalaryForm"
+          (ngSubmit)="addSalarySubmitAction()">
+          <div class="mb-3">
+            <label>First name</label>
+            <input formControlName="candidateFirstName" type="text" class="form-control" />
+            <app-field-error [field]="addNewCandidateCard.get('candidateFirstName')"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <label>Last name</label>
+            <input formControlName="candidateLastName" type="text" class="form-control" />
+            <app-field-error [field]="addNewCandidateCard.get('candidateLastName')"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between">
+              <label>Contacts</label>
+              <span class="text-muted small">Markdown is supported</span>
+            </div>
+            <textarea class="form-control" formControlName="candidateContacts" rows="3"></textarea>
+            <app-field-error [field]="addNewCandidateCard.get('candidateContacts')"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <label>Labels</label>
+            <app-labels-ng-select [labels]="labels" [(selectedLabels)]="selectedLabels" [placeholder]="'Select tags for your template'"></app-labels-ng-select>
+          </div>
+
+          <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Create new card</button>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
