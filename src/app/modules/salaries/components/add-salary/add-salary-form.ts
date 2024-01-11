@@ -45,14 +45,19 @@ static readonly digitsPattern = '^[0-9]*$';
 
     createRequestOrNull(): CreateUserSalaryRequest | null {
         if (this.valid) {
+            const profession = Number(this.value.profession) as UserProfession;
+            const grade = this.value.grade != null
+                ? Number(this.value.grade) as DeveloperGrade
+                : null;
+
           return {
             value: Number(this.value.value),
             quarter: Number(this.value.quarter),
             year: Number(this.value.year),
             currency: Number(this.value.currency) as Currency,
             company: Number(this.value.company) as CompanyType,
-            grade: Number(this.value.grade) as DeveloperGrade,
-            profession: Number(this.value.profession) as UserProfession,
+            grade: grade,
+            profession: profession,
           };
         }
     

@@ -22,6 +22,14 @@ export interface SalariesChartResponse {
   shouldAddOwnSalary: boolean;
   rangeStart: Date;
   rangeEnd: Date;
+  averageSalary: number;
+  medianSalary: number;
+  salariesByProfession: SalariesByProfession[];
+}
+
+export interface SalariesByProfession {
+  profession: UserProfession;
+  salaries: UserSalary[];
 }
 
 @Injectable({
