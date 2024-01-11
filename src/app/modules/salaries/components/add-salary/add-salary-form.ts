@@ -1,6 +1,8 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { DeveloperGrade } from "@models/enums";
 import { CompanyType } from "@models/salaries/company-type";
 import { Currency } from "@models/salaries/currency";
+import { UserProfession } from "@models/salaries/user-profession";
 import { CreateUserSalaryRequest } from "@services/user-salaries.service";
 
 export class AddSalaryForm extends FormGroup {
@@ -44,13 +46,13 @@ static readonly digitsPattern = '^[0-9]*$';
     createRequestOrNull(): CreateUserSalaryRequest | null {
         if (this.valid) {
           return {
-            value: this.value.value,
-            quarter: this.value.quarter,
-            year: this.value.year,
-            currency: this.value.currency,
-            company: this.value.company,
-            grade: this.value.grade,
-            profession: this.value.profession,
+            value: Number(this.value.value),
+            quarter: Number(this.value.quarter),
+            year: Number(this.value.year),
+            currency: Number(this.value.currency) as Currency,
+            company: Number(this.value.company) as CompanyType,
+            grade: Number(this.value.grade) as DeveloperGrade,
+            profession: Number(this.value.profession) as UserProfession,
           };
         }
     
