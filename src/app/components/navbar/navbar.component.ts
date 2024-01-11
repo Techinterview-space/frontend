@@ -133,7 +133,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
           {
             title: 'Salaries chart',
             url: '/salaries',
-            show: hasCurrentUser
+            show: true
           },
         ]
       }
