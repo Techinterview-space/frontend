@@ -4,6 +4,7 @@ import { UserSalary } from '@models/salaries/salary.model';
 import { TitleService } from '@services/title.service';
 import { SalariesChartResponse, UserSalariesService } from '@services/user-salaries.service';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
+import { SalariesChart } from './salaries-chart';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -11,7 +12,7 @@ import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 })
 export class SalariesChartComponent implements OnInit, OnDestroy {
 
-  salariesChart: SalariesChartResponse | null = null;
+  salariesChart: SalariesChart | null = null;
 
   openAddSalaryModal = false;
 
@@ -30,12 +31,15 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.service.charts()
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
-        this.salariesChart = x;
-        this.openAddSalaryModal = true;
-        /*if (this.salariesChart.shouldAddOwnSalary) {
+        this.salariesChart = new SalariesChart(x);
+        if (x.shouldAddOwnSalary) {
           this.openAddSalaryModal = true;
-        }*/
+        }
       });
+  }
+
+  openAddSalaryAction(): void {
+    this.openAddSalaryModal = true;
   }
 
   closeAddSalaryAction(): void {
