@@ -132,14 +132,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
         links: [
           {
             title: 'Salaries chart',
-            url: '/salaries/',
-            show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer)
+            url: '/salaries',
+            show: hasCurrentUser
           },
-          {
-            title: 'Add salary',
-            url: '/salaries/add-salary',
-            show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer)
-          }
         ]
       }
     ];

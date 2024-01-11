@@ -37,7 +37,7 @@ static readonly digitsPattern = '^[0-9]*$';
                     Validators.required
                 ]),
             currency: new FormControl(Currency.KZT, [Validators.required]),
-            company: new FormControl(CompanyType.Local, [Validators.required]),
+            company: new FormControl(null, [Validators.required]),
             grade: new FormControl(null, []),
             profession: new FormControl(null, [Validators.required]),
         });

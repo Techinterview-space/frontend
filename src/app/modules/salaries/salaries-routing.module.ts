@@ -5,12 +5,7 @@ import { AddSalaryComponent } from './components/add-salary/add-salary.component
 import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
-  { path: '', component: SalariesChartComponent, },
-  {
-    path: 'add-salary',
-    component: AddSalaryComponent,
-    canActivate: [AuthGuard],
-  },
+  { path: '', component: SalariesChartComponent, canActivate: [AuthGuard],},
 ];
 
 @NgModule({

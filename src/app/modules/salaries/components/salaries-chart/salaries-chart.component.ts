@@ -13,6 +13,8 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   salariesChart: SalariesChartResponse | null = null;
 
+  openAddSalaryModal = false;
+
   constructor(
     private readonly service: UserSalariesService,
     title: TitleService,
@@ -29,12 +31,20 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.salariesChart = x;
-
-        if (this.salariesChart.shouldAddOwnSalary) {
-          this.router.navigateByUrl('/salaries/add-salary');
-          return;
-        }
+        this.openAddSalaryModal = true;
+        /*if (this.salariesChart.shouldAddOwnSalary) {
+          this.openAddSalaryModal = true;
+        }*/
       });
+  }
+
+  closeAddSalaryAction(): void {
+    this.openAddSalaryModal = false;
+  }
+
+  onSalaryAdded(salary: UserSalary): void {
+    this.openAddSalaryModal = false;
+    this.load();
   }
 
   ngOnDestroy(): void {
