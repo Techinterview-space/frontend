@@ -1,0 +1,73 @@
+<div class="modal d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog custom-alert modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="h3 modal-title">Добавьте свою зарплату</span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="p-1">
+
+          <div class="my-1 mb-3">
+            Для того, чтобы просматривать график зарплат, вам нужно сначала внести свою. График открывается, только если среди данных есть ваша зарплата за последний год.
+          </div>
+
+          <hr class="mb-3" />
+
+          <form
+          *ngIf="addSalaryForm"
+          [formGroup]="addSalaryForm"
+          (ngSubmit)="addSalarySubmitAction()">
+          <div class="mb-3">
+            <label>Зарплата в KZT. Если вы получаете в иной валюте, переведите в тенге.</label>
+            <input formControlName="value" type="text" class="form-control" />
+            <app-field-error [field]="addSalaryForm.get('value')"></app-field-error>
+          </div>
+  
+          <div class="mb-3">
+            <label>Квартал</label>
+            <input formControlName="quarter" type="text" class="form-control" />
+            <app-field-error [field]="addSalaryForm.get('quarter')"></app-field-error>
+          </div>
+  
+          <div class="mb-3">
+            <label>Год</label>
+            <input formControlName="year" type="text" class="form-control" />
+            <app-field-error [field]="addSalaryForm.get('year')"></app-field-error>
+          </div>
+  
+          <div class="mb-3">
+            <select formControlName="company" class="form-select" aria-label="Select a company">
+              <option [value]="null" selected disabled>Работаете в казахстанской компании или удаленно</option>
+              <option *ngFor="let option of companyTypes" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <app-field-error [field]="addSalaryForm.get('company')"></app-field-error>
+          </div>
+  
+          <div class="mb-3">
+            <select formControlName="profession" class="form-select" aria-label="Select your profession">
+              <option [value]="null" selected disabled>Ваша профессия</option>
+              <option *ngFor="let option of professions" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <app-field-error [field]="addSalaryForm.get('profession')"></app-field-error>
+          </div>
+  
+          <div class="mb-3">
+            <select formControlName="grade" class="form-select" aria-label="Select your grade">
+              <option [value]="null" selected disabled>Ваш грейд</option>
+              <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <app-field-error [field]="addSalaryForm.get('grade')"></app-field-error>
+          </div>
+  
+          <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Добавить</button>
+          </div>
+        </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

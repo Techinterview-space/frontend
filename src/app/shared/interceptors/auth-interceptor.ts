@@ -59,6 +59,12 @@ export class AuthInterceptor implements HttpInterceptor {
       return true;
     }
 
+    if (error.status === 0 &&
+        error.url != null &&
+        error.url.endsWith('/health')) {
+      return false;
+    }
+
     const headersStatus = error.headers.get('status');
     return headersStatus != null && Number(headersStatus) === notAuthStatusCode;
   }
@@ -67,6 +73,8 @@ export class AuthInterceptor implements HttpInterceptor {
     // unauthorized
     if (this.checkIsNotAuthorizeError(error)) {
       this.authService!.signout();
+
+      console.log('Navigated by auth interceptor to main page');
       this.router.navigate(['/']);
       return true;
     }

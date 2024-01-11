@@ -14,12 +14,15 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot | null,
     state: RouterStateSnapshot | null): boolean {
+
+    console.log('State', state);
     if (this.authService.isAuthenticated()) {
       return true;
     }
 
-    if (state !== null && state.url !== null) {
+    if (state !== null && state.url != null) {
       // set expire date + 10 hours
+      console.log('Url to redirect', state.url);
       this.cookieService.set('url', state.url, Date.now(), '/');
     }
 

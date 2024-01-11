@@ -125,6 +125,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
             show: true
           }
         ]
+      },
+      {
+        title: 'Salaries',
+        show: true,
+        links: [
+          {
+            title: 'Salaries chart',
+            url: '/salaries',
+            show: true
+          },
+        ]
       }
     ];
 

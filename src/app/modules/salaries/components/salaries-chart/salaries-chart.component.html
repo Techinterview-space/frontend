@@ -1,0 +1,66 @@
+<app-page-header>Зарплаты в Казахстане</app-page-header>
+
+<div class="container my-5" *ngIf="salariesChart != null; else dataLoading">
+    <div class="card">
+      <div class="card-body">
+        <div class="mb-3">
+          На графике можно увидеть зарплаты в Казахстане по разным специальностям IT. Данные заполняются самими пользователями.
+        </div>
+
+        <div *ngIf="salariesChart" class="row">
+          <div class="col-3">
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="small text-muted">Всего зарплат</div>
+                <div class="h4">{{ salariesChart.countOfRecords }}</div>
+              </li>
+      
+              <li class="list-group-item">
+                <div class="small text-muted">Специальностей</div>
+                <div class="h4">{{ salariesChart.salariesByProfession.length }}</div>
+              </li>
+      
+              <li class="list-group-item">
+                <div class="small text-muted">Действия</div>
+                <div class="">
+                  <button class="btn btn-outline-primary btn-sm" (click)="openAddSalaryAction()">Добавить зарплату</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-9 ps-5">
+            <div class="mb-5">
+              <div class="text-muted">Медианная зарплата:</div>
+              <div class="">
+                <span class="display-2 me-3">{{ salariesChart.medianSalary }}</span>
+                <span class="h4 text-muted">тенге.</span>
+              </div>
+            </div>
+
+            <div class="mb-5">
+              <div class="text-muted">Средняя зарплата:</div>
+              <div class="">
+                <span class="display-2 me-3">{{ salariesChart.averageSalary }}</span>
+                <span class="h4 text-muted">тенге.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-add-salary-modal
+    *ngIf="openAddSalaryModal"
+    (closed)="closeAddSalaryAction()"
+    (salaryAdded)="onSalaryAdded($event)"
+  ></app-add-salary-modal>
+  
+  <ng-template #dataLoading>
+    <div class="container mt-5">
+      <app-data-loader></app-data-loader>
+    </div>
+  </ng-template>

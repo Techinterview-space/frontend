@@ -25,10 +25,10 @@ export class MockAuthService implements IAuthService {
   }
 
   login(): Promise<void> {
-    throw new Error('Method not implemented.');
+    return Promise.resolve();
   }
 
   signout(): void {
-    throw new Error('Method not implemented.');
+    // do nothing
   }
 }
