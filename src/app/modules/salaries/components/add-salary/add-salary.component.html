@@ -1,50 +1,65 @@
 <app-page-header>Add your salary</app-page-header>
 
 <div class="container my-5" *ngIf="true; else dataLoading">
-    <div class="card">
-      <div class="card-body">
-        
-        <form
-          *ngIf="addSalaryForm"
-          [formGroup]="addSalaryForm"
-          (ngSubmit)="addSalarySubmitAction()">
-          <div class="mb-3">
-            <label>First name</label>
-            <input formControlName="candidateFirstName" type="text" class="form-control" />
-            <app-field-error [field]="addNewCandidateCard.get('candidateFirstName')"></app-field-error>
-          </div>
+  <div class="card">
+    <div class="card-body">
+      <form
+        *ngIf="addSalaryForm"
+        [formGroup]="addSalaryForm"
+        (ngSubmit)="addSalarySubmitAction()">
+        <div class="mb-3">
+          <label>Salary in KZT</label>
+          <input formControlName="value" type="text" class="form-control" />
+          <app-field-error [field]="addSalaryForm.get('value')"></app-field-error>
+        </div>
 
-          <div class="mb-3">
-            <label>Last name</label>
-            <input formControlName="candidateLastName" type="text" class="form-control" />
-            <app-field-error [field]="addNewCandidateCard.get('candidateLastName')"></app-field-error>
-          </div>
+        <div class="mb-3">
+          <label>Quarter</label>
+          <input formControlName="quarter" type="text" class="form-control" />
+          <app-field-error [field]="addSalaryForm.get('quarter')"></app-field-error>
+        </div>
 
-          <div class="mb-3">
-            <div class="d-flex justify-content-between">
-              <label>Contacts</label>
-              <span class="text-muted small">Markdown is supported</span>
-            </div>
-            <textarea class="form-control" formControlName="candidateContacts" rows="3"></textarea>
-            <app-field-error [field]="addNewCandidateCard.get('candidateContacts')"></app-field-error>
-          </div>
+        <div class="mb-3">
+          <label>Year</label>
+          <input formControlName="year" type="text" class="form-control" />
+          <app-field-error [field]="addSalaryForm.get('year')"></app-field-error>
+        </div>
 
-          <div class="mb-3">
-            <label>Labels</label>
-            <app-labels-ng-select [labels]="labels" [(selectedLabels)]="selectedLabels" [placeholder]="'Select tags for your template'"></app-labels-ng-select>
-          </div>
+        <div class="mb-3">
+          <select formControlName="company" class="form-select" aria-label="Select a company">
+            <option [value]="null" selected disabled>Select a type of company you work for</option>
+            <option *ngFor="let option of companyTypes" [value]="option.value">{{ option.label }}</option>
+          </select>
+          <app-field-error [field]="addSalaryForm.get('company')"></app-field-error>
+        </div>
 
-          <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Create new card</button>
-          </div>
-        </form>
+        <div class="mb-3">
+          <select formControlName="profession" class="form-select" aria-label="Select your profession">
+            <option [value]="null" selected disabled>Select your profession</option>
+            <option *ngFor="let option of professions" [value]="option.value">{{ option.label }}</option>
+          </select>
+          <app-field-error [field]="addSalaryForm.get('profession')"></app-field-error>
+        </div>
 
-      </div>
+        <div class="mb-3">
+          <select formControlName="grade" class="form-select" aria-label="Select your grade">
+            <option [value]="null" selected disabled>Select your grade</option>
+            <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
+          </select>
+          <app-field-error [field]="addSalaryForm.get('grade')"></app-field-error>
+        </div>
+
+        <div class="mb-3">
+          <button class="btn btn-primary" type="submit">Add salary</button>
+        </div>
+      </form>
+
     </div>
   </div>
-  
-  <ng-template #dataLoading>
-    <div class="container mt-5">
-      <app-data-loader></app-data-loader>
-    </div>
-  </ng-template>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
