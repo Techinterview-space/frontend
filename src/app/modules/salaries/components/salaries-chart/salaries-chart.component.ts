@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserSalary } from '@models/salaries/salary.model';
 import { TitleService } from '@services/title.service';
-import { SalariesChartResponse, UserSalariesService } from '@services/user-salaries.service';
+import { UserSalariesService } from '@services/user-salaries.service';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { SalariesChart } from './salaries-chart';
+import { AuthService } from '@shared/services/auth/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -19,12 +21,21 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: UserSalariesService,
     title: TitleService,
-    private readonly router: Router) {
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly cookieService: CookieService) {
       title.setTitle('Salaries');
     }
 
   ngOnInit(): void {
-    this.load();
+    if (this.authService.isAuthenticated()) {
+      this.load();
+      return;
+    }
+
+    console.log('Saving url to cookie', this.router.url);
+    this.cookieService.set('url', this.router.url);
+    this.authService.login();
   }
 
   load(): void {
