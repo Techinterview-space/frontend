@@ -1,6 +1,4 @@
 import { formatNumber } from "@angular/common";
-import { UserSalary } from "@models/salaries/salary.model";
-import { UserProfession } from "@models/salaries/user-profession";
 import { SalariesByProfession, SalariesChartResponse } from "@services/user-salaries.service";
 
 export class SalariesChart {
