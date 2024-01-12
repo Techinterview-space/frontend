@@ -15,7 +15,6 @@ export class PermissionsService {
         private readonly cookieService: CookieService) {}
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        console.log('State', state);
         if (this.authService.isAuthenticated()) {
             return true;
         }
