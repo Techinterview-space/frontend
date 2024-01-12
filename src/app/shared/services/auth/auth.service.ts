@@ -76,7 +76,6 @@ export class AuthService implements IAuthService {
   completeAuthentication(): Observable<IdToken | null> {
     return this.oidcManager.completeAuthentication().pipe(map(x => {
       this.authorizationInfo = x;
-      console.log('completeAuthentication', this.authorizationInfo);
       this.reloadInternalProperties();
       return x ?? null;
     }));

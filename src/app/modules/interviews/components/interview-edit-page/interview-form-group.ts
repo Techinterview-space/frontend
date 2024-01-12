@@ -116,10 +116,8 @@ export class InterviewFormGroup extends FormGroup {
 
   createRequest(selectedLabels: Array<Label>): InterviewCreateRequest | null {
     if (!this.valid) {
-      console.log('createRequest invalid');
+      console.error('createRequest invalid', this.errors);
       this.markAllAsTouched();
-      console.log(this.errors);
-      console.log(this.get('overallOpinion')?.value);
       return null;
     }
 

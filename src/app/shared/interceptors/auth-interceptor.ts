@@ -54,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private checkIsNotAuthorizeError(error: HttpErrorResponse): boolean {
     const notAuthStatusCode = 401;
-    console.log(error);
+    console.error(error);
     if (error.status === notAuthStatusCode) {
       return true;
     }
@@ -73,8 +73,6 @@ export class AuthInterceptor implements HttpInterceptor {
     // unauthorized
     if (this.checkIsNotAuthorizeError(error)) {
       this.authService!.signout();
-
-      console.log('Navigated by auth interceptor to main page');
       this.router.navigate(['/']);
       return true;
     }

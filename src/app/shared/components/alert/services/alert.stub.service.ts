@@ -11,7 +11,7 @@ export class AlertStubService implements IAlertService {
   }
 
   error(message: string, keepAfterRouteChange: boolean): void {
-    console.log(message);
+    console.error(message);
   }
 
   info(message: string, keepAfterRouteChange: boolean): void {

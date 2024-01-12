@@ -112,7 +112,6 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.selectedCandidateCard = null;
-    console.log('closeModal', this.board?.lists);
   }
 
   archive(card: CandidateCard): void {
