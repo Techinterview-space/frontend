@@ -7,6 +7,10 @@
           На графике можно увидеть зарплаты в Казахстане по разным специальностям IT. Данные заполняются самими пользователями.
         </div>
 
+        <div class="mb-3">
+          Вы сможете посмотреть график только после добавления хотя бы одной зарплаты за последний год.
+        </div>
+
         <div *ngIf="salariesChart" class="row">
           <div class="col-3">
 
@@ -18,7 +22,7 @@
       
               <li class="list-group-item">
                 <div class="small text-muted">Специальностей</div>
-                <div class="h4">{{ salariesChart.salariesByProfession.length }}</div>
+                <div class="h4">{{ salariesChart.salariesByProfession?.length ?? "-" }}</div>
               </li>
       
               <li class="list-group-item">
