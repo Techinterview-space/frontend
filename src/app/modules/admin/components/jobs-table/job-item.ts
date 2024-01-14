@@ -14,7 +14,6 @@ export class JobItem extends AdminTableItem<Observable<JobResult>> {
     }
 
     this.executing = true;
-    console.log('executing');
     const start = Date.now();
 
     this.action().subscribe(

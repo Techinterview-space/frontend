@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
           this.loginButtonAvailable = true;
         },
         (err) => {
-          console.log(err);
+          console.error(err);
           this.healthCheckError = true;
         }
       );

@@ -23,7 +23,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
   addSalaryForm: AddSalaryForm | null = null;
 
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
-  readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.allGrades();
+  readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
   readonly professions: Array<ProfessionSelectItem> = ProfessionSelectItem.allItems();
 
   constructor(

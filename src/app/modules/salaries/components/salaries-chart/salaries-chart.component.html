@@ -28,7 +28,7 @@
                 <div class="small text-muted">Специальностей</div>
                 <div class="h4">{{ salariesChart.salariesByProfession?.length ?? "-" }}</div>
               </li>
-      
+
               <li class="list-group-item">
                 <div class="small text-muted">Действия</div>
                 <div class="">
@@ -53,6 +53,11 @@
                 <span class="display-2 me-3">{{ salariesChart.averageSalary }}</span>
                 <span class="h4 text-muted">тенге.</span>
               </div>
+            </div>
+
+            <div class="mb-5">
+              <div class="mb-3">График зарплат по профессиям</div>
+              <app-salaries-by-grades-chart [chart]="salariesChart"></app-salaries-by-grades-chart>
             </div>
 
           </div>

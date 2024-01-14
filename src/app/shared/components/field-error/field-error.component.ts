@@ -8,8 +8,8 @@ import { FormGroup, AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class FieldErrorComponent implements OnInit {
   @Input() field: AbstractControl | null = null;
-  @Input() max: string | null = null;
-  @Input() min: string | null = null;
+  @Input() max: string | number | null = null;
+  @Input() min: string | number | null = null;
 
   constructor() {}
 
