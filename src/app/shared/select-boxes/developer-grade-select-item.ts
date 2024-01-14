@@ -17,4 +17,19 @@ export class DeveloperGradeSelectItem implements SelectItem<DeveloperGrade> {
   static allGrades(): DeveloperGradeSelectItem[] {
     return EnumHelper.getValues(DeveloperGrade).map((grade) => new DeveloperGradeSelectItem(grade));
   }
+
+  static gradesSimpleOnly(): DeveloperGradeSelectItem[] {
+    return EnumHelper.getValues(DeveloperGrade)
+      .filter((grade) =>
+        grade != DeveloperGrade.Unknown &&
+        grade != DeveloperGrade.JuniorMinus &&
+        grade != DeveloperGrade.JuniorStrong &&
+        grade != DeveloperGrade.MiddleMinus &&
+        grade != DeveloperGrade.MiddleStrong &&
+        grade != DeveloperGrade.SeniorMinus &&
+        grade != DeveloperGrade.SeniorStrong &&
+        grade != DeveloperGrade.LeadMinus &&
+        grade != DeveloperGrade.LeadStrong)
+      .map((grade) => new DeveloperGradeSelectItem(grade));
+  }
 }

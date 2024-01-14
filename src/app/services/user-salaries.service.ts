@@ -25,11 +25,23 @@ export interface SalariesChartResponse {
   averageSalary: number;
   medianSalary: number;
   salariesByProfession: SalariesByProfession[];
+  salariesByMoneyBarChart: SalariesByMoneyBarChart;
 }
 
 export interface SalariesByProfession {
   profession: UserProfession;
   salaries: UserSalary[];
+}
+
+export interface SalariesByMoneyBarChart {
+  labels: string[];
+  items: Array<SalariesByMoneyBarChartItem>;
+}
+
+export interface SalariesByMoneyBarChartItem {
+  start: number;
+  end: number;
+  count: number;
 }
 
 @Injectable({

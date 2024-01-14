@@ -18,7 +18,9 @@ static readonly digitsPattern = '^[0-9]*$';
                 null,
                 [
                     Validators.pattern(AddSalaryForm.digitsPattern),
-                    Validators.required
+                    Validators.required,
+                    Validators.min(42500),
+                    Validators.max(10000000),
                 ]),
             quarter: new FormControl(
                 currentQuarter,

@@ -1,17 +1,19 @@
 import { formatNumber } from "@angular/common";
-import { SalariesByProfession, SalariesChartResponse } from "@services/user-salaries.service";
+import { SalariesByMoneyBarChart, SalariesByProfession, SalariesChartResponse } from "@services/user-salaries.service";
 
 export class SalariesChart {
 
-    averageSalary: string;
-    medianSalary: string;
-    countOfRecords: number;
-    salariesByProfession: Array<SalariesByProfession>;
+    readonly averageSalary: string;
+    readonly medianSalary: string;
+    readonly countOfRecords: number;
+    readonly salariesByProfession: Array<SalariesByProfession>;
+    readonly salariesByMoneyBarChart: SalariesByMoneyBarChart;
 
-    constructor(private readonly data: SalariesChartResponse) {
+    constructor(readonly data: SalariesChartResponse) {
         this.averageSalary = formatNumber(data.averageSalary, 'en-US', '1.0-2');
         this.medianSalary = formatNumber(data.medianSalary, 'en-US', '1.0-2');
         this.countOfRecords = data.salaries.length;
         this.salariesByProfession = data.salariesByProfession;
+        this.salariesByMoneyBarChart = data.salariesByMoneyBarChart;
     }
 }
