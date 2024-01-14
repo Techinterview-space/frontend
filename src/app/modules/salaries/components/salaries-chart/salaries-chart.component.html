@@ -55,7 +55,7 @@
               </div>
             </div>
 
-            <div class="mb-5">
+            <div *ngIf="salariesChart.salariesByMoneyBarChart" class="mb-5">
               <div class="mb-3">График зарплат по профессиям</div>
               <app-salaries-by-grades-chart [chart]="salariesChart"></app-salaries-by-grades-chart>
             </div>
