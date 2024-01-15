@@ -37,6 +37,8 @@ export class StubSalariesChart extends SalariesChart {
         super({
             averageSalary: 450_000,
             medianSalary: 356_000,
+            averageRemoteSalary: 750_000,
+            medianRemoteSalary: 656_000,
             shouldAddOwnSalary: true,
             salaries: salaries,
             salariesByProfession: [],

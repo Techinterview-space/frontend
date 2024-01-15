@@ -47,7 +47,7 @@
   
           <div class="mb-3">
             <select formControlName="profession" class="form-select" aria-label="Select your profession">
-              <option [value]="null" selected disabled>Ваша профессия</option>
+              <option [value]="null" selected disabled>Ваша специализация</option>
               <option *ngFor="let option of professions" [value]="option.value">{{ option.label }}</option>
             </select>
             <app-field-error [field]="addSalaryForm.get('profession')"></app-field-error>

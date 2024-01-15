@@ -24,30 +24,42 @@
       <div class="card-body">
 
         <div *ngIf="salariesChart" class="row">
-          <div class="col-3">
+          <div class="col-3 d-none d-md-block">
             <div class="mb-3 text-muted">Квалификации:</div>
 
             <div title="Coming soon" class="mb-3" *ngFor="let grade of grades">
-              <button disabled type="button" class="text-start btn btn-light w-100" >{{ grade }}</button>
+              <button disabled type="button" class="text-start btn btn-outline-secondary w-100" >{{ grade }}</button>
             </div>
           </div>
 
-          <div class="col-9 ps-5">
-            <div class="mb-5">
-              <div class="text-muted">Медианная зарплата:</div>
-              <div class="">
-                <span class="display-2 me-3">{{ salariesChart.medianSalary }}</span>
-                <span class="h4 text-muted">тенге.</span>
-              </div>
+          <div class="col-md-9">
+            <div class="mb-5 d-flex justify-content-between align-items-end">
+              <app-salary-block-value
+                [title]="'Медианная зарплата:'"
+                [value]="salariesChart.medianSalary"></app-salary-block-value>
+
+                <div *ngIf="salariesChart.medianRemoteSalary" class="d-none d-md-block">
+                  <app-salary-block-remote-value
+                    [title]="'На удаленке:'"
+                    [value]="salariesChart.medianRemoteSalary"></app-salary-block-remote-value>
+                </div>
+
             </div>
 
-            <div class="mb-3">
-              <div class="text-muted">Средняя зарплата:</div>
-              <div class="">
-                <span class="display-2 me-3">{{ salariesChart.averageSalary }}</span>
-                <span class="h4 text-muted">тенге.</span>
-              </div>
+            <div class="mb-3 d-flex justify-content-between align-items-end">
+
+              <app-salary-block-value
+                [title]="'Средняя зарплата:'"
+                [value]="salariesChart.averageSalary"></app-salary-block-value>
+
+                <div *ngIf="salariesChart.averageRemoteSalary" class="d-none d-md-block">
+                  <app-salary-block-remote-value
+                    [title]="'На удаленке:'"
+                    [value]="salariesChart.averageRemoteSalary"></app-salary-block-remote-value>
+                </div>
+
             </div>
+           
 
             <div *ngIf="!showDataStub" class="mb-3 fst-italic">
               <div class="text-muted">Рассчитано на основании {{ salariesChart.countOfRecords }} анкет(ы)</div>
@@ -88,3 +100,4 @@
       <app-data-loader></app-data-loader>
     </div>
   </ng-template>
+
