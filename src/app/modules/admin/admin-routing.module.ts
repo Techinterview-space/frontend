@@ -5,13 +5,15 @@ import { BackgroundJobsComponent } from './components/background-jobs/background
 import { InterviewTemplatesAdminPageComponent } from './components/interviews/interview-templates-admin-page/interview-templates-admin-page.component';
 import { AllOrganizationsAdminComponent } from './components/organizations/all-organizations-admin/all-organizations-admin.component';
 import { UsersAdminPageComponent } from './components/users/users-admin-page/users-admin-page.component';
+import { SalariesAdminPageComponent } from './components/salaries/salaries-admin-page/salaries-admin-page.component';
 
 const routes: Routes = [
   { path: '', component: AdminStartPageComponent },
   { path: 'users', component: UsersAdminPageComponent },
   { path: 'interview-templates', component: InterviewTemplatesAdminPageComponent },
   { path: 'background-jobs', component: BackgroundJobsComponent },
-  { path: 'organizations', component: AllOrganizationsAdminComponent }
+  { path: 'organizations', component: AllOrganizationsAdminComponent },
+  { path: 'salaries', component: SalariesAdminPageComponent }
 ];
 
 @NgModule({

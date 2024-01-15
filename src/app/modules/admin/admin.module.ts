@@ -11,6 +11,7 @@ import { InterviewTemplatesAdminPageComponent } from './components/interviews/in
 import { UsersAdminPageComponent } from './components/users/users-admin-page/users-admin-page.component';
 import { AllOrganizationsAdminComponent } from './components/organizations/all-organizations-admin/all-organizations-admin.component';
 import { AdminStartPageComponent } from './components/admin-start-page/admin-start-page.component';
+import { SalariesAdminPageComponent } from './components/salaries/salaries-admin-page/salaries-admin-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AdminStartPageComponent } from './components/admin-start-page/admin-sta
     InterviewTemplatesAdminPageComponent,
     UsersAdminPageComponent,
     AllOrganizationsAdminComponent,
-    AdminStartPageComponent
+    AdminStartPageComponent,
+    SalariesAdminPageComponent
   ],
   imports: [CommonModule, SharedModule, AdminRoutingModule, FormsModule, ReactiveFormsModule]
 })
