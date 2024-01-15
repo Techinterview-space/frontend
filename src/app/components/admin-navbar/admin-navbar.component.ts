@@ -49,6 +49,15 @@ export class AdminNavbarComponent {
         ]
       },
       {
+        title: 'Salaries',
+        links: [
+          {
+            title: 'All salaries',
+            url: '/admin/salaries'
+          }
+        ]
+      },
+      {
         title: 'Tools',
         links: [
           {

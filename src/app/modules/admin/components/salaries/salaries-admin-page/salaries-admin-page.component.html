@@ -1,0 +1,50 @@
+<app-page-header>All salaries</app-page-header>
+
+<div class="container my-5" *ngIf="salaries; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive mb-3" *ngIf="salaries.length > 0; else nothingToShow">
+        <table class="table table-hover table-sm">
+          <thead>
+            <th>Value</th>
+            <th>Profession</th>
+            <th>Grade</th>
+            <th>Company</th>
+            <th>Created at</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of salaries; let i = index">
+              <td>{{ item.value }}</td>
+              <td>{{ item.profession }}</td>
+              <td>{{ item.grade }}</td>
+              <td>{{ item.company }}</td>
+              <td>{{ item.createdAt | date: 'yyyy-MM-dd' }}</td>
+              <td>
+                <button type="button" class="btn-link-sm" (click)="openDeleteDialog(item)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons [source]="source" (pageChange)="loadData($event)"></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">There is no salaries.</div>
+    </div>
+  </div>
+</ng-template>

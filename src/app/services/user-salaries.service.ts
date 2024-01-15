@@ -4,8 +4,11 @@ import { ApiService } from './api.service';
 import { DeveloperGrade } from '@models/enums';
 import { CompanyType } from '@models/salaries/company-type';
 import { Currency } from '@models/salaries/currency';
-import { UserSalary } from '@models/salaries/salary.model';
+import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
 import { UserProfession } from '@models/salaries/user-profession';
+import { PageParams, defaultPageParams } from '@models/page-params';
+import { PaginatedList } from '@models/paginated-list';
+import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 
 export interface CreateUserSalaryRequest {
   value: number;
@@ -61,13 +64,11 @@ export class UserSalariesService {
   private readonly root = '/api/salaries/';
   constructor(private readonly api: ApiService) {}
 
-  all(): Observable<Array<UserSalary>> {
-    // for admis
-    return this.api.get<UserSalary[]>(this.root + 'all');
+  all(pageParams: PageParams = defaultPageParams): Observable<PaginatedList<UserSalary>> {
+    return this.api.get<PaginatedList<UserSalary>>(this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
   }
 
   charts(): Observable<SalariesChartResponse> {
-    // for admis
     return this.api.get<SalariesChartResponse>(this.root + 'chart');
   }
 
