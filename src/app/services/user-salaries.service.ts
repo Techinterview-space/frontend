@@ -33,9 +33,15 @@ export interface SalariesByProfession {
   salaries: UserSalary[];
 }
 
+export interface SalariesByProfessionMoneyBarChartItem {
+  profession: UserProfession;
+  items: Array<SalariesByMoneyBarChartItem>;
+}
+
 export interface SalariesByMoneyBarChart {
   labels: string[];
   items: Array<SalariesByMoneyBarChartItem>;
+  itemsByProfession: Array<SalariesByProfessionMoneyBarChartItem>;
 }
 
 export interface SalariesByMoneyBarChartItem {

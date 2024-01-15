@@ -4,8 +4,9 @@ import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-s
 import { ProfessionSelectItem } from '@shared/select-boxes/profession-select-item';
 import { UserSalary } from '@models/salaries/salary.model';
 import { SalariesChart } from '../salaries-chart/salaries-chart';
-import Chart from 'chart.js/auto';
+import { Chart, ChartType }  from 'chart.js/auto';
 import { RandomRgbColor } from './random-rgb-color';
+import { UserProfession } from '@models/salaries/user-profession';
 
 @Component({
   selector: 'app-salaries-by-grades-chart',
@@ -30,16 +31,30 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
     const randomColor = new RandomRgbColor();
     const datasets = [
       {
+        type: 'line' as ChartType,
         label: 'Все',
         data: chartData.items.map(x => x.count),
-        borderWidth: 1,
+        borderWidth: 3,
         borderColor: randomColor.toString(1),
         backgroundColor: randomColor.toString(0.5),
       },
     ];
 
+    chartData.itemsByProfession.forEach((x, i) => {
+      const profession = x.profession;
+      const color = new RandomRgbColor();
+      datasets.push({
+        label: UserProfession[profession].toString(),
+        data: x.items.map(x => x.count),
+        borderWidth: 1,
+        borderColor: color.toString(0.6),
+        backgroundColor: color.toString(0.3),
+        type: 'bar' as ChartType,
+      });
+    });
+
     this.chartData = new Chart('canvas', {
-      type: 'line',
+      type: 'scatter',
       data: {
         labels: chartData.labels
           .map(x => {
