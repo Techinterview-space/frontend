@@ -1,41 +1,35 @@
-<app-page-header>Зарплаты в Казахстане</app-page-header>
+<app-page-header>Зарплаты IT в Казахстане</app-page-header>
 
-<div class="container my-5" *ngIf="salariesChart != null; else dataLoading">
+<div *ngIf="showDataStub" class="container mt-5 mb-3">
+
+  <div *ngIf="!isAuthenticated" class="alert alert-primary" role="alert">
+    <div class="mb-2 h3">Ваша зарплата «в рынке»?</div>
+    <div class="mb-3">Зарегистрируйтесь и оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
+    <div>
+      <button class="btn btn-primary" (click)="openAddSalaryAction()">Зарегистрироваться</button>
+    </div>
+  </div>
+
+  <div *ngIf="isAuthenticated" class="alert alert-warning" role="alert">
+    <div class="mb-2 h3">Ваша зарплата «в рынке»?</div>
+    <div class="mb-3">Оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
+    <div>
+      <button class="btn btn-dark" (click)="openAddSalaryAction()">Добавить зарплату</button>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-5" *ngIf="salariesChart != null; else dataLoading">
     <div class="card">
       <div class="card-body">
-        <div class="mb-3">
-          На графике можно увидеть зарплаты в Казахстане по разным специальностям IT. Данные заполняются самими пользователями.
-        </div>
-
-        <div class="mb-3">
-          Вы сможете посмотреть график только после добавления хотя бы одной зарплаты за последний год.
-        </div>
-
-        <div class="mb-3">
-          <i>TODO: в скором времени будут добавлены график и возможность фльтрации данных по специальностям, грейдам и фреймворкам/языкам программирования</i>
-        </div>
 
         <div *ngIf="salariesChart" class="row">
           <div class="col-3">
+            <div class="mb-3 text-muted">Квалификации:</div>
 
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <div class="small text-muted">Всего зарплат</div>
-                <div class="h4">{{ salariesChart.countOfRecords }}</div>
-              </li>
-      
-              <li class="list-group-item">
-                <div class="small text-muted">Специальностей</div>
-                <div class="h4">{{ salariesChart.salariesByProfession?.length ?? "-" }}</div>
-              </li>
-
-              <li class="list-group-item">
-                <div class="small text-muted">Действия</div>
-                <div class="">
-                  <button class="btn btn-outline-primary btn-sm" (click)="openAddSalaryAction()">Добавить зарплату</button>
-                </div>
-              </li>
-            </ul>
+            <div title="Coming soon" class="mb-3" *ngFor="let grade of grades">
+              <button disabled type="button" class="text-start btn btn-light w-100" >{{ grade }}</button>
+            </div>
           </div>
 
           <div class="col-9 ps-5">
@@ -47,7 +41,7 @@
               </div>
             </div>
 
-            <div class="mb-5">
+            <div class="mb-3">
               <div class="text-muted">Средняя зарплата:</div>
               <div class="">
                 <span class="display-2 me-3">{{ salariesChart.averageSalary }}</span>
@@ -55,12 +49,29 @@
               </div>
             </div>
 
-            <div *ngIf="salariesChart.salariesByMoneyBarChart" class="mb-5">
-              <div class="mb-3">График зарплат по профессиям</div>
+            <div *ngIf="!showDataStub" class="mb-3 fst-italic">
+              <div class="text-muted">Рассчитано на основании {{ salariesChart.countOfRecords }} анкет(ы)</div>
+            </div>
+
+            <div *ngIf="showDataStub" class="mb-3">
+              <div class="text-muted">Данные сгенерированы для демонстрации. 
+                <button class="btn btn-outline-secondary btn-sm" (click)="openAddSalaryAction()">{{ isAuthenticated ? 'Добавить зарплату' : 'Зарегистрироваться' }}</button> для получения актуальных данных.</div>
+            </div>
+
+            <div *ngIf="salariesChart.salariesByMoneyBarChart" class="mt-5 mb-5">
+              <div class="mb-3 h3">По всем IT-специалистам</div>
+              <div class="mb-3">
+                <i>TODO: в скором времени будет добавлена возможность фильтрации данных по специальностям, грейдам и фреймворкам/языкам программирования</i>
+              </div>
+
               <app-salaries-by-grades-chart [chart]="salariesChart"></app-salaries-by-grades-chart>
             </div>
 
           </div>
+        </div>
+
+        <div class="mb-3 text-muted text-end fst-italic">
+          Идея подсмотрена у сервиса <a class="text-reset" href="https://career.habr.com/salaries" target="_blank">Habr.Карьера</a>, за что им большая благодарность.
         </div>
       </div>
     </div>

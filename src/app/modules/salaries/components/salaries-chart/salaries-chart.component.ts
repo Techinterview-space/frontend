@@ -7,6 +7,7 @@ import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { SalariesChart } from './salaries-chart';
 import { AuthService } from '@shared/services/auth/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { StubSalariesChart } from './stub-salaries-chart';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -15,8 +16,16 @@ import { CookieService } from 'ngx-cookie-service';
 export class SalariesChartComponent implements OnInit, OnDestroy {
 
   salariesChart: SalariesChart | null = null;
-
+  showDataStub = false;
   openAddSalaryModal = false;
+  isAuthenticated = false;
+
+  readonly grades: Array<string> = [
+    "Junior",
+    "Middle",
+    "Senior",
+    "Lead",
+  ];
 
   constructor(
     private readonly service: UserSalariesService,
@@ -28,29 +37,40 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
+    this.isAuthenticated = this.authService.isAuthenticated();
+    if (this.isAuthenticated) {
       this.load();
       return;
     }
 
-    console.log('Saving url to cookie', this.router.url);
-    this.cookieService.set('url', this.router.url);
-    this.authService.login();
+    this.showDataStub = true;
+    this.salariesChart = new StubSalariesChart();
   }
 
   load(): void {
     this.service.charts()
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
-        this.salariesChart = new SalariesChart(x);
         if (x.shouldAddOwnSalary) {
           this.openAddSalaryModal = true;
+          this.showDataStub = true;
+          this.salariesChart = new StubSalariesChart();
+        } else {
+          this.salariesChart = new SalariesChart(x);
+          this.showDataStub = false;
         }
       });
   }
 
   openAddSalaryAction(): void {
-    this.openAddSalaryModal = true;
+    if (this.authService.isAuthenticated()) {
+      this.openAddSalaryModal = true;
+      return;
+    }
+
+    console.log('Saving url to cookie', this.router.url);
+    this.cookieService.set('url', this.router.url);
+    this.authService.login();
   }
 
   closeAddSalaryAction(): void {
