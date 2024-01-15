@@ -23,7 +23,8 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    if (this.chart == null) {
+    if (this.chart == null ||
+      this.chart.salariesByMoneyBarChart == null) {
       return;
     }
 

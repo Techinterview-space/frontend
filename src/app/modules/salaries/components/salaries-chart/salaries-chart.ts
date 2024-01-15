@@ -7,7 +7,7 @@ export class SalariesChart {
     readonly medianSalary: string;
     readonly countOfRecords: number;
     readonly salariesByProfession: Array<SalariesByProfession>;
-    readonly salariesByMoneyBarChart: SalariesByMoneyBarChart;
+    readonly salariesByMoneyBarChart: SalariesByMoneyBarChart | null;
 
     constructor(readonly data: SalariesChartResponse) {
         this.averageSalary = formatNumber(data.averageSalary, 'en-US', '1.0-2');

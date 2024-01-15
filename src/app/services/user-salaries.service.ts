@@ -25,7 +25,7 @@ export interface SalariesChartResponse {
   averageSalary: number;
   medianSalary: number;
   salariesByProfession: SalariesByProfession[];
-  salariesByMoneyBarChart: SalariesByMoneyBarChart;
+  salariesByMoneyBarChart: SalariesByMoneyBarChart | null;
 }
 
 export interface SalariesByProfession {
