@@ -25,11 +25,21 @@
 
         <div *ngIf="salariesChart" class="row">
           <div class="col-3 d-none d-md-block">
-            <div class="mb-3 text-muted">Квалификации:</div>
-
-            <div title="Coming soon" class="mb-3" *ngFor="let grade of grades">
-              <button disabled type="button" class="text-start btn btn-outline-secondary w-100" >{{ grade }}</button>
+            <div>
+              <div class="mb-3 text-muted">Квалификации:</div>
+              <div title="Coming soon" class="mb-3" *ngFor="let grade of grades">
+                <button disabled type="button" class="text-start btn btn-outline-secondary w-100" >{{ grade }}</button>
+              </div>
             </div>
+
+            <hr class="mb-3" />
+            <div class="mb-3">
+              <div class="mb-3 text-muted">Действия:</div>
+              <div >
+                <button type="button" class="btn btn-outline-dark w-100" (click)="openAddSalaryAction()">Добавить еще зарплату</button>
+              </div>
+            </div>
+
           </div>
 
           <div class="col-md-9">
