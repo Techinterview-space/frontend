@@ -48,6 +48,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   }
 
   load(): void {
+    this.salariesChart = null;
     this.service.charts()
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
