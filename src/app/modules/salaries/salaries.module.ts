@@ -7,12 +7,16 @@ import { SharedModule } from '@shared/shared.module';
 import { SalariesChartComponent } from './components/salaries-chart/salaries-chart.component';
 import { AddSalaryComponent } from './components/add-salary/add-salary.component';
 import { SalariesByGradesChartComponent } from './components/salaries-by-grades-chart/salaries-by-grades-chart.component';
+import { SalaryBlockValueComponent } from './components/salaries-chart/salary-block-value/salary-block-value.component';
+import { SalaryBlockRemoteValueComponent } from './components/salaries-chart/salary-block-remote-value/salary-block-remote-value.component';
 
 @NgModule({
   declarations: [
     SalariesChartComponent,
     AddSalaryComponent,
     SalariesByGradesChartComponent,
+    SalaryBlockValueComponent,
+    SalaryBlockRemoteValueComponent,
   ],
   imports: [
     CommonModule,

@@ -24,6 +24,10 @@ export interface SalariesChartResponse {
   rangeEnd: Date;
   averageSalary: number;
   medianSalary: number;
+
+  averageRemoteSalary: number | null;
+  medianRemoteSalary: number | null;
+
   salariesByProfession: SalariesByProfession[];
   salariesByMoneyBarChart: SalariesByMoneyBarChart | null;
 }

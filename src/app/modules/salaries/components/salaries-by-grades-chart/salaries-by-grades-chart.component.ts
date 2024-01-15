@@ -70,6 +70,7 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
         datasets: datasets,
       },
       options: {
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true,
