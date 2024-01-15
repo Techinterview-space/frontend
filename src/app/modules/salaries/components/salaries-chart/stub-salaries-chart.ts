@@ -35,10 +35,10 @@ export class StubSalariesChart extends SalariesChart {
         }
 
         super({
-            averageSalary: 450_000,
-            medianSalary: 356_000,
-            averageRemoteSalary: 750_000,
-            medianRemoteSalary: 656_000,
+            averageSalary: StubSalariesChart.getRandomNumber(1_000, 300) * 1000,
+            medianSalary: StubSalariesChart.getRandomNumber(1_000, 300) * 1000,
+            averageRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
+            medianRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
             shouldAddOwnSalary: true,
             salaries: salaries,
             salariesByProfession: [],

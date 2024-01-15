@@ -36,13 +36,17 @@
             <div class="mb-3">
               <div class="mb-3 text-muted">Действия:</div>
               <div >
-                <button type="button" class="btn btn-outline-dark w-100" (click)="openAddSalaryAction()">Добавить еще зарплату</button>
+                <button type="button" class="btn btn-outline-dark w-100" (click)="openAddSalaryAction()">Добавить зарплату</button>
               </div>
             </div>
 
           </div>
 
           <div class="col-md-9">
+            <div *ngIf="showDataStub" class="mb-3">
+              <div class="h4">Демонстрационные данные:</div> 
+            </div>
+
             <div class="mb-5 d-flex justify-content-between align-items-end">
               <app-salary-block-value
                 [title]="'Медианная зарплата:'"
@@ -76,13 +80,16 @@
             </div>
 
             <div *ngIf="showDataStub" class="mb-3">
-              <div class="text-muted">Данные сгенерированы для демонстрации. 
+              <div class="text-muted">Данные сгенерированы для <strong>демонстрации</strong>. 
                 <button class="btn btn-outline-secondary btn-sm" (click)="openAddSalaryAction()">{{ isAuthenticated ? 'Добавить зарплату' : 'Зарегистрироваться' }}</button> для получения актуальных данных.</div>
             </div>
 
             <div *ngIf="salariesChart.salariesByMoneyBarChart" class="mt-5 mb-5">
-              <div class="mb-3 h3">По всем IT-специалистам</div>
-              <div class="mb-3">
+              <div class="mb-3 h3">
+                <span>По всем IT-специалистам</span>
+                <span *ngIf="showDataStub" class="ms-2">(демонстрационные данные)</span>
+              </div>
+              <div *ngIf="!showDataStub" class="mb-3">
                 <i>TODO: в скором времени будет добавлена возможность фильтрации данных по специальностям, грейдам и фреймворкам/языкам программирования</i>
               </div>
 
