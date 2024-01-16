@@ -64,8 +64,8 @@ export class UserSalariesService {
   private readonly root = '/api/salaries/';
   constructor(private readonly api: ApiService) {}
 
-  all(pageParams: PageParams = defaultPageParams): Observable<PaginatedList<UserSalary>> {
-    return this.api.get<PaginatedList<UserSalary>>(this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
+  all(pageParams: PageParams = defaultPageParams): Observable<PaginatedList<UserSalaryAdminDto>> {
+    return this.api.get<PaginatedList<UserSalaryAdminDto>>(this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
   }
 
   charts(): Observable<SalariesChartResponse> {
@@ -74,5 +74,9 @@ export class UserSalariesService {
 
   create(data: CreateUserSalaryRequest): Observable<UserSalary> {
     return this.api.post<UserSalary>(this.root, data);
+  }
+
+  delete(dataId: string): Observable<void> {
+    return this.api.delete<void>(this.root + dataId);
   }
 }

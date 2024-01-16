@@ -1,11 +1,12 @@
 import { DeveloperGrade } from "@models/enums/developer-grade.enum";
 import { CompanyType } from "@models/salaries/company-type";
 import { Currency } from "@models/salaries/currency";
-import { UserSalary } from "@models/salaries/salary.model";
+import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { UserProfession } from "@models/salaries/user-profession";
 
 export class SalaryAdminItem {
 
+    readonly id: string;
     readonly value: number;
     readonly quarter: number;
     readonly year: number;
@@ -15,7 +16,8 @@ export class SalaryAdminItem {
     readonly profession: string;
     readonly createdAt: Date;
 
-    constructor(private readonly item: UserSalary) {
+    constructor(private readonly item: UserSalaryAdminDto) {
+        this.id = item.id;
         this.value = item.value;
         this.quarter = item.quarter;
         this.year = item.year;

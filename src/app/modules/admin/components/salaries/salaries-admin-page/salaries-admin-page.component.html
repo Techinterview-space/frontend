@@ -7,6 +7,7 @@
         <table class="table table-hover table-sm">
           <thead>
             <th>Value</th>
+            <th>Period</th>
             <th>Profession</th>
             <th>Grade</th>
             <th>Company</th>
@@ -16,6 +17,7 @@
           <tbody>
             <tr *ngFor="let item of salaries; let i = index">
               <td>{{ item.value }}</td>
+              <td>{{ item.quarter }}.{{ item.year }}</td>
               <td>{{ item.profession }}</td>
               <td>{{ item.grade }}</td>
               <td>{{ item.company }}</td>
@@ -48,3 +50,5 @@
     </div>
   </div>
 </ng-template>
+
+<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
