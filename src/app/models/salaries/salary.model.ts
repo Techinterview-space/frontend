@@ -4,8 +4,7 @@ import { Currency } from "./currency";
 import { UserProfession } from "./user-profession";
 
 export interface UserSalaryAdminDto extends UserSalary{
-    userId: number | null;
-    userEmail: string | null;
+    id: string;
 }
 
 export interface UserSalary {
