@@ -57,6 +57,11 @@ export interface SalariesByMoneyBarChartItem {
   count: number;
 }
 
+export interface SalaryAddHttpError {
+  Message: string;
+  Status: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })

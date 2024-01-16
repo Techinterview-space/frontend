@@ -61,6 +61,10 @@
             <app-field-error [field]="addSalaryForm.get('grade')"></app-field-error>
           </div>
 
+          <div *ngIf="errorMessage" class="mb-3 alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
           <div class="mb-3">
             Отправляя данные, вы соглашаетесь, что <strong>обезличенная</strong> зарплата будет учтена при рассчетах и составлении графиков.
             Мы гарантируем, что конфедициальность ваших данных будет соблюдена.
