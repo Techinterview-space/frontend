@@ -4,4 +4,4 @@ Frontend part of the [Techinterview.space](https://techinterview.space)
 
 ## Tech stack
 
-- Angular 13
+- Angular 17
