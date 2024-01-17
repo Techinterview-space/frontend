@@ -41,7 +41,6 @@ export class StubSalariesChart extends SalariesChart {
             medianRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
             shouldAddOwnSalary: true,
             salaries: salaries,
-            salariesByProfession: [],
             salariesByMoneyBarChart: {
                 items: StubSalariesChart.salaryLabels.map((x) => {
                     const value = parseInt(x);
@@ -54,6 +53,7 @@ export class StubSalariesChart extends SalariesChart {
                 itemsByProfession: [],
                 labels: StubSalariesChart.salaryLabels,
             },
+            salariesByMoneyBarChartForRemote: null,
             rangeStart: new Date(),
             rangeEnd: new Date(),
           });

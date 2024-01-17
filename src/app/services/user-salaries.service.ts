@@ -31,13 +31,8 @@ export interface SalariesChartResponse {
   averageRemoteSalary: number | null;
   medianRemoteSalary: number | null;
 
-  salariesByProfession: SalariesByProfession[];
   salariesByMoneyBarChart: SalariesByMoneyBarChart | null;
-}
-
-export interface SalariesByProfession {
-  profession: UserProfession;
-  salaries: UserSalary[];
+  salariesByMoneyBarChartForRemote: SalariesByMoneyBarChart | null;
 }
 
 export interface SalariesByProfessionMoneyBarChartItem {
