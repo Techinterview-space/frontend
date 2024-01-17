@@ -16,7 +16,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of salaries; let i = index">
-              <td>{{ item.value }}</td>
+              <td>{{ item.value | number: '1.0-0' }}</td>
               <td>{{ item.quarter }}.{{ item.year }}</td>
               <td>{{ item.profession }}</td>
               <td>{{ item.grade }}</td>
