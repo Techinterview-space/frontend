@@ -57,9 +57,10 @@ export interface SalariesByMoneyBarChartItem {
   count: number;
 }
 
-export interface SalaryAddHttpError {
-  Message: string;
-  Status: number;
+export interface CreateSalaryRecordResponse {
+  isSuccess: boolean;
+  errorMessage: string | null;
+  createdSalary: UserSalary | null;
 }
 
 @Injectable({
@@ -77,8 +78,8 @@ export class UserSalariesService {
     return this.api.get<SalariesChartResponse>(this.root + 'chart');
   }
 
-  create(data: CreateUserSalaryRequest): Observable<UserSalary> {
-    return this.api.post<UserSalary>(this.root, data);
+  create(data: CreateUserSalaryRequest): Observable<CreateSalaryRecordResponse> {
+    return this.api.post<CreateSalaryRecordResponse>(this.root, data);
   }
 
   delete(dataId: string): Observable<void> {
