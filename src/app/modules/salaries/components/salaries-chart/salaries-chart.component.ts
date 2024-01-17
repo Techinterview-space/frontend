@@ -16,6 +16,7 @@ import { StubSalariesChart } from './stub-salaries-chart';
 export class SalariesChartComponent implements OnInit, OnDestroy {
 
   salariesChart: SalariesChart | null = null;
+
   showDataStub = false;
   openAddSalaryModal = false;
   isAuthenticated = false;

@@ -7,6 +7,9 @@ import { SalariesChart } from '../salaries-chart/salaries-chart';
 import { Chart, ChartType }  from 'chart.js/auto';
 import { RandomRgbColor } from './random-rgb-color';
 import { UserProfession } from '@models/salaries/user-profession';
+import { SalariesChartJsObject } from './salaries-chart-js-object';
+import { SalariesByMoneyBarChart } from '@services/user-salaries.service';
+import { SalariesPerProfession } from '../salaries-per-profession';
 
 @Component({
   selector: 'app-salaries-by-grades-chart',
@@ -16,76 +19,47 @@ import { UserProfession } from '@models/salaries/user-profession';
 export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
 
   @Input()
-  chart: SalariesChart | null = null;
+  chart: SalariesByMoneyBarChart | null = null;
 
-  chartData: Chart | null = null;
+  @Input()
+  title: string | null = null;
+
+  @Input()
+  salaries: Array<SalariesPerProfession> | null = null;
+
+  chartDataLocal: SalariesChartJsObject | null = null;
+
+  readonly canvasId = 'canvas_' + Math.random().toString(36).substring(7);
 
   constructor() {}
 
   ngOnInit(): void {
-    if (this.chart == null ||
-      this.chart.salariesByMoneyBarChart == null) {
-      return;
-    }
+    // ignored
+  }
 
-    const chartData = this.chart.salariesByMoneyBarChart;
-    const randomColor = new RandomRgbColor();
-    const datasets = [
-      {
-        type: 'line' as ChartType,
-        label: 'Все',
-        data: chartData.items.map(x => x.count),
-        borderWidth: 3,
-        borderColor: randomColor.toString(1),
-        backgroundColor: randomColor.toString(0.5),
-      },
-    ];
-
-    chartData.itemsByProfession.forEach((x, i) => {
-      const profession = x.profession;
-      const color = new RandomRgbColor();
-      datasets.push({
-        label: UserProfession[profession].toString(),
-        data: x.items.map(x => x.count),
-        borderWidth: 1,
-        borderColor: color.toString(0.6),
-        backgroundColor: color.toString(0.3),
-        type: 'bar' as ChartType,
-      });
-    });
-
-    this.chartData = new Chart('canvas', {
-      type: 'scatter',
-      data: {
-        labels: chartData.labels
-          .map(x => {
-            let num = Number(x);
-            if (isNaN(num)) {
-              throw Error('Invalid label ' + x);
-            }
-
-            num = num / 1000;
-            return num + 'k';
-          }),
-        datasets: datasets,
-      },
-      options: {
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-        elements: {
-          line: {
-              tension: 0.4
-          },
-        }
-      },
-    });
+  ngAfterViewInit() {
+    this.initChart();
   }
 
   ngOnDestroy(): void {
     // ignored
+  }
+
+  toggleBarDatasetByProfession(profession: UserProfession): void {
+    this.chartDataLocal?.toggleDatasetByProfession(profession);
+  }
+
+  private initChart(): void {
+    if (this.chart == null || this.salaries == null) {
+      return;
+  }
+
+  this.chartDataLocal = new SalariesChartJsObject(this.canvasId, this.chart);
+  this.chartDataLocal.hideBarDatasets();
+
+  var chartEl = document.getElementById(this.canvasId);
+  if (chartEl != null && chartEl.parentElement != null) {
+    chartEl.style.height = chartEl?.parentElement.style.height ?? '100%';
+  }
   }
 }

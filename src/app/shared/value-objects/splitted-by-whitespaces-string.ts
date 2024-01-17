@@ -15,4 +15,8 @@ export class SplittedByWhitespacesString {
 
     this.value = '';
   }
+
+  toString(): string {
+    return this.value;
+  }
 }
