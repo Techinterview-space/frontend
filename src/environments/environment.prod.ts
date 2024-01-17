@@ -22,6 +22,6 @@ export const environment = {
     silent_redirect_uri: 'https://techinterview.space/silent-refresh.html'
   },
   googleAnalytics: {
-    imports: [NgxGoogleAnalyticsModule.forRoot('G-2FHW1CTS63'), NgxGoogleAnalyticsRouterModule]
+    imports: [NgxGoogleAnalyticsModule.forRoot('G-6GS9Y7GJD3'), NgxGoogleAnalyticsRouterModule]
   }
 };
