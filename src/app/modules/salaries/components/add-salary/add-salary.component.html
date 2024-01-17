@@ -20,21 +20,31 @@
           [formGroup]="addSalaryForm"
           (ngSubmit)="addSalarySubmitAction()">
           <div class="mb-3">
-            <label>Зарплата в KZT. Если вы получаете в иной валюте, переведите в тенге.</label>
-            <input formControlName="value" type="text" class="form-control" />
+            <label>Зарплата в тенге <strong>в месяц</strong>. Если вы получаете в иной валюте, переведите в тенге.</label>
+            <input formControlName="value" type="text" class="form-control form-control-lg" />
             <app-field-error [field]="addSalaryForm.get('value')" [max]="10000000" [min]="42500"></app-field-error>
           </div>
-  
+
           <div class="mb-3">
-            <label>Квартал</label>
-            <input formControlName="quarter" type="text" class="form-control" />
-            <app-field-error [field]="addSalaryForm.get('quarter')" [max]="4" [min]="1"></app-field-error>
-          </div>
+            <div class="row mb-1">
+              <div class="col-6">
+                <label>Квартал</label>
+                <input formControlName="quarter" type="text" class="form-control" />
+                <app-field-error [field]="addSalaryForm.get('quarter')" [max]="4" [min]="1"></app-field-error>
+              </div>
   
-          <div class="mb-3">
-            <label>Год</label>
-            <input formControlName="year" type="text" class="form-control" />
-            <app-field-error [field]="addSalaryForm.get('year')" [max]="2000" [min]="2100"></app-field-error>
+              <div class="col-6">
+                <label>Год</label>
+                <input formControlName="year" type="text" class="form-control" />
+                <app-field-error [field]="addSalaryForm.get('year')" [max]="2000" [min]="2100"></app-field-error>
+              </div>
+            </div>
+
+            <div class="text-muted fst-italic">
+              Квартал и год необходим для того, чтобы в статистике учитывать только актуальные данные.
+              <br />
+              Указывая 1 квартал 2024го года, вы говорите, что в первом квартале этого года у вас <strong>в месяц</strong> была такая зарплата.
+            </div>
           </div>
   
           <div class="mb-3">
@@ -65,13 +75,13 @@
             {{ errorMessage }}
           </div>
 
-          <div class="mb-3">
+          <div class="mb-3 fst-italic">
             Отправляя данные, вы соглашаетесь, что <strong>обезличенная</strong> зарплата будет учтена при рассчетах и составлении графиков.
             Мы гарантируем, что конфедициальность ваших данных будет соблюдена.
           </div>
   
-          <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Добавить</button>
+          <div class="mb-3 pt-2">
+            <button class="btn btn-primary btn-lg w-100" type="submit">Добавить</button>
           </div>
         </form>
 
