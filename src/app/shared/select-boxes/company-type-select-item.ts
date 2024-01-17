@@ -10,7 +10,19 @@ export class CompanyTypeSelectItem implements SelectItem<CompanyType> {
 
   constructor(item: CompanyType) {
     this.value = item.toString();
-    this.label = new SplittedByWhitespacesString(CompanyType[item]).value;
+    
+    switch (item) {
+      case CompanyType.Local:
+        this.label = 'Казахстанская';
+        break;
+      case CompanyType.Remote:
+        this.label = 'Удаленно на иностранную компанию';
+        break;
+      default:
+        this.label = new SplittedByWhitespacesString(CompanyType[item]).value;
+        break;
+    }
+
     this.item = item;
   }
 

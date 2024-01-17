@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { SalaryAddHttpError, UserSalariesService } from '@services/user-salaries.service';
+import { UserSalariesService } from '@services/user-salaries.service';
 import { AddSalaryForm } from './add-salary-form';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { CompanyTypeSelectItem } from '@shared/select-boxes/company-type-select-item';
@@ -50,7 +50,15 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(
         (x) => {
-          this.salaryAdded.emit(x);
+          if (x.isSuccess && x.createdSalary) {
+            this.errorMessage = null;
+            this.alert.success('Зарплата успешно записана');
+            this.salaryAdded.emit(x.createdSalary);
+          } else {
+            const error = 'За данный квартал уже есть запись';
+            this.alert.error(error);
+            this.errorMessage = error;
+          }
         });
   }
 

@@ -23,7 +23,8 @@
               <td><app-visibility-label [visibility]="item.isPublic"></app-visibility-label></td>
               <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
               <td>
-                <a routerLink="/interviews/templates/{{ item.id }}" class="btn-link-sm"> Open </a>
+                <a routerLink="/interviews/templates/{{ item.id }}" class="btn-link-sm">Open</a>
+                <button type="button" class="btn-link-sm ms-1" (click)="openDeleteDialog(item)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -50,3 +51,5 @@
     </div>
   </div>
 </ng-template>
+
+<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
