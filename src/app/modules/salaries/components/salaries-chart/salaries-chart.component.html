@@ -62,7 +62,6 @@
                   [title]="'На удаленке:'"
                   [value]="salariesChart.averageRemoteSalary"></app-salary-block-remote-value>
               </div>
-  
           </div>
          
   
@@ -87,6 +86,14 @@
               <div *ngIf="!showDataStub" class="">
                 <i>TODO: в скором времени будет добавлена возможность фильтрации данных по специальностям, грейдам и фреймворкам/языкам программирования</i>
               </div>
+            </div>
+
+            <div class="mb-5">
+              <app-salary-chart-global-filters
+                [filterData]="filterData"
+                (filtersApplied)="applyGlobalFilters($event)"
+                (filtersReset)="resetGlobalFilters()">
+              ></app-salary-chart-global-filters>
             </div>
   
             <div class="mb-5">

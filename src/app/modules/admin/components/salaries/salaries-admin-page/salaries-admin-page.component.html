@@ -27,12 +27,12 @@
 
         <div class="col-md-3">
           <label for="profession" class="form-label">Grade</label>
-            <select class="form-select" id="grade" name="grade" [(ngModel)]="filter.grade">
-              <option selected value="">All</option>
-              <option *ngFor="let item of filter.grades" [value]="item.item">
-                {{ item.label }}
-              </option>
-            </select>
+          <select class="form-select" id="grade" name="grade" [(ngModel)]="filter.grade">
+            <option selected value="">All</option>
+            <option *ngFor="let item of filter.grades" [value]="item.item">
+              {{ item.label }}
+            </option>
+          </select>
         </div>
 
         <div class="col-md-3 d-flex align-items-end">

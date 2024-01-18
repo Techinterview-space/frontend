@@ -71,6 +71,10 @@ export interface AdminAllSalariesQueryParams extends PageParams {
   grade: DeveloperGrade | null;
 }
 
+export interface SalariesChartFilterData {
+  grade: DeveloperGrade | null;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -83,8 +87,9 @@ export class UserSalariesService {
       this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
   }
 
-  charts(): Observable<SalariesChartResponse> {
-    return this.api.get<SalariesChartResponse>(this.root + 'chart');
+  charts(filters: SalariesChartFilterData): Observable<SalariesChartResponse> {
+    return this.api.get<SalariesChartResponse>(
+      this.root + 'chart?' + new ConvertObjectToHttpParams(filters).get());
   }
 
   create(data: CreateUserSalaryRequest): Observable<CreateSalaryRecordResponse> {

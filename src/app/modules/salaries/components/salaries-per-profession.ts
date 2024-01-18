@@ -38,9 +38,6 @@ export class SalariesPerProfession {
         var uniqueProfessionsForLocal = [...new Set(localSalaries.map(x => x.profession))];
         var uniqueProfessionsForRemote = [...new Set(remoteSalaries.map(x => x.profession))];
 
-        console.log(uniqueProfessionsForLocal);
-        console.log(uniqueProfessionsForRemote);
-
         const local = uniqueProfessionsForLocal.map(x => {
             const filteredSalaries = localSalaries.filter(salary => salary.profession == x);
             return new SalariesPerProfession(x, filteredSalaries);

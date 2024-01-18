@@ -8,6 +8,8 @@ import { SalariesChart } from './salaries-chart';
 import { AuthService } from '@shared/services/auth/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { StubSalariesChart } from './stub-salaries-chart';
+import { DeveloperGrade } from '@models/enums';
+import { SalaryChartGlobalFiltersData } from './salary-chart-global-filters/global-filters-form-group';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -18,17 +20,13 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   readonly isYourSalaryWithinMarketTitle = 'Ваша зарплата «в рынке»?';
 
   salariesChart: SalariesChart | null = null;
+  filterData = new SalaryChartGlobalFiltersData();
 
   showDataStub = false;
   openAddSalaryModal = false;
   isAuthenticated = false;
 
-  readonly grades: Array<string> = [
-    "Junior",
-    "Middle",
-    "Senior",
-    "Lead",
-  ];
+  gradeFilter: DeveloperGrade | null = null;
 
   constructor(
     private readonly service: UserSalariesService,
@@ -50,9 +48,11 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.salariesChart = new StubSalariesChart();
   }
 
-  load(): void {
+  load(data: SalaryChartGlobalFiltersData | null = null): void {
     this.salariesChart = null;
-    this.service.charts()
+    this.service.charts({
+      grade: data?.grade ?? null,
+    })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         if (x.shouldAddOwnSalary) {
@@ -72,7 +72,6 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       return;
     }
 
-    console.log('Saving url to cookie', this.router.url);
     this.cookieService.set('url', this.router.url);
     this.authService.login();
   }
@@ -83,6 +82,27 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   onSalaryAdded(salary: UserSalary): void {
     this.openAddSalaryModal = false;
+    this.load();
+  }
+
+  applyGlobalFilters(data: SalaryChartGlobalFiltersData): void {
+
+    if (this.filterData.equals(data)) {
+        return;
+    }
+
+    this.filterData = data;
+    this.load(data);
+  }
+
+  resetGlobalFilters(): void {
+
+    const newFilterData = new SalaryChartGlobalFiltersData();
+    if (this.filterData.equals(newFilterData)) {
+      return;
+    }
+
+    this.filterData = newFilterData;
     this.load();
   }
 
