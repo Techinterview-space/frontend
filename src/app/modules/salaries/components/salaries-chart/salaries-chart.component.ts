@@ -15,6 +15,8 @@ import { StubSalariesChart } from './stub-salaries-chart';
 })
 export class SalariesChartComponent implements OnInit, OnDestroy {
 
+  readonly isYourSalaryWithinMarketTitle = 'Ваша зарплата «в рынке»?';
+
   salariesChart: SalariesChart | null = null;
 
   showDataStub = false;

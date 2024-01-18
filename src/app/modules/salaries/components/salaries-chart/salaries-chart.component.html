@@ -4,7 +4,7 @@
 
 
   <div *ngIf="isAuthenticated" class="alert alert-warning" role="alert">
-    <div class="mb-2 h3">Ваша зарплата «в рынке»?</div>
+    <div class="mb-2 h3">{{ isYourSalaryWithinMarketTitle }}</div>
     <div class="mb-3">Оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
     <div>
       <button class="btn btn-dark" (click)="openAddSalaryAction()">Добавить зарплату</button>
@@ -14,12 +14,18 @@
 
 <div class="container mb-5" *ngIf="salariesChart != null; else dataLoading">
   <div class="position-relative">
-    <div class="position-absolute h-100 w-100 d-flex align-items-center justify-content-center">
-      <div *ngIf="!isAuthenticated" class="alert alert-info mx-5 z-1" role="alert">
-        <div class="mb-2 h3">Ваша зарплата «в рынке»?</div>
-        <div class="mb-3">Зарегистрируйтесь и оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
-        <div>
-          <button class="btn btn-primary" (click)="openAddSalaryAction()">Зарегистрироваться</button>
+    <div 
+      *ngIf="!isAuthenticated"
+      class="position-absolute h-100 w-100 d-flex align-items-md-center align-items-start justify-content-center">
+      <div class="mt-5 alert alert-info mx-5 z-1">
+        <div class="mb-2 h3">{{ isYourSalaryWithinMarketTitle }}</div>
+        <div class="mb-5">Зарегистрируйтесь и оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
+        <div class="">
+          <button
+            class="btn btn-primary btn-lg px-5"
+            (click)="openAddSalaryAction()">
+            Зарегистрироваться
+          </button>
         </div>
       </div>
     </div>
