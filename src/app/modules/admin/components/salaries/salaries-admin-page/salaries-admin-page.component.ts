@@ -9,6 +9,7 @@ import { SalaryAdminItem } from './salary-admin-item';
 import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
 import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
 import { AlertService } from '@shared/components/alert/services/alert.service';
+import { SalariesTableFilter } from './salaries-table-filter';
 
 @Component({
   templateUrl: './salaries-admin-page.component.html'
@@ -18,6 +19,8 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
   salaries: Array<SalaryAdminItem> | null = null;
   source: PaginatedList<UserSalaryAdminDto> | null = null;
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
+
+  readonly filter = new SalariesTableFilter();
 
   constructor(
     private readonly service: UserSalariesService,
@@ -30,8 +33,18 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
   }
 
   loadData(page = 1): void {
+
+    this.salaries = null;
+    this.source = null;
+
     this.service
-      .all({ ...defaultPageParams, page })
+      .all({ 
+        page,
+        pageSize: defaultPageParams.pageSize,
+        profession: this.filter.profession ?? null,
+        company: this.filter.company ?? null,
+        grade: this.filter.grade ?? null,
+       })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.salaries = x.results.map((x) => new SalaryAdminItem(x));
@@ -59,5 +72,11 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
         }
       )
     );
+  }
+
+  clearFilter(): void {
+    this.filter.profession = null;
+    this.filter.company = null;
+    this.loadData();
   }
 }

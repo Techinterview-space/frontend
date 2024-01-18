@@ -63,6 +63,14 @@ export interface UpdateSalaryRequest {
   grade: DeveloperGrade | null;
 }
 
+export interface AdminAllSalariesQueryParams extends PageParams {
+  page: number;
+  pageSize: number;
+  profession: UserProfession | null;
+  company: CompanyType | null;
+  grade: DeveloperGrade | null;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -70,8 +78,9 @@ export class UserSalariesService {
   private readonly root = '/api/salaries/';
   constructor(private readonly api: ApiService) {}
 
-  all(pageParams: PageParams = defaultPageParams): Observable<PaginatedList<UserSalaryAdminDto>> {
-    return this.api.get<PaginatedList<UserSalaryAdminDto>>(this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
+  all(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
+    return this.api.get<PaginatedList<UserSalaryAdminDto>>(
+      this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
   }
 
   charts(): Observable<SalariesChartResponse> {

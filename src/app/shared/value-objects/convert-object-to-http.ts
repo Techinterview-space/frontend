@@ -14,6 +14,11 @@ export class ConvertObjectToHttpParams {
     let httpParams: HttpParams = new HttpParams();
 
     for (const field of Object.keys(this.params)) {
+      const value = this.params[field];
+      if (value == null) {
+        continue;
+      }
+
       httpParams = httpParams.append(field, this.params[field]);
     }
 

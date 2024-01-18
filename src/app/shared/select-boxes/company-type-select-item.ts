@@ -16,7 +16,7 @@ export class CompanyTypeSelectItem implements SelectItem<CompanyType> {
         this.label = 'Казахстанская';
         break;
       case CompanyType.Remote:
-        this.label = 'Удаленно на иностранную компанию';
+        this.label = 'Иностранная компания (оплата в валюте)';
         break;
       default:
         this.label = new SplittedByWhitespacesString(CompanyType[item]).value;
