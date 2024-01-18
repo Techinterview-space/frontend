@@ -6,10 +6,16 @@ import { SplittedByWhitespacesString } from "@shared/value-objects/splitted-by-w
 export class SalariesPerProfession {
 
     readonly professionName: string;
+    turnedOn: boolean = false;
+
     constructor(
         readonly profession: UserProfession,
         readonly items: Array<UserSalary>) {
         this.professionName = new SplittedByWhitespacesString(UserProfession[profession]).toString();
+    }
+
+    toggle(): void {
+        this.turnedOn = !this.turnedOn;
     }
 
     static from(salaries: Array<UserSalary>): {

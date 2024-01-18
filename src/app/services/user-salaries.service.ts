@@ -58,6 +58,11 @@ export interface CreateSalaryRecordResponse {
   createdSalary: UserSalary | null;
 }
 
+export interface UpdateSalaryRequest {
+  company: CompanyType;
+  grade: DeveloperGrade | null;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -75,6 +80,10 @@ export class UserSalariesService {
 
   create(data: CreateUserSalaryRequest): Observable<CreateSalaryRecordResponse> {
     return this.api.post<CreateSalaryRecordResponse>(this.root, data);
+  }
+
+  update(id: string, data: UpdateSalaryRequest): Observable<void> {
+    return this.api.post<void>(this.root + id, data);
   }
 
   delete(dataId: string): Observable<void> {
