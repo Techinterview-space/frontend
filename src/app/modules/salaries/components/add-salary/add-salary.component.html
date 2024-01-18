@@ -49,7 +49,7 @@
   
           <div class="mb-3">
             <select formControlName="company" class="form-select" aria-label="Select a company">
-              <option [value]="null" selected disabled>Работаете в казахстанской компании или удаленно</option>
+              <option [value]="null" selected disabled>Работаете в казахстанской компании или иностранной</option>
               <option *ngFor="let option of companyTypes" [value]="option.value">{{ option.label }}</option>
             </select>
             <app-field-error [field]="addSalaryForm.get('company')"></app-field-error>
