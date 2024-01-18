@@ -8,10 +8,14 @@ export class DeveloperGradeSelectItem implements SelectItem<DeveloperGrade> {
   readonly label: string;
   readonly item: DeveloperGrade;
 
-  constructor(grade: DeveloperGrade) {
+  constructor(grade: DeveloperGrade, label: string | null = null) {
     this.value = grade.toString();
-    this.label = new SplittedByWhitespacesString(DeveloperGrade[grade]).value;
+    this.label = label ?? new SplittedByWhitespacesString(DeveloperGrade[grade]).value;
     this.item = grade;
+  }
+
+  static empty(label: string): DeveloperGradeSelectItem {
+    return new DeveloperGradeSelectItem(DeveloperGrade.Unknown, label);
   }
 
   static allGrades(): DeveloperGradeSelectItem[] {

@@ -34,7 +34,6 @@ export class AuthCallbackComponent implements OnInit {
         this.cookieService.delete('url');
         this.router.navigate([url]);
       } else {
-        console.log('Redirecting to /me');
         this.router.navigate([this.urlToRedirectAfterLogin]);
       }
     });

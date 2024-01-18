@@ -9,6 +9,7 @@ import { AddSalaryComponent } from './components/add-salary/add-salary.component
 import { SalariesByGradesChartComponent } from './components/salaries-by-grades-chart/salaries-by-grades-chart.component';
 import { SalaryBlockValueComponent } from './components/salaries-chart/salary-block-value/salary-block-value.component';
 import { SalaryBlockRemoteValueComponent } from './components/salaries-chart/salary-block-remote-value/salary-block-remote-value.component';
+import { SalaryChartGlobalFiltersComponent } from './components/salaries-chart/salary-chart-global-filters/salary-chart-global-filters.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SalaryBlockRemoteValueComponent } from './components/salaries-chart/sal
     SalariesByGradesChartComponent,
     SalaryBlockValueComponent,
     SalaryBlockRemoteValueComponent,
+    SalaryChartGlobalFiltersComponent,
   ],
   imports: [
     CommonModule,

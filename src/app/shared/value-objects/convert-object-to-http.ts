@@ -19,7 +19,7 @@ export class ConvertObjectToHttpParams {
         continue;
       }
 
-      httpParams = httpParams.append(field, this.params[field]);
+      httpParams = httpParams.append(field, value);
     }
 
     return httpParams;
