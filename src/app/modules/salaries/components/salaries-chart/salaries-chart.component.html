@@ -2,13 +2,6 @@
 
 <div *ngIf="showDataStub" class="container mt-5 mb-3">
 
-  <div *ngIf="!isAuthenticated" class="alert alert-primary" role="alert">
-    <div class="mb-2 h3">Ваша зарплата «в рынке»?</div>
-    <div class="mb-3">Зарегистрируйтесь и оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
-    <div>
-      <button class="btn btn-primary" (click)="openAddSalaryAction()">Зарегистрироваться</button>
-    </div>
-  </div>
 
   <div *ngIf="isAuthenticated" class="alert alert-warning" role="alert">
     <div class="mb-2 h3">Ваша зарплата «в рынке»?</div>
@@ -20,8 +13,19 @@
 </div>
 
 <div class="container mb-5" *ngIf="salariesChart != null; else dataLoading">
+  <div class="position-relative">
+    <div class="position-absolute h-100 w-100 d-flex align-items-center justify-content-center">
+      <div *ngIf="!isAuthenticated" class="alert alert-info mx-5 z-1" role="alert">
+        <div class="mb-2 h3">Ваша зарплата «в рынке»?</div>
+        <div class="mb-3">Зарегистрируйтесь и оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
+        <div>
+          <button class="btn btn-primary" (click)="openAddSalaryAction()">Зарегистрироваться</button>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
-      <div class="card-body p-5">
+      <div class="card-body p-5 {{!isAuthenticated ? 'blur' : ''}}">
 
         <div *ngIf="salariesChart">
           <div *ngIf="showDataStub" class="mb-3">
@@ -102,6 +106,7 @@
         </div>
         
       </div>
+    </div>
     </div>
   </div>
 
