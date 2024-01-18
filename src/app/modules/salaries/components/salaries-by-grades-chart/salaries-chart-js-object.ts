@@ -24,10 +24,10 @@ export class SalariesChartJsObject extends Chart {
         const datasets: Array<ChartDatasetType> = [
         {
             profession: null,
-            type: 'line' as ChartType,
+            type: 'bar' as ChartType,
             label: 'Все',
             data: chartData.items.map(x => x.count),
-            borderWidth: 3,
+            borderWidth: 1,
             borderColor: randomColor.toString(1),
             backgroundColor: randomColor.toString(0.5),
         },
@@ -39,10 +39,10 @@ export class SalariesChartJsObject extends Chart {
             profession: x.profession,
             label: UserProfession[x.profession].toString(),
             data: x.items.map(x => x.count),
-            borderWidth: 1,
-            borderColor: color.toString(0.6),
-            backgroundColor: color.toString(0.3),
-            type: 'bar' as ChartType,
+            borderWidth: 2,
+            borderColor: color.toString(1),
+            backgroundColor: color.toString(0.7),
+            type: 'line' as ChartType,
         });
         });
 
@@ -90,10 +90,10 @@ export class SalariesChartJsObject extends Chart {
         this.datasets = datasets;
     }
 
-    hideBarDatasets(): void {
+    hideProfessionDatasets(): void {
         for (let index = 0; index < this.datasets.length; index++) {
             const dataset = this.datasets[index];
-            if (dataset.type == 'bar') {
+            if (dataset.profession != null) {
                 this.setDatasetVisibility(index, false);
             }
         }
