@@ -10,7 +10,25 @@ export class ProfessionSelectItem implements SelectItem<UserProfession> {
 
   constructor(item: UserProfession) {
     this.value = item.toString();
-    this.label = new SplittedByWhitespacesString(UserProfession[item]).value;
+
+    switch (item) {
+      case UserProfession.UiDesigner:
+        this.label = 'UI Designer';
+        break;
+
+      case UserProfession.UxDesigner:
+        this.label = 'UX Designer';
+        break;
+
+      case UserProfession.UiUxDesigner:
+        this.label = 'UI/UX Designer';
+        break;
+
+      default:
+        this.label = new SplittedByWhitespacesString(UserProfession[item]).value;
+        break;
+    }
+
     this.item = item;
   }
 
