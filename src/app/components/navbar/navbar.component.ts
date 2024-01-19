@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserRole } from '@models/enums';
-import { ApplicationUserExtended } from '@models/extended';
-import { HealthCheckService } from '@shared/health-check/health-check.service';
-import { AuthService } from '@shared/services/auth/auth.service';
-import { SpinnerService } from '@shared/services/spinners/spinner-service';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
+import { _getFocusedElementPierceShadowDom } from "@angular/cdk/platform";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { UserRole } from "@models/enums";
+import { ApplicationUserExtended } from "@models/extended";
+import { HealthCheckService } from "@shared/health-check/health-check.service";
+import { AuthService } from "@shared/services/auth/auth.service";
+import { SpinnerService } from "@shared/services/spinners/spinner-service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 interface NavbarLink {
   title: string;
@@ -19,9 +20,9 @@ interface NavbarDropdown {
 }
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   loginButtonAvailable = false;
@@ -69,10 +70,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   private setupSubscribers(): void {
-    this.authService.loggedOutInvoked$.pipe(untilDestroyed(this)).subscribe(() => {
-      this.currentUser = null;
-      this.renderNavbar();
-    });
+    this.authService.loggedOutInvoked$
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.currentUser = null;
+        this.renderNavbar();
+      });
 
     this.authService.loggedOut$.pipe(untilDestroyed(this)).subscribe(() => {
       this.currentUser = null;
@@ -90,54 +93,65 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.dropdowns = [
       {
-        title: 'Interviews',
+        title: "Interviews",
         show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer),
         links: [
           {
-            title: 'Start an interview',
-            url: '/interviews/create',
-            show: true
+            title: "Start an interview",
+            url: "/interviews/create",
+            show: true,
           },
           {
-            title: 'My interviews',
-            url: '/interviews/my',
-            show: true
-          }
-        ]
+            title: "My interviews",
+            url: "/interviews/my",
+            show: true,
+          },
+        ],
       },
       {
-        title: 'Templates',
+        title: "Templates",
         show: true,
         links: [
           {
-            title: 'Create a template',
-            url: '/interviews/templates/create',
-            show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer)
+            title: "Create a template",
+            url: "/interviews/templates/create",
+            show:
+              hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer),
           },
           {
-            title: 'My templates',
-            url: '/interviews/templates/my',
-            show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer)
+            title: "My templates",
+            url: "/interviews/templates/my",
+            show:
+              hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer),
           },
           {
-            title: 'Public templates',
-            url: '/interviews/templates/public',
-            show: true
-          }
-        ]
+            title: "Public templates",
+            url: "/interviews/templates/public",
+            show: true,
+          },
+        ],
       },
       {
-        title: 'Salaries',
+        title: "Salaries",
         show: true,
         links: [
           {
-            title: 'Salaries chart',
-            url: '/salaries',
-            show: true
+            title: "Salaries chart",
+            url: "/salaries",
+            show: true,
           },
-        ]
-      }
+        ],
+      },
     ];
+
+    if (window.innerWidth <= 768) {
+      const navbarContent = document.getElementById("navbarSupportedContent");
+      const navbarToggler = document.querySelector(".navbar-toggler");
+      navbarContent?.classList.add("d-none");
+      navbarToggler?.addEventListener("click", function () {
+        navbarContent?.classList.toggle("d-none");
+      });
+    }
 
     if (hasCurrentUser && this.currentUser!.organizations.length === 1) {
       const orgName = this.currentUser!.organizations[0].organization.name;
@@ -148,41 +162,41 @@ export class NavbarComponent implements OnInit, OnDestroy {
         show: true,
         links: [
           {
-            title: 'Open organization',
+            title: "Open organization",
             url: `/organizations/${organizationId}`,
-            show: true
+            show: true,
           },
           {
-            title: 'Recruitment pipeline board',
+            title: "Recruitment pipeline board",
             url: `/boards/${organizationId}/recruitment-pipeline`,
-            show: true
+            show: true,
           },
           {
-            title: 'Interviews',
+            title: "Interviews",
             url: `/organizations/${organizationId}/interviews`,
-            show: true
+            show: true,
           },
           {
-            title: 'Interview templates',
+            title: "Interview templates",
             url: `/organizations/${organizationId}/interview-templates`,
-            show: true
+            show: true,
           },
           {
-            title: 'Candidate cards',
+            title: "Candidate cards",
             url: `/organizations/${organizationId}/candidate-cards`,
-            show: true
+            show: true,
           },
           {
-            title: 'Candidates',
+            title: "Candidates",
             url: `/organizations/${organizationId}/candidates`,
-            show: true
+            show: true,
           },
           {
-            title: 'Labels',
+            title: "Labels",
             url: `/organizations/${organizationId}/labels`,
-            show: true
-          }
-        ]
+            show: true,
+          },
+        ],
       });
     }
   }

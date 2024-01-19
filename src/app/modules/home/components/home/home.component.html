@@ -3,11 +3,17 @@
     <div class="col-sm d-flex align-items-end">
       <div class="d-inline-block my-5">
         <div class="display-1">Tech.Interview</div>
-        <div class="lead">Conduct an interview. Make your notes. Create templates.</div>
+        <div class="lead">
+          Conduct an interview. Make your notes. Create templates.
+        </div>
       </div>
     </div>
     <div class="col-sm">
-      <img src="/assets/img/Job-Interview-vector.png" alt="Interviewer" class="img-fluid" />
+      <img
+        src="/assets/img/Job-Interview-vector.png"
+        alt="Interviewer"
+        class="img-fluid"
+      />
     </div>
   </div>
 </div>
@@ -21,8 +27,15 @@
           <div class="mt-3 feature-subtitle">{{ hint.subtitle }}</div>
         </div>
         <div class="col-sm-8">
-          <div *ngIf="hint.showPreloader" class="h-100 d-flex justify-content-center align-items-center">
-            <div class="spinner-border" style="width: 3rem; height: 3rem" role="status">
+          <div
+            *ngIf="hint.showPreloader"
+            class="h-100 d-flex justify-content-center align-items-center"
+          >
+            <div
+              class="spinner-border"
+              style="width: 3rem; height: 3rem"
+              role="status"
+            >
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -52,9 +65,18 @@
 
 <div class="feature bg-white">
   <div class="container">
-    <div class="feature-title">Ready to start? Just create your first interview or template</div>
+    <div class="feature-title text-center">
+      Ready to start? Just create your first interview or template
+    </div>
     <div class="mt-5">
-      <button type="button" class="btn btn-huge btn-primary" (click)="getStarted()">{{ getStartedButtonTitle }}</button>
+      <button
+        type="button"
+        class="btn btn-huge btn-primary mx-auto"
+        style="display: flex; justify-content: center"
+        (click)="getStarted()"
+      >
+        {{ getStartedButtonTitle }}
+      </button>
     </div>
   </div>
 </div>
