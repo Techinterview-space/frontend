@@ -40,7 +40,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     }
 
     const salary = this.salariesChart.currentUserSalary;
-    return `Вы указали зарплату за ${salary.quarter}.${salary.year}`;
+    return `Вы указали зарплату за ${salary.quarter}.${salary.year}. Вы можете `;
   }
 
   constructor(
