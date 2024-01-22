@@ -41,15 +41,15 @@ export enum UserProfession {
 
     ItRecruiter = 20,
 
-    UiDesigner = 19,
+    UiDesigner = 21,
 
-    UxDesigner = 20,
+    UxDesigner = 22,
 
-    UiUxDesigner = 21,
+    UiUxDesigner = 23,
 
-    ProductAnalyst = 22,
+    ProductAnalyst = 24,
 
-    ProductManager = 23,
+    ProductManager = 25,
 
-    ProductDesigner = 24,
+    ProductDesigner = 26,
 }
