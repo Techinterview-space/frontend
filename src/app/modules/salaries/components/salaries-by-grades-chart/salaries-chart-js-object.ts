@@ -1,6 +1,6 @@
 import { UserProfession } from '@models/salaries/user-profession';
 import { SalariesByMoneyBarChart } from '@services/user-salaries.service';
-import { Chart, ChartType }  from 'chart.js/auto';
+import { Chart, ChartType, PointStyle }  from 'chart.js/auto';
 import { RandomRgbColor } from './random-rgb-color';
 
 interface ChartDatasetType {
@@ -11,6 +11,7 @@ interface ChartDatasetType {
     borderColor: string;
     backgroundColor: string;
     type: ChartType;
+    pointStyle: PointStyle;
 }
 
 export class SalariesChartJsObject extends Chart {
@@ -19,30 +20,34 @@ export class SalariesChartJsObject extends Chart {
 
     constructor(canvasId: string, chartData: SalariesByMoneyBarChart) {
         const randomColor = new RandomRgbColor();
-        const datasets: Array<ChartDatasetType> = [
-        {
-            profession: null,
-            type: 'bar' as ChartType,
-            label: 'Все',
-            data: chartData.items.map(x => x.count),
-            borderWidth: 1,
-            borderColor: randomColor.toString(1),
-            backgroundColor: randomColor.toString(0.5),
-        },
-        ];
+        const datasets: Array<ChartDatasetType> = [];
 
         chartData.itemsByProfession.forEach((x, i) => {
-        const color = new RandomRgbColor();
-        datasets.push({
-            profession: x.profession,
-            label: UserProfession[x.profession].toString(),
-            data: x.items.map(x => x.count),
-            borderWidth: 2,
-            borderColor: color.toString(1),
-            backgroundColor: color.toString(0.7),
-            type: 'line' as ChartType,
+            const color = new RandomRgbColor();
+            datasets.push({
+                profession: x.profession,
+                label: UserProfession[x.profession].toString(),
+                data: x.items.map(x => x.count),
+                borderWidth: 2,
+                borderColor: color.toString(1),
+                backgroundColor: color.toString(0.7),
+                type: 'line' as ChartType,
+                pointStyle: false as PointStyle,
+            });
         });
-        });
+
+        datasets.push(
+            {
+                profession: null,
+                type: 'bar' as ChartType,
+                label: 'Все',
+                data: chartData.items.map(x => x.count),
+                borderWidth: 1,
+                borderColor: randomColor.toString(1),
+                backgroundColor: randomColor.toString(0.5),
+                pointStyle: false as PointStyle,
+            },
+        );
 
         super(
             canvasId,

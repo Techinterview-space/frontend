@@ -10,14 +10,17 @@ import { PageParams, defaultPageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 
-export interface CreateUserSalaryRequest {
+export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
   quarter: number;
   year: number;
   currency: Currency;
   company: CompanyType;
-  grade: DeveloperGrade | null;
   profession: UserProfession;
+}
+
+export interface EditUserSalaryRequest {
+  grade: DeveloperGrade;
 }
 
 export interface SalariesChartResponse {
@@ -107,7 +110,7 @@ export class UserSalariesService {
     return this.api.post<CreateSalaryRecordResponse>(this.root, data);
   }
 
-  update(id: string, data: CreateUserSalaryRequest): Observable<CreateSalaryRecordResponse> {
+  update(id: string, data: EditUserSalaryRequest): Observable<CreateSalaryRecordResponse> {
     return this.api.post<CreateSalaryRecordResponse>(this.root + id, data);
   }
 
