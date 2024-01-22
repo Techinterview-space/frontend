@@ -13,33 +13,22 @@ export class SalariesAddingChartComponent implements OnInit, OnDestroy {
   data: SalariesAddingTrendAdminChart | null = null;
   chart: SalariesAddingChart | null = null;
 
-  readonly canvasId = 'canvas_' + Math.random().toString(36).substring(7);
-
   constructor(
     private readonly service: UserSalariesService,
-    private readonly titleService: TitleService) {}
+    private readonly titleService: TitleService) {
+      this.titleService.setTitle('All salaries chart');
+    }
 
   ngOnInit(): void {
-    this.titleService.setTitle('All salaries chart');
+
     this.chart = null;
     this.service
       .addingSalariesaTrendAdminChart()
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.data = x;
+        this.chart = new SalariesAddingChart('canvas', this.data);
       });
-  }
-
-  ngAfterViewInit() {
-    if (this.data != null) {
-      this.chart = new SalariesAddingChart(this.canvasId, this.data);
-      /*var chartEl = document.getElementById(this.canvasId);
-      if (chartEl != null && chartEl.parentElement != null) {
-        chartEl.style.height = chartEl?.parentElement.style.height ?? '100%';
-      }*/
-    } else {
-      this.chart = null;
-    }
   }
 
   ngOnDestroy(): void {

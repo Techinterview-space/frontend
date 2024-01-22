@@ -1,29 +1,15 @@
 <app-page-header>All salaries chart</app-page-header>
 
-<div class="container my-5" *ngIf="data; else dataLoading">
+<div class="container my-5">
   <div class="card">
     <div class="card-body">
 
-      <div class="col-md-9">
-        <div id="canvas-container" *ngIf="canvasId">
-          <canvas [attr.id]="canvasId">{{ chart }}</canvas>
+      <div class="">
+        <div id="canvas-container">
+          <canvas id="canvas">{{ chart }}</canvas>
         </div>
       </div>
 
     </div>
   </div>
 </div>
-
-<ng-template #dataLoading>
-  <div class="container mt-5">
-    <app-data-loader></app-data-loader>
-  </div>
-</ng-template>
-
-<ng-template #nothingToShow>
-  <div class="card">
-    <div class="card-body">
-      <div class="text-center">There is no salaries.</div>
-    </div>
-  </div>
-</ng-template>
