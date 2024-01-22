@@ -5,7 +5,7 @@ import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { CompanyTypeSelectItem } from '@shared/select-boxes/company-type-select-item';
 import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-select-item';
 import { ProfessionSelectItem } from '@shared/select-boxes/profession-select-item';
-import { UserSalary } from '@models/salaries/salary.model';
+import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
 import { AlertService } from '@shared/components/alert/services/alert.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { AlertService } from '@shared/components/alert/services/alert.service';
 export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
 
   @Input()
-  salarytoBeEdited: UserSalary | null = null;
+  salarytoBeEdited: UserSalaryAdminDto | null = null;
 
   @Output()
   closed: EventEmitter<void> = new EventEmitter();
@@ -46,6 +46,25 @@ export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (this.salarytoBeEdited) {
+      this.service
+        .update(this.salarytoBeEdited.id, data)
+        .pipe(untilDestroyed(this))
+        .subscribe(
+          (x) => {
+            if (x.isSuccess && x.createdSalary) {
+              this.errorMessage = null;
+              this.alert.success(this.salarytoBeEdited ? 'Зарплата обновлена' : 'Зарплата успешно записана');
+              this.salaryAdded.emit(x.createdSalary);
+            } else {
+              const error = 'За данный квартал уже есть запись';
+              this.alert.error(error);
+              this.errorMessage = error;
+            }});
+      
+      return;
+    }
+
     this.service
       .create(data)
       .pipe(untilDestroyed(this))
@@ -53,14 +72,14 @@ export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
         (x) => {
           if (x.isSuccess && x.createdSalary) {
             this.errorMessage = null;
-            this.alert.success('Зарплата успешно записана');
+            this.alert.success(this.salarytoBeEdited ? 'Зарплата обновлена' : 'Зарплата успешно записана');
             this.salaryAdded.emit(x.createdSalary);
           } else {
             const error = 'За данный квартал уже есть запись';
             this.alert.error(error);
             this.errorMessage = error;
-          }
-        });
+          }});
+    
   }
 
   ngOnDestroy(): void {
