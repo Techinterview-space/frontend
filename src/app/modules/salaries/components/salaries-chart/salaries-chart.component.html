@@ -34,48 +34,56 @@
       <div class="card-body p-5 {{!isAuthenticated ? 'blur' : ''}}">
 
         <div *ngIf="salariesChart">
-          <div *ngIf="showDataStub" class="mb-3">
-            <div class="h4">Демонстрационные данные:</div> 
-          </div>
-  
-          <div class="mb-5 d-flex justify-content-between align-items-end">
-            <app-salary-block-value
-              [title]="'Медианная зарплата:'"
-              [value]="salariesChart.medianSalary"></app-salary-block-value>
-  
-              <div *ngIf="salariesChart.medianRemoteSalary" class="d-none d-md-block">
-                <app-salary-block-remote-value
-                  [title]="'На удаленке:'"
-                  [value]="salariesChart.medianRemoteSalary"></app-salary-block-remote-value>
-              </div>
-  
-          </div>
-  
-          <div class="mb-3 d-flex justify-content-between align-items-end">
-  
-            <app-salary-block-value
-              [title]="'Средняя зарплата:'"
-              [value]="salariesChart.averageSalary"></app-salary-block-value>
-  
-              <div *ngIf="salariesChart.averageRemoteSalary" class="d-none d-md-block">
-                <app-salary-block-remote-value
-                  [title]="'На удаленке:'"
-                  [value]="salariesChart.averageRemoteSalary"></app-salary-block-remote-value>
-              </div>
-          </div>
-         
-  
-          <div *ngIf="!showDataStub" class="mb-3 fst-italic">
-            <div class="text-muted">
-              <span>Рассчитано на основании {{ salariesChart.countOfRecords }} анкет(ы)</span>
-              <button type="button" class="btn btn-outline-dark btn-sm ms-2" (click)="openAddSalaryAction()">Добавить еще одну зарплату</button>
+          <div class="mb-3">
+            <div *ngIf="showDataStub" class="mb-3">
+              <div class="h4">Демонстрационные данные:</div> 
             </div>
-          </div>
-  
-          <div *ngIf="showDataStub" class="mb-3">
-            <div class="text-muted">Данные сгенерированы для <strong>демонстрации</strong>. 
-              <button class="btn btn-outline-secondary btn-sm" (click)="openAddSalaryAction()">{{ isAuthenticated ? 'Добавить зарплату' : 'Зарегистрироваться' }}</button> для получения актуальных данных.</div>
-          </div>
+    
+            <div class="mb-5 d-flex justify-content-between align-items-end">
+              <app-salary-block-value
+                [title]="'Медианная зарплата:'"
+                [value]="salariesChart.medianSalary"></app-salary-block-value>
+    
+                <div *ngIf="salariesChart.medianRemoteSalary" class="d-none d-md-block">
+                  <app-salary-block-remote-value
+                    [title]="'На удаленке:'"
+                    [value]="salariesChart.medianRemoteSalary"></app-salary-block-remote-value>
+                </div>
+    
+            </div>
+    
+            <div class="mb-3 d-flex justify-content-between align-items-end">
+    
+              <app-salary-block-value
+                [title]="'Средняя зарплата:'"
+                [value]="salariesChart.averageSalary"></app-salary-block-value>
+    
+                <div *ngIf="salariesChart.averageRemoteSalary" class="d-none d-md-block">
+                  <app-salary-block-remote-value
+                    [title]="'На удаленке:'"
+                    [value]="salariesChart.averageRemoteSalary"></app-salary-block-remote-value>
+                </div>
+            </div>
+           
+    
+            <div *ngIf="!showDataStub" class="mb-3">
+              <div class="text-muted mb-3 fst-italic">
+                <span>Рассчитано на основании {{ salariesChart.countOfRecords }} анкет(ы)</span>
+              </div>
+              <div class="fst-italic text-muted" *ngIf="salariesChart.currentUserSalary">
+                <div>Ваша текущая зарплата указана за {{ salariesChart.currentUserSalary.quarter }} квартал {{salariesChart.currentUserSalary.year}} года.</div>
+                <div>
+                  Вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">изменить эти данные</button>
+                  или <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openAddSalaryAction()">добавить еще зарплату</button> к статистике.
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showDataStub" class="mb-3">
+              <div class="text-muted">Данные сгенерированы для <strong>демонстрации</strong>. 
+                <button class="btn btn-outline-secondary btn-sm" (click)="openAddSalaryAction()">{{ isAuthenticated ? 'Добавить зарплату' : 'Зарегистрироваться' }}</button> для получения актуальных данных.</div>
+            </div>
+          </div>          
   
           <div *ngIf="salariesChart.salariesByMoneyBarChart" class="mt-5 mb-5">
             <div class="mb-5">
@@ -128,6 +136,13 @@
     [salarytoBeEdited]="null"
     (closed)="closeAddSalaryAction()"
     (salaryAdded)="onSalaryAdded($event)"
+  ></app-add-or-edit-salary-modal>
+
+  <app-add-or-edit-salary-modal
+    *ngIf="openEditCurrentSalaryModal && salariesChart"
+    [salarytoBeEdited]="salariesChart.currentUserSalary"
+    (closed)="closeEditSalaryAction()"
+    (salaryAdded)="onSalaryUpdated($event)"
   ></app-add-or-edit-salary-modal>
   
   <ng-template #dataLoading>

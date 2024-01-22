@@ -1,7 +1,7 @@
 import { formatNumber } from "@angular/common";
 import { SalariesByMoneyBarChart, SalariesChartResponse } from "@services/user-salaries.service";
 import { SalariesPerProfession } from "../salaries-per-profession";
-import { UserSalary } from "@models/salaries/salary.model";
+import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 
 export class SalariesChart {
 
@@ -19,7 +19,7 @@ export class SalariesChart {
     readonly salariesPerProfessionForLocal: Array<SalariesPerProfession> | null;
     readonly salariesPerProfessionForRemote: Array<SalariesPerProfession> | null;
 
-    readonly currentUserSalary: UserSalary | null = null;
+    readonly currentUserSalary: UserSalaryAdminDto | null = null;
     readonly currentUserSalaryValue: string | null = null;
 
     readonly hasRemoteSalaries: boolean;

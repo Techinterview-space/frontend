@@ -15,6 +15,14 @@ import { AlertService } from '@shared/components/alert/services/alert.service';
 })
 export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
 
+  get modalTitle(): string {
+    return this.salarytoBeEdited ? 'Редактирование зарплаты' : 'Добавьте свою зарплату';
+  }
+
+  get saveButtonTitle(): string {
+    return this.salarytoBeEdited ? 'Сохранить изменения' : 'Добавить';
+  }
+
   @Input()
   salarytoBeEdited: UserSalaryAdminDto | null = null;
 

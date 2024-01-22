@@ -24,9 +24,24 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   showDataStub = false;
   openAddSalaryModal = false;
+  openEditCurrentSalaryModal = false;
   isAuthenticated = false;
 
   gradeFilter: DeveloperGrade | null = null;
+
+  get userExistingSalaryLabel() : string {
+
+    if (this.showDataStub) {
+      return 'Здесь будут отображаться возможные действия';
+    }
+
+    if (this.salariesChart == null || this.salariesChart.currentUserSalary == null) {
+      return '';
+    }
+
+    const salary = this.salariesChart.currentUserSalary;
+    return `Вы указали зарплату за ${salary.quarter}.${salary.year}`;
+  }
 
   constructor(
     private readonly service: UserSalariesService,
@@ -76,12 +91,28 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.authService.login();
   }
 
+  openEditSalaryAction(): void {
+    if (this.salariesChart?.currentUserSalary) {
+      this.openEditCurrentSalaryModal = true;
+      return;
+    }
+  }
+
   closeAddSalaryAction(): void {
     this.openAddSalaryModal = false;
   }
 
+  closeEditSalaryAction(): void {
+    this.openEditCurrentSalaryModal = false;
+  }
+
   onSalaryAdded(salary: UserSalary): void {
     this.openAddSalaryModal = false;
+    this.load();
+  }
+
+  onSalaryUpdated(salary: UserSalary): void {
+    this.openEditCurrentSalaryModal = false;
     this.load();
   }
 

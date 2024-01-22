@@ -8,7 +8,6 @@ export interface UserSalaryAdminDto extends UserSalary{
 }
 
 export interface UserSalary {
-    id: string;
     value: number;
     quarter: number;
     year: number;
