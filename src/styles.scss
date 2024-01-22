@@ -76,7 +76,7 @@ ul.no-bullets {
   background-color: transparent;
   border: 0;
   font-weight: 600;
-  font-size: 0.875rem;
+  /*font-size: 0.875rem;*/
   text-decoration: none;
 
   &:disabled {
@@ -116,6 +116,7 @@ ul.no-bullets {
     color: $color-info;
     &:hover {
       color: darken($color: $color-info, $amount: 20%);
+      font-weight: 600;
     }
   }
 }

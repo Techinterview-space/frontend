@@ -46,14 +46,14 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
   private initChart(): void {
     if (this.chart == null || this.salaries == null) {
       return;
-  }
+    }
 
-  this.chartDataLocal = new SalariesChartJsObject(this.canvasId, this.chart);
-  this.chartDataLocal.hideProfessionDatasets();
+    this.chartDataLocal = new SalariesChartJsObject(this.canvasId, this.chart);
+    this.chartDataLocal.hideProfessionDatasets();
 
-  var chartEl = document.getElementById(this.canvasId);
-  if (chartEl != null && chartEl.parentElement != null) {
-    chartEl.style.height = chartEl?.parentElement.style.height ?? '100%';
-  }
+    var chartEl = document.getElementById(this.canvasId);
+    if (chartEl != null && chartEl.parentElement != null) {
+      chartEl.style.height = chartEl?.parentElement.style.height ?? '100%';
+    }
   }
 }

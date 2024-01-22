@@ -40,6 +40,7 @@ export class StubSalariesChart extends SalariesChart {
             averageRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
             medianRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
             shouldAddOwnSalary: true,
+            currentUserSalary: null,
             salaries: salaries,
             salariesByMoneyBarChart: {
                 items: StubSalariesChart.salaryLabels.map((x) => {

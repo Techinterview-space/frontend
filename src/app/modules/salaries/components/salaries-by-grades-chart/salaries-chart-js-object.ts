@@ -18,8 +18,6 @@ export class SalariesChartJsObject extends Chart {
     private readonly datasets: Array<ChartDatasetType> = [];
 
     constructor(canvasId: string, chartData: SalariesByMoneyBarChart) {
-
-        const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
         const randomColor = new RandomRgbColor();
         const datasets: Array<ChartDatasetType> = [
         {

@@ -33,6 +33,8 @@ export interface SalariesChartResponse {
 
   salariesByMoneyBarChart: SalariesByMoneyBarChart | null;
   salariesByMoneyBarChartForRemote: SalariesByMoneyBarChart | null;
+
+  currentUserSalary: UserSalaryAdminDto | null;
 }
 
 export interface SalariesByProfessionMoneyBarChartItem {
@@ -58,11 +60,6 @@ export interface CreateSalaryRecordResponse {
   createdSalary: UserSalary | null;
 }
 
-export interface UpdateSalaryRequest {
-  company: CompanyType;
-  grade: DeveloperGrade | null;
-}
-
 export interface AdminAllSalariesQueryParams extends PageParams {
   page: number;
   pageSize: number;
@@ -73,6 +70,16 @@ export interface AdminAllSalariesQueryParams extends PageParams {
 
 export interface SalariesChartFilterData {
   grade: DeveloperGrade | null;
+}
+
+export interface SalariesAddingTrendAdminChart {
+  labels: string[];
+  items: Array<{
+    count: number,
+    startedAt: Date,
+  }>;
+
+  salariesPerUser: number;
 }
 
 @Injectable({
@@ -87,6 +94,10 @@ export class UserSalariesService {
       this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
   }
 
+  addingSalariesaTrendAdminChart(): Observable<SalariesAddingTrendAdminChart> {
+    return this.api.get<SalariesAddingTrendAdminChart>(this.root + 'salaries-adding-trend-chart');
+  }
+
   charts(filters: SalariesChartFilterData): Observable<SalariesChartResponse> {
     return this.api.get<SalariesChartResponse>(
       this.root + 'chart?' + new ConvertObjectToHttpParams(filters).get());
@@ -96,8 +107,8 @@ export class UserSalariesService {
     return this.api.post<CreateSalaryRecordResponse>(this.root, data);
   }
 
-  update(id: string, data: UpdateSalaryRequest): Observable<void> {
-    return this.api.post<void>(this.root + id, data);
+  update(id: string, data: CreateUserSalaryRequest): Observable<CreateSalaryRecordResponse> {
+    return this.api.post<CreateSalaryRecordResponse>(this.root + id, data);
   }
 
   delete(dataId: string): Observable<void> {

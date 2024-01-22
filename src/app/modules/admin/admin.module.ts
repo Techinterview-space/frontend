@@ -12,6 +12,7 @@ import { UsersAdminPageComponent } from './components/users/users-admin-page/use
 import { AllOrganizationsAdminComponent } from './components/organizations/all-organizations-admin/all-organizations-admin.component';
 import { AdminStartPageComponent } from './components/admin-start-page/admin-start-page.component';
 import { SalariesAdminPageComponent } from './components/salaries/salaries-admin-page/salaries-admin-page.component';
+import { SalariesAddingChartComponent } from './components/salaries/salaries-adding-chart/salaries-adding-chart.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SalariesAdminPageComponent } from './components/salaries/salaries-admin
     UsersAdminPageComponent,
     AllOrganizationsAdminComponent,
     AdminStartPageComponent,
-    SalariesAdminPageComponent
+    SalariesAdminPageComponent,
+    SalariesAddingChartComponent,
   ],
   imports: [CommonModule, SharedModule, AdminRoutingModule, FormsModule, ReactiveFormsModule]
 })
