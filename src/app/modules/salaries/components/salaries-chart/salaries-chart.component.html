@@ -131,19 +131,18 @@
     </div>
   </div>
 
-  <app-add-or-edit-salary-modal
+  <app-add-salary-modal
     *ngIf="openAddSalaryModal"
-    [salarytoBeEdited]="null"
     (closed)="closeAddSalaryAction()"
     (salaryAdded)="onSalaryAdded($event)"
-  ></app-add-or-edit-salary-modal>
+  ></app-add-salary-modal>
 
-  <app-add-or-edit-salary-modal
+  <app-edit-salary-modal
     *ngIf="openEditCurrentSalaryModal && salariesChart"
     [salarytoBeEdited]="salariesChart.currentUserSalary"
     (closed)="closeEditSalaryAction()"
     (salaryAdded)="onSalaryUpdated($event)"
-  ></app-add-or-edit-salary-modal>
+  ></app-edit-salary-modal>
   
   <ng-template #dataLoading>
     <div class="container mt-5">

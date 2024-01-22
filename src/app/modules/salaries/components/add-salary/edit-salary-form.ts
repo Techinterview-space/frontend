@@ -10,7 +10,7 @@ export class EditSalaryForm extends FormGroup {
 
 static readonly digitsPattern = '^[0-9]*$';
 
-    constructor(private readonly salarytoBeEdited: UserSalary | null) {
+    constructor(private readonly salarytoBeEdited: UserSalary | null = null) {
         const now = new Date(Date.now());
         const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
 
@@ -20,7 +20,7 @@ static readonly digitsPattern = '^[0-9]*$';
                 [
                     Validators.pattern(EditSalaryForm.digitsPattern),
                     Validators.required,
-                    Validators.min(42500),
+                    Validators.min(75000),
                     Validators.max(10000000),
                 ]),
             quarter: new FormControl(
@@ -49,9 +49,7 @@ static readonly digitsPattern = '^[0-9]*$';
     createRequestOrNull(): CreateUserSalaryRequest | null {
         if (this.valid) {
             const profession = Number(this.value.profession) as UserProfession;
-            const grade = this.value.grade != null
-                ? Number(this.value.grade) as DeveloperGrade
-                : null;
+            const grade = Number(this.value.grade) as DeveloperGrade;
 
           return {
             value: Number(this.value.value),

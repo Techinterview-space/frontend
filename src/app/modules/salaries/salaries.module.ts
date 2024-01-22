@@ -5,16 +5,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from '@shared/shared.module';
 import { SalariesChartComponent } from './components/salaries-chart/salaries-chart.component';
-import { AddOrEditSalaryComponent } from './components/add-salary/add-or-edit-salary.component';
+import { AddSalaryComponent } from './components/add-salary/add-salary.component';
 import { SalariesByGradesChartComponent } from './components/salaries-by-grades-chart/salaries-by-grades-chart.component';
 import { SalaryBlockValueComponent } from './components/salaries-chart/salary-block-value/salary-block-value.component';
 import { SalaryBlockRemoteValueComponent } from './components/salaries-chart/salary-block-remote-value/salary-block-remote-value.component';
 import { SalaryChartGlobalFiltersComponent } from './components/salaries-chart/salary-chart-global-filters/salary-chart-global-filters.component';
+import { EditSalaryComponent } from './components/edit-salary/edit-salary.component';
 
 @NgModule({
   declarations: [
     SalariesChartComponent,
-    AddOrEditSalaryComponent,
+    AddSalaryComponent,
+    EditSalaryComponent,
     SalariesByGradesChartComponent,
     SalaryBlockValueComponent,
     SalaryBlockRemoteValueComponent,
