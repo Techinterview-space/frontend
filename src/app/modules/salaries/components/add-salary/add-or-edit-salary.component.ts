@@ -1,21 +1,22 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { UserSalariesService } from '@services/user-salaries.service';
-import { AddSalaryForm } from './add-salary-form';
+import { EditSalaryForm } from './edit-salary-form';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { CompanyTypeSelectItem } from '@shared/select-boxes/company-type-select-item';
 import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-select-item';
 import { ProfessionSelectItem } from '@shared/select-boxes/profession-select-item';
 import { UserSalary } from '@models/salaries/salary.model';
-import { error } from 'console';
 import { AlertService } from '@shared/components/alert/services/alert.service';
-import { catchError, tap } from 'rxjs';
 
 @Component({
-  selector: 'app-add-salary-modal',
-  templateUrl: './add-salary.component.html',
-  styleUrl: './add-salary.component.scss'
+  selector: 'app-add-or-edit-salary-modal',
+  templateUrl: './add-or-edit-salary.component.html',
+  styleUrl: './add-or-edit-salary.component.scss'
 })
-export class AddSalaryComponent implements OnInit, OnDestroy {
+export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
+
+  @Input()
+  salarytoBeEdited: UserSalary | null = null;
 
   @Output()
   closed: EventEmitter<void> = new EventEmitter();
@@ -23,7 +24,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
   @Output()
   salaryAdded: EventEmitter<UserSalary> = new EventEmitter();
 
-  addSalaryForm: AddSalaryForm | null = null;
+  addSalaryForm: EditSalaryForm | null = null;
   errorMessage: string | null = null;
 
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
@@ -35,7 +36,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
     private readonly alert: AlertService) {}
 
   ngOnInit(): void {
-    this.addSalaryForm = new AddSalaryForm();
+    this.addSalaryForm = new EditSalaryForm(this.salarytoBeEdited);
   }
 
   addSalarySubmitAction(): void {

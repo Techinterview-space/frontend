@@ -2,46 +2,47 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { DeveloperGrade } from "@models/enums";
 import { CompanyType } from "@models/salaries/company-type";
 import { Currency } from "@models/salaries/currency";
+import { UserSalary } from "@models/salaries/salary.model";
 import { UserProfession } from "@models/salaries/user-profession";
 import { CreateUserSalaryRequest } from "@services/user-salaries.service";
 
-export class AddSalaryForm extends FormGroup {
+export class EditSalaryForm extends FormGroup {
 
 static readonly digitsPattern = '^[0-9]*$';
 
-    constructor() {
+    constructor(private readonly salarytoBeEdited: UserSalary | null) {
         const now = new Date(Date.now());
         const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
 
         super({
             value: new FormControl(
-                null,
+                salarytoBeEdited?.value ?? null,
                 [
-                    Validators.pattern(AddSalaryForm.digitsPattern),
+                    Validators.pattern(EditSalaryForm.digitsPattern),
                     Validators.required,
                     Validators.min(42500),
                     Validators.max(10000000),
                 ]),
             quarter: new FormControl(
-                currentQuarter,
+                salarytoBeEdited?.quarter ?? currentQuarter,
                 [
-                    Validators.pattern(AddSalaryForm.digitsPattern),
+                    Validators.pattern(EditSalaryForm.digitsPattern),
                     Validators.min(1),
                     Validators.max(4),
                     Validators.required
                 ]),
             year: new FormControl(
-                now.getFullYear(),
+                salarytoBeEdited?.year ?? now.getFullYear(),
                 [
-                    Validators.pattern(AddSalaryForm.digitsPattern),
+                    Validators.pattern(EditSalaryForm.digitsPattern),
                     Validators.min(2000),
                     Validators.max(2100),
                     Validators.required
                 ]),
-            currency: new FormControl(Currency.KZT, [Validators.required]),
-            company: new FormControl(null, [Validators.required]),
-            grade: new FormControl(null, []),
-            profession: new FormControl(null, [Validators.required]),
+            currency: new FormControl(salarytoBeEdited?.currency ?? Currency.KZT, [Validators.required]),
+            company: new FormControl(salarytoBeEdited?.currency ?? null, [Validators.required]),
+            grade: new FormControl(salarytoBeEdited?.currency ?? null, [Validators.required]),
+            profession: new FormControl(salarytoBeEdited?.currency ?? null, [Validators.required]),
         });
     }
 
