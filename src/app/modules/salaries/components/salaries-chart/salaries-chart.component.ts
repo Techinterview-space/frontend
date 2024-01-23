@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { StubSalariesChart } from './stub-salaries-chart';
 import { DeveloperGrade } from '@models/enums';
 import { SalaryChartGlobalFiltersData } from './salary-chart-global-filters/global-filters-form-group';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -29,26 +30,13 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   gradeFilter: DeveloperGrade | null = null;
 
-  get userExistingSalaryLabel() : string {
-
-    if (this.showDataStub) {
-      return 'Здесь будут отображаться возможные действия';
-    }
-
-    if (this.salariesChart == null || this.salariesChart.currentUserSalary == null) {
-      return '';
-    }
-
-    const salary = this.salariesChart.currentUserSalary;
-    return `Вы указали зарплату за ${salary.quarter}.${salary.year}. Вы можете `;
-  }
-
   constructor(
     private readonly service: UserSalariesService,
     title: TitleService,
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly cookieService: CookieService) {
+    private readonly cookieService: CookieService,
+    private readonly gtag: GoogleAnalyticsService) {
       title.setTitle('Salaries');
     }
 
@@ -84,6 +72,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   openAddSalaryAction(): void {
     if (this.authService.isAuthenticated()) {
       this.openAddSalaryModal = true;
+      this.gtag.event('salaries_chart_view', 'salary_add_modal_opened');
       return;
     }
 
@@ -94,25 +83,30 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   openEditSalaryAction(): void {
     if (this.salariesChart?.currentUserSalary) {
       this.openEditCurrentSalaryModal = true;
+      this.gtag.event('salaries_chart_view', 'salary_edit_modal_opened');
       return;
     }
   }
 
   closeAddSalaryAction(): void {
     this.openAddSalaryModal = false;
+    this.gtag.event('salaries_chart_view', 'salary_add_modal_closed_without_adding');
   }
 
   closeEditSalaryAction(): void {
     this.openEditCurrentSalaryModal = false;
+    this.gtag.event('salaries_chart_view', 'salary_edit_modal_closed_without_editing');
   }
 
   onSalaryAdded(salary: UserSalary): void {
     this.openAddSalaryModal = false;
+    this.gtag.event('salaries_chart_view', 'salary_added');
     this.load();
   }
 
   onSalaryUpdated(salary: UserSalary): void {
     this.openEditCurrentSalaryModal = false;
+    this.gtag.event('salaries_chart_view', 'salary_updated');
     this.load();
   }
 
@@ -123,6 +117,8 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     }
 
     this.filterData = data;
+    const selectedGrade = data.grade ? DeveloperGrade[data.grade] : 'empty';
+    this.gtag.event('salaries_chart_view', 'filters_applied', selectedGrade);
     this.load(data);
   }
 
@@ -134,6 +130,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     }
 
     this.filterData = newFilterData;
+    this.gtag.event('salaries_chart_view', 'filters_reset');
     this.load();
   }
 
