@@ -8,7 +8,7 @@ export class TestApplicationUser implements ApplicationUser {
     this.id = id;
     this.firstName = 'John';
     this.lastName = 'Smith';
-    this.email = 'j.smith@petrel.ai';
+    this.email = 'j.smith@gmail.com';
     this.roles = [role];
     this.emailConfirmed = true;
     this.identityId = id;
