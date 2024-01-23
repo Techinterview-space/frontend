@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SalariesChartComponent } from './salaries-chart.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 describe('SalariesChartComponent', () => {
   let component: SalariesChartComponent;
@@ -12,7 +13,7 @@ describe('SalariesChartComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SalariesChartComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices],
+      providers: [...testUtilStubs, ...mostUsedServices, GoogleAnalyticsService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
