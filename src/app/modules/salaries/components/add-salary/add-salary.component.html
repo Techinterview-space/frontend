@@ -16,14 +16,14 @@
           <hr class="mb-3" />
 
           <form
-          *ngIf="addSalaryForm"
-          [formGroup]="addSalaryForm"
-          (ngSubmit)="addSalarySubmitAction()">
-          <div class="mb-3">
-            <label>Зарплата в тенге <strong>в месяц</strong>. Если вы получаете в иной валюте, переведите в тенге.</label>
-            <input formControlName="value" type="text" class="form-control form-control-lg" />
-            <app-field-error [field]="addSalaryForm.get('value')" [max]="10000000" [min]="42500"></app-field-error>
-          </div>
+            *ngIf="addSalaryForm"
+            [formGroup]="addSalaryForm"
+            (ngSubmit)="addSalarySubmitAction()">
+            <div class="mb-3">
+              <label>Зарплата в тенге <strong>в месяц</strong>. Если вы получаете в иной валюте, переведите в тенге.</label>
+              <input formControlName="value" type="text" class="form-control form-control-lg" />
+              <app-field-error [field]="addSalaryForm.get('value')" [max]="10000000" [min]="75000"></app-field-error>
+            </div>
 
           <div class="mb-3">
             <div class="row mb-1">

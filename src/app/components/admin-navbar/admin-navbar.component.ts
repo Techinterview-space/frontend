@@ -54,6 +54,10 @@ export class AdminNavbarComponent {
           {
             title: 'All salaries',
             url: '/admin/salaries'
+          },
+          {
+            title: 'Salaries adding chart',
+            url: '/admin/salaries/salaries-adding-trend-chart'
           }
         ]
       },

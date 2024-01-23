@@ -9,11 +9,11 @@ import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
 import { AlertService } from '@shared/components/alert/services/alert.service';
 
 @Component({
-  selector: 'app-add-or-edit-salary-modal',
-  templateUrl: './add-or-edit-salary.component.html',
-  styleUrl: './add-or-edit-salary.component.scss'
+  selector: 'app-edit-salary-modal',
+  templateUrl: './edit-salary.component.html',
+  styleUrl: './edit-salary.component.scss'
 })
-export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
+export class EditSalaryComponent implements OnInit, OnDestroy {
 
   @Input()
   salarytoBeEdited: UserSalaryAdminDto | null = null;
@@ -24,7 +24,7 @@ export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
   @Output()
   salaryAdded: EventEmitter<UserSalary> = new EventEmitter();
 
-  addSalaryForm: EditSalaryForm | null = null;
+  form: EditSalaryForm | null = null;
   errorMessage: string | null = null;
 
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
@@ -36,18 +36,17 @@ export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
     private readonly alert: AlertService) {}
 
   ngOnInit(): void {
-    this.addSalaryForm = new EditSalaryForm(this.salarytoBeEdited);
+    this.form = new EditSalaryForm(this.salarytoBeEdited);
   }
 
   addSalarySubmitAction(): void {
     this.errorMessage = null;
-    const data = this.addSalaryForm?.createRequestOrNull();
-    if (data == null) {
+    const data = this.form?.createRequestOrNull();
+    if (data == null || this.salarytoBeEdited == null) {
       return;
     }
 
-    if (this.salarytoBeEdited) {
-      this.service
+    this.service
         .update(this.salarytoBeEdited.id, data)
         .pipe(untilDestroyed(this))
         .subscribe(
@@ -57,29 +56,9 @@ export class AddOrEditSalaryComponent implements OnInit, OnDestroy {
               this.alert.success(this.salarytoBeEdited ? 'Зарплата обновлена' : 'Зарплата успешно записана');
               this.salaryAdded.emit(x.createdSalary);
             } else {
-              const error = 'За данный квартал уже есть запись';
-              this.alert.error(error);
-              this.errorMessage = error;
+              this.alert.error(x.errorMessage!);
+              this.errorMessage = x.errorMessage!;
             }});
-      
-      return;
-    }
-
-    this.service
-      .create(data)
-      .pipe(untilDestroyed(this))
-      .subscribe(
-        (x) => {
-          if (x.isSuccess && x.createdSalary) {
-            this.errorMessage = null;
-            this.alert.success(this.salarytoBeEdited ? 'Зарплата обновлена' : 'Зарплата успешно записана');
-            this.salaryAdded.emit(x.createdSalary);
-          } else {
-            const error = 'За данный квартал уже есть запись';
-            this.alert.error(error);
-            this.errorMessage = error;
-          }});
-    
   }
 
   ngOnDestroy(): void {

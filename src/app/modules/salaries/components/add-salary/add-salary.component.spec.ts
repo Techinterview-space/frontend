@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddOrEditSalaryComponent } from './add-or-edit-salary.component';
+import { AddSalaryComponent } from './add-salary.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
 
-describe('AddOrEditSalaryComponent', () => {
-  let component: AddOrEditSalaryComponent;
-  let fixture: ComponentFixture<AddOrEditSalaryComponent>;
+describe('AddSalaryComponent', () => {
+  let component: AddSalaryComponent;
+  let fixture: ComponentFixture<AddSalaryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddOrEditSalaryComponent],
+      declarations: [AddSalaryComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AddOrEditSalaryComponent);
+    fixture = TestBed.createComponent(AddSalaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

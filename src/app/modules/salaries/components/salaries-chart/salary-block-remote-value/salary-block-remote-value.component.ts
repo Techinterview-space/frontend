@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class SalaryBlockRemoteValueComponent {
 
   @Input()
-  title: string = '';
+  title: string | null = '';
 
   @Input()
   value: string = '';

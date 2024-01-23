@@ -1,0 +1,48 @@
+<div class="modal d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog custom-alert modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="h3 modal-title">Редактирование данных</span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="p-1">
+
+          <div *ngIf="salarytoBeEdited" class="mb-3">
+            <div class="mb-1">
+              Значение: <strong>{{ salarytoBeEdited.value }}</strong>
+            </div>
+            <div class="">
+              {{ salarytoBeEdited.quarter }} квартал {{ salarytoBeEdited.year }} года
+            </div>
+          </div>
+
+          <form
+            *ngIf="form"
+            [formGroup]="form"
+            (ngSubmit)="addSalarySubmitAction()">
+  
+          <div class="mb-3">
+            <label>Ваш грейд</label>
+            <select formControlName="grade" class="form-select" aria-label="Select your grade">
+              <option [value]="null" selected disabled>Ваш грейд</option>
+              <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <app-field-error [field]="form.get('grade')"></app-field-error>
+          </div>
+
+          <div *ngIf="errorMessage" class="mb-3 alert alert-danger">
+            {{ errorMessage }}
+          </div>
+  
+          <div class="mb-3 pt-3">
+            <button class="btn btn-primary btn-lg w-100" type="submit">Сохранить изменения</button>
+          </div>
+        </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
