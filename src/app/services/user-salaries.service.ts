@@ -97,6 +97,11 @@ export class UserSalariesService {
       this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
   }
 
+  salariesNotInStats(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
+    return this.api.get<PaginatedList<UserSalaryAdminDto>>(
+      this.root + 'not-in-stats?' + new ConvertObjectToHttpParams(pageParams).get());
+  }
+
   addingSalariesaTrendAdminChart(): Observable<SalariesAddingTrendAdminChart> {
     return this.api.get<SalariesAddingTrendAdminChart>(this.root + 'salaries-adding-trend-chart');
   }

@@ -10,9 +10,9 @@ import { SalaryAdminItem } from '../salary-admin-item';
 import { SalariesTableFilter } from '../salaries-table-filter';
 
 @Component({
-  templateUrl: './salaries-admin-page.component.html'
+  templateUrl: './salaries-not-in-stat-admin-page.component.html'
 })
-export class SalariesAdminPageComponent implements OnInit, OnDestroy {
+export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
 
   salaries: Array<SalaryAdminItem> | null = null;
   source: PaginatedList<UserSalaryAdminDto> | null = null;
@@ -21,9 +21,9 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: UserSalariesService,
-    private readonly titleService: TitleService,
+    titleService: TitleService,
     private readonly alert: AlertService) {
-      titleService.setTitle('All salaries');
+      titleService.setTitle('Salaries not in stats');
     }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
     this.currentPage = data.page;
 
     this.service
-      .all(data)
+      .salariesNotInStats(data)
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.salaries = x.results.map((x) => new SalaryAdminItem(x));
@@ -63,6 +63,16 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(() => {
         this.alert.success('Salary deleted');
+        this.ngOnInit();
+      });
+  }
+
+  approveSalary(salary: SalaryAdminItem): void {
+    this.service
+      .approve(salary.id)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success('Salary approved');
         this.ngOnInit();
       });
   }
