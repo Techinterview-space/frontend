@@ -56,7 +56,7 @@ export class AdminNavbarComponent {
             url: '/admin/salaries'
           },
           {
-            title: 'Salaries not in stats',
+            title: 'Salaries to be approved',
             url: '/admin/salaries/not-in-stats'
           },
           {

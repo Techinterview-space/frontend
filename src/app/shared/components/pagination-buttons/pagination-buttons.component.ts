@@ -12,7 +12,7 @@ export class PaginationButtonsComponent implements OnInit {
   @Output()
   pageChange: EventEmitter<number> = new EventEmitter<number>();
 
-  pages: Array<number> = [];
+  pages: Array<number | null> = [];
   lastPage: number | null = null;
 
   get disablePreviousButton(): boolean {
@@ -26,7 +26,49 @@ export class PaginationButtonsComponent implements OnInit {
   ngOnInit(): void {
     if (this.source) {
       this.lastPage = Math.ceil(this.source.totalItems / this.source.pageSize);
-      this.pages = Array.from(Array(this.lastPage).keys()).map((i) => i + 1);
+      const allPages = Array.from(Array(this.lastPage).keys()).map((i) => i + 1);
+
+      if (allPages.length > 7) {
+
+        if (this.source.currentPage > 3 &&
+            this.source.currentPage < this.lastPage - 2) {
+          this.pages = [
+            1,
+            2,
+            null,
+            this.source.currentPage - 1,
+            this.source.currentPage,
+            this.source.currentPage + 1,
+            null,
+            this.lastPage - 1,
+            this.lastPage,
+          ];
+        } else if (this.source.currentPage <= 3) {
+          this.pages = [
+            1,
+            2,
+            3,
+            4,
+            5,
+            null,
+            this.lastPage - 1,
+            this.lastPage,
+          ];
+        } else {
+          this.pages = [
+            1,
+            2,
+            null,
+            this.lastPage - 4,
+            this.lastPage - 3,
+            this.lastPage - 2,
+            this.lastPage - 1,
+            this.lastPage,
+          ];
+        }
+      } else {
+        this.pages = allPages;
+      }
     }
   }
 
@@ -42,11 +84,17 @@ export class PaginationButtonsComponent implements OnInit {
     }
   }
 
-  pageClicked(page: number): void {
-    this.pageChange.emit(page);
+  pageClicked(page: number | null): void {
+    if (page != null) {
+      this.pageChange.emit(page);
+    }
   }
 
-  activePageStyle(page: number): string {
+  activePageStyle(page: number | null): string {
+    if (page == null) {
+      return '';
+    }
+
     return this.source && this.source.currentPage === page ? 'active' : '';
   }
 }

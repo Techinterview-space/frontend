@@ -23,7 +23,7 @@ export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
     private readonly service: UserSalariesService,
     titleService: TitleService,
     private readonly alert: AlertService) {
-      titleService.setTitle('Salaries not in stats');
+      titleService.setTitle('Salaries to be approved');
     }
 
   ngOnInit(): void {
