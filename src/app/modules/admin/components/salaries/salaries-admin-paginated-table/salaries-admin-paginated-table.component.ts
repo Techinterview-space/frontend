@@ -23,8 +23,14 @@ export class SalariesAdminPaginatedTableComponent {
   @Input()
   filter: SalariesTableFilter | null = null;
 
+  @Input()
+  showApproveButton = false;
+
   @Output()
   loadDataRequested: EventEmitter<AdminAllSalariesQueryParams> = new EventEmitter<AdminAllSalariesQueryParams>();
+
+  @Output()
+  approveRequested: EventEmitter<SalaryAdminItem> = new EventEmitter<SalaryAdminItem>();
 
   @Output()
   deleteRequested: EventEmitter<SalaryAdminItem> = new EventEmitter<SalaryAdminItem>();
@@ -50,7 +56,19 @@ export class SalariesAdminPaginatedTableComponent {
         'Are you sure to delete?',
         () => {
           this.deleteRequested.emit(salary);
-          this.loadData();
+          console.log('deleteRequested');
+        }
+      )
+    );
+  }
+
+  openApproveDialog(salary: SalaryAdminItem): void {
+    this.confirmDeletionMessage = new DialogMessage(
+      new ConfirmMsg(
+        'Approve the salary record',
+        'Are you sure to approve?',
+        () => {
+          this.approveRequested.emit(salary);
         }
       )
     );

@@ -17,27 +17,32 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
   salaries: Array<SalaryAdminItem> | null = null;
   source: PaginatedList<UserSalaryAdminDto> | null = null;
   readonly filter = new SalariesTableFilter();
+  currentPage: number = 1;
 
   constructor(
     private readonly service: UserSalariesService,
     private readonly titleService: TitleService,
-    private readonly alert: AlertService) {}
+    private readonly alert: AlertService) {
+      titleService.setTitle('All salaries');
+    }
 
   ngOnInit(): void {
+    this.salaries = null;
+    this.source = null;
     this.loadData(
       { 
-        page: 1,
+        page: this.currentPage,
         pageSize: defaultPageParams.pageSize,
         ...this.filter
        }
     );
-    this.titleService.setTitle('All salaries');
   }
 
   loadData(data: AdminAllSalariesQueryParams): void {
 
     this.salaries = null;
     this.source = null;
+    this.currentPage = data.page;
 
     this.service
       .all(data)
@@ -58,6 +63,17 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(() => {
         this.alert.success('Salary deleted');
+        this.ngOnInit();
+      });
+  }
+
+  approveSalary(salary: SalaryAdminItem): void {
+    this.service
+      .approve(salary.id)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success('Salary approved');
+        this.ngOnInit();
       });
   }
 }

@@ -114,6 +114,10 @@ export class UserSalariesService {
     return this.api.post<CreateSalaryRecordResponse>(this.root + id, data);
   }
 
+  approve(dataId: string): Observable<void> {
+    return this.api.post<void>(this.root + dataId + '/approve', {});
+  }
+
   delete(dataId: string): Observable<void> {
     return this.api.delete<void>(this.root + dataId);
   }

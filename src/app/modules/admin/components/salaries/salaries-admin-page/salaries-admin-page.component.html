@@ -8,8 +8,10 @@
         [source]="source"
         [salaries]="salaries"
         [filter]="filter"
+        [showApproveButton]="true"
+        (approveRequested)="approveSalary($event)"
         (loadDataRequested)="loadData($event)"
-        deleteRequested="deleteSalary($event)"
+        (deleteRequested)="deleteSalary($event)"
         ></app-salaries-admin-paginated-table>
 
     </div>

@@ -57,7 +57,15 @@
         <td>{{ item.company }}</td>
         <td>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
         <td>
-          <button type="button" class="btn-link-sm" (click)="openDeleteDialog(item)">Delete</button>
+          <button
+            type="button"
+            class="btn-link-sm btn-link-danger"
+            (click)="openDeleteDialog(item)">Delete</button>
+          <button
+            *ngIf="showApproveButton"
+            type="button"
+            class="btn-link-sm ms-2"
+            (click)="openApproveDialog(item)">Approve</button>
         </td>
       </tr>
     </tbody>
