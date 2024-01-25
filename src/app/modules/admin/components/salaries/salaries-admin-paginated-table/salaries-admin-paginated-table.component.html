@@ -1,4 +1,4 @@
-<div class="mb-3 row">
+<div *ngIf="filter" class="mb-3 row">
   <div class="col-md-3">
     <label for="profession" class="form-label">Company</label>
       <select class="form-select" id="company" name="company" [(ngModel)]="filter.company">
@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<div class="table-responsive mb-3" *ngIf="salaries.length > 0; else nothingToShow">
+<div class="table-responsive mb-3" *ngIf="salaries && salaries.length > 0; else nothingToShow">
   <table class="table table-hover table-sm">
     <thead>
       <th>Value</th>

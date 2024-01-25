@@ -3,10 +3,10 @@ import { defaultPageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { UserSalaryAdminDto } from '@models/salaries/salary.model';
 import { AdminAllSalariesQueryParams } from '@services/user-salaries.service';
-import { SalaryAdminItem } from './salary-admin-item';
+import { SalaryAdminItem } from '../salary-admin-item';
 import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
 import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
-import { SalariesTableFilter } from './salaries-table-filter';
+import { SalariesTableFilter } from '../salaries-table-filter';
 
 @Component({
   selector: 'app-salaries-admin-paginated-table',
@@ -15,10 +15,13 @@ import { SalariesTableFilter } from './salaries-table-filter';
 export class SalariesAdminPaginatedTableComponent {
 
   @Input()
-  salaries: Array<SalaryAdminItem> = [];
+  salaries: Array<SalaryAdminItem> | null = null;
 
   @Input()
   source: PaginatedList<UserSalaryAdminDto> | null = null;
+
+  @Input()
+  filter: SalariesTableFilter | null = null;
 
   @Output()
   loadDataRequested: EventEmitter<AdminAllSalariesQueryParams> = new EventEmitter<AdminAllSalariesQueryParams>();
@@ -28,17 +31,15 @@ export class SalariesAdminPaginatedTableComponent {
 
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
 
-  readonly filter = new SalariesTableFilter();
-
   constructor() {}
 
   loadData(page = 1): void {
     this.loadDataRequested.emit({ 
       page,
       pageSize: defaultPageParams.pageSize,
-      profession: this.filter.profession ?? null,
-      company: this.filter.company ?? null,
-      grade: this.filter.grade ?? null,
+      profession: this.filter?.profession ?? null,
+      company: this.filter?.company ?? null,
+      grade: this.filter?.grade ?? null,
      });
   }
 
@@ -56,8 +57,12 @@ export class SalariesAdminPaginatedTableComponent {
   }
 
   clearFilter(): void {
-    this.filter.profession = null;
-    this.filter.company = null;
+    if (this.filter) {
+      this.filter.profession = null;
+      this.filter.company = null;
+      this.filter.grade = null;
+    }
+
     this.loadData();
   }
 }

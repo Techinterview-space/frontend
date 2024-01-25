@@ -5,11 +5,9 @@ import { UserSalaryAdminDto } from '@models/salaries/salary.model';
 import { TitleService } from '@services/title.service';
 import { AdminAllSalariesQueryParams, UserSalariesService } from '@services/user-salaries.service';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { SalaryAdminItem } from './salary-admin-item';
-import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
-import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
 import { AlertService } from '@shared/components/alert/services/alert.service';
-import { SalariesTableFilter } from './salaries-table-filter';
+import { SalaryAdminItem } from '../salary-admin-item';
+import { SalariesTableFilter } from '../salaries-table-filter';
 
 @Component({
   templateUrl: './salaries-admin-page.component.html'
@@ -18,6 +16,7 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
 
   salaries: Array<SalaryAdminItem> | null = null;
   source: PaginatedList<UserSalaryAdminDto> | null = null;
+  readonly filter = new SalariesTableFilter();
 
   constructor(
     private readonly service: UserSalariesService,
@@ -29,9 +28,7 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
       { 
         page: 1,
         pageSize: defaultPageParams.pageSize,
-        profession: null,
-        company: null,
-        grade: null,
+        ...this.filter
        }
     );
     this.titleService.setTitle('All salaries');
