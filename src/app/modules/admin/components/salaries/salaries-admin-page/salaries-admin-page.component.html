@@ -4,75 +4,13 @@
   <div class="card">
     <div class="card-body">
 
-      <div class="mb-3 row">
-        <div class="col-md-3">
-          <label for="profession" class="form-label">Company</label>
-            <select class="form-select" id="company" name="company" [(ngModel)]="filter.company">
-              <option selected value="">All</option>
-              <option *ngFor="let item of filter.companies" [value]="item.item">
-                {{ item.label }}
-              </option>
-            </select>
-        </div>
+      <app-salaries-admin-paginated-table
+        [source]="source"
+        [salaries]="salaries"
+        (loadDataRequested)="loadData($event)"
+        deleteRequested="deleteSalary($event)"
+        ></app-salaries-admin-paginated-table>
 
-        <div class="col-md-3">
-          <label for="profession" class="form-label">Profession</label>
-            <select class="form-select" id="profession" name="profession" [(ngModel)]="filter.profession">
-              <option selected value="">All</option>
-              <option *ngFor="let item of filter.professions" [value]="item.item">
-                {{ item.label }}
-              </option>
-            </select>
-        </div>
-
-        <div class="col-md-3">
-          <label for="profession" class="form-label">Grade</label>
-          <select class="form-select" id="grade" name="grade" [(ngModel)]="filter.grade">
-            <option selected value="">All</option>
-            <option *ngFor="let item of filter.grades" [value]="item.item">
-              {{ item.label }}
-            </option>
-          </select>
-        </div>
-
-        <div class="col-md-3 d-flex align-items-end">
-          <div>
-            <button type="button" class="btn btn-outline-primary" (click)="loadData()">Apply</button>
-            <button type="button" class="btn btn-outline-dark ms-2" (click)="clearFilter()">Reset</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="table-responsive mb-3" *ngIf="salaries.length > 0; else nothingToShow">
-        <table class="table table-hover table-sm">
-          <thead>
-            <th>Value</th>
-            <th>Period</th>
-            <th>Profession</th>
-            <th>Grade</th>
-            <th>Company</th>
-            <th>Created at</th>
-            <th></th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of salaries; let i = index">
-              <td>{{ item.value | number: '1.0-0' }}</td>
-              <td>{{ item.quarter }}.{{ item.year }}</td>
-              <td>{{ item.profession }}</td>
-              <td>{{ item.grade }}</td>
-              <td>{{ item.company }}</td>
-              <td>{{ item.createdAt | date: 'yyyy-MM-dd' }}</td>
-              <td>
-                <button type="button" class="btn-link-sm" (click)="openDeleteDialog(item)">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="" *ngIf="source && source.results.length > 0">
-        <app-pagination-buttons [source]="source" (pageChange)="loadData($event)"></app-pagination-buttons>
-      </div>
     </div>
   </div>
 </div>
@@ -82,13 +20,3 @@
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
-
-<ng-template #nothingToShow>
-  <div class="card">
-    <div class="card-body">
-      <div class="text-center">There is no salaries.</div>
-    </div>
-  </div>
-</ng-template>
-
-<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>

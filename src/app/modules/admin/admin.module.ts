@@ -13,6 +13,7 @@ import { AllOrganizationsAdminComponent } from './components/organizations/all-o
 import { AdminStartPageComponent } from './components/admin-start-page/admin-start-page.component';
 import { SalariesAdminPageComponent } from './components/salaries/salaries-admin-page/salaries-admin-page.component';
 import { SalariesAddingChartComponent } from './components/salaries/salaries-adding-chart/salaries-adding-chart.component';
+import { SalariesAdminPaginatedTableComponent } from './components/salaries/salaries-admin-paginated-table/salaries-admin-paginated-table.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,13 @@ import { SalariesAddingChartComponent } from './components/salaries/salaries-add
     AdminStartPageComponent,
     SalariesAdminPageComponent,
     SalariesAddingChartComponent,
+    SalariesAdminPaginatedTableComponent
   ],
-  imports: [CommonModule, SharedModule, AdminRoutingModule, FormsModule, ReactiveFormsModule]
+  imports: [
+    CommonModule,
+    SharedModule,
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule]
 })
 export class AdminModule {}
