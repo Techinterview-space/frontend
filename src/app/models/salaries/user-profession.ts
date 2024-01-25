@@ -52,4 +52,6 @@ export enum UserProfession {
     ProductManager = 25,
 
     ProductDesigner = 26,
+
+    HrNonIt = 27,
 }
