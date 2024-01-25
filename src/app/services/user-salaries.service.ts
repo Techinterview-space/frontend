@@ -97,6 +97,11 @@ export class UserSalariesService {
       this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
   }
 
+  salariesNotInStats(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
+    return this.api.get<PaginatedList<UserSalaryAdminDto>>(
+      this.root + 'not-in-stats?' + new ConvertObjectToHttpParams(pageParams).get());
+  }
+
   addingSalariesaTrendAdminChart(): Observable<SalariesAddingTrendAdminChart> {
     return this.api.get<SalariesAddingTrendAdminChart>(this.root + 'salaries-adding-trend-chart');
   }
@@ -112,6 +117,10 @@ export class UserSalariesService {
 
   update(id: string, data: EditUserSalaryRequest): Observable<CreateSalaryRecordResponse> {
     return this.api.post<CreateSalaryRecordResponse>(this.root + id, data);
+  }
+
+  approve(dataId: string): Observable<void> {
+    return this.api.post<void>(this.root + dataId + '/approve', {});
   }
 
   delete(dataId: string): Observable<void> {

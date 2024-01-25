@@ -1,4 +1,4 @@
-<app-page-header>All salaries</app-page-header>
+<app-page-header>Salaries not in stats</app-page-header>
 
 <div class="container my-5" *ngIf="salaries; else dataLoading">
   <div class="card">
@@ -8,7 +8,8 @@
         [source]="source"
         [salaries]="salaries"
         [filter]="filter"
-        [showApproveButton]="false"
+        [showApproveButton]="true"
+        (approveRequested)="approveSalary($event)"
         (loadDataRequested)="loadData($event)"
         (deleteRequested)="deleteSalary($event)"
         ></app-salaries-admin-paginated-table>

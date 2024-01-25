@@ -56,6 +56,10 @@ export class AdminNavbarComponent {
             url: '/admin/salaries'
           },
           {
+            title: 'Salaries not in stats',
+            url: '/admin/salaries/not-in-stats'
+          },
+          {
             title: 'Salaries adding chart',
             url: '/admin/salaries/salaries-adding-trend-chart'
           }

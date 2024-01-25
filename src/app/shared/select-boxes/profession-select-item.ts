@@ -24,6 +24,10 @@ export class ProfessionSelectItem implements SelectItem<UserProfession> {
         this.label = 'UI/UX Designer';
         break;
 
+      case UserProfession.HrNonIt:
+        this.label = 'HR (не из IT)';
+        break;
+
       default:
         this.label = new SplittedByWhitespacesString(UserProfession[item]).value;
         break;
