@@ -19,6 +19,14 @@ export class ConvertObjectToHttpParams {
         continue;
       }
 
+      if (value instanceof Array) {
+        for (const item of value) {
+          httpParams = httpParams.append(field, item);
+        }
+
+        continue;
+      }
+
       httpParams = httpParams.append(field, value);
     }
 

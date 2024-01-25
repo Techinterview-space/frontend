@@ -2,13 +2,46 @@
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="apply()">
     <div class="h5 mb-2">Глобальные фильтры</div>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 mb-1">
+        <label class="text-sm">Грейд</label>
         <select class="form-select" formControlName="grade">
           <option [value]="null" selected>Все грейды</option>
           <option *ngFor="let item of form.grades" [value]="item.item">
             {{ item.label }}
           </option>
         </select>
+      </div>
+
+      <div class="col-md-3 mb-1">
+        <label class="text-sm">Специальности, включенные в выдачу</label>
+        <ng-select
+            [items]="allProfessions"
+            [hideSelected]="true"
+            [selectOnTab]="true"
+            bindLabel="label"
+            bindValue="item"
+            placeholder="Выберите специальности"
+            appendTo="body"
+            formControlName="profsToInclude"
+            [multiple]="true"
+          >
+          </ng-select>
+      </div>
+
+      <div class="col-md-3 mb-1">
+        <label class="text-sm">Специальности, исключенные из выдачи</label>
+        <ng-select
+            [items]="allProfessions"
+            [hideSelected]="true"
+            [selectOnTab]="true"
+            bindLabel="label"
+            bindValue="item"
+            placeholder="Выберите специальности"
+            appendTo="body"
+            formControlName="profsToExclude"
+            [multiple]="true"
+          >
+          </ng-select>
       </div>
 
       <div class="col-md-3 d-flex align-items-end">

@@ -1,20 +1,32 @@
 import { FormControl, FormGroup } from "@angular/forms";
 import { DeveloperGrade } from "@models/enums";
+import { UserProfession } from "@models/salaries/user-profession";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
+import { SelectItem } from "@shared/select-boxes/select-item";
 
 export class SalaryChartGlobalFiltersData {
     grade: DeveloperGrade | null = null;
+    profsToInclude: Array<UserProfession> = [];
+    profsToExclude: Array<UserProfession> = [];
 
-    constructor(grade: DeveloperGrade | null = null) {
+    constructor(
+        grade: DeveloperGrade | null = null,
+        profsToInclude: Array<UserProfession> = [],
+        profsToExclude: Array<UserProfession> = []) {
         if (grade === DeveloperGrade.Unknown) {
             grade = null;
         }
 
         this.grade = grade;
+        this.profsToInclude = profsToInclude;
+        this.profsToExclude = profsToExclude;
     }
 
     equals(other: SalaryChartGlobalFiltersData): boolean {
-        return this.grade === other.grade;
+        // TODO mgorbatyuk: do more smart check that two arrays are not same
+        return this.grade === other.grade &&
+            this.profsToExclude.length === other.profsToExclude.length &&
+            this.profsToInclude.length === other.profsToInclude.length;
     }
 }
 
@@ -25,6 +37,8 @@ export class GlobalFiltersFormGroup extends FormGroup {
     constructor(filterData: SalaryChartGlobalFiltersData | null) {
         super({
             grade: new FormControl(filterData?.grade, []),
+            profsToInclude: new FormControl(filterData?.profsToInclude, []),
+            profsToExclude: new FormControl(filterData?.profsToExclude, []),
         });
     }
 
@@ -38,6 +52,9 @@ export class GlobalFiltersFormGroup extends FormGroup {
             ? this.value.grade as DeveloperGrade
             : null;
 
-        return new SalaryChartGlobalFiltersData(grade);
+        const profsToInclude = this.value.profsToInclude as Array<UserProfession> ?? [];
+        const profsToExclude = this.value.profsToExclude as Array<UserProfession> ?? [];
+
+        return new SalaryChartGlobalFiltersData(grade, profsToInclude, profsToExclude);
     }
 }

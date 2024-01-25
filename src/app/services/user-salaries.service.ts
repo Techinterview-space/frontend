@@ -73,6 +73,8 @@ export interface AdminAllSalariesQueryParams extends PageParams {
 
 export interface SalariesChartFilterData {
   grade: DeveloperGrade | null;
+  profsInclude: Array<UserProfession> | null;
+  profsExclude: Array<UserProfession> | null;
 }
 
 export interface SalariesAddingTrendAdminChart {

@@ -120,3 +120,72 @@ ul.no-bullets {
     }
   }
 }
+
+/* ng-select bootstrap-like styles. Start */
+/* https://github.com/ng-select/ng-select/issues/1955#issuecomment-1240459808 */
+/*.form-floating {
+  position: relative;
+
+  .ng-select-container {
+    height: calc(3.5rem + 2px) !important;
+    line-height: 1.25;
+  }
+
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; // allow textareas
+    padding: 1rem 0.75rem;
+    overflow: hidden;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+    border: 1px solid transparent; // Required for aligning label's text with the input as it affects inner box model
+    transform-origin: 0 0;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  }
+
+  .ng-select-container {
+    padding-top: 1.625rem;
+    padding-bottom: .625rem;
+
+    .ng-input {
+        top: unset !important;
+    }
+  }
+
+  ng-select {
+    ~label {
+        opacity: 0.65;
+        transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+        z-index: 1001;
+    }
+
+
+    &:focus .ng-select-container {
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+    }
+
+    &.is-valid .ng-select-container {
+        border-color: #198754 !important;
+    }
+
+    &.is-valid.ng-select-focused .ng-select-container {
+        box-shadow: 0 0 0 0.25rem rgb(25 135 84 / 25%);
+    }
+
+    &.is-invalid .ng-select-container {
+        border-color: #dc3545 !important;
+
+    }
+
+    &.is-invalid.ng-select-focused .ng-select-container {
+        box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%);
+    }
+  }
+}*/

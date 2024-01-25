@@ -1,3 +1,7 @@
+import { SelectItem } from "@shared/select-boxes/select-item";
+import { EnumHelper } from "@shared/value-objects/enum-helper";
+import { SplittedByWhitespacesString } from "@shared/value-objects/splitted-by-whitespaces-string";
+
 export enum UserProfession {
     Undefined = 0,
 
@@ -54,4 +58,40 @@ export enum UserProfession {
     ProductDesigner = 26,
 
     HrNonIt = 27,
+}
+
+export class UserProfessionEnum { 
+    static options(): Array<SelectItem<UserProfession>> {
+        return UserProfessionEnum.allItems().map((item) => {
+            return {
+            value: item.toString(),
+            item: item,
+            label: UserProfessionEnum.label(item)
+            };
+        });
+    }
+
+    static allItems(): UserProfession[] {
+        return EnumHelper.getValues(UserProfession)
+            .filter((x) => x !== UserProfession.Undefined);
+    }
+
+    static label(item: UserProfession): string {
+        switch (item) {
+            case UserProfession.UiDesigner:
+              return 'UI Designer';
+      
+            case UserProfession.UxDesigner:
+              return 'UX Designer';
+      
+            case UserProfession.UiUxDesigner:
+              return 'UI/UX Designer';
+      
+            case UserProfession.HrNonIt:
+              return 'HR (не из IT)';
+      
+            default:
+              return new SplittedByWhitespacesString(UserProfession[item]).value;
+        }
+      }
 }

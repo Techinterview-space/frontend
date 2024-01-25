@@ -68,7 +68,7 @@
     
             <div *ngIf="!showDataStub" class="mb-3">
               <div class="text-muted mb-3 fst-italic">
-                <span>Рассчитано на основании {{ salariesChart.countOfRecords }} анкет(ы)</span>
+                <span>Рассчитано на основе {{ salariesChart.countOfRecords }} анкет(ы)</span>
               </div>
               <div class="fst-italic text-muted" *ngIf="salariesChart.currentUserSalary">
                 <div>Ваша текущая зарплата указана за {{ salariesChart.currentUserSalary.quarter }} квартал {{salariesChart.currentUserSalary.year}} года.</div>

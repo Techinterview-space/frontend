@@ -4,9 +4,10 @@ import { EditSalaryForm } from './edit-salary-form';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { CompanyTypeSelectItem } from '@shared/select-boxes/company-type-select-item';
 import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-select-item';
-import { ProfessionSelectItem } from '@shared/select-boxes/profession-select-item';
 import { UserSalary } from '@models/salaries/salary.model';
 import { AlertService } from '@shared/components/alert/services/alert.service';
+import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
+import { SelectItem } from '@shared/select-boxes/select-item';
 
 @Component({
   selector: 'app-add-salary-modal',
@@ -26,7 +27,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
 
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
   readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
-  readonly professions: Array<ProfessionSelectItem> = ProfessionSelectItem.allItems();
+  readonly professions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options();
 
   constructor(
     private readonly service: UserSalariesService,

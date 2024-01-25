@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GlobalFiltersFormGroup, SalaryChartGlobalFiltersData } from './global-filters-form-group';
+import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
+import { SelectItem } from '@shared/select-boxes/select-item';
 
 @Component({
   selector: 'app-salary-chart-global-filters',
@@ -7,6 +9,8 @@ import { GlobalFiltersFormGroup, SalaryChartGlobalFiltersData } from './global-f
   styleUrl: './salary-chart-global-filters.component.scss'
 })
 export class SalaryChartGlobalFiltersComponent implements OnInit {
+
+  readonly allProfessions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options()
 
   @Input()
   filterData: SalaryChartGlobalFiltersData | null = null;
