@@ -58,37 +58,87 @@ export enum UserProfession {
     ProductDesigner = 26,
 
     HrNonIt = 27,
+
+    OneCDeveloper = 28,
+
+    ThreeDModeler = 29,
+
+    AndroidDeveloper = 30,
+
+    IosDeveloper = 31,
+
+    MobileDeveloper = 32,
+
+    FrontendDeveloper = 33,
+
+    BackendDeveloper = 34,
+
+    FullstackDeveloper = 35,
+
+    GameDeveloper = 36,
+
+    EmbeddedDeveloper = 37,
+
+    MachineLearningDeveloper = 38,
+
+    Pentester = 39,
+
+    SecurityEngineer = 40,
+
+    SecurityAnalyst = 41,
+
+    TechnicalWriter = 42,
+
+    BiDeveloper = 43,
 }
 
 export class UserProfessionEnum { 
-    static options(): Array<SelectItem<UserProfession>> {
-        return UserProfessionEnum.allItems().map((item) => {
+    static options(excludeDeveloper = false): Array<SelectItem<UserProfession>> {
+        return UserProfessionEnum.allItems(excludeDeveloper).map((item) => {
             return {
-            value: item.toString(),
-            item: item,
-            label: UserProfessionEnum.label(item)
+              value: item.toString(),
+              item: item,
+              label: UserProfessionEnum.label(item)
             };
         });
     }
 
-    static allItems(): UserProfession[] {
-        return EnumHelper.getValues(UserProfession)
+    static allItems(excludeDeveloper = false): UserProfession[] {
+        let values = EnumHelper.getValues(UserProfession)
             .filter((x) => x !== UserProfession.Undefined);
+
+        if (excludeDeveloper) {
+            values = values.filter((x) => x !== UserProfession.Developer);
+        }
+
+        return values;
     }
 
     static label(item: UserProfession): string {
         switch (item) {
             case UserProfession.UiDesigner:
-              return 'UI Designer';
+              return 'UI designer';
       
             case UserProfession.UxDesigner:
-              return 'UX Designer';
+              return 'UX designer';
       
             case UserProfession.UiUxDesigner:
-              return 'UI/UX Designer';
+              return 'UI/UX designer';
       
             case UserProfession.HrNonIt:
               return 'HR (не из IT)';
+            
+            case UserProfession.OneCDeveloper:
+              return '1C developer';
+
+            case UserProfession.ThreeDModeler:
+              return '3D developer';
+
+            case UserProfession.IosDeveloper:
+              return 'iOS developer';
+
+            case UserProfession.BiDeveloper:
+              return 'BI developer';
       
             default:
               return new SplittedByWhitespacesString(UserProfession[item]).value;

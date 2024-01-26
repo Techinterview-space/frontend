@@ -27,7 +27,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
 
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
   readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
-  readonly professions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options();
+  readonly professions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options(true);
 
   constructor(
     private readonly service: UserSalariesService,

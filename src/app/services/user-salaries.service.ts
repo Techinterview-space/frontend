@@ -16,11 +16,11 @@ export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   year: number;
   currency: Currency;
   company: CompanyType;
-  profession: UserProfession;
 }
 
 export interface EditUserSalaryRequest {
   grade: DeveloperGrade;
+  profession: UserProfession;
 }
 
 export interface SalariesChartResponse {
