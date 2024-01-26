@@ -54,12 +54,19 @@
             </select>
             <app-field-error [field]="addSalaryForm.get('company')"></app-field-error>
           </div>
-  
+
           <div class="mb-3">
-            <select formControlName="profession" class="form-select" aria-label="Select your profession">
-              <option [value]="null" selected disabled>Ваша специализация</option>
-              <option *ngFor="let option of professions" [value]="option.value">{{ option.label }}</option>
-            </select>
+            <label class="text-sm">Ваша специализация</label>
+            <ng-select
+                [items]="professions"
+                [selectOnTab]="true"
+                bindLabel="label"
+                bindValue="item"
+                placeholder="Выберите вашу специальность"
+                appendTo=""
+                formControlName="profession"
+              >
+              </ng-select>
             <app-field-error [field]="addSalaryForm.get('profession')"></app-field-error>
           </div>
   
