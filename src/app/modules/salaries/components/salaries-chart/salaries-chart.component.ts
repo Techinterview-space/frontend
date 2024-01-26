@@ -11,6 +11,7 @@ import { StubSalariesChart } from './stub-salaries-chart';
 import { DeveloperGrade } from '@models/enums';
 import { SalaryChartGlobalFiltersData } from './salary-chart-global-filters/global-filters-form-group';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { UserProfession } from '@models/salaries/user-profession';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -26,6 +27,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   showDataStub = false;
   openAddSalaryModal = false;
   openEditCurrentSalaryModal = false;
+  showAdjustCurrentSalaryProfessionModal = false;
   isAuthenticated = false;
 
   gradeFilter: DeveloperGrade | null = null;
@@ -67,6 +69,10 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
         } else {
           this.salariesChart = new SalariesChart(x);
           this.showDataStub = false;
+          /*this.showAdjustCurrentSalaryProfessionModal =
+            x.currentUserSalary != null &&
+            x.currentUserSalary.profession === UserProfession.Developer;*/
+            this.showAdjustCurrentSalaryProfessionModal = true;
         }
       });
   }
