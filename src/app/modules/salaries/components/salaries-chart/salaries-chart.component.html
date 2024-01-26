@@ -71,7 +71,7 @@
                 <span>Рассчитано на основе {{ salariesChart.countOfRecords }} анкет(ы)</span>
               </div>
 
-              <div class="fst-italic text-muted" *ngIf="salariesChart.currentUserSalary">
+              <div class="fst-italic text-muted" *ngIf="salariesChart.currentUserSalary && !showAdjustCurrentSalaryProfessionModal">
                 <div>Ваша текущая зарплата указана за {{ salariesChart.currentUserSalary.quarter }} квартал {{salariesChart.currentUserSalary.year}} года.</div>
                 <div>
                   Вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">изменить эти данные</button>
@@ -79,7 +79,7 @@
                 </div>
               </div>
 
-              <div class="alert alert-warning mt-3" *ngIf="showAdjustCurrentSalaryProfessionModal">
+              <div *ngIf="showAdjustCurrentSalaryProfessionModal" class="alert alert-warning mt-3">
                 <strong class="me-2">Внимание!</strong>
                 <span>Ваша специальность указана как Developer. На сервисе появилось разделение на Mobile, Frontend, Backend, etc, 
                   поэтому вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">уточнить свою специальность</button></span>

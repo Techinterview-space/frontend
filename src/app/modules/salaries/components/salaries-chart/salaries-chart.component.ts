@@ -69,10 +69,9 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
         } else {
           this.salariesChart = new SalariesChart(x);
           this.showDataStub = false;
-          /*this.showAdjustCurrentSalaryProfessionModal =
+          this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
-            x.currentUserSalary.profession === UserProfession.Developer;*/
-            this.showAdjustCurrentSalaryProfessionModal = true;
+            x.currentUserSalary.profession === UserProfession.Developer;
         }
       });
   }
