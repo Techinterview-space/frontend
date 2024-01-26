@@ -93,8 +93,8 @@ export enum UserProfession {
 }
 
 export class UserProfessionEnum { 
-    static options(): Array<SelectItem<UserProfession>> {
-        return UserProfessionEnum.allItems().map((item) => {
+    static options(excludeDeveloper = false): Array<SelectItem<UserProfession>> {
+        return UserProfessionEnum.allItems(excludeDeveloper).map((item) => {
             return {
               value: item.toString(),
               item: item,
@@ -103,9 +103,15 @@ export class UserProfessionEnum {
         });
     }
 
-    static allItems(): UserProfession[] {
-        return EnumHelper.getValues(UserProfession)
+    static allItems(excludeDeveloper = false): UserProfession[] {
+        let values = EnumHelper.getValues(UserProfession)
             .filter((x) => x !== UserProfession.Undefined);
+
+        if (excludeDeveloper) {
+            values = values.filter((x) => x !== UserProfession.Developer);
+        }
+
+        return values;
     }
 
     static label(item: UserProfession): string {
