@@ -31,7 +31,7 @@ export class SalariesChart {
         this.averageRemoteSalary = SalariesChart.formatNumber(data.averageRemoteSalary);
         this.medianRemoteSalary = SalariesChart.formatNumber(data.medianRemoteSalary)
 
-        this.countOfRecords = data.salaries.length;
+        this.countOfRecords = data.totalCountInStats;
 
         this.salariesByMoneyBarChart = data.salariesByMoneyBarChart;
         this.salariesByMoneyBarChartForRemote = data.salariesByMoneyBarChartForRemote;

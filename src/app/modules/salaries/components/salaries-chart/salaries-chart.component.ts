@@ -50,7 +50,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     }
 
     this.showDataStub = true;
-    this.salariesChart = new StubSalariesChart();
+    this.salariesChart = new StubSalariesChart(null);
   }
 
   load(data: SalaryChartGlobalFiltersData | null = null): void {
@@ -65,7 +65,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
         if (x.shouldAddOwnSalary) {
           this.openAddSalaryModal = true;
           this.showDataStub = true;
-          this.salariesChart = new StubSalariesChart();
+          this.salariesChart = new StubSalariesChart(x);
         } else {
           this.salariesChart = new SalariesChart(x);
           this.showDataStub = false;

@@ -25,6 +25,7 @@ export interface EditUserSalaryRequest {
 
 export interface SalariesChartResponse {
   salaries: UserSalary[];
+  totalCountInStats: number;
   shouldAddOwnSalary: boolean;
   rangeStart: Date;
   rangeEnd: Date;
