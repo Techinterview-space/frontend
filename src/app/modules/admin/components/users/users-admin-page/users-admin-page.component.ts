@@ -33,6 +33,9 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
   }
 
   loadData(page = 1): void {
+    this.users = null;
+    this.source = null;
+
     this.service
       .all({ ...defaultPageParams, page })
       .pipe(untilDestroyed(this))

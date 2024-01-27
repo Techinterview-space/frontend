@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { defaultPageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { AdminAllSalariesQueryParams } from '@services/user-salaries.service';
+import { AdminAllSalariesQueryParams, SalariesAdminOrderingType } from '@services/user-salaries.service';
 import { SalaryAdminItem } from '../salary-admin-item';
 import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
 import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
@@ -46,6 +46,7 @@ export class SalariesAdminPaginatedTableComponent {
       profession: this.filter?.profession ?? null,
       company: this.filter?.company ?? null,
       grade: this.filter?.grade ?? null,
+      order_type: this.filter?.order_type ?? null,
      });
   }
 
@@ -79,6 +80,7 @@ export class SalariesAdminPaginatedTableComponent {
       this.filter.profession = null;
       this.filter.company = null;
       this.filter.grade = null;
+      this.filter.order_type = SalariesAdminOrderingType.CreatedAtDesc;
     }
 
     this.loadData();

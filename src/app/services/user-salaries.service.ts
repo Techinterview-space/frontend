@@ -70,6 +70,7 @@ export interface AdminAllSalariesQueryParams extends PageParams {
   profession: UserProfession | null;
   company: CompanyType | null;
   grade: DeveloperGrade | null;
+  order_type: SalariesAdminOrderingType | null;
 }
 
 export interface SalariesChartFilterData {
@@ -86,6 +87,14 @@ export interface SalariesAddingTrendAdminChart {
   }>;
 
   salariesPerUser: number;
+}
+
+export enum SalariesAdminOrderingType {
+  Undefined = 0,
+  CreatedAtAsc = 1,
+  CreatedAtDesc = 2,
+  ValueAsc = 3,
+  ValueDesc = 4,
 }
 
 @Injectable({
