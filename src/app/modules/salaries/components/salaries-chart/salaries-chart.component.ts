@@ -44,17 +44,13 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
-    if (this.isAuthenticated) {
-      this.load();
-      return;
-    }
-
-    this.showDataStub = true;
-    this.salariesChart = new StubSalariesChart();
+    this.load();
   }
 
   load(data: SalaryChartGlobalFiltersData | null = null): void {
     this.salariesChart = null;
+    this.openAddSalaryModal = false;
+
     this.service.charts({
       grade: data?.grade ?? null,
       profsInclude: data?.profsToInclude ?? null,
@@ -63,9 +59,9 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         if (x.shouldAddOwnSalary) {
-          this.openAddSalaryModal = true;
+          this.openAddSalaryModal = this.isAuthenticated;
           this.showDataStub = true;
-          this.salariesChart = new StubSalariesChart();
+          this.salariesChart = new StubSalariesChart(x);
         } else {
           this.salariesChart = new SalariesChart(x);
           this.showDataStub = false;

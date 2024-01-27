@@ -1,8 +1,6 @@
-import { Currency } from "@models/salaries/currency";
 import { SalariesChart } from "./salaries-chart";
-import { CompanyType } from "@models/salaries/company-type";
-import { DeveloperGrade } from "@models/enums";
-import { UserProfession } from "@models/salaries/user-profession";
+import { SalariesChartResponse } from "@services/user-salaries.service";
+import { UserSalary } from "@models/salaries/salary.model";
 
 export class StubSalariesChart extends SalariesChart {
 
@@ -15,33 +13,16 @@ export class StubSalariesChart extends SalariesChart {
         "1500000",
     ]
 
-    constructor() {
-        const salariesCount = 10;
-        const thisYearDate = new Date();
-        const salaries = [];
-
-        for (let index = 0; index < salariesCount; index++) {
-            salaries.push(
-                {
-                    value: StubSalariesChart.getRandomNumber(1_500_000, 250_000),
-                    quarter: 1,
-                    year: thisYearDate.getFullYear(),
-                    currency: Currency.KZT,
-                    company: CompanyType.Local,
-                    grade: DeveloperGrade.Middle,
-                    profession: UserProfession.Developer, // TODO mgorbatyuk: randomize
-                    createdAt: thisYearDate,
-                });
-        }
-
+    constructor(data: SalariesChartResponse | null) {
         super({
-            averageSalary: StubSalariesChart.getRandomNumber(1_000, 300) * 1000,
-            medianSalary: StubSalariesChart.getRandomNumber(1_000, 300) * 1000,
+            averageSalary: data?.averageSalary ?? StubSalariesChart.getRandomNumber(700, 300) * 1000,
+            medianSalary: data?.medianSalary ?? StubSalariesChart.getRandomNumber(700, 300) * 1000,
             averageRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
             medianRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
             shouldAddOwnSalary: true,
             currentUserSalary: null,
-            salaries: salaries,
+            totalCountInStats: data?.totalCountInStats ?? 0,
+            salaries: [] as UserSalary[],
             salariesByMoneyBarChart: {
                 items: StubSalariesChart.salaryLabels.map((x) => {
                     const value = parseInt(x);
