@@ -1,8 +1,6 @@
 <app-page-header>Зарплаты IT в Казахстане</app-page-header>
 
 <div *ngIf="showDataStub" class="container mt-5 mb-3">
-
-
   <div *ngIf="isAuthenticated" class="alert alert-warning" role="alert">
     <div class="mb-2 h3">{{ isYourSalaryWithinMarketTitle }}</div>
     <div class="mb-3">Оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
@@ -10,137 +8,132 @@
       <button class="btn btn-dark" (click)="openAddSalaryAction()">Добавить зарплату</button>
     </div>
   </div>
+
+  <div *ngIf="!isAuthenticated" class="mt-5 alert alert-info">
+    <div class="mb-2 h3">{{ isYourSalaryWithinMarketTitle }}</div>
+    <div class="mb-3">Зарегистрируйтесь и оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
+    <div class="">
+      <button
+        class="btn btn-primary btn-lg px-5"
+        (click)="openAddSalaryAction()">
+        Зарегистрироваться
+      </button>
+    </div>
+  </div>
+
 </div>
 
 <div class="container mb-5" *ngIf="salariesChart != null; else dataLoading">
-  <div class="position-relative">
-    <div 
-      *ngIf="!isAuthenticated"
-      class="position-absolute h-100 w-100 d-flex align-items-start justify-content-center pt-3">
-      <div class="mt-5 alert alert-info mx-5 z-1">
-        <div class="mb-2 h3">{{ isYourSalaryWithinMarketTitle }}</div>
-        <div class="mb-5">Зарегистрируйтесь и оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают другие IT-специалисты в Казахстане.</div>
-        <div class="">
-          <button
-            class="btn btn-primary btn-lg px-5"
-            (click)="openAddSalaryAction()">
-            Зарегистрироваться
-          </button>
-        </div>
-      </div>
-    </div>
+  <div class="card">
+    <div class="card-body p-5">
 
-    <div class="card">
-      <div class="card-body p-5 {{!isAuthenticated ? 'blur' : ''}}">
+      <div *ngIf="salariesChart">
+        <div class="mb-3">
+  
+          <div class="mb-5 d-flex justify-content-between align-items-end">
+            <app-salary-block-value
+              [title]="'Медианная зарплата:'"
+              [value]="salariesChart.medianSalary"></app-salary-block-value>
+  
+              <div *ngIf="!showDataStub && salariesChart.medianRemoteSalary" class="d-none d-md-block">
+                <app-salary-block-remote-value
+                  [title]="'На удаленке:'"
+                  [value]="salariesChart.medianRemoteSalary"></app-salary-block-remote-value>
+              </div>
 
-        <div *ngIf="salariesChart">
+          </div>
+  
+          <div class="mb-3 d-flex justify-content-between align-items-end">
+  
+            <app-salary-block-value
+              [title]="'Средняя зарплата:'"
+              [value]="salariesChart.averageSalary"></app-salary-block-value>
+  
+              <div *ngIf="!showDataStub && salariesChart.averageRemoteSalary" class="d-none d-md-block">
+                <app-salary-block-remote-value
+                  [title]="'На удаленке:'"
+                  [value]="salariesChart.averageRemoteSalary"></app-salary-block-remote-value>
+              </div>
+          </div>
+         
+  
           <div class="mb-3">
-    
-            <div class="mb-5 d-flex justify-content-between align-items-end">
-              <app-salary-block-value
-                [title]="'Медианная зарплата:'"
-                [value]="salariesChart.medianSalary"></app-salary-block-value>
-    
-                <div *ngIf="!showDataStub && salariesChart.medianRemoteSalary" class="d-none d-md-block">
-                  <app-salary-block-remote-value
-                    [title]="'На удаленке:'"
-                    [value]="salariesChart.medianRemoteSalary"></app-salary-block-remote-value>
-                </div>
-
+            <div class="text-muted mb-3 fst-italic">
+              <span>Рассчитано на основе {{ salariesChart.countOfRecords }} анкет(ы)</span>
             </div>
-    
-            <div class="mb-3 d-flex justify-content-between align-items-end">
-    
-              <app-salary-block-value
-                [title]="'Средняя зарплата:'"
-                [value]="salariesChart.averageSalary"></app-salary-block-value>
-    
-                <div *ngIf="!showDataStub && salariesChart.averageRemoteSalary" class="d-none d-md-block">
-                  <app-salary-block-remote-value
-                    [title]="'На удаленке:'"
-                    [value]="salariesChart.averageRemoteSalary"></app-salary-block-remote-value>
-                </div>
-            </div>
-           
-    
-            <div class="mb-3">
-              <div class="text-muted mb-3 fst-italic">
-                <span>Рассчитано на основе {{ salariesChart.countOfRecords }} анкет(ы)</span>
-              </div>
 
-              <div
-                *ngIf="showDataStub"
-                class="alert alert-warning">
-                <div class="h3">Внимание!</div>
-                <div class="mt-2">
-                  Вы видите <strong>обобщенные данные</strong> для всех специальностей и грейдов.
-                  <br />
-                  Для получения более точной статистики и возможности применять фильтры вам нужно
-                  <button class="btn-link-sm fst-italic font-weight-normal px-1" (click)="openAddSalaryAction()">{{ isAuthenticated ? 'добавить свою зарплату' : 'зарегистрироваться' }}</button>
-                </div>
-              </div>
-
-              <div
-                class="fst-italic text-muted"
-                *ngIf="!showDataStub && salariesChart.currentUserSalary && !showAdjustCurrentSalaryProfessionModal">
-
-                <div>Ваша текущая зарплата указана за {{ salariesChart.currentUserSalary.quarter }} квартал {{salariesChart.currentUserSalary.year}} года.</div>
-                <div>
-                  Вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">изменить эти данные</button>
-                  или <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openAddSalaryAction()">добавить еще зарплату</button> к статистике.
-                </div>
-              </div>
-
-              <div *ngIf="!showDataStub && showAdjustCurrentSalaryProfessionModal" class="alert alert-warning mt-3">
-                <strong class="me-2">Внимание!</strong>
-                <span>Ваша специальность указана как Developer. На сервисе появилось разделение на Mobile, Frontend, Backend, etc, 
-                  поэтому вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">уточнить свою специальность</button></span>
+            <div
+              *ngIf="showDataStub"
+              class="alert alert-warning">
+              <div class="h3">Внимание!</div>
+              <div class="mt-2">
+                Вы видите <strong>обобщенные данные</strong> для всех специальностей, форм работ (найм или валютная удаленка) и грейдов.
+                <br />
+                Для получения более точной статистики и возможности применять фильтры вам нужно
+                <button class="btn-link-sm fst-italic font-weight-normal px-1" (click)="openAddSalaryAction()">{{ isAuthenticated ? 'добавить свою зарплату' : 'зарегистрироваться' }}</button>
               </div>
             </div>
 
-          </div>          
-  
-          <div *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart" class="mt-5 mb-5">
-            <div class="mb-5">
-              <div class="h3">
-                <span>Графики</span>
+            <div
+              class="fst-italic text-muted"
+              *ngIf="!showDataStub && salariesChart.currentUserSalary && !showAdjustCurrentSalaryProfessionModal">
+
+              <div>Ваша текущая зарплата указана за {{ salariesChart.currentUserSalary.quarter }} квартал {{salariesChart.currentUserSalary.year}} года.</div>
+              <div>
+                Вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">изменить эти данные</button>
+                или <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openAddSalaryAction()">добавить еще зарплату</button> к статистике.
               </div>
             </div>
 
-            <div class="mb-5">
-              <app-salary-chart-global-filters
-                [filterData]="filterData"
-                (filtersApplied)="applyGlobalFilters($event)"
-                (filtersReset)="resetGlobalFilters()">
-              ></app-salary-chart-global-filters>
-            </div>
-  
-            <div class="mb-5">
-              <app-salaries-by-grades-chart
-                [chart]="salariesChart.salariesByMoneyBarChart"
-                [title]="'Зарплаты в KZ компаниях'"
-                [salaries]="salariesChart.salariesPerProfessionForLocal">
-              </app-salaries-by-grades-chart>
-            </div>
-
-            <div class="mb-5" *ngIf="salariesChart.hasRemoteSalaries">
-              <app-salaries-by-grades-chart
-                [chart]="salariesChart.salariesByMoneyBarChartForRemote"
-                [title]="'Зарплаты удаленщиков'"
-                [salaries]="salariesChart.salariesPerProfessionForRemote">
-              </app-salaries-by-grades-chart>
+            <div *ngIf="!showDataStub && showAdjustCurrentSalaryProfessionModal" class="alert alert-warning mt-3">
+              <strong class="me-2">Внимание!</strong>
+              <span>Ваша специальность указана как Developer. На сервисе появилось разделение на Mobile, Frontend, Backend, etc, 
+                поэтому вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">уточнить свою специальность</button></span>
             </div>
           </div>
-  
-          <div *ngIf="!showDataStub" class="mb-3 text-muted text-end fst-italic">
-            Идея подсмотрена у сервиса <a class="text-reset" href="https://career.habr.com/salaries" target="_blank">Habr.Карьера</a>, за что им большая благодарность.
+
+        </div>          
+
+        <div *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart" class="mt-5 mb-5">
+          <div class="mb-5">
+            <div class="h3">
+              <span>Графики</span>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <app-salary-chart-global-filters
+              [filterData]="filterData"
+              (filtersApplied)="applyGlobalFilters($event)"
+              (filtersReset)="resetGlobalFilters()">
+            ></app-salary-chart-global-filters>
+          </div>
+
+          <div class="mb-5">
+            <app-salaries-by-grades-chart
+              [chart]="salariesChart.salariesByMoneyBarChart"
+              [title]="'Зарплаты в KZ компаниях'"
+              [salaries]="salariesChart.salariesPerProfessionForLocal">
+            </app-salaries-by-grades-chart>
+          </div>
+
+          <div class="mb-5" *ngIf="salariesChart.hasRemoteSalaries">
+            <app-salaries-by-grades-chart
+              [chart]="salariesChart.salariesByMoneyBarChartForRemote"
+              [title]="'Зарплаты удаленщиков'"
+              [salaries]="salariesChart.salariesPerProfessionForRemote">
+            </app-salaries-by-grades-chart>
           </div>
         </div>
-        
+
+        <div *ngIf="!showDataStub" class="mb-3 text-muted text-end fst-italic">
+          Идея подсмотрена у сервиса <a class="text-reset" href="https://career.habr.com/salaries" target="_blank">Habr.Карьера</a>, за что им большая благодарность.
+        </div>
       </div>
-    </div>
+      
     </div>
   </div>
+</div>
 
   <app-add-salary-modal
     *ngIf="openAddSalaryModal"
