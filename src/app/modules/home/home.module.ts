@@ -26,7 +26,7 @@ import { LogoutCallbackComponent } from './components/logout-callback/logout-cal
     PrivacyPolicyPageComponent,
     AboutUsComponent,
     PricingBlockComponent,
-    LogoutCallbackComponent
+    LogoutCallbackComponent,
   ],
   imports: [CommonModule, SharedModule, HomeRoutingModule]
 })

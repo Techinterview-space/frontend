@@ -17,11 +17,17 @@ import { MarkdownModule } from 'ngx-markdown';
 import { AdminNavbarComponent } from '@components/admin-navbar/admin-navbar.component';
 import { NavbarComponent } from '@components/navbar/navbar.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { MaintenanceComponent } from '@components/maintenance/maintenance.component';
 
 const appModules: any[] = [AdminModule, InterviewsModule];
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, AdminNavbarComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    AdminNavbarComponent,
+    MaintenanceComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
