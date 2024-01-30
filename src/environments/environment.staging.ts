@@ -4,7 +4,7 @@ export const environment = {
   production: true,
   staging: false,
   type: 'dev',
-  baseUrl: 'http://techinterview.space',
+  baseUrl: 'http://localhost:4200',
   resourceApiURI: 'https://api.techinterview.space',
   identityApiURI: 'https://techinterview-space.eu.auth0.com',
   name: '',

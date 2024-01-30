@@ -14,7 +14,7 @@ import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { UserProfession } from '@models/salaries/user-profession';
 import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
 import { SalariesChartActivatedRoute } from './salaries-activated-route';
-import { ClipboardCopier } from '@shared/value-objects/clipboard-copier';
+import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
 import { environment } from '@environments/environment';
 
 @Component({
@@ -45,9 +45,9 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
-    activatedRoute: ActivatedRoute) {
+    private readonly activatedRouteSource: ActivatedRoute) {
       title.setTitle('Salaries');
-      this.activatedRoute = new SalariesChartActivatedRoute(activatedRoute);
+      this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
     }
 
   ngOnInit(): void {
@@ -148,6 +148,12 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
     this.filterData = newFilterData;
     this.gtag.event('salaries_chart_view', 'filters_reset');
+
+    if (this.router.url.indexOf('?') > 0) {
+      this.router.navigateByUrl(this.router.url.substring(0, this.router.url.indexOf('?')));
+      return;
+    }
+
     this.load();
   }
 
@@ -155,7 +161,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.filterData = data;
     this.gtag.event('salaries_chart_view', 'share_clicked');
 
-    const currentUrl = environment.baseUrl + '/salaries';
+    const currentUrl = new AbsoluteLink(this.router.url).asString();
     const shareUrlPart = this.activatedRoute.prepareQueryParamsAsString(this.filterData);
 
     const shareUrl = `${currentUrl}${shareUrlPart}`;
