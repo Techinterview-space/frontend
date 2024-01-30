@@ -21,6 +21,9 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
   @Output()
   readonly filtersReset = new EventEmitter<void>();
 
+  @Output()
+  readonly shareClicked = new EventEmitter<SalaryChartGlobalFiltersData>();
+
   form: GlobalFiltersFormGroup | null = null;
 
   ngOnInit(): void {
@@ -45,5 +48,16 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
 
     this.form.reset();
     this.filtersReset.emit();
+  }
+
+  share(): void {
+    if (!this.form) {
+      return;
+    }
+
+    const data = this.form.data();
+    if (data) {
+      this.shareClicked.emit(data);
+    }
   }
 }

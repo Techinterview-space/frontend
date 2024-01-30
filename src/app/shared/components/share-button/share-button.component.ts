@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
 
 @Component({
@@ -20,17 +20,28 @@ export class ShareButtonComponent implements OnInit {
   relativeUrl = '';
 
   @Input()
-  css = 'btn-sm btn-outline-dark';
+  css = 'btn-outline-dark';
+
+  @Input()
+  cssBtnSize = 'btn-sm';
+
+  @Output()
+  shareClicked = new EventEmitter<void>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   share(): void {
-    new ClipboardCopier(new AbsoluteLink(this.relativeUrl).asString()).execute();
+
+    if (this.relativeUrl != null && this.relativeUrl !== '') {
+      new ClipboardCopier(new AbsoluteLink(this.relativeUrl).asString()).execute();
+    }
 
     this.btnTitle = this.copiedBtnTitle;
     this.btnIcon = this.copiedBtnIcon;
+
+    this.shareClicked.emit();
 
     setTimeout(() => {
       this.btnTitle = this.copyBtnDefaultTitle;

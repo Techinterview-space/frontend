@@ -105,7 +105,8 @@
             <app-salary-chart-global-filters
               [filterData]="filterData"
               (filtersApplied)="applyGlobalFilters($event)"
-              (filtersReset)="resetGlobalFilters()">
+              (filtersReset)="resetGlobalFilters()"
+              (shareClicked)="share($event)">
             ></app-salary-chart-global-filters>
           </div>
 

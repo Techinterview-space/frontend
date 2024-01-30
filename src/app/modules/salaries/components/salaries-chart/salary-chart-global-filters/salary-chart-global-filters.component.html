@@ -2,7 +2,7 @@
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="apply()">
     <div class="h5 mb-2">Глобальные фильтры</div>
     <div class="row">
-      <div class="col-md-3 mb-1">
+      <div class="col-md-2 mb-1">
         <label class="text-sm">Грейд</label>
         <select class="form-select" formControlName="grade">
           <option [value]="null" selected>Все грейды</option>
@@ -44,10 +44,13 @@
           </ng-select>
       </div>
 
-      <div class="col-md-3 mb-1 d-flex align-items-end">
+      <div class="col-md-4 mb-1 d-flex align-items-end">
         <div>
           <button type="submit" class="btn btn-outline-dark">Применить</button>
-          <button type="reset" class="btn btn-outline-secondary ms-2" (click)="reset()">Сброс</button>
+          <button type="reset" class="btn btn-outline-secondary ms-2 me-2" (click)="reset()">Сброс</button>
+          <app-share-button
+            [cssBtnSize]="''"
+            (shareClicked)="share()">Поделиться</app-share-button>
         </div>
       </div>
     </div>

@@ -2,7 +2,6 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { DeveloperGrade } from "@models/enums";
 import { UserProfession } from "@models/salaries/user-profession";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
-import { SelectItem } from "@shared/select-boxes/select-item";
 
 export class SalaryChartGlobalFiltersData {
     grade: DeveloperGrade | null = null;

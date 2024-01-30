@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserSalary } from '@models/salaries/salary.model';
 import { TitleService } from '@services/title.service';
 import { UserSalariesService } from '@services/user-salaries.service';
@@ -12,6 +12,10 @@ import { DeveloperGrade } from '@models/enums';
 import { SalaryChartGlobalFiltersData } from './salary-chart-global-filters/global-filters-form-group';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { UserProfession } from '@models/salaries/user-profession';
+import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
+import { SalariesChartActivatedRoute } from './salaries-activated-route';
+import { ClipboardCopier } from '@shared/value-objects/clipboard-copier';
+import { environment } from '@environments/environment';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -23,6 +27,8 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   salariesChart: SalariesChart | null = null;
   filterData = new SalaryChartGlobalFiltersData();
+  
+  readonly activatedRoute: SalariesChartActivatedRoute;
 
   showDataStub = false;
   openAddSalaryModal = false;
@@ -38,13 +44,21 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
-    private readonly gtag: GoogleAnalyticsService) {
+    private readonly gtag: GoogleAnalyticsService,
+    activatedRoute: ActivatedRoute) {
       title.setTitle('Salaries');
+      this.activatedRoute = new SalariesChartActivatedRoute(activatedRoute);
     }
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
-    this.load();
+    this.activatedRoute
+      .getQueryParams()
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.filterData = x;
+        this.load(x);
+      });
   }
 
   load(data: SalaryChartGlobalFiltersData | null = null): void {
@@ -135,6 +149,17 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.filterData = newFilterData;
     this.gtag.event('salaries_chart_view', 'filters_reset');
     this.load();
+  }
+
+  share(data: SalaryChartGlobalFiltersData): void {
+    this.filterData = data;
+    this.gtag.event('salaries_chart_view', 'share_clicked');
+
+    const currentUrl = environment.baseUrl + '/salaries';
+    const shareUrlPart = this.activatedRoute.prepareQueryParamsAsString(this.filterData);
+
+    const shareUrl = `${currentUrl}${shareUrlPart}`;
+    new ClipboardCopier(shareUrl).execute();
   }
 
   ngOnDestroy(): void {

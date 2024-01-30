@@ -3,18 +3,26 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import Assertion from '@shared/validation/assertion';
 
+export interface QueryParameter {
+  key: string;
+  value: string | null;
+}
+
 // This class should not be injected
 export class ActivatedRouteExtended {
   constructor(private readonly activatedRoute: ActivatedRoute) {
     Assertion.notNull(activatedRoute, 'activatedRoute');
   }
 
-  getQueryParams(paramNames: Array<string>): Observable<Array<string | null>> {
+  getQueryParams(paramNames: Array<string>): Observable<Array<QueryParameter>> {
     return this.activatedRoute.queryParams.pipe(
       map((params) => {
-        const result: Array<string> = [];
+        const result: Array<QueryParameter> = [];
         paramNames.forEach((x) => {
-          result.push(params[x] as string);
+          result.push({
+            key: x,
+            value: params[x] ?? null,
+          });
         });
         return result;
       })
