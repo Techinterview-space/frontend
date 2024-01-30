@@ -1,5 +1,5 @@
 <div *ngIf="filter" class="mb-3 row">
-  <div class="col-md-3">
+  <div class="col-md-2">
     <label for="profession" class="form-label">Company</label>
       <select class="form-select" id="company" name="company" [(ngModel)]="filter.company">
         <option selected value="">All</option>
@@ -9,7 +9,7 @@
       </select>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-2">
     <label for="profession" class="form-label">Profession</label>
       <select class="form-select" id="profession" name="profession" [(ngModel)]="filter.profession">
         <option selected value="">All</option>
@@ -19,7 +19,7 @@
       </select>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-2">
     <label for="profession" class="form-label">Grade</label>
     <select class="form-select" id="grade" name="grade" [(ngModel)]="filter.grade">
       <option selected value="">All</option>
@@ -29,7 +29,16 @@
     </select>
   </div>
 
-  <div class="col-md-3 d-flex align-items-end">
+  <div class="col-md-2">
+    <label for="profession" class="form-label">Order by</label>
+    <select class="form-select" id="grade" name="orderBy" [(ngModel)]="filter.order_type">
+      <option *ngFor="let item of filter.orderTypes" [value]="item.item">
+        {{ item.label }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-md-2 d-flex align-items-end">
     <div>
       <button type="button" class="btn btn-outline-primary" (click)="loadData()">Apply</button>
       <button type="button" class="btn btn-outline-dark ms-2" (click)="clearFilter()">Reset</button>
