@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   staging: false,
+  isUnderMaintenance: false,
   type: 'dev',
   baseUrl: 'http://localhost:4200',
   resourceApiURI: 'https://localhost:5001',

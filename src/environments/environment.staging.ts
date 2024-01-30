@@ -1,8 +1,7 @@
-import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
-
 export const environment = {
   production: true,
   staging: false,
+  isUnderMaintenance: false,
   type: 'dev',
   baseUrl: 'http://localhost:4200',
   resourceApiURI: 'https://api.techinterview.space',

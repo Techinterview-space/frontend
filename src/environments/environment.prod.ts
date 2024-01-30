@@ -3,6 +3,7 @@ import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-go
 export const environment = {
   production: true,
   staging: false,
+  isUnderMaintenance: true,
   type: 'prod',
   baseUrl: 'http://techinterview.space',
   resourceApiURI: 'https://api.techinterview.space',
