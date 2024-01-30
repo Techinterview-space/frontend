@@ -26,11 +26,17 @@ export class SalariesAdminPaginatedTableComponent {
   @Input()
   showApproveButton = false;
 
+  @Input()
+  showExcludeButton = false;
+
   @Output()
   loadDataRequested: EventEmitter<AdminAllSalariesQueryParams> = new EventEmitter<AdminAllSalariesQueryParams>();
 
   @Output()
   approveRequested: EventEmitter<SalaryAdminItem> = new EventEmitter<SalaryAdminItem>();
+
+  @Output()
+  excludeRequested: EventEmitter<SalaryAdminItem> = new EventEmitter<SalaryAdminItem>();
 
   @Output()
   deleteRequested: EventEmitter<SalaryAdminItem> = new EventEmitter<SalaryAdminItem>();
@@ -70,6 +76,18 @@ export class SalariesAdminPaginatedTableComponent {
         'Are you sure to approve?',
         () => {
           this.approveRequested.emit(salary);
+        }
+      )
+    );
+  }
+
+  openExcludeDialog(salary: SalaryAdminItem): void {
+    this.confirmDeletionMessage = new DialogMessage(
+      new ConfirmMsg(
+        'Exclude the salary from stats',
+        'Are you sure to exclude?',
+        () => {
+          this.excludeRequested.emit(salary);
         }
       )
     );

@@ -135,6 +135,10 @@ export class UserSalariesService {
     return this.api.post<void>(this.root + dataId + '/approve', {});
   }
 
+  excludeFromStats(dataId: string): Observable<void> {
+    return this.api.post<void>(this.root + dataId + '/exclude-from-stats', {});
+  }
+
   delete(dataId: string): Observable<void> {
     return this.api.delete<void>(this.root + dataId);
   }

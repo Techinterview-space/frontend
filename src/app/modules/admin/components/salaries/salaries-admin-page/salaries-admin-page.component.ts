@@ -66,4 +66,14 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
         this.ngOnInit();
       });
   }
+
+  excludeSalary(salary: SalaryAdminItem): void {
+    this.service
+      .excludeFromStats(salary.id)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success('Salary excluded from stats');
+        this.ngOnInit();
+      });
+  }
 }

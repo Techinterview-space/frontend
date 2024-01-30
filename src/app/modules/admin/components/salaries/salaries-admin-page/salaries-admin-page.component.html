@@ -9,8 +9,10 @@
         [salaries]="salaries"
         [filter]="filter"
         [showApproveButton]="false"
+        [showExcludeButton]="true"
         (loadDataRequested)="loadData($event)"
         (deleteRequested)="deleteSalary($event)"
+        (excludeRequested)="excludeSalary($event)"
         ></app-salaries-admin-paginated-table>
 
     </div>

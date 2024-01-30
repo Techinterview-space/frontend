@@ -75,6 +75,13 @@
             type="button"
             class="btn-link-sm ms-2"
             (click)="openApproveDialog(item)">Approve</button>
+
+          <button
+            *ngIf="showExcludeButton"
+            type="button"
+            class="btn-link-sm ms-2 btn-link-warning"
+            title="Exclude the salary from stats"
+            (click)="openExcludeDialog(item)">Exclude</button>
         </td>
       </tr>
     </tbody>
