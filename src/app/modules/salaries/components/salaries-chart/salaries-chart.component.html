@@ -76,9 +76,12 @@
 
             <div
               class="fst-italic text-muted"
-              *ngIf="!showDataStub && salariesChart.currentUserSalary && !showAdjustCurrentSalaryProfessionModal">
+              *ngIf="!showDataStub && currentUserSalary && !showAdjustCurrentSalaryProfessionModal">
 
-              <div>Ваша текущая зарплата указана за {{ salariesChart.currentUserSalary.quarter }} квартал {{salariesChart.currentUserSalary.year}} года.</div>
+              <div>
+                <span>Ваша текущая зарплата указана за {{ currentUserSalary.quarter }} квартал {{currentUserSalary.year}} года.</span>
+                <span class="ms-1" *ngIf="currentUserSalary.city == null">Город проживания не указан.</span>
+              </div>
               <div>
                 Вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">изменить эти данные</button>
                 или <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openAddSalaryAction()">добавить еще зарплату</button> к статистике.
