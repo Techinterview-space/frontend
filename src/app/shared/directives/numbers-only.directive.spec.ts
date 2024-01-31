@@ -4,17 +4,17 @@ describe('OnlyNumberDirective', () => {
   it('.isNotDigit should return false if digit is passed', () => {
     const target = new OnlyNumberDirective(null);
 
-    expect(target.isNotDigit('1')).toEqual(false);
-    expect(target.isNotDigit('1213')).toEqual(false);
-    expect(target.isNotDigit('0234')).toEqual(false);
+    expect(target.isDigit('1')).toEqual(true);
+    expect(target.isDigit('1213')).toEqual(true);
+    expect(target.isDigit('0234')).toEqual(true);
   });
 
-  it('.isNotDigit should return true if not-digit is passed', () => {
+  it('.isDigit should return false if not-digit is passed', () => {
     const target = new OnlyNumberDirective(null);
 
-    expect(target.isNotDigit('asd')).toEqual(true);
-    expect(target.isNotDigit('dfg')).toEqual(true);
-    expect(target.isNotDigit('!@#$%^&*()_+=-')).toEqual(true);
+    expect(target.isDigit('asd')).toEqual(false);
+    expect(target.isDigit('dfg')).toEqual(false);
+    expect(target.isDigit('!@#$%^&*()_+=-')).toEqual(false);
   });
 
   it('.isSpecialKey should return true if allowed special key is passed', () => {

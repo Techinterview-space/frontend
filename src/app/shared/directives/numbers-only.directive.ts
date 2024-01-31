@@ -1,12 +1,13 @@
-import { ElementRef, HostListener, Directive } from '@angular/core';
+import { ElementRef, HostListener, Directive, Input } from '@angular/core';
 
 @Directive({
   selector: '[appOnlyNumber]'
 })
 // soure: https://www.bennettnotes.com/angular-4-input-numbers-directive/
 export class OnlyNumberDirective {
+
   // Allow decimal numbers and negative values
-  private readonly regex = new RegExp(/^-?[0-9]+(\.[0-9]*){0,1}$/g);
+  private readonly onlyDigitsRegex = new RegExp(/^-?[0-9]+(\.[0-9]*){0,1}$/g);
 
   // Allow key codes for special events. Reflect :
   // Backspace, tab, end, home
@@ -37,7 +38,7 @@ export class OnlyNumberDirective {
     const current = this.el!.nativeElement.value as string;
     const next = current.concat(event.key);
 
-    if (this.isNotDigit(next)) {
+    if (!this.isDigit(next)) {
       event.preventDefault();
     }
   }
@@ -48,7 +49,11 @@ export class OnlyNumberDirective {
   }
 
   // public is for test purposes
-  isNotDigit(value: string): boolean {
-    return value != null && value !== '' && !String(value).match(this.regex);
+  isDigit(value: string): boolean {
+    if (value == null || value === '') {
+      return false;
+    }
+
+    return value.match(this.onlyDigitsRegex) != null;
   }
 }

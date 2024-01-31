@@ -16,6 +16,7 @@ import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended'
 import { SalariesChartActivatedRoute } from './salaries-activated-route';
 import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
 import { environment } from '@environments/environment';
+import { CurrentUserSalaryLabelData } from './current-user-salary-label-data';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -26,6 +27,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   readonly isYourSalaryWithinMarketTitle = 'Ваша зарплата «в рынке»?';
 
   salariesChart: SalariesChart | null = null;
+  currentUserSalary: CurrentUserSalaryLabelData | null = null;
   filterData = new SalaryChartGlobalFiltersData();
   
   readonly activatedRoute: SalariesChartActivatedRoute;
@@ -64,6 +66,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   load(data: SalaryChartGlobalFiltersData | null = null): void {
     this.salariesChart = null;
     this.openAddSalaryModal = false;
+    this.currentUserSalary = null;
 
     this.service.charts({
       grade: data?.grade ?? null,
@@ -78,6 +81,10 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           this.salariesChart = new StubSalariesChart(x);
         } else {
           this.salariesChart = new SalariesChart(x);
+          this.currentUserSalary = x.currentUserSalary != null
+            ? new CurrentUserSalaryLabelData(x.currentUserSalary)
+            : null;
+
           this.showDataStub = false;
           this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
