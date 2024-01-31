@@ -9,6 +9,7 @@ import { UserProfession } from '@models/salaries/user-profession';
 import { PageParams, defaultPageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
+import { KazakhstanCity } from '@models/salaries/kazakhstan-city';
 
 export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
@@ -21,6 +22,8 @@ export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
 export interface EditUserSalaryRequest {
   grade: DeveloperGrade;
   profession: UserProfession;
+  city: KazakhstanCity | null;
+  skillId: number | null;
 }
 
 export interface SalariesChartResponse {

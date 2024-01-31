@@ -21,7 +21,7 @@
             (ngSubmit)="addSalarySubmitAction()">
             <div class="mb-3">
               <label>Зарплата в тенге <strong>в месяц</strong>. Если вы получаете в иной валюте, переведите в тенге.</label>
-              <input formControlName="value" type="text" class="form-control form-control-lg" />
+              <input formControlName="value" type="text" class="form-control form-control-lg" appOnlyNumber />
               <app-field-error [field]="addSalaryForm.get('value')" [max]="10000000" [min]="75000"></app-field-error>
             </div>
 
@@ -71,11 +71,27 @@
           </div>
   
           <div class="mb-3">
+            <div><label class="">Ваш грейд</label></div>
             <select formControlName="grade" class="form-select" aria-label="Select your grade">
-              <option [value]="null" selected disabled>Ваш грейд</option>
+              <option [value]="null" selected disabled>Выберите грейд</option>
               <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
             </select>
             <app-field-error [field]="addSalaryForm.get('grade')"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <div><label class="">В каком городе Казахстана Вы живете?</label></div>
+            <ng-select
+                [items]="cities"
+                [selectOnTab]="true"
+                bindLabel="label"
+                bindValue="item"
+                placeholder="Выберите город"
+                appendTo=""
+                formControlName="city"
+              >
+              </ng-select>
+            <app-field-error [field]="addSalaryForm.get('city')"></app-field-error>
           </div>
 
           <div *ngIf="errorMessage" class="mb-3 alert alert-danger">

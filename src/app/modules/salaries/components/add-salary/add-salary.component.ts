@@ -8,6 +8,7 @@ import { UserSalary } from '@models/salaries/salary.model';
 import { AlertService } from '@shared/components/alert/services/alert.service';
 import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
 import { SelectItem } from '@shared/select-boxes/select-item';
+import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
 
 @Component({
   selector: 'app-add-salary-modal',
@@ -28,6 +29,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
   readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
   readonly professions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options(true);
+  readonly cities: Array<SelectItem<KazakhstanCity>> = KazakhstanCityEnum.options();
 
   constructor(
     private readonly service: UserSalariesService,
