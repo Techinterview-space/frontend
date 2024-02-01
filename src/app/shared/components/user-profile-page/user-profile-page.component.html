@@ -5,7 +5,7 @@
         <li class="list-group-item">
           <div class="small text-muted">Email</div>
           <div class="small">
-            {{ user?.email ?? '-' }}
+            {{ user.email ?? '-' }}
           </div>
         </li>
 
@@ -25,7 +25,7 @@
 
         <li class="list-group-item">
           <div class="small text-muted">Roles</div>
-          <div *ngIf="user">
+          <div>
             <app-user-roles-label [userRoles]="user.roles"></app-user-roles-label>
           </div>
         </li>

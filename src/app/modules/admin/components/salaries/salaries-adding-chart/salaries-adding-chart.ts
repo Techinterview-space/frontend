@@ -1,4 +1,4 @@
-import { RandomRgbColor } from "@modules/salaries/components/salaries-by-grades-chart/random-rgb-color";
+import { RandomRgbColor } from "@modules/salaries/components/random-rgb-color";
 import { SalariesAddingTrendAdminChart } from "@services/user-salaries.service";
 import { Chart, ChartType, PointStyle }  from 'chart.js/auto';
 

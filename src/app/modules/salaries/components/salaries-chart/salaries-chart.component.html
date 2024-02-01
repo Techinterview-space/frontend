@@ -128,6 +128,15 @@
               [salaries]="salariesChart.salariesPerProfessionForRemote">
             </app-salaries-by-grades-chart>
           </div>
+
+          <div class="mb-5">
+            <app-cities-doughnut-chart
+              [title]="'Распределение респондентов по городам проживания'"
+              [currentSalary]="salariesChart.currentUserSalary"
+              [salaries]="salariesChart.salaries"
+              (editSalaryActionClick)="openEditSalaryAction()">
+            </app-cities-doughnut-chart>
+          </div>
         </div>
 
         <div *ngIf="!showDataStub" class="mb-3 text-muted text-end fst-italic">

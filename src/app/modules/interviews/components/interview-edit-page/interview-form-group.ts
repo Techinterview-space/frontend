@@ -41,7 +41,7 @@ export class InterviewFormGroup extends FormGroup {
         organizationId: new FormControl(interview.organizationId, [])
       });
 
-      interview.subjects.forEach((subject) => {
+      interview.subjects?.forEach((subject) => {
         this.subjectsFormArray.push(this.createSubjectFormGroup(subject.title, subject.grade, subject.comments));
       });
     }
@@ -58,7 +58,7 @@ export class InterviewFormGroup extends FormGroup {
       overallOpinionField.setValue(interviewTemplate.overallOpinion);
     }
 
-    interviewTemplate.subjects.forEach((subject) => {
+    interviewTemplate.subjects?.forEach((subject) => {
       this.subjectsFormArray.push(this.createSubjectFormGroup(subject.title, null, null));
       this.subjectDescriptions.push(subject.description);
     });

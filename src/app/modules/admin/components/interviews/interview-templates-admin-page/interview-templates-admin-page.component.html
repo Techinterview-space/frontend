@@ -19,7 +19,7 @@
               <td>{{ i + 1 }}</td>
               <td>{{ item.title }}</td>
               <td>{{ item.author?.email }}</td>
-              <td>{{ item.subjects.length }}</td>
+              <td>{{ item.subjects?.length ?? 0 }}</td>
               <td><app-visibility-label [visibility]="item.isPublic"></app-visibility-label></td>
               <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
               <td>

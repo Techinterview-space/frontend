@@ -66,7 +66,7 @@
             <li class="list-group-item">
               <div class="text-muted small">Actions</div>
               <div>
-                <a routerLink="/interviews/{{ interview?.id ?? '-' }}/edit" class="btn-link-sm" title="Edit the interview"
+                <a routerLink="/interviews/{{ interview.id }}/edit" class="btn-link-sm" title="Edit the interview"
                   >Edit</a
                 >
                 <button
@@ -105,7 +105,7 @@
         <div class="card-body">
           <div class="h5">Subjects discussed</div>
 
-          <ul class="list-group list-group-flush" *ngIf="interview && interview.subjects.length > 0; noSubjectsYet">
+          <ul class="list-group list-group-flush" *ngIf="interview && interview.subjects && interview.subjects.length > 0; noSubjectsYet">
             <li class="list-group-item" *ngFor="let item of interview.subjects; let i = index">
               <div class="d-flex justify-content-between">
                 <div class="d-inline-block">

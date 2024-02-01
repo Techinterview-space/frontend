@@ -11,6 +11,7 @@ import { SalaryBlockValueComponent } from './components/salaries-chart/salary-bl
 import { SalaryBlockRemoteValueComponent } from './components/salaries-chart/salary-block-remote-value/salary-block-remote-value.component';
 import { SalaryChartGlobalFiltersComponent } from './components/salaries-chart/salary-chart-global-filters/salary-chart-global-filters.component';
 import { EditSalaryComponent } from './components/edit-salary/edit-salary.component';
+import { CitiesDoughnutChartComponent } from './components/cities-doughnut-chart/cities-doughnut-chart.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EditSalaryComponent } from './components/edit-salary/edit-salary.compon
     SalaryBlockValueComponent,
     SalaryBlockRemoteValueComponent,
     SalaryChartGlobalFiltersComponent,
+    CitiesDoughnutChartComponent,
   ],
   imports: [
     CommonModule,

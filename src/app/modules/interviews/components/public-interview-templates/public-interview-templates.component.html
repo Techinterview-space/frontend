@@ -16,7 +16,7 @@
             <tr *ngFor="let item of templates.results; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ item.title }}</td>
-              <td>{{ item.subjects.length }}</td>
+              <td>{{ item.subjects?.length ?? 0 }}</td>
               <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
               <td>
                 <a routerLink="/interviews/templates/{{ item.id }}" class="btn btn-info text-dark btn-sm">

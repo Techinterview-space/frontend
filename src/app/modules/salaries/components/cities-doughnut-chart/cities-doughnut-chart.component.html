@@ -1,0 +1,28 @@
+<div class="">
+  <div class="h5 mb-3">{{ title }}</div>
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="fst-italic" *ngIf="currentSalary != null && currentSalary.city == null; else hasCityInSalary">
+        <div>Вы пока не указали город проживания.</div>
+        <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="" *ngIf="canvasId">
+        <div id="canvas-container">
+          <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #hasCityInSalary>
+  <div class="fst-italic">
+    Вы уже указали ваш город проживания. Спасибо!
+  </div>
+</ng-template>

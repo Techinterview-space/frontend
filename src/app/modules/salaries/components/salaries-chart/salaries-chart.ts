@@ -12,6 +12,7 @@ export class SalariesChart {
     readonly medianRemoteSalary: string | null;
 
     readonly countOfRecords: number;
+    readonly salaries: Array<UserSalary>;
 
     readonly salariesByMoneyBarChart: SalariesByMoneyBarChart | null;
     readonly salariesByMoneyBarChartForRemote: SalariesByMoneyBarChart | null;
@@ -32,6 +33,7 @@ export class SalariesChart {
         this.medianRemoteSalary = SalariesChart.formatNumber(data.medianRemoteSalary)
 
         this.countOfRecords = data.totalCountInStats;
+        this.salaries = data.salaries;
 
         this.salariesByMoneyBarChart = data.salariesByMoneyBarChart;
         this.salariesByMoneyBarChartForRemote = data.salariesByMoneyBarChartForRemote;

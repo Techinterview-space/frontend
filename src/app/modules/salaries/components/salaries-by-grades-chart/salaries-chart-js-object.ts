@@ -1,7 +1,7 @@
 import { UserProfession } from '@models/salaries/user-profession';
 import { SalariesByMoneyBarChart } from '@services/user-salaries.service';
 import { Chart, ChartType, PointStyle }  from 'chart.js/auto';
-import { RandomRgbColor } from './random-rgb-color';
+import { RandomRgbColor } from '../random-rgb-color';
 
 interface ChartDatasetType {
     profession: UserProfession | null;
@@ -71,7 +71,9 @@ export class SalariesChartJsObject extends Chart {
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            beginAtZero: true,
+                            type: 'linear',
+                            min: 0,
+                            
                         },
                     },
                     elements: {

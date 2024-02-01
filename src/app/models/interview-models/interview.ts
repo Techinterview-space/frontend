@@ -16,7 +16,7 @@ export interface Interview {
   interviewer: ApplicationUser | null;
   organizationId: string | null;
   organization: Organization | null;
-  subjects: Array<InterviewSubject>;
+  subjects: Array<InterviewSubject> | null;
   labels: Array<Label>;
   candidateInterview: CandidateInterview | null;
 }

@@ -14,6 +14,6 @@ export interface InterviewTemplate {
   isPublic: boolean;
   organizationId: string | null;
   organization: Organization | null;
-  subjects: Array<InterviewTemplateSubject>;
+  subjects: Array<InterviewTemplateSubject> | null;
   labels: Array<Label>;
 }

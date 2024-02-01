@@ -32,7 +32,7 @@ export class InterviewTemplateFormGroup extends FormGroup {
         organizationId: new FormControl(template.organizationId, [])
       });
 
-      template.subjects.forEach((subject) => {
+      template.subjects?.forEach((subject) => {
         this.subjectsFormArray.push(
           InterviewTemplateFormGroup.createSubjectFormGroup(subject.title, subject.description)
         );

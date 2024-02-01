@@ -61,7 +61,7 @@
           </div>
           <div class="d-inline-block" *ngIf="showEditButtons">
             <a
-              routerLink="/interviews/templates/{{ interviewTemplate?.id ?? '-' }}/edit"
+              routerLink="/interviews/templates/{{ interviewTemplate.id }}/edit"
               class="btn-link-sm"
               title="Edit the template"
               >Edit</a
@@ -91,7 +91,7 @@
           </div>
           <ul
             class="list-group list-group-flush"
-            *ngIf="interviewTemplate && interviewTemplate.subjects.length > 0; noSubjectsYet"
+            *ngIf="interviewTemplate && interviewTemplate.subjects && interviewTemplate.subjects.length > 0; noSubjectsYet"
           >
             <li class="list-group-item" *ngFor="let item of interviewTemplate.subjects; let i = index">
               <div class="d-flex justify-content-between">

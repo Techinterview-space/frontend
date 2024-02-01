@@ -18,7 +18,7 @@
             <tr *ngFor="let item of templates; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ item.title }}</td>
-              <td>{{ item.subjects.length }}</td>
+              <td>{{ item.subjects?.length ?? 0 }}</td>
               <td><app-visibility-label [visibility]="item.isPublic"></app-visibility-label></td>
               <td><app-label *ngFor="let label of item.labels" [label]="label"></app-label></td>
               <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
