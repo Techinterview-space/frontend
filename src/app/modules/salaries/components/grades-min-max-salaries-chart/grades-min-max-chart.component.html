@@ -1,0 +1,11 @@
+<div class="">
+  <div class="h5 mb-3">{{ title }}</div>
+
+  <div></div>
+
+  <div class="" *ngIf="canvasId">
+    <div id="canvas-container">
+      <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
+    </div>
+  </div>
+</div>

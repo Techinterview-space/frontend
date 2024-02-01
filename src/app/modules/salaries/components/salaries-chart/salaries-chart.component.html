@@ -137,6 +137,13 @@
               (editSalaryActionClick)="openEditSalaryAction()">
             </app-cities-doughnut-chart>
           </div>
+
+          <div class="mb-5">
+            <app-grades-min-max-chart
+              [title]="'Min/max зарплаты по грейдам'"
+              [salaries]="salariesChart.salaries">
+            </app-grades-min-max-chart>
+          </div>
         </div>
 
         <div *ngIf="!showDataStub" class="mb-3 text-muted text-end fst-italic">

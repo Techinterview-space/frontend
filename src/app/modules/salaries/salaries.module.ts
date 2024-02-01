@@ -12,6 +12,7 @@ import { SalaryBlockRemoteValueComponent } from './components/salaries-chart/sal
 import { SalaryChartGlobalFiltersComponent } from './components/salaries-chart/salary-chart-global-filters/salary-chart-global-filters.component';
 import { EditSalaryComponent } from './components/edit-salary/edit-salary.component';
 import { CitiesDoughnutChartComponent } from './components/cities-doughnut-chart/cities-doughnut-chart.component';
+import { GradesMinMaxChartComponent } from './components/grades-min-max-salaries-chart/grades-min-max-chart.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CitiesDoughnutChartComponent } from './components/cities-doughnut-chart
     SalaryBlockRemoteValueComponent,
     SalaryChartGlobalFiltersComponent,
     CitiesDoughnutChartComponent,
+    GradesMinMaxChartComponent,
   ],
   imports: [
     CommonModule,
