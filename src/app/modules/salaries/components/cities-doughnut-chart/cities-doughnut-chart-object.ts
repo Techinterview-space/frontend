@@ -48,7 +48,7 @@ export class CitiesDoughnutChartObject extends Chart {
                 },
                 options: {
                     aspectRatio: 1,
-                    responsive: false,
+                    responsive: true,
                     plugins: {
                         legend: {
                             position: 'bottom',

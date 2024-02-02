@@ -71,7 +71,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.service.charts({
       grade: data?.grade ?? null,
       profsInclude: data?.profsToInclude ?? null,
-      profsExclude: data?.profsToExclude ?? null,
+      cities: data?.cities ?? null,
     })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {

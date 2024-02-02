@@ -29,16 +29,16 @@
       </div>
 
       <div class="col-md-3 mb-1">
-        <label class="text-sm">Исключения из выдачи</label>
+        <label class="text-sm">Города</label>
         <ng-select
-            [items]="allProfessions"
+            [items]="allCities"
             [hideSelected]="true"
             [selectOnTab]="true"
             bindLabel="label"
             bindValue="item"
-            placeholder="Выберите исключения"
+            placeholder="Выберите города"
             appendTo="body"
-            formControlName="profsToExclude"
+            formControlName="cities"
             [multiple]="true"
           >
           </ng-select>
