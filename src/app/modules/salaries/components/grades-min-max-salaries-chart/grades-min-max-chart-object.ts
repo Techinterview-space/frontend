@@ -3,8 +3,9 @@ import { RandomRgbColor } from '../random-rgb-color';
 import { UserSalary } from '@models/salaries/salary.model';
 import { DeveloperGrade } from '@models/enums';
 import { CompanyType } from '@models/salaries/company-type';
+import { BoxPlotChart } from '@sgratzl/chartjs-chart-boxplot';
 
-export class GradesMinMaxSalariesChartObject extends Chart {
+export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
 
     static readonly grades: Array<{grade: DeveloperGrade, label: string}> = [
         { grade: DeveloperGrade.Junior, label: DeveloperGrade[DeveloperGrade.Junior] },
@@ -37,7 +38,7 @@ export class GradesMinMaxSalariesChartObject extends Chart {
         });
 
         if (salariesLocal.length > 0) {
-            datasets.push(new ChartDataset(salariesLocal, 'Казахстанские компании'));
+            datasets.push(new ChartDataset(salariesLocal, 'Казахстанская компания'));
         }
 
         if (salariesRemote.length > 0) {
@@ -47,7 +48,6 @@ export class GradesMinMaxSalariesChartObject extends Chart {
         super(
             canvasId,
             {
-                type: 'bar',
                 data: {
                     labels: GradesMinMaxSalariesChartObject.grades.map(x => x.label),
                     datasets: datasets,
@@ -82,7 +82,10 @@ class ChartDataset {
         this.borderColor = color.toString(1);
         this.backgroundColor = color.toString(0.7);
         this.data = GradesMinMaxSalariesChartObject.grades.map(g => {
-            const salaries = salariesSource.filter(s => s.grade == g.grade);
+            const salaries = salariesSource
+                .filter(s => s.grade == g.grade)
+                .sort((a, b) => a.value - b.value);
+
             if (salaries.length == 0) {
                 return [0, 0];
             }
