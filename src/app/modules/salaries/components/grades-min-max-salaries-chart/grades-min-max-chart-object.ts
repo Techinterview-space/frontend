@@ -112,6 +112,18 @@ class ChartDatasetItem {
     readonly mean: number;
 
     constructor(salaries: Array<UserSalary>) {
+
+        if (salaries.length === 0) {
+            this.min = 0;
+            this.max = 0;
+            this.median = 0;
+            this.q1 = 0;
+            this.q3 = 0;
+            this.mean = 0;
+            this.items = [];
+            return;
+        }
+
         this.min = salaries[0].value;
         this.max = salaries[salaries.length - 1].value;
         this.median = salaries[Math.floor(salaries.length / 2)].value;
