@@ -53,7 +53,14 @@ export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
                     datasets: datasets,
                 },
                 options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
                     responsive: true,
+                    elements: {
+                        boxplot: {
+                          itemRadius: 2,
+                        },
+                      },
                     plugins: {
                         legend: {
                             position: 'bottom',
@@ -70,7 +77,7 @@ export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
 }
 
 class ChartDataset {
-    readonly data: Array<[number, number]>;
+    readonly data: Array<ChartDatasetItem>;
     readonly borderColor: string;
     readonly backgroundColor: string;
     readonly borderRadius = 5;
@@ -81,19 +88,29 @@ class ChartDataset {
         const color = new RandomRgbColor();
         this.borderColor = color.toString(1);
         this.backgroundColor = color.toString(0.7);
+
         this.data = GradesMinMaxSalariesChartObject.grades.map(g => {
             const salaries = salariesSource
                 .filter(s => s.grade == g.grade)
                 .sort((a, b) => a.value - b.value);
 
-            if (salaries.length == 0) {
-                return [0, 0];
-            }
-
-            const min = Math.min(...salaries.map(s => s.value));
-            const max = Math.max(...salaries.map(s => s.value));
-
-            return [min, max];
+            return new ChartDatasetItem(salaries);
         })
+    }
+}
+
+class ChartDatasetItem {
+    readonly min: number;
+    readonly q1: number;
+    readonly median: number;
+    readonly q3: number;
+    readonly max: number;
+
+    constructor(salaries: Array<UserSalary>) {
+        this.min = salaries[0].value;
+        this.max = salaries[salaries.length - 1].value;
+        this.median = salaries[Math.floor(salaries.length / 2)].value;
+        this.q1 = salaries[Math.floor(salaries.length / 4)].value;
+        this.q3 = salaries[Math.floor(salaries.length * 3 / 4)].value;
     }
 }
