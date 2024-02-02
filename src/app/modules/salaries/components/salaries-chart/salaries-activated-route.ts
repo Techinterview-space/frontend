@@ -1,15 +1,16 @@
 import { DeveloperGrade } from "@models/enums";
 import { UserProfession } from "@models/salaries/user-profession";
-import { ActivatedRouteExtended, QueryParameter } from "@shared/routes/activated-route-extended";
+import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { Observable, map } from "rxjs";
 import { SalaryChartGlobalFiltersData } from "./salary-chart-global-filters/global-filters-form-group";
 import { ActivatedRoute } from "@angular/router";
+import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 
 export class SalariesChartActivatedRoute {
 
     static readonly gradeRouteParamName = 'grade';
     static readonly profsIncludeRouteParamName = 'profsInclude';
-    static readonly profsExcludeRouteParamName = 'profsExclude';
+    static readonly ciiesParamName = 'cities';
 
     private readonly activatedRoute: ActivatedRouteExtended
 
@@ -29,9 +30,9 @@ export class SalariesChartActivatedRoute {
             queryParams += `${queryParams.length > 1 ? '&' : ''}${profsValue}`;
         }
 
-        if (data.profsToExclude.length > 0) {
-            const profsExcludeValue = `${SalariesChartActivatedRoute.profsExcludeRouteParamName}=${data.profsToExclude.map(x => x.toString()).join(',')}`;
-            queryParams += `${queryParams.length > 1 ? '&' : ''}${profsExcludeValue}`;
+        if (data.cities.length > 0) {
+            const citiesValue = `${SalariesChartActivatedRoute.ciiesParamName}=${data.cities.map(x => x.toString()).join(',')}`;
+            queryParams += `${queryParams.length > 1 ? '&' : ''}${citiesValue}`;
         }
 
         return queryParams;
@@ -42,7 +43,7 @@ export class SalariesChartActivatedRoute {
             .getQueryParams([
                 SalariesChartActivatedRoute.gradeRouteParamName,
                 SalariesChartActivatedRoute.profsIncludeRouteParamName,
-                SalariesChartActivatedRoute.profsExcludeRouteParamName,
+                SalariesChartActivatedRoute.ciiesParamName,
             ])
             .pipe(map(queryParams => {
                 const gradeString = queryParams
@@ -64,16 +65,16 @@ export class SalariesChartActivatedRoute {
                     profsInclude = profsToIncludeValue.split(',').map(x => Number(x) as UserProfession);
                 }
 
-                let profsExclude: Array<UserProfession> = [];
-                const profsToExcludeValue = queryParams
-                    .find(x => x.key === SalariesChartActivatedRoute.profsExcludeRouteParamName)
+                let cities: Array<KazakhstanCity> = [];
+                const citiesValue = queryParams
+                    .find(x => x.key === SalariesChartActivatedRoute.ciiesParamName)
                     ?.value ?? null;
 
-                if (profsToExcludeValue && profsToExcludeValue !== '') {
-                    profsExclude = profsToExcludeValue.split(',').map(x => Number(x) as UserProfession);
+                if (citiesValue && citiesValue !== '') {
+                    cities = citiesValue.split(',').map(x => Number(x) as KazakhstanCity);
                 }
 
-                return new SalaryChartGlobalFiltersData(grade, profsInclude, profsExclude);
+                return new SalaryChartGlobalFiltersData(grade, profsInclude, cities);
             }));
     }
 }

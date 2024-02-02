@@ -82,6 +82,9 @@ class ChartDataset {
     readonly backgroundColor: string;
     readonly borderRadius = 5;
     readonly borderWidth = 2;
+    readonly itemRadius = 1;
+    readonly itemStyle = 'circle';
+    readonly itemBackgroundColor = '#000';
 
     constructor(salariesSource: Array<UserSalary>, readonly label: string) {
 
@@ -105,6 +108,8 @@ class ChartDatasetItem {
     readonly median: number;
     readonly q3: number;
     readonly max: number;
+    readonly items: Array<number>;
+    readonly mean: number;
 
     constructor(salaries: Array<UserSalary>) {
         this.min = salaries[0].value;
@@ -112,5 +117,8 @@ class ChartDatasetItem {
         this.median = salaries[Math.floor(salaries.length / 2)].value;
         this.q1 = salaries[Math.floor(salaries.length / 4)].value;
         this.q3 = salaries[Math.floor(salaries.length * 3 / 4)].value;
+        this.mean = salaries.reduce((a, b) => a + b.value, 0) / salaries.length;
+
+        this.items = salaries.map(s => s.value);
     }
 }
