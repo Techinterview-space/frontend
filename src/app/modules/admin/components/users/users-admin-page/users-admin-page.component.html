@@ -8,6 +8,7 @@
           <thead>
             <th>Id</th>
             <th>Full name</th>
+            <th>Email</th>
             <th>Roles</th>
             <th>Active</th>
             <th>Registered at</th>
@@ -17,9 +18,10 @@
             <tr *ngFor="let item of users; let i = index">
               <td>{{ item.id }}</td>
               <td><app-user-link [css]="'link-as-text'" [user]="item"></app-user-link></td>
+              <td>{{item.email }}</td>
               <td><app-user-roles-label [userRoles]="item.roles"></app-user-roles-label></td>
               <td><app-status-label [status]="item.isActive"></app-status-label></td>
-              <td>{{ item.createdAt | date: 'yyyy-MM-dd' }}</td>
+              <td>{{ item.createdAt | date: 'yyyy-MM-dd HH:ss' }}</td>
               <td>
                 <button type="button" class="btn-link-sm" (click)="openUserRolesForm(item)">Edit roles</button>
               </td>
