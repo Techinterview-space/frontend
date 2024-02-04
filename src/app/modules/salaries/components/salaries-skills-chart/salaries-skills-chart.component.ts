@@ -14,9 +14,6 @@ export class SalariesSkillsChartComponent {
   skills: Array<Skill> = [];
 
   @Input()
-  title: string | null = null;
-
-  @Input()
   currentSalary: UserSalaryAdminDto | null = null;
 
   @Input()
