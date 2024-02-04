@@ -144,6 +144,16 @@
               [salaries]="salariesChart.salaries">
             </app-grades-min-max-chart>
           </div>
+
+          <div class="mb-5" *ngIf="skills.length > 0">
+            <app-salaries-skills-chart
+              [title]="'Указанные навыки в зарплатах'"
+              [skills]="skills"
+              [currentSalary]="salariesChart.currentUserSalary"
+              [salaries]="salariesChart.salaries"
+              (editSalaryActionClick)="openEditSalaryAction()">
+            </app-salaries-skills-chart>
+          </div>
         </div>
 
         <div *ngIf="!showDataStub" class="mb-3 text-muted text-end fst-italic">
