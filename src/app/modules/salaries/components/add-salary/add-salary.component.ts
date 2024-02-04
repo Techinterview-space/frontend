@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { UserSalariesService } from '@services/user-salaries.service';
-import { EditSalaryForm } from './edit-salary-form';
+import { AddSalaryForm } from './add-salary-form';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { CompanyTypeSelectItem } from '@shared/select-boxes/company-type-select-item';
 import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-select-item';
@@ -9,6 +9,7 @@ import { AlertService } from '@shared/components/alert/services/alert.service';
 import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
 import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
+import { Skill } from '@services/skills.service';
 
 @Component({
   selector: 'app-add-salary-modal',
@@ -17,13 +18,16 @@ import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-
 })
 export class AddSalaryComponent implements OnInit, OnDestroy {
 
+  @Input()
+  skills: Array<Skill> = [];
+
   @Output()
   closed: EventEmitter<void> = new EventEmitter();
 
   @Output()
   salaryAdded: EventEmitter<UserSalary> = new EventEmitter();
 
-  addSalaryForm: EditSalaryForm | null = null;
+  addSalaryForm: AddSalaryForm | null = null;
   errorMessage: string | null = null;
 
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
@@ -31,12 +35,22 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
   readonly professions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options(true);
   readonly cities: Array<SelectItem<KazakhstanCity>> = KazakhstanCityEnum.options();
 
+  skillsAsOptions: Array<SelectItem<number>> = [];
+
   constructor(
     private readonly service: UserSalariesService,
     private readonly alert: AlertService) {}
 
   ngOnInit(): void {
-    this.addSalaryForm = new EditSalaryForm();
+    this.skillsAsOptions = this.skills.map((x) => {
+      return {
+        value: x.id.toString(),
+        item: x.id,
+        label: x.title
+      }
+    });
+
+    this.addSalaryForm = new AddSalaryForm();
   }
 
   addSalarySubmitAction(): void {

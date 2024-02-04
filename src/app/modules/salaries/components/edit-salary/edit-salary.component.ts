@@ -9,6 +9,7 @@ import { AlertService } from '@shared/components/alert/services/alert.service';
 import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
 import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
+import { Skill } from '@services/skills.service';
 
 @Component({
   selector: 'app-edit-salary-modal',
@@ -16,6 +17,9 @@ import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-
   styleUrl: './edit-salary.component.scss'
 })
 export class EditSalaryComponent implements OnInit, OnDestroy {
+
+  @Input()
+  skills: Array<Skill> = [];
 
   @Input()
   salarytoBeEdited: UserSalaryAdminDto | null = null;
@@ -34,11 +38,21 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
   readonly professions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options();
   readonly cities: Array<SelectItem<KazakhstanCity>> = KazakhstanCityEnum.options();
 
+  skillsAsOptions: Array<SelectItem<number>> = [];
+
   constructor(
     private readonly service: UserSalariesService,
     private readonly alert: AlertService) {}
 
   ngOnInit(): void {
+    this.skillsAsOptions = this.skills.map((x) => {
+      return {
+        value: x.id.toString(),
+        item: x.id,
+        label: x.title
+      }
+    });
+
     this.form = new EditSalaryForm(this.salarytoBeEdited);
   }
 

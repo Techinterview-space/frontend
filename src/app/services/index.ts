@@ -20,6 +20,7 @@ import { CandidatesService } from './candidates.service';
 import { OrganizationLabelsService } from './organization-labels.service';
 import { CandidateCvService } from './candidate-cv.service';
 import { UserSalariesService } from './user-salaries.service';
+import { SkillsService } from './skills.service';
 
 export * from './authorization.service';
 export * from './api.service';
@@ -60,5 +61,6 @@ export const applicationServices = [
   CandidatesService,
   OrganizationLabelsService,
   CandidateCvService,
-  UserSalariesService
+  UserSalariesService,
+  SkillsService,
 ];

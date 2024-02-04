@@ -17,6 +17,7 @@ import { SalariesChartActivatedRoute } from './salaries-activated-route';
 import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
 import { environment } from '@environments/environment';
 import { CurrentUserSalaryLabelData } from './current-user-salary-label-data';
+import { Skill, SkillsService } from '@services/skills.service';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -31,6 +32,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   filterData = new SalaryChartGlobalFiltersData();
   
   readonly activatedRoute: SalariesChartActivatedRoute;
+  skills: Array<Skill> = [];
 
   showDataStub = false;
   openAddSalaryModal = false;
@@ -47,7 +49,8 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
-    private readonly activatedRouteSource: ActivatedRoute) {
+    activatedRouteSource: ActivatedRoute,
+    private readonly skillsService: SkillsService) {
       title.setTitle('Salaries');
       this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
     }
@@ -89,6 +92,14 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
             x.currentUserSalary.profession === UserProfession.Developer;
+
+          if (this.skills.length === 0) {
+            this.skillsService.allForSelectBoxes()
+              .pipe(untilDestroyed(this))
+              .subscribe((skills) => {
+                this.skills = skills;
+              });
+          }
         }
       });
   }

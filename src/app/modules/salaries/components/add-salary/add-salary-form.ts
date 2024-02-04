@@ -8,7 +8,7 @@ import { UserSalary } from "@models/salaries/salary.model";
 import { UserProfession } from "@models/salaries/user-profession";
 import { CreateUserSalaryRequest } from "@services/user-salaries.service";
 
-export class EditSalaryForm extends FormGroup {
+export class AddSalaryForm extends FormGroup {
 
 static readonly digitsPattern = '^[0-9]*$';
 
@@ -23,7 +23,7 @@ static readonly digitsPattern = '^[0-9]*$';
             value: new FormControl(
                 salaryValue,
                 [
-                    Validators.pattern(EditSalaryForm.digitsPattern),
+                    Validators.pattern(AddSalaryForm.digitsPattern),
                     Validators.required,
                     Validators.min(75000),
                     Validators.max(10000000),
@@ -31,7 +31,7 @@ static readonly digitsPattern = '^[0-9]*$';
             quarter: new FormControl(
                 salarytoBeEdited?.quarter ?? currentQuarter,
                 [
-                    Validators.pattern(EditSalaryForm.digitsPattern),
+                    Validators.pattern(AddSalaryForm.digitsPattern),
                     Validators.min(1),
                     Validators.max(4),
                     Validators.required
@@ -39,7 +39,7 @@ static readonly digitsPattern = '^[0-9]*$';
             year: new FormControl(
                 salarytoBeEdited?.year ?? now.getFullYear(),
                 [
-                    Validators.pattern(EditSalaryForm.digitsPattern),
+                    Validators.pattern(AddSalaryForm.digitsPattern),
                     Validators.min(2000),
                     Validators.max(2100),
                     Validators.required
