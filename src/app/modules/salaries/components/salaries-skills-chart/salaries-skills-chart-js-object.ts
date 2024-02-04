@@ -22,7 +22,7 @@ export class SalariesSkillsChartJsObject extends Chart {
                 type: 'polarArea',
                 data: {
                     labels: [
-                        'Не указан навык',
+                        'Не указаны данные',
                         ...uniqueSkills.map(x => x.title),
                     ],
                     datasets: datasets,
