@@ -62,7 +62,11 @@ export class AdminNavbarComponent {
           {
             title: 'Salaries adding chart',
             url: '/admin/salaries/salaries-adding-trend-chart'
-          }
+          },
+          {
+            title: 'Skills',
+            url: '/admin/skills'
+          },
         ]
       },
       {

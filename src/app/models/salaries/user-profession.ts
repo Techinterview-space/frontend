@@ -90,6 +90,14 @@ export enum UserProfession {
     TechnicalWriter = 42,
 
     BiDeveloper = 43,
+
+    ChiefTechnicalOfficer = 44,
+
+    ChiefExecutiveOfficer = 45,
+
+    HeadOfDepartment = 46,
+
+    DeliveryManager = 47,
 }
 
 export class UserProfessionEnum { 
@@ -139,7 +147,16 @@ export class UserProfessionEnum {
 
             case UserProfession.BiDeveloper:
               return 'BI developer';
-      
+            
+            case UserProfession.ChiefTechnicalOfficer:
+              return 'CTO (Chief Technical Officer)';
+
+            case UserProfession.ChiefExecutiveOfficer:
+              return 'CEO (Chief Executive Officer)';
+
+            case UserProfession.HeadOfDepartment:
+              return 'Head of IT department';
+
             default:
               return new SplittedByWhitespacesString(UserProfession[item]).value;
         }

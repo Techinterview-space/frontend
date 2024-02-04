@@ -15,6 +15,7 @@ import { SalariesAdminPageComponent } from './components/salaries/salaries-admin
 import { SalariesAddingChartComponent } from './components/salaries/salaries-adding-chart/salaries-adding-chart.component';
 import { SalariesAdminPaginatedTableComponent } from './components/salaries/salaries-admin-paginated-table/salaries-admin-paginated-table.component';
 import { SalariesNotInStatsAdminPageComponent } from './components/salaries/salaries-not-in-stat-admin-page/salaries-not-in-stat-admin-page.component';
+import { SkillsPaginatedTableComponent } from './components/skills/skills-paginated-table/skills-paginated-table.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SalariesNotInStatsAdminPageComponent } from './components/salaries/sala
     SalariesAdminPageComponent,
     SalariesAddingChartComponent,
     SalariesAdminPaginatedTableComponent,
-    SalariesNotInStatsAdminPageComponent
+    SalariesNotInStatsAdminPageComponent,
+    SkillsPaginatedTableComponent
   ],
   imports: [
     CommonModule,

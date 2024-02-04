@@ -6,11 +6,12 @@ import { ApiService } from './api.service';
 export interface Skill {
   id: number;
   title: string;
-  hexColor: string;
+  hexColorAsString: string;
 }
 
 export interface SkillAdmiDto extends Skill {
   createdById: number | null;
+  createdBy: string | null;
 }
 
 export interface CreateSkillRequest {
@@ -50,7 +51,7 @@ export class SkillsService {
     return this.api.put<void>(this.root, data);
   }
 
-  delete(id: string): Observable<void> {
+  delete(id: number): Observable<void> {
     return this.api.delete<void>(this.root + id);
   }
 }
