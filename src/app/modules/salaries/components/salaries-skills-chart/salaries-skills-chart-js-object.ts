@@ -6,15 +6,16 @@ import { Skill } from '@services/skills.service';
 export class SalariesSkillsChartJsObject extends Chart {
 
     private readonly datasets: Array<ChartDatasetItem> = [];
+    private readonly uniqueSkills: Array<Skill> = [];
 
-    constructor(canvasId: string, salaries: UserSalary[], skills: Skill[]) {
-        const randomColor = new RandomRgbColor();
+    constructor(
+        canvasId: string,
+        private readonly salaries: UserSalary[],
+        private readonly skills: Skill[]) {
         const datasets: Array<ChartDatasetItem> = [];
 
         const uniqueSkills = SalariesSkillsChartJsObject.prepareUniqueSkills(salaries, skills);
-        datasets.push(new ChartDatasetItem(uniqueSkills, salaries));
-
-        console.log('SalariesSkillsChartJsObject', uniqueSkills, datasets);
+        datasets.push(new ChartDatasetItem(uniqueSkills, salaries, false));
 
         super(
             canvasId,
@@ -22,8 +23,8 @@ export class SalariesSkillsChartJsObject extends Chart {
                 type: 'polarArea',
                 data: {
                     labels: [
-                        'Не указаны данные',
                         ...uniqueSkills.map(x => x.title),
+                        'Не указаны данные',
                     ],
                     datasets: datasets,
                 },
@@ -52,6 +53,20 @@ export class SalariesSkillsChartJsObject extends Chart {
             });
 
         this.datasets = datasets;
+        this.uniqueSkills = uniqueSkills;
+    }
+
+    toggleNoDataArea(show: boolean): void {
+        this.data.labels = this.uniqueSkills.map(x => x.title);
+        if (show) {
+            this.data.labels.push('Не указаны данные');
+        }
+
+        this.data.datasets = [
+            new ChartDatasetItem(this.uniqueSkills, this.salaries, show),
+        ];
+
+        this.update();
     }
 
     static prepareUniqueSkills(salaries: UserSalary[], skills: Skill[]): Skill[] {
@@ -83,7 +98,7 @@ class ChartDatasetItem {
     readonly data: Array<number>;
     readonly backgroundColor: Array<string>;
 
-    constructor(uniqueSkills: Array<Skill>, salaries: Array<UserSalary>) {
+    constructor(uniqueSkills: Array<Skill>, salaries: Array<UserSalary>, includeNoData: boolean) {
 
         this.label = 'Указанные ЯП/фреймворки';
         this.data = [];
@@ -93,13 +108,17 @@ class ChartDatasetItem {
             return;
         }
 
-        const noSkillSalaries = salaries.filter(x => x.skillId == null).length;
-        this.data.push(noSkillSalaries);
-        this.backgroundColor.push(new RandomRgbColor().toString(0.4));
-
         uniqueSkills.forEach(s => {
             this.data.push(salaries.filter(x => x.skillId === s.id).length);
             this.backgroundColor.push(new RandomRgbColor().toString(0.4));
-        })
+        });
+
+        if (!includeNoData) {
+            return;
+        }
+
+        const noSkillSalaries = salaries.filter(x => x.skillId == null).length;
+        this.data.push(noSkillSalaries);
+        this.backgroundColor.push(new RandomRgbColor().toString(0.4));
     }
 }

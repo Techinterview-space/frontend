@@ -6,6 +6,20 @@
     <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
   </div>
 
+
+  <div class="mb-1">
+    <input
+      type="checkbox"
+      class="cursor-pointer form-check-input"
+      id="includeNoDataCheckbox"
+      [(ngModel)]="showNoDataArea"
+      [ngModelOptions]="{standalone: true}"
+      (change)="changeShowNoDataAreaToggler()" />
+    <label class="ms-3 form-check-label fst-italic cursor-pointer" for="includeNoDataCheckbox">
+      Включить в график пункт "Нет данных"
+    </label>
+  </div>
+
   <div class="col-md-9" *ngIf="canvasId">
     <div id="canvas-container">
       <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>

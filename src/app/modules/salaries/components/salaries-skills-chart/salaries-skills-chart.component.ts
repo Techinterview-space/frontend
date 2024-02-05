@@ -23,6 +23,7 @@ export class SalariesSkillsChartComponent {
   editSalaryActionClick = new EventEmitter<void>();
 
   chartDataLocal: SalariesSkillsChartJsObject | null = null;
+  showNoDataArea = false;
 
   readonly canvasId = 'canvas_' + Math.random().toString(36).substring(7);
 
@@ -34,6 +35,10 @@ export class SalariesSkillsChartComponent {
 
   openEditSalaryAction(): void {
     this.editSalaryActionClick.emit();
+  }
+
+  changeShowNoDataAreaToggler(): void {
+    this.chartDataLocal?.toggleNoDataArea(this.showNoDataArea);
   }
 
   private initChart(): void {

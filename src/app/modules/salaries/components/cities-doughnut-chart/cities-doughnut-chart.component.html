@@ -4,7 +4,7 @@
   <div class="row">
 
     <div class="col-md-3">
-      <div class="fst-italic" *ngIf="currentSalary != null && currentSalary.city == null; else hasCityInSalary">
+      <div class="mb-3 fst-italic" *ngIf="currentSalary != null && currentSalary.city == null; else hasCityInSalary">
         <div>Вы пока не указали город проживания.</div>
         <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
       </div>
