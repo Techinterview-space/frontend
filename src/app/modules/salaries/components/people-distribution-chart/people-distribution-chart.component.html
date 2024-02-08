@@ -1,0 +1,8 @@
+<div class="">
+  <div class="h5 mb-3">Расппределение респондентов по специальностям</div>
+  <div class="" *ngIf="canvasId">
+    <div id="canvas-container">
+      <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
+    </div>
+  </div>
+</div>
