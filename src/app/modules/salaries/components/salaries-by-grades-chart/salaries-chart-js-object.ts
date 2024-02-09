@@ -27,7 +27,7 @@ export class SalariesChartJsObject extends Chart {
             datasets.push({
                 profession: x.profession,
                 label: UserProfession[x.profession].toString(),
-                data: x.items.map(x => x.count),
+                data: x.items,
                 borderWidth: 2,
                 borderColor: color.toString(1),
                 backgroundColor: color.toString(0.7),
@@ -41,7 +41,7 @@ export class SalariesChartJsObject extends Chart {
                 profession: null,
                 type: 'bar' as ChartType,
                 label: 'Все',
-                data: chartData.items.map(x => x.count),
+                data: chartData.items,
                 borderWidth: 1,
                 borderColor: randomColor.toString(1),
                 backgroundColor: randomColor.toString(0.5),

@@ -26,11 +26,7 @@ export class StubSalariesChart extends SalariesChart {
             salariesByMoneyBarChart: {
                 items: StubSalariesChart.salaryLabels.map((x) => {
                     const value = parseInt(x);
-                    return {
-                        start: value,
-                        end: value + 250_000,
-                        count: StubSalariesChart.getRandomNumber(100, 25),
-                    };
+                    return StubSalariesChart.getRandomNumber(100, 25);
                 }),
                 itemsByProfession: [],
                 labels: StubSalariesChart.salaryLabels,
@@ -38,6 +34,10 @@ export class StubSalariesChart extends SalariesChart {
             salariesByMoneyBarChartForRemote: null,
             rangeStart: new Date(),
             rangeEnd: new Date(),
+            developersByGradeDistributionDataForLocal: null,
+            developersByGradeDistributionDataForRemote: null,
+            professionsDistributionDataForLocal: null,
+            professionsDistributionDataForRemote: null,
           });
     }
 
