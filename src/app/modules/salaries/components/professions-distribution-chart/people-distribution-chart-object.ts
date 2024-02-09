@@ -19,12 +19,31 @@ export class PeopleDistributionChartObject extends Chart {
     constructor(canvasId: string, chart: SalariesChart) {
         const datasets: Array<ChartDatasetType> = [];
 
+        const professions = chart.professionsDistributionDataForLocal?.items.map(x => x.profession) ?? [];
+        chart.professionsDistributionDataForRemote?.items.forEach(item => {
+            if (professions.some(x => x === item.profession)) {
+                return;
+            }
+
+            professions.push(item.profession);
+        });
+
+        datasets.push(
+            {
+                label: "Казахстанская компания",
+                data: chart.professionsDistributionDataForLocal?.items.map(x => {
+                    return (x.count / chart.professionsDistributionDataForLocal!.all) * 100;
+                }) ?? [],
+                backgroundColor: new RandomRgbColor().toString(0.8),
+            }
+        );
+
         super(
             canvasId,
             {
                 type: 'bar',
                 data: {
-                    labels: ["Казахстанские компании", "Иностранные компании"],
+                    labels: professions.map(x => UserProfessionEnum.label(x)),
                     datasets: datasets,
                 },
                 options: {
@@ -32,11 +51,9 @@ export class PeopleDistributionChartObject extends Chart {
                     responsive: true,
                     scales: {
                         x: {
-                          stacked: true,
+                          min: 0,
+                          max: 100
                         },
-                        y: {
-                          stacked: true,
-                        }
                     }
                 },
             });

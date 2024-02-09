@@ -14,7 +14,7 @@ import { EditSalaryComponent } from './components/edit-salary/edit-salary.compon
 import { CitiesDoughnutChartComponent } from './components/cities-doughnut-chart/cities-doughnut-chart.component';
 import { GradesMinMaxChartComponent } from './components/grades-min-max-salaries-chart/grades-min-max-chart.component';
 import { SalariesSkillsChartComponent } from './components/salaries-skills-chart/salaries-skills-chart.component';
-import { PeopleDistributionChartComponent } from './components/people-distribution-chart/people-distribution-chart.component';
+import { PeopleDistributionChartComponent } from './components/professions-distribution-chart/people-distribution-chart.component';
 
 @NgModule({
   declarations: [
