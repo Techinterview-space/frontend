@@ -56,8 +56,7 @@ export interface SalariesByMoneyBarChart {
 }
 
 export interface SalariesByMoneyBarChartItem {
-  start: number;
-  end: number;
+  // TODO mgorbatyuk: remove this model
   count: number;
 }
 
