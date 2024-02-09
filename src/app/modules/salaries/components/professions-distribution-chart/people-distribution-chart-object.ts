@@ -19,17 +19,6 @@ export class PeopleDistributionChartObject extends Chart {
     constructor(canvasId: string, chart: SalariesChart) {
         const datasets: Array<ChartDatasetType> = [];
 
-        const maxcount = chart.salaries.filter(x => x.company === CompanyType.Local).length;
-
-        // TODO mgorbatyuk: wrong calculation, should be fixed
-        chart.salariesByMoneyBarChart?.itemsByProfession.forEach((x, i) => {
-            datasets.push({
-                label: UserProfessionEnum.label(x.profession),
-                data: x.items.map(s => (s.count/ maxcount * 100)),
-                backgroundColor: new RandomRgbColor().toString(0.6),
-            });
-        });
-
         super(
             canvasId,
             {
