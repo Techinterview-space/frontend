@@ -24,14 +24,7 @@ export class StubSalariesChart extends SalariesChart {
             totalCountInStats: data?.totalCountInStats ?? 0,
             salaries: [] as UserSalary[],
             salariesByMoneyBarChart: {
-                items: StubSalariesChart.salaryLabels.map((x) => {
-                    const value = parseInt(x);
-                    return {
-                        start: value,
-                        end: value + 250_000,
-                        count: StubSalariesChart.getRandomNumber(100, 25),
-                    };
-                }),
+                items: StubSalariesChart.salaryLabels.map((x) => StubSalariesChart.getRandomNumber(100, 25)),
                 itemsByProfession: [],
                 labels: StubSalariesChart.salaryLabels,
             },

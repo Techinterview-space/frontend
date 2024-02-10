@@ -10,6 +10,7 @@ import { PageParams, defaultPageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 import { KazakhstanCity } from '@models/salaries/kazakhstan-city';
+import { NumberExtended } from '@shared/value-objects';
 
 export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
@@ -46,12 +47,12 @@ export interface SalariesChartResponse {
 
 export interface SalariesByProfessionMoneyBarChartItem {
   profession: UserProfession;
-  items: Array<SalariesByMoneyBarChartItem>;
+  items: Array<number>;
 }
 
 export interface SalariesByMoneyBarChart {
   labels: string[];
-  items: Array<SalariesByMoneyBarChartItem>;
+  items: Array<number>;
   itemsByProfession: Array<SalariesByProfessionMoneyBarChartItem>;
 }
 
