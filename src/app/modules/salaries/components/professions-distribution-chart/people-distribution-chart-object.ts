@@ -9,7 +9,7 @@ import { CompanyType } from '@models/salaries/company-type';
 interface ChartDatasetType {
     label: string;
     data: Array<number>;
-    backgroundColor: string;
+    backgroundColor: Array<string>;
 }
 
 export class PeopleDistributionChartObject extends Chart {
@@ -19,59 +19,90 @@ export class PeopleDistributionChartObject extends Chart {
     constructor(canvasId: string, chart: SalariesChart) {
         const datasets: Array<ChartDatasetType> = [];
 
-        const professions: Array<UserProfession> = [];
+        let professions: Array<{profession: UserProfession, label: string, count: number}> = [];
         chart.salaries.forEach(x => {
-            if (professions.some(y => y === x.profession)) {
+
+            const existingItem = professions.find(p => p.profession === x.profession);
+            if (existingItem != null) {
+                existingItem.count++;
                 return;
             }
 
-            professions.push(x.profession);
+            professions.push({
+                profession: x.profession,
+                label: UserProfessionEnum.label(x.profession),
+                count: 1,
+            });
         });
 
-        console.log('Professions', professions);
+        professions = professions.sort((a, b) => b.count - a.count);
+
+        const professionsToInclude = professions.filter((x) => x.count > 10);
+        const salariesNotINcluded = professions.filter((x) => x.count <= 10);
 
         const salariesLocal = chart.salaries.filter(x => x.company === CompanyType.Local);
         if (salariesLocal.length > 0) {
+
+            const dataForDataset = professionsToInclude.map(x => {
+                return {
+                    value: (salariesLocal.filter(s => s.profession === x.profession).length / salariesLocal.length) * 100,
+                    color: new RandomRgbColor().toString(0.8),
+                };
+            });
+
+            if (salariesNotINcluded.length > 0) {
+                const count = salariesNotINcluded.map(x => x.count).reduce((a, b) => a + b);
+                dataForDataset.push({
+                    value: count / salariesLocal.length * 100,
+                    color: new RandomRgbColor().toString(0.8),
+                });
+            }
+
             datasets.push(
                 {
-                    label: "Казахстанская компания",
-                    data: professions.map(x => {
-                        return (salariesLocal.filter(s => s.profession === x).length / salariesLocal.length) * 100;
-                    }),
-                    backgroundColor: new RandomRgbColor().toString(0.8),
+                    label: "Специальность",
+                    data: dataForDataset.map(x => x.value),
+                    backgroundColor: dataForDataset.map(x => x.color),
                 }
             );
         }
 
-        const salariesRemote = chart.salaries.filter(x => x.company === CompanyType.Remote);
+        /*const salariesRemote = chart.salaries.filter(x => x.company === CompanyType.Remote);
         if (salariesRemote.length > 0) {
             datasets.push(
                 {
                     label: "Иностранная компания",
                     data: professions.map(x => {
-                        return (salariesRemote.filter(s => s.profession === x).length / salariesRemote.length) * 100;
+                        return (salariesRemote.filter(s => s.profession === x.profession).length / salariesRemote.length) * 100;
                     }),
                     backgroundColor: new RandomRgbColor().toString(0.8),
                 }
             );
+        }*/
+
+        const labels = professionsToInclude.map(x => x.label);
+        if (salariesNotINcluded.length > 0) {
+            labels.push("Другие");
         }
 
         super(
             canvasId,
             {
-                type: 'bar',
+                type: 'doughnut',
                 data: {
-                    labels: professions.map(x => UserProfessionEnum.label(x)),
+                    labels: labels,
                     datasets: datasets,
                 },
                 options: {
-                    indexAxis: 'y',
-                    responsive: false,
-                    scales: {
-                        x: {
-                          min: 0,
-                          max: 100
-                        },
+                    aspectRatio: 1,
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'left',
+                            title: {
+                                display: false,
+                            },
+                          }
                     }
                 },
             });
