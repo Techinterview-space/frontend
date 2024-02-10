@@ -34,10 +34,6 @@ export class StubSalariesChart extends SalariesChart {
             salariesByMoneyBarChartForRemote: null,
             rangeStart: new Date(),
             rangeEnd: new Date(),
-            developersByGradeDistributionDataForLocal: null,
-            developersByGradeDistributionDataForRemote: null,
-            professionsDistributionDataForLocal: null,
-            professionsDistributionDataForRemote: null,
           });
     }
 

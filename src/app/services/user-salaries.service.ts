@@ -42,12 +42,6 @@ export interface SalariesChartResponse {
   salariesByMoneyBarChartForRemote: SalariesByMoneyBarChart | null;
 
   currentUserSalary: UserSalaryAdminDto | null;
-
-  developersByGradeDistributionDataForLocal: DevelopersByGradeDistributionData | null;
-  developersByGradeDistributionDataForRemote: DevelopersByGradeDistributionData | null;
-
-  professionsDistributionDataForLocal: DevelopersByProfessionsDistributionData | null;
-  professionsDistributionDataForRemote: DevelopersByProfessionsDistributionData | null;
 }
 
 export interface SalariesByProfessionMoneyBarChartItem {
@@ -90,16 +84,6 @@ export interface SalariesAddingTrendAdminChart {
   }>;
 
   salariesPerUser: number;
-}
-
-export interface DevelopersByProfessionsDistributionData {
-  all: number;
-  items: Array<{profession: UserProfession, count: number}>;
-}
-
-export interface DevelopersByGradeDistributionData {
-  all: number;
-  items: Array<{grade: DeveloperGrade | null, count: number}>;
 }
 
 export enum SalariesAdminOrderingType {

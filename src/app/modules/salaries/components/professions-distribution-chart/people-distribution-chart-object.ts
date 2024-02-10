@@ -3,7 +3,7 @@ import { RandomRgbColor } from '../random-rgb-color';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
 import { UserSalary } from '@models/salaries/salary.model';
 import { SalariesChart } from '../salaries-chart/salaries-chart';
-import { UserProfessionEnum } from '@models/salaries/user-profession';
+import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
 import { CompanyType } from '@models/salaries/company-type';
 
 interface ChartDatasetType {
@@ -19,24 +19,42 @@ export class PeopleDistributionChartObject extends Chart {
     constructor(canvasId: string, chart: SalariesChart) {
         const datasets: Array<ChartDatasetType> = [];
 
-        const professions = chart.professionsDistributionDataForLocal?.items.map(x => x.profession) ?? [];
-        chart.professionsDistributionDataForRemote?.items.forEach(item => {
-            if (professions.some(x => x === item.profession)) {
+        const professions: Array<UserProfession> = [];
+        chart.salaries.forEach(x => {
+            if (professions.some(y => y === x.profession)) {
                 return;
             }
 
-            professions.push(item.profession);
+            professions.push(x.profession);
         });
 
-        datasets.push(
-            {
-                label: "Казахстанская компания",
-                data: chart.professionsDistributionDataForLocal?.items.map(x => {
-                    return (x.count / chart.professionsDistributionDataForLocal!.all) * 100;
-                }) ?? [],
-                backgroundColor: new RandomRgbColor().toString(0.8),
-            }
-        );
+        console.log('Professions', professions);
+
+        const salariesLocal = chart.salaries.filter(x => x.company === CompanyType.Local);
+        if (salariesLocal.length > 0) {
+            datasets.push(
+                {
+                    label: "Казахстанская компания",
+                    data: professions.map(x => {
+                        return (salariesLocal.filter(s => s.profession === x).length / salariesLocal.length) * 100;
+                    }),
+                    backgroundColor: new RandomRgbColor().toString(0.8),
+                }
+            );
+        }
+
+        const salariesRemote = chart.salaries.filter(x => x.company === CompanyType.Remote);
+        if (salariesRemote.length > 0) {
+            datasets.push(
+                {
+                    label: "Иностранная компания",
+                    data: professions.map(x => {
+                        return (salariesRemote.filter(s => s.profession === x).length / salariesRemote.length) * 100;
+                    }),
+                    backgroundColor: new RandomRgbColor().toString(0.8),
+                }
+            );
+        }
 
         super(
             canvasId,
@@ -48,7 +66,7 @@ export class PeopleDistributionChartObject extends Chart {
                 },
                 options: {
                     indexAxis: 'y',
-                    responsive: true,
+                    responsive: false,
                     scales: {
                         x: {
                           min: 0,
