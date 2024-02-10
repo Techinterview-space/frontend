@@ -23,7 +23,7 @@ export class CitiesDoughnutChartComponent {
 
   chartDataLocal: CitiesDoughnutChartObject | null = null;
 
-  readonly canvasId = 'canvas_' + Math.random().toString(36).substring(7);
+  readonly canvasId = 'canvas_' + Math.random().toString(36);
 
   constructor() {}
 
