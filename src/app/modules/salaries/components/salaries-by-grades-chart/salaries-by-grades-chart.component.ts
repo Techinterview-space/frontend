@@ -22,7 +22,7 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
 
   chartDataLocal: SalariesChartJsObject | null = null;
 
-  readonly canvasId = 'canvas_' + Math.random().toString(36).substring(7);
+  readonly canvasId = 'canvas_' + Math.random().toString(36);
 
   constructor() {}
 

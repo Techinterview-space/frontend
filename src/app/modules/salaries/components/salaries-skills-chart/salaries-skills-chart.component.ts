@@ -25,7 +25,7 @@ export class SalariesSkillsChartComponent {
   chartDataLocal: SalariesSkillsChartJsObject | null = null;
   showNoDataArea = false;
 
-  readonly canvasId = 'canvas_' + Math.random().toString(36).substring(7);
+  readonly canvasId = 'canvas_' + Math.random().toString(36);
 
   constructor() {}
 
@@ -42,7 +42,6 @@ export class SalariesSkillsChartComponent {
   }
 
   private initChart(): void {
-    console.log('SalariesSkillsChartComponent', this.salaries, this.skills);
     if (this.salaries == null || this.salaries.length === 0 || this.skills.length === 0) {
       return;
     }
