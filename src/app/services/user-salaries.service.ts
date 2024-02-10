@@ -56,11 +56,6 @@ export interface SalariesByMoneyBarChart {
   itemsByProfession: Array<SalariesByProfessionMoneyBarChartItem>;
 }
 
-export interface SalariesByMoneyBarChartItem {
-  // TODO mgorbatyuk: remove this model
-  count: number;
-}
-
 export interface CreateSalaryRecordResponse {
   isSuccess: boolean;
   errorMessage: string | null;

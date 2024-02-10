@@ -114,6 +114,12 @@
           </div>
 
           <div class="mb-5">
+            <app-people-distribution-chart
+              [chart]="salariesChart"
+              ></app-people-distribution-chart>
+          </div>
+
+          <div class="mb-5">
             <app-salaries-by-grades-chart
               [chart]="salariesChart.salariesByMoneyBarChart"
               [title]="'Зарплаты в KZ компаниях'"

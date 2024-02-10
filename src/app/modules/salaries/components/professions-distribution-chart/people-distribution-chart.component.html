@@ -1,0 +1,20 @@
+<div class="">
+  <div class="h5 mb-3">Распределение по специальностям</div>
+
+  <div class="fst-italic">График отображает распределение респондентов по специальностям в процентном соотношении к общему числу</div>
+  <div class="row">
+
+    <div class="col-md-6 mb-3" *ngIf="canvasIdLocal">
+      <div id="canvas-container">
+        <canvas [attr.id]="canvasIdLocal">{{chartDataLocal}}</canvas>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3" *ngIf="canvasIdRemote">
+      <div id="canvas-container">
+        <canvas [attr.id]="canvasIdRemote">{{chartDataRemote}}</canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
