@@ -105,18 +105,18 @@
           </div>
 
           <div class="mb-5">
-            <app-people-distribution-chart
-              [chart]="salariesChart"
-              ></app-people-distribution-chart>
-          </div>
-
-          <div class="mb-5">
             <app-salary-chart-global-filters
               [filterData]="filterData"
               (filtersApplied)="applyGlobalFilters($event)"
               (filtersReset)="resetGlobalFilters()"
               (shareClicked)="share($event)">
             ></app-salary-chart-global-filters>
+          </div>
+
+          <div class="mb-5">
+            <app-people-distribution-chart
+              [chart]="salariesChart"
+              ></app-people-distribution-chart>
           </div>
 
           <div class="mb-5">

@@ -63,7 +63,6 @@ export class SalariesAdminPaginatedTableComponent {
         'Are you sure to delete?',
         () => {
           this.deleteRequested.emit(salary);
-          console.log('deleteRequested');
         }
       )
     );
