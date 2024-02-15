@@ -1,6 +1,6 @@
 <app-page-header>Work industries</app-page-header>
 
-<div class="container py-5" *ngIf="items; else dataLoading">
+<div class="container mt-3" *ngIf="items; else dataLoading">
   <div class="card">
     <div class="card-body">
 
@@ -71,7 +71,7 @@
 </app-dialog>
 
 <ng-template #dataLoading>
-  <div class="container py-5">
+  <div class="container mt-3">
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
