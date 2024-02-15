@@ -50,6 +50,7 @@ static readonly digitsPattern = '^[0-9]*$';
             profession: new FormControl(salarytoBeEdited?.profession ?? null, [Validators.required]),
             city: new FormControl(salarytoBeEdited?.city ?? null, []),
             skillId: new FormControl(salarytoBeEdited?.skillId ?? null, []),
+            workIndustryId: new FormControl(salarytoBeEdited?.workIndustryId ?? null, []),
         });
     }
 
@@ -65,6 +66,10 @@ static readonly digitsPattern = '^[0-9]*$';
                 ? Number(this.value.skillId)
                 : null;
 
+            const workIndustryId = this.value.workIndustryId != null
+                ? Number(this.value.workIndustryId)
+                : null;
+
           return {
             value: Number(this.value.value),
             quarter: Number(this.value.quarter),
@@ -75,6 +80,7 @@ static readonly digitsPattern = '^[0-9]*$';
             profession: profession,
             city: city != KazakhstanCity.Undefined ? city : null,
             skillId: skillId,
+            workIndustryId: workIndustryId,
           };
         }
     

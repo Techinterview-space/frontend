@@ -94,6 +94,21 @@
             <app-field-error [field]="addSalaryForm.get('skillId')"></app-field-error>
           </div>
 
+          <div class="mb-3" *ngIf="industriesAsOptions.length > 0">
+            <label class="text-sm">Сфера, где вы работаете</label>
+            <ng-select
+                [items]="industriesAsOptions"
+                [selectOnTab]="true"
+                bindLabel="label"
+                bindValue="item"
+                placeholder="Выберите сферу, где работаете. Можно оставить поле пустым."
+                appendTo=""
+                formControlName="workIndustryId"
+              >
+              </ng-select>
+            <app-field-error [field]="addSalaryForm.get('workIndustryId')"></app-field-error>
+          </div>
+
           <div class="mb-3">
             <div><label class="">В каком городе Казахстана Вы живете?</label></div>
             <ng-select

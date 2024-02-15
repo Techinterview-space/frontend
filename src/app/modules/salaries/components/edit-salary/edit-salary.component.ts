@@ -11,6 +11,7 @@ import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
 import { Skill } from '@services/skills.service';
 import { SalariesChart } from '../salaries-chart/salaries-chart';
+import { WorkIndustry } from '@services/work-industry.service';
 
 @Component({
   selector: 'app-edit-salary-modal',
@@ -21,6 +22,9 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
 
   @Input()
   skills: Array<Skill> = [];
+
+  @Input()
+  industries: Array<WorkIndustry> = [];
 
   @Input()
   salarytoBeEdited: UserSalaryAdminDto | null = null;
@@ -42,6 +46,7 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
   readonly cities: Array<SelectItem<KazakhstanCity>> = KazakhstanCityEnum.options();
 
   skillsAsOptions: Array<SelectItem<number>> = [];
+  industriesAsOptions: Array<SelectItem<number>> = [];
 
   constructor(
     private readonly service: UserSalariesService,
@@ -49,6 +54,14 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.skillsAsOptions = this.skills.map((x) => {
+      return {
+        value: x.id.toString(),
+        item: x.id,
+        label: x.title
+      }
+    });
+
+    this.industriesAsOptions = this.industries.map((x) => {
       return {
         value: x.id.toString(),
         item: x.id,

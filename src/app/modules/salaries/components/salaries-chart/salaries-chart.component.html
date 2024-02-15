@@ -173,6 +173,7 @@
   <app-add-salary-modal
     *ngIf="openAddSalaryModal"
     [skills]="skills"
+    [industries]="industries"
     (closed)="closeAddSalaryAction()"
     (salaryAdded)="onSalaryAdded($event)"
   ></app-add-salary-modal>
@@ -180,6 +181,7 @@
   <app-edit-salary-modal
     *ngIf="openEditCurrentSalaryModal && salariesChart"
     [skills]="skills"
+    [industries]="industries"
     [salarytoBeEdited]="salariesChart.currentUserSalary"
     (closed)="closeEditSalaryAction()"
     (salaryAdded)="onSalaryUpdated($event)"

@@ -12,12 +12,11 @@ import { DeveloperGrade } from '@models/enums';
 import { SalaryChartGlobalFiltersData } from './salary-chart-global-filters/global-filters-form-group';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { UserProfession } from '@models/salaries/user-profession';
-import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
 import { SalariesChartActivatedRoute } from './salaries-activated-route';
 import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
-import { environment } from '@environments/environment';
 import { CurrentUserSalaryLabelData } from './current-user-salary-label-data';
 import { Skill, SkillsService } from '@services/skills.service';
+import { WorkIndusrtiesService, WorkIndustry } from '@services/work-industry.service';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -33,6 +32,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   
   readonly activatedRoute: SalariesChartActivatedRoute;
   skills: Array<Skill> = [];
+  industries: Array<WorkIndustry> = [];
 
   showDataStub = false;
   openAddSalaryModal = false;
@@ -50,7 +50,8 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
     activatedRouteSource: ActivatedRoute,
-    private readonly skillsService: SkillsService) {
+    private readonly skillsService: SkillsService,
+    private readonly workIndusrtiesService: WorkIndusrtiesService) {
       title.setTitle('Salaries');
       this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
     }
@@ -96,8 +97,16 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           if (this.skills.length === 0) {
             this.skillsService.allForSelectBoxes()
               .pipe(untilDestroyed(this))
-              .subscribe((skills) => {
-                this.skills = skills;
+              .subscribe((x) => {
+                this.skills = x;
+              });
+          }
+
+          if (this.industries.length === 0) {
+            this.workIndusrtiesService.allForSelectBoxes()
+              .pipe(untilDestroyed(this))
+              .subscribe((x) => {
+                this.industries = x;
               });
           }
         }

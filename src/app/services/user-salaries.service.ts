@@ -24,6 +24,7 @@ export interface EditUserSalaryRequest {
   profession: UserProfession;
   city: KazakhstanCity | null;
   skillId: number | null;
+  workIndustryId: number | null;
   company: CompanyType;
 }
 
