@@ -159,6 +159,15 @@
               (editSalaryActionClick)="openEditSalaryAction()">
             </app-salaries-skills-chart>
           </div>
+
+          <div class="mb-5" *ngIf="industries.length > 0">
+            <app-work-industries-chart
+              [industries]="industries"
+              [currentSalary]="salariesChart.currentUserSalary"
+              [salaries]="salariesChart.salaries"
+              (editSalaryActionClick)="openEditSalaryAction()">
+            </app-work-industries-chart>
+          </div>
         </div>
 
         <div *ngIf="!showDataStub" class="mb-3 text-muted text-end fst-italic">

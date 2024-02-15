@@ -1,0 +1,34 @@
+<div class="">
+  <div class="h5 mb-3">Сферы компаний, где работают респонденты</div>
+
+  <div class="fst-italic mb-2" *ngIf="currentSalary != null && currentSalary.workIndustryId == null; else hasSkillInSalary">
+    <div>Вы пока не указали сферу деятельности вашей компании.</div>
+    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
+  </div>
+
+
+  <div class="mb-1">
+    <input
+      type="checkbox"
+      class="cursor-pointer form-check-input"
+      id="includeNoDataCheckboxIndustries"
+      [(ngModel)]="showNoDataArea"
+      [ngModelOptions]="{standalone: true}"
+      (change)="changeShowNoDataAreaToggler()" />
+    <label class="ms-3 form-check-label fst-italic cursor-pointer" for="includeNoDataCheckboxIndustries">
+      Включить в график пункт "Нет данных"
+    </label>
+  </div>
+
+  <div class="col-md-9" *ngIf="canvasId">
+    <div id="canvas-container">
+      <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
+    </div>
+  </div>
+</div>
+
+<ng-template #hasSkillInSalary>
+  <div class="fst-italic">
+    Вы уже указали сферу деятельности вашей компании. Спасибо!
+  </div>
+</ng-template>
