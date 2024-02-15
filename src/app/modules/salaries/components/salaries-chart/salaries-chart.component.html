@@ -114,6 +114,13 @@
           </div>
 
           <div class="mb-5">
+            <app-grades-min-max-chart
+              [title]="'Min/max зарплаты по грейдам'"
+              [salaries]="salariesChart.salaries">
+            </app-grades-min-max-chart>
+          </div>
+
+          <div class="mb-5">
             <app-people-distribution-chart
               [chart]="salariesChart"
               ></app-people-distribution-chart>
@@ -142,13 +149,6 @@
               [salaries]="salariesChart.salaries"
               (editSalaryActionClick)="openEditSalaryAction()">
             </app-cities-doughnut-chart>
-          </div>
-
-          <div class="mb-5">
-            <app-grades-min-max-chart
-              [title]="'Min/max зарплаты по грейдам'"
-              [salaries]="salariesChart.salaries">
-            </app-grades-min-max-chart>
           </div>
 
           <div class="mb-5" *ngIf="skills.length > 0">
