@@ -6,6 +6,7 @@ import { KazakhstanCity } from "./kazakhstan-city";
 
 export interface UserSalaryAdminDto extends UserSalary{
     id: string;
+    updatedAt: Date | null;
 }
 
 export interface UserSalary {

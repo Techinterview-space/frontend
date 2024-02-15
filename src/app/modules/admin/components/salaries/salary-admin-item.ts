@@ -16,7 +16,10 @@ export class SalaryAdminItem {
     readonly grade: string | null;
     readonly profession: string;
     readonly city: string;
+    readonly skill: string;
+    readonly industry: string;
     readonly createdAt: Date;
+    readonly updatedAt: Date;
 
     constructor(private readonly item: UserSalaryAdminDto) {
         this.id = item.id;
@@ -28,6 +31,9 @@ export class SalaryAdminItem {
         this.grade = item.grade != null ? DeveloperGrade[item.grade] : null;
         this.profession = UserProfession[item.profession];
         this.city = item.city != null ? KazakhstanCity[item.city] : '-';
+        this.skill = item.skillId != null ? item.skillId.toString() : '-';
+        this.industry = item.workIndustryId != null ? item.workIndustryId.toString() : '-';
         this.createdAt = item.createdAt;
+        this.updatedAt = item.updatedAt ?? item.createdAt;
     }
 }

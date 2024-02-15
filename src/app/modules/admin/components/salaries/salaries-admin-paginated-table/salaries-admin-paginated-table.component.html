@@ -55,18 +55,24 @@
       <th>Grade</th>
       <th>Company</th>
       <th>City</th>
+      <th>Skill</th>
+      <th>Industry</th>
       <th>Created at</th>
+      <th>Updated at</th>
       <th></th>
     </thead>
     <tbody>
-      <tr *ngFor="let item of salaries; let i = index">
+      <tr class="small" *ngFor="let item of salaries; let i = index">
         <td>{{ item.value | number: '1.0-0' }}</td>
         <td>{{ item.quarter }}.{{ item.year }}</td>
         <td>{{ item.profession }}</td>
         <td>{{ item.grade }}</td>
         <td>{{ item.company }}</td>
         <td>{{ item.city }}</td>
+        <td>{{ item.skill }}</td>
+        <td>{{ item.industry }}</td>
         <td>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
+        <td>{{ item.updatedAt | date: 'yyyy-MM-dd HH:mm' }}</td>
         <td>
           <button
             type="button"
