@@ -50,7 +50,7 @@ export class SalariesChart {
             : null;
     }
 
-    private static formatNumber(value: number | null): string | null {
+    public static formatNumber(value: number | null): string | null {
         return value != null
             ? formatNumber(value, 'en-US', '1.0-2')
             : null;

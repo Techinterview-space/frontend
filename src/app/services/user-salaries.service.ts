@@ -17,7 +17,6 @@ export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   quarter: number;
   year: number;
   currency: Currency;
-  company: CompanyType;
 }
 
 export interface EditUserSalaryRequest {
@@ -25,6 +24,7 @@ export interface EditUserSalaryRequest {
   profession: UserProfession;
   city: KazakhstanCity | null;
   skillId: number | null;
+  company: CompanyType;
 }
 
 export interface SalariesChartResponse {

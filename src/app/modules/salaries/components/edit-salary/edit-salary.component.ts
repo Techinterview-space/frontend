@@ -10,6 +10,7 @@ import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profes
 import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
 import { Skill } from '@services/skills.service';
+import { SalariesChart } from '../salaries-chart/salaries-chart';
 
 @Component({
   selector: 'app-edit-salary-modal',
@@ -32,6 +33,8 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
 
   form: EditSalaryForm | null = null;
   errorMessage: string | null = null;
+  salaryValue: string | null = null;
+  showSalaryValue = false;
 
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
   readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
@@ -53,6 +56,11 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
       }
     });
 
+    if (this.salarytoBeEdited == null) {
+      return;
+    }
+
+    this.salaryValue = this.showSalaryValue ? SalariesChart.formatNumber(this.salarytoBeEdited.value) : "* * * * *";
     this.form = new EditSalaryForm(this.salarytoBeEdited);
   }
 
@@ -76,6 +84,11 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
               this.alert.error(x.errorMessage!);
               this.errorMessage = x.errorMessage!;
             }});
+  }
+
+  showOrHideSalary(): void {
+    this.showSalaryValue = !this.showSalaryValue;
+    this.salaryValue = this.showSalaryValue ? SalariesChart.formatNumber(this.salarytoBeEdited!.value) : "* * * * *";
   }
 
   ngOnDestroy(): void {

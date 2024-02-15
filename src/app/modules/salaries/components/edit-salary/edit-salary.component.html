@@ -10,11 +10,12 @@
         <div class="p-1">
 
           <div *ngIf="salarytoBeEdited" class="mb-3">
-            <div class="mb-1">
-              Значение: <strong>{{ salarytoBeEdited.value }}</strong>
+            <div class="mb-1 salary-value-wrapper" title="Показать сумму" (click)="showOrHideSalary()">
+              <span class="display-4">{{ salaryValue }}</span>
             </div>
             <div class="">
-              {{ salarytoBeEdited.quarter }} квартал {{ salarytoBeEdited.year }} года
+              <div>При клике будет показана ваша зарплата</div>
+              <div>Данные указаны за {{ salarytoBeEdited.quarter }} квартал {{ salarytoBeEdited.year }} года</div>
             </div>
           </div>
 
@@ -22,6 +23,14 @@
             *ngIf="form"
             [formGroup]="form"
             (ngSubmit)="addSalarySubmitAction()">
+
+          <div class="mb-3">
+            <select formControlName="company" class="form-select" aria-label="Select a company">
+              <option [value]="null" selected disabled>Работаете в казахстанской компании или иностранной</option>
+              <option *ngFor="let option of companyTypes" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <app-field-error [field]="form.get('company')"></app-field-error>
+          </div>
   
           <div class="mb-3">
             <label>Ваш грейд</label>

@@ -1,5 +1,6 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { DeveloperGrade } from "@models/enums";
+import { CompanyType } from "@models/salaries/company-type";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { UserSalary } from "@models/salaries/salary.model";
 import { UserProfession } from "@models/salaries/user-profession";
@@ -12,6 +13,7 @@ static readonly digitsPattern = '^[0-9]*$';
     constructor(private readonly salarytoBeEdited: UserSalary | null) {
         super({
             grade: new FormControl(salarytoBeEdited?.grade ?? null, [Validators.required]),
+            company: new FormControl(salarytoBeEdited?.company ?? null, [Validators.required]),
             profession: new FormControl(salarytoBeEdited?.profession ?? null, [Validators.required]),
             city: new FormControl(salarytoBeEdited?.city ?? null, []),
             skillId: new FormControl(salarytoBeEdited?.skillId ?? null, []),
@@ -35,6 +37,7 @@ static readonly digitsPattern = '^[0-9]*$';
                 profession: profession,
                 city: city != KazakhstanCity.Undefined ? city : null,
                 skillId: skillId,
+                company: Number(this.value.company) as CompanyType,
             };
         }
     
