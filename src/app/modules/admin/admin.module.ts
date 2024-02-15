@@ -16,6 +16,7 @@ import { SalariesAddingChartComponent } from './components/salaries/salaries-add
 import { SalariesAdminPaginatedTableComponent } from './components/salaries/salaries-admin-paginated-table/salaries-admin-paginated-table.component';
 import { SalariesNotInStatsAdminPageComponent } from './components/salaries/salaries-not-in-stat-admin-page/salaries-not-in-stat-admin-page.component';
 import { SkillsPaginatedTableComponent } from './components/skills/skills-paginated-table/skills-paginated-table.component';
+import { WorkIndustriesPaginatedTableComponent } from './components/work-industries/work-industries-paginated-table/work-indusrties-paginated-table.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SkillsPaginatedTableComponent } from './components/skills/skills-pagina
     SalariesAddingChartComponent,
     SalariesAdminPaginatedTableComponent,
     SalariesNotInStatsAdminPageComponent,
-    SkillsPaginatedTableComponent
+    SkillsPaginatedTableComponent,
+    WorkIndustriesPaginatedTableComponent,
   ],
   imports: [
     CommonModule,

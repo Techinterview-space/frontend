@@ -9,6 +9,7 @@ import { SalariesAdminPageComponent } from './components/salaries/salaries-admin
 import { SalariesAddingChartComponent } from './components/salaries/salaries-adding-chart/salaries-adding-chart.component';
 import { SalariesNotInStatsAdminPageComponent } from './components/salaries/salaries-not-in-stat-admin-page/salaries-not-in-stat-admin-page.component';
 import { SkillsPaginatedTableComponent } from './components/skills/skills-paginated-table/skills-paginated-table.component';
+import { WorkIndustriesPaginatedTableComponent } from './components/work-industries/work-industries-paginated-table/work-indusrties-paginated-table.component';
 
 const routes: Routes = [
   { path: '', component: AdminStartPageComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'background-jobs', component: BackgroundJobsComponent },
   { path: 'organizations', component: AllOrganizationsAdminComponent },
   { path: 'skills', component: SkillsPaginatedTableComponent },
+  { path: 'work-industries', component: WorkIndustriesPaginatedTableComponent },
   { path: 'salaries', component: SalariesAdminPageComponent },
   { path: 'salaries/not-in-stats', component: SalariesNotInStatsAdminPageComponent },
   { path: 'salaries/salaries-adding-trend-chart', component: SalariesAddingChartComponent },

@@ -67,6 +67,10 @@ export class AdminNavbarComponent {
             title: 'Skills',
             url: '/admin/skills'
           },
+          {
+            title: 'Work industries',
+            url: '/admin/work-industries'
+          },
         ]
       },
       {
