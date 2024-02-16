@@ -130,31 +130,6 @@
             <app-people-by-grades-chart [source]="salariesChart"></app-people-by-grades-chart>
           </div>
 
-          <div class="mb-5">
-            <app-salaries-by-grades-chart
-              [chart]="salariesChart.salariesByMoneyBarChart"
-              [title]="'Зарплаты в Казахстанских компаниях'"
-              [salaries]="salariesChart.salariesPerProfessionForLocal">
-            </app-salaries-by-grades-chart>
-          </div>
-
-          <div class="mb-5" *ngIf="salariesChart.hasRemoteSalaries">
-            <app-salaries-by-grades-chart
-              [chart]="salariesChart.salariesByMoneyBarChartForRemote"
-              [title]="'Зарплаты тех, кто работает удаленно в иностранных компаниях'"
-              [salaries]="salariesChart.salariesPerProfessionForRemote">
-            </app-salaries-by-grades-chart>
-          </div>
-
-          <div class="mb-5">
-            <app-cities-doughnut-chart
-              [title]="'Распределение респондентов по городам проживания'"
-              [currentSalary]="salariesChart.currentUserSalary"
-              [salaries]="salariesChart.salaries"
-              (editSalaryActionClick)="openEditSalaryAction()">
-            </app-cities-doughnut-chart>
-          </div>
-
           <div class="mb-5" *ngIf="skills.length > 0">
             <app-salaries-skills-chart
               [skills]="skills"
@@ -171,6 +146,31 @@
               [salaries]="salariesChart.salaries"
               (editSalaryActionClick)="openEditSalaryAction()">
             </app-work-industries-chart>
+          </div>
+
+          <div class="mb-5">
+            <app-cities-doughnut-chart
+              [title]="'Распределение респондентов по городам проживания'"
+              [currentSalary]="salariesChart.currentUserSalary"
+              [salaries]="salariesChart.salaries"
+              (editSalaryActionClick)="openEditSalaryAction()">
+            </app-cities-doughnut-chart>
+          </div>
+
+          <div class="mb-5">
+            <app-salaries-by-grades-chart
+              [chart]="salariesChart.salariesByMoneyBarChart"
+              [title]="'Зарплаты в Казахстанских компаниях'"
+              [salaries]="salariesChart.salariesPerProfessionForLocal">
+            </app-salaries-by-grades-chart>
+          </div>
+
+          <div class="mb-5" *ngIf="salariesChart.hasRemoteSalaries">
+            <app-salaries-by-grades-chart
+              [chart]="salariesChart.salariesByMoneyBarChartForRemote"
+              [title]="'Зарплаты тех, кто работает удаленно в иностранных компаниях'"
+              [salaries]="salariesChart.salariesPerProfessionForRemote">
+            </app-salaries-by-grades-chart>
           </div>
         </div>
 

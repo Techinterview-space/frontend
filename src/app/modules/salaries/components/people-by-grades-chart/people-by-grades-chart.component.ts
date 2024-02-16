@@ -36,6 +36,9 @@ export class PeopleByGradesChartComponent implements OnInit {
   barsForLocal: Array<ProgressBarData> = [];
   barsForRemote: Array<ProgressBarData> = [];
 
+  totalCountLocal: number = 0;
+  totalCountRemote: number = 0;
+
   showPercents = true;
 
   @Input()
@@ -58,11 +61,13 @@ export class PeopleByGradesChartComponent implements OnInit {
     }
 
     if (this.source.peopleByGradesChartDataForLocal != null) {
+      this.totalCountLocal = this.source.peopleByGradesChartDataForLocal.allCount;
       this.barsForLocal = this.prepareData(
         this.source.peopleByGradesChartDataForLocal, this.showPercents);
     }
 
     if (this.source.peopleByGradesChartDataForRemote != null) {
+      this.totalCountRemote = this.source.peopleByGradesChartDataForRemote.allCount;
       this.barsForRemote = this.prepareData(
         this.source.peopleByGradesChartDataForRemote, this.showPercents);
     }
