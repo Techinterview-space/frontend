@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         background: '',
         title: 'Share your feedback',
-        subtitle: 'Feel free to share your feedback as markdown document. Exporting as PDF is coming soon.',
+        subtitle: 'Feel free to share your feedback as markdown document. Exporting as PDF is available.',
         imageSrc:
           'https://object.pscloud.io/petrel-intranet-storage/public-files/dfd35b14-26e8-4eab-bb3f-6ab4e69febfa-share_the_interview.gif',
         imageAlt: 'Share the interview GIF',

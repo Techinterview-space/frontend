@@ -21,7 +21,7 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: UserSalariesService,
-    private readonly titleService: TitleService,
+    titleService: TitleService,
     private readonly alert: AlertService) {
       titleService.setTitle('All salaries');
     }

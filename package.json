@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build-prod": "ng build --configuration=production",
-    "serve-staging": "ng serve --configuration=staging",
+    "serve-staging": "ng serve --configuration=staging -o",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test-headless-ci-only": "ng test --browsers ChromiumNoSandbox",

@@ -11,7 +11,6 @@ import { HomeRoutingModule } from './home.routing-module';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { PrivacyPolicyPageComponent } from './components/privacy-policy-page/privacy-policy-page.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
-import { PricingBlockComponent } from './components/pricing-block/pricing-block.component';
 import { LogoutCallbackComponent } from './components/logout-callback/logout-callback.component';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { LogoutCallbackComponent } from './components/logout-callback/logout-cal
     AuthCallbackComponent,
     PrivacyPolicyPageComponent,
     AboutUsComponent,
-    PricingBlockComponent,
     LogoutCallbackComponent,
   ],
   imports: [CommonModule, SharedModule, HomeRoutingModule]
