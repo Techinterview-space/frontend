@@ -22,10 +22,7 @@ export class WorkIndustriesChartJsObject extends Chart {
             {
                 type: 'polarArea',
                 data: {
-                    labels: [
-                        ...uniqueIndustries.map(x => x.title),
-                        'Не указаны данные',
-                    ],
+                    labels: uniqueIndustries.map(x => x.title),
                     datasets: datasets,
                 },
                 options: {
