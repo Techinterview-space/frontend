@@ -73,8 +73,8 @@ export class WorkIndustriesChartJsObject extends Chart {
                 return;
             }
 
-            const skill = industries.find(y => y.id === x.skillId);
-            if (skill == null) {
+            const industry = industries.find(y => y.id === x.workIndustryId);
+            if (industry == null) {
                 return;
             }
 
@@ -83,7 +83,7 @@ export class WorkIndustriesChartJsObject extends Chart {
                 return;
             }
 
-            uniqueIndustries.push(skill);
+            uniqueIndustries.push(industry);
         });
 
         return uniqueIndustries;
