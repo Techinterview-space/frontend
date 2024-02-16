@@ -16,6 +16,7 @@ import { GradesMinMaxChartComponent } from './components/grades-min-max-salaries
 import { SalariesSkillsChartComponent } from './components/salaries-skills-chart/salaries-skills-chart.component';
 import { PeopleDistributionChartComponent } from './components/professions-distribution-chart/people-distribution-chart.component';
 import { WorkIndustriesChartComponent } from './components/work-industries-chart/work-industries-chart.component';
+import { PeopleByGradesChartComponent } from './components/people-by-grades-chart/people-by-grades-chart.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { WorkIndustriesChartComponent } from './components/work-industries-chart
     SalariesSkillsChartComponent,
     PeopleDistributionChartComponent,
     WorkIndustriesChartComponent,
+    PeopleByGradesChartComponent,
   ],
   imports: [
     CommonModule,

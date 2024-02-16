@@ -44,6 +44,16 @@ export interface SalariesChartResponse {
   salariesByMoneyBarChartForRemote: SalariesByMoneyBarChart | null;
 
   currentUserSalary: UserSalaryAdminDto | null;
+  peopleByGradesChartDataForLocal: PeopleByGradesChartData | null;
+  peopleByGradesChartDataForRemote: PeopleByGradesChartData | null;
+}
+
+export interface PeopleByGradesChartData {
+  allCount: number;
+  data: Array<{
+    grade: DeveloperGrade;
+    count: number;
+  }>;
 }
 
 export interface SalariesByProfessionMoneyBarChartItem {

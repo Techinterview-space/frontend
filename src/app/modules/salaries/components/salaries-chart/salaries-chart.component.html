@@ -127,6 +127,10 @@
           </div>
 
           <div class="mb-5">
+            <app-people-by-grades-chart [source]="salariesChart"></app-people-by-grades-chart>
+          </div>
+
+          <div class="mb-5">
             <app-salaries-by-grades-chart
               [chart]="salariesChart.salariesByMoneyBarChart"
               [title]="'Зарплаты в Казахстанских компаниях'"

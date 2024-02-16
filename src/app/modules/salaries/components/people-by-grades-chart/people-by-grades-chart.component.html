@@ -1,0 +1,47 @@
+<div class="">
+  <div class="h5 mb-3">Распределение респондентов по грейдам</div>
+
+  <div class="mb-3" *ngIf="barsForLocal.length > 0">
+    <div class="mb-3">Казахстанские компании</div>
+    <div class="progress">
+      <div
+        *ngFor="let item of barsForLocal"
+        class="progress-bar progress-bar-striped {{item.color}}"
+        role="progressbar"
+        [attr.aria-label]="item.label"
+        [ngStyle]="{'width': item.value + '%'}"
+        [attr.aria-label]="item.value"
+        aria-valuemin="0"
+        aria-valuemax="100">
+        <strong title="{{item.label}} - {{item.value}}%" class="{{item.textColor}}">{{item.value}}%</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3" *ngIf="barsForRemote.length > 0">
+    <div class="mb-3">Иностранные компании</div>
+    <div class="progress">
+      <div
+        *ngFor="let item of barsForRemote"
+        class="progress-bar progress-bar-striped {{item.color}}"
+        role="progressbar"
+        [attr.aria-label]="item.label"
+        [ngStyle]="{'width': item.value + '%'}"
+        [attr.aria-label]="item.value"
+        aria-valuemin="0"
+        aria-valuemax="100">
+        <strong title="{{item.label}} - {{item.value}}%" class="{{item.textColor}}">{{item.value}}%</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="">
+    <span>Значения цветов</span>
+    <span class="ms-2 badge bg-success">Junior</span>
+    <span class="ms-2 badge bg-warning text-dark">Middle</span>
+    <span class="ms-2 badge bg-info text-dark">Senior</span>
+    <span class="ms-2 badge bg-primary">Lead</span>
+    <span class="ms-2 badge bg-light text-dark">Не указан грейд</span>
+  </div>
+
+</div>
