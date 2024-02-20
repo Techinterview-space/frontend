@@ -72,6 +72,22 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.openAddSalaryModal = false;
     this.currentUserSalary = null;
 
+    if (this.skills.length === 0) {
+      this.skillsService.allForSelectBoxes()
+        .pipe(untilDestroyed(this))
+        .subscribe((x) => {
+          this.skills = x;
+        });
+    }
+
+    if (this.industries.length === 0) {
+      this.workIndusrtiesService.allForSelectBoxes()
+        .pipe(untilDestroyed(this))
+        .subscribe((x) => {
+          this.industries = x;
+        });
+    }
+
     this.service.charts({
       grade: data?.grade ?? null,
       profsInclude: data?.profsToInclude ?? null,
@@ -93,22 +109,6 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
             x.currentUserSalary.profession === UserProfession.Developer;
-
-          if (this.skills.length === 0) {
-            this.skillsService.allForSelectBoxes()
-              .pipe(untilDestroyed(this))
-              .subscribe((x) => {
-                this.skills = x;
-              });
-          }
-
-          if (this.industries.length === 0) {
-            this.workIndusrtiesService.allForSelectBoxes()
-              .pipe(untilDestroyed(this))
-              .subscribe((x) => {
-                this.industries = x;
-              });
-          }
         }
       });
   }
