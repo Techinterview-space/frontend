@@ -10,9 +10,6 @@ import { GradesMinMaxSalariesChartObject } from './grades-min-max-chart-object';
 export class GradesMinMaxChartComponent {
 
   @Input()
-  title: string | null = null;
-
-  @Input()
   salaries: Array<UserSalary> | null = null;
 
   chartDataLocal: GradesMinMaxSalariesChartObject | null = null;
