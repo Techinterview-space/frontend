@@ -12,7 +12,10 @@ export class AddSalaryForm extends FormGroup {
 
 static readonly digitsPattern = '^[0-9]*$';
 
-    constructor(private readonly salarytoBeEdited: UserSalary | null = null) {
+    constructor(
+        salarytoBeEdited: UserSalary | null = null,
+        hasSkills: boolean = false,
+        hasIndustries: boolean = false) {
         const now = new Date(Date.now());
         const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
         const salaryValue = salarytoBeEdited?.value != null
@@ -49,8 +52,8 @@ static readonly digitsPattern = '^[0-9]*$';
             grade: new FormControl(salarytoBeEdited?.grade ?? null, [Validators.required]),
             profession: new FormControl(salarytoBeEdited?.profession ?? null, [Validators.required]),
             city: new FormControl(salarytoBeEdited?.city ?? null, []),
-            skillId: new FormControl(salarytoBeEdited?.skillId ?? null, []),
-            workIndustryId: new FormControl(salarytoBeEdited?.workIndustryId ?? null, []),
+            skillId: new FormControl(salarytoBeEdited?.skillId ?? null, hasSkills ? [Validators.required] : []),
+            workIndustryId: new FormControl(salarytoBeEdited?.workIndustryId ?? null, hasIndustries ? [Validators.required]: []),
         });
     }
 
