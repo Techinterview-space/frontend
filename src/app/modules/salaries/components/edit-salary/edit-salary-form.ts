@@ -10,14 +10,17 @@ export class EditSalaryForm extends FormGroup {
 
 static readonly digitsPattern = '^[0-9]*$';
 
-    constructor(private readonly salarytoBeEdited: UserSalary | null) {
+    constructor(
+        salarytoBeEdited: UserSalary | null,
+        hasSkills: boolean = false,
+        hasIndustries: boolean = false) {
         super({
             grade: new FormControl(salarytoBeEdited?.grade ?? null, [Validators.required]),
             company: new FormControl(salarytoBeEdited?.company ?? null, [Validators.required]),
             profession: new FormControl(salarytoBeEdited?.profession ?? null, [Validators.required]),
             city: new FormControl(salarytoBeEdited?.city ?? null, []),
-            skillId: new FormControl(salarytoBeEdited?.skillId ?? null, []),
-            workIndustryId: new FormControl(salarytoBeEdited?.workIndustryId ?? null, []),
+            skillId: new FormControl(salarytoBeEdited?.skillId ?? null, hasSkills ? [Validators.required] : []),
+            workIndustryId: new FormControl(salarytoBeEdited?.workIndustryId ?? null, hasIndustries ? [Validators.required] : []),
         });
     }
 
