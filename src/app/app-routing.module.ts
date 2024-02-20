@@ -20,21 +20,8 @@ const appRoutes: Routes = [
     loadChildren: () => import('./modules/interviews/interviews.module').then((m) => m.InterviewsModule)
   },
   {
-    path: 'organizations',
-    loadChildren: () => import('./modules/organizations/organizations.module').then((m) => m.OrganizationsModule)
-  },
-  {
     path: 'users',
     loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule)
-  },
-  {
-    path: 'boards',
-    loadChildren: () =>
-      import('./modules/candidates-dashboards/candidates-dashboards.module').then((m) => m.CandidatesDashboardsModule)
-  },
-  {
-    path: 'candidate-cards',
-    loadChildren: () => import('./modules/candidate-cards/candidate-cards.module').then((m) => m.CandidateCardsModule)
   },
   {
     path: 'salaries',
