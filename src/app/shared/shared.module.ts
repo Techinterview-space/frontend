@@ -31,13 +31,10 @@ import { DataLoadingInfoBlockComponent } from './components/data-loading-info-bl
 import { PaginationButtonsComponent } from './components/pagination-buttons/pagination-buttons.component';
 import { LoadingButtonComponent } from './components/loading-button/loading-button.component';
 import { LabelComponent } from './components/label/label.component';
-import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
 import { StatusLabelComponent } from './components/status-label/status-label.component';
 import { UserLinkComponent } from './components/user-link/user-link.component';
 import { RouterModule } from '@angular/router';
-import { OrganizationInvitationStatusComponent } from './components/organization-invitation-status/organization-invitation-status.component';
 import { MarkdownModule } from 'ngx-markdown';
-import { OrganizationLinkComponent } from './components/organization-link/organization-link.component';
 import { ShareButtonComponent } from './components/share-button/share-button.component';
 import { LabelsNgSelectComponent } from './components/labels-ng-select/labels-ng-select.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -70,11 +67,8 @@ const componentsToDeclareAndExport = [
   PaginationButtonsComponent,
   LoadingButtonComponent,
   LabelComponent,
-  EmploymentStatusComponent,
   StatusLabelComponent,
   UserLinkComponent,
-  OrganizationInvitationStatusComponent,
-  OrganizationLinkComponent,
   ShareButtonComponent,
   LabelsNgSelectComponent
 ];

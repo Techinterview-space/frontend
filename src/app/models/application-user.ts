@@ -1,5 +1,4 @@
 import { UserRole } from './enums';
-import { OrganizationUser } from './organizations/organization-user.model';
 
 export interface ApplicationUser {
   email: string | null;
@@ -13,5 +12,4 @@ export interface ApplicationUser {
   id: number;
   createdAt: Date;
   updatedAt: Date;
-  organizations: Array<OrganizationUser>;
 }

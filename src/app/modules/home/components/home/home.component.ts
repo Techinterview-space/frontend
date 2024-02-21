@@ -111,14 +111,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private getRedirectUrl(): string {
-    if (this.currentUser!.organizations.length === 1) {
-      return '/organizations' + this.currentUser!.organizations[0].id;
-    }
-
-    if (this.currentUser!.organizations.length > 1) {
-      return '/me';
-    }
-
     return '/interviews/my';
   }
 }

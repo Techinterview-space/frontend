@@ -35,34 +35,8 @@
 
   <div class="col-sm-9">
     <div class="card card-body">
-      <div *ngIf="user.organizations && user.organizations.length > 0; else noOrganizations">
-        <div class="mb-3">
-          <span class="h5">Organizations</span>
-        </div>
-
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let item of user.organizations; let i = index">
-            <div class="d-flex justify-content-between">
-              <div class="d-inline-block">
-                <span class="me-1">{{ i + 1 }}.</span>
-                <a *ngIf="item.active" routerLink="/organizations/{{ item.organizationId }}">{{
-                  item.organization.name
-                }}</a>
-                <span *ngIf="!item.active">{{ item.organization.name }}</span>
-              </div>
-
-              <div class="d-inline-block text-muted small">
-                <span class="me-1"> Since {{ item.createdAt | date: 'HH:mm yyyy-MM-dd' }}</span>
-                <span *ngIf="!item.active" class="me-1">till {{ item.deletedAt | date: 'HH:mm yyyy-MM-dd' }}</span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <div class="text-muted">Coming soon.</div>
     </div>
   </div>
 </div>
 
-<ng-template #noOrganizations>
-  <div class="text-muted p-5 text-center">User does not belong to any organization.</div>
-</ng-template>

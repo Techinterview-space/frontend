@@ -11,14 +11,7 @@ import { InterviewTemplatesService } from './interview-templates.service';
 import { InterviewsService } from './interviews.service';
 import { UserAdminService } from './user-admin.service';
 import { UserLabelsService } from './user-labels.service';
-import { OrganizationsService } from './organizations.service';
-import { OrganizationInvitationsService } from './organization-invitations.service';
 import { UsersService } from './users.service';
-import { BoardService } from '@modules/candidates-dashboards/components/models/board.service';
-import { CandidateCardsService } from './candidate-cards.service';
-import { CandidatesService } from './candidates.service';
-import { OrganizationLabelsService } from './organization-labels.service';
-import { CandidateCvService } from './candidate-cv.service';
 import { UserSalariesService } from './user-salaries.service';
 import { SkillsService } from './skills.service';
 
@@ -31,13 +24,7 @@ export * from './interview-templates.service';
 export * from './interviews.service';
 export * from './user-admin.service';
 export * from './user-labels.service';
-export * from './organizations.service';
-export * from './organization-invitations.service';
-export * from './candidates.service';
-export * from './candidate-cards.service';
 export * from './users.service';
-export * from './organization-labels.service';
-export * from './candidate-cv.service';
 
 export const applicationServices = [
   SessionStorageWrapper,
@@ -53,14 +40,7 @@ export const applicationServices = [
   InterviewsService,
   UserAdminService,
   UserLabelsService,
-  OrganizationsService,
-  OrganizationInvitationsService,
   UsersService,
-  BoardService,
-  CandidateCardsService,
-  CandidatesService,
-  OrganizationLabelsService,
-  CandidateCvService,
   UserSalariesService,
   SkillsService,
 ];

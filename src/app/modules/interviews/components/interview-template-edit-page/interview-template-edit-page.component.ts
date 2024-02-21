@@ -1,15 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Organization } from '@models/organizations/organization.model';
 import { Label } from '@models/user-label.model';
 import { InterviewTemplatesService } from '@services/interview-templates.service';
-import { OrganizationsService } from '@services/organizations.service';
 import { TitleService } from '@services/title.service';
 import { UserLabelsService } from '@services/user-labels.service';
 import { AlertService } from '@shared/components/alert/services/alert.service';
 import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { RandomHexColor } from '@shared/value-objects/random-hex-color';
 import { InterviewTemplateFormGroup } from './interview-template-form-group';
 
 @Component({
@@ -22,7 +19,6 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
 
   labels: Array<Label> = [];
   selectedLabels: Array<Label> = [];
-  myOrganizations: Array<Organization> = [];
 
   get subjectsCount(): number {
     return this.formGroup?.subjectsCount ?? 0;
@@ -37,8 +33,7 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
     private readonly alert: AlertService,
     private readonly router: Router,
     activatedRoute: ActivatedRoute,
-    private readonly userLabelsService: UserLabelsService,
-    private readonly orgService: OrganizationsService
+    private readonly userLabelsService: UserLabelsService
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
   }
@@ -70,13 +65,6 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.labels = x;
-      });
-
-    this.orgService
-      .myForSelectBoxes()
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.myOrganizations = x;
       });
   }
 

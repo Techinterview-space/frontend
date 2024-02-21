@@ -40,12 +40,16 @@ export class AdminNavbarComponent {
         ]
       },
       {
-        title: 'Organizations',
+        title: 'Select boxes',
         links: [
           {
-            title: 'All',
-            url: '/admin/organizations'
-          }
+            title: 'Skills',
+            url: '/admin/skills'
+          },
+          {
+            title: 'Work industries',
+            url: '/admin/work-industries'
+          },
         ]
       },
       {
@@ -62,14 +66,6 @@ export class AdminNavbarComponent {
           {
             title: 'Salaries adding chart',
             url: '/admin/salaries/salaries-adding-trend-chart'
-          },
-          {
-            title: 'Skills',
-            url: '/admin/skills'
-          },
-          {
-            title: 'Work industries',
-            url: '/admin/work-industries'
           },
         ]
       },

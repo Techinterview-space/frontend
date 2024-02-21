@@ -1,7 +1,6 @@
 import { ApplicationUser } from '@models/application-user';
 import Assertion from '@shared/validation/assertion';
 import { UserRole } from '@models/enums';
-import { OrganizationUser } from '@models/organizations/organization-user.model';
 
 export class ApplicationUserExtended implements ApplicationUser {
   readonly fullName: string;
@@ -53,10 +52,6 @@ export class ApplicationUserExtended implements ApplicationUser {
 
   get roles(): Array<UserRole> {
     return this.instance.roles;
-  }
-
-  get organizations(): Array<OrganizationUser> {
-    return this.instance.organizations;
   }
 
   constructor(public readonly instance: ApplicationUser) {

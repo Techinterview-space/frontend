@@ -138,53 +138,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
         ]
       }
     ];
-
-    if (hasCurrentUser && this.currentUser!.organizations.length === 1) {
-      const orgName = this.currentUser!.organizations[0].organization.name;
-      const organizationId = this.currentUser!.organizations[0].organizationId;
-
-      this.dropdowns.push({
-        title: orgName,
-        show: true,
-        links: [
-          {
-            title: 'Open organization',
-            url: `/organizations/${organizationId}`,
-            show: true
-          },
-          {
-            title: 'Recruitment pipeline board',
-            url: `/boards/${organizationId}/recruitment-pipeline`,
-            show: true
-          },
-          {
-            title: 'Interviews',
-            url: `/organizations/${organizationId}/interviews`,
-            show: true
-          },
-          {
-            title: 'Interview templates',
-            url: `/organizations/${organizationId}/interview-templates`,
-            show: true
-          },
-          {
-            title: 'Candidate cards',
-            url: `/organizations/${organizationId}/candidate-cards`,
-            show: true
-          },
-          {
-            title: 'Candidates',
-            url: `/organizations/${organizationId}/candidates`,
-            show: true
-          },
-          {
-            title: 'Labels',
-            url: `/organizations/${organizationId}/labels`,
-            show: true
-          }
-        ]
-      });
-    }
   }
 
   ngOnDestroy(): void {}

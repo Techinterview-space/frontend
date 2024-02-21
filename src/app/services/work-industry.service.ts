@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Organization } from '@models/organizations/organization.model';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 
@@ -39,8 +38,8 @@ export class WorkIndusrtiesService {
     return this.api.get<WorkIndustry[]>(this.root + 'for-select-boxes');
   }
 
-  byIdSimple(id: string): Observable<Organization> {
-    return this.api.get<Organization>(this.root + id + '/simple');
+  byIdSimple(id: string): Observable<WorkIndustry> {
+    return this.api.get<WorkIndustry>(this.root + id + '/simple');
   }
 
   create(data: CreateWorkIndustryRequest): Observable<number> {

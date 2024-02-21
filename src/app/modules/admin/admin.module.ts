@@ -9,7 +9,6 @@ import { HealthCheckTableComponent } from './components/health-check-table/healt
 import { JobsTableComponent } from './components/jobs-table/jobs-table.component';
 import { InterviewTemplatesAdminPageComponent } from './components/interviews/interview-templates-admin-page/interview-templates-admin-page.component';
 import { UsersAdminPageComponent } from './components/users/users-admin-page/users-admin-page.component';
-import { AllOrganizationsAdminComponent } from './components/organizations/all-organizations-admin/all-organizations-admin.component';
 import { AdminStartPageComponent } from './components/admin-start-page/admin-start-page.component';
 import { SalariesAdminPageComponent } from './components/salaries/salaries-admin-page/salaries-admin-page.component';
 import { SalariesAddingChartComponent } from './components/salaries/salaries-adding-chart/salaries-adding-chart.component';
@@ -25,7 +24,6 @@ import { WorkIndustriesPaginatedTableComponent } from './components/work-industr
     JobsTableComponent,
     InterviewTemplatesAdminPageComponent,
     UsersAdminPageComponent,
-    AllOrganizationsAdminComponent,
     AdminStartPageComponent,
     SalariesAdminPageComponent,
     SalariesAddingChartComponent,

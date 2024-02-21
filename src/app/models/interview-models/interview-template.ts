@@ -1,4 +1,3 @@
-import { Organization } from '@models/organizations/organization.model';
 import { Label } from '@models/user-label.model';
 import { ApplicationUser } from '..';
 import { InterviewTemplateSubject } from './interview-template-subject';
@@ -13,7 +12,6 @@ export interface InterviewTemplate {
   author: ApplicationUser | null;
   isPublic: boolean;
   organizationId: string | null;
-  organization: Organization | null;
   subjects: Array<InterviewTemplateSubject> | null;
   labels: Array<Label>;
 }

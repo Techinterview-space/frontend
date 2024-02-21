@@ -1,5 +1,3 @@
-import { CandidateInterview } from '@models/organizations/candidate-interview.model';
-import { Organization } from '@models/organizations/organization.model';
 import { Label } from '@models/user-label.model';
 import { ApplicationUser } from '../application-user';
 import { DeveloperGrade } from '../enums';
@@ -15,8 +13,6 @@ export interface Interview {
   interviewerId: number;
   interviewer: ApplicationUser | null;
   organizationId: string | null;
-  organization: Organization | null;
   subjects: Array<InterviewSubject> | null;
   labels: Array<Label>;
-  candidateInterview: CandidateInterview | null;
 }

@@ -1,7 +1,6 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DeveloperGrade } from '@models/enums';
 import { Interview, InterviewTemplate } from '@models/interview-models';
-import { CandidateCard } from '@models/organizations/candidate-card.model';
 import { Label } from '@models/user-label.model';
 import { InterviewCreateRequest, InterviewUpdateRequest } from '@services/interviews.service';
 
@@ -17,20 +16,14 @@ export class InterviewFormGroup extends FormGroup {
   readonly subjectDescriptions: Array<string | null>;
 
   private readonly interviewId: string | null;
-  private readonly candidateCard: CandidateCard | null;
 
-  constructor(interview: Interview | null = null, candidateCard: CandidateCard | null = null) {
+  constructor(interview: Interview | null = null) {
     if (interview == null) {
-      const candidateName = candidateCard?.candidate
-        ? candidateCard!.candidate!.firstName + ' ' + candidateCard!.candidate!.lastName
-        : null;
       super({
-        candidateName: new FormControl(candidateName, [Validators.required, Validators.max(150)]),
+        candidateName: new FormControl(null, [Validators.required, Validators.max(150)]),
         overallOpinion: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(20000)]),
         candidateGrade: new FormControl(null, [Validators.required]),
         subjects: new FormArray([]),
-        organizationId: new FormControl(candidateCard?.organizationId, []),
-        candidateCardId: new FormControl(candidateCard?.id)
       });
     } else {
       super({
@@ -38,7 +31,6 @@ export class InterviewFormGroup extends FormGroup {
         overallOpinion: new FormControl(interview.overallOpinion, [Validators.required, Validators.min(1), Validators.max(20000)]),
         candidateGrade: new FormControl(interview.candidateGrade, [Validators.required]),
         subjects: new FormArray([]),
-        organizationId: new FormControl(interview.organizationId, [])
       });
 
       interview.subjects?.forEach((subject) => {
@@ -48,7 +40,6 @@ export class InterviewFormGroup extends FormGroup {
 
     this.subjectDescriptions = [];
     this.interviewId = interview?.id ?? null;
-    this.candidateCard = candidateCard ?? null;
   }
 
   addSubjectsFromTemplate(interviewTemplate: InterviewTemplate): void {
@@ -133,9 +124,7 @@ export class InterviewFormGroup extends FormGroup {
     });
 
     const candidateGrade = this.get('candidateGrade')?.value as string;
-    const candidateName = this.candidateCard
-      ? this.candidateCard!.candidate!.firstName + ' ' + this.candidateCard!.candidate!.lastName
-      : (this.get('candidateName')?.value as string);
+    const candidateName = this.get('candidateName')?.value as string;
 
     return {
       candidateName: candidateName,

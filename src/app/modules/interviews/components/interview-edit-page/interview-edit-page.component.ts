@@ -1,23 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InterviewTemplate } from '@models/interview-models';
-import { CandidateCard } from '@models/organizations/candidate-card.model';
-import { CandidateInterview } from '@models/organizations/candidate-interview.model';
-import { EmploymentStatus } from '@models/organizations/employment-status.enum';
-import { Organization } from '@models/organizations/organization.model';
 import { Label } from '@models/user-label.model';
-import { CandidateCardsService } from '@services/candidate-cards.service';
 import { InterviewTemplatesService } from '@services/interview-templates.service';
 import { InterviewsService } from '@services/interviews.service';
-import { OrganizationsService } from '@services/organizations.service';
 import { TitleService } from '@services/title.service';
 import { UserLabelsService } from '@services/user-labels.service';
 import { AlertService } from '@shared/components/alert/services/alert.service';
 import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
 import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-select-item';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { RandomHexColor } from '@shared/value-objects/random-hex-color';
-import { EventType } from 'puppeteer';
 import { InterviewFormGroup } from './interview-form-group';
 import { InterviewTemplateSelectItem } from './interview-template-select-item';
 
@@ -32,23 +24,14 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
   selectedTemplate: InterviewTemplate | null = null;
   labels: Array<Label> = [];
   selectedLabels: Array<Label> = [];
-  myOrganizations: Array<Organization> = [];
 
-  candidateCard: CandidateCard | null = null;
-  candidateInterview: CandidateInterview | null = null;
   candidateFullname = '';
   showAddSubjectsFromTemplateModal = false;
-  organization: Organization | null = null;
-  employmentStatus: EmploymentStatus | null = null;
 
   readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.allGrades();
 
   get subjectsCount(): number {
     return this.formGroup?.subjectsCount ?? 0;
-  }
-
-  get disableOrganizationAndCandidateFields(): boolean {
-    return this.candidateCard != null || this.candidateInterview != null;
   }
 
   private readonly activateRoute: ActivatedRouteExtended;
@@ -61,9 +44,7 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
     private readonly alert: AlertService,
     private readonly router: Router,
     activatedRoute: ActivatedRoute,
-    private readonly userLabelsService: UserLabelsService,
-    private readonly orgService: OrganizationsService,
-    private readonly candidateCardService: CandidateCardsService
+    private readonly userLabelsService: UserLabelsService
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
   }
@@ -81,51 +62,19 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
             .byId(this.interviewId)
             .pipe(untilDestroyed(this))
             .subscribe((i) => {
-              this.candidateInterview = i.candidateInterview;
-              this.candidateFullname = i.candidateInterview?.candidateName ?? '';
-              this.organization = i.organization;
-              this.employmentStatus = i.candidateInterview?.conductedDuringStatus ?? null;
               this.formGroup = new InterviewFormGroup(i);
               this.selectedLabels = [...this.selectedLabels, ...i.labels];
             });
           return;
         }
 
-        this.activateRoute
-          .getParam('cardId')
-          .pipe(untilDestroyed(this))
-          .subscribe((cardId) => {
-            this.setTitle('Create an interview');
-            if (cardId != null) {
-              this.candidateCardService
-                .byId(cardId)
-                .pipe(untilDestroyed(this))
-                .subscribe((card) => {
-                  this.candidateCard = card;
-                  this.employmentStatus = card.employmentStatus;
-                  this.organization = card.organization;
-                  this.candidateFullname =
-                    card.candidate != null ? card.candidate!.firstName + ' ' + card.candidate!.lastName : '';
-
-                  this.templateService
-                    .availableForInterview()
-                    .pipe(untilDestroyed(this))
-                    .subscribe((templates) => {
-                      this.templates = templates.map((t) => new InterviewTemplateSelectItem(t));
-                      this.formGroup = new InterviewFormGroup(null, card);
-                    });
-                  return;
-                });
-            }
-
-            this.templateService
-              .availableForInterview()
-              .pipe(untilDestroyed(this))
-              .subscribe((templates) => {
-                this.templates = templates.map((t) => new InterviewTemplateSelectItem(t));
-                this.formGroup = new InterviewFormGroup(null, null);
-              });
-          });
+        this.templateService
+            .availableForInterview()
+            .pipe(untilDestroyed(this))
+            .subscribe((templates) => {
+              this.templates = templates.map((t) => new InterviewTemplateSelectItem(t));
+              this.formGroup = new InterviewFormGroup(null);
+            });
       });
 
     this.userLabelsService
@@ -133,13 +82,6 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.labels = x;
-      });
-
-    this.orgService
-      .myForSelectBoxes()
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.myOrganizations = x;
       });
   }
 

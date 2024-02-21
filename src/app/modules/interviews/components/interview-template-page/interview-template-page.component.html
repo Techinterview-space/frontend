@@ -14,17 +14,6 @@
                 {{ interviewTemplate.author?.email }}
               </div>
             </li>
-            <li class="list-group-item" *ngIf="interviewTemplate.organization">
-              <div class="text-muted small">Organization</div>
-              <div>
-                <a
-                  routerLink="/organizations/{{ interviewTemplate.organizationId }}"
-                  title="Go to the organization page"
-                >
-                  {{ interviewTemplate.organization.name }}
-                </a>
-              </div>
-            </li>
             <li class="list-group-item">
               <div class="text-muted small">Subjects</div>
               <div>
