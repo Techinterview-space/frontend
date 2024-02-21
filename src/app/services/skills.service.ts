@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Organization } from '@models/organizations/organization.model';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 
@@ -37,10 +36,6 @@ export class SkillsService {
 
   allForSelectBoxes(): Observable<Array<Skill>> {
     return this.api.get<Skill[]>(this.root + 'for-select-boxes');
-  }
-
-  byIdSimple(id: string): Observable<Organization> {
-    return this.api.get<Organization>(this.root + id + '/simple');
   }
 
   create(data: CreateSkillRequest): Observable<number> {

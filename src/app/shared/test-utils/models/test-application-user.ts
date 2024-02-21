@@ -1,7 +1,6 @@
 import { ApplicationUser } from '@models/application-user';
 import { UserRole } from '@models/enums';
 import { ApplicationUserExtended } from '@models/extended';
-import { OrganizationUser } from '@models/organizations/organization-user.model';
 
 export class TestApplicationUser implements ApplicationUser {
   constructor(role: UserRole, id: number = 1) {
@@ -15,11 +14,9 @@ export class TestApplicationUser implements ApplicationUser {
     this.deletedAt = null;
     this.createdAt = new Date();
     this.updatedAt = new Date();
-    this.organizations = [];
     this.fullname = `${this.firstName} ${this.lastName}`;
   }
 
-  organizations: OrganizationUser[];
   email: string | null;
   firstName: string | null;
   lastName: string | null;

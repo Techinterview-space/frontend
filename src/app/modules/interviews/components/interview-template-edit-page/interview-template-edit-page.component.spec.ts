@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InterviewTemplatesService } from '@services/interview-templates.service';
-import { OrganizationsService } from '@services/organizations.service';
 import { UserLabelsService } from '@services/user-labels.service';
 import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
 
@@ -19,8 +18,7 @@ describe('InterviewTemplateEditPageComponent', () => {
         ...testUtilStubs,
         ...mostUsedServices,
         InterviewTemplatesService,
-        UserLabelsService,
-        OrganizationsService
+        UserLabelsService
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

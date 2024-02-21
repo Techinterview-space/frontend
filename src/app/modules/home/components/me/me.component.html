@@ -9,37 +9,3 @@
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
-
-<app-dialog
-  [show]="showYouHaveBeenInvitedDialog"
-  (closed)="onInvitationsModalDlgClose()"
-  [header]="'Invitations'"
-  [additionalCss]="'modal-lg'"
->
-  <div class="mb-3 h3">
-    You have been invited to the following organizations.
-  </div>
-
-  <div class="mb-3 h5 text-muted">
-    If you accept any invitation, you will be sign off the system.
-    It is necessary for giving you access to the organization.
-  </div>
-
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let item of invitations; let i = index">
-      <div class="d-flex justify-content-between">
-        <div class="d-inline-block">
-          <div>
-            <a routerLink="/organizations/{{ item.organizationId }}">{{ item.organizationName }}</a>
-          </div>
-          <span class="text-muted small"> Invited at {{ item.createdAt | date: 'HH:mm yyyy-MM-dd' }}</span>
-        </div>
-
-        <div class="d-inline-block">
-          <button type="button" class="btn btn-sm btn-success me-1" (click)="accept(item)">Accept</button>
-          <button type="button" class="btn btn-sm btn-outline-danger" (click)="decline(item)">Decline</button>
-        </div>
-      </div>
-    </li>
-  </ul>
-</app-dialog>

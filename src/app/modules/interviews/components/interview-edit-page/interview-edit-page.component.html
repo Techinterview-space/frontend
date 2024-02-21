@@ -8,7 +8,7 @@
       <div class="col-sm-4">
         <div class="card">
           <div class="card-body">
-            <div class="form-floating mb-3" *ngIf="!disableOrganizationAndCandidateFields; else readonlyCandidateName">
+            <div class="form-floating mb-3">
               <input
                 type="text"
                 class="form-control"
@@ -19,18 +19,6 @@
               />
               <label for="candidateName" class="form-label">Candidate name</label>
               <app-field-error [field]="formGroup.get('candidateName')"></app-field-error>
-            </div>
-
-            <div class="mb-3" *ngIf="disableOrganizationAndCandidateFields; else organizationSelectBox">
-              <div class="text-muted">Organization</div>
-              <div>{{ organization?.name }}</div>
-            </div>
-
-            <div class="mb-3" *ngIf="employmentStatus">
-              <div class="text-muted">Candidate stage</div>
-              <div>
-                <app-employment-status [status]="employmentStatus"></app-employment-status>
-              </div>
             </div>
 
             <div class="mb-3">
@@ -191,24 +179,6 @@
     </div>
   </form>
 </div>
-
-<ng-template #organizationSelectBox>
-  <div class="mb-3" *ngIf="myOrganizations.length > 0">
-    <select class="form-control" formControlName="organizationId">
-      <option value="">No organization</option>
-      <option *ngFor="let item of myOrganizations" [value]="item.id">
-        {{ item.name }}
-      </option>
-    </select>
-  </div>
-</ng-template>
-
-<ng-template #readonlyCandidateName>
-  <div class="mb-3">
-    <div class="text-muted">Candidate name</div>
-    <div>{{ candidateFullname }}</div>
-  </div>
-</ng-template>
 
 <app-dialog
   [show]="templates && showAddSubjectsFromTemplateModal"

@@ -26,14 +26,6 @@
                 <app-developer-grade-label [grade]="interview.candidateGrade"></app-developer-grade-label>
               </div>
             </li>
-            <li class="list-group-item" *ngIf="interview.organization">
-              <div class="text-muted small">Organization</div>
-              <div class="small">
-                <a routerLink="/organizations/{{ interview.organization.id }}">
-                  {{ interview.organization.name }}
-                </a>
-              </div>
-            </li>
             <li class="list-group-item">
               <div class="text-muted small">Subjects</div>
               <div>

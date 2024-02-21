@@ -21,15 +21,6 @@
               <app-field-error [field]="formGroup.get('title')"></app-field-error>
             </div>
 
-            <div class="mb-3" *ngIf="myOrganizations.length > 0">
-              <select class="form-control" formControlName="organizationId">
-                <option value="">No organization</option>
-                <option *ngFor="let item of myOrganizations" [value]="item.id">
-                  {{ item.name }}
-                </option>
-              </select>
-            </div>
-
             <div class="mb-3">
               <app-labels-ng-select [labels]="labels" [(selectedLabels)]="selectedLabels" [placeholder]="'Select tags for your template'"></app-labels-ng-select>
             </div>
