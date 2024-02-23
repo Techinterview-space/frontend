@@ -10,6 +10,18 @@ import { SalariesAddingChart } from './salaries-adding-chart';
 })
 export class SalariesAddingChartComponent implements OnInit, OnDestroy {
 
+  get salariesPerOneUser(): number {
+    return this.data?.salariesPerUser || 0;
+  }
+
+  get usersWhoLeftSalary(): number {
+    return this.data?.usersWhoLeftSalary || 0;
+  }
+
+  get allUsersCount(): number {
+    return this.data?.allUsersCount || 0;
+  }
+
   data: SalariesAddingTrendAdminChart | null = null;
   chart: SalariesAddingChart | null = null;
 

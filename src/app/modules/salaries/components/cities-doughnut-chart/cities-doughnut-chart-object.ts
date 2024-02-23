@@ -10,40 +10,28 @@ interface ChartDatasetType {
     hoverOffset: number;
 }
 
+interface CityWithCount {
+    city: KazakhstanCity | null;
+    count: number;
+}
+
 export class CitiesDoughnutChartObject extends Chart {
 
     private readonly datasets: Array<ChartDatasetType> = [];
+    private readonly uniqueCities: Array<CityWithCount> = [];
 
-    constructor(canvasId: string, salaries: Array<UserSalary>) {
+    constructor(canvasId: string, private readonly salaries: Array<UserSalary>) {
         const datasets: Array<ChartDatasetType> = [];
 
-        const cities: Array<{city: KazakhstanCity | null, count: number}> = [];
-        salaries.forEach(x => {
-
-            const item = cities.find(c => c.city == x.city);
-            if (item == null) {
-                cities.push({city: x.city, count: 1});
-                return;
-            }
-
-            item.count++;
-        });
-
-        datasets.push({
-            label: 'Город проживания',
-            data: cities.map(x => x.count),
-            backgroundColor: cities.map(x => new RandomRgbColor().toString(1)),
-            hoverOffset: 4,
-        });
+        const uniqueCities = CitiesDoughnutChartObject.prepareUniqueItems(salaries, KazakhstanCityEnum.allItems());
+        datasets.push(new ChartDatasetItem(uniqueCities, salaries, false));
 
         super(
             canvasId,
             {
                 type: 'doughnut',
                 data: {
-                    labels: cities.map(x => x.city != null
-                        ? KazakhstanCityEnum.label(x.city) + ` (${x.count})`
-                        : `Не указан (${x.count})`),
+                    labels: uniqueCities.filter(x => x.city != null).map(x => KazakhstanCityEnum.label(x.city!) + ` (${x.count})`),
                     datasets: datasets,
                 },
                 options: {
@@ -61,5 +49,67 @@ export class CitiesDoughnutChartObject extends Chart {
             });
 
         this.datasets = datasets;
+        this.uniqueCities = uniqueCities;
+    }
+
+    toggleNoDataArea(show: boolean): void {
+        this.data.labels = this.uniqueCities.map(x => (x.city != null ? KazakhstanCityEnum.label(x.city) : 'Нет данных') + ` (${x.count})`);
+
+        if (show) {
+            this.data.labels.push('Не указаны данные');
+        }
+
+        this.data.datasets = [
+            new ChartDatasetItem(this.uniqueCities, this.salaries, show),
+        ];
+
+        this.update();
+    }
+
+    private static prepareUniqueItems(salaries: UserSalary[], cities: KazakhstanCity[]): CityWithCount[] {
+        const uniqueItems: Array<CityWithCount> = [];
+        salaries.forEach(x => {
+            const item = uniqueItems.find(c => c.city == x.city);
+            if (item == null) {
+                uniqueItems.push({city: x.city, count: 1});
+                return;
+            }
+
+            item.count++;
+        });
+
+        return uniqueItems;
+    }
+}
+
+class ChartDatasetItem {
+    readonly label: string;
+    readonly data: Array<number>;
+    readonly backgroundColor: Array<string>;
+    readonly hoverOffset: number;
+
+    constructor(uniqueCities: Array<CityWithCount>, salaries: Array<UserSalary>, includeNoData: boolean) {
+
+        this.label = 'Город проживания';
+        this.data = [];
+        this.backgroundColor = [];
+        this.hoverOffset = 4;
+
+        if (salaries.length === 0) {
+            return;
+        }
+
+        uniqueCities.filter(x => x.city != null).forEach(s => {
+            this.data.push(salaries.filter(x => x.city === s.city).length);
+            this.backgroundColor.push(new RandomRgbColor().toString(0.4));
+        });
+
+        if (!includeNoData) {
+            return;
+        }
+
+        const noDataSalaries = uniqueCities.filter(x => x.city == null).length;
+        this.data.push(noDataSalaries);
+        this.backgroundColor.push(new RandomRgbColor().toString(0.4));
     }
 }

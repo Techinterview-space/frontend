@@ -96,6 +96,8 @@ export interface SalariesAddingTrendAdminChart {
   }>;
 
   salariesPerUser: number;
+  usersWhoLeftSalary: number;
+  allUsersCount: number;
 }
 
 export enum SalariesAdminOrderingType {

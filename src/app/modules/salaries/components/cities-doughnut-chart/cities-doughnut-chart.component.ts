@@ -10,9 +10,6 @@ import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
 export class CitiesDoughnutChartComponent {
 
   @Input()
-  title: string | null = null;
-
-  @Input()
   salaries: Array<UserSalary> | null = null;
 
   @Input()
@@ -22,6 +19,7 @@ export class CitiesDoughnutChartComponent {
   editSalaryActionClick = new EventEmitter<void>();
 
   chartDataLocal: CitiesDoughnutChartObject | null = null;
+  showNoDataArea = false;
 
   readonly canvasId = 'canvas_' + Math.random().toString(36);
 
@@ -33,6 +31,10 @@ export class CitiesDoughnutChartComponent {
 
   openEditSalaryAction(): void {
     this.editSalaryActionClick.emit();
+  }
+
+  changeShowNoDataAreaToggler(): void {
+    this.chartDataLocal?.toggleNoDataArea(this.showNoDataArea);
   }
 
   private initChart(): void {

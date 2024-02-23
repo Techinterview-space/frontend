@@ -4,9 +4,31 @@
   <div class="card">
     <div class="card-body">
 
-      <div class="">
+      <div class="mb-3">
         <div id="canvas-container">
           <canvas id="canvas">{{ chart }}</canvas>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="mb-2">
+          <span class="me-2">Salaries per user:</span>
+          <span>~{{ salariesPerOneUser | number: '1.0-5' }}</span>
+        </div>
+
+        <div class="mb-2">
+          <span class="me-2">Users who left salary:</span>
+          <span>{{ usersWhoLeftSalary }}</span>
+        </div>
+
+        <div class="mb-2">
+          <span class="me-2">Users who didn't leave salary:</span>
+          <span>{{ allUsersCount - usersWhoLeftSalary }}</span>
+        </div>
+
+        <div class="mb-2">
+          <span class="me-2">All users count:</span>
+          <span>{{ allUsersCount }}</span>
         </div>
       </div>
 
