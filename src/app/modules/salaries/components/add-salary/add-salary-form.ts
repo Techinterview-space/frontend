@@ -14,7 +14,6 @@ static readonly digitsPattern = '^[0-9]*$';
 
     constructor(
         salarytoBeEdited: UserSalary | null = null,
-        hasSkills: boolean = false,
         hasIndustries: boolean = false) {
         const now = new Date(Date.now());
         const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
@@ -52,7 +51,7 @@ static readonly digitsPattern = '^[0-9]*$';
             grade: new FormControl(salarytoBeEdited?.grade ?? null, [Validators.required]),
             profession: new FormControl(salarytoBeEdited?.profession ?? null, [Validators.required]),
             city: new FormControl(salarytoBeEdited?.city ?? null, []),
-            skillId: new FormControl(salarytoBeEdited?.skillId ?? null, hasSkills ? [Validators.required] : []),
+            skillId: new FormControl(salarytoBeEdited?.skillId ?? null, []),
             workIndustryId: new FormControl(salarytoBeEdited?.workIndustryId ?? null, hasIndustries ? [Validators.required]: []),
         });
     }

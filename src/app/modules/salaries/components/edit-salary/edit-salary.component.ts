@@ -74,7 +74,7 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
     }
 
     this.salaryValue = this.showSalaryValue ? SalariesChart.formatNumber(this.salarytoBeEdited.value) : "* * * * *";
-    this.form = new EditSalaryForm(this.salarytoBeEdited, this.skills.length > 0, this.industries.length > 0);
+    this.form = new EditSalaryForm(this.salarytoBeEdited, this.industries.length > 0);
   }
 
   addSalarySubmitAction(): void {

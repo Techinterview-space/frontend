@@ -14,6 +14,7 @@ import { UserLabelsService } from './user-labels.service';
 import { UsersService } from './users.service';
 import { UserSalariesService } from './user-salaries.service';
 import { SkillsService } from './skills.service';
+import { MetaTagService } from './meta-tag.service';
 
 export * from './authorization.service';
 export * from './api.service';
@@ -25,6 +26,7 @@ export * from './interviews.service';
 export * from './user-admin.service';
 export * from './user-labels.service';
 export * from './users.service';
+export * from './meta-tag.service';
 
 export const applicationServices = [
   SessionStorageWrapper,
@@ -43,4 +45,5 @@ export const applicationServices = [
   UsersService,
   UserSalariesService,
   SkillsService,
+  MetaTagService,
 ];
