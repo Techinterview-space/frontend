@@ -21,13 +21,13 @@ export class MetaTagService {
 
     this.removeTags();
     this.meta.addTags([
-      { name: 'og:title', content: title },
+      { property: 'og:title', content: title },
       { name: 'twitter:title', content: title },
 
-      { name: 'og:description', content: description },
+      { property: 'og:description', content: description },
       { name: 'twitter:description', content: description },
 
-      { name: 'og:url', content: environment.baseUrl + url },
+      { property: 'og:url', content: environment.baseUrl + url },
     ]);
   }
 
@@ -38,13 +38,13 @@ export class MetaTagService {
     const description = 'Here you can store your technical interview notes and share them';
 
     this.meta.addTags([
-      { name: 'og:title', content: title },
+      { property: 'og:title', content: title },
       { name: 'twitter:title', content: title },
 
-      { name: 'og:description', content: description },
+      { property: 'og:description', content: description },
       { name: 'twitter:description', content: description },
 
-      { name: 'og:url', content: environment.baseUrl },
+      { property: 'og:url', content: environment.baseUrl },
     ]);
   }
 
