@@ -10,7 +10,7 @@ import { PageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 import { KazakhstanCity } from '@models/salaries/kazakhstan-city';
-import { LabelEntityAdmiDto, LabelEntityDto } from './label-entity.model';
+import { LabelEntityDto } from './label-entity.model';
 
 export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
@@ -25,6 +25,7 @@ export interface EditUserSalaryRequest {
   city: KazakhstanCity | null;
   skillId: number | null;
   workIndustryId: number | null;
+  professionId: number | null;
   company: CompanyType;
 }
 
@@ -122,11 +123,13 @@ export class UserSalariesService {
 
   selectBoxItems(): Observable<{
     skills: LabelEntityDto[],
-    industries: LabelEntityDto[]
+    industries: LabelEntityDto[],
+    professions: LabelEntityDto[]
   }> {
     return this.api.get<{
       skills: LabelEntityDto[],
-      industries: LabelEntityDto[]
+      industries: LabelEntityDto[],
+      professions: LabelEntityDto[]
     }>(this.root + 'select-box-items');
   }
 

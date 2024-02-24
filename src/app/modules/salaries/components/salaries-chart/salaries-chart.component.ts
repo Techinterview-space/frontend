@@ -32,6 +32,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   readonly activatedRoute: SalariesChartActivatedRoute;
   skills: Array<LabelEntityDto> = [];
   industries: Array<LabelEntityDto> = [];
+  professions: Array<LabelEntityDto> = [];
 
   showDataStub = false;
   openAddSalaryModal = false;
@@ -79,6 +80,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
         .subscribe((x) => {
           this.skills = x.skills;
           this.industries = x.industries;
+          this.professions = x.professions;
         });
     }
 
@@ -94,7 +96,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           this.showDataStub = true;
           this.salariesChart = new StubSalariesChart(x);
         } else {
-          this.salariesChart = new SalariesChart(x);
+          this.salariesChart = new SalariesChart(x, this.professions);
           this.currentUserSalary = x.currentUserSalary != null
             ? new CurrentUserSalaryLabelData(x.currentUserSalary)
             : null;

@@ -1,24 +1,21 @@
 import { CompanyType } from "@models/salaries/company-type";
 import { UserSalary } from "@models/salaries/salary.model";
-import { UserProfession } from "@models/salaries/user-profession";
-import { SplittedByWhitespacesString } from "@shared/value-objects/splitted-by-whitespaces-string";
+import { LabelEntityDto } from "@services/label-entity.model";
 
 export class SalariesPerProfession {
 
-    readonly professionName: string;
     turnedOn: boolean = false;
 
     constructor(
-        readonly profession: UserProfession,
-        readonly items: Array<UserSalary>) {
-        this.professionName = new SplittedByWhitespacesString(UserProfession[profession]).toString();
-    }
+        readonly profession: number | null,
+        readonly items: Array<UserSalary>,
+        readonly professionName: string) {}
 
     toggle(): void {
         this.turnedOn = !this.turnedOn;
     }
 
-    static from(salaries: Array<UserSalary>): {
+    static from(salaries: Array<UserSalary>, professions: Array<LabelEntityDto>): {
         local: Array<SalariesPerProfession>,
         remote: Array<SalariesPerProfession>
     } {
@@ -35,17 +32,17 @@ export class SalariesPerProfession {
             }
         }
 
-        var uniqueProfessionsForLocal = [...new Set(localSalaries.map(x => x.profession))];
-        var uniqueProfessionsForRemote = [...new Set(remoteSalaries.map(x => x.profession))];
+        var uniqueProfessionsForLocal = [...new Set(localSalaries.map(x => x.professionId))];
+        var uniqueProfessionsForRemote = [...new Set(remoteSalaries.map(x => x.professionId))];
 
         const local = uniqueProfessionsForLocal.map(x => {
             const filteredSalaries = localSalaries.filter(salary => salary.profession == x);
-            return new SalariesPerProfession(x, filteredSalaries);
+            return new SalariesPerProfession(x, filteredSalaries, professions.find(p => p.id == x)?.title || '');
         });
 
         const remote = uniqueProfessionsForRemote.map(x => {
             const filteredSalaries = remoteSalaries.filter(salary => salary.profession == x);
-            return new SalariesPerProfession(x, filteredSalaries);
+            return new SalariesPerProfession(x, filteredSalaries, professions.find(p => p.id == x)?.title || '');
         });
 
         return {

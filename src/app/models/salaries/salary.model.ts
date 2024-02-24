@@ -20,5 +20,6 @@ export interface UserSalary {
     city: KazakhstanCity | null;
     skillId: number | null;
     workIndustryId: number | null;
+    professionId: number | null;
     createdAt: Date;
 }

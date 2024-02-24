@@ -4,7 +4,7 @@ import { Chart, ChartType, PointStyle }  from 'chart.js/auto';
 import { RandomRgbColor } from '../random-rgb-color';
 
 interface ChartDatasetType {
-    profession: UserProfession | null;
+    profession: UserProfession | null; // TODO mgorbatyuk: change to number | null
     label: string;
     data: Array<number>;
     borderWidth: number;
@@ -106,8 +106,8 @@ export class SalariesChartJsObject extends Chart {
         this.update();
     }
 
-    toggleDatasetByProfession(profession: UserProfession): void {
-        const index = this.datasets.findIndex(x => x.profession == profession);
+    toggleDatasetByProfession(professionId: number | null): void {
+        const index = this.datasets.findIndex(x => x.profession == professionId);
         if (index == -1) {
             return;
         }

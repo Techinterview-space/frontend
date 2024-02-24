@@ -159,7 +159,8 @@
             <app-salaries-by-grades-chart
               [chart]="salariesChart.salariesByMoneyBarChart"
               [title]="'Зарплаты в Казахстанских компаниях'"
-              [salaries]="salariesChart.salariesPerProfessionForLocal">
+              [salaries]="salariesChart.salariesPerProfessionForLocal"
+              [professions]="professions">
             </app-salaries-by-grades-chart>
           </div>
 
@@ -167,7 +168,8 @@
             <app-salaries-by-grades-chart
               [chart]="salariesChart.salariesByMoneyBarChartForRemote"
               [title]="'Зарплаты тех, кто работает удаленно в иностранных компаниях'"
-              [salaries]="salariesChart.salariesPerProfessionForRemote">
+              [salaries]="salariesChart.salariesPerProfessionForRemote"
+              [professions]="professions">
             </app-salaries-by-grades-chart>
           </div>
         </div>

@@ -80,6 +80,7 @@ static readonly digitsPattern = '^[0-9]*$';
             company: Number(this.value.company) as CompanyType,
             grade: grade,
             profession: profession,
+            professionId: profession,
             city: city != KazakhstanCity.Undefined ? city : null,
             skillId: skillId,
             workIndustryId: workIndustryId,

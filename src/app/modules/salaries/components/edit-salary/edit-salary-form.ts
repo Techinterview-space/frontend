@@ -42,6 +42,7 @@ static readonly digitsPattern = '^[0-9]*$';
             return {
                 grade: grade,
                 profession: profession,
+                professionId: profession,
                 city: city != KazakhstanCity.Undefined ? city : null,
                 skillId: skillId,
                 workIndustryId: workIndustryId,
