@@ -11,6 +11,8 @@ import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 import { KazakhstanCity } from '@models/salaries/kazakhstan-city';
 import { NumberExtended } from '@shared/value-objects';
+import { Skill } from './skills.service';
+import { WorkIndustry } from './work-industry.service';
 
 export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
@@ -118,6 +120,16 @@ export class UserSalariesService {
   all(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
     return this.api.get<PaginatedList<UserSalaryAdminDto>>(
       this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
+  }
+
+  selectBoxItems(): Observable<{
+    skills: Skill[],
+    industries: WorkIndustry[]
+  }> {
+    return this.api.get<{
+      skills: Skill[],
+      industries: WorkIndustry[]
+    }>(this.root + 'select-box-items');
   }
 
   salariesNotInStats(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {

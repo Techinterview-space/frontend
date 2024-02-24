@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserSalary } from '@models/salaries/salary.model';
-import { TitleService } from '@services/title.service';
 import { UserSalariesService } from '@services/user-salaries.service';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { SalariesChart } from './salaries-chart';
@@ -50,9 +49,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
-    activatedRouteSource: ActivatedRoute,
-    private readonly skillsService: SkillsService,
-    private readonly workIndusrtiesService: WorkIndusrtiesService) {
+    activatedRouteSource: ActivatedRoute) {
       meta.updateChartMetaTags(
         'Зарплаты в IT в Казахстане',
         'Здесь можно увидеть статистику по зарплатам в IT в Казахстане. Есть множество графиков по разным критериям, а также возможность применить необходимые фильтры.',
@@ -77,19 +74,12 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.openAddSalaryModal = false;
     this.currentUserSalary = null;
 
-    if (this.skills.length === 0) {
-      this.skillsService.allForSelectBoxes()
+    if (this.skills.length === 0 || this.industries.length === 0) {
+      this.service.selectBoxItems()
         .pipe(untilDestroyed(this))
         .subscribe((x) => {
-          this.skills = x;
-        });
-    }
-
-    if (this.industries.length === 0) {
-      this.workIndusrtiesService.allForSelectBoxes()
-        .pipe(untilDestroyed(this))
-        .subscribe((x) => {
-          this.industries = x;
+          this.skills = x.skills;
+          this.industries = x.industries;
         });
     }
 
