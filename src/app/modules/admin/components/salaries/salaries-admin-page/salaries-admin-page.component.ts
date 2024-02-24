@@ -8,6 +8,7 @@ import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
 import { AlertService } from '@shared/components/alert/services/alert.service';
 import { SalaryAdminItem } from '../salary-admin-item';
 import { SalariesTableFilter } from '../salaries-table-filter';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 @Component({
   templateUrl: './salaries-admin-page.component.html'
@@ -16,6 +17,10 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
 
   salaries: Array<SalaryAdminItem> | null = null;
   source: PaginatedList<UserSalaryAdminDto> | null = null;
+  professions: Array<LabelEntityDto> = [];
+  skills: Array<LabelEntityDto> = [];
+  industries: Array<LabelEntityDto> = [];
+  
   readonly filter = new SalariesTableFilter();
   currentPage: number = 1;
 
@@ -29,13 +34,23 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.salaries = null;
     this.source = null;
-    this.loadData(
-      { 
-        page: this.currentPage,
-        pageSize: defaultPageParams.pageSize,
-        ...this.filter
-       }
-    );
+
+    this.service
+      .selectBoxItems()
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.professions = x.professions;
+        this.skills = x.skills;
+        this.industries = x.industries;
+
+        this.loadData(
+          { 
+            page: this.currentPage,
+            pageSize: defaultPageParams.pageSize,
+            ...this.filter
+           }
+        );
+      });
   }
 
   loadData(data: AdminAllSalariesQueryParams): void {
@@ -48,7 +63,7 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
       .all(data)
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
-        this.salaries = x.results.map((x) => new SalaryAdminItem(x));
+        this.salaries = x.results.map((x) => new SalaryAdminItem(x, this.professions, this.skills, this.industries));
         this.source = x;
       });
   }
