@@ -1,10 +1,10 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CreateWorkIndustryRequest, UpdateWorkIndustryRequest, WorkIndustryAdmiDto } from '@services/work-industry.service';
+import { CreateLabelEntityRequest, LabelEntityAdmiDto, UpdateLabelEntityRequest } from '@services/label-entity.model';
 import { RandomHexColor } from '@shared/value-objects/random-hex-color';
 
-export class WorkIndustryEditForm extends FormGroup {
+export class LabelEntityEditForm extends FormGroup {
   private readonly itemId: number | null;
-  constructor(item: WorkIndustryAdmiDto | null) {
+  constructor(item: LabelEntityAdmiDto | null) {
     super({
       title: new FormControl(item?.title, [Validators.required, Validators.maxLength(50)]),
       hexColor: new FormControl(item?.hexColorAsString ?? new RandomHexColor().toString(), [
@@ -20,7 +20,7 @@ export class WorkIndustryEditForm extends FormGroup {
     this.get('hexColor')?.setValue(new RandomHexColor().toString());
   }
 
-  createRequestOrNull(): CreateWorkIndustryRequest | null {
+  createRequestOrNull(): CreateLabelEntityRequest | null {
     if (!this.valid) {
       this.markAllAsTouched();
       return null;
@@ -32,7 +32,7 @@ export class WorkIndustryEditForm extends FormGroup {
     };
   }
 
-  updateRequestOrNull(): UpdateWorkIndustryRequest | null {
+  updateRequestOrNull(): UpdateLabelEntityRequest | null {
     if (!this.valid) {
       this.markAllAsTouched();
       return null;

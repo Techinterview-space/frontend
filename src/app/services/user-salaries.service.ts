@@ -6,13 +6,11 @@ import { CompanyType } from '@models/salaries/company-type';
 import { Currency } from '@models/salaries/currency';
 import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
 import { UserProfession } from '@models/salaries/user-profession';
-import { PageParams, defaultPageParams } from '@models/page-params';
+import { PageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 import { KazakhstanCity } from '@models/salaries/kazakhstan-city';
-import { NumberExtended } from '@shared/value-objects';
-import { Skill } from './skills.service';
-import { WorkIndustry } from './work-industry.service';
+import { LabelEntityAdmiDto, LabelEntityDto } from './label-entity.model';
 
 export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
@@ -123,12 +121,12 @@ export class UserSalariesService {
   }
 
   selectBoxItems(): Observable<{
-    skills: Skill[],
-    industries: WorkIndustry[]
+    skills: LabelEntityDto[],
+    industries: LabelEntityDto[]
   }> {
     return this.api.get<{
-      skills: Skill[],
-      industries: WorkIndustry[]
+      skills: LabelEntityDto[],
+      industries: LabelEntityDto[]
     }>(this.root + 'select-box-items');
   }
 

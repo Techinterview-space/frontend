@@ -1,17 +1,17 @@
 import { Chart }  from 'chart.js/auto';
 import { RandomRgbColor } from '../random-rgb-color';
 import { UserSalary } from '@models/salaries/salary.model';
-import { WorkIndustry } from '@services/work-industry.service';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 export class WorkIndustriesChartJsObject extends Chart {
 
     private readonly datasets: Array<ChartDatasetItem> = [];
-    private readonly uniqueIndustries: Array<WorkIndustry> = [];
+    private readonly uniqueIndustries: Array<LabelEntityDto> = [];
 
     constructor(
         canvasId: string,
         private readonly salaries: UserSalary[],
-        private readonly industries: WorkIndustry[]) {
+        private readonly industries: LabelEntityDto[]) {
         const datasets: Array<ChartDatasetItem> = [];
 
         const uniqueIndustries = WorkIndustriesChartJsObject.prepareUniqueIndustries(salaries, industries);
@@ -66,8 +66,8 @@ export class WorkIndustriesChartJsObject extends Chart {
         this.update();
     }
 
-    static prepareUniqueIndustries(salaries: UserSalary[], industries: WorkIndustry[]): WorkIndustry[] {
-        const uniqueIndustries: Array<WorkIndustry> = [];
+    static prepareUniqueIndustries(salaries: UserSalary[], industries: LabelEntityDto[]): LabelEntityDto[] {
+        const uniqueIndustries: Array<LabelEntityDto> = [];
         salaries.forEach(x => {
             if (x.workIndustryId == null) {
                 return;
@@ -95,7 +95,7 @@ class ChartDatasetItem {
     readonly data: Array<number>;
     readonly backgroundColor: Array<string>;
 
-    constructor(uniqueIndustries: Array<WorkIndustry>, salaries: Array<UserSalary>, includeNoData: boolean) {
+    constructor(uniqueIndustries: Array<LabelEntityDto>, salaries: Array<UserSalary>, includeNoData: boolean) {
 
         this.label = 'Сфера работы';
         this.data = [];

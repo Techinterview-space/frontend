@@ -43,6 +43,10 @@ export class AdminNavbarComponent {
         title: 'Select boxes',
         links: [
           {
+            title: 'Professions',
+            url: '/admin/professions'
+          },
+          {
             title: 'Skills',
             url: '/admin/skills'
           },

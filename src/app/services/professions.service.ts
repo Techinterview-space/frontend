@@ -5,8 +5,8 @@ import { LabelEntityBaseService } from './label-entity-base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SkillsService extends LabelEntityBaseService {
+export class ProfessionsService extends LabelEntityBaseService {
   constructor(api: ApiService) {
-    super('/api/skills/', api);
+    super('/api/professions/', api);
   }
 }

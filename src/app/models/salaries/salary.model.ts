@@ -4,7 +4,7 @@ import { Currency } from "./currency";
 import { UserProfession } from "./user-profession";
 import { KazakhstanCity } from "./kazakhstan-city";
 
-export interface UserSalaryAdminDto extends UserSalary{
+export interface UserSalaryAdminDto extends UserSalary {
     id: string;
     updatedAt: Date | null;
 }
