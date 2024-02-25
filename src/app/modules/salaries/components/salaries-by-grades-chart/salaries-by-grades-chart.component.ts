@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { UserProfession } from '@models/salaries/user-profession';
 import { SalariesChartJsObject } from './salaries-chart-js-object';
 import { SalariesByMoneyBarChart } from '@services/user-salaries.service';
 import { SalariesPerProfession } from '../salaries-per-profession';
@@ -52,7 +51,11 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.chartDataLocal = new SalariesChartJsObject(this.canvasId, this.chart);
+    this.chartDataLocal = new SalariesChartJsObject(
+      this.canvasId,
+      this.chart,
+      this.professions);
+
     this.chartDataLocal.hideProfessionDatasets();
 
     var chartEl = document.getElementById(this.canvasId);

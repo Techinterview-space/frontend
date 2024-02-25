@@ -1,7 +1,6 @@
 import { DeveloperGrade } from "@models/enums";
 import { CompanyType } from "./company-type";
 import { Currency } from "./currency";
-import { UserProfession } from "./user-profession";
 import { KazakhstanCity } from "./kazakhstan-city";
 
 export interface UserSalaryAdminDto extends UserSalary {
@@ -16,7 +15,6 @@ export interface UserSalary {
     currency: Currency;
     company: CompanyType;
     grade: DeveloperGrade | null;
-    profession: UserProfession;
     city: KazakhstanCity | null;
     skillId: number | null;
     workIndustryId: number | null;

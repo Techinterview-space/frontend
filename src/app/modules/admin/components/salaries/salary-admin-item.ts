@@ -3,7 +3,6 @@ import { CompanyType } from "@models/salaries/company-type";
 import { Currency } from "@models/salaries/currency";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { UserSalaryAdminDto } from "@models/salaries/salary.model";
-import { UserProfession } from "@models/salaries/user-profession";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 export class SalaryAdminItem {

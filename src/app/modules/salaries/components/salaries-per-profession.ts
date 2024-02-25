@@ -36,12 +36,12 @@ export class SalariesPerProfession {
         var uniqueProfessionsForRemote = [...new Set(remoteSalaries.map(x => x.professionId))];
 
         const local = uniqueProfessionsForLocal.map(x => {
-            const filteredSalaries = localSalaries.filter(salary => salary.profession == x);
+            const filteredSalaries = localSalaries.filter(salary => salary.professionId == x);
             return new SalariesPerProfession(x, filteredSalaries, professions.find(p => p.id == x)?.title || '');
         });
 
         const remote = uniqueProfessionsForRemote.map(x => {
-            const filteredSalaries = remoteSalaries.filter(salary => salary.profession == x);
+            const filteredSalaries = remoteSalaries.filter(salary => salary.professionId == x);
             return new SalariesPerProfession(x, filteredSalaries, professions.find(p => p.id == x)?.title || '');
         });
 

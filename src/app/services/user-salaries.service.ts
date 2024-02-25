@@ -5,7 +5,6 @@ import { DeveloperGrade } from '@models/enums';
 import { CompanyType } from '@models/salaries/company-type';
 import { Currency } from '@models/salaries/currency';
 import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { UserProfession } from '@models/salaries/user-profession';
 import { PageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
@@ -21,7 +20,6 @@ export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
 
 export interface EditUserSalaryRequest {
   grade: DeveloperGrade;
-  profession: UserProfession;
   city: KazakhstanCity | null;
   skillId: number | null;
   workIndustryId: number | null;
@@ -58,7 +56,7 @@ export interface PeopleByGradesChartData {
 }
 
 export interface SalariesByProfessionMoneyBarChartItem {
-  profession: UserProfession;
+  profession: number;
   items: Array<number>;
 }
 
@@ -77,7 +75,7 @@ export interface CreateSalaryRecordResponse {
 export interface AdminAllSalariesQueryParams extends PageParams {
   page: number;
   pageSize: number;
-  profession: UserProfession | null;
+  profession: number | null;
   company: CompanyType | null;
   grade: DeveloperGrade | null;
   order_type: SalariesAdminOrderingType | null;
@@ -85,7 +83,7 @@ export interface AdminAllSalariesQueryParams extends PageParams {
 
 export interface SalariesChartFilterData {
   grade: DeveloperGrade | null;
-  profsInclude: Array<UserProfession> | null;
+  profsInclude: Array<number> | null;
   cities: Array<KazakhstanCity> | null;
 }
 

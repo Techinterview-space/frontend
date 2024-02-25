@@ -6,7 +6,6 @@ import { CompanyTypeSelectItem } from '@shared/select-boxes/company-type-select-
 import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-select-item';
 import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
 import { AlertService } from '@shared/components/alert/services/alert.service';
-import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
 import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
 import { SalariesChart } from '../salaries-chart/salaries-chart';
@@ -26,6 +25,9 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
   industries: Array<LabelEntityDto> = [];
 
   @Input()
+  professions: Array<LabelEntityDto> = [];
+
+  @Input()
   salarytoBeEdited: UserSalaryAdminDto | null = null;
 
   @Output()
@@ -41,11 +43,11 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
 
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
   readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
-  readonly professions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options();
   readonly cities: Array<SelectItem<KazakhstanCity>> = KazakhstanCityEnum.options();
 
   skillsAsOptions: Array<SelectItem<number>> = [];
   industriesAsOptions: Array<SelectItem<number>> = [];
+  professionsAsOptions: Array<SelectItem<number>> = [];
 
   constructor(
     private readonly service: UserSalariesService,
@@ -67,6 +69,17 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
         label: x.title
       }
     });
+
+    const professionIdToSkip = 1;
+    this.professionsAsOptions = this.professions
+      .filter((x) => x.id !== professionIdToSkip)
+      .map((x) => {
+        return {
+          value: x.id.toString(),
+          item: x.id,
+          label: x.title
+        }
+      });
 
     if (this.salarytoBeEdited == null) {
       return;

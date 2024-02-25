@@ -22,7 +22,7 @@ export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
   skills: Array<LabelEntityDto> = [];
   industries: Array<LabelEntityDto> = [];
 
-  readonly filter = new SalariesTableFilter();
+  filter: SalariesTableFilter | null = null;
   currentPage: number = 1;
 
   constructor(
@@ -44,6 +44,7 @@ export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
         this.skills = x.skills;
         this.industries = x.industries;
 
+        this.filter = new SalariesTableFilter(this.professions);
         this.loadData(
           { 
             page: this.currentPage,

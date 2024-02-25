@@ -1,10 +1,10 @@
-import { UserProfession } from '@models/salaries/user-profession';
 import { SalariesByMoneyBarChart } from '@services/user-salaries.service';
 import { Chart, ChartType, PointStyle }  from 'chart.js/auto';
 import { RandomRgbColor } from '../random-rgb-color';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 interface ChartDatasetType {
-    profession: UserProfession | null; // TODO mgorbatyuk: change to number | null
+    profession: number | null;
     label: string;
     data: Array<number>;
     borderWidth: number;
@@ -18,7 +18,10 @@ export class SalariesChartJsObject extends Chart {
 
     private readonly datasets: Array<ChartDatasetType> = [];
 
-    constructor(canvasId: string, chartData: SalariesByMoneyBarChart) {
+    constructor(
+        canvasId: string,
+        chartData: SalariesByMoneyBarChart,
+        professions: Array<LabelEntityDto>) {
         const randomColor = new RandomRgbColor();
         const datasets: Array<ChartDatasetType> = [];
 
@@ -26,7 +29,7 @@ export class SalariesChartJsObject extends Chart {
             const color = new RandomRgbColor();
             datasets.push({
                 profession: x.profession,
-                label: UserProfession[x.profession].toString(),
+                label: professions.find(p => p.id == x.profession)?.title ?? 'Unknown',
                 data: x.items,
                 borderWidth: 2,
                 borderColor: color.toString(1),

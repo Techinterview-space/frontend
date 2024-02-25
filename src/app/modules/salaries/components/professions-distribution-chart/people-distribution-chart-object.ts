@@ -1,7 +1,6 @@
 import { Chart }  from 'chart.js/auto';
 import { RandomRgbColor } from '../random-rgb-color';
 import { UserSalary } from '@models/salaries/salary.model';
-import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
 import { LabelEntityDto } from '@services/label-entity.model';
 
 interface ChartDatasetType {
