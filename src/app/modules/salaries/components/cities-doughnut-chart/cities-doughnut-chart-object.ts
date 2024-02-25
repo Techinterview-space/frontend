@@ -53,7 +53,13 @@ export class CitiesDoughnutChartObject extends Chart {
     }
 
     toggleNoDataArea(show: boolean): void {
-        this.data.labels = this.uniqueCities.map(x => (x.city != null ? KazakhstanCityEnum.label(x.city) : 'Нет данных') + ` (${x.count})`);
+
+        const items = show
+            ? this.uniqueCities
+            : this.uniqueCities.filter(x => x.city != null);
+
+        this.data.labels = items.map(x =>
+            (x.city != null ? KazakhstanCityEnum.label(x.city) : 'Нет данных') + ` (${x.count})`);
 
         if (show) {
             this.data.labels.push('Не указаны данные');
@@ -88,7 +94,10 @@ class ChartDatasetItem {
     readonly backgroundColor: Array<string>;
     readonly hoverOffset: number;
 
-    constructor(uniqueCities: Array<CityWithCount>, salaries: Array<UserSalary>, includeNoData: boolean) {
+    constructor(
+        uniqueCities: Array<CityWithCount>,
+        salaries: Array<UserSalary>,
+        includeNoData: boolean) {
 
         this.label = 'Город проживания';
         this.data = [];
@@ -104,12 +113,10 @@ class ChartDatasetItem {
             this.backgroundColor.push(new RandomRgbColor().toString(0.4));
         });
 
-        if (!includeNoData) {
-            return;
+        if (includeNoData) {
+            const noDataSalaries = uniqueCities.filter(x => x.city == null).length;
+            this.data.push(noDataSalaries);
+            this.backgroundColor.push(new RandomRgbColor().toString(0.4));
         }
-
-        const noDataSalaries = uniqueCities.filter(x => x.city == null).length;
-        this.data.push(noDataSalaries);
-        this.backgroundColor.push(new RandomRgbColor().toString(0.4));
     }
 }

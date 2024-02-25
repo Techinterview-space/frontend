@@ -26,6 +26,10 @@ export class SalariesPerProfession {
         for (let index = 0; index < salaries.length; index++) {
             const salary = salaries[index];
             if (salary.company == CompanyType.Local) {
+                if (salary.professionId == null) {
+                    console.log('Profession is null', salary);
+                }
+
                 localSalaries.push(salary);
             } else {
                 remoteSalaries.push(salary);
@@ -37,7 +41,10 @@ export class SalariesPerProfession {
 
         const local = uniqueProfessionsForLocal.map(x => {
             const filteredSalaries = localSalaries.filter(salary => salary.professionId == x);
-            return new SalariesPerProfession(x, filteredSalaries, professions.find(p => p.id == x)?.title || '');
+            return new SalariesPerProfession(
+                x,
+                filteredSalaries,
+                professions.find(p => p.id == x)?.title || '');
         });
 
         const remote = uniqueProfessionsForRemote.map(x => {
