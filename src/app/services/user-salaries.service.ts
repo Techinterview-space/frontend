@@ -5,7 +5,6 @@ import { DeveloperGrade } from '@models/enums';
 import { CompanyType } from '@models/salaries/company-type';
 import { Currency } from '@models/salaries/currency';
 import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { UserProfession } from '@models/salaries/user-profession';
 import { PageParams } from '@models/page-params';
 import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
@@ -57,7 +56,7 @@ export interface PeopleByGradesChartData {
 }
 
 export interface SalariesByProfessionMoneyBarChartItem {
-  profession: UserProfession;
+  profession: number;
   items: Array<number>;
 }
 

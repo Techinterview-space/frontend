@@ -48,7 +48,7 @@ static readonly digitsPattern = '^[0-9]*$';
             currency: new FormControl(salarytoBeEdited?.currency ?? Currency.KZT, [Validators.required]),
             company: new FormControl(salarytoBeEdited?.company ?? null, [Validators.required]),
             grade: new FormControl(salarytoBeEdited?.grade ?? null, [Validators.required]),
-            profession: new FormControl(salarytoBeEdited?.profession ?? null, [Validators.required]),
+            profession: new FormControl(salarytoBeEdited?.professionId ?? null, [Validators.required]),
             city: new FormControl(salarytoBeEdited?.city ?? null, []),
             skillId: new FormControl(salarytoBeEdited?.skillId ?? null, []),
             workIndustryId: new FormControl(salarytoBeEdited?.workIndustryId ?? null, hasIndustries ? [Validators.required]: []),
