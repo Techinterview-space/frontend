@@ -1,17 +1,17 @@
 import { Chart }  from 'chart.js/auto';
 import { RandomRgbColor } from '../random-rgb-color';
 import { UserSalary } from '@models/salaries/salary.model';
-import { Skill } from '@services/skills.service';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 export class SalariesSkillsChartJsObject extends Chart {
 
     private readonly datasets: Array<ChartDatasetItem> = [];
-    private readonly uniqueSkills: Array<Skill> = [];
+    private readonly uniqueSkills: Array<LabelEntityDto> = [];
 
     constructor(
         canvasId: string,
         private readonly salaries: UserSalary[],
-        private readonly skills: Skill[]) {
+        private readonly skills: LabelEntityDto[]) {
         const datasets: Array<ChartDatasetItem> = [];
 
         const uniqueSkills = SalariesSkillsChartJsObject.prepareUniqueSkills(salaries, skills);
@@ -66,8 +66,8 @@ export class SalariesSkillsChartJsObject extends Chart {
         this.update();
     }
 
-    static prepareUniqueSkills(salaries: UserSalary[], skills: Skill[]): Skill[] {
-        const uniqueSkills: Array<Skill> = [];
+    static prepareUniqueSkills(salaries: UserSalary[], skills: LabelEntityDto[]): LabelEntityDto[] {
+        const uniqueSkills: Array<LabelEntityDto> = [];
         salaries.forEach(x => {
             if (x.skillId == null) {
                 return;
@@ -95,7 +95,7 @@ class ChartDatasetItem {
     readonly data: Array<number>;
     readonly backgroundColor: Array<string>;
 
-    constructor(uniqueSkills: Array<Skill>, salaries: Array<UserSalary>, includeNoData: boolean) {
+    constructor(uniqueSkills: Array<LabelEntityDto>, salaries: Array<UserSalary>, includeNoData: boolean) {
 
         this.label = 'Указанные ЯП/фреймворки';
         this.data = [];

@@ -2,11 +2,19 @@ import { Chart }  from 'chart.js/auto';
 import { RandomRgbColor } from '../random-rgb-color';
 import { UserSalary } from '@models/salaries/salary.model';
 import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 interface ChartDatasetType {
     label: string;
     data: Array<number>;
     backgroundColor: Array<string>;
+}
+
+interface ProfessionItem {
+    professionId: number | null;
+    label: string;
+    count: number;
+
 }
 
 export class PeopleDistributionChartObject extends Chart {
@@ -17,21 +25,22 @@ export class PeopleDistributionChartObject extends Chart {
         canvasId: string,
         salaries: Array<UserSalary>,
         otherLimit: number,
-        title: string) {
+        title: string,
+        private readonly professionEntities: Array<LabelEntityDto>) {
         const datasets: Array<ChartDatasetType> = [];
 
-        let professions: Array<{profession: UserProfession, label: string, count: number}> = [];
+        let professions: Array<ProfessionItem> = [];
         salaries.forEach(x => {
 
-            const existingItem = professions.find(p => p.profession === x.profession);
+            const existingItem = professions.find(p => p.professionId === x.professionId);
             if (existingItem != null) {
                 existingItem.count++;
                 return;
             }
 
             professions.push({
-                profession: x.profession,
-                label: UserProfessionEnum.label(x.profession),
+                professionId: x.professionId,
+                label: professionEntities.find(p => p.id === x.professionId)?.title || '',
                 count: 1,
             });
         });
@@ -45,7 +54,7 @@ export class PeopleDistributionChartObject extends Chart {
 
             const dataForDataset = professionsToInclude.map(x => {
                 return {
-                    value: (salaries.filter(s => s.profession === x.profession).length / salaries.length) * 100,
+                    value: (salaries.filter(s => s.professionId === x.professionId).length / salaries.length) * 100,
                     color: new RandomRgbColor().toString(0.8),
                 };
             });

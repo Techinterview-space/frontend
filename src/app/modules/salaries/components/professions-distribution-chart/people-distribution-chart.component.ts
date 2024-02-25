@@ -60,7 +60,8 @@ export class PeopleDistributionChartComponent {
       canvasId,
       salaries,
       otherLimit,
-      title);
+      title,
+      this.chart!.allProfessions);
 
     var chartEl = document.getElementById(canvasId);
     if (chartEl != null && chartEl.parentElement != null) {

@@ -3,6 +3,7 @@ import { UserProfession } from '@models/salaries/user-profession';
 import { SalariesChartJsObject } from './salaries-chart-js-object';
 import { SalariesByMoneyBarChart } from '@services/user-salaries.service';
 import { SalariesPerProfession } from '../salaries-per-profession';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 @Component({
   selector: 'app-salaries-by-grades-chart',
@@ -19,6 +20,9 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
 
   @Input()
   salaries: Array<SalariesPerProfession> | null = null;
+
+  @Input()
+  professions: Array<LabelEntityDto> = [];
 
   chartDataLocal: SalariesChartJsObject | null = null;
 

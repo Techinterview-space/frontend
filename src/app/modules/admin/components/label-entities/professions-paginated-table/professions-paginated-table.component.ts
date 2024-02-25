@@ -1,27 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Label } from '@models/user-label.model';
 import { TitleService } from '@services/title.service';
 import { AlertService } from '@shared/components/alert/services/alert.service';
 import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
 import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { SkillEditForm } from './skill-edit-form';
-import { SkillAdmiDto, SkillsService } from '@services/skills.service';
+import { LabelEntityAdmiDto } from '@services/label-entity.model';
+import { LabelEntityEditForm } from '../label-entity-edit-form';
+import { ProfessionsService } from '@services/professions.service';
 
 @Component({
-  templateUrl: './skills-paginated-table.component.html'
+  templateUrl: './professions-paginated-table.component.html'
 })
-export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
-  skills: Array<SkillAdmiDto> | null = null;
+export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
+  items: Array<LabelEntityAdmiDto> | null = null;
 
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
-  editForm: SkillEditForm | null = null;
-  itemToEdit: SkillAdmiDto | null = null;
+  editForm: LabelEntityEditForm | null = null;
+  itemToEdit: LabelEntityAdmiDto | null = null;
 
   constructor(
     private readonly title: TitleService,
     private readonly alert: AlertService,
-    private readonly skillService: SkillsService
+    private readonly service: ProfessionsService
   ) {}
 
   ngOnDestroy(): void {
@@ -29,22 +29,22 @@ export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.title.setTitle('Skills');
-    this.skillService
+    this.title.setTitle('Professions');
+    this.service
       .all()
       .pipe(untilDestroyed(this))
       .subscribe((data) => {
-        this.skills = data;
+        this.items = data;
       });
   }
 
-  edit(item: SkillAdmiDto): void {
-    this.editForm = new SkillEditForm(item);
+  edit(item: LabelEntityAdmiDto): void {
+    this.editForm = new LabelEntityEditForm(item);
     this.itemToEdit = item;
   }
 
   create(): void {
-    this.editForm = new SkillEditForm(null);
+    this.editForm = new LabelEntityEditForm(null);
     this.itemToEdit = null;
   }
 
@@ -60,11 +60,11 @@ export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
         return;
       }
   
-      this.skillService
+      this.service
         .update(updateRequest)
         .pipe(untilDestroyed(this))
         .subscribe(() => {
-          this.alert.success('The skill was updated');
+          this.alert.success('The profession was updated');
           this.editForm = null;
           this.ngOnInit();
         });
@@ -77,11 +77,11 @@ export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
         return;
       }
   
-      this.skillService
+      this.service
         .create(createRequest)
         .pipe(untilDestroyed(this))
         .subscribe(() => {
-          this.alert.success('The skill was created');
+          this.alert.success('The profession was created');
           this.editForm = null;
           this.ngOnInit();
         });
@@ -91,17 +91,17 @@ export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
     this.editForm = null;
   }
 
-  delete(item: SkillAdmiDto): void {
+  delete(item: LabelEntityAdmiDto): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
-        'Delete the skill',
+        'Delete the profession',
         'Are you sure to delete?',
         () => {
-          this.skillService
+          this.service
             .delete(item.id!)
             .pipe(untilDestroyed(this))
             .subscribe(() => {
-              this.alert.success('The skill was removed');
+              this.alert.success('The profession was removed');
               this.confirmDeletionMessage = null;
               this.ngOnInit();
             });

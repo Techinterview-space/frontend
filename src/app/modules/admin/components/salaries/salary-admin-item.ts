@@ -4,6 +4,7 @@ import { Currency } from "@models/salaries/currency";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { UserProfession } from "@models/salaries/user-profession";
+import { LabelEntityDto } from "@services/label-entity.model";
 
 export class SalaryAdminItem {
 
@@ -21,7 +22,11 @@ export class SalaryAdminItem {
     readonly createdAt: Date;
     readonly updatedAt: Date;
 
-    constructor(private readonly item: UserSalaryAdminDto) {
+    constructor(
+        private readonly item: UserSalaryAdminDto,
+        professions: Array<LabelEntityDto>,
+        skills: Array<LabelEntityDto>,
+        industries: Array<LabelEntityDto>) {
         this.id = item.id;
         this.value = item.value;
         this.quarter = item.quarter;
@@ -29,10 +34,10 @@ export class SalaryAdminItem {
         this.currency = Currency[item.currency];
         this.company = CompanyType[item.company];
         this.grade = item.grade != null ? DeveloperGrade[item.grade] : null;
-        this.profession = UserProfession[item.profession];
+        this.profession = professions.find(p => p.id == item.professionId)?.title || '-';
         this.city = item.city != null ? KazakhstanCity[item.city] : '-';
-        this.skill = item.skillId != null ? item.skillId.toString() : '-';
-        this.industry = item.workIndustryId != null ? item.workIndustryId.toString() : '-';
+        this.skill = item.skillId != null ? skills.find(x => x.id == item.skillId)?.title ?? '-' : '-';
+        this.industry = item.workIndustryId != null ? industries.find(x => x.id == item.workIndustryId)?.title ?? '-' : '-';
         this.createdAt = item.createdAt;
         this.updatedAt = item.updatedAt ?? item.createdAt;
     }

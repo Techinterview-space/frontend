@@ -4,23 +4,24 @@ import { AlertService } from '@shared/components/alert/services/alert.service';
 import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
 import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { WorkIndusrtiesService, WorkIndustryAdmiDto } from '@services/work-industry.service';
-import { WorkIndustryEditForm } from './work-industry-edit-form';
+import { SkillsService } from '@services/skills.service';
+import { LabelEntityAdmiDto } from '@services/label-entity.model';
+import { LabelEntityEditForm } from '../label-entity-edit-form';
 
 @Component({
-  templateUrl: './work-indusrties-paginated-table.component.html'
+  templateUrl: './skills-paginated-table.component.html'
 })
-export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy {
-  items: Array<WorkIndustryAdmiDto> | null = null;
+export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
+  skills: Array<LabelEntityAdmiDto> | null = null;
 
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
-  editForm: WorkIndustryEditForm | null = null;
-  itemToEdit: WorkIndustryAdmiDto | null = null;
+  editForm: LabelEntityEditForm | null = null;
+  itemToEdit: LabelEntityAdmiDto | null = null;
 
   constructor(
     private readonly title: TitleService,
     private readonly alert: AlertService,
-    private readonly skillService: WorkIndusrtiesService
+    private readonly skillService: SkillsService
   ) {}
 
   ngOnDestroy(): void {
@@ -28,22 +29,22 @@ export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy 
   }
 
   ngOnInit(): void {
-    this.title.setTitle('Industries');
+    this.title.setTitle('Skills');
     this.skillService
       .all()
       .pipe(untilDestroyed(this))
       .subscribe((data) => {
-        this.items = data;
+        this.skills = data;
       });
   }
 
-  edit(item: WorkIndustryAdmiDto): void {
-    this.editForm = new WorkIndustryEditForm(item);
+  edit(item: LabelEntityAdmiDto): void {
+    this.editForm = new LabelEntityEditForm(item);
     this.itemToEdit = item;
   }
 
   create(): void {
-    this.editForm = new WorkIndustryEditForm(null);
+    this.editForm = new LabelEntityEditForm(null);
     this.itemToEdit = null;
   }
 
@@ -63,7 +64,7 @@ export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy 
         .update(updateRequest)
         .pipe(untilDestroyed(this))
         .subscribe(() => {
-          this.alert.success('The industry was updated');
+          this.alert.success('The skill was updated');
           this.editForm = null;
           this.ngOnInit();
         });
@@ -80,7 +81,7 @@ export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy 
         .create(createRequest)
         .pipe(untilDestroyed(this))
         .subscribe(() => {
-          this.alert.success('The industry was created');
+          this.alert.success('The skill was created');
           this.editForm = null;
           this.ngOnInit();
         });
@@ -90,17 +91,17 @@ export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy 
     this.editForm = null;
   }
 
-  delete(item: WorkIndustryAdmiDto): void {
+  delete(item: LabelEntityAdmiDto): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
-        'Delete the industry',
+        'Delete the skill',
         'Are you sure to delete?',
         () => {
           this.skillService
             .delete(item.id!)
             .pipe(untilDestroyed(this))
             .subscribe(() => {
-              this.alert.success('The industry was removed');
+              this.alert.success('The skill was removed');
               this.confirmDeletionMessage = null;
               this.ngOnInit();
             });

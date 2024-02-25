@@ -9,8 +9,7 @@ import { AlertService } from '@shared/components/alert/services/alert.service';
 import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
 import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
-import { Skill } from '@services/skills.service';
-import { WorkIndustry } from '@services/work-industry.service';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 @Component({
   selector: 'app-add-salary-modal',
@@ -20,10 +19,10 @@ import { WorkIndustry } from '@services/work-industry.service';
 export class AddSalaryComponent implements OnInit, OnDestroy {
 
   @Input()
-  skills: Array<Skill> = [];
+  skills: Array<LabelEntityDto> = [];
 
   @Input()
-  industries: Array<WorkIndustry> = [];
+  industries: Array<LabelEntityDto> = [];
 
   @Output()
   closed: EventEmitter<void> = new EventEmitter();

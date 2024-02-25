@@ -2,6 +2,7 @@ import { formatNumber } from "@angular/common";
 import { PeopleByGradesChartData, SalariesByMoneyBarChart, SalariesChartResponse } from "@services/user-salaries.service";
 import { SalariesPerProfession } from "../salaries-per-profession";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { LabelEntityDto } from "@services/label-entity.model";
 
 export class SalariesChart {
 
@@ -28,7 +29,7 @@ export class SalariesChart {
 
     readonly hasRemoteSalaries: boolean;
 
-    constructor(readonly data: SalariesChartResponse) {
+    constructor(readonly data: SalariesChartResponse, readonly allProfessions: Array<LabelEntityDto>) {
         this.averageSalary = SalariesChart.formatNumber(data.averageSalary) ?? '';
         this.medianSalary = SalariesChart.formatNumber(data.medianSalary) ?? '';
 
@@ -41,7 +42,7 @@ export class SalariesChart {
         this.salariesByMoneyBarChart = data.salariesByMoneyBarChart;
         this.salariesByMoneyBarChartForRemote = data.salariesByMoneyBarChartForRemote;
 
-        const salariesPerProfession = SalariesPerProfession.from(data.salaries);
+        const salariesPerProfession = SalariesPerProfession.from(data.salaries, allProfessions);
 
         this.salariesPerProfessionForLocal = salariesPerProfession.local;
         this.salariesPerProfessionForRemote = salariesPerProfession.remote;

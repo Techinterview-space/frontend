@@ -14,9 +14,8 @@ import { UserProfession } from '@models/salaries/user-profession';
 import { SalariesChartActivatedRoute } from './salaries-activated-route';
 import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
 import { CurrentUserSalaryLabelData } from './current-user-salary-label-data';
-import { Skill, SkillsService } from '@services/skills.service';
-import { WorkIndusrtiesService, WorkIndustry } from '@services/work-industry.service';
 import { MetaTagService } from '@services/meta-tag.service';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -29,10 +28,11 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   salariesChart: SalariesChart | null = null;
   currentUserSalary: CurrentUserSalaryLabelData | null = null;
   filterData = new SalaryChartGlobalFiltersData();
-  
+
   readonly activatedRoute: SalariesChartActivatedRoute;
-  skills: Array<Skill> = [];
-  industries: Array<WorkIndustry> = [];
+  skills: Array<LabelEntityDto> = [];
+  industries: Array<LabelEntityDto> = [];
+  professions: Array<LabelEntityDto> = [];
 
   showDataStub = false;
   openAddSalaryModal = false;
@@ -80,6 +80,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
         .subscribe((x) => {
           this.skills = x.skills;
           this.industries = x.industries;
+          this.professions = x.professions;
         });
     }
 
@@ -95,7 +96,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           this.showDataStub = true;
           this.salariesChart = new StubSalariesChart(x);
         } else {
-          this.salariesChart = new SalariesChart(x);
+          this.salariesChart = new SalariesChart(x, this.professions);
           this.currentUserSalary = x.currentUserSalary != null
             ? new CurrentUserSalaryLabelData(x.currentUserSalary)
             : null;

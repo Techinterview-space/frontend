@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
 import { WorkIndustriesChartJsObject } from './work-industries-chart-js-object';
-import { WorkIndustry } from '@services/work-industry.service';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 @Component({
   selector: 'app-work-industries-chart',
@@ -11,7 +11,7 @@ import { WorkIndustry } from '@services/work-industry.service';
 export class WorkIndustriesChartComponent {
 
   @Input()
-  industries: Array<WorkIndustry> = [];
+  industries: Array<LabelEntityDto> = [];
 
   @Input()
   currentSalary: UserSalaryAdminDto | null = null;
