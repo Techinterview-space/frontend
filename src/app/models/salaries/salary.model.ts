@@ -16,7 +16,7 @@ export interface UserSalary {
     currency: Currency;
     company: CompanyType;
     grade: DeveloperGrade | null;
-    profession: UserProfession;
+    profession: UserProfession; // TODO remove
     city: KazakhstanCity | null;
     skillId: number | null;
     workIndustryId: number | null;

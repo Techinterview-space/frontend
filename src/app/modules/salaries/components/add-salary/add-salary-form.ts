@@ -5,7 +5,6 @@ import { CompanyType } from "@models/salaries/company-type";
 import { Currency } from "@models/salaries/currency";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { UserSalary } from "@models/salaries/salary.model";
-import { UserProfession } from "@models/salaries/user-profession";
 import { CreateUserSalaryRequest } from "@services/user-salaries.service";
 
 export class AddSalaryForm extends FormGroup {
@@ -58,7 +57,6 @@ static readonly digitsPattern = '^[0-9]*$';
 
     createRequestOrNull(): CreateUserSalaryRequest | null {
         if (this.valid) {
-            const profession = Number(this.value.profession) as UserProfession;
             const grade = Number(this.value.grade) as DeveloperGrade;
             const city = this.value.city != null
                 ? Number(this.value.city) as KazakhstanCity
@@ -72,6 +70,10 @@ static readonly digitsPattern = '^[0-9]*$';
                 ? Number(this.value.workIndustryId)
                 : null;
 
+            const professionId = this.value.profession != null
+                ? Number(this.value.profession)
+                : null;
+
           return {
             value: Number(this.value.value),
             quarter: Number(this.value.quarter),
@@ -79,8 +81,7 @@ static readonly digitsPattern = '^[0-9]*$';
             currency: Number(this.value.currency) as Currency,
             company: Number(this.value.company) as CompanyType,
             grade: grade,
-            profession: profession,
-            professionId: profession,
+            professionId: professionId,
             city: city != KazakhstanCity.Undefined ? city : null,
             skillId: skillId,
             workIndustryId: workIndustryId,

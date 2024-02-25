@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { UserProfession } from '@models/salaries/user-profession';
 import { SalariesChartJsObject } from './salaries-chart-js-object';
 import { SalariesByMoneyBarChart } from '@services/user-salaries.service';
 import { SalariesPerProfession } from '../salaries-per-profession';

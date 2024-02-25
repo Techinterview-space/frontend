@@ -1,5 +1,4 @@
 import { DeveloperGrade } from "@models/enums";
-import { UserProfession } from "@models/salaries/user-profession";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { Observable, map } from "rxjs";
 import { SalaryChartGlobalFiltersData } from "./salary-chart-global-filters/global-filters-form-group";
@@ -56,13 +55,13 @@ export class SalariesChartActivatedRoute {
                     grade = Number(gradeString) as DeveloperGrade;
                 }
 
-                let profsInclude: Array<UserProfession> = [];
+                let profsInclude: Array<number> = [];
                 const profsToIncludeValue = queryParams
                     .find(x => x.key === SalariesChartActivatedRoute.profsIncludeRouteParamName)
                     ?.value ?? null;
 
                 if (profsToIncludeValue && profsToIncludeValue !== '') {
-                    profsInclude = profsToIncludeValue.split(',').map(x => Number(x) as UserProfession);
+                    profsInclude = profsToIncludeValue.split(',').map(x => Number(x));
                 }
 
                 let cities: Array<KazakhstanCity> = [];

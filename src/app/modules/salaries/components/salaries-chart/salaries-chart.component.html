@@ -107,6 +107,7 @@
           <div class="mb-5">
             <app-salary-chart-global-filters
               [filterData]="filterData"
+              [professions]="professions"
               (filtersApplied)="applyGlobalFilters($event)"
               (filtersReset)="resetGlobalFilters()"
               (shareClicked)="share($event)">
@@ -188,6 +189,7 @@
     *ngIf="openAddSalaryModal"
     [skills]="skills"
     [industries]="industries"
+    [professions]="professions"
     (closed)="closeAddSalaryAction()"
     (salaryAdded)="onSalaryAdded($event)"
   ></app-add-salary-modal>
@@ -196,6 +198,7 @@
     *ngIf="openEditCurrentSalaryModal && salariesChart"
     [skills]="skills"
     [industries]="industries"
+    [professions]="professions"
     [salarytoBeEdited]="salariesChart.currentUserSalary"
     (closed)="closeEditSalaryAction()"
     (salaryAdded)="onSalaryUpdated($event)"

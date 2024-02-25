@@ -1,17 +1,16 @@
 import { FormControl, FormGroup } from "@angular/forms";
 import { DeveloperGrade } from "@models/enums";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
-import { UserProfession } from "@models/salaries/user-profession";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
 
 export class SalaryChartGlobalFiltersData {
     grade: DeveloperGrade | null = null;
-    profsToInclude: Array<UserProfession> = [];
+    profsToInclude: Array<number> = [];
     cities: Array<KazakhstanCity> = [];
 
     constructor(
         grade: DeveloperGrade | null = null,
-        profsToInclude: Array<UserProfession> = [],
+        profsToInclude: Array<number> = [],
         cities: Array<KazakhstanCity> = []) {
         if (grade === DeveloperGrade.Unknown) {
             grade = null;
@@ -52,7 +51,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
             ? this.value.grade as DeveloperGrade
             : null;
 
-        const profsToInclude = this.value.profsToInclude as Array<UserProfession> ?? [];
+        const profsToInclude = this.value.profsToInclude as Array<number> ?? [];
         const cities = this.value.cities as Array<KazakhstanCity> ?? [];
 
         return new SalaryChartGlobalFiltersData(grade, profsToInclude, cities);

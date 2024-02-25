@@ -21,7 +21,6 @@ export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
 
 export interface EditUserSalaryRequest {
   grade: DeveloperGrade;
-  profession: UserProfession;
   city: KazakhstanCity | null;
   skillId: number | null;
   workIndustryId: number | null;
@@ -77,7 +76,7 @@ export interface CreateSalaryRecordResponse {
 export interface AdminAllSalariesQueryParams extends PageParams {
   page: number;
   pageSize: number;
-  profession: UserProfession | null;
+  profession: number | null;
   company: CompanyType | null;
   grade: DeveloperGrade | null;
   order_type: SalariesAdminOrderingType | null;
@@ -85,7 +84,7 @@ export interface AdminAllSalariesQueryParams extends PageParams {
 
 export interface SalariesChartFilterData {
   grade: DeveloperGrade | null;
-  profsInclude: Array<UserProfession> | null;
+  profsInclude: Array<number> | null;
   cities: Array<KazakhstanCity> | null;
 }
 

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GlobalFiltersFormGroup, SalaryChartGlobalFiltersData } from './global-filters-form-group';
-import { UserProfession, UserProfessionEnum } from '@models/salaries/user-profession';
 import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
+import { LabelEntityDto } from '@services/label-entity.model';
 
 @Component({
   selector: 'app-salary-chart-global-filters',
@@ -11,11 +11,13 @@ import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-
 })
 export class SalaryChartGlobalFiltersComponent implements OnInit {
 
-  readonly allProfessions: Array<SelectItem<UserProfession>> = UserProfessionEnum.options();
   readonly allCities: Array<SelectItem<KazakhstanCity>> = KazakhstanCityEnum.options();
 
   @Input()
   filterData: SalaryChartGlobalFiltersData | null = null;
+
+  @Input()
+  professions: Array<LabelEntityDto> = [];
 
   @Output()
   readonly filtersApplied = new EventEmitter<SalaryChartGlobalFiltersData>();
@@ -27,8 +29,17 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
   readonly shareClicked = new EventEmitter<SalaryChartGlobalFiltersData>();
 
   form: GlobalFiltersFormGroup | null = null;
+  professionsAsOptions: Array<SelectItem<number>> = [];
 
   ngOnInit(): void {
+    this.professionsAsOptions = this.professions.map((x) => {
+      return {
+        value: x.id.toString(),
+        item: x.id,
+        label: x.title
+      }
+    });
+
     this.form = new GlobalFiltersFormGroup(this.filterData);
   }
 
