@@ -48,9 +48,12 @@
 
 <div class="table-responsive mb-3" *ngIf="salaries && salaries.length > 0; else nothingToShow">
   <table class="table table-hover table-sm">
-    <thead>
+    <thead class="small">
       <th>Value</th>
       <th>Period</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Started</th>
       <th>Profession</th>
       <th>Grade</th>
       <th>Company</th>
@@ -65,6 +68,9 @@
       <tr class="small" *ngFor="let item of salaries; let i = index">
         <td>{{ item.value | number: '1.0-0' }}</td>
         <td>{{ item.quarter }}.{{ item.year }}</td>
+        <td>{{ item.age }}</td>
+        <td>{{ item.gender }}</td>
+        <td>{{ item.yearOfStartingWork }}</td>
         <td>{{ item.profession }}</td>
         <td>{{ item.grade }}</td>
         <td>{{ item.company }}</td>
