@@ -101,12 +101,39 @@
             <app-field-error [field]="form.get('city')"></app-field-error>
           </div>
 
+          <div class="mb-3">
+            <label>Когда вы начали карьеру? (Год)</label>
+            <input formControlName="yearOfStartingWork" type="text" class="form-control" />
+            <app-field-error
+              [field]="form.get('yearOfStartingWork')"
+              [max]="currentYear"
+              [min]="1960"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <label>Ваш пол</label>
+            <select formControlName="gender" class="form-select" aria-label="Select your gender">
+              <option [value]="null" selected disabled>Ваш пол</option>
+              <option *ngFor="let option of genders" [value]="option.value">{{ option.label }}</option>
+            </select>
+            <app-field-error [field]="form.get('gender')"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <label>Сколько вам полных лет?</label>
+            <input formControlName="age" type="text" class="form-control" />
+            <app-field-error
+              [field]="form.get('age')"
+              [max]="120"
+              [min]="12"></app-field-error>
+          </div>
+
           <div *ngIf="errorMessage" class="mb-3 alert alert-danger">
             {{ errorMessage }}
           </div>
   
           <div class="mb-3 pt-3">
-            <button class="btn btn-primary btn-lg w-100" type="submit">Сохранить изменения</button>
+            <button class="btn btn-primary btn-lg w-100" type="submit">Дополнить анкету</button>
           </div>
         </form>
 

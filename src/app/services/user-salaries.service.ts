@@ -10,6 +10,7 @@ import { PaginatedList } from '@models/paginated-list';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 import { KazakhstanCity } from '@models/salaries/kazakhstan-city';
 import { LabelEntityDto } from './label-entity.model';
+import { Gender } from '@models/enums/gender.enum';
 
 export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
@@ -21,6 +22,9 @@ export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
 export interface EditUserSalaryRequest {
   grade: DeveloperGrade;
   city: KazakhstanCity | null;
+  age: number | null;
+  gender: Gender | null;
+  yearOfStartingWork: number | null;
   skillId: number | null;
   workIndustryId: number | null;
   professionId: number | null;

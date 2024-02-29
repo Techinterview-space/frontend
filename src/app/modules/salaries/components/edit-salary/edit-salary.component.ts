@@ -10,6 +10,7 @@ import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
 import { SalariesChart } from '../salaries-chart/salaries-chart';
 import { LabelEntityDto } from '@services/label-entity.model';
+import { Gender, GenderEnum } from '@models/enums/gender.enum';
 
 @Component({
   selector: 'app-edit-salary-modal',
@@ -41,9 +42,11 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
   salaryValue: string | null = null;
   showSalaryValue = false;
 
+  readonly currentYear = new Date().getFullYear();
   readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
   readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
   readonly cities: Array<SelectItem<KazakhstanCity>> = KazakhstanCityEnum.options();
+  readonly genders: Array<SelectItem<Gender>> = GenderEnum.options();
 
   skillsAsOptions: Array<SelectItem<number>> = [];
   industriesAsOptions: Array<SelectItem<number>> = [];
