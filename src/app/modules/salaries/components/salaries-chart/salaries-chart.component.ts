@@ -38,6 +38,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   openEditCurrentSalaryModal = false;
   showAdjustCurrentSalaryProfessionModal = false;
   isAuthenticated = false;
+  hasPredefinedFilter = false;
 
   gradeFilter: DeveloperGrade | null = null;
 
@@ -64,7 +65,12 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.filterData = x;
-        this.load(x);
+        this.hasPredefinedFilter =
+          this.filterData.grade != null ||
+          this.filterData.profsToInclude?.length > 0 ||
+          this.filterData.cities?.length > 0;
+
+        this.load(this.filterData);
       });
   }
 

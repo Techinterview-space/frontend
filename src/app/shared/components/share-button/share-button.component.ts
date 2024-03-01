@@ -7,14 +7,18 @@ import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-c
   styleUrls: ['./share-button.component.scss']
 })
 export class ShareButtonComponent implements OnInit {
-  private readonly copyBtnDefaultTitle = 'Share';
+
+  static readonly copyBtnDefaultTitle = 'Share';
   private readonly copyBtnDefaultIcon = 'bi bi-share-fill me-1';
 
   private readonly copiedBtnTitle = 'Copied';
   private readonly copiedBtnIcon = 'bi bi-check2';
 
-  btnTitle = this.copyBtnDefaultTitle;
+  btnTitle = '';
   btnIcon = this.copyBtnDefaultIcon;
+
+  @Input()
+  title: string = ShareButtonComponent.copyBtnDefaultTitle;
 
   @Input()
   relativeUrl = '';
@@ -30,7 +34,9 @@ export class ShareButtonComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.btnTitle = this.title;
+  }
 
   share(): void {
 
@@ -44,7 +50,7 @@ export class ShareButtonComponent implements OnInit {
     this.shareClicked.emit();
 
     setTimeout(() => {
-      this.btnTitle = this.copyBtnDefaultTitle;
+      this.btnTitle = this.title;
       this.btnIcon = this.copyBtnDefaultIcon;
     }, 700);
   }

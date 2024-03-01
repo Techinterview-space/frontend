@@ -49,8 +49,9 @@
           <button type="submit" class="btn btn-outline-dark">Применить</button>
           <button type="reset" class="btn btn-outline-secondary ms-2 me-2" (click)="reset()">Сброс</button>
           <app-share-button
+            [title]="'Поделиться'"
             [cssBtnSize]="''"
-            (shareClicked)="share()">Поделиться</app-share-button>
+            (shareClicked)="share()"></app-share-button>
         </div>
       </div>
     </div>

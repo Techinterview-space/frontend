@@ -1,0 +1,15 @@
+<div *ngIf="filterData" class="fs-4 fw-light">
+  <span class="text-muted">Специалисты </span>
+  <span class="ms-1 fw-bold">{{ getProfessions() }}</span>
+  <span *ngIf="filterData.grade" class="ms-2">
+    <span class="text-muted">уровня</span>
+    <span class="ms-2 fw-bold">{{ getGrade() }}</span>
+  </span>
+
+  <span *ngIf="filterData.cities && filterData.cities.length > 0">
+    <span *ngIf="filterData.cities.length === 1" class="ms-2 text-muted">в городе</span>
+    <span *ngIf="filterData.cities.length > 1" class="ms-2 text-muted">в городах</span>
+    <span class="ms-2 fw-bold">{{ getCities() }}</span>
+  </span>
+  <span class="ms-2 text-muted">получают:</span>
+</div>

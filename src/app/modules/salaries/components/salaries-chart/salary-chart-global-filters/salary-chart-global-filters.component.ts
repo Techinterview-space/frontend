@@ -3,6 +3,7 @@ import { GlobalFiltersFormGroup, SalaryChartGlobalFiltersData } from './global-f
 import { SelectItem } from '@shared/select-boxes/select-item';
 import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
 import { LabelEntityDto } from '@services/label-entity.model';
+import { AlertService } from '@shared/components/alert/services/alert.service';
 
 @Component({
   selector: 'app-salary-chart-global-filters',
@@ -30,6 +31,8 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
 
   form: GlobalFiltersFormGroup | null = null;
   professionsAsOptions: Array<SelectItem<number>> = [];
+
+  constructor(private readonly alert: AlertService) {}
 
   ngOnInit(): void {
     this.professionsAsOptions = this.professions.map((x) => {
@@ -71,6 +74,7 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
     const data = this.form.data();
     if (data) {
       this.shareClicked.emit(data);
+      this.alert.success('Ссылка скопирована в буфер обмена. Скорее отправляйте ее друзьям!');
     }
   }
 }
