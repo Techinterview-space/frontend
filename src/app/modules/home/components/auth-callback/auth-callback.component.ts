@@ -30,9 +30,14 @@ export class AuthCallbackComponent implements OnInit {
 
     this.authService.completeAuthentication().subscribe(x => {
       if (this.cookieService.check('url')) {
-        const url = this.cookieService.get('url');
+        const url = this.cookieService.get('url') ?? '';
         this.cookieService.delete('url');
-        this.router.navigate([url]);
+
+        if (url.includes('?')) {
+          this.router.navigateByUrl(url);
+        } else {
+          this.router.navigate([url]);
+        }
       } else {
         this.router.navigate([this.urlToRedirectAfterLogin]);
       }
