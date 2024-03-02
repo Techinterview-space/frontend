@@ -46,8 +46,8 @@ export class PredefinedInfoBlockComponent {
   }
 
   getProfessions(): string {
-    return this.filterData?.profsToInclude
-      ? this.filterData.profsToInclude
+    return this.filterData?.profsInclude
+      ? this.filterData.profsInclude
           .map(x => this.professions.find(p => p.id === x)?.title ?? null)
           .filter(x => x != null)
           .join(', ')

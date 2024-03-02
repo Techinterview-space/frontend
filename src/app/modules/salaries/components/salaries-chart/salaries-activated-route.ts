@@ -24,8 +24,8 @@ export class SalariesChartActivatedRoute {
             queryParams += `${SalariesChartActivatedRoute.gradeRouteParamName}=${data.grade}`;
         }
 
-        if (data.profsToInclude.length > 0) {
-            const profsValue = `${SalariesChartActivatedRoute.profsIncludeRouteParamName}=${data.profsToInclude.map(x => x.toString()).join(',')}`;
+        if (data.profsInclude.length > 0) {
+            const profsValue = `${SalariesChartActivatedRoute.profsIncludeRouteParamName}=${data.profsInclude.map(x => x.toString()).join(',')}`;
             queryParams += `${queryParams.length > 1 ? '&' : ''}${profsValue}`;
         }
 

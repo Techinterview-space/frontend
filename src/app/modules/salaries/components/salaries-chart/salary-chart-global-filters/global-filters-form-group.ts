@@ -5,19 +5,19 @@ import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-s
 
 export class SalaryChartGlobalFiltersData {
     grade: DeveloperGrade | null = null;
-    profsToInclude: Array<number> = [];
+    profsInclude: Array<number> = [];
     cities: Array<KazakhstanCity> = [];
 
     constructor(
         grade: DeveloperGrade | null = null,
-        profsToInclude: Array<number> = [],
+        profsInclude: Array<number> = [],
         cities: Array<KazakhstanCity> = []) {
         if (grade === DeveloperGrade.Unknown) {
             grade = null;
         }
 
         this.grade = grade;
-        this.profsToInclude = profsToInclude;
+        this.profsInclude = profsInclude;
         this.cities = cities;
     }
 
@@ -25,7 +25,7 @@ export class SalaryChartGlobalFiltersData {
         // TODO mgorbatyuk: do more smart check that two arrays are not same
         return this.grade === other.grade &&
             this.cities.length === other.cities.length &&
-            this.profsToInclude.length === other.profsToInclude.length;
+            this.profsInclude.length === other.profsInclude.length;
     }
 }
 
@@ -36,7 +36,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
     constructor(filterData: SalaryChartGlobalFiltersData | null) {
         super({
             grade: new FormControl(filterData?.grade, []),
-            profsToInclude: new FormControl(filterData?.profsToInclude, []),
+            profsToInclude: new FormControl(filterData?.profsInclude, []),
             cities: new FormControl(filterData?.cities, []),
         });
     }

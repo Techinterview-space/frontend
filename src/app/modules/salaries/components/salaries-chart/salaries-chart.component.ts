@@ -68,7 +68,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
         this.filterData = x;
         this.hasPredefinedFilter =
           this.filterData.grade != null ||
-          this.filterData.profsToInclude?.length > 0 ||
+          this.filterData.profsInclude?.length > 0 ||
           this.filterData.cities?.length > 0;
 
         this.load(this.filterData);
@@ -92,7 +92,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
     this.service.charts({
       grade: data?.grade ?? null,
-      profsInclude: data?.profsToInclude ?? null,
+      profsInclude: data?.profsInclude ?? null,
       cities: data?.cities ?? null,
     })
       .pipe(untilDestroyed(this))
