@@ -11,7 +11,7 @@ import { DeveloperGrade } from '@models/enums';
 import { SalaryChartGlobalFiltersData } from './salary-chart-global-filters/global-filters-form-group';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { SalariesChartActivatedRoute } from './salaries-activated-route';
-import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
+import { AbsoluteLink, ApiBackendAbsoluteUrl, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
 import { CurrentUserSalaryLabelData } from './current-user-salary-label-data';
 import { MetaTagService } from '@services/meta-tag.service';
 import { LabelEntityDto } from '@services/label-entity.model';
@@ -51,6 +51,11 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     private readonly gtag: GoogleAnalyticsService,
     activatedRouteSource: ActivatedRoute) {
       this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
+      this.meta.updateChartMetaTags(
+        'Зарплаты в IT в Казахстане',
+        'Здесь можно увидеть статистику по зарплатам в IT в Казахстане. Есть множество графиков по разным критериям, а также возможность применить необходимые фильтры.',
+        '/salaries'
+      );
     }
 
   ngOnInit(): void {
@@ -185,12 +190,14 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.filterData = data;
     this.gtag.event('salaries_chart_view', 'share_clicked');
 
-    const currentUrl = new AbsoluteLink(this.router.url).asString();
+    const currentUrl = new ApiBackendAbsoluteUrl('/api/salaries/chart-share').asString();
     const shareUrlPart = this.activatedRoute.prepareQueryParamsAsString(this.filterData);
 
     const shareUrl = `${currentUrl}${shareUrlPart}`;
     new ClipboardCopier(shareUrl).execute();
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.meta.returnDefaultMetaTags();
+  }
 }

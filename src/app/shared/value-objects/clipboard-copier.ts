@@ -30,3 +30,16 @@ export class AbsoluteLink {
     return environment.baseUrl + url;
   }
 }
+
+export class ApiBackendAbsoluteUrl{
+  constructor(private readonly relativeUrl: string) {}
+
+  asString(): string {
+    let url = this.relativeUrl;
+    if (!this.relativeUrl.startsWith('/')) {
+      url = '/' + url;
+    }
+
+    return environment.resourceApiURI + url;
+  }
+}
