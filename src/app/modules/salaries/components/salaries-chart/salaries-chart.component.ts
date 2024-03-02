@@ -50,11 +50,6 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
     activatedRouteSource: ActivatedRoute) {
-      meta.updateChartMetaTags(
-        'Зарплаты в IT в Казахстане',
-        'Здесь можно увидеть статистику по зарплатам в IT в Казахстане. Есть множество графиков по разным критериям, а также возможность применить необходимые фильтры.',
-        '/salaries'
-      );
       this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
     }
 
@@ -197,7 +192,5 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     new ClipboardCopier(shareUrl).execute();
   }
 
-  ngOnDestroy(): void {
-    this.meta.returnDefaultMetaTags();
-  }
+  ngOnDestroy(): void {}
 }

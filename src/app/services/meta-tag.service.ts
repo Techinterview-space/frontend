@@ -24,6 +24,7 @@ export class MetaTagService {
       { property: 'og:title', content: title },
       { name: 'twitter:title', content: title },
 
+      { name: 'description', content: description },
       { property: 'og:description', content: description },
       { name: 'twitter:description', content: description },
 
@@ -41,6 +42,7 @@ export class MetaTagService {
       { property: 'og:title', content: title },
       { name: 'twitter:title', content: title },
 
+      { name: 'description', content: description },
       { property: 'og:description', content: description },
       { name: 'twitter:description', content: description },
 
@@ -49,6 +51,7 @@ export class MetaTagService {
   }
 
   private removeTags(): void {
+    this.meta.removeTag('name="description"');
     this.meta.removeTag('property="og:title"');
     this.meta.removeTag('name="twitter:title"');
     this.meta.removeTag('property="og:description"');

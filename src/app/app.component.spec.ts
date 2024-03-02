@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '@shared/services/auth/auth.service';
 import { MockAuthService, mostUsedImports, mostUsedServices, testUtilStubs } from '@shared/test-utils';
 import { AppComponent } from './app.component';
+import { MetaTagService } from './services';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
