@@ -15,6 +15,7 @@ import { AbsoluteLink, ApiBackendAbsoluteUrl, ClipboardCopier } from '@shared/va
 import { CurrentUserSalaryLabelData } from './current-user-salary-label-data';
 import { MetaTagService } from '@services/meta-tag.service';
 import { LabelEntityDto } from '@services/label-entity.model';
+import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -191,9 +192,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.gtag.event('salaries_chart_view', 'share_clicked');
 
     const currentUrl = new ApiBackendAbsoluteUrl('/api/salaries/chart-share').asString();
-    const shareUrlPart = this.activatedRoute.prepareQueryParamsAsString(this.filterData);
-
-    const shareUrl = `${currentUrl}${shareUrlPart}`;
+    const shareUrl = `${currentUrl}?${new ConvertObjectToHttpParams(this.filterData).get()}`;
     new ClipboardCopier(shareUrl).execute();
   }
 
