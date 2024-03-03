@@ -191,7 +191,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.filterData = data;
     this.gtag.event('salaries_chart_view', 'share_clicked');
 
-    const currentUrl = new ApiBackendAbsoluteUrl('/api/salaries/chart-share').asString();
+    const currentUrl = new ApiBackendAbsoluteUrl('/chart-share').asString();
     const shareUrl = `${currentUrl}?${new ConvertObjectToHttpParams(this.filterData).get()}`;
     new ClipboardCopier(shareUrl).execute();
   }
