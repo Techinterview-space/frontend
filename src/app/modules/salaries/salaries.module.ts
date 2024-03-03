@@ -18,6 +18,7 @@ import { PeopleDistributionChartComponent } from './components/professions-distr
 import { WorkIndustriesChartComponent } from './components/work-industries-chart/work-industries-chart.component';
 import { PeopleByGradesChartComponent } from './components/people-by-grades-chart/people-by-grades-chart.component';
 import { PredefinedInfoBlockComponent } from './components/salaries-chart/predefined-filter-info/predefined-info-block.component';
+import { PeopleByGenderChartComponent } from './components/people-by-gender-chart/people-by-gender-chart.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PredefinedInfoBlockComponent } from './components/salaries-chart/predef
     WorkIndustriesChartComponent,
     PeopleByGradesChartComponent,
     PredefinedInfoBlockComponent,
+    PeopleByGenderChartComponent,
   ],
   imports: [
     CommonModule,
