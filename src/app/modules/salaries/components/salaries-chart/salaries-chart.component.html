@@ -113,8 +113,20 @@
               поэтому вы можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">уточнить свою специальность</button></span>
           </div>
         </div>
-
-      </div>          
+      </div>
+      
+      <div
+        *ngIf="!showDataStub && currentUserSalary != null && currentUserSalary.shouldBeFilledUp"
+        class="mb-5">
+        <div class="alert alert-success">
+          <div><strong class="me-2">Спасибо за анкету!</strong></div>
+          <div>
+              Ваши данные учтены в статистике.
+              Вы также можете <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">дополнить</button>
+              свою анкету, чтобы сделать статистику более точной.
+          </div>
+        </div>
+      </div>
 
       <div *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart" class="mt-5 mb-5">
         <div class="mb-5">

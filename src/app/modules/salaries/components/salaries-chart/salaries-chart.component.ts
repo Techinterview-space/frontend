@@ -11,7 +11,7 @@ import { DeveloperGrade } from '@models/enums';
 import { SalaryChartGlobalFiltersData } from './salary-chart-global-filters/global-filters-form-group';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { SalariesChartActivatedRoute } from './salaries-activated-route';
-import { AbsoluteLink, ApiBackendAbsoluteUrl, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
+import { ApiBackendAbsoluteUrl, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
 import { CurrentUserSalaryLabelData } from './current-user-salary-label-data';
 import { MetaTagService } from '@services/meta-tag.service';
 import { LabelEntityDto } from '@services/label-entity.model';
