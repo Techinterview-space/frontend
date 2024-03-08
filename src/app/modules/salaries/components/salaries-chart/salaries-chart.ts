@@ -1,5 +1,5 @@
 import { formatNumber } from "@angular/common";
-import { PeopleByGradesChartData, SalariesByMoneyBarChart, SalariesChartResponse } from "@services/user-salaries.service";
+import { DevelopersByCategoryChartData, PeopleByGradesChartData, SalariesByMoneyBarChart, SalariesChartResponse } from "@services/user-salaries.service";
 import { SalariesPerProfession } from "../salaries-per-profession";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { LabelEntityDto } from "@services/label-entity.model";
@@ -26,6 +26,9 @@ export class SalariesChart {
 
     readonly peopleByGradesChartDataForLocal: PeopleByGradesChartData | null;
     readonly peopleByGradesChartDataForRemote: PeopleByGradesChartData | null;
+
+    readonly developersByAgeChartData: DevelopersByCategoryChartData | null;
+    readonly developersByExperienceYearsChartData: DevelopersByCategoryChartData | null;
 
     readonly hasRemoteSalaries: boolean;
 
@@ -55,6 +58,9 @@ export class SalariesChart {
 
         this.peopleByGradesChartDataForLocal = data.peopleByGradesChartDataForLocal;
         this.peopleByGradesChartDataForRemote = data.peopleByGradesChartDataForRemote;
+
+        this.developersByAgeChartData = data.developersByAgeChartData;
+        this.developersByExperienceYearsChartData = data.developersByExperienceYearsChartData;
     }
 
     public static formatNumber(value: number | null): string | null {

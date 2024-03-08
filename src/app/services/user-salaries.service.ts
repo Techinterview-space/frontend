@@ -49,6 +49,14 @@ export interface SalariesChartResponse {
   currentUserSalary: UserSalaryAdminDto | null;
   peopleByGradesChartDataForLocal: PeopleByGradesChartData | null;
   peopleByGradesChartDataForRemote: PeopleByGradesChartData | null;
+
+  developersByAgeChartData: DevelopersByCategoryChartData | null;
+  developersByExperienceYearsChartData: DevelopersByCategoryChartData | null;
+}
+
+export interface DevelopersByCategoryChartData {
+  labels: Array<{start: number, end: number}>;
+  data: Array<number>;
 }
 
 export interface PeopleByGradesChartData {

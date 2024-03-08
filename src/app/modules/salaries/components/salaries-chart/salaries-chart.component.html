@@ -197,6 +197,18 @@
             [currentSalary]="salariesChart.currentUserSalary"></app-people-by-gender-chart>
         </div>
 
+        <div class="mt-5 mb-5">
+          <app-people-by-age-chart
+            [source]="salariesChart"
+            (editSalaryActionClick)="openEditSalaryAction()"></app-people-by-age-chart>
+        </div>
+
+        <div class="mt-5 mb-5">
+          <app-people-by-experience-chart
+            [source]="salariesChart"
+            (editSalaryActionClick)="openEditSalaryAction()"></app-people-by-experience-chart>
+        </div>
+
         <div class="mb-5 display-4 chapter-title">
           <span>Сравнение зарплат и специализаций</span>
         </div>
