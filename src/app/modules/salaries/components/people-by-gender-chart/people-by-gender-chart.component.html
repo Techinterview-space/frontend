@@ -1,10 +1,5 @@
 <div class="">
-  <div class="h5 mb-3">Распределение респондентов по полу</div>
-
-  <div class="mb-3 fst-italic" *ngIf="currentSalary != null && currentSalary.gender == null; else hasGenderInSalary">
-    <div>Вы пока не указали ваш пол.</div>
-    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
-  </div>
+  <div class="h5 mb-3">Гендер респондента</div>
 
   <div class="mb-3" *ngIf="barsForLocal.length > 0">
     <div class="mb-3">
@@ -46,11 +41,16 @@
     </div>
   </div>
 
-  <div class="">
+  <div class="mb-2">
     <span>Значения цветов</span>
     <span
       *ngFor="let item of colorByGradeLegend"
       class="ms-2 badge {{item.color}} {{item.textColor}}">{{item.title}}</span>
+  </div>
+
+  <div class="mb-3 fst-italic" *ngIf="currentSalary != null && currentSalary.gender == null; else hasGenderInSalary">
+    <div>Вы пока не указали ваш пол.</div>
+    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
   </div>
 </div>
 

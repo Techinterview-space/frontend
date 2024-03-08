@@ -1,7 +1,7 @@
 <div>
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="apply()">
-    <div class="h5 mb-2">Глобальные фильтры</div>
-    <div class="mb-2">
+    <div class="h3 mb-2">Фильтр</div>
+    <div class="mb-2 fst-italic">
       Вы можете поделиться информацией с кем-то в соцсетях или телеграме. 
       Для этого сначала примените нужные фильтры, а затем нажмите на кнопку "Поделиться".
       Ссылка будет скопирована в буфер обмена
@@ -18,7 +18,7 @@
       </div>
 
       <div class="col-md-3 mb-1">
-        <label class="text-sm">Данные по специальностям</label>
+        <label class="text-sm">Cпециализации</label>
         <ng-select
             [items]="professionsAsOptions"
             [hideSelected]="true"

@@ -1,14 +1,9 @@
 <div class="">
-  <div class="h5 mb-3">Распределение респондентов по городам проживания</div>
+  <div class="h5 mb-3">Где живут респонденты</div>
 
   <div class="row">
 
     <div class="col-md-3">
-      <div class="mb-3 fst-italic" *ngIf="currentSalary != null && currentSalary.city == null; else hasCityInSalary">
-        <div>Вы пока не указали город проживания.</div>
-        <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
-      </div>
-
       <div class="mb-1">
         <input
           type="checkbox"
@@ -29,6 +24,11 @@
           <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
         </div>
       </div>
+    </div>
+
+    <div class="mb-3 fst-italic" *ngIf="currentSalary != null && currentSalary.city == null; else hasCityInSalary">
+      <div>Вы пока не указали город проживания.</div>
+      <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
     </div>
 
   </div>

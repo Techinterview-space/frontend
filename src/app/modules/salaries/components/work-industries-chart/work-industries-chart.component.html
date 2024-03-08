@@ -1,12 +1,5 @@
 <div class="">
-  <div class="h5 mb-3">Сферы компаний, где работают респонденты</div>
-
-  <div class="fst-italic mb-2" *ngIf="currentSalary != null && currentSalary.workIndustryId == null; else hasSkillInSalary">
-    <div>Вы пока не указали сферу деятельности вашей компании.</div>
-    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
-  </div>
-
-
+  <div class="h5 mb-3">Где работают респонденты</div>
   <div class="mb-1">
     <input
       type="checkbox"
@@ -20,10 +13,15 @@
     </label>
   </div>
 
-  <div class="col-md-9" *ngIf="canvasId">
+  <div class="" *ngIf="canvasId">
     <div id="canvas-container">
       <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
     </div>
+  </div>
+
+  <div class="fst-italic mb-2" *ngIf="currentSalary != null && currentSalary.workIndustryId == null; else hasSkillInSalary">
+    <div>Вы пока не указали сферу деятельности вашей компании.</div>
+    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
   </div>
 </div>
 

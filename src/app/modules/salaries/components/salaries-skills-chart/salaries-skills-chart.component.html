@@ -1,11 +1,5 @@
 <div class="">
-  <div class="h5 mb-3">Указанные ЯП/фреймворки в зарплатах</div>
-
-  <div class="fst-italic mb-2" *ngIf="currentSalary != null && currentSalary.skillId == null; else hasSkillInSalary">
-    <div>Вы пока не указали ваш основной ЯП/фреймворк.</div>
-    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
-  </div>
-
+  <div class="h5 mb-3">Языки программирования и фреймворки</div>
 
   <div class="mb-1">
     <input
@@ -20,10 +14,15 @@
     </label>
   </div>
 
-  <div class="col-md-9" *ngIf="canvasId">
+  <div class="" *ngIf="canvasId">
     <div id="canvas-container">
       <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
     </div>
+  </div>
+
+  <div class="fst-italic mb-2" *ngIf="currentSalary != null && currentSalary.skillId == null; else hasSkillInSalary">
+    <div>Вы пока не указали ваш основной ЯП/фреймворк.</div>
+    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
   </div>
 </div>
 

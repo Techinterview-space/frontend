@@ -129,11 +129,6 @@
       </div>
 
       <div *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart" class="mt-5 mb-5">
-        <div class="mb-5">
-          <div class="h3">
-            <span>Графики</span>
-          </div>
-        </div>
 
         <div class="mb-5">
           <app-salary-chart-global-filters
@@ -145,23 +140,27 @@
           ></app-salary-chart-global-filters>
         </div>
 
-        <div class="mt-3 mb-5">
+        <div class="mb-5 display-4 chapter-title">
+          <span>Зарплата, специализация и индустрия</span>
+        </div>
+
+        <div class="mt-5 mb-5">
           <app-grades-min-max-chart
             [salaries]="salariesChart.salaries">
           </app-grades-min-max-chart>
         </div>
 
-        <div class="mt-3 mb-5">
+        <div class="mt-5 mb-5">
           <app-people-distribution-chart
             [chart]="salariesChart"
             ></app-people-distribution-chart>
         </div>
 
-        <div class="mt-3 mb-5">
+        <div class="mt-5 mb-5">
           <app-people-by-grades-chart [source]="salariesChart"></app-people-by-grades-chart>
         </div>
 
-        <div class="mt-3 mb-5" *ngIf="skills.length > 0">
+        <div class="mt-5 mb-5" *ngIf="skills.length > 0">
           <app-salaries-skills-chart
             [skills]="skills"
             [currentSalary]="salariesChart.currentUserSalary"
@@ -179,7 +178,11 @@
           </app-work-industries-chart>
         </div>
 
-        <div class="mt-3 mb-5">
+        <div class="mb-5 display-4 chapter-title">
+          <span>Подробнее о респондентах</span>
+        </div>
+
+        <div class="mt-5 mb-5">
           <app-cities-doughnut-chart
             [currentSalary]="salariesChart.currentUserSalary"
             [salaries]="salariesChart.salaries"
@@ -187,23 +190,27 @@
           </app-cities-doughnut-chart>
         </div>
 
-        <div class="mt-3 mb-5">
+        <div class="mt-5 mb-5">
           <app-people-by-gender-chart
             [salaries]="salariesChart.salaries"
             (editSalaryActionClick)="openEditSalaryAction()"
             [currentSalary]="salariesChart.currentUserSalary"></app-people-by-gender-chart>
         </div>
 
-        <div class="mt-3 mb-5">
+        <div class="mb-5 display-4 chapter-title">
+          <span>Сравнение зарплат и специализаций</span>
+        </div>
+
+        <div class="mt-5 mb-5">
           <app-salaries-by-grades-chart
             [chart]="salariesChart.salariesByMoneyBarChart"
-            [title]="'Зарплаты в Казахстанских компаниях'"
+            [title]="'Казахстанские компании'"
             [salaries]="salariesChart.salariesPerProfessionForLocal"
             [professions]="professions">
           </app-salaries-by-grades-chart>
         </div>
 
-        <div class="mt-3 mb-5" *ngIf="salariesChart.hasRemoteSalaries">
+        <div class="mt-5 mb-5" *ngIf="salariesChart.hasRemoteSalaries">
           <app-salaries-by-grades-chart
             [chart]="salariesChart.salariesByMoneyBarChartForRemote"
             [title]="'Зарплаты тех, кто работает удаленно в иностранных компаниях'"
