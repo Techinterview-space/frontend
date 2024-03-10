@@ -20,6 +20,7 @@ export class PeopleByAgeChartComponent {
   currentSalary: UserSalaryAdminDto | null = null;
 
   showNoDataArea = false;
+  countOfResponses = 0;
 
   readonly canvasId = 'canvas_' + Math.random().toString(36);
 
@@ -39,6 +40,7 @@ export class PeopleByAgeChartComponent {
     }
 
     this.currentSalary = this.source.currentUserSalary;
+    this.countOfResponses = this.source.developersByAgeChartData.data.length;
     this.chartDataLocal = new PeopleByCategoryBarChartObject(this.canvasId, this.source.developersByAgeChartData);
 
     var chartEl = document.getElementById(this.canvasId);
