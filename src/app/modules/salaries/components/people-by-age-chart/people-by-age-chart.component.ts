@@ -40,7 +40,8 @@ export class PeopleByAgeChartComponent {
     }
 
     this.currentSalary = this.source.currentUserSalary;
-    this.countOfResponses = this.source.developersByAgeChartData.data.length;
+    this.countOfResponses = this.source.developersByAgeChartData.data.reduce((acc, item) => acc + item, 0);
+
     this.chartDataLocal = new PeopleByCategoryBarChartObject(this.canvasId, this.source.developersByAgeChartData);
 
     var chartEl = document.getElementById(this.canvasId);

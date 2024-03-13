@@ -40,7 +40,7 @@ export class PeopleByExperienceChartComponent {
     }
 
     this.currentSalary = this.source.currentUserSalary;
-    this.countOfResponses = this.source.developersByExperienceYearsChartData.data.length;
+    this.countOfResponses = this.source.developersByExperienceYearsChartData.data.reduce((acc, item) => acc + item, 0);
     this.chartDataLocal = new PeopleByCategoryBarChartObject(this.canvasId, this.source.developersByExperienceYearsChartData);
 
     var chartEl = document.getElementById(this.canvasId);
