@@ -43,6 +43,8 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   gradeFilter: DeveloperGrade | null = null;
 
+  private initialLoading = true;
+
   constructor(
     private readonly service: UserSalariesService,
     private readonly meta: MetaTagService,
@@ -80,40 +82,26 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.openAddSalaryModal = false;
     this.currentUserSalary = null;
 
-    if (this.skills.length === 0 || this.industries.length === 0) {
+    const shouldLoadSelectBoxItems = this.skills.length === 0 ||
+      this.industries.length === 0 ||
+      this.initialLoading;
+
+    if (shouldLoadSelectBoxItems) {
       this.service.selectBoxItems()
         .pipe(untilDestroyed(this))
         .subscribe((x) => {
           this.skills = x.skills;
           this.industries = x.industries;
           this.professions = x.professions;
+
+          this.loadChartWithFilter(data);
+          this.initialLoading = false;
         });
+
+      return;
     }
 
-    this.service.charts({
-      grade: data?.grade ?? null,
-      profsInclude: data?.profsInclude ?? null,
-      cities: data?.cities ?? null,
-    })
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        if (x.shouldAddOwnSalary) {
-          this.openAddSalaryModal = this.isAuthenticated;
-          this.showDataStub = true;
-          this.salariesChart = new StubSalariesChart(x);
-        } else {
-          this.salariesChart = new SalariesChart(x, this.professions);
-          this.currentUserSalary = x.currentUserSalary != null
-            ? new CurrentUserSalaryLabelData(x.currentUserSalary)
-            : null;
-
-          const developerProfessionId = 1;
-          this.showDataStub = false;
-          this.showAdjustCurrentSalaryProfessionModal =
-            x.currentUserSalary != null &&
-            x.currentUserSalary.professionId === developerProfessionId;
-        }
-      });
+    this.loadChartWithFilter(data);
   }
 
   openAddSalaryAction(): void {
@@ -198,5 +186,32 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.meta.returnDefaultMetaTags();
+  }
+
+  private loadChartWithFilter(data: SalaryChartGlobalFiltersData | null = null): void {
+    this.service.charts({
+      grade: data?.grade ?? null,
+      profsInclude: data?.profsInclude ?? null,
+      cities: data?.cities ?? null,
+    })
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        if (x.shouldAddOwnSalary) {
+          this.openAddSalaryModal = this.isAuthenticated;
+          this.showDataStub = true;
+          this.salariesChart = new StubSalariesChart(x);
+        } else {
+          this.salariesChart = new SalariesChart(x, this.professions);
+          this.currentUserSalary = x.currentUserSalary != null
+            ? new CurrentUserSalaryLabelData(x.currentUserSalary)
+            : null;
+
+          const developerProfessionId = 1;
+          this.showDataStub = false;
+          this.showAdjustCurrentSalaryProfessionModal =
+            x.currentUserSalary != null &&
+            x.currentUserSalary.professionId === developerProfessionId;
+        }
+      });
   }
 }
