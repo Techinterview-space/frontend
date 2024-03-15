@@ -31,6 +31,7 @@ export class SalariesChart {
     readonly developersByExperienceYearsChartData: DevelopersByCategoryChartData | null;
 
     readonly hasRemoteSalaries: boolean;
+    readonly hasAuthentication: boolean;
 
     constructor(readonly data: SalariesChartResponse, readonly allProfessions: Array<LabelEntityDto>) {
         this.averageSalary = SalariesChart.formatNumber(data.averageSalary) ?? '';
@@ -50,6 +51,7 @@ export class SalariesChart {
         this.salariesPerProfessionForLocal = salariesPerProfession.local;
         this.salariesPerProfessionForRemote = salariesPerProfession.remote;
         this.hasRemoteSalaries = this.salariesPerProfessionForRemote.length > 0;
+        this.hasAuthentication = data.hasAuthentication;
 
         this.currentUserSalary = data.currentUserSalary;
         this.currentUserSalaryValue = data.currentUserSalary

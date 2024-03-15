@@ -196,6 +196,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
+        this.isAuthenticated = x.hasAuthentication;
         if (x.shouldAddOwnSalary) {
           this.openAddSalaryModal = this.isAuthenticated;
           this.showDataStub = true;

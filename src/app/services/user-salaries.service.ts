@@ -32,6 +32,7 @@ export interface EditUserSalaryRequest {
 }
 
 export interface SalariesChartResponse {
+  hasAuthentication: boolean;
   salaries: UserSalary[];
   totalCountInStats: number;
   shouldAddOwnSalary: boolean;
