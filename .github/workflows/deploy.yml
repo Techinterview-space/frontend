@@ -42,7 +42,7 @@ jobs:
           source: "docker-compose.frontend.yml"
           target: "/home/devops/deploy"
       - name: Execute commands
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.IP }}
           username: devops

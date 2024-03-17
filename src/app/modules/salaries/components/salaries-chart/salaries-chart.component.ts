@@ -105,9 +105,9 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   }
 
   openAddSalaryAction(): void {
-    if (this.authService.isAuthenticated()) {
+    if (this.isAuthenticated) {
       this.openAddSalaryModal = true;
-      this.gtag.event('salaries_chart_view', 'salary_add_modal_opened');
+      this.gtag.event('salary_add_modal_opened', 'salary_chart');
       return;
     }
 
@@ -118,30 +118,30 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   openEditSalaryAction(): void {
     if (this.salariesChart?.currentUserSalary) {
       this.openEditCurrentSalaryModal = true;
-      this.gtag.event('salaries_chart_view', 'salary_edit_modal_opened');
+      this.gtag.event('salary_edit_modal_opened', 'salary_chart');
       return;
     }
   }
 
   closeAddSalaryAction(): void {
     this.openAddSalaryModal = false;
-    this.gtag.event('salaries_chart_view', 'salary_add_modal_closed_without_adding');
+    this.gtag.event('salary_add_modal_closed_without_adding', 'salary_chart');
   }
 
   closeEditSalaryAction(): void {
     this.openEditCurrentSalaryModal = false;
-    this.gtag.event('salaries_chart_view', 'salary_edit_modal_closed_without_editing');
+    this.gtag.event('salary_edit_modal_closed_without_editing', 'salary_chart');
   }
 
   onSalaryAdded(salary: UserSalary): void {
     this.openAddSalaryModal = false;
-    this.gtag.event('salaries_chart_view', 'salary_added');
+    this.gtag.event('salary_added', 'salary_chart');
     this.load();
   }
 
   onSalaryUpdated(salary: UserSalary): void {
     this.openEditCurrentSalaryModal = false;
-    this.gtag.event('salaries_chart_view', 'salary_updated');
+    this.gtag.event('salary_updated', 'salary_chart');
     this.load();
   }
 
@@ -153,7 +153,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
     this.filterData = data;
     const selectedGrade = data.grade ? DeveloperGrade[data.grade] : 'empty';
-    this.gtag.event('salaries_chart_view', 'filters_applied', selectedGrade);
+    this.gtag.event('salaries_filters_applied', 'salary_chart', selectedGrade);
     this.load(data);
   }
 
@@ -165,7 +165,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     }
 
     this.filterData = newFilterData;
-    this.gtag.event('salaries_chart_view', 'filters_reset');
+    this.gtag.event('salaries_filters_reset', 'salary_chart');
 
     if (this.router.url.indexOf('?') > 0) {
       this.router.navigateByUrl(this.router.url.substring(0, this.router.url.indexOf('?')));
@@ -177,7 +177,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   share(data: SalaryChartGlobalFiltersData): void {
     this.filterData = data;
-    this.gtag.event('salaries_chart_view', 'share_clicked');
+    this.gtag.event('salaries_share_clicked', 'salary_chart');
 
     const currentUrl = new ApiBackendAbsoluteUrl('/chart-share').asString();
     const shareUrl = `${currentUrl}?${new ConvertObjectToHttpParams(this.filterData).get()}`;
