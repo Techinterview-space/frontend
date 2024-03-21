@@ -15,6 +15,7 @@ import { UsersService } from './users.service';
 import { UserSalariesService } from './user-salaries.service';
 import { SkillsService } from './skills.service';
 import { MetaTagService } from './meta-tag.service';
+import { TelegramBotService } from './telegram-bot.service';
 
 export * from './authorization.service';
 export * from './api.service';
@@ -46,4 +47,5 @@ export const applicationServices = [
   UserSalariesService,
   SkillsService,
   MetaTagService,
+  TelegramBotService,
 ];

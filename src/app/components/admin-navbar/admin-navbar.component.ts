@@ -74,6 +74,15 @@ export class AdminNavbarComponent {
         ]
       },
       {
+        title: 'Telegram',
+        links: [
+          {
+            title: 'Bot usages',
+            url: '/admin/telegram/bot-usages'
+          }
+        ]
+      },
+      {
         title: 'Tools',
         links: [
           {
