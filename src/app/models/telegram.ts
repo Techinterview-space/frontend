@@ -5,6 +5,7 @@ export interface TelegramBotUsage {
     channelName: string | null;
     usageType: TelegramBotUsageType;
     usageTypeAsString: string;
+    receivedMessageText: string | null;
     createdAt: string;
     updatedAt: string;
 }

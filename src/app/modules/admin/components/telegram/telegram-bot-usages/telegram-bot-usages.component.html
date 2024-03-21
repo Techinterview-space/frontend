@@ -11,6 +11,7 @@
             <th>Count</th>
             <th>Channel</th>
             <th>Used in</th>
+            <th>Received text</th>
             <th>Created at</th>
             <th>Updated at</th>
           </thead>
@@ -20,6 +21,7 @@
               <td>{{ item.usageCount | number: '1.0-0' }}</td>
               <td>{{ item.channelName ?? '-' }}</td>
               <td>{{ item.usageTypeAsString }}</td>
+              <td title="{{item.receivedMessageText}}">{{ item.receivedMessageText }}</td>
               <td>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
               <td>{{ item.updatedAt | date: 'yyyy-MM-dd HH:mm' }}</td>
             </tr>
