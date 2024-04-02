@@ -232,11 +232,22 @@
         </div>
       </div>
 
-      <div *ngIf="!showDataStub" class="mb-3 text-muted text-end fst-italic">
-        <div>Идея подсмотрена у сервиса <a class="text-reset" href="https://career.habr.com/salaries" target="_blank">Habr.Карьера</a>, за что им большая благодарность.</div>
-        <div>Проект opensource, исходный код доступен на <a class="text-reset" href="https://github.com/orgs/Techinterview-space/repositories" target="_blank">Github</a>.</div>
-        <div>
-          Вы можете поддержать проект на <a href="https://boosty.to/ake111aa" class="text-reset" target="_blank">boosty</a>. Любая поддержка будет ценна.
+      <div class="mt-3 mb-5">
+        <hr />
+      </div>
+
+      <div *ngIf="!showDataStub" class="mb-3">
+        <div class="mb-5">
+          <div>Сырые данные можно выгрузить в <button type="button" class="btn-link-sm font-weight-normal" (click)="downloadCsv()">CSV файл</button></div>
+          <div>В файл будут записаны все данные, несмотря на примененные на странице фильтры.</div>
+        </div>
+
+        <div class="text-muted fst-italic">
+          <div>Идея подсмотрена у сервиса <a class="text-reset" href="https://career.habr.com/salaries" target="_blank">Habr.Карьера</a>, за что им большая благодарность.</div>
+          <div>Проект opensource, исходный код доступен на <a class="text-reset" href="https://github.com/orgs/Techinterview-space/repositories" target="_blank">Github</a>.</div>
+          <div>
+            Вы можете поддержать проект на <a href="https://boosty.to/ake111aa" class="text-reset" target="_blank">boosty</a>. Любая поддержка будет ценна.
+          </div>
         </div>
       </div>
       

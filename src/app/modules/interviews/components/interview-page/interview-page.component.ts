@@ -8,6 +8,7 @@ import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
 import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
 import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
 import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
+import { FileDownloadAnchor } from '@shared/value-objects/file-download-anchor';
 
 @Component({
   selector: 'app-interview-page',
@@ -84,7 +85,7 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
 
   exportAsPDF(): void {
     if (this.downloadedFile != null) {
-      this.outputFile();
+      new FileDownloadAnchor(this.downloadedFile).execute(`${this.interview!.candidateName}_${this.interview!.id}.pdf`);
       return;
     }
 
@@ -93,16 +94,8 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((file) => {
         this.downloadedFile = file;
-        this.outputFile();
+        new FileDownloadAnchor(this.downloadedFile).execute(`${this.interview!.candidateName}_${this.interview!.id}.pdf`);
       });
-  }
-
-  private outputFile(): void {
-    const url = window.URL.createObjectURL(this.downloadedFile!);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${this.interview!.candidateName}_${this.interview!.id}.pdf`;
-    a.click();
   }
 
   private setTitle(): void {

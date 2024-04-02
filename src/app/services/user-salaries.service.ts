@@ -177,4 +177,12 @@ export class UserSalariesService {
   delete(dataId: string): Observable<void> {
     return this.api.delete<void>(this.root + dataId);
   }
+
+  downloadCsv(): Observable<File> {
+    const httpOptions = {
+      responseType: 'blob' as 'json'
+    };
+
+    return this.api.get<File>(this.root + '/export', httpOptions);
+  }
 }

@@ -16,6 +16,7 @@ import { CurrentUserSalaryLabelData } from './current-user-salary-label-data';
 import { MetaTagService } from '@services/meta-tag.service';
 import { LabelEntityDto } from '@services/label-entity.model';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
+import { FileDownloadAnchor } from '@shared/value-objects/file-download-anchor';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -33,6 +34,8 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   skills: Array<LabelEntityDto> = [];
   industries: Array<LabelEntityDto> = [];
   professions: Array<LabelEntityDto> = [];
+
+  downloadedFile: File | null = null;
 
   showDataStub = false;
   openAddSalaryModal = false;
@@ -186,6 +189,23 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.meta.returnDefaultMetaTags();
+  }
+
+  downloadCsv(): void {
+    this.gtag.event('salaries_csv_download', 'salary_chart');
+
+    if (this.downloadedFile != null) {
+      new FileDownloadAnchor(this.downloadedFile).execute(null);
+      return;
+    }
+
+    this.service
+      .downloadCsv()
+      .pipe(untilDestroyed(this))
+      .subscribe((file) => {
+        this.downloadedFile = file;
+        new FileDownloadAnchor(this.downloadedFile).execute(null);
+      });
   }
 
   private loadChartWithFilter(data: SalaryChartGlobalFiltersData | null = null): void {
