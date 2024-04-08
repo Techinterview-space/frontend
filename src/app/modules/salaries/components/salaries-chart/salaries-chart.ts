@@ -1,5 +1,5 @@
 import { formatNumber } from "@angular/common";
-import { DevelopersByCategoryChartData, PeopleByGradesChartData, SalariesByMoneyBarChart, SalariesChartResponse } from "@services/user-salaries.service";
+import { DevelopersByCategoryChartData, PeopleByGradesChartData, SalariesByGrade, SalariesByMoneyBarChart, SalariesChartResponse } from "@services/user-salaries.service";
 import { SalariesPerProfession } from "../salaries-per-profession";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { LabelEntityDto } from "@services/label-entity.model";
@@ -11,6 +11,9 @@ export class SalariesChart {
 
     readonly averageRemoteSalary: string | null;
     readonly medianRemoteSalary: string | null;
+
+    readonly localSalariesByGrade: Array<SalariesByGrade>;
+    readonly remoteSalariesByGrade: Array<SalariesByGrade>;
 
     readonly countOfRecords: number;
     readonly salaries: Array<UserSalary>;
@@ -36,6 +39,9 @@ export class SalariesChart {
     constructor(readonly data: SalariesChartResponse, readonly allProfessions: Array<LabelEntityDto>) {
         this.averageSalary = SalariesChart.formatNumber(data.averageSalary) ?? '';
         this.medianSalary = SalariesChart.formatNumber(data.medianSalary) ?? '';
+
+        this.localSalariesByGrade = data.localSalariesByGrade ?? [];
+        this.remoteSalariesByGrade = data.remoteSalariesByGrade ?? [];
 
         this.averageRemoteSalary = SalariesChart.formatNumber(data.averageRemoteSalary);
         this.medianRemoteSalary = SalariesChart.formatNumber(data.medianRemoteSalary)

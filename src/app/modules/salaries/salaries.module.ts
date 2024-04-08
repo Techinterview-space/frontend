@@ -21,6 +21,7 @@ import { PredefinedInfoBlockComponent } from './components/salaries-chart/predef
 import { PeopleByGenderChartComponent } from './components/people-by-gender-chart/people-by-gender-chart.component';
 import { PeopleByAgeChartComponent } from './components/people-by-age-chart/people-by-age-chart.component';
 import { PeopleByExperienceChartComponent } from './components/people-by-experience-chart/people-by-experience-chart.component';
+import { SalariesByGradeBlockComponent } from './components/salaries-chart/salaries-by-grade/salaries-by-grade-block.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PeopleByExperienceChartComponent } from './components/people-by-experie
     PeopleByGenderChartComponent,
     PeopleByAgeChartComponent,
     PeopleByExperienceChartComponent,
+    SalariesByGradeBlockComponent,
   ],
   imports: [
     CommonModule,

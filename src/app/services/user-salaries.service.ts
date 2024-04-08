@@ -31,6 +31,14 @@ export interface EditUserSalaryRequest {
   company: CompanyType;
 }
 
+export interface SalariesByGrade {
+  grade: DeveloperGrade;
+  count: number;
+  hasData: boolean;
+  averageSalary: number | null;
+  medianSalary: number | null;
+}
+
 export interface SalariesChartResponse {
   hasAuthentication: boolean;
   salaries: UserSalary[];
@@ -43,6 +51,9 @@ export interface SalariesChartResponse {
 
   averageRemoteSalary: number | null;
   medianRemoteSalary: number | null;
+
+  localSalariesByGrade: Array<SalariesByGrade>;
+  remoteSalariesByGrade: Array<SalariesByGrade>;
 
   salariesByMoneyBarChart: SalariesByMoneyBarChart | null;
   salariesByMoneyBarChartForRemote: SalariesByMoneyBarChart | null;

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { SalariesChart } from '../salaries-chart';
 
 @Component({
   selector: 'app-salary-block-value',
@@ -8,8 +9,21 @@ import { Component, Input } from '@angular/core';
 export class SalaryBlockValueComponent {
 
   @Input()
-  title: string = '';
+  source: SalariesChart | null= null;
 
-  @Input()
-  value: string = '';
+  get median(): string {
+    return this.source?.medianSalary ?? '';
+  }
+
+  get average(): string {
+    return this.source?.averageSalary ?? '';
+  }
+
+  get medianRemote(): string {
+    return this.source?.medianRemoteSalary ?? '';
+  }
+
+  get averageRemote(): string {
+    return this.source?.averageRemoteSalary ?? '';
+  }
 }

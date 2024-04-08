@@ -1,0 +1,20 @@
+<div *ngIf="source">
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Грейд</th>
+        <th scope="col">Медианная, тг.</th>
+        <th scope="col">Средняя, тг.</th>
+        <th scope="col">Кол-во анкет</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td scope="row">{{item.gradeAsString}}</td>
+        <td>{{item.medianSalaryAsString}}</td>
+        <td>{{item.averageSalaryAsString }}</td>
+        <td>{{item.count}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

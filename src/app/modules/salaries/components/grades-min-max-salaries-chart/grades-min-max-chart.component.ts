@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { UserSalary } from '@models/salaries/salary.model';
 import { GradesMinMaxSalariesChartObject } from './grades-min-max-chart-object';
+import { SalariesChart } from '../salaries-chart/salaries-chart';
 
 @Component({
   selector: 'app-grades-min-max-chart',
@@ -10,8 +11,9 @@ import { GradesMinMaxSalariesChartObject } from './grades-min-max-chart-object';
 export class GradesMinMaxChartComponent {
 
   @Input()
-  salaries: Array<UserSalary> | null = null;
+  source: SalariesChart | null= null;
 
+  salaries: Array<UserSalary> | null = null;
   chartDataLocal: GradesMinMaxSalariesChartObject | null = null;
 
   readonly canvasId = 'canvas_' + Math.random().toString(36);
@@ -23,6 +25,11 @@ export class GradesMinMaxChartComponent {
   }
 
   private initChart(): void {
+    if (this.source == null) {
+      return;
+    }
+
+    this.salaries = this.source.salaries;
     if (this.salaries == null || this.salaries.length == 0) {
       return;
     }
