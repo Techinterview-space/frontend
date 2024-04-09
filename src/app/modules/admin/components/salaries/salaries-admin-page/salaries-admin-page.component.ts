@@ -61,7 +61,7 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
     this.currentPage = data.page;
 
     this.service
-      .all(data)
+      .allAdminPaginated(data)
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.salaries = x.results.map((x) => new SalaryAdminItem(x, this.professions, this.skills, this.industries));

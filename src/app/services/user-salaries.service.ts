@@ -96,12 +96,16 @@ export interface CreateSalaryRecordResponse {
   createdSalary: UserSalary | null;
 }
 
-export interface AdminAllSalariesQueryParams extends PageParams {
-  page: number;
-  pageSize: number;
-  profession: number | null;
-  company: CompanyType | null;
+export interface PublicAllSalariesQueryParams extends PageParams {
   grade: DeveloperGrade | null;
+  profsInclude: Array<number> | null;
+  cities: Array<KazakhstanCity> | null;
+}
+
+export interface AdminAllSalariesQueryParams extends PageParams {
+  profession: number | null;
+  grade: DeveloperGrade | null;
+  company: CompanyType | null;
   order_type: SalariesAdminOrderingType | null;
 }
 
@@ -131,6 +135,12 @@ export enum SalariesAdminOrderingType {
   ValueDesc = 4,
 }
 
+export interface SelectBoxItemsResponse {
+  skills: LabelEntityDto[];
+  industries: LabelEntityDto[];
+  professions: LabelEntityDto[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -138,21 +148,18 @@ export class UserSalariesService {
   private readonly root = '/api/salaries/';
   constructor(private readonly api: ApiService) {}
 
-  all(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
+  allPaginated(pageParams: PublicAllSalariesQueryParams): Observable<PaginatedList<UserSalary>> {
+    return this.api.get<PaginatedList<UserSalary>>(
+      this.root + '?' + new ConvertObjectToHttpParams(pageParams).get());
+  }
+
+  allAdminPaginated(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
     return this.api.get<PaginatedList<UserSalaryAdminDto>>(
       this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
   }
 
-  selectBoxItems(): Observable<{
-    skills: LabelEntityDto[],
-    industries: LabelEntityDto[],
-    professions: LabelEntityDto[]
-  }> {
-    return this.api.get<{
-      skills: LabelEntityDto[],
-      industries: LabelEntityDto[],
-      professions: LabelEntityDto[]
-    }>(this.root + 'select-box-items');
+  selectBoxItems(): Observable<SelectBoxItemsResponse> {
+    return this.api.get<SelectBoxItemsResponse>(this.root + 'select-box-items');
   }
 
   salariesNotInStats(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
