@@ -17,6 +17,7 @@ import { MetaTagService } from '@services/meta-tag.service';
 import { LabelEntityDto } from '@services/label-entity.model';
 import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
 import { FileDownloadAnchor } from '@shared/value-objects/file-download-anchor';
+import { TitleService } from '@services/title.service';
 
 @Component({
   templateUrl: './salaries-chart.component.html',
@@ -50,18 +51,14 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: UserSalariesService,
-    private readonly meta: MetaTagService,
+    private readonly title: TitleService,
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
     activatedRouteSource: ActivatedRoute) {
       this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
-      this.meta.updateChartMetaTags(
-        'Зарплаты в IT в Казахстане',
-        'Здесь можно увидеть статистику по зарплатам в IT в Казахстане. Есть множество графиков по разным критериям, а также возможность применить необходимые фильтры.',
-        '/salaries'
-      );
+      title.setTitle('Зарплаты в IT в Казахстане');
     }
 
   ngOnInit(): void {
@@ -188,7 +185,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.meta.returnDefaultMetaTags();
+    // ignore
   }
 
   downloadCsv(): void {

@@ -36,7 +36,7 @@ export class MetaTagService {
     this.removeTags();
 
     const title = 'Tech.Interview';
-    const description = 'Here you can store your technical interview notes and share them';
+    const description = 'Зарплаты в IT в Казахстане';
 
     this.meta.addTags([
       { property: 'og:title', content: title },
