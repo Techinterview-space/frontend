@@ -45,7 +45,7 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
       .subscribe((id) => {
         this.templateId = id;
         if (this.templateId != null) {
-          this.setTitle('Edit template');
+          this.setTitle('Редактировать шаблон');
           this.service
             .byId(this.templateId)
             .pipe(untilDestroyed(this))
@@ -56,7 +56,7 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.setTitle('Create template');
+        this.setTitle('Создать шаблон');
         this.formGroup = new InterviewTemplateFormGroup();
       });
 
@@ -80,7 +80,7 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
         .create(createRequest)
         .pipe(untilDestroyed(this))
         .subscribe((id) => {
-          this.alert.success('Template created');
+          this.alert.success('Шаблон создан');
           this.router.navigate(['/interviews/templates/my']);
         });
       return;
@@ -96,7 +96,7 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
       .update(updateRequest)
       .pipe(untilDestroyed(this))
       .subscribe((id) => {
-        this.alert.success('Template was updated');
+        this.alert.success('Шаблон обновлен');
         this.router.navigate(['/interviews/templates/my']);
       });
   }

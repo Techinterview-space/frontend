@@ -13,6 +13,7 @@ import { PublicInterviewTemplatesComponent } from './components/public-interview
 import { MarkdownModule } from 'ngx-markdown';
 import { InterviewMarkdownModalDialogComponent } from './components/interview-page/interview-markdown-modal-dialog/interview-markdown-modal-dialog.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { InterviewsHomeComponent } from './components/interviews-home/interviews-home.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     InterviewEditPageComponent,
     InterviewPageComponent,
     PublicInterviewTemplatesComponent,
-    InterviewMarkdownModalDialogComponent
+    InterviewMarkdownModalDialogComponent,
+    InterviewsHomeComponent,
   ],
   imports: [
     CommonModule,

@@ -17,7 +17,7 @@
                 formControlName="title"
                 placeholder="Type a name of the template"
               />
-              <label for="title" class="form-label">Template title</label>
+              <label for="title" class="form-label">Название</label>
               <app-field-error [field]="formGroup.get('title')"></app-field-error>
             </div>
 
@@ -27,7 +27,7 @@
 
             <div class="mb-3 form-check cursor-pointer">
               <input type="checkbox" class="form-check-input" id="isPublic" formControlName="isPublic" />
-              <label class="form-check-label" for="isPublic">Visible for everyone</label>
+              <label class="form-check-label" for="isPublic">Виден для всех?</label>
             </div>
 
             <div class="mb-3 d-flex justify-content-between">
@@ -35,7 +35,7 @@
                 <app-go-back-button></app-go-back-button>
               </div>
               <div class="d-inline-block">
-                <app-submit-button (btnSubmit)="onSave()">Save</app-submit-button>
+                <app-submit-button (btnSubmit)="onSave()">Сохранить</app-submit-button>
               </div>
             </div>
           </div>
@@ -53,15 +53,15 @@
                 style="height: 100px"
                 formControlName="overallOpinion"
               ></textarea>
-              <label for="overallOpinion">Template for 'Overall opinion' field</label>
+              <label for="overallOpinion">Заготовка для поля "Общие впечатления о кандидате"</label>
               <app-field-error [field]="formGroup.get('overallOpinion')"></app-field-error>
-              <div class="text-muted small">Markdown is supported</div>
+              <div class="text-muted small">Поддерживается Markdown</div>
             </div>
 
             <div class="mb-3 d-flex justify-content-between">
               <span class="h4">Subjects: {{ subjectsCount }}</span>
               <button type="button" class="btn-link-sm" (click)="addSubject()" title="Add a new subject">
-                <i class="bi bi-plus-square"></i> Add subject
+                <i class="bi bi-plus-square"></i> Добавить тему
               </button>
             </div>
 
@@ -78,14 +78,14 @@
                       class="form-control"
                       formControlName="title"
                       id="subjectTitle_{{ subjectIndex }}"
-                      placeholder="Subject title"
+                      placeholder="О чем поговорили"
                     />
 
                     <button
                       class="btn btn-outline-primary"
                       type="button"
                       (click)="formGroup.moveDown(subjectIndex)"
-                      title="Move down"
+                      title="Вверх"
                       [disabled]="!formGroup.canBeMovedDown(subjectIndex)"
                     >
                       <i class="bi bi-arrow-down"></i>
@@ -95,7 +95,7 @@
                       class="btn btn-outline-primary"
                       type="button"
                       (click)="formGroup.moveUp(subjectIndex)"
-                      title="Move up"
+                      title="Вниз"
                       [disabled]="!formGroup.canBeMovedUp(subjectIndex)"
                     >
                       <i class="bi bi-arrow-up"></i>
@@ -113,8 +113,8 @@
                   <app-field-error [field]="formGroup.getSubjectTitleField(subjectIndex)"></app-field-error>
                   <div class="ps-5 mt-3">
                     <div class="d-flex justify-content-between">
-                      <label>Description</label>
-                      <span class="text-muted small">Markdown is supported</span>
+                      <label>Описание</label>
+                      <span class="text-muted small">Поддерживается Markdown</span>
                     </div>
                     <textarea class="form-control" rows="5" formControlName="description"></textarea>
                     <app-field-error [field]="formGroup.getSubjectDescriptionField(subjectIndex)"></app-field-error>
@@ -126,8 +126,8 @@
             <div class="mb-3" *ngIf="formGroup.subjectsCount > 1">
               <hr />
               <div class="d-flex justify-content-end">
-                <button type="button" class="btn-link-sm" (click)="addSubject()" title="Add a new subject">
-                  <i class="bi bi-plus-square"></i> Add subject
+                <button type="button" class="btn-link-sm" (click)="addSubject()" title="Добавить новую тему">
+                  <i class="bi bi-plus-square"></i> Добавить тему
                 </button>
               </div>
             </div>

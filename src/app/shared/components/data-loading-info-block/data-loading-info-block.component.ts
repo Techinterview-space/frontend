@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
 })
 export class DataLoadingInfoBlockComponent {
   @Input()
-  title = 'Data is loading';
+  title = 'Загрузка данных';
 }

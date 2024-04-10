@@ -90,48 +90,48 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.dropdowns = [
       {
-        title: 'Interviews',
+        title: 'Заметки',
         show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer),
         links: [
           {
-            title: 'Start an interview',
+            title: 'Начать интервью',
             url: '/interviews/create',
             show: true
           },
           {
-            title: 'My interviews',
+            title: 'Мои интервью',
             url: '/interviews/my',
             show: true
           }
         ]
       },
       {
-        title: 'Templates',
+        title: 'Шаблоны',
         show: true,
         links: [
           {
-            title: 'Create a template',
+            title: 'Создать шаблон',
             url: '/interviews/templates/create',
             show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer)
           },
           {
-            title: 'My templates',
+            title: 'Мои шаблоны',
             url: '/interviews/templates/my',
             show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer)
           },
           {
-            title: 'Public templates',
+            title: 'Публичные шаблоны',
             url: '/interviews/templates/public',
             show: true
           }
         ]
       },
       {
-        title: 'Salaries',
+        title: 'Зарплаты',
         show: true,
         links: [
           {
-            title: 'Salaries chart',
+            title: 'Статистика по зарплатам',
             url: '/salaries',
             show: true
           },

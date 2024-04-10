@@ -17,13 +17,13 @@
                 formControlName="candidateName"
                 placeholder="Type a candidate's name"
               />
-              <label for="candidateName" class="form-label">Candidate name</label>
+              <label for="candidateName" class="form-label">Имя кандидата</label>
               <app-field-error [field]="formGroup.get('candidateName')"></app-field-error>
             </div>
 
             <div class="mb-3">
               <select formControlName="candidateGrade" class="form-select" aria-label="Select a grade">
-                <option [value]="null" selected disabled>Select a grade</option>
+                <option [value]="null" selected disabled>Выберите грейд</option>
                 <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
               </select>
               <app-field-error [field]="formGroup.get('candidateGrade')"></app-field-error>
@@ -33,7 +33,7 @@
               <app-labels-ng-select
                 [labels]="labels"
                 [(selectedLabels)]="selectedLabels"
-                [placeholder]="'Select tags for your interview'"
+                [placeholder]="'Вебрите теги для заметки'"
               ></app-labels-ng-select>
             </div>
           </div>
@@ -46,7 +46,7 @@
                 <app-go-back-button></app-go-back-button>
               </div>
               <div class="d-inline-block">
-                <app-submit-button (btnSubmit)="onSave()">Save</app-submit-button>
+                <app-submit-button (btnSubmit)="onSave()">Сохранить</app-submit-button>
               </div>
             </div>
           </div>
@@ -62,18 +62,18 @@
             style="height: 100px"
             formControlName="overallOpinion"
           ></textarea>
-          <label for="overallOpinion">Overall opinion about candidate</label>
+          <label for="overallOpinion">Общее впечатление о кандидате</label>
           <app-field-error [field]="formGroup.get('overallOpinion')"></app-field-error>
-          <div class="text-muted small">Markdown is supported</div>
+          <div class="text-muted small">Поддерживается markdown</div>
         </div>
 
         <div class="card">
           <div class="card-body">
             <div class="mb-3 d-flex justify-content-between align-items-end">
               <div class="d-inline-block">
-                <span class="h4">Subjects: {{ subjectsCount }}</span>
+                <span class="h4">Тем: {{ subjectsCount }}</span>
                 <button class="btn-link-sm ms-1" type="button" (click)="openAddSubjectsFromTemplateModal()">
-                  Add subjects from template
+                  Добавить темы из шаблона
                 </button>
               </div>
 
@@ -84,10 +84,10 @@
                   (click)="clearSubjects()"
                   [disabled]="formGroup.subjectsCount === 0"
                 >
-                  Clear all
+                  Удалить все
                 </button>
-                <button type="button" class="btn-link-sm ms-1" (click)="addSubject()" title="Add a new subject">
-                  <i class="bi bi-plus-square"></i> Add new subject
+                <button type="button" class="btn-link-sm ms-1" (click)="addSubject()" title="Добавить тему">
+                  <i class="bi bi-plus-square"></i> Добавить тему
                 </button>
               </div>
             </div>
@@ -106,10 +106,10 @@
                         class="form-control"
                         formControlName="title"
                         id="subjectTitle_{{ subjectIndex }}"
-                        placeholder="Subject title"
+                        placeholder="О чем поговорили"
                       />
                       <select formControlName="grade" class="form-select w-10" aria-label="Select a grade">
-                        <option [value]="null">Didn't check</option>
+                        <option [value]="null">Не проверил</option>
                         <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
                       </select>
 
@@ -117,7 +117,7 @@
                         class="btn btn-outline-primary"
                         type="button"
                         (click)="formGroup.moveDown(subjectIndex)"
-                        title="Move down"
+                        title="Вверх"
                         [disabled]="!formGroup.canBeMovedDown(subjectIndex)"
                       >
                         <i class="bi bi-arrow-down"></i>
@@ -127,7 +127,7 @@
                         class="btn btn-outline-primary"
                         type="button"
                         (click)="formGroup.moveUp(subjectIndex)"
-                        title="Move up"
+                        title="Вниз"
                         [disabled]="!formGroup.canBeMovedUp(subjectIndex)"
                       >
                         <i class="bi bi-arrow-up"></i>
@@ -137,7 +137,7 @@
                         class="btn btn-outline-danger"
                         type="button"
                         (click)="removeSubject(subjectIndex)"
-                        title="Remove the subject"
+                        title="Удалить тему"
                       >
                         <i class="bi bi-trash-fill"></i>
                       </button>
@@ -155,8 +155,8 @@
 
                   <div class="ps-5">
                     <div class="d-flex justify-content-between">
-                      <label>Comments</label>
-                      <span class="text-muted small">Markdown is supported</span>
+                      <label>Комментарии</label>
+                      <span class="text-muted small">Поддерживается markdown</span>
                     </div>
                     <textarea class="form-control" rows="5" formControlName="comments"></textarea>
                     <app-field-error [field]="formGroup.getSubjectCommentsField(subjectIndex)"></app-field-error>
@@ -169,7 +169,7 @@
               <hr />
               <div class="d-flex justify-content-end">
                 <button type="button" class="btn-link-sm" (click)="addSubject()" title="Add a new subject">
-                  <i class="bi bi-plus-square"></i> Add subject
+                  <i class="bi bi-plus-square"></i> Добавить тему
                 </button>
               </div>
             </div>
@@ -183,11 +183,11 @@
 <app-dialog
   [show]="templates && showAddSubjectsFromTemplateModal"
   (closed)="onAddSubjectsFromTemplateModalClose()"
-  [header]="'Add subjects from the template'"
+  [header]="'Добавить темы из шаблона'"
 >
   <div class="mb-3">
     <select class="form-select" (change)="onInterviewTemplateSelected($event)">
-      <option [value]="null" selected disabled>Select a template</option>
+      <option [value]="null" selected disabled>Выберите шаблон</option>
       <option *ngFor="let option of templates" [value]="option.value">{{ option.label }}</option>
     </select>
   </div>
@@ -199,7 +199,7 @@
       [disabled]="!selectedTemplate"
       (click)="addSubjectsFromTemplate()"
     >
-      Add subjects and topics
+      Добавить темы и топики
     </button>
   </div>
 </app-dialog>

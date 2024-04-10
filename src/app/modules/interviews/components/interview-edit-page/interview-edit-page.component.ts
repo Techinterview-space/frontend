@@ -18,7 +18,8 @@ import { InterviewTemplateSelectItem } from './interview-template-select-item';
   styleUrls: ['./interview-edit-page.component.scss']
 })
 export class InterviewEditPageComponent implements OnInit, OnDestroy {
-  pageTitle = 'Create an interview';
+  pageTitle = 'Новая заметка к интервью';
+
   formGroup: InterviewFormGroup | null = null;
   templates: Array<InterviewTemplateSelectItem> = [];
   selectedTemplate: InterviewTemplate | null = null;
@@ -57,7 +58,7 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
         this.interviewId = id;
 
         if (this.interviewId != null) {
-          this.setTitle('Edit the interview');
+          this.setTitle('Редактирование заметки');
           this.service
             .byId(this.interviewId)
             .pipe(untilDestroyed(this))

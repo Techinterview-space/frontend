@@ -8,10 +8,10 @@ import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-c
 })
 export class ShareButtonComponent implements OnInit {
 
-  static readonly copyBtnDefaultTitle = 'Share';
+  static readonly copyBtnDefaultTitle = 'Поделиться';
   private readonly copyBtnDefaultIcon = 'bi bi-share-fill me-1';
 
-  private readonly copiedBtnTitle = 'Copied';
+  private readonly copiedBtnTitle = 'Скопировано';
   private readonly copiedBtnIcon = 'bi bi-check2';
 
   btnTitle = '';
