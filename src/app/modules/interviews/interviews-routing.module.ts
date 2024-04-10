@@ -8,8 +8,11 @@ import { InterviewTemplatePageComponent } from './components/interview-template-
 import { MyInterviewTemplatesComponent } from './components/my-interview-templates/my-interview-templates.component';
 import { MyInterviewsComponent } from './components/my-interviews/my-interviews.component';
 import { PublicInterviewTemplatesComponent } from './components/public-interview-templates/public-interview-templates.component';
+import { InterviewsHomeComponent } from './components/interviews-home/interviews-home.component';
 
 const routes: Routes = [
+  { path: '', component: InterviewsHomeComponent },
+
   { path: 'templates/public', component: PublicInterviewTemplatesComponent },
   { path: 'templates/my', component: MyInterviewTemplatesComponent, canActivate: [AuthGuard] },
   { path: 'templates/create', component: InterviewTemplateEditPageComponent, canActivate: [AuthGuard] },

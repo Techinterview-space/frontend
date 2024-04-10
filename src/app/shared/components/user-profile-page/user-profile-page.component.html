@@ -10,21 +10,21 @@
         </li>
 
         <li class="list-group-item" *ngIf="!user.emailConfirmed">
-          <div class="small text-muted">Email confirmed</div>
+          <div class="small text-muted">Email подтвержден</div>
           <div class="">
             <span class="badge bg-warning text-dark">Not confirmed</span>
           </div>
         </li>
 
         <li class="list-group-item" *ngIf="user.deletedAt">
-          <div class="small text-muted">Status</div>
+          <div class="small text-muted">Статус</div>
           <div class="">
-            <span class="badge bg-danger text-light">Deleted</span>
+            <span class="badge bg-danger text-light">Удален</span>
           </div>
         </li>
 
         <li class="list-group-item">
-          <div class="small text-muted">Roles</div>
+          <div class="small text-muted">Роли</div>
           <div>
             <app-user-roles-label [userRoles]="user.roles"></app-user-roles-label>
           </div>
@@ -35,7 +35,7 @@
 
   <div class="col-sm-9">
     <div class="card card-body">
-      <div class="text-muted">Coming soon.</div>
+      <div class="text-muted">Пока работаем над этим.</div>
     </div>
   </div>
 </div>

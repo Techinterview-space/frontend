@@ -41,7 +41,7 @@
             aria-current="page"
             (click)="login()"
             [attr.disabled]="!loginButtonAvailable"
-            >Sign in</a
+            >Войти</a
           >
         </li>
         <ng-template #loggedIn>
@@ -57,11 +57,11 @@
               {{ loginName }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="/me">Profile</a></li>
-              <li><a class="dropdown-item" routerLink="users/me/labels">My lables</a></li>
+              <li><a class="dropdown-item" routerLink="/me">Мой профиль</a></li>
+              <li><a class="dropdown-item" routerLink="users/me/labels">Мои метки</a></li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" routerLink="/admin" *appHasRole="'admin'">Admin panel</a></li>
-              <li><a class="dropdown-item cursor-pointer" (click)="logout()">Sign out</a></li>
+              <li><a class="dropdown-item" routerLink="/admin" *appHasRole="'admin'">Админка</a></li>
+              <li class="cursor-pointer"><a class="dropdown-item" (click)="logout()">Выйти</a></li>
             </ul>
           </li>
         </ng-template>

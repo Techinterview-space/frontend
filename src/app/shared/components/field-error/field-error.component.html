@@ -1,13 +1,12 @@
 <div *ngIf="shouldShowError && errors" class="invalid-feedback d-block">
-  <div *ngIf="errors['required']">Value is required.</div>
-  <div *ngIf="errors['minlength']">Value must be at least 4 characters long.</div>
-  <div *ngIf="errors['spentTimeValueInvalid']">Worklog time field value is invalid</div>
+  <div *ngIf="errors['required']">Значение обязательно.</div>
+  <div *ngIf="errors['minlength']">Минимум 4 символа.</div>
   <div *ngIf="errors['ngbDate']">
-    <span *ngIf="errors['ngbDate']!.invalid">Invalid date</span>
+    <span *ngIf="errors['ngbDate']!.invalid">Некорректная дата</span>
   </div>
   <div *ngIf="errors['dateRange']">
     <p class="alert alert-danger small">
-      <strong>To date should be greater than From date.</strong> Please double-check the from and to dates.
+      <strong>Дата "До" должна быть позже, чем "От".</strong> Пожалуйста, проверьте введенные данные.
     </p>
   </div>
   <div *ngIf="errors['yearRange']">
@@ -16,10 +15,10 @@
     </p>
   </div>
   <div *ngIf="errors['max']">
-    <span>Maximum value is {{ max }}</span>
+    <span>Максимальное значение: {{ max }}</span>
   </div>
   <div *ngIf="errors['min']">
-    <span>Minimum value is {{ min }}</span>
+    <span>Минимальное значение: {{ min }}</span>
   </div>
   <div *ngIf="errors['Value']">
     <span>{{ errors['Value'] }}</span>

@@ -15,14 +15,14 @@
             <br />
             <div class="form-group">
               <input type="text" class="form-control" formControlName="comment" placeholder="Comment" required />
-              <small class="form-text text-muted">Comment is required</small>
+              <small class="form-text text-muted">Текст обязателен</small>
               <app-field-error [field]="declineForm.get('comment')"></app-field-error>
             </div>
           </form>
         </div>
         <p class="confirm-button">
-          <button class="btn btn-outline-danger mr-1" (click)="decline()">Decline</button>
-          <button class="btn btn-outline-secondary" (click)="close()">Cancel</button>
+          <button class="btn btn-outline-danger mr-1" (click)="decline()">Отклонить</button>
+          <button class="btn btn-outline-secondary" (click)="close()">Отмена</button>
         </p>
       </div>
     </div>
