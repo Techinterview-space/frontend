@@ -9,32 +9,32 @@
         <div class="card-body">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <div class="text-muted small">Author</div>
+              <div class="text-muted small">Автор</div>
               <div class="small">
                 {{ interviewTemplate.author?.email }}
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Subjects</div>
+              <div class="text-muted small">Кол-во тем</div>
               <div>
                 {{ interviewTemplate.subjects?.length ?? 0 }}
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Visibility</div>
+              <div class="text-muted small">Видимость</div>
               <div>
                 <app-visibility-label [visibility]="interviewTemplate.isPublic"></app-visibility-label>
               </div>
             </li>
 
             <li class="list-group-item" *ngIf="interviewTemplate.labels.length > 0">
-              <div class="text-muted small">Labels</div>
+              <div class="text-muted small">Теги</div>
               <div>
                 <app-label *ngFor="let item of interviewTemplate.labels" [label]="item"></app-label>
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Last update</div>
+              <div class="text-muted small">Обновлено</div>
               <div>
                 {{ interviewTemplate.updatedAt | date: 'HH:mm yyyy-MM-dd' }}
               </div>
@@ -53,7 +53,7 @@
               routerLink="/interviews/templates/{{ interviewTemplate.id }}/edit"
               class="btn-link-sm"
               title="Edit the template"
-              >Edit</a
+              >Редактировать</a
             >
             <button
               type="button"
@@ -61,7 +61,7 @@
               title="Delete the template"
               (click)="delete()"
             >
-              Delete
+              Удалить
             </button>
           </div>
         </div>
@@ -73,7 +73,7 @@
         <div class="card-body">
           <div class="mb-3" *ngIf="interviewTemplate.overallOpinion">
             <div>
-              <div class="small text-muted">Overall opinion text template</div>
+              <div class="small text-muted">Шаблон для поля "Общее впечатление"</div>
               <markdown>{{ interviewTemplate.overallOpinion }}</markdown>
             </div>
             <hr />
@@ -102,7 +102,7 @@
 <ng-template #noSubjectsYet>
   <div class="card">
     <div class="card-body text-center">
-      <span class="h4">No subjects yet</span>
+      <span class="h4">Пока нет тем</span>
     </div>
   </div>
 </ng-template>

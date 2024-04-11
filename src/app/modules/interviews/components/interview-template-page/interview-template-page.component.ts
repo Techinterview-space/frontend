@@ -61,9 +61,9 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
 
   delete(): void {
     this.confirmDeletionMessage = new DialogMessage(
-      new ConfirmMsg('Delete the template', 'Are you sure to delete it? This cannot be undone.', () => {
+      new ConfirmMsg('Удалить шаблон?', 'Вы уверены, что хотите удалить его? Это действие нельзя отменить', () => {
         this.service.delete(this.interviewTemplate!.id).subscribe(() => {
-          this.alert.info(`The template (${this.interviewTemplate!.title}) was deleted`, true);
+          this.alert.info(`Шаблон (${this.interviewTemplate!.title}) был удален`, true);
           this.router.navigate(['/interviews/templates/my']);
         });
       })

@@ -1,4 +1,4 @@
-<app-page-header> My labels </app-page-header>
+<app-page-header>Мои теги</app-page-header>
 
 <div class="container py-5" *ngIf="labels; else dataLoading">
   <div class="card">
@@ -7,8 +7,8 @@
         <table class="table table-hover table-sm">
           <thead>
             <th></th>
-            <th>Title</th>
-            <th>Color</th>
+            <th>Название</th>
+            <th>Цвет</th>
             <th></th>
           </thead>
           <tbody>
@@ -21,8 +21,8 @@
                 }}</span>
               </td>
               <td>
-                <button type="button" class="btn-link-sm" (click)="edit(item)">Edit</button>
-                <button type="button" class="ms-3 btn-link-sm btn-link-danger" (click)="delete(item)">Delete</button>
+                <button type="button" class="btn-link-sm" (click)="edit(item)">Редактировать</button>
+                <button type="button" class="ms-3 btn-link-sm btn-link-danger" (click)="delete(item)">Удалить</button>
               </td>
             </tr>
           </tbody>
@@ -37,19 +37,19 @@
 <app-dialog [show]="!!editForm" (closed)="onEditModalDlgClose()" [header]="'Edit label'">
   <form class="mb-5" *ngIf="!!editForm" [formGroup]="editForm" (ngSubmit)="onFormSubmit()">
     <div class="mb-3">
-      <label>Title</label>
+      <label>Название</label>
       <input type="text" class="form-control" formControlName="title" />
       <app-field-error [field]="editForm.get('title')"></app-field-error>
     </div>
 
     <div class="mb-3">
-      <label>Color</label>
+      <label>Цвет</label>
       <input type="color" class="form-control" formControlName="hexColor" />
       <app-field-error [field]="editForm.get('hexColor')"></app-field-error>
     </div>
 
     <div class="mb-3">
-      <button class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-primary" type="submit">Сохранить</button>
     </div>
   </form>
 </app-dialog>
@@ -61,5 +61,5 @@
 </ng-template>
 
 <ng-template #nothingToShow>
-  <div class="text-center text-muted p-3">You have not created any label yet</div>
+  <div class="text-center text-muted p-3">Вы еще не создали ни одного тега</div>
 </ng-template>

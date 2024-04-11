@@ -28,7 +28,7 @@ export class MyUserLabelsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.title.setTitle('My labels');
+    this.title.setTitle('Мои теги');
     this.service
       .my()
       .pipe(untilDestroyed(this))
@@ -52,7 +52,7 @@ export class MyUserLabelsComponent implements OnInit, OnDestroy {
       .update(request)
       .pipe(untilDestroyed(this))
       .subscribe(() => {
-        this.alert.success('The label was updated');
+        this.alert.success('Тег был сохранен');
         this.editForm = null;
         this.ngOnInit();
       });
@@ -65,14 +65,14 @@ export class MyUserLabelsComponent implements OnInit, OnDestroy {
   delete(item: Label): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
-        'Delete the label',
-        'Are you sure to delete? Interviews, templates, etc, with the label will stay in the system',
+        'Удалить тег',
+        'Вы уверены, что хотите удалить тег? Заметки и шаблоны останутся в системе',
         () => {
           this.service
             .delete(item.id!)
             .pipe(untilDestroyed(this))
             .subscribe(() => {
-              this.alert.success('The label was removed');
+              this.alert.success('Тег был удален');
               this.confirmDeletionMessage = null;
               this.ngOnInit();
             });

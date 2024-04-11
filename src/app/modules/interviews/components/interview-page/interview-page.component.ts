@@ -59,9 +59,9 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
 
   delete(): void {
     this.confirmDeletionMessage = new DialogMessage(
-      new ConfirmMsg('Delete the interview', 'Are you sure to delete it? This cannot be undone.', () => {
+      new ConfirmMsg('Удалить заметку?', 'Вы уверены, что хотите удалить ее? Это действие нельзя отменить', () => {
         this.service.delete(this.interview!.id).subscribe(() => {
-          this.alert.info(`The interview with ${this.interview!.candidateName} was deleted`, true);
+          this.alert.info(`Заметка для кандидата ${this.interview!.candidateName} была удалена`, true);
           this.router.navigate(['/interviews/my']);
         });
       })

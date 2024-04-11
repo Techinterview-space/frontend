@@ -7,11 +7,11 @@
         <table class="table table-hover table-sm">
           <thead>
             <th>#</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Subjects</th>
-            <th>Visibility</th>
-            <th>Last update</th>
+            <th>Название</th>
+            <th>Автор</th>
+            <th>Тем</th>
+            <th>Видимость</th>
+            <th>Обновлено</th>
             <th></th>
           </thead>
           <tbody>
@@ -23,8 +23,8 @@
               <td><app-visibility-label [visibility]="item.isPublic"></app-visibility-label></td>
               <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
               <td>
-                <a routerLink="/interviews/templates/{{ item.id }}" class="btn-link-sm">Open</a>
-                <button type="button" class="btn-link-sm ms-1" (click)="openDeleteDialog(item)">Delete</button>
+                <a routerLink="/interviews/templates/{{ item.id }}" class="btn-link-sm">Открыть</a>
+                <button type="button" class="btn-link-sm ms-1" (click)="openDeleteDialog(item)">Удалить</button>
               </td>
             </tr>
           </tbody>
@@ -47,7 +47,7 @@
 <ng-template #nothingToShow>
   <div class="card">
     <div class="card-body">
-      <div class="text-center">There is no templates.</div>
+      <div class="text-center">Нет шаблонов.</div>
     </div>
   </div>
 </ng-template>
