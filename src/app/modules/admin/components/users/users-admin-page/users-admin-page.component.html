@@ -7,11 +7,11 @@
         <table class="table table-hover table-sm">
           <thead>
             <th>Id</th>
-            <th>Full name</th>
+            <th>Имя</th>
             <th>Email</th>
-            <th>Roles</th>
-            <th>Active</th>
-            <th>Registered at</th>
+            <th>Роли</th>
+            <th>Активный</th>
+            <th>Зарегестрирован</th>
             <th></th>
           </thead>
           <tbody>
@@ -23,7 +23,7 @@
               <td><app-status-label [status]="item.isActive"></app-status-label></td>
               <td>{{ item.createdAt | date: 'yyyy-MM-dd HH:ss' }}</td>
               <td>
-                <button type="button" class="btn-link-sm" (click)="openUserRolesForm(item)">Edit roles</button>
+                <button type="button" class="btn-link-sm" (click)="openUserRolesForm(item)">Изменить роль</button>
               </td>
             </tr>
           </tbody>
@@ -46,16 +46,16 @@
 <ng-template #nothingToShow>
   <div class="card">
     <div class="card-body">
-      <div class="text-center">There is no users.</div>
+      <div class="text-center">Нет пользователей.</div>
     </div>
   </div>
 </ng-template>
 
-<app-dialog [show]="!!userRolesForm" (closed)="onEditModalDlgClose()" [header]="'Edit organization'">
+<app-dialog [show]="!!userRolesForm" (closed)="onEditModalDlgClose()" [header]="'Редактировать пользователя'">
   <div>
     <form class="mb-5" *ngIf="!!userRolesForm" [formGroup]="userRolesForm" (ngSubmit)="onFormSubmit()">
       <div class="mb-3">
-        <label>Roles</label>
+        <label>Роли</label>
         <select multiple class="form-control" formControlName="roles">
           <option *ngFor="let option of options" [value]="option.item">{{ option.label }}</option>
         </select>
@@ -64,7 +64,7 @@
       </div>
 
       <div class="mb-3">
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Сохранить</button>
       </div>
     </form>
   </div>

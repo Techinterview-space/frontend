@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
 import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
-import Assertion from '@shared/validation/assertion';
 
 @Component({
   selector: 'app-confirm-dialog',

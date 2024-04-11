@@ -34,7 +34,7 @@
 
 <app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
 
-<app-dialog [show]="!!editForm" (closed)="onEditModalDlgClose()" [header]="'Edit label'">
+<app-dialog [show]="!!editForm" (closed)="onEditModalDlgClose()" [header]="'Редактировать тег'">
   <form class="mb-5" *ngIf="!!editForm" [formGroup]="editForm" (ngSubmit)="onFormSubmit()">
     <div class="mb-3">
       <label>Название</label>

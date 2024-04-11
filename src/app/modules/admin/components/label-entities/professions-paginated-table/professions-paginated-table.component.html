@@ -1,20 +1,20 @@
-<app-page-header>Professions</app-page-header>
+<app-page-header>Специальности</app-page-header>
 
 <div class="container mt-3" *ngIf="items; else dataLoading">
   <div class="card">
     <div class="card-body">
 
       <div class="mb-2">
-        <button class="btn btn-sm btn-primary" (click)="create()">Create</button>
+        <button class="btn btn-sm btn-primary" (click)="create()">Создать</button>
       </div>
 
       <div class="table-responsive mb-3" *ngIf="items.length > 0; else nothingToShow">
         <table class="table table-hover table-sm">
           <thead>
             <th>ID</th>
-            <th>Title</th>
-            <th>Color</th>
-            <th>Email</th>
+            <th>Название</th>
+            <th>Цвет</th>
+            <th>Автор</th>
             <th></th>
           </thead>
           <tbody>
@@ -28,13 +28,13 @@
               </td>
               <td>{{ item.createdBy }}</td>
               <td>
-                <button type="button" class="btn-link-sm" (click)="edit(item)">Edit</button>
+                <button type="button" class="btn-link-sm" (click)="edit(item)">Редактировать</button>
                 <button
                   type="button"
                   class="ms-2 btn-link-sm btn-link-danger"
                   (click)="delete(item)"
                 >
-                  Delete
+                  Удалить
                 </button>
               </td>
             </tr>
@@ -47,25 +47,25 @@
 
 <app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
 
-<app-dialog [show]="!!editForm" (closed)="onEditModalDlgClose()" [header]="'Edit profession'">
+<app-dialog [show]="!!editForm" (closed)="onEditModalDlgClose()" [header]="'Редактировать специальность'">
   <form class="mb-5" *ngIf="!!editForm" [formGroup]="editForm" (ngSubmit)="onEditFormSubmit()">
     <div class="mb-3">
-      <label>Title</label>
+      <label>Название</label>
       <input type="text" class="form-control" formControlName="title" />
       <app-field-error [field]="editForm.get('title')"></app-field-error>
     </div>
 
     <div class="mb-3">
       <div class="d-flex justify-content-between">
-        <label>Color</label>
-        <button type="button" (click)="editForm.randomizeColor()" class="btn-link-sm">Random</button>
+        <label>Цвет</label>
+        <button type="button" (click)="editForm.randomizeColor()" class="btn-link-sm">Случайный выбор</button>
       </div>
       <input type="color" class="form-control" formControlName="hexColor" />
       <app-field-error [field]="editForm.get('hexColor')"></app-field-error>
     </div>
 
     <div class="mb-3">
-      <button class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-primary" type="submit">Сохранить</button>
     </div>
   </form>
 </app-dialog>
@@ -77,5 +77,5 @@
 </ng-template>
 
 <ng-template #nothingToShow>
-  <div class="text-center p-3 text-muted">No one has not created any profession yet</div>
+  <div class="text-center p-3 text-muted">Пока не создано ни одной специальности</div>
 </ng-template>
