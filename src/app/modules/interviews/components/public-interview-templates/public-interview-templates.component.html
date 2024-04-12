@@ -1,15 +1,18 @@
-<app-page-header>Public interview templates</app-page-header>
+<app-page-header>Публичные шаблоны для интервью</app-page-header>
 
 <div class="container my-5" *ngIf="templates; else dataLoading">
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive mb-3" *ngIf="templates.results.length > 0; else nothingToShow">
+      <div
+        class="table-responsive mb-3"
+        *ngIf="templates.results.length > 0; else nothingToShow"
+      >
         <table class="table table-hover table-sm">
           <thead>
             <th>#</th>
-            <th>Title</th>
-            <th>Subjects</th>
-            <th>Last update</th>
+            <th>Название</th>
+            <th>Тем</th>
+            <th>Обновлено</th>
             <th></th>
           </thead>
           <tbody>
@@ -17,10 +20,13 @@
               <td>{{ i + 1 }}</td>
               <td>{{ item.title }}</td>
               <td>{{ item.subjects?.length ?? 0 }}</td>
-              <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
-              <td>
-                <a routerLink="/interviews/templates/{{ item.id }}" class="btn btn-info text-dark btn-sm">
-                  <i class="bi bi-eye-fill"></i> Open
+              <td>{{ item.updatedAt | date: "HH:mm yyyy-MM-dd" }}</td>
+              <td class="small">
+                <a
+                  routerLink="/interviews/templates/{{ item.id }}"
+                  class="btn btn-info text-dark btn-sm"
+                >
+                  Открыть
                 </a>
               </td>
             </tr>
@@ -29,7 +35,10 @@
       </div>
 
       <div class="" *ngIf="templates && templates.results.length > 0">
-        <app-pagination-buttons [source]="templates" (pageChange)="loadTemplates($event)"></app-pagination-buttons>
+        <app-pagination-buttons
+          [source]="templates"
+          (pageChange)="loadTemplates($event)"
+        ></app-pagination-buttons>
       </div>
     </div>
   </div>
@@ -44,11 +53,13 @@
 <ng-template #nothingToShow>
   <div class="card">
     <div class="card-body">
-      <div class="text-center">There is no any public template. Feel free to create the first one</div>
+      <div class="text-center">
+        Еще никто не создал публичные шаблоны. Вы можете стать первым
+      </div>
 
       <div class="text-center mt-3">
         <a routerLink="/interviews/templates/create" class="btn btn-primary">
-          <i class="bi bi-plus-circle"></i> Create a template
+          <i class="bi bi-plus-circle"></i> Создать шаблон
         </a>
       </div>
     </div>

@@ -15,19 +15,32 @@
                 id="title"
                 aria-describedby="titleHint"
                 formControlName="title"
-                placeholder="Type a name of the template"
+                placeholder="Назовите ваш шаблон"
               />
               <label for="title" class="form-label">Название</label>
-              <app-field-error [field]="formGroup.get('title')"></app-field-error>
+              <app-field-error
+                [field]="formGroup.get('title')"
+              ></app-field-error>
             </div>
 
             <div class="mb-3">
-              <app-labels-ng-select [labels]="labels" [(selectedLabels)]="selectedLabels" [placeholder]="'Select tags for your template'"></app-labels-ng-select>
+              <app-labels-ng-select
+                [labels]="labels"
+                [(selectedLabels)]="selectedLabels"
+                [placeholder]="'Выберите теги для шаблона'"
+              ></app-labels-ng-select>
             </div>
 
             <div class="mb-3 form-check cursor-pointer">
-              <input type="checkbox" class="form-check-input" id="isPublic" formControlName="isPublic" />
-              <label class="form-check-label" for="isPublic">Виден для всех?</label>
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="isPublic"
+                formControlName="isPublic"
+              />
+              <label class="form-check-label" for="isPublic"
+                >Виден для всех?</label
+              >
             </div>
 
             <div class="mb-3 d-flex justify-content-between">
@@ -35,7 +48,9 @@
                 <app-go-back-button></app-go-back-button>
               </div>
               <div class="d-inline-block">
-                <app-submit-button (btnSubmit)="onSave()">Сохранить</app-submit-button>
+                <app-submit-button (btnSubmit)="onSave()"
+                  >Сохранить</app-submit-button
+                >
               </div>
             </div>
           </div>
@@ -53,14 +68,23 @@
                 style="height: 100px"
                 formControlName="overallOpinion"
               ></textarea>
-              <label for="overallOpinion">Заготовка для поля "Общие впечатления о кандидате"</label>
-              <app-field-error [field]="formGroup.get('overallOpinion')"></app-field-error>
+              <label for="overallOpinion"
+                >Заготовка для поля "Общие впечатления о кандидате"</label
+              >
+              <app-field-error
+                [field]="formGroup.get('overallOpinion')"
+              ></app-field-error>
               <div class="text-muted small">Поддерживается Markdown</div>
             </div>
 
             <div class="mb-3 d-flex justify-content-between">
-              <span class="h4">Subjects: {{ subjectsCount }}</span>
-              <button type="button" class="btn-link-sm" (click)="addSubject()" title="Add a new subject">
+              <span class="h4">Тем: {{ subjectsCount }}</span>
+              <button
+                type="button"
+                class="btn-link-sm"
+                (click)="addSubject()"
+                title="Add a new subject"
+              >
                 <i class="bi bi-plus-square"></i> Добавить тему
               </button>
             </div>
@@ -68,7 +92,10 @@
             <ul class="list-group list-group-flush" formArrayName="subjects">
               <li
                 class="list-group-item"
-                *ngFor="let child of formGroup.subjectsFormArray.controls; let subjectIndex = index"
+                *ngFor="
+                  let child of formGroup.subjectsFormArray.controls;
+                  let subjectIndex = index
+                "
               >
                 <div [formGroupName]="subjectIndex">
                   <div class="input-group">
@@ -110,14 +137,26 @@
                       <i class="bi bi-trash-fill"></i>
                     </button>
                   </div>
-                  <app-field-error [field]="formGroup.getSubjectTitleField(subjectIndex)"></app-field-error>
+                  <app-field-error
+                    [field]="formGroup.getSubjectTitleField(subjectIndex)"
+                  ></app-field-error>
                   <div class="ps-5 mt-3">
                     <div class="d-flex justify-content-between">
                       <label>Описание</label>
-                      <span class="text-muted small">Поддерживается Markdown</span>
+                      <span class="text-muted small"
+                        >Поддерживается Markdown</span
+                      >
                     </div>
-                    <textarea class="form-control" rows="5" formControlName="description"></textarea>
-                    <app-field-error [field]="formGroup.getSubjectDescriptionField(subjectIndex)"></app-field-error>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      formControlName="description"
+                    ></textarea>
+                    <app-field-error
+                      [field]="
+                        formGroup.getSubjectDescriptionField(subjectIndex)
+                      "
+                    ></app-field-error>
                   </div>
                 </div>
               </li>
@@ -126,7 +165,12 @@
             <div class="mb-3" *ngIf="formGroup.subjectsCount > 1">
               <hr />
               <div class="d-flex justify-content-end">
-                <button type="button" class="btn-link-sm" (click)="addSubject()" title="Добавить новую тему">
+                <button
+                  type="button"
+                  class="btn-link-sm"
+                  (click)="addSubject()"
+                  title="Добавить новую тему"
+                >
                   <i class="bi bi-plus-square"></i> Добавить тему
                 </button>
               </div>

@@ -1,16 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ApplicationUser } from '@models/application-user';
-import { UserRoleEnum } from '@models/enums';
-import { ApplicationUserExtended } from '@models/extended';
-import { defaultPageParams } from '@models/page-params';
-import { PaginatedList } from '@models/paginated-list';
-import { TitleService } from '@services/title.service';
-import { UserAdminService } from '@services/user-admin.service';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { UserRolesEditForm } from './user-roles-edit-form';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ApplicationUser } from "@models/application-user";
+import { UserRoleEnum } from "@models/enums";
+import { ApplicationUserExtended } from "@models/extended";
+import { defaultPageParams } from "@models/page-params";
+import { PaginatedList } from "@models/paginated-list";
+import { TitleService } from "@services/title.service";
+import { UserAdminService } from "@services/user-admin.service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { UserRolesEditForm } from "./user-roles-edit-form";
 
 @Component({
-  templateUrl: './users-admin-page.component.html'
+  templateUrl: "./users-admin-page.component.html",
 })
 export class UsersAdminPageComponent implements OnInit, OnDestroy {
   get hasSelectedUser(): boolean {
@@ -24,12 +24,15 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
   userRolesForm: UserRolesEditForm | null = null;
   readonly options = UserRoleEnum.options();
 
-  constructor(private readonly service: UserAdminService, private readonly titleService: TitleService) {}
+  constructor(
+    private readonly service: UserAdminService,
+    private readonly titleService: TitleService
+  ) {}
 
   ngOnInit(): void {
     this.userRolesForm = null;
     this.loadData();
-    this.titleService.setTitle('All users');
+    this.titleService.setTitle("Пользователи");
   }
 
   loadData(page = 1): void {

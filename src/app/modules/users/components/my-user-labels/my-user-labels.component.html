@@ -1,9 +1,12 @@
 <app-page-header>Мои теги</app-page-header>
 
-<div class="container py-5" *ngIf="labels; else dataLoading">
+<div class="container py-3" *ngIf="labels; else dataLoading">
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive mb-3" *ngIf="labels.length > 0; else nothingToShow">
+      <div
+        class="table-responsive mb-3"
+        *ngIf="labels.length > 0; else nothingToShow"
+      >
         <table class="table table-hover table-sm">
           <thead>
             <th></th>
@@ -16,13 +19,23 @@
               <td>{{ i + 1 }}</td>
               <td>{{ item.title }}</td>
               <td>
-                <span class="user-label px-3 small border-2 border-radius-2" [style.backgroundColor]="item.hexColor">{{
-                  item.hexColor
-                }}</span>
+                <span
+                  class="user-label px-3 small border-2 border-radius-2"
+                  [style.backgroundColor]="item.hexColor"
+                  >{{ item.hexColor }}</span
+                >
               </td>
-              <td>
-                <button type="button" class="btn-link-sm" (click)="edit(item)">Редактировать</button>
-                <button type="button" class="ms-3 btn-link-sm btn-link-danger" (click)="delete(item)">Удалить</button>
+              <td class="small">
+                <button type="button" class="btn-link-sm" (click)="edit(item)">
+                  Редактировать
+                </button>
+                <button
+                  type="button"
+                  class="ms-3 btn-link-sm btn-link-danger"
+                  (click)="delete(item)"
+                >
+                  Удалить
+                </button>
               </td>
             </tr>
           </tbody>
@@ -32,10 +45,22 @@
   </div>
 </div>
 
-<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>
 
-<app-dialog [show]="!!editForm" (closed)="onEditModalDlgClose()" [header]="'Редактировать тег'">
-  <form class="mb-5" *ngIf="!!editForm" [formGroup]="editForm" (ngSubmit)="onFormSubmit()">
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Редактировать тег'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onFormSubmit()"
+  >
     <div class="mb-3">
       <label>Название</label>
       <input type="text" class="form-control" formControlName="title" />

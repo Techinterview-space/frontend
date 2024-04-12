@@ -1,16 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { InterviewTemplate } from '@models/interview-models';
-import { defaultPageParams } from '@models/page-params';
-import { PaginatedList } from '@models/paginated-list';
-import { InterviewTemplatesService } from '@services/interview-templates.service';
-import { TitleService } from '@services/title.service';
-import { AlertService } from '@shared/components/alert/services/alert.service';
-import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
-import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { InterviewTemplate } from "@models/interview-models";
+import { defaultPageParams } from "@models/page-params";
+import { PaginatedList } from "@models/paginated-list";
+import { InterviewTemplatesService } from "@services/interview-templates.service";
+import { TitleService } from "@services/title.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
+import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
+import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  templateUrl: './interview-templates-admin-page.component.html'
+  templateUrl: "./interview-templates-admin-page.component.html",
 })
 export class InterviewTemplatesAdminPageComponent implements OnInit, OnDestroy {
   templates: PaginatedList<InterviewTemplate> | null = null;
@@ -19,10 +19,11 @@ export class InterviewTemplatesAdminPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: InterviewTemplatesService,
     private readonly title: TitleService,
-    private readonly alert: AlertService) {}
+    private readonly alert: AlertService
+  ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('All interview templates');
+    this.title.setTitle("Шаблоны для интервью");
     this.loadTemplates();
   }
 
@@ -39,19 +40,15 @@ export class InterviewTemplatesAdminPageComponent implements OnInit, OnDestroy {
 
   openDeleteDialog(item: InterviewTemplate): void {
     this.confirmDeletionMessage = new DialogMessage(
-      new ConfirmMsg(
-        'Delete the template',
-        'Are you sure to delete?',
-        () => {
-          this.service
-            .delete(item.id)
-            .pipe(untilDestroyed(this))
-            .subscribe(() => {
-              this.alert.success('Template was deleted');
-              this.loadTemplates();
-            });
-        }
-      )
+      new ConfirmMsg("Delete the template", "Are you sure to delete?", () => {
+        this.service
+          .delete(item.id)
+          .pipe(untilDestroyed(this))
+          .subscribe(() => {
+            this.alert.success("Template was deleted");
+            this.loadTemplates();
+          });
+      })
     );
   }
 }

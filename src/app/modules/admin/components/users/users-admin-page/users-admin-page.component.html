@@ -1,9 +1,12 @@
-<app-page-header>All users</app-page-header>
+<app-page-header>Пользователи</app-page-header>
 
 <div class="container my-5" *ngIf="users; else dataLoading">
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive mb-3" *ngIf="users.length > 0; else nothingToShow">
+      <div
+        class="table-responsive mb-3"
+        *ngIf="users.length > 0; else nothingToShow"
+      >
         <table class="table table-hover table-sm">
           <thead>
             <th>Id</th>
@@ -15,15 +18,32 @@
             <th></th>
           </thead>
           <tbody>
-            <tr *ngFor="let item of users; let i = index">
+            <tr *ngFor="let item of users; let i = index" class="small">
               <td>{{ item.id }}</td>
-              <td><app-user-link [css]="'link-as-text'" [user]="item"></app-user-link></td>
-              <td>{{item.email }}</td>
-              <td><app-user-roles-label [userRoles]="item.roles"></app-user-roles-label></td>
-              <td><app-status-label [status]="item.isActive"></app-status-label></td>
-              <td>{{ item.createdAt | date: 'yyyy-MM-dd HH:ss' }}</td>
               <td>
-                <button type="button" class="btn-link-sm" (click)="openUserRolesForm(item)">Изменить роль</button>
+                <app-user-link
+                  [css]="'link-as-text'"
+                  [user]="item"
+                ></app-user-link>
+              </td>
+              <td>{{ item.email }}</td>
+              <td>
+                <app-user-roles-label
+                  [userRoles]="item.roles"
+                ></app-user-roles-label>
+              </td>
+              <td>
+                <app-status-label [status]="item.isActive"></app-status-label>
+              </td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:ss" }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn-link-sm"
+                  (click)="openUserRolesForm(item)"
+                >
+                  Изменить роль
+                </button>
               </td>
             </tr>
           </tbody>
@@ -31,7 +51,10 @@
       </div>
 
       <div class="" *ngIf="source && source.results.length > 0">
-        <app-pagination-buttons [source]="source" (pageChange)="loadData($event)"></app-pagination-buttons>
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
       </div>
     </div>
   </div>
@@ -51,13 +74,24 @@
   </div>
 </ng-template>
 
-<app-dialog [show]="!!userRolesForm" (closed)="onEditModalDlgClose()" [header]="'Редактировать пользователя'">
+<app-dialog
+  [show]="!!userRolesForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Редактировать пользователя'"
+>
   <div>
-    <form class="mb-5" *ngIf="!!userRolesForm" [formGroup]="userRolesForm" (ngSubmit)="onFormSubmit()">
+    <form
+      class="mb-5"
+      *ngIf="!!userRolesForm"
+      [formGroup]="userRolesForm"
+      (ngSubmit)="onFormSubmit()"
+    >
       <div class="mb-3">
         <label>Роли</label>
         <select multiple class="form-control" formControlName="roles">
-          <option *ngFor="let option of options" [value]="option.item">{{ option.label }}</option>
+          <option *ngFor="let option of options" [value]="option.item">
+            {{ option.label }}
+          </option>
         </select>
 
         <app-field-error [field]="userRolesForm.get('roles')"></app-field-error>

@@ -1,20 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { defaultPageParams } from '@models/page-params';
-import { PaginatedList } from '@models/paginated-list';
-import { UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { TitleService } from '@services/title.service';
-import { AdminAllSalariesQueryParams, UserSalariesService } from '@services/user-salaries.service';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { AlertService } from '@shared/components/alert/services/alert.service';
-import { SalaryAdminItem } from '../salary-admin-item';
-import { SalariesTableFilter } from '../salaries-table-filter';
-import { LabelEntityDto } from '@services/label-entity.model';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { defaultPageParams } from "@models/page-params";
+import { PaginatedList } from "@models/paginated-list";
+import { UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { TitleService } from "@services/title.service";
+import {
+  AdminAllSalariesQueryParams,
+  UserSalariesService,
+} from "@services/user-salaries.service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { AlertService } from "@shared/components/alert/services/alert.service";
+import { SalaryAdminItem } from "../salary-admin-item";
+import { SalariesTableFilter } from "../salaries-table-filter";
+import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-  templateUrl: './salaries-not-in-stat-admin-page.component.html'
+  templateUrl: "./salaries-not-in-stat-admin-page.component.html",
 })
 export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
-
   salaries: Array<SalaryAdminItem> | null = null;
   source: PaginatedList<UserSalaryAdminDto> | null = null;
 
@@ -28,9 +30,10 @@ export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: UserSalariesService,
     titleService: TitleService,
-    private readonly alert: AlertService) {
-      titleService.setTitle('Salaries to be approved');
-    }
+    private readonly alert: AlertService
+  ) {
+    titleService.setTitle("Анкеты вне статистики");
+  }
 
   ngOnInit(): void {
     this.salaries = null;
@@ -45,18 +48,15 @@ export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
         this.industries = x.industries;
 
         this.filter = new SalariesTableFilter(this.professions);
-        this.loadData(
-          { 
-            page: this.currentPage,
-            pageSize: defaultPageParams.pageSize,
-            ...this.filter
-           }
-        );
+        this.loadData({
+          page: this.currentPage,
+          pageSize: defaultPageParams.pageSize,
+          ...this.filter,
+        });
       });
   }
 
   loadData(data: AdminAllSalariesQueryParams): void {
-
     this.salaries = null;
     this.source = null;
     this.currentPage = data.page;
@@ -65,7 +65,15 @@ export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
       .salariesNotInStats(data)
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
-        this.salaries = x.results.map((x) => new SalaryAdminItem(x, this.professions, this.skills, this.industries));
+        this.salaries = x.results.map(
+          (x) =>
+            new SalaryAdminItem(
+              x,
+              this.professions,
+              this.skills,
+              this.industries
+            )
+        );
         this.source = x;
       });
   }
@@ -79,7 +87,7 @@ export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
       .delete(salary.id)
       .pipe(untilDestroyed(this))
       .subscribe(() => {
-        this.alert.success('Salary deleted');
+        this.alert.success("Salary deleted");
         this.ngOnInit();
       });
   }
@@ -89,7 +97,7 @@ export class SalariesNotInStatsAdminPageComponent implements OnInit, OnDestroy {
       .approve(salary.id)
       .pipe(untilDestroyed(this))
       .subscribe(() => {
-        this.alert.success('Salary approved');
+        this.alert.success("Salary approved");
         this.ngOnInit();
       });
   }

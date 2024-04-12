@@ -23,20 +23,28 @@
             <li class="list-group-item">
               <div class="text-muted small">Видимость</div>
               <div>
-                <app-visibility-label [visibility]="interviewTemplate.isPublic"></app-visibility-label>
+                <app-visibility-label
+                  [visibility]="interviewTemplate.isPublic"
+                ></app-visibility-label>
               </div>
             </li>
 
-            <li class="list-group-item" *ngIf="interviewTemplate.labels.length > 0">
+            <li
+              class="list-group-item"
+              *ngIf="interviewTemplate.labels.length > 0"
+            >
               <div class="text-muted small">Теги</div>
               <div>
-                <app-label *ngFor="let item of interviewTemplate.labels" [label]="item"></app-label>
+                <app-label
+                  *ngFor="let item of interviewTemplate.labels"
+                  [label]="item"
+                ></app-label>
               </div>
             </li>
             <li class="list-group-item">
               <div class="text-muted small">Обновлено</div>
               <div>
-                {{ interviewTemplate.updatedAt | date: 'HH:mm yyyy-MM-dd' }}
+                {{ interviewTemplate.updatedAt | date: "HH:mm yyyy-MM-dd" }}
               </div>
             </li>
           </ul>
@@ -48,7 +56,7 @@
           <div class="d-inline-block">
             <app-go-back-button></app-go-back-button>
           </div>
-          <div class="d-inline-block" *ngIf="showEditButtons">
+          <div class="d-inline-block small" *ngIf="showEditButtons">
             <a
               routerLink="/interviews/templates/{{ interviewTemplate.id }}/edit"
               class="btn-link-sm"
@@ -73,19 +81,30 @@
         <div class="card-body">
           <div class="mb-3" *ngIf="interviewTemplate.overallOpinion">
             <div>
-              <div class="small text-muted">Шаблон для поля "Общее впечатление"</div>
+              <div class="small text-muted">
+                Шаблон для поля "Общее впечатление"
+              </div>
               <markdown>{{ interviewTemplate.overallOpinion }}</markdown>
             </div>
             <hr />
           </div>
           <ul
             class="list-group list-group-flush"
-            *ngIf="interviewTemplate && interviewTemplate.subjects && interviewTemplate.subjects.length > 0; noSubjectsYet"
+            *ngIf="
+              interviewTemplate &&
+                interviewTemplate.subjects &&
+                interviewTemplate.subjects.length > 0;
+              noSubjectsYet
+            "
           >
-            <li class="list-group-item" *ngFor="let item of interviewTemplate.subjects; let i = index">
+            <li
+              class="list-group-item"
+              *ngFor="let item of interviewTemplate.subjects; let i = index"
+            >
               <div class="d-flex justify-content-between">
                 <div class="d-inline-block">
-                  <span class="text-muted small">{{ i + 1 }}.</span><strong class="ms-1">{{ item.title }}</strong>
+                  <span class="text-muted small">{{ i + 1 }}.</span
+                  ><strong class="ms-1">{{ item.title }}</strong>
                 </div>
               </div>
               <div class="ps-3" *ngIf="item.description">
@@ -113,4 +132,7 @@
   </div>
 </ng-template>
 
-<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

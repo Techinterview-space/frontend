@@ -1,9 +1,8 @@
-<app-page-header>Salaries to be approved</app-page-header>
+<app-page-header>Анкеты вне статистики</app-page-header>
 
 <div class="container my-5" *ngIf="salaries; else dataLoading">
   <div class="card">
     <div class="card-body">
-
       <app-salaries-admin-paginated-table
         [source]="source"
         [salaries]="salaries"
@@ -12,8 +11,7 @@
         (approveRequested)="approveSalary($event)"
         (loadDataRequested)="loadData($event)"
         (deleteRequested)="deleteSalary($event)"
-        ></app-salaries-admin-paginated-table>
-
+      ></app-salaries-admin-paginated-table>
     </div>
   </div>
 </div>

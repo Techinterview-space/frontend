@@ -1,9 +1,12 @@
-<app-page-header> All interview templates </app-page-header>
+<app-page-header>Шаблоны для интервью</app-page-header>
 
 <div class="container mt-5 mb-5" *ngIf="templates; else dataLoading">
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive mb-3" *ngIf="templates.results.length > 0; else nothingToShow">
+      <div
+        class="table-responsive mb-3"
+        *ngIf="templates.results.length > 0; else nothingToShow"
+      >
         <table class="table table-hover table-sm">
           <thead>
             <th>#</th>
@@ -20,11 +23,25 @@
               <td>{{ item.title }}</td>
               <td>{{ item.author?.email }}</td>
               <td>{{ item.subjects?.length ?? 0 }}</td>
-              <td><app-visibility-label [visibility]="item.isPublic"></app-visibility-label></td>
-              <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
               <td>
-                <a routerLink="/interviews/templates/{{ item.id }}" class="btn-link-sm">Открыть</a>
-                <button type="button" class="btn-link-sm ms-1" (click)="openDeleteDialog(item)">Удалить</button>
+                <app-visibility-label
+                  [visibility]="item.isPublic"
+                ></app-visibility-label>
+              </td>
+              <td>{{ item.updatedAt | date: "HH:mm yyyy-MM-dd" }}</td>
+              <td class="small">
+                <a
+                  routerLink="/interviews/templates/{{ item.id }}"
+                  class="btn-link-sm"
+                  >Открыть</a
+                >
+                <button
+                  type="button"
+                  class="btn-link-sm ms-1 text-danger"
+                  (click)="openDeleteDialog(item)"
+                >
+                  Удалить
+                </button>
               </td>
             </tr>
           </tbody>
@@ -32,7 +49,10 @@
       </div>
 
       <div class="" *ngIf="templates && templates.results.length > 0">
-        <app-pagination-buttons [source]="templates" (pageChange)="loadTemplates($event)"></app-pagination-buttons>
+        <app-pagination-buttons
+          [source]="templates"
+          (pageChange)="loadTemplates($event)"
+        ></app-pagination-buttons>
       </div>
     </div>
   </div>
@@ -52,4 +72,7 @@
   </div>
 </ng-template>
 
-<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

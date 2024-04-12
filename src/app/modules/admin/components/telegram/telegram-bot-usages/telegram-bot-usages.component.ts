@@ -1,25 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { PageParams, defaultPageParams } from '@models/page-params';
-import { PaginatedList } from '@models/paginated-list';
-import { TitleService } from '@services/title.service';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { TelegramBotService } from '@services/telegram-bot.service';
-import { TelegramBotUsage } from '@models/telegram';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { PageParams, defaultPageParams } from "@models/page-params";
+import { PaginatedList } from "@models/paginated-list";
+import { TitleService } from "@services/title.service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { TelegramBotService } from "@services/telegram-bot.service";
+import { TelegramBotUsage } from "@models/telegram";
 
 @Component({
-  templateUrl: './telegram-bot-usages.component.html'
+  templateUrl: "./telegram-bot-usages.component.html",
 })
 export class TelegramBotUsagesComponent implements OnInit, OnDestroy {
-
   items: Array<TelegramBotUsage> | null = null;
   source: PaginatedList<TelegramBotUsage> | null = null;
   currentPage: number = 1;
 
   constructor(
     private readonly service: TelegramBotService,
-    titleService: TitleService) {
-      titleService.setTitle('Telegram bot usages');
-    }
+    titleService: TitleService
+  ) {
+    titleService.setTitle("Использование бота");
+  }
 
   ngOnInit(): void {
     this.items = null;
@@ -29,16 +29,15 @@ export class TelegramBotUsagesComponent implements OnInit, OnDestroy {
   }
 
   loadData(pageToRequest: number): void {
-
     this.items = null;
     this.source = null;
     this.currentPage = pageToRequest;
 
     this.service
-      .botUsages({ 
+      .botUsages({
         page: this.currentPage,
-        pageSize: defaultPageParams.pageSize
-       })
+        pageSize: defaultPageParams.pageSize,
+      })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.items = x.results;

@@ -1,14 +1,18 @@
 <app-page-header>Навыки</app-page-header>
 
-<div class="container py-5" *ngIf="skills; else dataLoading">
+<div class="container py-3" *ngIf="skills; else dataLoading">
   <div class="card">
     <div class="card-body">
-
       <div class="mb-2">
-        <button class="btn btn-sm btn-primary" (click)="create()">Create</button>
+        <button class="btn btn-sm btn-primary" (click)="create()">
+          Создать
+        </button>
       </div>
 
-      <div class="table-responsive mb-3" *ngIf="skills.length > 0; else nothingToShow">
+      <div
+        class="table-responsive mb-3"
+        *ngIf="skills.length > 0; else nothingToShow"
+      >
         <table class="table table-hover table-sm">
           <thead>
             <th>ID</th>
@@ -22,13 +26,17 @@
               <td>{{ item.id }}</td>
               <td>{{ item.title }}</td>
               <td>
-                <span class="user-label px-3 small border-2 border-radius-2" [style.backgroundColor]="item.hexColorAsString">{{
-                  item.hexColorAsString
-                }}</span>
+                <span
+                  class="user-label px-3 small border-2 border-radius-2"
+                  [style.backgroundColor]="item.hexColorAsString"
+                  >{{ item.hexColorAsString }}</span
+                >
               </td>
               <td>{{ item.createdBy }}</td>
-              <td>
-                <button type="button" class="btn-link-sm" (click)="edit(item)">Редактировать</button>
+              <td class="small">
+                <button type="button" class="btn-link-sm" (click)="edit(item)">
+                  Редактировать
+                </button>
                 <button
                   type="button"
                   class="ms-2 btn-link-sm btn-link-danger"
@@ -45,10 +53,22 @@
   </div>
 </div>
 
-<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>
 
-<app-dialog [show]="!!editForm" (closed)="onEditModalDlgClose()" [header]="'Редактировать навык'">
-  <form class="mb-5" *ngIf="!!editForm" [formGroup]="editForm" (ngSubmit)="onEditFormSubmit()">
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Редактировать навык'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
     <div class="mb-3">
       <label>Название</label>
       <input type="text" class="form-control" formControlName="title" />
@@ -58,7 +78,13 @@
     <div class="mb-3">
       <div class="d-flex justify-content-between">
         <label>Цвет</label>
-        <button type="button" (click)="editForm.randomizeColor()" class="btn-link-sm">Случайный выбор</button>
+        <button
+          type="button"
+          (click)="editForm.randomizeColor()"
+          class="btn-link-sm"
+        >
+          Случайный выбор
+        </button>
       </div>
       <input type="color" class="form-control" formControlName="hexColor" />
       <app-field-error [field]="editForm.get('hexColor')"></app-field-error>

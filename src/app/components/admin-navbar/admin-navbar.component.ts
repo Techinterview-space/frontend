@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 interface NavbarLink {
   title: string;
@@ -11,9 +11,9 @@ interface NavbarDropdown {
 }
 
 @Component({
-  selector: 'app-admin-navbar',
-  templateUrl: './admin-navbar.component.html',
-  styleUrls: ['./admin-navbar.component.scss']
+  selector: "app-admin-navbar",
+  templateUrl: "./admin-navbar.component.html",
+  styleUrls: ["./admin-navbar.component.scss"],
 })
 export class AdminNavbarComponent {
   readonly showSearchForm = false;
@@ -22,75 +22,75 @@ export class AdminNavbarComponent {
   constructor() {
     this.dropdowns = [
       {
-        title: 'Users',
+        title: "Юзеры",
         links: [
           {
-            title: 'All users',
-            url: '/admin/users'
-          }
-        ]
+            title: "Все юзеры",
+            url: "/admin/users",
+          },
+        ],
       },
       {
-        title: 'Templates',
+        title: "Шаблоны",
         links: [
           {
-            title: 'All',
-            url: '/admin/interview-templates'
-          }
-        ]
+            title: "Все шаблоны",
+            url: "/admin/interview-templates",
+          },
+        ],
       },
       {
-        title: 'Select boxes',
+        title: "Справочники",
         links: [
           {
-            title: 'Professions',
-            url: '/admin/professions'
+            title: "Специальности",
+            url: "/admin/professions",
           },
           {
-            title: 'Skills',
-            url: '/admin/skills'
+            title: "Навыки",
+            url: "/admin/skills",
           },
           {
-            title: 'Work industries',
-            url: '/admin/work-industries'
+            title: "Сферы деятельности",
+            url: "/admin/work-industries",
           },
-        ]
+        ],
       },
       {
-        title: 'Salaries',
+        title: "Зарплаты",
         links: [
           {
-            title: 'All salaries',
-            url: '/admin/salaries'
+            title: "Зарплаты в статистике",
+            url: "/admin/salaries",
           },
           {
-            title: 'Salaries to be approved',
-            url: '/admin/salaries/not-in-stats'
+            title: "Зарплаты вне статистики",
+            url: "/admin/salaries/not-in-stats",
           },
           {
-            title: 'Salaries adding chart',
-            url: '/admin/salaries/salaries-adding-trend-chart'
+            title: "Тренд добавления анкет",
+            url: "/admin/salaries/salaries-adding-trend-chart",
           },
-        ]
+        ],
       },
       {
-        title: 'Telegram',
+        title: "Telegram",
         links: [
           {
-            title: 'Bot usages',
-            url: '/admin/telegram/bot-usages'
-          }
-        ]
+            title: "Использование бота",
+            url: "/admin/telegram/bot-usages",
+          },
+        ],
       },
       {
-        title: 'Tools',
+        title: "Инструменты",
         links: [
           {
-            title: 'Background jobs',
-            url: '/admin/background-jobs'
-          }
-        ]
-      }
+            title: "Хз как назвать",
+            url: "/admin/background-jobs",
+          },
+        ],
+      },
     ];
   }
 }

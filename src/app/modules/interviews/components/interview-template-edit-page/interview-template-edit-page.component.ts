@@ -1,20 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Label } from '@models/user-label.model';
-import { InterviewTemplatesService } from '@services/interview-templates.service';
-import { TitleService } from '@services/title.service';
-import { UserLabelsService } from '@services/user-labels.service';
-import { AlertService } from '@shared/components/alert/services/alert.service';
-import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { InterviewTemplateFormGroup } from './interview-template-form-group';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Label } from "@models/user-label.model";
+import { InterviewTemplatesService } from "@services/interview-templates.service";
+import { TitleService } from "@services/title.service";
+import { UserLabelsService } from "@services/user-labels.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
+import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { InterviewTemplateFormGroup } from "./interview-template-form-group";
 
 @Component({
-  templateUrl: './interview-template-edit-page.component.html',
-  styleUrls: ['./interview-template-edit-page.component.scss']
+  templateUrl: "./interview-template-edit-page.component.html",
+  styleUrls: ["./interview-template-edit-page.component.scss"],
 })
 export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
-  pageTitle = 'Create a template';
+  pageTitle = "Создать шаблон";
   formGroup: InterviewTemplateFormGroup | null = null;
 
   labels: Array<Label> = [];
@@ -40,12 +40,12 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activateRoute
-      .getParam('id')
+      .getParam("id")
       .pipe(untilDestroyed(this))
       .subscribe((id) => {
         this.templateId = id;
         if (this.templateId != null) {
-          this.setTitle('Редактировать шаблон');
+          this.setTitle("Редактировать шаблон");
           this.service
             .byId(this.templateId)
             .pipe(untilDestroyed(this))
@@ -56,7 +56,7 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.setTitle('Создать шаблон');
+        this.setTitle("Создать шаблон");
         this.formGroup = new InterviewTemplateFormGroup();
       });
 
@@ -72,7 +72,7 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
     if (this.templateId == null) {
       const createRequest = this.formGroup!.createRequest(this.selectedLabels);
       if (createRequest == null) {
-        this.alert.error('Invalid form data');
+        this.alert.error("Invalid form data");
         return;
       }
 
@@ -80,15 +80,15 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
         .create(createRequest)
         .pipe(untilDestroyed(this))
         .subscribe((id) => {
-          this.alert.success('Шаблон создан');
-          this.router.navigate(['/interviews/templates/my']);
+          this.alert.success("Шаблон создан");
+          this.router.navigate(["/interviews/templates/my"]);
         });
       return;
     }
 
     const updateRequest = this.formGroup!.updateRequest(this.selectedLabels);
     if (updateRequest == null) {
-      this.alert.error('Invalid form data');
+      this.alert.error("Invalid form data");
       return;
     }
 
@@ -96,8 +96,8 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
       .update(updateRequest)
       .pipe(untilDestroyed(this))
       .subscribe((id) => {
-        this.alert.success('Шаблон обновлен');
-        this.router.navigate(['/interviews/templates/my']);
+        this.alert.success("Шаблон обновлен");
+        this.router.navigate(["/interviews/templates/my"]);
       });
   }
 

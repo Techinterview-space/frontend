@@ -1,27 +1,42 @@
 <div *ngIf="filter" class="mb-3 row">
   <div class="col-md-2">
-    <label for="profession" class="form-label">Company</label>
-      <select class="form-select" id="company" name="company" [(ngModel)]="filter.company">
-        <option selected value="">All</option>
-        <option *ngFor="let item of filter.companies" [value]="item.item">
-          {{ item.label }}
-        </option>
-      </select>
+    <label for="profession" class="form-label">Компания</label>
+    <select
+      class="form-select form-select-sm"
+      id="company"
+      name="company"
+      [(ngModel)]="filter.company"
+    >
+      <option selected value="">All</option>
+      <option *ngFor="let item of filter.companies" [value]="item.item">
+        {{ item.label }}
+      </option>
+    </select>
   </div>
 
   <div class="col-md-2">
-    <label for="profession" class="form-label">Profession</label>
-      <select class="form-select" id="profession" name="profession" [(ngModel)]="filter.profession">
-        <option selected value="">All</option>
-        <option *ngFor="let item of filter.professions" [value]="item.item">
-          {{ item.label }}
-        </option>
-      </select>
+    <label for="profession" class="form-label">Специальность</label>
+    <select
+      class="form-select form-select-sm"
+      id="profession"
+      name="profession"
+      [(ngModel)]="filter.profession"
+    >
+      <option selected value="">All</option>
+      <option *ngFor="let item of filter.professions" [value]="item.item">
+        {{ item.label }}
+      </option>
+    </select>
   </div>
 
   <div class="col-md-2">
-    <label for="profession" class="form-label">Grade</label>
-    <select class="form-select" id="grade" name="grade" [(ngModel)]="filter.grade">
+    <label for="profession" class="form-label">Грейд</label>
+    <select
+      class="form-select form-select-sm"
+      id="grade"
+      name="grade"
+      [(ngModel)]="filter.grade"
+    >
       <option selected value="">All</option>
       <option *ngFor="let item of filter.grades" [value]="item.item">
         {{ item.label }}
@@ -30,43 +45,61 @@
   </div>
 
   <div class="col-md-2">
-    <label for="profession" class="form-label">Order by</label>
-    <select class="form-select" id="grade" name="orderBy" [(ngModel)]="filter.order_type">
+    <label for="profession" class="form-label">Сортировка</label>
+    <select
+      class="form-select form-select-sm"
+      id="grade"
+      name="orderBy"
+      [(ngModel)]="filter.order_type"
+    >
       <option *ngFor="let item of filter.orderTypes" [value]="item.item">
         {{ item.label }}
       </option>
     </select>
   </div>
 
-  <div class="col-md-2 d-flex align-items-end">
-    <div>
-      <button type="button" class="btn btn-outline-primary" (click)="loadData()">Apply</button>
-      <button type="button" class="btn btn-outline-dark ms-2" (click)="clearFilter()">Reset</button>
-    </div>
+  <div class="col-md-2 d-flex align-items-end small">
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-primary"
+      (click)="loadData()"
+    >
+      Применить
+    </button>
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-dark ms-2"
+      (click)="clearFilter()"
+    >
+      Сброс
+    </button>
   </div>
 </div>
 
-<div class="table-responsive mb-3" *ngIf="salaries && salaries.length > 0; else nothingToShow">
+<div
+  class="table-responsive mb-3"
+  *ngIf="salaries && salaries.length > 0; else nothingToShow"
+>
   <table class="table table-hover table-sm">
     <thead class="small">
-      <th>Value</th>
-      <th>Period</th>
-      <th>Age</th>
-      <th>Gender</th>
-      <th>Started</th>
-      <th>Profession</th>
-      <th>Grade</th>
-      <th>Company</th>
-      <th>City</th>
-      <th>Skill</th>
-      <th>Industry</th>
-      <th>Created at</th>
-      <th>Updated at</th>
+      <th>ЗП</th>
+      <th>Период</th>
+      <th>Возраст</th>
+      <th>Гендер</th>
+      <th>Начало карьеры</th>
+      <th>Специальность</th>
+      <th>Грейд</th>
+      <th>Компания</th>
+      <th>Город</th>
+      <th>Навык</th>
+      <th>Сфера</th>
+      <th>Создано</th>
+      <th>Обновлено</th>
       <th></th>
     </thead>
     <tbody>
       <tr class="small" *ngFor="let item of salaries; let i = index">
-        <td>{{ item.value | number: '1.0-0' }}</td>
+        <td>{{ item.value | number: "1.0-0" }}</td>
         <td>{{ item.quarter }}.{{ item.year }}</td>
         <td>{{ item.age }}</td>
         <td>{{ item.gender }}</td>
@@ -77,25 +110,34 @@
         <td>{{ item.city }}</td>
         <td>{{ item.skill }}</td>
         <td>{{ item.industry }}</td>
-        <td>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
-        <td>{{ item.updatedAt | date: 'yyyy-MM-dd HH:mm' }}</td>
+        <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+        <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
         <td>
           <button
             type="button"
             class="btn-link-sm btn-link-danger"
-            (click)="openDeleteDialog(item)">Delete</button>
+            (click)="openDeleteDialog(item)"
+          >
+            Удалить
+          </button>
           <button
             *ngIf="showApproveButton"
             type="button"
             class="btn-link-sm ms-2"
-            (click)="openApproveDialog(item)">Approve</button>
+            (click)="openApproveDialog(item)"
+          >
+            Аппрув
+          </button>
 
           <button
             *ngIf="showExcludeButton"
             type="button"
             class="btn-link-sm ms-2 btn-link-warning"
             title="Exclude the salary from stats"
-            (click)="openExcludeDialog(item)">Exclude</button>
+            (click)="openExcludeDialog(item)"
+          >
+            Исключить
+          </button>
         </td>
       </tr>
     </tbody>
@@ -103,7 +145,10 @@
 </div>
 
 <div class="" *ngIf="source && source.results.length > 0">
-  <app-pagination-buttons [source]="source" (pageChange)="loadData($event)"></app-pagination-buttons>
+  <app-pagination-buttons
+    [source]="source"
+    (pageChange)="loadData($event)"
+  ></app-pagination-buttons>
 </div>
 
 <ng-template #dataLoading>
@@ -122,4 +167,5 @@
 
 <app-confirm-dialog
   *ngIf="confirmDeletionMessage"
-  [message]="confirmDeletionMessage"></app-confirm-dialog>
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

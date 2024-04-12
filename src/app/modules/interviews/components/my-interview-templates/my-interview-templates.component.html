@@ -3,7 +3,10 @@
 <div class="container my-5" *ngIf="templates; else dataLoading">
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive mb-3" *ngIf="templates.length > 0; else nothingToShow">
+      <div
+        class="table-responsive mb-3"
+        *ngIf="templates.length > 0; else nothingToShow"
+      >
         <table class="table table-hover table-sm">
           <thead>
             <th>#</th>
@@ -19,12 +22,31 @@
               <td>{{ i + 1 }}</td>
               <td>{{ item.title }}</td>
               <td>{{ item.subjects?.length ?? 0 }}</td>
-              <td><app-visibility-label [visibility]="item.isPublic"></app-visibility-label></td>
-              <td><app-label *ngFor="let label of item.labels" [label]="label"></app-label></td>
-              <td>{{ item.updatedAt | date: 'HH:mm yyyy-MM-dd' }}</td>
               <td>
-                <a routerLink="/interviews/templates/{{ item.id }}" class="btn-link-sm"> Открыть</a>
-                <button type="button" class="btn-link-sm btn-link-danger ms-1" title="Delete" (click)="delete(item)">
+                <app-visibility-label
+                  [visibility]="item.isPublic"
+                ></app-visibility-label>
+              </td>
+              <td>
+                <app-label
+                  *ngFor="let label of item.labels"
+                  [label]="label"
+                ></app-label>
+              </td>
+              <td>{{ item.updatedAt | date: "HH:mm yyyy-MM-dd" }}</td>
+              <td class="small">
+                <a
+                  routerLink="/interviews/templates/{{ item.id }}"
+                  class="btn-link-sm"
+                >
+                  Открыть</a
+                >
+                <button
+                  type="button"
+                  class="btn-link-sm btn-link-danger ms-1"
+                  title="Delete"
+                  (click)="delete(item)"
+                >
                   Удалить
                 </button>
               </td>
@@ -56,4 +78,7 @@
   </div>
 </ng-template>
 
-<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

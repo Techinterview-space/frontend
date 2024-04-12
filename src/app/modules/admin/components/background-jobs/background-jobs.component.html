@@ -1,19 +1,13 @@
-<app-page-header>Admin tools</app-page-header>
+<app-page-header>Инструменты</app-page-header>
 
 <div class="container my-5">
   <div class="card">
     <div class="card-body">
       <div>
         <div class="h5">Health check</div>
-        <app-health-check-table [items]="healthCheckItems"></app-health-check-table>
-      </div>
-
-      <div class="mt-5" *ngIf="jobItems && jobItems.length > 0">
-        <div class="h5">Background jobs</div>
-        <div class="text-muted mb-3">
-          <small>Задачи, которые выполняются в фоне, но здесь можно запустить их вручную</small>
-        </div>
-        <app-jobs-table [items]="jobItems"></app-jobs-table>
+        <app-health-check-table
+          [items]="healthCheckItems"
+        ></app-health-check-table>
       </div>
 
       <div class="mt-5">
