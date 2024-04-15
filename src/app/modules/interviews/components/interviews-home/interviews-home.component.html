@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row pt-5">
-    <div class="col-sm-6 d-flex align-items-center">
+    <div class="col-md-6 d-flex align-items-center mb-2">
       <div class="d-inline-block my-5">
         <div class="display-1">Заметки к интервью</div>
         <div class="lead">Проводите технические интервью.</div>
         <div class="lead">Ведите заметки. Создавайте шаблоны.</div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-md-6">
       <img src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/intervew_transparent_1000.png" alt="Interviewer" class="img-fluid" />
     </div>
   </div>
@@ -17,11 +17,11 @@
   <div *ngFor="let hint of images" class="feature {{ hint.background }}">
     <div class="container">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-md-4 pe-3 mb-2">
           <div class="feature-title">{{ hint.title }}</div>
           <div class="mt-3 feature-subtitle">{{ hint.subtitle }}</div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-md-8 ps-5">
           <div *ngIf="hint.showPreloader" class="h-100 d-flex justify-content-center align-items-center">
             <div class="spinner-border" style="width: 3rem; height: 3rem" role="status">
               <span class="visually-hidden">Loading...</span>
@@ -43,7 +43,8 @@
 
 <div class="feature bg-white">
   <div class="container">
-    <div class="feature-title">Готовы начать? Просто создайте свою первую заметку или шаблон</div>
+    <div class="feature-title">Готовы начать?</div>
+    <div class="feature-title">Просто создайте свою первую заметку или шаблон.</div>
     <div class="mt-5">
       <button type="button" class="btn btn-huge btn-primary" (click)="getStarted()">{{ getStartedButtonTitle }}</button>
     </div>
