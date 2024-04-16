@@ -10,7 +10,7 @@ import { untilDestroyed } from './shared/subscriptions/until-destroyed';
 })
 export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
-  title = 'Tech.Interview';
+  title = 'Techinterview.space';
 
   timer = 'timer';
   transparent = 'transparent';

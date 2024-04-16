@@ -60,11 +60,11 @@ export class AdminNavbarComponent {
         title: "Зарплаты",
         links: [
           {
-            title: "Зарплаты в статистике",
+            title: "Анкеты в статистике",
             url: "/admin/salaries",
           },
           {
-            title: "Зарплаты вне статистики",
+            title: "Анкеты вне статистики",
             url: "/admin/salaries/not-in-stats",
           },
           {
