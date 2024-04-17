@@ -17,8 +17,8 @@ export class StubSalariesChart extends SalariesChart {
         super({
             averageSalary: data?.averageSalary ?? StubSalariesChart.getRandomNumber(700, 300) * 1000,
             medianSalary: data?.medianSalary ?? StubSalariesChart.getRandomNumber(700, 300) * 1000,
-            averageRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
-            medianRemoteSalary: StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
+            averageRemoteSalary: data?.averageRemoteSalary ?? StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
+            medianRemoteSalary: data?.medianRemoteSalary ?? StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
             localSalariesByGrade: [],
             remoteSalariesByGrade: [],
             shouldAddOwnSalary: true,
