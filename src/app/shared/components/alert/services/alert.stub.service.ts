@@ -1,6 +1,6 @@
-import { IAlertService } from './i-alert.service';
-import { Subject } from 'rxjs';
-import { Alert } from '../models/alert.model';
+import { IAlertService } from "./i-alert.service";
+import { Subject } from "rxjs";
+import { Alert } from "../models/alert.model";
 
 export class AlertStubService implements IAlertService {
   readonly onAlert$: Subject<Alert>;

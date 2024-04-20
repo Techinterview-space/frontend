@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { LabelEntityBaseService } from './label-entity-base.service';
+import { Injectable } from "@angular/core";
+import { ApiService } from "./api.service";
+import { LabelEntityBaseService } from "./label-entity-base.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class WorkIndusrtiesService extends LabelEntityBaseService {
-
   constructor(api: ApiService) {
-    super('/api/work-industries/', api);
+    super("/api/work-industries/", api);
   }
 }

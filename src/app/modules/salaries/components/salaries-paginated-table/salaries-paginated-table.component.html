@@ -1,5 +1,8 @@
 <div>
-  <div class="table-responsive" *ngIf="items && items.length > 0; else nothingToShow">
+  <div
+    class="table-responsive"
+    *ngIf="items && items.length > 0; else nothingToShow"
+  >
     <table class="table table-hover table-sm">
       <thead class="small">
         <th>ЗП, тенге</th>
@@ -17,7 +20,7 @@
       </thead>
       <tbody>
         <tr class="small" *ngFor="let item of items; let i = index">
-          <td>{{ item.value | number: '1.0-0' }}</td>
+          <td>{{ item.value | number: "1.0-0" }}</td>
           <td>{{ item.quarter }}.{{ item.year }}</td>
           <td>{{ item.age }}</td>
           <td>{{ item.gender }}</td>
@@ -28,14 +31,17 @@
           <td>{{ item.city }}</td>
           <td>{{ item.skill }}</td>
           <td>{{ item.industry }}</td>
-          <td>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  
+
   <div class="mt-3" *ngIf="source && source.results.length > 0">
-    <app-pagination-buttons [source]="source" (pageChange)="loadData($event)"></app-pagination-buttons>
+    <app-pagination-buttons
+      [source]="source"
+      (pageChange)="loadData($event)"
+    ></app-pagination-buttons>
   </div>
 </div>
 

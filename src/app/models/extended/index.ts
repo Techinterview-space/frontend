@@ -1,1 +1,1 @@
-export * from './application-user-extended';
+export * from "./application-user-extended";

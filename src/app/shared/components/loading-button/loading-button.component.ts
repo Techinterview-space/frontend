@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: 'app-loading-button',
-  templateUrl: './loading-button.component.html',
-  styleUrls: ['./loading-button.component.scss']
+  selector: "app-loading-button",
+  templateUrl: "./loading-button.component.html",
+  styleUrls: ["./loading-button.component.scss"],
 })
 export class LoadingButtonComponent {
   @Input()
-  css = 'btn btn-primary';
+  css = "btn btn-primary";
 
   @Input()
-  title = '';
+  title = "";
 
   waitingResponse = false;
   timeout: NodeJS.Timeout | null = null;

@@ -5,25 +5,25 @@ import { KazakhstanCity } from "./kazakhstan-city";
 import { Gender } from "@models/enums/gender.enum";
 
 export interface UserSalaryAdminDto extends UserSalary {
-    id: string;
-    updatedAt: Date | null;
+  id: string;
+  updatedAt: Date | null;
 }
 
 export interface UserSalary {
-    value: number;
-    quarter: number;
-    year: number;
-    currency: Currency;
-    company: CompanyType;
-    grade: DeveloperGrade | null;
-    city: KazakhstanCity | null;
-    gender: Gender | null;
-    age: number | null;
-    yearOfStartingWork: number | null;
-    yearsOfExperience: number | null;
-    requireAdditionalData: boolean;
-    skillId: number | null;
-    workIndustryId: number | null;
-    professionId: number | null;
-    createdAt: Date;
+  value: number;
+  quarter: number;
+  year: number;
+  currency: Currency;
+  company: CompanyType;
+  grade: DeveloperGrade | null;
+  city: KazakhstanCity | null;
+  gender: Gender | null;
+  age: number | null;
+  yearOfStartingWork: number | null;
+  yearsOfExperience: number | null;
+  requireAdditionalData: boolean;
+  skillId: number | null;
+  workIndustryId: number | null;
+  professionId: number | null;
+  createdAt: Date;
 }

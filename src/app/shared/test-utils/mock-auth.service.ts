@@ -1,7 +1,7 @@
-import { Subject, of, Observable } from 'rxjs';
-import { IAuthService } from '../services/auth/auth.service';
-import { ApplicationUserExtended } from '@models/extended';
-import { IdToken } from '@auth0/auth0-angular';
+import { Subject, of, Observable } from "rxjs";
+import { IAuthService } from "../services/auth/auth.service";
+import { ApplicationUserExtended } from "@models/extended";
+import { IdToken } from "@auth0/auth0-angular";
 
 export class MockAuthService implements IAuthService {
   public readonly loggedOutInvoked$: Subject<void> = new Subject();
@@ -13,7 +13,7 @@ export class MockAuthService implements IAuthService {
   }
 
   getAuthorizationHeaderValue(): string {
-    return '';
+    return "";
   }
 
   completeAuthentication(): Observable<IdToken | null> {

@@ -1,7 +1,7 @@
-import { YearRangeValidator } from '@shared/directives/year-range.directive';
+import { YearRangeValidator } from "@shared/directives/year-range.directive";
 
-describe('YearRangeValidator', () => {
-  it('return False If Year is between 1900 and 3000', () => {
+describe("YearRangeValidator", () => {
+  it("return False If Year is between 1900 and 3000", () => {
     const target = new YearRangeValidator();
     target.min = 1900;
     target.max = 3000;
@@ -9,7 +9,7 @@ describe('YearRangeValidator', () => {
     expect(target.checkIfYearRangeInvalid(year)).toBeFalsy();
   });
 
-  it('return True If Year is not between 1900 and 3000', () => {
+  it("return True If Year is not between 1900 and 3000", () => {
     const target = new YearRangeValidator();
     target.min = 1900;
     target.max = 3000;

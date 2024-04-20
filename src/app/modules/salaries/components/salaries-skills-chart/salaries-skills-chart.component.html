@@ -7,22 +7,41 @@
       class="cursor-pointer form-check-input"
       id="includeNoDataCheckbox"
       [(ngModel)]="showNoDataArea"
-      [ngModelOptions]="{standalone: true}"
-      (change)="changeShowNoDataAreaToggler()" />
-    <label class="ms-3 form-check-label fst-italic cursor-pointer" for="includeNoDataCheckbox">
+      [ngModelOptions]="{ standalone: true }"
+      (change)="changeShowNoDataAreaToggler()"
+    />
+    <label
+      class="ms-3 form-check-label fst-italic cursor-pointer"
+      for="includeNoDataCheckbox"
+    >
       Включить в график пункт "Нет данных"
     </label>
   </div>
 
   <div class="" *ngIf="canvasId">
     <div id="canvas-container">
-      <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
+      <canvas [attr.id]="canvasId">{{ chartDataLocal }}</canvas>
     </div>
   </div>
 
-  <div class="fst-italic mb-2" *ngIf="currentSalary != null && currentSalary.skillId == null; else hasSkillInSalary">
+  <div
+    class="fst-italic mb-2"
+    *ngIf="
+      currentSalary != null && currentSalary.skillId == null;
+      else hasSkillInSalary
+    "
+  >
     <div>Вы пока не указали ваш основной ЯП/фреймворк.</div>
-    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
+    <div>
+      Уточнить данные
+      <button
+        type="button"
+        class="btn-link-sm fst-italic font-weight-normal"
+        (click)="openEditSalaryAction()"
+      >
+        можно тут
+      </button>
+    </div>
   </div>
 </div>
 

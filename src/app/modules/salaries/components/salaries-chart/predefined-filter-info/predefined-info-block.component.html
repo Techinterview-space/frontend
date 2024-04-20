@@ -7,8 +7,12 @@
   </span>
 
   <span *ngIf="filterData.cities && filterData.cities.length > 0">
-    <span *ngIf="filterData.cities.length === 1" class="ms-2 text-muted">в городе</span>
-    <span *ngIf="filterData.cities.length > 1" class="ms-2 text-muted">в городах</span>
+    <span *ngIf="filterData.cities.length === 1" class="ms-2 text-muted"
+      >в городе</span
+    >
+    <span *ngIf="filterData.cities.length > 1" class="ms-2 text-muted"
+      >в городах</span
+    >
     <span class="ms-2 fw-bold">{{ getCities() }}</span>
   </span>
   <span class="ms-2 text-muted">получают:</span>

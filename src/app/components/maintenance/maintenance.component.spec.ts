@@ -1,13 +1,13 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaintenanceComponent } from './maintenance.component';
+import { waitForAsync, ComponentFixture, TestBed } from "@angular/core/testing";
+import { MaintenanceComponent } from "./maintenance.component";
 
-describe('MaintenanceComponent', () => {
+describe("MaintenanceComponent", () => {
   let component: MaintenanceComponent;
   let fixture: ComponentFixture<MaintenanceComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MaintenanceComponent]
+      declarations: [MaintenanceComponent],
     }).compileComponents();
   }));
 
@@ -17,7 +17,7 @@ describe('MaintenanceComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

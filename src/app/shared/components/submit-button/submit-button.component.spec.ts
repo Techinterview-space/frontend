@@ -1,13 +1,13 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SubmitButtonComponent } from './submit-button.component';
+import { waitForAsync, ComponentFixture, TestBed } from "@angular/core/testing";
+import { SubmitButtonComponent } from "./submit-button.component";
 
-describe('SubmitButtonComponent', () => {
+describe("SubmitButtonComponent", () => {
   let component: SubmitButtonComponent;
   let fixture: ComponentFixture<SubmitButtonComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [SubmitButtonComponent]
+      declarations: [SubmitButtonComponent],
     }).compileComponents();
   }));
 
@@ -17,7 +17,7 @@ describe('SubmitButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

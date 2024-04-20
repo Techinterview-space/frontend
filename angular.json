@@ -134,7 +134,12 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets", "src/robots.txt", "src/sitemap.xml"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/robots.txt",
+              "src/sitemap.xml"
+            ],
             "styles": ["src/styles.scss"],
             "scripts": []
           }

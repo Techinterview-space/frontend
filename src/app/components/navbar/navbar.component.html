@@ -1,10 +1,13 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom border-2">
+<nav
+  class="navbar navbar-expand-md navbar-light bg-white border-bottom border-2"
+>
   <div class="container">
     <a class="navbar-brand" routerLink="/"
       ><img
         class="me-1 img-fluid logo-image"
-        src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cat_logo.png" />
-        <span>Techinterview.space</span></a
+        src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cat_logo.png"
+      />
+      <span>Techinterview.space</span></a
     >
     <button
       class="navbar-toggler"
@@ -17,7 +20,10 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarSupportedContent"
+    >
       <ul class="navbar-nav mb-2 mb-md-0">
         <li class="nav-item dropdown" *ngFor="let dropdown of dropdowns">
           <a
@@ -33,14 +39,21 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li *ngFor="let link of dropdown.links">
-              <a class="dropdown-item" routerLink="{{ link.url }}" *ngIf="link.show">{{ link.title }}</a>
+              <a
+                class="dropdown-item"
+                routerLink="{{ link.url }}"
+                *ngIf="link.show"
+                >{{ link.title }}</a
+              >
             </li>
           </ul>
         </li>
 
         <li class="nav-item ms-3" *ngIf="!loginName; else loggedIn">
           <a
-            class="btn btn-primary {{ !loginButtonAvailable ? 'disabled' : '' }}"
+            class="btn btn-primary {{
+              !loginButtonAvailable ? 'disabled' : ''
+            }}"
             aria-current="page"
             (click)="login()"
             [attr.disabled]="!loginButtonAvailable"
@@ -61,10 +74,23 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" routerLink="/me">Мой профиль</a></li>
-              <li><a class="dropdown-item" routerLink="users/me/labels">Мои теги</a></li>
+              <li>
+                <a class="dropdown-item" routerLink="users/me/labels"
+                  >Мои теги</a
+                >
+              </li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" routerLink="/admin" *appHasRole="'admin'">Админка</a></li>
-              <li class="cursor-pointer"><a class="dropdown-item" (click)="logout()">Выйти</a></li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/admin"
+                  *appHasRole="'admin'"
+                  >Админка</a
+                >
+              </li>
+              <li class="cursor-pointer">
+                <a class="dropdown-item" (click)="logout()">Выйти</a>
+              </li>
             </ul>
           </li>
         </ng-template>

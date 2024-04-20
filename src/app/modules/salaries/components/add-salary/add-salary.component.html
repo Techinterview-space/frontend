@@ -3,14 +3,21 @@
     <div class="modal-content">
       <div class="modal-header">
         <span class="h3 modal-title">Добавьте свою зарплату</span>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="close()"
+        ></button>
       </div>
 
       <div class="modal-body">
         <div class="p-1">
-
           <div class="my-1 mb-3">
-            Для того, чтобы просматривать график зарплат, вам нужно сначала внести свою. График открывается, только если среди данных есть ваша зарплата за последний год.
+            Для того, чтобы просматривать график зарплат, вам нужно сначала
+            внести свою. График открывается, только если среди данных есть ваша
+            зарплата за последний год.
           </div>
 
           <hr class="mb-3" />
@@ -18,46 +25,97 @@
           <form
             *ngIf="addSalaryForm"
             [formGroup]="addSalaryForm"
-            (ngSubmit)="addSalarySubmitAction()">
+            (ngSubmit)="addSalarySubmitAction()"
+          >
             <div class="mb-3">
-              <label>Зарплата в тенге <strong>в месяц</strong> "на руки". Если вы получаете в иной валюте, переведите в тенге.</label>
-              <input formControlName="value" type="text" class="form-control form-control-lg" appOnlyNumber />
-              <app-field-error [field]="addSalaryForm.get('value')" [max]="10000000" [min]="75000"></app-field-error>
+              <label
+                >Зарплата в тенге <strong>в месяц</strong> "на руки". Если вы
+                получаете в иной валюте, переведите в тенге.</label
+              >
+              <input
+                formControlName="value"
+                type="text"
+                class="form-control form-control-lg"
+                appOnlyNumber
+              />
+              <app-field-error
+                [field]="addSalaryForm.get('value')"
+                [max]="10000000"
+                [min]="75000"
+              ></app-field-error>
             </div>
 
-          <div class="mb-3">
-            <div class="row mb-1">
-              <div class="col-6">
-                <label>Квартал</label>
-                <input formControlName="quarter" type="text" class="form-control" />
-                <app-field-error [field]="addSalaryForm.get('quarter')" [max]="4" [min]="1"></app-field-error>
+            <div class="mb-3">
+              <div class="row mb-1">
+                <div class="col-6">
+                  <label>Квартал</label>
+                  <input
+                    formControlName="quarter"
+                    type="text"
+                    class="form-control"
+                  />
+                  <app-field-error
+                    [field]="addSalaryForm.get('quarter')"
+                    [max]="4"
+                    [min]="1"
+                  ></app-field-error>
+                </div>
+
+                <div class="col-6">
+                  <label>Год</label>
+                  <input
+                    formControlName="year"
+                    type="text"
+                    class="form-control"
+                  />
+                  <app-field-error
+                    [field]="addSalaryForm.get('year')"
+                    [max]="2000"
+                    [min]="2100"
+                  ></app-field-error>
+                </div>
               </div>
-  
-              <div class="col-6">
-                <label>Год</label>
-                <input formControlName="year" type="text" class="form-control" />
-                <app-field-error [field]="addSalaryForm.get('year')" [max]="2000" [min]="2100"></app-field-error>
+
+              <div class="text-muted fst-italic">
+                <div>
+                  Квартал и год необходим для того, чтобы в статистике учитывать
+                  только актуальные данные.
+                </div>
+                <div>
+                  Указывая 1 квартал 2024го года, вы говорите, что в первом
+                  квартале этого года у вас <strong>в месяц</strong> была такая
+                  зарплата.
+                </div>
+                <div>
+                  В статистике учитываются зарплаты за текущий и предыдущий год.
+                </div>
               </div>
             </div>
 
-            <div class="text-muted fst-italic">
-              <div>Квартал и год необходим для того, чтобы в статистике учитывать только актуальные данные.</div>
-              <div>Указывая 1 квартал 2024го года, вы говорите, что в первом квартале этого года у вас <strong>в месяц</strong> была такая зарплата.</div>
-              <div>В статистике учитываются зарплаты за текущий и предыдущий год.</div>
+            <div class="mb-3">
+              <select
+                formControlName="company"
+                class="form-select"
+                aria-label="Select a company"
+              >
+                <option [value]="null" selected disabled>
+                  Работаете в казахстанской компании или иностранной
+                </option>
+                <option
+                  *ngFor="let option of companyTypes"
+                  [value]="option.value"
+                >
+                  {{ option.label }}
+                </option>
+              </select>
+              <app-field-error
+                [field]="addSalaryForm.get('company')"
+              ></app-field-error>
             </div>
-          </div>
-  
-          <div class="mb-3">
-            <select formControlName="company" class="form-select" aria-label="Select a company">
-              <option [value]="null" selected disabled>Работаете в казахстанской компании или иностранной</option>
-              <option *ngFor="let option of companyTypes" [value]="option.value">{{ option.label }}</option>
-            </select>
-            <app-field-error [field]="addSalaryForm.get('company')"></app-field-error>
-          </div>
 
-          <div class="mb-3">
-            <label class="text-sm">Ваша специализация</label>
-            <ng-select
+            <div class="mb-3">
+              <label class="text-sm">Ваша специализация</label>
+              <ng-select
                 [items]="professionsAsOptions"
                 [selectOnTab]="true"
                 bindLabel="label"
@@ -67,21 +125,33 @@
                 formControlName="profession"
               >
               </ng-select>
-            <app-field-error [field]="addSalaryForm.get('profession')"></app-field-error>
-          </div>
-  
-          <div class="mb-3">
-            <div><label class="">Ваш грейд</label></div>
-            <select formControlName="grade" class="form-select" aria-label="Select your grade">
-              <option [value]="null" selected disabled>Выберите грейд</option>
-              <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
-            </select>
-            <app-field-error [field]="addSalaryForm.get('grade')"></app-field-error>
-          </div>
+              <app-field-error
+                [field]="addSalaryForm.get('profession')"
+              ></app-field-error>
+            </div>
 
-          <div class="mb-3" *ngIf="skillsAsOptions.length > 0">
-            <label class="text-sm">Ваш основной фреймворк или язык программирования</label>
-            <ng-select
+            <div class="mb-3">
+              <div><label class="">Ваш грейд</label></div>
+              <select
+                formControlName="grade"
+                class="form-select"
+                aria-label="Select your grade"
+              >
+                <option [value]="null" selected disabled>Выберите грейд</option>
+                <option *ngFor="let option of grades" [value]="option.value">
+                  {{ option.label }}
+                </option>
+              </select>
+              <app-field-error
+                [field]="addSalaryForm.get('grade')"
+              ></app-field-error>
+            </div>
+
+            <div class="mb-3" *ngIf="skillsAsOptions.length > 0">
+              <label class="text-sm"
+                >Ваш основной фреймворк или язык программирования</label
+              >
+              <ng-select
                 [items]="skillsAsOptions"
                 [selectOnTab]="true"
                 bindLabel="label"
@@ -91,12 +161,14 @@
                 formControlName="skillId"
               >
               </ng-select>
-            <app-field-error [field]="addSalaryForm.get('skillId')"></app-field-error>
-          </div>
+              <app-field-error
+                [field]="addSalaryForm.get('skillId')"
+              ></app-field-error>
+            </div>
 
-          <div class="mb-3" *ngIf="industriesAsOptions.length > 0">
-            <label class="text-sm">Сфера, где вы работаете</label>
-            <ng-select
+            <div class="mb-3" *ngIf="industriesAsOptions.length > 0">
+              <label class="text-sm">Сфера, где вы работаете</label>
+              <ng-select
                 [items]="industriesAsOptions"
                 [selectOnTab]="true"
                 bindLabel="label"
@@ -106,12 +178,16 @@
                 formControlName="workIndustryId"
               >
               </ng-select>
-            <app-field-error [field]="addSalaryForm.get('workIndustryId')"></app-field-error>
-          </div>
+              <app-field-error
+                [field]="addSalaryForm.get('workIndustryId')"
+              ></app-field-error>
+            </div>
 
-          <div class="mb-3">
-            <div><label class="">В каком городе Казахстана Вы живете?</label></div>
-            <ng-select
+            <div class="mb-3">
+              <div>
+                <label class="">В каком городе Казахстана Вы живете?</label>
+              </div>
+              <ng-select
                 [items]="cities"
                 [selectOnTab]="true"
                 bindLabel="label"
@@ -121,23 +197,28 @@
                 formControlName="city"
               >
               </ng-select>
-            <app-field-error [field]="addSalaryForm.get('city')"></app-field-error>
-          </div>
+              <app-field-error
+                [field]="addSalaryForm.get('city')"
+              ></app-field-error>
+            </div>
 
-          <div *ngIf="errorMessage" class="mb-3 alert alert-danger">
-            {{ errorMessage }}
-          </div>
+            <div *ngIf="errorMessage" class="mb-3 alert alert-danger">
+              {{ errorMessage }}
+            </div>
 
-          <div class="mb-3 fst-italic">
-            Отправляя данные, вы соглашаетесь, что <strong>обезличенная</strong> зарплата будет учтена при рассчетах и составлении графиков.
-            Мы гарантируем, что конфиденциальность ваших данных будет соблюдена.
-          </div>
-  
-          <div class="mb-3 pt-2">
-            <button class="btn btn-primary btn-lg w-100" type="submit">Добавить</button>
-          </div>
-        </form>
+            <div class="mb-3 fst-italic">
+              Отправляя данные, вы соглашаетесь, что
+              <strong>обезличенная</strong> зарплата будет учтена при рассчетах
+              и составлении графиков. Мы гарантируем, что конфиденциальность
+              ваших данных будет соблюдена.
+            </div>
 
+            <div class="mb-3 pt-2">
+              <button class="btn btn-primary btn-lg w-100" type="submit">
+                Добавить
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

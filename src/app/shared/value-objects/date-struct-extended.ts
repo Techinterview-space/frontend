@@ -1,4 +1,4 @@
-import { DateStruct } from './date-extended';
+import { DateStruct } from "./date-extended";
 
 export class DateStructExtended implements DateStruct {
   private hasDate = false;

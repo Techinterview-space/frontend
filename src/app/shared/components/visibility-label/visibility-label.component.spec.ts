@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { VisibilityLabelComponent } from './visibility-label.component';
+import { VisibilityLabelComponent } from "./visibility-label.component";
 
-describe('VisibilityLabelComponent', () => {
+describe("VisibilityLabelComponent", () => {
   let component: VisibilityLabelComponent;
   let fixture: ComponentFixture<VisibilityLabelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [VisibilityLabelComponent]
+      declarations: [VisibilityLabelComponent],
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe('VisibilityLabelComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

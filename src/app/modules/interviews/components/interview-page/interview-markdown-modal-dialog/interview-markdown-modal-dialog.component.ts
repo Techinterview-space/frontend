@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
-  selector: 'app-interview-markdown-modal-dialog',
-  templateUrl: './interview-markdown-modal-dialog.component.html'
+  selector: "app-interview-markdown-modal-dialog",
+  templateUrl: "./interview-markdown-modal-dialog.component.html",
 })
 export class InterviewMarkdownModalDialogComponent implements OnInit {
-  private readonly copyBtnDefaultTitle = 'Copy';
-  private readonly copyBtnDefaultIcon = 'bi bi-clipboard2-check';
+  private readonly copyBtnDefaultTitle = "Copy";
+  private readonly copyBtnDefaultIcon = "bi bi-clipboard2-check";
 
-  private readonly copiedBtnTitle = 'Copied';
-  private readonly copiedBtnIcon = 'bi bi-check2';
+  private readonly copiedBtnTitle = "Copied";
+  private readonly copiedBtnIcon = "bi bi-check2";
 
   @Input()
   interview: string | null = null;
@@ -17,7 +17,7 @@ export class InterviewMarkdownModalDialogComponent implements OnInit {
   @Input()
   show = false;
 
-  interviewMarkdownContent = '';
+  interviewMarkdownContent = "";
   copyBtnTitle = this.copyBtnDefaultTitle;
   copyBtnIcon = this.copyBtnDefaultIcon;
 
@@ -31,7 +31,7 @@ export class InterviewMarkdownModalDialogComponent implements OnInit {
 
   copy(inputElement: any): void {
     inputElement.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     inputElement.setSelectionRange(0, 0);
 
     this.copyBtnTitle = this.copiedBtnTitle;

@@ -1,21 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { mostUsedImports, mostUsedServices, testUtilStubs } from '@shared/test-utils';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  mostUsedImports,
+  mostUsedServices,
+  testUtilStubs,
+} from "@shared/test-utils";
 
-import { BackgroundJobsComponent } from './background-jobs.component';
+import { BackgroundJobsComponent } from "./background-jobs.component";
 
-describe('BackgroundJobsComponent', () => {
+describe("BackgroundJobsComponent", () => {
   let component: BackgroundJobsComponent;
   let fixture: ComponentFixture<BackgroundJobsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BackgroundJobsComponent ],
+      declarations: [BackgroundJobsComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-    .compileComponents();
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -24,7 +27,7 @@ describe('BackgroundJobsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

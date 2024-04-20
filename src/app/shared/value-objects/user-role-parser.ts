@@ -1,14 +1,14 @@
-import { UserRole } from '@models/enums';
-import Assertion from '@shared/validation/assertion';
+import { UserRole } from "@models/enums";
+import Assertion from "@shared/validation/assertion";
 
 export default class UserRoleParser {
   private readonly userRolesArray = [
     this.roleWtihStrRepresent(UserRole.Interviewer),
-    this.roleWtihStrRepresent(UserRole.Admin)
+    this.roleWtihStrRepresent(UserRole.Admin),
   ];
 
   constructor(private readonly role: string | null) {
-    Assertion.stringNotNullOrEmpty(role, 'role');
+    Assertion.stringNotNullOrEmpty(role, "role");
   }
 
   get(): UserRole {
@@ -22,10 +22,13 @@ export default class UserRoleParser {
     return UserRole.None;
   }
 
-  private roleWtihStrRepresent(role: UserRole): { str: string; role: UserRole } {
+  private roleWtihStrRepresent(role: UserRole): {
+    str: string;
+    role: UserRole;
+  } {
     return {
       str: UserRole[role].toString().toLowerCase(),
-      role
+      role,
     };
   }
 }

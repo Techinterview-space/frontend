@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DeveloperGradeLabelComponent } from './developer-grade-label.component';
+import { DeveloperGradeLabelComponent } from "./developer-grade-label.component";
 
-describe('DeveloperGradeLabelComponent', () => {
+describe("DeveloperGradeLabelComponent", () => {
   let component: DeveloperGradeLabelComponent;
   let fixture: ComponentFixture<DeveloperGradeLabelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DeveloperGradeLabelComponent]
+      declarations: [DeveloperGradeLabelComponent],
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe('DeveloperGradeLabelComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -21,8 +21,12 @@
       </td>
       <td>
         <div *ngIf="item.elapsed; else requestWaiting">
-          <span class="badge rounded-pill bg-success" *ngIf="item.success">{{ item.elapsed }} ms</span>
-          <span class="badge rounded-pill bg-danger" *ngIf="item.error">{{ item.elapsed }} ms</span>
+          <span class="badge rounded-pill bg-success" *ngIf="item.success"
+            >{{ item.elapsed }} ms</span
+          >
+          <span class="badge rounded-pill bg-danger" *ngIf="item.error"
+            >{{ item.elapsed }} ms</span
+          >
         </div>
       </td>
     </tr>

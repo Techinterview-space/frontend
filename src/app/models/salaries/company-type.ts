@@ -1,7 +1,7 @@
 export enum CompanyType {
-    Undefined = 0,
+  Undefined = 0,
 
-    Local = 1,
+  Local = 1,
 
-    Remote = 2,
+  Remote = 2,
 }

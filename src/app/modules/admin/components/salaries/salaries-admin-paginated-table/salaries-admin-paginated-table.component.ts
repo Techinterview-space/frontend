@@ -1,20 +1,22 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { defaultPageParams } from '@models/page-params';
-import { PaginatedList } from '@models/paginated-list';
-import { UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { AdminAllSalariesQueryParams, SalariesAdminOrderingType } from '@services/user-salaries.service';
-import { SalaryAdminItem } from '../salary-admin-item';
-import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
-import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
-import { SalariesTableFilter } from '../salaries-table-filter';
-import { LabelEntityDto } from '@services/label-entity.model';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { defaultPageParams } from "@models/page-params";
+import { PaginatedList } from "@models/paginated-list";
+import { UserSalaryAdminDto } from "@models/salaries/salary.model";
+import {
+  AdminAllSalariesQueryParams,
+  SalariesAdminOrderingType,
+} from "@services/user-salaries.service";
+import { SalaryAdminItem } from "../salary-admin-item";
+import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
+import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
+import { SalariesTableFilter } from "../salaries-table-filter";
+import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-  selector: 'app-salaries-admin-paginated-table',
-  templateUrl: './salaries-admin-paginated-table.component.html'
+  selector: "app-salaries-admin-paginated-table",
+  templateUrl: "./salaries-admin-paginated-table.component.html",
 })
 export class SalariesAdminPaginatedTableComponent {
-
   @Input()
   salaries: Array<SalaryAdminItem> | null = null;
 
@@ -47,21 +49,21 @@ export class SalariesAdminPaginatedTableComponent {
   constructor() {}
 
   loadData(page = 1): void {
-    this.loadDataRequested.emit({ 
+    this.loadDataRequested.emit({
       page,
       pageSize: defaultPageParams.pageSize,
       profession: this.filter?.profession ?? null,
       company: this.filter?.company ?? null,
       grade: this.filter?.grade ?? null,
       order_type: this.filter?.order_type ?? null,
-     });
+    });
   }
 
   openDeleteDialog(salary: SalaryAdminItem): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
-        'Delete the salary record',
-        'Are you sure to delete?',
+        "Удалить анкету",
+        "Вы уверены, что хотите удалить анкету?",
         () => {
           this.deleteRequested.emit(salary);
         }
@@ -72,8 +74,8 @@ export class SalariesAdminPaginatedTableComponent {
   openApproveDialog(salary: SalaryAdminItem): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
-        'Approve the salary record',
-        'Are you sure to approve?',
+        "Внести анкету в статистику",
+        "Вы уверены, что хотите внести эту анкету в статистику?",
         () => {
           this.approveRequested.emit(salary);
         }
@@ -84,8 +86,8 @@ export class SalariesAdminPaginatedTableComponent {
   openExcludeDialog(salary: SalaryAdminItem): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
-        'Exclude the salary from stats',
-        'Are you sure to exclude?',
+        "Убрать анкету из статистики",
+        "Вы уверены, что хотите убрать эту анкету из статистику?",
         () => {
           this.excludeRequested.emit(salary);
         }

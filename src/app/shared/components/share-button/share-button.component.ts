@@ -1,33 +1,35 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbsoluteLink, ClipboardCopier } from '@shared/value-objects/clipboard-copier';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  AbsoluteLink,
+  ClipboardCopier,
+} from "@shared/value-objects/clipboard-copier";
 
 @Component({
-  selector: 'app-share-button',
-  templateUrl: './share-button.component.html',
-  styleUrls: ['./share-button.component.scss']
+  selector: "app-share-button",
+  templateUrl: "./share-button.component.html",
+  styleUrls: ["./share-button.component.scss"],
 })
 export class ShareButtonComponent implements OnInit {
+  static readonly copyBtnDefaultTitle = "Поделиться";
+  private readonly copyBtnDefaultIcon = "bi bi-share-fill me-1";
 
-  static readonly copyBtnDefaultTitle = 'Поделиться';
-  private readonly copyBtnDefaultIcon = 'bi bi-share-fill me-1';
+  private readonly copiedBtnTitle = "Скопировано";
+  private readonly copiedBtnIcon = "bi bi-check2";
 
-  private readonly copiedBtnTitle = 'Скопировано';
-  private readonly copiedBtnIcon = 'bi bi-check2';
-
-  btnTitle = '';
+  btnTitle = "";
   btnIcon = this.copyBtnDefaultIcon;
 
   @Input()
   title: string = ShareButtonComponent.copyBtnDefaultTitle;
 
   @Input()
-  relativeUrl = '';
+  relativeUrl = "";
 
   @Input()
-  css = 'btn-outline-dark';
+  css = "btn-outline-dark";
 
   @Input()
-  cssBtnSize = 'btn-sm';
+  cssBtnSize = "btn-sm";
 
   @Output()
   shareClicked = new EventEmitter<void>();
@@ -39,9 +41,10 @@ export class ShareButtonComponent implements OnInit {
   }
 
   share(): void {
-
-    if (this.relativeUrl != null && this.relativeUrl !== '') {
-      new ClipboardCopier(new AbsoluteLink(this.relativeUrl).asString()).execute();
+    if (this.relativeUrl != null && this.relativeUrl !== "") {
+      new ClipboardCopier(
+        new AbsoluteLink(this.relativeUrl).asString()
+      ).execute();
     }
 
     this.btnTitle = this.copiedBtnTitle;

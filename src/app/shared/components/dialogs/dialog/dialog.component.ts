@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { DialogModalCallToAction } from './dialog-modal-call-to-action';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { DialogModalCallToAction } from "./dialog-modal-call-to-action";
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  selector: "app-dialog",
+  templateUrl: "./dialog.component.html",
+  styleUrls: ["./dialog.component.scss"],
 })
 export class DialogComponent {
   @Input()
@@ -17,7 +17,7 @@ export class DialogComponent {
   callToAction: DialogModalCallToAction | null = null;
 
   @Input()
-  additionalCss = '';
+  additionalCss = "";
 
   @Output()
   closed: EventEmitter<void> = new EventEmitter();

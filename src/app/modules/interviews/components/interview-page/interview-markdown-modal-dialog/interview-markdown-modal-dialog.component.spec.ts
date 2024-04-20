@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { InterviewMarkdownModalDialogComponent } from './interview-markdown-modal-dialog.component';
+import { InterviewMarkdownModalDialogComponent } from "./interview-markdown-modal-dialog.component";
 
-describe('InterviewMarkdownModalDialogComponent', () => {
+describe("InterviewMarkdownModalDialogComponent", () => {
   let component: InterviewMarkdownModalDialogComponent;
   let fixture: ComponentFixture<InterviewMarkdownModalDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InterviewMarkdownModalDialogComponent]
+      declarations: [InterviewMarkdownModalDialogComponent],
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe('InterviewMarkdownModalDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,7 +1,7 @@
-import { Label } from '@models/user-label.model';
-import { ApplicationUser } from '../application-user';
-import { DeveloperGrade } from '../enums';
-import { InterviewSubject } from './interview-subject';
+import { Label } from "@models/user-label.model";
+import { ApplicationUser } from "../application-user";
+import { DeveloperGrade } from "../enums";
+import { InterviewSubject } from "./interview-subject";
 
 export interface Interview {
   id: string;

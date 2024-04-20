@@ -1,6 +1,6 @@
-import { JobResult } from '@models/job-result';
-import { Observable } from 'rxjs';
-import { AdminTableItem } from './admin-table-item';
+import { JobResult } from "@models/job-result";
+import { Observable } from "rxjs";
+import { AdminTableItem } from "./admin-table-item";
 
 export class JobItem extends AdminTableItem<Observable<JobResult>> {
   elapsed: number | null = null;
@@ -17,7 +17,7 @@ export class JobItem extends AdminTableItem<Observable<JobResult>> {
     const start = Date.now();
 
     this.action().subscribe(
-      result => {
+      (result) => {
         this.elapsed = Date.now() - start;
         this.itemsUpdated = result.count;
       },

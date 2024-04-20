@@ -1,9 +1,9 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { GoBackButtonComponent } from './go-back-button.component';
-import { Location } from '@angular/common';
-import { SpyLocation } from '@angular/common/testing';
+import { waitForAsync, ComponentFixture, TestBed } from "@angular/core/testing";
+import { GoBackButtonComponent } from "./go-back-button.component";
+import { Location } from "@angular/common";
+import { SpyLocation } from "@angular/common/testing";
 
-describe('GoBackButtonComponent', () => {
+describe("GoBackButtonComponent", () => {
   let component: GoBackButtonComponent;
   let fixture: ComponentFixture<GoBackButtonComponent>;
 
@@ -13,9 +13,9 @@ describe('GoBackButtonComponent', () => {
       providers: [
         {
           provide: Location,
-          useClass: SpyLocation
-        }
-      ]
+          useClass: SpyLocation,
+        },
+      ],
     }).compileComponents();
   }));
 
@@ -25,7 +25,7 @@ describe('GoBackButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

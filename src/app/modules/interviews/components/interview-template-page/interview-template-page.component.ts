@@ -1,23 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserRole } from '@models/enums';
-import { InterviewTemplate } from '@models/interview-models';
-import { InterviewTemplatesService } from '@services/interview-templates.service';
-import { TitleService } from '@services/title.service';
-import { AlertService } from '@shared/components/alert/services/alert.service';
-import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
-import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
-import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
-import { AuthService } from '@shared/services/auth/auth.service';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { UserRole } from "@models/enums";
+import { InterviewTemplate } from "@models/interview-models";
+import { InterviewTemplatesService } from "@services/interview-templates.service";
+import { TitleService } from "@services/title.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
+import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
+import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
+import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
+import { AuthService } from "@shared/services/auth/auth.service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: 'app-interview-template-page',
-  templateUrl: './interview-template-page.component.html',
-  styleUrls: ['./interview-template-page.component.scss']
+  selector: "app-interview-template-page",
+  templateUrl: "./interview-template-page.component.html",
+  styleUrls: ["./interview-template-page.component.scss"],
 })
 export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
-  pageTitle = '';
+  pageTitle = "";
   interviewTemplate: InterviewTemplate | null = null;
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
 
@@ -38,7 +38,7 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activateRoute
-      .getParam('id')
+      .getParam("id")
       .pipe(untilDestroyed(this))
       .subscribe((id) => {
         this.service
@@ -53,7 +53,9 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
               .pipe(untilDestroyed(this))
               .subscribe((cu) => {
                 this.showEditButtons =
-                  cu != null && (cu.hasRole(UserRole.Admin) || cu.id === this.interviewTemplate!.authorId);
+                  cu != null &&
+                  (cu.hasRole(UserRole.Admin) ||
+                    cu.id === this.interviewTemplate!.authorId);
               });
           });
       });
@@ -61,12 +63,19 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
 
   delete(): void {
     this.confirmDeletionMessage = new DialogMessage(
-      new ConfirmMsg('Удалить шаблон?', 'Вы уверены, что хотите удалить его? Это действие нельзя отменить', () => {
-        this.service.delete(this.interviewTemplate!.id).subscribe(() => {
-          this.alert.info(`Шаблон (${this.interviewTemplate!.title}) был удален`, true);
-          this.router.navigate(['/interviews/templates/my']);
-        });
-      })
+      new ConfirmMsg(
+        "Удалить шаблон?",
+        "Вы уверены, что хотите удалить его? Это действие нельзя отменить",
+        () => {
+          this.service.delete(this.interviewTemplate!.id).subscribe(() => {
+            this.alert.info(
+              `Шаблон (${this.interviewTemplate!.title}) был удален`,
+              true
+            );
+            this.router.navigate(["/interviews/templates/my"]);
+          });
+        }
+      )
     );
   }
 

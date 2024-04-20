@@ -1,7 +1,9 @@
-import { InterviewTemplate } from '@models/interview-models/interview-template';
-import { SelectItem } from '@shared/select-boxes/select-item';
+import { InterviewTemplate } from "@models/interview-models/interview-template";
+import { SelectItem } from "@shared/select-boxes/select-item";
 
-export class InterviewTemplateSelectItem implements SelectItem<InterviewTemplate> {
+export class InterviewTemplateSelectItem
+  implements SelectItem<InterviewTemplate>
+{
   readonly value: string;
   readonly label: string;
   readonly item: InterviewTemplate;

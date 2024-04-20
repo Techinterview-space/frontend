@@ -3,17 +3,17 @@ export class SplittedByWhitespacesString {
 
   constructor(source: string | null) {
     if (source == null) {
-      this.value = '';
+      this.value = "";
       return;
     }
 
     var match = source.match(/[A-Z][a-z]+|[0-9]+/g);
     if (match) {
-      this.value = match.join(' ');
+      this.value = match.join(" ");
       return;
     }
 
-    this.value = '';
+    this.value = "";
   }
 
   toString(): string {

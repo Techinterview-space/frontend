@@ -1,11 +1,15 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { InterviewTemplatesService } from '@services/interview-templates.service';
-import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { InterviewTemplatesService } from "@services/interview-templates.service";
+import {
+  mostUsedImports,
+  testUtilStubs,
+  mostUsedServices,
+} from "@shared/test-utils";
 
-import { InterviewTemplatesAdminPageComponent } from './interview-templates-admin-page.component';
+import { InterviewTemplatesAdminPageComponent } from "./interview-templates-admin-page.component";
 
-describe('InterviewTemplatesAdminPageComponent', () => {
+describe("InterviewTemplatesAdminPageComponent", () => {
   let component: InterviewTemplatesAdminPageComponent;
   let fixture: ComponentFixture<InterviewTemplatesAdminPageComponent>;
 
@@ -13,8 +17,12 @@ describe('InterviewTemplatesAdminPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [InterviewTemplatesAdminPageComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices, InterviewTemplatesService],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      providers: [
+        ...testUtilStubs,
+        ...mostUsedServices,
+        InterviewTemplatesService,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -24,7 +32,7 @@ describe('InterviewTemplatesAdminPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

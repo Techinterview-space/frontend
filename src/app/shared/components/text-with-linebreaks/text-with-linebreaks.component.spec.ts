@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TextWithLinebreaksComponent } from './text-with-linebreaks.component';
+import { TextWithLinebreaksComponent } from "./text-with-linebreaks.component";
 
-describe('TextWithLinebreaksComponent', () => {
+describe("TextWithLinebreaksComponent", () => {
   let component: TextWithLinebreaksComponent;
   let fixture: ComponentFixture<TextWithLinebreaksComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TextWithLinebreaksComponent]
+      declarations: [TextWithLinebreaksComponent],
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe('TextWithLinebreaksComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

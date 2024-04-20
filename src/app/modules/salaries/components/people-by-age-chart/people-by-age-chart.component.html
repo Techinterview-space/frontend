@@ -1,24 +1,35 @@
 <div class="">
   <div class="h4 mb-3">Возраст респондентов</div>
 
-  <div class="fst-italic">
-    Ответов: {{countOfResponses}}
-  </div>
+  <div class="fst-italic">Ответов: {{ countOfResponses }}</div>
 
   <div class="" *ngIf="canvasId">
     <div id="canvas-container">
-      <canvas [attr.id]="canvasId">{{chartDataLocal}}</canvas>
+      <canvas [attr.id]="canvasId">{{ chartDataLocal }}</canvas>
     </div>
   </div>
 
-  <div class="mb-3 fst-italic" *ngIf="currentSalary != null && currentSalary.age == null; else hasCityInSalary">
+  <div
+    class="mb-3 fst-italic"
+    *ngIf="
+      currentSalary != null && currentSalary.age == null;
+      else hasCityInSalary
+    "
+  >
     <div>Вы пока не указали свой возраст.</div>
-    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
+    <div>
+      Уточнить данные
+      <button
+        type="button"
+        class="btn-link-sm fst-italic font-weight-normal"
+        (click)="openEditSalaryAction()"
+      >
+        можно тут
+      </button>
+    </div>
   </div>
 </div>
 
 <ng-template #hasCityInSalary>
-  <div class="fst-italic text-muted">
-    Вы уже указали ваш возраст. Спасибо!
-  </div>
+  <div class="fst-italic text-muted">Вы уже указали ваш возраст. Спасибо!</div>
 </ng-template>

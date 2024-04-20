@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserRole } from '@models/enums';
-import { ApplicationUserExtended } from '@models/extended';
-import { HealthCheckService } from '@shared/health-check/health-check.service';
-import { AuthService } from '@shared/services/auth/auth.service';
-import { SpinnerService } from '@shared/services/spinners/spinner-service';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { UserRole } from "@models/enums";
+import { ApplicationUserExtended } from "@models/extended";
+import { HealthCheckService } from "@shared/health-check/health-check.service";
+import { AuthService } from "@shared/services/auth/auth.service";
+import { SpinnerService } from "@shared/services/spinners/spinner-service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 interface NavbarLink {
   title: string;
@@ -19,9 +19,9 @@ interface NavbarDropdown {
 }
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   loginButtonAvailable = false;
@@ -69,10 +69,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   private setupSubscribers(): void {
-    this.authService.loggedOutInvoked$.pipe(untilDestroyed(this)).subscribe(() => {
-      this.currentUser = null;
-      this.renderNavbar();
-    });
+    this.authService.loggedOutInvoked$
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.currentUser = null;
+        this.renderNavbar();
+      });
 
     this.authService.loggedOut$.pipe(untilDestroyed(this)).subscribe(() => {
       this.currentUser = null;
@@ -90,53 +92,55 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.dropdowns = [
       {
-        title: 'Заметки',
+        title: "Заметки",
         show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer),
         links: [
           {
-            title: 'Начать интервью',
-            url: '/interviews/create',
-            show: true
+            title: "Начать интервью",
+            url: "/interviews/create",
+            show: true,
           },
           {
-            title: 'Мои интервью',
-            url: '/interviews/my',
-            show: true
-          }
-        ]
+            title: "Мои интервью",
+            url: "/interviews/my",
+            show: true,
+          },
+        ],
       },
       {
-        title: 'Шаблоны',
+        title: "Шаблоны",
         show: true,
         links: [
           {
-            title: 'Создать шаблон',
-            url: '/interviews/templates/create',
-            show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer)
+            title: "Создать шаблон",
+            url: "/interviews/templates/create",
+            show:
+              hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer),
           },
           {
-            title: 'Мои шаблоны',
-            url: '/interviews/templates/my',
-            show: hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer)
+            title: "Мои шаблоны",
+            url: "/interviews/templates/my",
+            show:
+              hasCurrentUser && this.currentUser!.hasRole(UserRole.Interviewer),
           },
           {
-            title: 'Публичные шаблоны',
-            url: '/interviews/templates/public',
-            show: true
-          }
-        ]
+            title: "Публичные шаблоны",
+            url: "/interviews/templates/public",
+            show: true,
+          },
+        ],
       },
       {
-        title: 'Зарплаты',
+        title: "Зарплаты",
         show: true,
         links: [
           {
-            title: 'Статистика по зарплатам',
-            url: '/salaries',
-            show: true
+            title: "Статистика по зарплатам",
+            url: "/salaries",
+            show: true,
           },
-        ]
-      }
+        ],
+      },
     ];
   }
 

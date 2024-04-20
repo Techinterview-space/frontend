@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DeveloperGrade } from '@models/enums';
-import { SalariesByGrade } from '@services/user-salaries.service';
-import { SalariesChart } from '../salaries-chart';
+import { Component, Input, OnInit } from "@angular/core";
+import { DeveloperGrade } from "@models/enums";
+import { SalariesByGrade } from "@services/user-salaries.service";
+import { SalariesChart } from "../salaries-chart";
 
 interface Item extends SalariesByGrade {
   gradeAsString: string;
@@ -10,12 +10,11 @@ interface Item extends SalariesByGrade {
 }
 
 @Component({
-  selector: 'app-salaries-by-grade-block',
-  templateUrl: './salaries-by-grade-block.component.html',
-  styleUrl: './salaries-by-grade-block.component.scss'
+  selector: "app-salaries-by-grade-block",
+  templateUrl: "./salaries-by-grade-block.component.html",
+  styleUrl: "./salaries-by-grade-block.component.scss",
 })
 export class SalariesByGradeBlockComponent implements OnInit {
-
   items: Array<Item> | null = null;
 
   @Input()
@@ -27,7 +26,7 @@ export class SalariesByGradeBlockComponent implements OnInit {
       return;
     }
 
-    this.items = this.source.map(x => {
+    this.items = this.source.map((x) => {
       return {
         gradeAsString: DeveloperGrade[x.grade],
         grade: x.grade,
@@ -35,8 +34,9 @@ export class SalariesByGradeBlockComponent implements OnInit {
         hasData: x.hasData,
         averageSalary: x.averageSalary,
         medianSalary: x.medianSalary,
-        medianSalaryAsString: SalariesChart.formatNumber(x.medianSalary) ?? '',
-        averageSalaryAsString: SalariesChart.formatNumber(x.averageSalary) ?? '',
+        medianSalaryAsString: SalariesChart.formatNumber(x.medianSalary) ?? "",
+        averageSalaryAsString:
+          SalariesChart.formatNumber(x.averageSalary) ?? "",
       };
     });
   }

@@ -1,10 +1,14 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
-import { TelegramBotUsagesComponent } from './telegram-bot-usages.component';
-import { TelegramBotService } from '@services/telegram-bot.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import {
+  mostUsedImports,
+  testUtilStubs,
+  mostUsedServices,
+} from "@shared/test-utils";
+import { TelegramBotUsagesComponent } from "./telegram-bot-usages.component";
+import { TelegramBotService } from "@services/telegram-bot.service";
 
-describe('TelegramBotUsagesComponent', () => {
+describe("TelegramBotUsagesComponent", () => {
   let component: TelegramBotUsagesComponent;
   let fixture: ComponentFixture<TelegramBotUsagesComponent>;
 
@@ -13,7 +17,7 @@ describe('TelegramBotUsagesComponent', () => {
       declarations: [TelegramBotUsagesComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices, TelegramBotService],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -23,7 +27,7 @@ describe('TelegramBotUsagesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

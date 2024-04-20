@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Label } from '@models/user-label.model';
-import { RandomHexColor } from '@shared/value-objects/random-hex-color';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Label } from "@models/user-label.model";
+import { RandomHexColor } from "@shared/value-objects/random-hex-color";
 
 @Component({
-  selector: 'app-labels-ng-select',
-  templateUrl: './labels-ng-select.component.html',
-  styleUrls: ['./labels-ng-select.component.scss']
+  selector: "app-labels-ng-select",
+  templateUrl: "./labels-ng-select.component.html",
+  styleUrls: ["./labels-ng-select.component.scss"],
 })
 export class LabelsNgSelectComponent implements OnInit {
   @Input()
@@ -18,7 +18,7 @@ export class LabelsNgSelectComponent implements OnInit {
   labels: Array<Label> = [];
 
   @Input()
-  placeholder = 'Select tags';
+  placeholder = "Select tags";
 
   ngOnInit(): void {}
 
@@ -30,12 +30,14 @@ export class LabelsNgSelectComponent implements OnInit {
     return {
       title: title,
       hexColor: new RandomHexColor().toString(),
-      organizationId: null
+      organizationId: null,
     } as Label;
   }
 
   clearSelectedLabel(item: Label): void {
-    this.selectedLabels = [...this.selectedLabels.filter((x) => x.title !== item.title)];
+    this.selectedLabels = [
+      ...this.selectedLabels.filter((x) => x.title !== item.title),
+    ];
     this.selectedLabelsChange.emit(this.selectedLabels);
   }
 }

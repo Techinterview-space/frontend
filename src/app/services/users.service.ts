@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ApplicationUser } from '@models/application-user';
-import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
+import { Injectable } from "@angular/core";
+import { ApplicationUser } from "@models/application-user";
+import { Observable } from "rxjs";
+import { ApiService } from "./api.service";
 
 @Injectable()
 export class UsersService {

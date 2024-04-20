@@ -1,6 +1,6 @@
-import { ApplicationUser } from '@models/application-user';
-import Assertion from '@shared/validation/assertion';
-import { UserRole } from '@models/enums';
+import { ApplicationUser } from "@models/application-user";
+import Assertion from "@shared/validation/assertion";
+import { UserRole } from "@models/enums";
 
 export class ApplicationUserExtended implements ApplicationUser {
   readonly fullName: string;
@@ -55,7 +55,7 @@ export class ApplicationUserExtended implements ApplicationUser {
   }
 
   constructor(public readonly instance: ApplicationUser) {
-    Assertion.notNull(instance, 'instance', ApplicationUserExtended.name);
+    Assertion.notNull(instance, "instance", ApplicationUserExtended.name);
 
     this.fullName = `${instance.firstName} ${instance.lastName}`;
     instance.roles.forEach((role) => {
@@ -69,7 +69,7 @@ export class ApplicationUserExtended implements ApplicationUser {
 
   hasRoleOrFail(role: UserRole): void {
     if (!this.hasRole(role)) {
-      throw Error('You have no permission to execute this operation');
+      throw Error("You have no permission to execute this operation");
     }
   }
 }

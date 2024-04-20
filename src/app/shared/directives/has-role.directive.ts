@@ -1,16 +1,23 @@
-import { Input, Directive, ViewContainerRef, TemplateRef, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '@shared/services/auth/auth.service';
-import UserRoleParser from '@shared/value-objects/user-role-parser';
-import { ApplicationUserExtended } from '@models/extended';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
+import {
+  Input,
+  Directive,
+  ViewContainerRef,
+  TemplateRef,
+  OnInit,
+  OnDestroy,
+} from "@angular/core";
+import { AuthService } from "@shared/services/auth/auth.service";
+import UserRoleParser from "@shared/value-objects/user-role-parser";
+import { ApplicationUserExtended } from "@models/extended";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Directive({
-  selector: '[appHasRole]'
+  selector: "[appHasRole]",
 })
 // Copied from https://blog.strongbrew.io/display-a-component-based-on-role/
 export class HasRoleDirective implements OnInit, OnDestroy {
   // the role the user must have.
-  @Input('appHasRole') role: string | null = null;
+  @Input("appHasRole") role: string | null = null;
 
   isVisible = false;
 
@@ -26,16 +33,18 @@ export class HasRoleDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getCurrentUser().subscribe(currentUser => {
+    this.authService.getCurrentUser().subscribe((currentUser) => {
       this.setPropertiesBasedOnUser(currentUser);
     });
 
-    this.authService.loggedIn$.pipe(untilDestroyed(this)).subscribe(user => {
+    this.authService.loggedIn$.pipe(untilDestroyed(this)).subscribe((user) => {
       this.setPropertiesBasedOnUser(user);
     });
   }
 
-  private setPropertiesBasedOnUser(currentUser: ApplicationUserExtended | null): void {
+  private setPropertiesBasedOnUser(
+    currentUser: ApplicationUserExtended | null
+  ): void {
     if (currentUser == null) {
       this.clear();
       return;

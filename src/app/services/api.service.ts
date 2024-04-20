@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 
 // responseType?: "arraybuffer" | "json" | "blob" | "text";
 // observe?: "body" | "response" | "events";
@@ -9,18 +9,18 @@ import { environment } from 'src/environments/environment';
 export interface HttpOptions {
   headers?: HttpHeaders | { [key: string]: string | string[] };
   params?: HttpParams | { [key: string]: string | string[] };
-  responseType?: 'json';
-  observe?: 'body';
+  responseType?: "json";
+  observe?: "body";
   reportProgress?: boolean;
   withCredentials?: boolean;
 }
 
 export const applicationsJsonHttpOptions: HttpOptions = {
-  headers: { 'Content-Type': 'application/json' }
+  headers: { "Content-Type": "application/json" },
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ApiService {
   private readonly apiUrl: string;

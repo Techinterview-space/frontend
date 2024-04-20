@@ -1,9 +1,20 @@
-import { Directive, forwardRef, Input } from '@angular/core';
-import { Validator, AbstractControl, ValidationErrors, NG_VALIDATORS } from '@angular/forms';
+import { Directive, forwardRef, Input } from "@angular/core";
+import {
+  Validator,
+  AbstractControl,
+  ValidationErrors,
+  NG_VALIDATORS,
+} from "@angular/forms";
 
 @Directive({
-  selector: '[appYearRange]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: forwardRef(() => YearRangeValidator), multi: true }]
+  selector: "[appYearRange]",
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => YearRangeValidator),
+      multi: true,
+    },
+  ],
 })
 export class YearRangeValidator implements Validator {
   @Input() min: number | null = null;
@@ -16,7 +27,7 @@ export class YearRangeValidator implements Validator {
         if (this.checkIfYearRangeInvalid(year)) {
           return {
             yearRange: true,
-            yearRangeError: `Year should be in range ${this.min} to  ${this.max}`
+            yearRangeError: `Year should be in range ${this.min} to  ${this.max}`,
           };
         }
       }

@@ -1,14 +1,14 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NotAuthorizedErrorComponent } from './not-authorized-error.component';
+import { NotAuthorizedErrorComponent } from "./not-authorized-error.component";
 
-describe('NotAuthorizedErrorComponent', () => {
+describe("NotAuthorizedErrorComponent", () => {
   let component: NotAuthorizedErrorComponent;
   let fixture: ComponentFixture<NotAuthorizedErrorComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NotAuthorizedErrorComponent]
+      declarations: [NotAuthorizedErrorComponent],
     }).compileComponents();
   }));
 
@@ -18,7 +18,7 @@ describe('NotAuthorizedErrorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

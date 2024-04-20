@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
-import { DeveloperGrade } from '@models/enums';
-import { CompanyType } from '@models/salaries/company-type';
-import { Currency } from '@models/salaries/currency';
-import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { PageParams } from '@models/page-params';
-import { PaginatedList } from '@models/paginated-list';
-import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
-import { KazakhstanCity } from '@models/salaries/kazakhstan-city';
-import { LabelEntityDto } from './label-entity.model';
-import { Gender } from '@models/enums/gender.enum';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { ApiService } from "./api.service";
+import { DeveloperGrade } from "@models/enums";
+import { CompanyType } from "@models/salaries/company-type";
+import { Currency } from "@models/salaries/currency";
+import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { PageParams } from "@models/page-params";
+import { PaginatedList } from "@models/paginated-list";
+import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
+import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
+import { LabelEntityDto } from "./label-entity.model";
+import { Gender } from "@models/enums/gender.enum";
 
 export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
@@ -67,7 +67,7 @@ export interface SalariesChartResponse {
 }
 
 export interface DevelopersByCategoryChartData {
-  labels: Array<{start: number, end: number}>;
+  labels: Array<{ start: number; end: number }>;
   data: Array<number>;
 }
 
@@ -118,8 +118,8 @@ export interface SalariesChartFilterData {
 export interface SalariesAddingTrendAdminChart {
   labels: string[];
   items: Array<{
-    count: number,
-    startedAt: Date,
+    count: number;
+    startedAt: Date;
   }>;
 
   salariesPerUser: number;
@@ -142,54 +142,73 @@ export interface SelectBoxItemsResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserSalariesService {
-  private readonly root = '/api/salaries/';
+  private readonly root = "/api/salaries/";
   constructor(private readonly api: ApiService) {}
 
-  allPaginated(pageParams: PublicAllSalariesQueryParams): Observable<PaginatedList<UserSalary>> {
+  allPaginated(
+    pageParams: PublicAllSalariesQueryParams
+  ): Observable<PaginatedList<UserSalary>> {
     return this.api.get<PaginatedList<UserSalary>>(
-      this.root + '?' + new ConvertObjectToHttpParams(pageParams).get());
+      this.root + "?" + new ConvertObjectToHttpParams(pageParams).get()
+    );
   }
 
-  allAdminPaginated(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
+  allAdminPaginated(
+    pageParams: AdminAllSalariesQueryParams
+  ): Observable<PaginatedList<UserSalaryAdminDto>> {
     return this.api.get<PaginatedList<UserSalaryAdminDto>>(
-      this.root + 'all?' + new ConvertObjectToHttpParams(pageParams).get());
+      this.root + "all?" + new ConvertObjectToHttpParams(pageParams).get()
+    );
   }
 
   selectBoxItems(): Observable<SelectBoxItemsResponse> {
-    return this.api.get<SelectBoxItemsResponse>(this.root + 'select-box-items');
+    return this.api.get<SelectBoxItemsResponse>(this.root + "select-box-items");
   }
 
-  salariesNotInStats(pageParams: AdminAllSalariesQueryParams): Observable<PaginatedList<UserSalaryAdminDto>> {
+  salariesNotInStats(
+    pageParams: AdminAllSalariesQueryParams
+  ): Observable<PaginatedList<UserSalaryAdminDto>> {
     return this.api.get<PaginatedList<UserSalaryAdminDto>>(
-      this.root + 'not-in-stats?' + new ConvertObjectToHttpParams(pageParams).get());
+      this.root +
+        "not-in-stats?" +
+        new ConvertObjectToHttpParams(pageParams).get()
+    );
   }
 
   addingSalariesaTrendAdminChart(): Observable<SalariesAddingTrendAdminChart> {
-    return this.api.get<SalariesAddingTrendAdminChart>(this.root + 'salaries-adding-trend-chart');
+    return this.api.get<SalariesAddingTrendAdminChart>(
+      this.root + "salaries-adding-trend-chart"
+    );
   }
 
   charts(filters: SalariesChartFilterData): Observable<SalariesChartResponse> {
     return this.api.get<SalariesChartResponse>(
-      this.root + 'chart?' + new ConvertObjectToHttpParams(filters).get());
+      this.root + "chart?" + new ConvertObjectToHttpParams(filters).get()
+    );
   }
 
-  create(data: CreateUserSalaryRequest): Observable<CreateSalaryRecordResponse> {
+  create(
+    data: CreateUserSalaryRequest
+  ): Observable<CreateSalaryRecordResponse> {
     return this.api.post<CreateSalaryRecordResponse>(this.root, data);
   }
 
-  update(id: string, data: EditUserSalaryRequest): Observable<CreateSalaryRecordResponse> {
+  update(
+    id: string,
+    data: EditUserSalaryRequest
+  ): Observable<CreateSalaryRecordResponse> {
     return this.api.post<CreateSalaryRecordResponse>(this.root + id, data);
   }
 
   approve(dataId: string): Observable<void> {
-    return this.api.post<void>(this.root + dataId + '/approve', {});
+    return this.api.post<void>(this.root + dataId + "/approve", {});
   }
 
   excludeFromStats(dataId: string): Observable<void> {
-    return this.api.post<void>(this.root + dataId + '/exclude-from-stats', {});
+    return this.api.post<void>(this.root + dataId + "/exclude-from-stats", {});
   }
 
   delete(dataId: string): Observable<void> {
@@ -198,9 +217,9 @@ export class UserSalariesService {
 
   downloadCsv(): Observable<File> {
     const httpOptions = {
-      responseType: 'blob' as 'json'
+      responseType: "blob" as "json",
     };
 
-    return this.api.get<File>(this.root + '/export', httpOptions);
+    return this.api.get<File>(this.root + "/export", httpOptions);
   }
 }

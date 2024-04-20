@@ -1,7 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { AuthService } from '../services/auth/auth.service';
+import { Injectable } from "@angular/core";
+import {
+  Router,
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
+import { AuthService } from "../services/auth/auth.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -13,19 +18,19 @@ export class AuthGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot | null,
-    state: RouterStateSnapshot | null): boolean {
-
+    state: RouterStateSnapshot | null
+  ): boolean {
     if (this.authService.isAuthenticated()) {
       return true;
     }
 
     if (state !== null && state.url != null) {
       // set expire date + 10 hours
-      console.log('Url to redirect', state.url);
-      this.cookieService.set('url', state.url, Date.now(), '/');
+      console.log("Url to redirect", state.url);
+      this.cookieService.set("url", state.url, Date.now(), "/");
     }
 
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl("/");
     return false;
   }
 }

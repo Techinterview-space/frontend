@@ -1,24 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { InterviewTemplate } from '@models/interview-models';
-import { Label } from '@models/user-label.model';
-import { InterviewTemplatesService } from '@services/interview-templates.service';
-import { InterviewsService } from '@services/interviews.service';
-import { TitleService } from '@services/title.service';
-import { UserLabelsService } from '@services/user-labels.service';
-import { AlertService } from '@shared/components/alert/services/alert.service';
-import { ActivatedRouteExtended } from '@shared/routes/activated-route-extended';
-import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-select-item';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { InterviewFormGroup } from './interview-form-group';
-import { InterviewTemplateSelectItem } from './interview-template-select-item';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { InterviewTemplate } from "@models/interview-models";
+import { Label } from "@models/user-label.model";
+import { InterviewTemplatesService } from "@services/interview-templates.service";
+import { InterviewsService } from "@services/interviews.service";
+import { TitleService } from "@services/title.service";
+import { UserLabelsService } from "@services/user-labels.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
+import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
+import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { InterviewFormGroup } from "./interview-form-group";
+import { InterviewTemplateSelectItem } from "./interview-template-select-item";
 
 @Component({
-  templateUrl: './interview-edit-page.component.html',
-  styleUrls: ['./interview-edit-page.component.scss']
+  templateUrl: "./interview-edit-page.component.html",
+  styleUrls: ["./interview-edit-page.component.scss"],
 })
 export class InterviewEditPageComponent implements OnInit, OnDestroy {
-  pageTitle = 'Новая заметка к интервью';
+  pageTitle = "Новая заметка к интервью";
 
   formGroup: InterviewFormGroup | null = null;
   templates: Array<InterviewTemplateSelectItem> = [];
@@ -26,10 +26,11 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
   labels: Array<Label> = [];
   selectedLabels: Array<Label> = [];
 
-  candidateFullname = '';
+  candidateFullname = "";
   showAddSubjectsFromTemplateModal = false;
 
-  readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.allGrades();
+  readonly grades: Array<DeveloperGradeSelectItem> =
+    DeveloperGradeSelectItem.allGrades();
 
   get subjectsCount(): number {
     return this.formGroup?.subjectsCount ?? 0;
@@ -52,13 +53,13 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activateRoute
-      .getParam('id')
+      .getParam("id")
       .pipe(untilDestroyed(this))
       .subscribe((id) => {
         this.interviewId = id;
 
         if (this.interviewId != null) {
-          this.setTitle('Редактирование заметки');
+          this.setTitle("Редактирование заметки");
           this.service
             .byId(this.interviewId)
             .pipe(untilDestroyed(this))
@@ -70,12 +71,14 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
         }
 
         this.templateService
-            .availableForInterview()
-            .pipe(untilDestroyed(this))
-            .subscribe((templates) => {
-              this.templates = templates.map((t) => new InterviewTemplateSelectItem(t));
-              this.formGroup = new InterviewFormGroup(null);
-            });
+          .availableForInterview()
+          .pipe(untilDestroyed(this))
+          .subscribe((templates) => {
+            this.templates = templates.map(
+              (t) => new InterviewTemplateSelectItem(t)
+            );
+            this.formGroup = new InterviewFormGroup(null);
+          });
       });
 
     this.userLabelsService
@@ -93,7 +96,8 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.selectedTemplate = this.templates.find((x) => x.item.id === templateId)?.item ?? null;
+    this.selectedTemplate =
+      this.templates.find((x) => x.item.id === templateId)?.item ?? null;
   }
 
   addSubjectsFromTemplate(): void {
@@ -111,7 +115,7 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
     if (this.interviewId == null) {
       const createRequest = this.formGroup!.createRequest(this.selectedLabels);
       if (createRequest == null) {
-        this.alert.error('Invalid form data');
+        this.alert.error("Invalid form data");
         return;
       }
 
@@ -119,15 +123,15 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
         .create(createRequest)
         .pipe(untilDestroyed(this))
         .subscribe((id) => {
-          this.alert.success('Interview was saved');
-          this.router.navigate(['/interviews/my']);
+          this.alert.success("Interview was saved");
+          this.router.navigate(["/interviews/my"]);
         });
       return;
     }
 
     const updateRequest = this.formGroup!.updateRequest(this.selectedLabels);
     if (updateRequest == null) {
-      this.alert.error('Invalid form data');
+      this.alert.error("Invalid form data");
       return;
     }
 
@@ -135,8 +139,8 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
       .update(updateRequest)
       .pipe(untilDestroyed(this))
       .subscribe((id) => {
-        this.alert.success('Interview was updated');
-        this.router.navigate(['/interviews/my']);
+        this.alert.success("Interview was updated");
+        this.router.navigate(["/interviews/my"]);
       });
   }
 

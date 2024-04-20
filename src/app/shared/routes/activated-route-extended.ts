@@ -1,7 +1,7 @@
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import Assertion from '@shared/validation/assertion';
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import Assertion from "@shared/validation/assertion";
 
 export interface QueryParameter {
   key: string;
@@ -11,7 +11,7 @@ export interface QueryParameter {
 // This class should not be injected
 export class ActivatedRouteExtended {
   constructor(private readonly activatedRoute: ActivatedRoute) {
-    Assertion.notNull(activatedRoute, 'activatedRoute');
+    Assertion.notNull(activatedRoute, "activatedRoute");
   }
 
   getQueryParams(paramNames: Array<string>): Observable<Array<QueryParameter>> {
@@ -38,10 +38,13 @@ export class ActivatedRouteExtended {
   }
 
   getIdFromRoute(throwErrorIfAintExist = true): Observable<number | null> {
-    return this.getParamAsNumber('id', throwErrorIfAintExist);
+    return this.getParamAsNumber("id", throwErrorIfAintExist);
   }
 
-  getParamAsNumber(paramName: string, throwErrorIfAintExist = true): Observable<number | null> {
+  getParamAsNumber(
+    paramName: string,
+    throwErrorIfAintExist = true
+  ): Observable<number | null> {
     return this.activatedRoute.paramMap.pipe(
       map((params) => {
         const paramValue = params.get(paramName);
@@ -56,7 +59,9 @@ export class ActivatedRouteExtended {
 
         const paramAsNumber = Number(paramValue);
         if (isNaN(paramAsNumber)) {
-          throw Error(`A paramenter ${paramName} is not a valid number (${paramValue})`);
+          throw Error(
+            `A paramenter ${paramName} is not a valid number (${paramValue})`
+          );
         }
 
         return paramAsNumber;

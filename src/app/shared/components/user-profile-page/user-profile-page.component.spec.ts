@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UserProfilePageComponent } from './user-profile-page.component';
+import { UserProfilePageComponent } from "./user-profile-page.component";
 
-describe('UserProfilePageComponent', () => {
+describe("UserProfilePageComponent", () => {
   let component: UserProfilePageComponent;
   let fixture: ComponentFixture<UserProfilePageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserProfilePageComponent]
+      declarations: [UserProfilePageComponent],
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe('UserProfilePageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

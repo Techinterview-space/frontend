@@ -1,10 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { mostUsedImports, mostUsedServices, testUtilStubs } from '@shared/test-utils';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  mostUsedImports,
+  mostUsedServices,
+  testUtilStubs,
+} from "@shared/test-utils";
 
-import { JobsTableComponent } from './jobs-table.component';
+import { JobsTableComponent } from "./jobs-table.component";
 
-describe('JobsTableComponent', () => {
+describe("JobsTableComponent", () => {
   let component: JobsTableComponent;
   let fixture: ComponentFixture<JobsTableComponent>;
 
@@ -13,7 +17,7 @@ describe('JobsTableComponent', () => {
       declarations: [JobsTableComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -23,7 +27,7 @@ describe('JobsTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

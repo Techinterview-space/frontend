@@ -1,4 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-3">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-3"
+>
   <div class="container">
     <a class="navbar-brand" routerLink="/admin/">Админка</a>
     <button
@@ -27,15 +29,24 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li *ngFor="let link of dropdown.links">
-              <a class="dropdown-item" routerLink="{{ link.url }}">{{ link.title }}</a>
+              <a class="dropdown-item" routerLink="{{ link.url }}">{{
+                link.title
+              }}</a>
             </li>
           </ul>
         </li>
       </ul>
 
       <form class="d-flex" *ngIf="showSearchForm">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success disabled" disabled type="submit">Поиск</button>
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success disabled" disabled type="submit">
+          Поиск
+        </button>
       </form>
     </div>
   </div>

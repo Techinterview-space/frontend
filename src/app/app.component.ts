@@ -1,27 +1,28 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from './shared/services/auth/auth.service';
-import { untilDestroyed } from './shared/subscriptions/until-destroyed';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "./shared/services/auth/auth.service";
+import { untilDestroyed } from "./shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
-  title = 'Techinterview.space';
+  title = "Techinterview.space";
 
-  timer = 'timer';
-  transparent = 'transparent';
+  timer = "timer";
+  transparent = "transparent";
 
   get showAdminNavbar(): boolean {
-    return this.router.url.startsWith('/admin');
+    return this.router.url.startsWith("/admin");
   }
 
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router) {}
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.authService

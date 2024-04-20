@@ -1,15 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TitleService } from '@services/title.service';
-import { AlertService } from '@shared/components/alert/services/alert.service';
-import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
-import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { LabelEntityAdmiDto } from '@services/label-entity.model';
-import { LabelEntityEditForm } from '../label-entity-edit-form';
-import { ProfessionsService } from '@services/professions.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { TitleService } from "@services/title.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
+import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
+import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { LabelEntityAdmiDto } from "@services/label-entity.model";
+import { LabelEntityEditForm } from "../label-entity-edit-form";
+import { ProfessionsService } from "@services/professions.service";
 
 @Component({
-  templateUrl: './professions-paginated-table.component.html'
+  templateUrl: "./professions-paginated-table.component.html",
 })
 export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
   items: Array<LabelEntityAdmiDto> | null = null;
@@ -29,7 +29,7 @@ export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.title.setTitle('Professions');
+    this.title.setTitle("Professions");
     this.service
       .all()
       .pipe(untilDestroyed(this))
@@ -49,7 +49,6 @@ export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
   }
 
   onEditFormSubmit(): void {
-
     if (this.editForm == null) {
       return;
     }
@@ -59,32 +58,32 @@ export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
       if (updateRequest == null) {
         return;
       }
-  
+
       this.service
         .update(updateRequest)
         .pipe(untilDestroyed(this))
         .subscribe(() => {
-          this.alert.success('The profession was updated');
+          this.alert.success("The profession was updated");
           this.editForm = null;
           this.ngOnInit();
         });
 
-        return;
+      return;
     }
 
     const createRequest = this.editForm.createRequestOrNull();
-      if (createRequest == null) {
-        return;
-      }
-  
-      this.service
-        .create(createRequest)
-        .pipe(untilDestroyed(this))
-        .subscribe(() => {
-          this.alert.success('The profession was created');
-          this.editForm = null;
-          this.ngOnInit();
-        });
+    if (createRequest == null) {
+      return;
+    }
+
+    this.service
+      .create(createRequest)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success("The profession was created");
+        this.editForm = null;
+        this.ngOnInit();
+      });
   }
 
   onEditModalDlgClose(): void {
@@ -93,20 +92,16 @@ export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
 
   delete(item: LabelEntityAdmiDto): void {
     this.confirmDeletionMessage = new DialogMessage(
-      new ConfirmMsg(
-        'Delete the profession',
-        'Are you sure to delete?',
-        () => {
-          this.service
-            .delete(item.id!)
-            .pipe(untilDestroyed(this))
-            .subscribe(() => {
-              this.alert.success('The profession was removed');
-              this.confirmDeletionMessage = null;
-              this.ngOnInit();
-            });
-        }
-      )
+      new ConfirmMsg("Delete the profession", "Are you sure to delete?", () => {
+        this.service
+          .delete(item.id!)
+          .pipe(untilDestroyed(this))
+          .subscribe(() => {
+            this.alert.success("The profession was removed");
+            this.confirmDeletionMessage = null;
+            this.ngOnInit();
+          });
+      })
     );
   }
 }

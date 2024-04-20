@@ -1,6 +1,6 @@
-import { Label } from '@models/user-label.model';
-import { ApplicationUser } from '..';
-import { InterviewTemplateSubject } from './interview-template-subject';
+import { Label } from "@models/user-label.model";
+import { ApplicationUser } from "..";
+import { InterviewTemplateSubject } from "./interview-template-subject";
 
 export interface InterviewTemplate {
   id: string;

@@ -1,4 +1,4 @@
 export enum Currency {
-    Undefined = 0,
-    KZT = 1,
+  Undefined = 0,
+  KZT = 1,
 }

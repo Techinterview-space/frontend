@@ -9,14 +9,19 @@
     <div class="progress" (click)="toggleCountAndPercent()">
       <div
         *ngFor="let item of barsForLocal"
-        class="progress-bar progress-bar-striped {{item.color}}"
+        class="progress-bar progress-bar-striped {{ item.color }}"
         role="progressbar"
         [attr.aria-label]="item.label"
-        [ngStyle]="{'width': item.width + '%'}"
+        [ngStyle]="{ width: item.width + '%' }"
         [attr.aria-label]="item.value"
         aria-valuemin="0"
-        aria-valuemax="100">
-        <strong title="{{item.label}} - {{item.value}}" class="{{item.textColor}}">{{item.value}}</strong>
+        aria-valuemax="100"
+      >
+        <strong
+          title="{{ item.label }} - {{ item.value }}"
+          class="{{ item.textColor }}"
+          >{{ item.value }}</strong
+        >
       </div>
     </div>
   </div>
@@ -29,14 +34,19 @@
     <div class="progress" (click)="toggleCountAndPercent()">
       <div
         *ngFor="let item of barsForRemote"
-        class="progress-bar progress-bar-striped {{item.color}}"
+        class="progress-bar progress-bar-striped {{ item.color }}"
         role="progressbar"
         [attr.aria-label]="item.label"
-        [ngStyle]="{'width': item.width + '%'}"
+        [ngStyle]="{ width: item.width + '%' }"
         [attr.aria-label]="item.value"
         aria-valuemin="0"
-        aria-valuemax="100">
-        <strong title="{{item.label}} - {{item.value}}" class="{{item.textColor}}">{{item.value}}</strong>
+        aria-valuemax="100"
+      >
+        <strong
+          title="{{ item.label }} - {{ item.value }}"
+          class="{{ item.textColor }}"
+          >{{ item.value }}</strong
+        >
       </div>
     </div>
   </div>
@@ -45,17 +55,32 @@
     <span>Значения цветов</span>
     <span
       *ngFor="let item of colorByGradeLegend"
-      class="ms-2 badge {{item.color}} {{item.textColor}}">{{item.title}}</span>
+      class="ms-2 badge {{ item.color }} {{ item.textColor }}"
+      >{{ item.title }}</span
+    >
   </div>
 
-  <div class="mb-3 fst-italic" *ngIf="currentSalary != null && currentSalary.gender == null; else hasGenderInSalary">
+  <div
+    class="mb-3 fst-italic"
+    *ngIf="
+      currentSalary != null && currentSalary.gender == null;
+      else hasGenderInSalary
+    "
+  >
     <div>Вы пока не указали ваш пол.</div>
-    <div>Уточнить данные <button type="button" class="btn-link-sm fst-italic font-weight-normal" (click)="openEditSalaryAction()">можно тут</button></div>
+    <div>
+      Уточнить данные
+      <button
+        type="button"
+        class="btn-link-sm fst-italic font-weight-normal"
+        (click)="openEditSalaryAction()"
+      >
+        можно тут
+      </button>
+    </div>
   </div>
 </div>
 
 <ng-template #hasGenderInSalary>
-  <div class="fst-italic text-muted">
-    Вы уже указали ваш пол. Спасибо!
-  </div>
+  <div class="fst-italic text-muted">Вы уже указали ваш пол. Спасибо!</div>
 </ng-template>

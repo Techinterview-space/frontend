@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthService } from '@shared/services/auth/auth.service';
-import { SpinnerService } from '@shared/services/spinners/spinner-service';
-import { SharedModule } from '@shared/shared.module';
-import { MockAuthService, testUtilStubs } from '@shared/test-utils';
-import { CookieService } from 'ngx-cookie-service';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AuthService } from "@shared/services/auth/auth.service";
+import { SpinnerService } from "@shared/services/spinners/spinner-service";
+import { SharedModule } from "@shared/shared.module";
+import { MockAuthService, testUtilStubs } from "@shared/test-utils";
+import { CookieService } from "ngx-cookie-service";
 
-import { NavbarComponent } from './navbar.component';
-import { RouterModule } from '@angular/router';
+import { NavbarComponent } from "./navbar.component";
+import { RouterModule } from "@angular/router";
 
-describe('NavbarComponent', () => {
+describe("NavbarComponent", () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
 
@@ -16,7 +16,12 @@ describe('NavbarComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SharedModule, RouterModule],
       declarations: [NavbarComponent],
-      providers: [{ provide: AuthService, useClass: MockAuthService }, ...testUtilStubs, CookieService, SpinnerService]
+      providers: [
+        { provide: AuthService, useClass: MockAuthService },
+        ...testUtilStubs,
+        CookieService,
+        SpinnerService,
+      ],
     }).compileComponents();
   });
 
@@ -26,7 +31,7 @@ describe('NavbarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

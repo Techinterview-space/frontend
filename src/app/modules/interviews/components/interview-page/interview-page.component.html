@@ -23,7 +23,9 @@
             <li class="list-group-item">
               <div class="text-muted small">Grade</div>
               <div class="">
-                <app-developer-grade-label [grade]="interview.candidateGrade"></app-developer-grade-label>
+                <app-developer-grade-label
+                  [grade]="interview.candidateGrade"
+                ></app-developer-grade-label>
               </div>
             </li>
             <li class="list-group-item">
@@ -35,22 +37,31 @@
             <li class="list-group-item" *ngIf="interview.labels.length > 0">
               <div class="text-muted small">Labels</div>
               <div>
-                <app-label *ngFor="let item of interview.labels" [label]="item"></app-label>
+                <app-label
+                  *ngFor="let item of interview.labels"
+                  [label]="item"
+                ></app-label>
               </div>
             </li>
             <li class="list-group-item">
               <div class="text-muted small">Last update</div>
               <div>
-                {{ interview.updatedAt | date: 'HH:mm yyyy-MM-dd' }}
+                {{ interview.updatedAt | date: "HH:mm yyyy-MM-dd" }}
               </div>
             </li>
             <li class="list-group-item">
               <div class="text-muted small">Export</div>
               <div>
-                <app-loading-button [css]="'btn btn-sm btn-outline-dark ms-1'" (clicked)="markdownFromServer()">
+                <app-loading-button
+                  [css]="'btn btn-sm btn-outline-dark ms-1'"
+                  (clicked)="markdownFromServer()"
+                >
                   Markdown
                 </app-loading-button>
-                <app-loading-button [css]="'btn btn-sm btn-outline-dark ms-1'" (clicked)="exportAsPDF()">
+                <app-loading-button
+                  [css]="'btn btn-sm btn-outline-dark ms-1'"
+                  (clicked)="exportAsPDF()"
+                >
                   PDF
                 </app-loading-button>
               </div>
@@ -58,7 +69,10 @@
             <li class="list-group-item">
               <div class="text-muted small">Actions</div>
               <div>
-                <a routerLink="/interviews/{{ interview.id }}/edit" class="btn-link-sm" title="Edit the interview"
+                <a
+                  routerLink="/interviews/{{ interview.id }}/edit"
+                  class="btn-link-sm"
+                  title="Edit the interview"
                   >Edit</a
                 >
                 <button
@@ -97,13 +111,27 @@
         <div class="card-body">
           <div class="h5">Subjects discussed</div>
 
-          <ul class="list-group list-group-flush" *ngIf="interview && interview.subjects && interview.subjects.length > 0; noSubjectsYet">
-            <li class="list-group-item" *ngFor="let item of interview.subjects; let i = index">
+          <ul
+            class="list-group list-group-flush"
+            *ngIf="
+              interview && interview.subjects && interview.subjects.length > 0;
+              noSubjectsYet
+            "
+          >
+            <li
+              class="list-group-item"
+              *ngFor="let item of interview.subjects; let i = index"
+            >
               <div class="d-flex justify-content-between">
                 <div class="d-inline-block">
-                  <span class="text-muted small">{{ i + 1 }}.</span><strong class="ms-1">{{ item.title }}</strong>
+                  <span class="text-muted small">{{ i + 1 }}.</span
+                  ><strong class="ms-1">{{ item.title }}</strong>
                 </div>
-                <span><app-developer-grade-label [grade]="item.grade"></app-developer-grade-label></span>
+                <span
+                  ><app-developer-grade-label
+                    [grade]="item.grade"
+                  ></app-developer-grade-label
+                ></span>
               </div>
               <div class="ps-5" *ngIf="item.comments">
                 <div class="small">
@@ -132,7 +160,10 @@
   </div>
 </ng-template>
 
-<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>
 
 <app-interview-markdown-modal-dialog
   *ngIf="interviewMarkdownContent"

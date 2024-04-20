@@ -1,8 +1,14 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { Iso8601Date } from '@shared/value-objects';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpResponse,
+} from "@angular/common/http";
+import { Observable } from "rxjs";
+import { tap } from "rxjs/operators";
+import { Injectable } from "@angular/core";
+import { Iso8601Date } from "@shared/value-objects";
 
 /**
  * Tries to convert dates written as string values into Date objects.
@@ -11,7 +17,10 @@ import { Iso8601Date } from '@shared/value-objects';
  */
 @Injectable()
 export class DateParserInterceptor implements HttpInterceptor {
-  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       tap(
         (event: HttpEvent<any>) => {
@@ -29,7 +38,7 @@ export class DateParserInterceptor implements HttpInterceptor {
 
   // public for test purposes
   tryConvertDates(body: any): void {
-    if (body == null || typeof body !== 'object') {
+    if (body == null || typeof body !== "object") {
       return body;
     }
 
@@ -39,7 +48,7 @@ export class DateParserInterceptor implements HttpInterceptor {
       const iso8601Date = new Iso8601Date(value);
       if (iso8601Date.valid()) {
         body[key] = iso8601Date.asDateOrFail();
-      } else if (typeof value === 'object') {
+      } else if (typeof value === "object") {
         this.tryConvertDates(value);
       }
     }

@@ -1,4 +1,8 @@
-<a *ngIf="user; else noUser" class="{{ css }}" routerLink="/users/{{ user.id }}">
+<a
+  *ngIf="user; else noUser"
+  class="{{ css }}"
+  routerLink="/users/{{ user.id }}"
+>
   {{ user.firstName }} {{ user.lastName }}
 </a>
 

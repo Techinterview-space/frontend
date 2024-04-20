@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UserLinkComponent } from './user-link.component';
+import { UserLinkComponent } from "./user-link.component";
 
-describe('UserLinkComponent', () => {
+describe("UserLinkComponent", () => {
   let component: UserLinkComponent;
   let fixture: ComponentFixture<UserLinkComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserLinkComponent]
+      declarations: [UserLinkComponent],
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe('UserLinkComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,64 +1,64 @@
-import { Chart }  from 'chart.js/auto';
-import { DevelopersByCategoryChartData } from '@services/user-salaries.service';
-import { RandomRgbColor } from './random-rgb-color';
+import { Chart } from "chart.js/auto";
+import { DevelopersByCategoryChartData } from "@services/user-salaries.service";
+import { RandomRgbColor } from "./random-rgb-color";
 
 interface ChartDatasetType {
-    label: string;
-    data: Array<number>;
-    backgroundColor: string;
-    borderColor: string;
+  label: string;
+  data: Array<number>;
+  backgroundColor: string;
+  borderColor: string;
 }
 
 export class PeopleByCategoryBarChartObject extends Chart {
+  private readonly datasets: Array<ChartDatasetType> = [];
 
-    private readonly datasets: Array<ChartDatasetType> = [];
+  constructor(
+    canvasId: string,
+    private readonly source: DevelopersByCategoryChartData
+  ) {
+    const randomColor = new RandomRgbColor();
+    const datasets: Array<ChartDatasetType> = [
+      {
+        label: "Developers",
+        data: source.data,
+        backgroundColor: randomColor.toString(0.8),
+        borderColor: randomColor.toString(1),
+      },
+    ];
 
-    constructor(canvasId: string, private readonly source: DevelopersByCategoryChartData) {
-        const randomColor = new RandomRgbColor();
-        const datasets: Array<ChartDatasetType> = [
-            {
-                label: 'Developers',
-                data: source.data,
-                backgroundColor: randomColor.toString(0.8),
-                borderColor: randomColor.toString(1),
-            }
-        ];
+    super(canvasId, {
+      type: "bar",
+      data: {
+        labels: source.labels.map((x, i) => {
+          if (i === 0) {
+            return `< ${x.end}`;
+          }
 
-        super(
-            canvasId,
-            {
-                type: 'bar',
-                data: {
-                    labels: source.labels.map((x, i) => {
-                        if (i === 0) {
-                            return `< ${x.end}`
-                        }
+          if (i === source.labels.length - 1) {
+            return `> ${x.start}`;
+          }
 
-                        if (i === source.labels.length - 1) {
-                            return `> ${x.start}`
-                        }
+          if (x.end - x.start === 1) {
+            return `до ${x.end}`;
+          }
 
-                        if (x.end - x.start === 1) {
-                            return `до ${x.end}`;
-                        }
+          return `${x.start}-${x.end}`;
+        }),
+        datasets: datasets,
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+            title: {
+              display: false,
+            },
+          },
+        },
+      },
+    });
 
-                        return `${x.start}-${x.end}`;
-                    }),
-                    datasets: datasets,
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            title: {
-                                display: false,
-                            },
-                          }
-                    }
-                },
-            });
-
-        this.datasets = datasets;
-    }
+    this.datasets = datasets;
+  }
 }

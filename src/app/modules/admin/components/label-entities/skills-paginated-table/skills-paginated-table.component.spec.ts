@@ -1,10 +1,14 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SkillsService } from '@services/skills.service';
-import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
-import { SkillsPaginatedTableComponent } from './skills-paginated-table.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { SkillsService } from "@services/skills.service";
+import {
+  mostUsedImports,
+  testUtilStubs,
+  mostUsedServices,
+} from "@shared/test-utils";
+import { SkillsPaginatedTableComponent } from "./skills-paginated-table.component";
 
-describe('SkillsPaginatedTableComponent', () => {
+describe("SkillsPaginatedTableComponent", () => {
   let component: SkillsPaginatedTableComponent;
   let fixture: ComponentFixture<SkillsPaginatedTableComponent>;
 
@@ -13,7 +17,7 @@ describe('SkillsPaginatedTableComponent', () => {
       declarations: [SkillsPaginatedTableComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices, SkillsService],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -23,7 +27,7 @@ describe('SkillsPaginatedTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

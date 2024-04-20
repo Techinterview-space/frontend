@@ -1,23 +1,29 @@
-import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
-import { CreateLabelEntityRequest, LabelEntityAdmiDto, LabelEntityDto, UpdateLabelEntityRequest } from './label-entity.model';
+import { Observable } from "rxjs";
+import { ApiService } from "./api.service";
+import {
+  CreateLabelEntityRequest,
+  LabelEntityAdmiDto,
+  LabelEntityDto,
+  UpdateLabelEntityRequest,
+} from "./label-entity.model";
 
 export abstract class LabelEntityBaseService {
   constructor(
     private readonly root: string,
-    private readonly api: ApiService) {}
+    private readonly api: ApiService
+  ) {}
 
   all(): Observable<Array<LabelEntityAdmiDto>> {
     // for admis
-    return this.api.get<LabelEntityAdmiDto[]>(this.root + 'all');
+    return this.api.get<LabelEntityAdmiDto[]>(this.root + "all");
   }
 
   allForSelectBoxes(): Observable<Array<LabelEntityDto>> {
-    return this.api.get<LabelEntityDto[]>(this.root + 'for-select-boxes');
+    return this.api.get<LabelEntityDto[]>(this.root + "for-select-boxes");
   }
 
   byIdSimple(id: string): Observable<LabelEntityDto> {
-    return this.api.get<LabelEntityDto>(this.root + id + '/simple');
+    return this.api.get<LabelEntityDto>(this.root + id + "/simple");
   }
 
   create(data: CreateLabelEntityRequest): Observable<number> {

@@ -1,7 +1,7 @@
-import Assertion from '@shared/validation/assertion';
-import { HealthReport } from '@shared/health-check/health-report.model';
-import { Observable } from 'rxjs';
-import { StatusMarker } from '@models/enums';
+import Assertion from "@shared/validation/assertion";
+import { HealthReport } from "@shared/health-check/health-report.model";
+import { Observable } from "rxjs";
+import { StatusMarker } from "@models/enums";
 
 export class HealthCheckItem {
   status = StatusMarker.Undefined;
@@ -20,9 +20,9 @@ export class HealthCheckItem {
     public readonly hint: string,
     private readonly action: () => Observable<HealthReport>
   ) {
-    Assertion.notNull(title, 'title');
-    Assertion.notNull(hint, 'hint');
-    Assertion.notNull(action, 'action');
+    Assertion.notNull(title, "title");
+    Assertion.notNull(hint, "hint");
+    Assertion.notNull(action, "action");
   }
 
   execute(): void {
@@ -31,11 +31,11 @@ export class HealthCheckItem {
     this.status = StatusMarker.Yellow;
 
     this.action().subscribe(
-      r => {
+      (r) => {
         this.elapsed = Date.now() - start;
         this.status = StatusMarker.Green;
       },
-      e => {
+      (e) => {
         this.elapsed = Date.now() - start;
         this.status = StatusMarker.Red;
       }

@@ -1,10 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { mostUsedImports, mostUsedServices, testUtilStubs } from '@shared/test-utils';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  mostUsedImports,
+  mostUsedServices,
+  testUtilStubs,
+} from "@shared/test-utils";
 
-import { HealthCheckTableComponent } from './health-check-table.component';
+import { HealthCheckTableComponent } from "./health-check-table.component";
 
-describe('HealthCheckTableComponent', () => {
+describe("HealthCheckTableComponent", () => {
   let component: HealthCheckTableComponent;
   let fixture: ComponentFixture<HealthCheckTableComponent>;
 
@@ -13,7 +17,7 @@ describe('HealthCheckTableComponent', () => {
       declarations: [HealthCheckTableComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -23,7 +27,7 @@ describe('HealthCheckTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

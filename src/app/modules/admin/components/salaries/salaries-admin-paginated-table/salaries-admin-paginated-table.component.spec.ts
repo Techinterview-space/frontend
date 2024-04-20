@@ -1,9 +1,13 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
-import { SalariesAdminPaginatedTableComponent } from './salaries-admin-paginated-table.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import {
+  mostUsedImports,
+  testUtilStubs,
+  mostUsedServices,
+} from "@shared/test-utils";
+import { SalariesAdminPaginatedTableComponent } from "./salaries-admin-paginated-table.component";
 
-describe('SalariesAdminPaginatedTableComponent', () => {
+describe("SalariesAdminPaginatedTableComponent", () => {
   let component: SalariesAdminPaginatedTableComponent;
   let fixture: ComponentFixture<SalariesAdminPaginatedTableComponent>;
 
@@ -12,7 +16,7 @@ describe('SalariesAdminPaginatedTableComponent', () => {
       declarations: [SalariesAdminPaginatedTableComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -22,7 +26,7 @@ describe('SalariesAdminPaginatedTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

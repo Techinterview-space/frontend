@@ -1,12 +1,12 @@
-import { Subject, Observable, of } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { OidcUserManager } from './oidc-user-manager.service';
-import { ApplicationUser } from '@models/application-user';
-import { AuthorizationService } from '@services/authorization.service';
-import { map } from 'rxjs/operators';
-import { ApplicationUserExtended } from '@models/extended';
-import { AuthSessionService } from './auth.session.service';
-import { IdToken, User } from '@auth0/auth0-angular';
+import { Subject, Observable, of } from "rxjs";
+import { Injectable } from "@angular/core";
+import { OidcUserManager } from "./oidc-user-manager.service";
+import { ApplicationUser } from "@models/application-user";
+import { AuthorizationService } from "@services/authorization.service";
+import { map } from "rxjs/operators";
+import { ApplicationUserExtended } from "@models/extended";
+import { AuthSessionService } from "./auth.session.service";
+import { IdToken, User } from "@auth0/auth0-angular";
 
 export interface IAuthService {
   getCurrentUser(): Observable<ApplicationUserExtended | null>;
@@ -23,7 +23,7 @@ export interface IAuthService {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService implements IAuthService {
   private authorizationInfo: IdToken | null | undefined = null;
@@ -74,11 +74,13 @@ export class AuthService implements IAuthService {
   }
 
   completeAuthentication(): Observable<IdToken | null> {
-    return this.oidcManager.completeAuthentication().pipe(map(x => {
-      this.authorizationInfo = x;
-      this.reloadInternalProperties();
-      return x ?? null;
-    }));
+    return this.oidcManager.completeAuthentication().pipe(
+      map((x) => {
+        this.authorizationInfo = x;
+        this.reloadInternalProperties();
+        return x ?? null;
+      })
+    );
   }
 
   private reloadInternalProperties(): void {
@@ -139,7 +141,8 @@ export class AuthService implements IAuthService {
     if (this.authorizationInfo == null) {
       this.authorizationInfo = this.session.auth;
       const user = this.session.applicationUser;
-      this.applicationUser = user != null ? new ApplicationUserExtended(user) : null;
+      this.applicationUser =
+        user != null ? new ApplicationUserExtended(user) : null;
     }
   }
 }

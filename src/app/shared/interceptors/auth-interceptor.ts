@@ -1,10 +1,16 @@
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Injector, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service';
-import { catchError, tap } from 'rxjs/operators';
-import { AlertService } from '@shared/components/alert/services/alert.service';
+import {
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpEvent,
+  HttpErrorResponse,
+} from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { Injector, Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "../services/auth/auth.service";
+import { catchError, tap } from "rxjs/operators";
+import { AlertService } from "@shared/components/alert/services/alert.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -16,12 +22,15 @@ export class AuthInterceptor implements HttpInterceptor {
     private readonly alertService: AlertService
   ) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     if (this.authService == null) {
       const authService = this.injector.get(AuthService);
 
       if (authService == null) {
-        throw Error('Cannot work without Auth Service');
+        throw Error("Cannot work without Auth Service");
       }
 
       this.authService = authService;
@@ -37,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
       // @ts-ignore
       catchError((err) => {
         if (err instanceof HttpErrorResponse && err.status === 0) {
-          this.router.navigateByUrl('server-unavailable');
+          this.router.navigateByUrl("server-unavailable");
           return of(err as any);
         }
       })
@@ -45,7 +54,10 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private processHttpErrors(error: any): void {
-    if (error instanceof HttpErrorResponse && this.processHttpErrorResponse(error)) {
+    if (
+      error instanceof HttpErrorResponse &&
+      this.processHttpErrorResponse(error)
+    ) {
       return;
     }
 
@@ -59,13 +71,15 @@ export class AuthInterceptor implements HttpInterceptor {
       return true;
     }
 
-    if (error.status === 0 &&
-        error.url != null &&
-        error.url.endsWith('/health')) {
+    if (
+      error.status === 0 &&
+      error.url != null &&
+      error.url.endsWith("/health")
+    ) {
       return false;
     }
 
-    const headersStatus = error.headers.get('status');
+    const headersStatus = error.headers.get("status");
     return headersStatus != null && Number(headersStatus) === notAuthStatusCode;
   }
 
@@ -73,13 +87,13 @@ export class AuthInterceptor implements HttpInterceptor {
     // unauthorized
     if (this.checkIsNotAuthorizeError(error)) {
       this.authService!.signout();
-      this.router.navigate(['/']);
+      this.router.navigate(["/"]);
       return true;
     }
 
     // permissions error
     if (error.status === 403) {
-      this.router.navigate(['not-permission']);
+      this.router.navigate(["not-permission"]);
       return true;
     }
 
@@ -87,7 +101,8 @@ export class AuthInterceptor implements HttpInterceptor {
     if (error.status === 400) {
       if (error.error != null) {
         const errorMessageAsText = error.error as string;
-        const backendMessage = errorMessageAsText ??
+        const backendMessage =
+          errorMessageAsText ??
           error.error.Message ??
           error.error.message ??
           null;
@@ -98,7 +113,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       }
 
-      this.alertService.error('Request data is invalid');
+      this.alertService.error("Request data is invalid");
       return true;
     }
 

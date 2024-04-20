@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: 'app-submit-button',
-  templateUrl: './submit-button.component.html',
-  styleUrls: ['./submit-button.component.scss']
+  selector: "app-submit-button",
+  templateUrl: "./submit-button.component.html",
+  styleUrls: ["./submit-button.component.scss"],
 })
 export class SubmitButtonComponent {
   @Input()
-  css = 'btn btn-primary btn-block';
+  css = "btn btn-primary btn-block";
 
   @Input()
-  title = '';
+  title = "";
 
   @Input()
-  additionalCss = '';
+  additionalCss = "";
 
   waitingResponse = false;
   timeout: NodeJS.Timeout | null = null;

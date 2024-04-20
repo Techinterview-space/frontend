@@ -1,5 +1,5 @@
-import { HttpParams } from '@angular/common/http';
-import Assertion from '@shared/validation/assertion';
+import { HttpParams } from "@angular/common/http";
+import Assertion from "@shared/validation/assertion";
 
 export class ConvertObjectToHttpParams {
   private readonly params: any;
@@ -9,7 +9,7 @@ export class ConvertObjectToHttpParams {
   }
 
   get(): HttpParams {
-    Assertion.notNull(this.params, 'param');
+    Assertion.notNull(this.params, "param");
 
     let httpParams: HttpParams = new HttpParams();
 

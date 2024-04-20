@@ -1,16 +1,15 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { SalariesChartJsObject } from './salaries-chart-js-object';
-import { SalariesByMoneyBarChart } from '@services/user-salaries.service';
-import { SalariesPerProfession } from '../salaries-per-profession';
-import { LabelEntityDto } from '@services/label-entity.model';
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { SalariesChartJsObject } from "./salaries-chart-js-object";
+import { SalariesByMoneyBarChart } from "@services/user-salaries.service";
+import { SalariesPerProfession } from "../salaries-per-profession";
+import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-  selector: 'app-salaries-by-grades-chart',
-  templateUrl: './salaries-by-grades-chart.component.html',
-  styleUrl: './salaries-by-grades-chart.component.scss'
+  selector: "app-salaries-by-grades-chart",
+  templateUrl: "./salaries-by-grades-chart.component.html",
+  styleUrl: "./salaries-by-grades-chart.component.scss",
 })
 export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
-
   @Input()
   chart: SalariesByMoneyBarChart | null = null;
 
@@ -25,7 +24,7 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
 
   chartDataLocal: SalariesChartJsObject | null = null;
 
-  readonly canvasId = 'canvas_' + Math.random().toString(36);
+  readonly canvasId = "canvas_" + Math.random().toString(36);
 
   constructor() {}
 
@@ -54,13 +53,14 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
     this.chartDataLocal = new SalariesChartJsObject(
       this.canvasId,
       this.chart,
-      this.professions);
+      this.professions
+    );
 
     this.chartDataLocal.hideProfessionDatasets();
 
     var chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
-      chartEl.style.height = chartEl?.parentElement.style.height ?? '100%';
+      chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }
   }
 }

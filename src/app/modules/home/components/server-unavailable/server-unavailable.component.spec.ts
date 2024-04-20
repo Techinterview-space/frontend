@@ -1,14 +1,14 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ServerUnavailableComponent } from './server-unavailable.component';
+import { ServerUnavailableComponent } from "./server-unavailable.component";
 
-describe('ServerUnavailableComponent', () => {
+describe("ServerUnavailableComponent", () => {
   let component: ServerUnavailableComponent;
   let fixture: ComponentFixture<ServerUnavailableComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ServerUnavailableComponent]
+      declarations: [ServerUnavailableComponent],
     }).compileComponents();
   }));
 
@@ -18,7 +18,7 @@ describe('ServerUnavailableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

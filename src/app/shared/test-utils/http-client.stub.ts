@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
 export class HttpClientStub {
   get<T>(url: string, options: any): Observable<T> {

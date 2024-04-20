@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthorizationService } from '@services/authorization.service';
-import { ApplicationUserExtended } from '@models/extended';
-import { TitleService } from '@services/title.service';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { AuthService } from '@shared/services/auth/auth.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { AuthorizationService } from "@services/authorization.service";
+import { ApplicationUserExtended } from "@models/extended";
+import { TitleService } from "@services/title.service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { AuthService } from "@shared/services/auth/auth.service";
 
 @Component({
-  templateUrl: './me.component.html'
+  templateUrl: "./me.component.html",
 })
 export class MeComponent implements OnInit, OnDestroy {
   user: ApplicationUserExtended | null = null;
@@ -25,7 +25,7 @@ export class MeComponent implements OnInit, OnDestroy {
         this.user = new ApplicationUserExtended(user);
       });
 
-    this.titleService.setTitle('My profile');
+    this.titleService.setTitle("My profile");
   }
 
   ngOnDestroy(): void {}

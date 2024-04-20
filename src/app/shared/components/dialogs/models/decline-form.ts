@@ -1,9 +1,9 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 export class DeclineForm extends FormGroup {
   constructor() {
     super({
-      comment: new FormControl('', [Validators.required])
+      comment: new FormControl("", [Validators.required]),
     });
   }
 

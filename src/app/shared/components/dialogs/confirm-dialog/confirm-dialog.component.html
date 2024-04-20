@@ -1,17 +1,32 @@
-<div *ngIf="showModal" class="modal fade show d-block" tabindex="-1" aria-hidden="true">
+<div
+  *ngIf="showModal"
+  class="modal fade show d-block"
+  tabindex="-1"
+  aria-hidden="true"
+>
   <div class="modal-dialog custom-alert">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{ message?.subject }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="close()"
+        ></button>
       </div>
 
       <div class="modal-body">
         <p class="text-center confirm-message">{{ text }}</p>
 
         <div class="p-1 confirm-button d-flex justify-content-between">
-          <button class="btn btn-{{ noButtonCss }}" (click)="close()">Отменить</button>
-          <button class="btn btn-{{ yesButtonCss }}" (click)="confirm()">Да</button>
+          <button class="btn btn-{{ noButtonCss }}" (click)="close()">
+            Отменить
+          </button>
+          <button class="btn btn-{{ yesButtonCss }}" (click)="confirm()">
+            Да
+          </button>
         </div>
       </div>
     </div>

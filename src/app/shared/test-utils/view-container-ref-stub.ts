@@ -8,8 +8,8 @@
   TemplateRef,
   Type,
   ViewContainerRef,
-  ViewRef
-} from '@angular/core';
+  ViewRef,
+} from "@angular/core";
 
 export class ViewContainerRefStub extends ViewContainerRef {
   createComponent<C>(
@@ -49,7 +49,10 @@ export class ViewContainerRefStub extends ViewContainerRef {
     return null;
   }
 
-  createEmbeddedView<C>(templateRef: TemplateRef<C>, context?: C): EmbeddedViewRef<C> {
+  createEmbeddedView<C>(
+    templateRef: TemplateRef<C>,
+    context?: C
+  ): EmbeddedViewRef<C> {
     return null as unknown as EmbeddedViewRef<C>;
   }
 

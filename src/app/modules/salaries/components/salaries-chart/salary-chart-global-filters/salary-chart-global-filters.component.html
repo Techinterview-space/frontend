@@ -2,9 +2,9 @@
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="apply()">
     <div class="h3 mb-2">Фильтр</div>
     <div class="mb-2 fst-italic">
-      Вы можете поделиться информацией с кем-то в соцсетях или телеграме. 
-      Для этого сначала примените нужные фильтры, а затем нажмите на кнопку "Поделиться".
-      Ссылка будет скопирована в буфер обмена
+      Вы можете поделиться информацией с кем-то в соцсетях или телеграме. Для
+      этого сначала примените нужные фильтры, а затем нажмите на кнопку
+      "Поделиться". Ссылка будет скопирована в буфер обмена
     </div>
     <div class="row">
       <div class="col-md-2 mb-1">
@@ -20,43 +20,50 @@
       <div class="col-md-3 mb-1">
         <label class="text-sm">Cпециализации</label>
         <ng-select
-            [items]="professionsAsOptions"
-            [hideSelected]="true"
-            [selectOnTab]="true"
-            bindLabel="label"
-            bindValue="item"
-            placeholder="Все специальности"
-            appendTo="body"
-            formControlName="profsToInclude"
-            [multiple]="true"
-          >
-          </ng-select>
+          [items]="professionsAsOptions"
+          [hideSelected]="true"
+          [selectOnTab]="true"
+          bindLabel="label"
+          bindValue="item"
+          placeholder="Все специальности"
+          appendTo="body"
+          formControlName="profsToInclude"
+          [multiple]="true"
+        >
+        </ng-select>
       </div>
 
       <div class="col-md-3 mb-1">
         <label class="text-sm">Города</label>
         <ng-select
-            [items]="allCities"
-            [hideSelected]="true"
-            [selectOnTab]="true"
-            bindLabel="label"
-            bindValue="item"
-            placeholder="Выберите города"
-            appendTo="body"
-            formControlName="cities"
-            [multiple]="true"
-          >
-          </ng-select>
+          [items]="allCities"
+          [hideSelected]="true"
+          [selectOnTab]="true"
+          bindLabel="label"
+          bindValue="item"
+          placeholder="Выберите города"
+          appendTo="body"
+          formControlName="cities"
+          [multiple]="true"
+        >
+        </ng-select>
       </div>
 
       <div class="col-md-4 mb-1 d-flex align-items-end">
         <div>
           <button type="submit" class="btn btn-outline-dark">Применить</button>
-          <button type="reset" class="btn btn-outline-secondary ms-2 me-2" (click)="reset()">Сброс</button>
+          <button
+            type="reset"
+            class="btn btn-outline-secondary ms-2 me-2"
+            (click)="reset()"
+          >
+            Сброс
+          </button>
           <app-share-button
             [title]="'Поделиться'"
             [cssBtnSize]="''"
-            (shareClicked)="share()"></app-share-button>
+            (shareClicked)="share()"
+          ></app-share-button>
         </div>
       </div>
     </div>

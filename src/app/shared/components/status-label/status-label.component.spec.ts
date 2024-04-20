@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { StatusLabelComponent } from './status-label.component';
+import { StatusLabelComponent } from "./status-label.component";
 
-describe('StatusLabelComponent', () => {
+describe("StatusLabelComponent", () => {
   let component: StatusLabelComponent;
   let fixture: ComponentFixture<StatusLabelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StatusLabelComponent]
+      declarations: [StatusLabelComponent],
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe('StatusLabelComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

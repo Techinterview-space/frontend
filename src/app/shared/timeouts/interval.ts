@@ -1,10 +1,13 @@
-import Assertion from '@shared/validation/assertion';
+import Assertion from "@shared/validation/assertion";
 
 export class Interval {
   private intervalId: NodeJS.Timeout | null = null;
 
-  constructor(private readonly operation: () => void, private readonly ms: number) {
-    Assertion.notNull(operation, 'operation');
+  constructor(
+    private readonly operation: () => void,
+    private readonly ms: number
+  ) {
+    Assertion.notNull(operation, "operation");
   }
 
   start(): void {

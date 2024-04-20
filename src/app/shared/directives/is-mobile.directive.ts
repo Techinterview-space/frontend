@@ -1,8 +1,13 @@
-import { Directive, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { CheckDeviceService } from '@shared/services/check-device/check-device.service';
+import {
+  Directive,
+  OnInit,
+  TemplateRef,
+  ViewContainerRef,
+} from "@angular/core";
+import { CheckDeviceService } from "@shared/services/check-device/check-device.service";
 
 @Directive({
-  selector: '[appIsMobile]'
+  selector: "[appIsMobile]",
 })
 export class IsMobileDirective implements OnInit {
   constructor(

@@ -1,13 +1,13 @@
-import { ApplicationUser } from '@models/application-user';
-import { UserRole } from '@models/enums';
-import { ApplicationUserExtended } from '@models/extended';
+import { ApplicationUser } from "@models/application-user";
+import { UserRole } from "@models/enums";
+import { ApplicationUserExtended } from "@models/extended";
 
 export class TestApplicationUser implements ApplicationUser {
   constructor(role: UserRole, id: number = 1) {
     this.id = id;
-    this.firstName = 'John';
-    this.lastName = 'Smith';
-    this.email = 'j.smith@gmail.com';
+    this.firstName = "John";
+    this.lastName = "Smith";
+    this.email = "j.smith@gmail.com";
     this.roles = [role];
     this.emailConfirmed = true;
     this.identityId = id;

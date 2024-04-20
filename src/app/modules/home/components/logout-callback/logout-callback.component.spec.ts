@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mostUsedImports, testUtilStubs } from '@shared/test-utils';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { mostUsedImports, testUtilStubs } from "@shared/test-utils";
 
-import { LogoutCallbackComponent } from './logout-callback.component';
+import { LogoutCallbackComponent } from "./logout-callback.component";
 
-describe('LogoutCallbackComponent', () => {
+describe("LogoutCallbackComponent", () => {
   let component: LogoutCallbackComponent;
   let fixture: ComponentFixture<LogoutCallbackComponent>;
 
@@ -21,7 +21,7 @@ describe('LogoutCallbackComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

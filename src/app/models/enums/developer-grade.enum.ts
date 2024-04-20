@@ -14,5 +14,5 @@ export enum DeveloperGrade {
 
   LeadMinus = 10,
   Lead = 11,
-  LeadStrong = 12
+  LeadStrong = 12,
 }

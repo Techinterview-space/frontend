@@ -12,6 +12,7 @@
             <th>#</th>
             <th>Название</th>
             <th>Тем</th>
+            <th>Теги</th>
             <th>Обновлено</th>
             <th></th>
           </thead>
@@ -20,11 +21,17 @@
               <td>{{ i + 1 }}</td>
               <td>{{ item.title }}</td>
               <td>{{ item.subjects?.length ?? 0 }}</td>
-              <td>{{ item.updatedAt | date: "HH:mm yyyy-MM-dd" }}</td>
+              <td>
+                <app-label
+                  *ngFor="let label of item.labels"
+                  [label]="label"
+                ></app-label>
+              </td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td class="small">
                 <a
                   routerLink="/interviews/templates/{{ item.id }}"
-                  class="btn btn-info text-dark btn-sm"
+                  class="btn-link-sm"
                 >
                   Открыть
                 </a>

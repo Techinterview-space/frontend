@@ -1,7 +1,7 @@
-import { EnumHelper } from '@shared/value-objects/enum-helper';
-import { SplittedByWhitespacesString } from '@shared/value-objects/splitted-by-whitespaces-string';
-import { SelectItem } from './select-item';
-import { Currency } from '@models/salaries/currency';
+import { EnumHelper } from "@shared/value-objects/enum-helper";
+import { SplittedByWhitespacesString } from "@shared/value-objects/splitted-by-whitespaces-string";
+import { SelectItem } from "./select-item";
+import { Currency } from "@models/salaries/currency";
 
 export class CurrencySelectItem implements SelectItem<Currency> {
   readonly value: string;

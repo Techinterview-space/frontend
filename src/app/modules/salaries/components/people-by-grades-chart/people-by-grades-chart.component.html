@@ -9,14 +9,19 @@
     <div class="progress" (click)="toggleCountAndPercent()">
       <div
         *ngFor="let item of barsForLocal"
-        class="progress-bar progress-bar-striped {{item.color}}"
+        class="progress-bar progress-bar-striped {{ item.color }}"
         role="progressbar"
         [attr.aria-label]="item.label"
-        [ngStyle]="{'width': item.width + '%'}"
+        [ngStyle]="{ width: item.width + '%' }"
         [attr.aria-label]="item.value"
         aria-valuemin="0"
-        aria-valuemax="100">
-        <strong title="{{item.label}} - {{item.value}}" class="{{item.textColor}}">{{item.value}}</strong>
+        aria-valuemax="100"
+      >
+        <strong
+          title="{{ item.label }} - {{ item.value }}"
+          class="{{ item.textColor }}"
+          >{{ item.value }}</strong
+        >
       </div>
     </div>
   </div>
@@ -29,14 +34,19 @@
     <div class="progress" (click)="toggleCountAndPercent()">
       <div
         *ngFor="let item of barsForRemote"
-        class="progress-bar progress-bar-striped {{item.color}}"
+        class="progress-bar progress-bar-striped {{ item.color }}"
         role="progressbar"
         [attr.aria-label]="item.label"
-        [ngStyle]="{'width': item.width + '%'}"
+        [ngStyle]="{ width: item.width + '%' }"
         [attr.aria-label]="item.value"
         aria-valuemin="0"
-        aria-valuemax="100">
-        <strong title="{{item.label}} - {{item.value}}" class="{{item.textColor}}">{{item.value}}</strong>
+        aria-valuemax="100"
+      >
+        <strong
+          title="{{ item.label }} - {{ item.value }}"
+          class="{{ item.textColor }}"
+          >{{ item.value }}</strong
+        >
       </div>
     </div>
   </div>
@@ -49,5 +59,4 @@
     <span class="ms-2 badge bg-primary">Lead</span>
     <span class="ms-2 badge bg-light text-dark">Не указан грейд</span>
   </div>
-
 </div>

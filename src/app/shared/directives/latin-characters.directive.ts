@@ -1,7 +1,7 @@
-import { ElementRef, HostListener, Directive } from '@angular/core';
+import { ElementRef, HostListener, Directive } from "@angular/core";
 
 @Directive({
-  selector: '[appLatin]'
+  selector: "[appLatin]",
 })
 export class LatinCharactersDirective {
   // Allow decimal numbers and latin characters values
@@ -10,24 +10,24 @@ export class LatinCharactersDirective {
   // Allow key codes for special events. Reflect :
   // Backspace, tab, end, home
   private specialKeys: Array<string> = [
-    'Backspace',
-    'Tab',
-    'End',
-    'Home',
-    'Delete',
-    'Down',
-    'ArrowDown',
-    'Up',
-    'ArrowUp',
-    'Left',
-    'ArrowLeft',
-    'Right',
-    'ArrowRight'
+    "Backspace",
+    "Tab",
+    "End",
+    "Home",
+    "Delete",
+    "Down",
+    "ArrowDown",
+    "Up",
+    "ArrowUp",
+    "Left",
+    "ArrowLeft",
+    "Right",
+    "ArrowRight",
   ];
 
   constructor(private el: ElementRef) {}
 
-  @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent): void {
+  @HostListener("keydown", ["$event"]) onKeyDown(event: KeyboardEvent): void {
     const current = this.el.nativeElement.value as string;
     const next = current.concat(event.key);
 
@@ -43,6 +43,6 @@ export class LatinCharactersDirective {
 
   // public is for test purposes
   isNotLatin(value: string): boolean {
-    return value != null && value !== '' && !String(value).match(this.regex);
+    return value != null && value !== "" && !String(value).match(this.regex);
   }
 }

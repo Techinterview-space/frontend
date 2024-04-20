@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Alert } from '../models/alert.model';
-import { Subject } from 'rxjs';
-import { Router, NavigationStart, Event } from '@angular/router';
-import { IAlertService } from './i-alert.service';
-import { AlertType } from '../models/alert-type.model';
+import { Injectable } from "@angular/core";
+import { Alert } from "../models/alert.model";
+import { Subject } from "rxjs";
+import { Router, NavigationStart, Event } from "@angular/router";
+import { IAlertService } from "./i-alert.service";
+import { AlertType } from "../models/alert-type.model";
 
 // copied from
 // https://jasonwatmore.com/post/2019/07/05/angular-8-alert-toaster-notifications

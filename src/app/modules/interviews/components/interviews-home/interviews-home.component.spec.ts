@@ -1,14 +1,18 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { InterviewsHomeComponent } from './interviews-home.component';
-import { SharedModule } from '@shared/shared.module';
-import { AuthService } from '@shared/services/auth/auth.service';
-import { MockAuthService, testUtilStubs, mostUsedServices } from '@shared/test-utils';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { SpinnerService } from '@shared/services/spinners/spinner-service';
-import { RouterTestingModule } from '@angular/router/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { waitForAsync, ComponentFixture, TestBed } from "@angular/core/testing";
+import { InterviewsHomeComponent } from "./interviews-home.component";
+import { SharedModule } from "@shared/shared.module";
+import { AuthService } from "@shared/services/auth/auth.service";
+import {
+  MockAuthService,
+  testUtilStubs,
+  mostUsedServices,
+} from "@shared/test-utils";
+import { NgxSpinnerService } from "ngx-spinner";
+import { SpinnerService } from "@shared/services/spinners/spinner-service";
+import { RouterTestingModule } from "@angular/router/testing";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
-describe('InterviewsHomeComponent', () => {
+describe("InterviewsHomeComponent", () => {
   let component: InterviewsHomeComponent;
   let fixture: ComponentFixture<InterviewsHomeComponent>;
 
@@ -19,11 +23,11 @@ describe('InterviewsHomeComponent', () => {
         ...testUtilStubs,
         ...mostUsedServices,
         NgxSpinnerService,
-        SpinnerService
+        SpinnerService,
       ],
       declarations: [InterviewsHomeComponent],
       imports: [RouterTestingModule, SharedModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
   beforeEach(() => {
@@ -32,7 +36,7 @@ describe('InterviewsHomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

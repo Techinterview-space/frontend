@@ -1,15 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { WorkIndustriesChartJsObject } from './work-industries-chart-js-object';
-import { LabelEntityDto } from '@services/label-entity.model';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { WorkIndustriesChartJsObject } from "./work-industries-chart-js-object";
+import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-  selector: 'app-work-industries-chart',
-  templateUrl: './work-industries-chart.component.html',
-  styleUrl: './work-industries-chart.component.scss'
+  selector: "app-work-industries-chart",
+  templateUrl: "./work-industries-chart.component.html",
+  styleUrl: "./work-industries-chart.component.scss",
 })
 export class WorkIndustriesChartComponent {
-
   @Input()
   industries: Array<LabelEntityDto> = [];
 
@@ -25,7 +24,7 @@ export class WorkIndustriesChartComponent {
   chartDataLocal: WorkIndustriesChartJsObject | null = null;
   showNoDataArea = false;
 
-  readonly canvasId = 'canvas_' + Math.random().toString(36);
+  readonly canvasId = "canvas_" + Math.random().toString(36);
 
   constructor() {}
 
@@ -42,15 +41,23 @@ export class WorkIndustriesChartComponent {
   }
 
   private initChart(): void {
-    if (this.salaries == null || this.salaries.length === 0 || this.industries.length === 0) {
+    if (
+      this.salaries == null ||
+      this.salaries.length === 0 ||
+      this.industries.length === 0
+    ) {
       return;
     }
 
-    this.chartDataLocal = new WorkIndustriesChartJsObject(this.canvasId, this.salaries, this.industries);
+    this.chartDataLocal = new WorkIndustriesChartJsObject(
+      this.canvasId,
+      this.salaries,
+      this.industries
+    );
 
     var chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
-      chartEl.style.height = chartEl?.parentElement.style.height ?? '100%';
+      chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }
   }
 }

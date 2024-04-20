@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
-import { InterviewTemplate, InterviewTemplateSubject } from '@models/interview-models';
-import { PaginatedList } from '@models/paginated-list';
-import { defaultPageParams, PageParams } from '@models/page-params';
-import { ConvertObjectToHttpParams } from '@shared/value-objects/convert-object-to-http';
-import { Label } from '@models/user-label.model';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { ApiService } from "./api.service";
+import {
+  InterviewTemplate,
+  InterviewTemplateSubject,
+} from "@models/interview-models";
+import { PaginatedList } from "@models/paginated-list";
+import { defaultPageParams, PageParams } from "@models/page-params";
+import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
+import { Label } from "@models/user-label.model";
 
 export interface InterviewTemplateCreateRequest {
   title: string;
@@ -16,7 +19,8 @@ export interface InterviewTemplateCreateRequest {
   labels: Array<Label>;
 }
 
-export interface InterviewTemplateUpdateRequest extends InterviewTemplateCreateRequest {
+export interface InterviewTemplateUpdateRequest
+  extends InterviewTemplateCreateRequest {
   id: string;
 }
 
@@ -44,21 +48,31 @@ export class InterviewTemplatesService {
     return this.api.delete(this.apiUrl + id);
   }
 
-  all(pageParams: PageParams = defaultPageParams): Observable<PaginatedList<InterviewTemplate>> {
+  all(
+    pageParams: PageParams = defaultPageParams
+  ): Observable<PaginatedList<InterviewTemplate>> {
     const params = new ConvertObjectToHttpParams(pageParams).get();
-    return this.api.get<PaginatedList<InterviewTemplate>>(this.apiUrl + `?${params}`);
+    return this.api.get<PaginatedList<InterviewTemplate>>(
+      this.apiUrl + `?${params}`
+    );
   }
 
-  public(pageParams: PageParams = defaultPageParams): Observable<PaginatedList<InterviewTemplate>> {
+  public(
+    pageParams: PageParams = defaultPageParams
+  ): Observable<PaginatedList<InterviewTemplate>> {
     const params = new ConvertObjectToHttpParams(pageParams).get();
-    return this.api.get<PaginatedList<InterviewTemplate>>(this.apiUrl + `public?${params}`);
+    return this.api.get<PaginatedList<InterviewTemplate>>(
+      this.apiUrl + `public?${params}`
+    );
   }
 
   my(): Observable<Array<InterviewTemplate>> {
-    return this.api.get<Array<InterviewTemplate>>(this.apiUrl + 'my');
+    return this.api.get<Array<InterviewTemplate>>(this.apiUrl + "my");
   }
 
   availableForInterview(): Observable<Array<InterviewTemplate>> {
-    return this.api.get<Array<InterviewTemplate>>(this.apiUrl + 'available-for-interview');
+    return this.api.get<Array<InterviewTemplate>>(
+      this.apiUrl + "available-for-interview"
+    );
   }
 }

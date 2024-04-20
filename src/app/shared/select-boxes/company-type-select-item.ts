@@ -1,7 +1,7 @@
-import { EnumHelper } from '@shared/value-objects/enum-helper';
-import { SplittedByWhitespacesString } from '@shared/value-objects/splitted-by-whitespaces-string';
-import { SelectItem } from './select-item';
-import { CompanyType } from '@models/salaries/company-type';
+import { EnumHelper } from "@shared/value-objects/enum-helper";
+import { SplittedByWhitespacesString } from "@shared/value-objects/splitted-by-whitespaces-string";
+import { SelectItem } from "./select-item";
+import { CompanyType } from "@models/salaries/company-type";
 
 export class CompanyTypeSelectItem implements SelectItem<CompanyType> {
   readonly value: string;
@@ -10,13 +10,13 @@ export class CompanyTypeSelectItem implements SelectItem<CompanyType> {
 
   constructor(item: CompanyType) {
     this.value = item.toString();
-    
+
     switch (item) {
       case CompanyType.Local:
-        this.label = 'Казахстанская';
+        this.label = "Казахстанская";
         break;
       case CompanyType.Remote:
-        this.label = 'Иностранная компания (оплата в валюте)';
+        this.label = "Иностранная компания (оплата в валюте)";
         break;
       default:
         this.label = new SplittedByWhitespacesString(CompanyType[item]).value;

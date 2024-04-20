@@ -1,10 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
-import { SalariesByGradeBlockComponent } from './salaries-by-grade-block.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  mostUsedImports,
+  testUtilStubs,
+  mostUsedServices,
+} from "@shared/test-utils";
+import { SalariesByGradeBlockComponent } from "./salaries-by-grade-block.component";
 
-describe('SalariesByGradeBlockComponent', () => {
+describe("SalariesByGradeBlockComponent", () => {
   let component: SalariesByGradeBlockComponent;
   let fixture: ComponentFixture<SalariesByGradeBlockComponent>;
 
@@ -13,16 +17,15 @@ describe('SalariesByGradeBlockComponent', () => {
       declarations: [SalariesByGradeBlockComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-    .compileComponents();
-    
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SalariesByGradeBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,27 +1,29 @@
-import { SessionStorageWrapper } from '../session-storage-wrapper.service';
-import { IdToken, User } from '@auth0/auth0-angular';
-import Assertion from '@shared/validation/assertion';
-import { Injectable } from '@angular/core';
-import { ApplicationUser } from '@models/application-user';
+import { SessionStorageWrapper } from "../session-storage-wrapper.service";
+import { IdToken, User } from "@auth0/auth0-angular";
+import Assertion from "@shared/validation/assertion";
+import { Injectable } from "@angular/core";
+import { ApplicationUser } from "@models/application-user";
 
 @Injectable()
 export class AuthSessionService {
   public static readonly SessionLifetimeSeconds = 43200; // 12 hours
 
-  private readonly authorizationTimestampSessionKey = 'CurrentUser_Timestamp';
-  private readonly authorizationStorageSessionKey = 'CurrentUser_AuthInfo';
-  private readonly applicationUserStorageSessionKey = 'CurrentUser_AppUserInfo';
+  private readonly authorizationTimestampSessionKey = "CurrentUser_Timestamp";
+  private readonly authorizationStorageSessionKey = "CurrentUser_AuthInfo";
+  private readonly applicationUserStorageSessionKey = "CurrentUser_AppUserInfo";
 
   constructor(private readonly session: SessionStorageWrapper) {}
 
   set auth(user: IdToken | null) {
-    Assertion.notNull(user, 'user');
+    Assertion.notNull(user, "user");
     this.session.setItem(this.authorizationStorageSessionKey, user);
     this.session.setItem(this.authorizationTimestampSessionKey, Date.now());
   }
 
   get auth(): IdToken | null {
-    const user = this.session.getItem<IdToken>(this.authorizationStorageSessionKey);
+    const user = this.session.getItem<IdToken>(
+      this.authorizationStorageSessionKey
+    );
     if (user == null || this.sessionExpired) {
       return null;
     }
@@ -30,7 +32,7 @@ export class AuthSessionService {
   }
 
   set applicationUser(user: ApplicationUser | null) {
-    Assertion.notNull(user, 'user');
+    Assertion.notNull(user, "user");
     this.session.setItem(this.applicationUserStorageSessionKey, user);
   }
 
@@ -39,7 +41,9 @@ export class AuthSessionService {
   }
 
   get timestamp(): Date | null {
-    const timestamp = this.session.getItem<number>(this.authorizationTimestampSessionKey);
+    const timestamp = this.session.getItem<number>(
+      this.authorizationTimestampSessionKey
+    );
     if (timestamp != null) {
       return new Date(timestamp);
     }
@@ -57,7 +61,9 @@ export class AuthSessionService {
   }
 
   get sessionExpired(): boolean {
-    return this.sessionAliveSeconds >= AuthSessionService.SessionLifetimeSeconds;
+    return (
+      this.sessionAliveSeconds >= AuthSessionService.SessionLifetimeSeconds
+    );
   }
 
   clear(): void {

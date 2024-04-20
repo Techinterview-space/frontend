@@ -1,10 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AdminNavbarComponent } from './admin-navbar.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { mostUsedImports, mostUsedServices, testUtilStubs } from '@shared/test-utils';
+import { AdminNavbarComponent } from "./admin-navbar.component";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  mostUsedImports,
+  mostUsedServices,
+  testUtilStubs,
+} from "@shared/test-utils";
 
-describe('AdminNavbarComponent', () => {
+describe("AdminNavbarComponent", () => {
   let component: AdminNavbarComponent;
   let fixture: ComponentFixture<AdminNavbarComponent>;
 
@@ -13,7 +17,7 @@ describe('AdminNavbarComponent', () => {
       declarations: [AdminNavbarComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices]
+      providers: [...testUtilStubs, ...mostUsedServices],
     }).compileComponents();
   });
 
@@ -23,7 +27,7 @@ describe('AdminNavbarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

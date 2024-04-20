@@ -1,10 +1,13 @@
-import { ApiService } from '@services/api.service';
-import { Observable } from 'rxjs';
+import { ApiService } from "@services/api.service";
+import { Observable } from "rxjs";
 
 export abstract class BaseApiService<TModel> {
   protected readonly apiUrl: string;
 
-  constructor(protected readonly api: ApiService, private readonly resourceUrlPart: string) {
+  constructor(
+    protected readonly api: ApiService,
+    private readonly resourceUrlPart: string
+  ) {
     // TODO Maxim: validate resourceUrlPart
     this.apiUrl = `/api/${this.resourceUrlPart}/`;
   }

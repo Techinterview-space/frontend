@@ -5,5 +5,5 @@ export interface PageParams {
 
 export const defaultPageParams: PageParams = {
   pageSize: 20,
-  page: 1
+  page: 1,
 };

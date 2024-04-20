@@ -1,14 +1,20 @@
-import { Directive, forwardRef, Attribute } from '@angular/core';
-import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
-import Assertion from '@shared/validation/assertion';
+import { Directive, forwardRef, Attribute } from "@angular/core";
+import { Validator, AbstractControl, NG_VALIDATORS } from "@angular/forms";
+import Assertion from "@shared/validation/assertion";
 
 @Directive({
-  selector: '[appDateRange]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: forwardRef(() => DateRangeValidator), multi: true }]
+  selector: "[appDateRange]",
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => DateRangeValidator),
+      multi: true,
+    },
+  ],
 })
 export class DateRangeValidator implements Validator {
-  constructor(@Attribute('appDateRange') public validateDateRange: string) {
-    Assertion.notNull(validateDateRange, 'validateDateRange');
+  constructor(@Attribute("appDateRange") public validateDateRange: string) {
+    Assertion.notNull(validateDateRange, "validateDateRange");
   }
 
   validate(c: AbstractControl): { [key: string]: any } | null {
@@ -17,27 +23,33 @@ export class DateRangeValidator implements Validator {
 
     const control = c.root.get(this.validateDateRange);
     if (control == null) {
-      throw Error('Control is null');
+      throw Error("Control is null");
     }
 
-    if (control.errors != null && control.errors['dateRange']) {
+    if (control.errors != null && control.errors["dateRange"]) {
       control.setErrors(null);
     }
-    if (this.validateDateRange === 'startDate' || this.validateDateRange === 'from') {
+    if (
+      this.validateDateRange === "startDate" ||
+      this.validateDateRange === "from"
+    ) {
       to = c.value;
       from = control.value;
     }
-    if (this.validateDateRange === 'endDate' || this.validateDateRange === 'to') {
+    if (
+      this.validateDateRange === "endDate" ||
+      this.validateDateRange === "to"
+    ) {
       from = c.value;
       to = control.value;
     }
     if (to != null && from != null) {
-      const startDate = new Date(from.month + '/' + from.day + '/' + from.year);
-      const endDate = new Date(to.month + '/' + to.day + '/' + to.year);
+      const startDate = new Date(from.month + "/" + from.day + "/" + from.year);
+      const endDate = new Date(to.month + "/" + to.day + "/" + to.year);
 
       if (this.checkIfDateRangeInvalid(startDate, endDate)) {
         return {
-          dateRange: true
+          dateRange: true,
         };
       }
     }

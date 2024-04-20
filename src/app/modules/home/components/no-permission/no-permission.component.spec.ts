@@ -1,14 +1,14 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NoPermissionComponent } from './no-permission.component';
+import { NoPermissionComponent } from "./no-permission.component";
 
-describe('NoPermissionComponent', () => {
+describe("NoPermissionComponent", () => {
   let component: NoPermissionComponent;
   let fixture: ComponentFixture<NoPermissionComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NoPermissionComponent]
+      declarations: [NoPermissionComponent],
     }).compileComponents();
   }));
 
@@ -18,7 +18,7 @@ describe('NoPermissionComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

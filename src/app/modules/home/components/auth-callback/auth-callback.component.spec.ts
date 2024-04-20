@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { AuthCallbackComponent } from './auth-callback.component';
-import { MockAuthService } from '@shared/test-utils/mock-auth.service';
-import { AuthService } from '@shared/services/auth/auth.service';
-import { SharedModule } from '@shared/shared.module';
-import { testUtilStubs } from '@shared/test-utils';
-import { CookieService } from 'ngx-cookie-service';
+import { AuthCallbackComponent } from "./auth-callback.component";
+import { MockAuthService } from "@shared/test-utils/mock-auth.service";
+import { AuthService } from "@shared/services/auth/auth.service";
+import { SharedModule } from "@shared/shared.module";
+import { testUtilStubs } from "@shared/test-utils";
+import { CookieService } from "ngx-cookie-service";
 
-describe('AuthCallbackComponent', () => {
+describe("AuthCallbackComponent", () => {
   let component: AuthCallbackComponent;
   let fixture: ComponentFixture<AuthCallbackComponent>;
 
@@ -15,7 +15,11 @@ describe('AuthCallbackComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
       declarations: [AuthCallbackComponent],
-      providers: [{ provide: AuthService, useClass: MockAuthService }, ...testUtilStubs, CookieService]
+      providers: [
+        { provide: AuthService, useClass: MockAuthService },
+        ...testUtilStubs,
+        CookieService,
+      ],
     }).compileComponents();
   }));
 
@@ -25,7 +29,7 @@ describe('AuthCallbackComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

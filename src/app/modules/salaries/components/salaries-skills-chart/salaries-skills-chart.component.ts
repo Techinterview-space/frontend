@@ -1,15 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { SalariesSkillsChartJsObject } from './salaries-skills-chart-js-object';
-import { LabelEntityDto } from '@services/label-entity.model';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { SalariesSkillsChartJsObject } from "./salaries-skills-chart-js-object";
+import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-  selector: 'app-salaries-skills-chart',
-  templateUrl: './salaries-skills-chart.component.html',
-  styleUrl: './salaries-skills-chart.component.scss'
+  selector: "app-salaries-skills-chart",
+  templateUrl: "./salaries-skills-chart.component.html",
+  styleUrl: "./salaries-skills-chart.component.scss",
 })
 export class SalariesSkillsChartComponent {
-
   @Input()
   skills: Array<LabelEntityDto> = [];
 
@@ -25,7 +24,7 @@ export class SalariesSkillsChartComponent {
   chartDataLocal: SalariesSkillsChartJsObject | null = null;
   showNoDataArea = false;
 
-  readonly canvasId = 'canvas_' + Math.random().toString(36);
+  readonly canvasId = "canvas_" + Math.random().toString(36);
 
   constructor() {}
 
@@ -42,15 +41,23 @@ export class SalariesSkillsChartComponent {
   }
 
   private initChart(): void {
-    if (this.salaries == null || this.salaries.length === 0 || this.skills.length === 0) {
+    if (
+      this.salaries == null ||
+      this.salaries.length === 0 ||
+      this.skills.length === 0
+    ) {
       return;
     }
 
-    this.chartDataLocal = new SalariesSkillsChartJsObject(this.canvasId, this.salaries, this.skills);
+    this.chartDataLocal = new SalariesSkillsChartJsObject(
+      this.canvasId,
+      this.salaries,
+      this.skills
+    );
 
     var chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
-      chartEl.style.height = chartEl?.parentElement.style.height ?? '100%';
+      chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }
   }
 }

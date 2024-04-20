@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Component, OnInit, Input } from "@angular/core";
+import { FormGroup, AbstractControl, ValidationErrors } from "@angular/forms";
 
 @Component({
-  selector: 'app-field-error',
-  templateUrl: './field-error.component.html',
-  styleUrls: ['./field-error.component.scss']
+  selector: "app-field-error",
+  templateUrl: "./field-error.component.html",
+  styleUrls: ["./field-error.component.scss"],
 })
 export class FieldErrorComponent implements OnInit {
   @Input() field: AbstractControl | null = null;
@@ -29,9 +29,13 @@ export class FieldErrorComponent implements OnInit {
 
   private tryReturnValid(): boolean {
     try {
-      return this.field != null && this.field.invalid && (this.field.dirty || this.field.touched);
+      return (
+        this.field != null &&
+        this.field.invalid &&
+        (this.field.dirty || this.field.touched)
+      );
     } catch (e) {
-      throw Error('Cannot get valid property from the field');
+      throw Error("Cannot get valid property from the field");
     }
   }
 }

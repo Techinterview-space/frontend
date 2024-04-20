@@ -1,12 +1,12 @@
-import { Observable, forkJoin } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '@environments/environment';
-import { HealthReport } from './health-report.model';
-import { map } from 'rxjs/operators';
+import { Observable, forkJoin } from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "@environments/environment";
+import { HealthReport } from "./health-report.model";
+import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class HealthCheckService {
   private readonly url: string;
@@ -20,6 +20,6 @@ export class HealthCheckService {
   }
 
   appHealth(): Observable<boolean> {
-    return this.backend().pipe(map(x => true));
+    return this.backend().pipe(map((x) => true));
   }
 }

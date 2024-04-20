@@ -1,12 +1,12 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApplicationUser } from '@models/application-user';
-import { UpdateUserRolesRequest } from '@services/user-admin.service';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ApplicationUser } from "@models/application-user";
+import { UpdateUserRolesRequest } from "@services/user-admin.service";
 
 export class UserRolesEditForm extends FormGroup {
   constructor(user: ApplicationUser) {
     super({
       userId: new FormControl(user.id, [Validators.required]),
-      roles: new FormControl(user.roles, [Validators.required])
+      roles: new FormControl(user.roles, [Validators.required]),
     });
   }
 
@@ -18,7 +18,7 @@ export class UserRolesEditForm extends FormGroup {
 
     return {
       id: this.value.userId,
-      roles: this.value.roles
+      roles: this.value.roles,
     };
   }
 }

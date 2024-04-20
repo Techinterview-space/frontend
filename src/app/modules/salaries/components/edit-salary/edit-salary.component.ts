@@ -1,24 +1,33 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { UserSalariesService } from '@services/user-salaries.service';
-import { EditSalaryForm } from './edit-salary-form';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { CompanyTypeSelectItem } from '@shared/select-boxes/company-type-select-item';
-import { DeveloperGradeSelectItem } from '@shared/select-boxes/developer-grade-select-item';
-import { UserSalary, UserSalaryAdminDto } from '@models/salaries/salary.model';
-import { AlertService } from '@shared/components/alert/services/alert.service';
-import { SelectItem } from '@shared/select-boxes/select-item';
-import { KazakhstanCity, KazakhstanCityEnum } from '@models/salaries/kazakhstan-city';
-import { SalariesChart } from '../salaries-chart/salaries-chart';
-import { LabelEntityDto } from '@services/label-entity.model';
-import { Gender, GenderEnum } from '@models/enums/gender.enum';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from "@angular/core";
+import { UserSalariesService } from "@services/user-salaries.service";
+import { EditSalaryForm } from "./edit-salary-form";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { CompanyTypeSelectItem } from "@shared/select-boxes/company-type-select-item";
+import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
+import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { AlertService } from "@shared/components/alert/services/alert.service";
+import { SelectItem } from "@shared/select-boxes/select-item";
+import {
+  KazakhstanCity,
+  KazakhstanCityEnum,
+} from "@models/salaries/kazakhstan-city";
+import { SalariesChart } from "../salaries-chart/salaries-chart";
+import { LabelEntityDto } from "@services/label-entity.model";
+import { Gender, GenderEnum } from "@models/enums/gender.enum";
 
 @Component({
-  selector: 'app-edit-salary-modal',
-  templateUrl: './edit-salary.component.html',
-  styleUrl: './edit-salary.component.scss'
+  selector: "app-edit-salary-modal",
+  templateUrl: "./edit-salary.component.html",
+  styleUrl: "./edit-salary.component.scss",
 })
 export class EditSalaryComponent implements OnInit, OnDestroy {
-
   @Input()
   skills: Array<LabelEntityDto> = [];
 
@@ -43,9 +52,12 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
   showSalaryValue = false;
 
   readonly currentYear = new Date().getFullYear();
-  readonly companyTypes: Array<CompanyTypeSelectItem> = CompanyTypeSelectItem.allItems();
-  readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
-  readonly cities: Array<SelectItem<KazakhstanCity>> = KazakhstanCityEnum.options();
+  readonly companyTypes: Array<CompanyTypeSelectItem> =
+    CompanyTypeSelectItem.allItems();
+  readonly grades: Array<DeveloperGradeSelectItem> =
+    DeveloperGradeSelectItem.gradesSimpleOnly();
+  readonly cities: Array<SelectItem<KazakhstanCity>> =
+    KazakhstanCityEnum.options();
   readonly genders: Array<SelectItem<Gender>> = GenderEnum.options();
 
   skillsAsOptions: Array<SelectItem<number>> = [];
@@ -54,23 +66,24 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: UserSalariesService,
-    private readonly alert: AlertService) {}
+    private readonly alert: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.skillsAsOptions = this.skills.map((x) => {
       return {
         value: x.id.toString(),
         item: x.id,
-        label: x.title
-      }
+        label: x.title,
+      };
     });
 
     this.industriesAsOptions = this.industries.map((x) => {
       return {
         value: x.id.toString(),
         item: x.id,
-        label: x.title
-      }
+        label: x.title,
+      };
     });
 
     const professionIdToSkip = 1;
@@ -80,16 +93,21 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
         return {
           value: x.id.toString(),
           item: x.id,
-          label: x.title
-        }
+          label: x.title,
+        };
       });
 
     if (this.salarytoBeEdited == null) {
       return;
     }
 
-    this.salaryValue = this.showSalaryValue ? SalariesChart.formatNumber(this.salarytoBeEdited.value) : "* * * * *";
-    this.form = new EditSalaryForm(this.salarytoBeEdited, this.industries.length > 0);
+    this.salaryValue = this.showSalaryValue
+      ? SalariesChart.formatNumber(this.salarytoBeEdited.value)
+      : "* * * * *";
+    this.form = new EditSalaryForm(
+      this.salarytoBeEdited,
+      this.industries.length > 0
+    );
   }
 
   addSalarySubmitAction(): void {
@@ -100,23 +118,29 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
     }
 
     this.service
-        .update(this.salarytoBeEdited.id, data)
-        .pipe(untilDestroyed(this))
-        .subscribe(
-          (x) => {
-            if (x.isSuccess && x.createdSalary) {
-              this.errorMessage = null;
-              this.alert.success(this.salarytoBeEdited ? 'Зарплата обновлена' : 'Зарплата успешно записана');
-              this.salaryAdded.emit(x.createdSalary);
-            } else {
-              this.alert.error(x.errorMessage!);
-              this.errorMessage = x.errorMessage!;
-            }});
+      .update(this.salarytoBeEdited.id, data)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        if (x.isSuccess && x.createdSalary) {
+          this.errorMessage = null;
+          this.alert.success(
+            this.salarytoBeEdited
+              ? "Зарплата обновлена"
+              : "Зарплата успешно записана"
+          );
+          this.salaryAdded.emit(x.createdSalary);
+        } else {
+          this.alert.error(x.errorMessage!);
+          this.errorMessage = x.errorMessage!;
+        }
+      });
   }
 
   showOrHideSalary(): void {
     this.showSalaryValue = !this.showSalaryValue;
-    this.salaryValue = this.showSalaryValue ? SalariesChart.formatNumber(this.salarytoBeEdited!.value) : "* * * * *";
+    this.salaryValue = this.showSalaryValue
+      ? SalariesChart.formatNumber(this.salarytoBeEdited!.value)
+      : "* * * * *";
   }
 
   ngOnDestroy(): void {

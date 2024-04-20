@@ -1,21 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AdminStartPageComponent } from './admin-start-page.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { mostUsedImports, mostUsedServices, testUtilStubs } from '@shared/test-utils';
+import { AdminStartPageComponent } from "./admin-start-page.component";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  mostUsedImports,
+  mostUsedServices,
+  testUtilStubs,
+} from "@shared/test-utils";
 
-describe('AdminStartPageComponent', () => {
+describe("AdminStartPageComponent", () => {
   let component: AdminStartPageComponent;
   let fixture: ComponentFixture<AdminStartPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminStartPageComponent ],
+      declarations: [AdminStartPageComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices]
-    })
-    .compileComponents();
+      providers: [...testUtilStubs, ...mostUsedServices],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -24,7 +27,7 @@ describe('AdminStartPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -6,12 +6,13 @@
   </div>
   <div *ngIf="errors['dateRange']">
     <p class="alert alert-danger small">
-      <strong>Дата "До" должна быть позже, чем "От".</strong> Пожалуйста, проверьте введенные данные.
+      <strong>Дата "До" должна быть позже, чем "От".</strong> Пожалуйста,
+      проверьте введенные данные.
     </p>
   </div>
   <div *ngIf="errors['yearRange']">
     <p class="alert alert-danger small">
-      <strong>{{ errors['yearRangeError'] }}</strong>
+      <strong>{{ errors["yearRangeError"] }}</strong>
     </p>
   </div>
   <div *ngIf="errors['max']">
@@ -21,6 +22,6 @@
     <span>Минимальное значение: {{ min }}</span>
   </div>
   <div *ngIf="errors['Value']">
-    <span>{{ errors['Value'] }}</span>
+    <span>{{ errors["Value"] }}</span>
   </div>
 </div>

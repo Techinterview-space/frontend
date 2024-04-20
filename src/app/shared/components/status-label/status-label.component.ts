@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-status-label',
-  templateUrl: './status-label.component.html'
+  selector: "app-status-label",
+  templateUrl: "./status-label.component.html",
 })
 export class StatusLabelComponent implements OnInit {
-  title = '';
-  style = '';
+  title = "";
+  style = "";
 
   @Input()
   status: boolean | null = null;
@@ -16,7 +16,7 @@ export class StatusLabelComponent implements OnInit {
       return;
     }
 
-    this.title = this.status === true ? 'Active' : 'Inactive';
-    this.style = this.status === true ? 'success' : 'warning text-dark';
+    this.title = this.status === true ? "Active" : "Inactive";
+    this.style = this.status === true ? "success" : "warning text-dark";
   }
 }

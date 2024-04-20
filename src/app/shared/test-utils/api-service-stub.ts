@@ -1,7 +1,7 @@
-import { HttpClientStub } from './http-client.stub';
-import { ApiService, HttpOptions } from '@services/api.service';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClientStub } from "./http-client.stub";
+import { ApiService, HttpOptions } from "@services/api.service";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 export class ApiServiceStub extends ApiService {
   constructor() {
@@ -9,18 +9,18 @@ export class ApiServiceStub extends ApiService {
   }
 
   get<T>(url: string, options?: HttpOptions): Observable<T> {
-    throw Error('not implemented');
+    throw Error("not implemented");
   }
 
   post<T>(url: string, body?: any, options?: HttpOptions): Observable<T> {
-    throw Error('not implemented');
+    throw Error("not implemented");
   }
 
   put<T>(url: string, body: any, options?: HttpOptions): Observable<T> {
-    throw Error('not implemented');
+    throw Error("not implemented");
   }
 
   delete<T>(url: string, options?: HttpOptions): Observable<T> {
-    throw Error('not implemented');
+    throw Error("not implemented");
   }
 }

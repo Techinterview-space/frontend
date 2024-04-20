@@ -1,21 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Interview } from '@models/interview-models';
-import { InterviewsService } from '@services/interviews.service';
-import { TitleService } from '@services/title.service';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Interview } from "@models/interview-models";
+import { InterviewsService } from "@services/interviews.service";
+import { TitleService } from "@services/title.service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: 'app-my-interviews',
-  templateUrl: './my-interviews.component.html',
-  styleUrls: ['./my-interviews.component.scss']
+  selector: "app-my-interviews",
+  templateUrl: "./my-interviews.component.html",
+  styleUrls: ["./my-interviews.component.scss"],
 })
 export class MyInterviewsComponent implements OnInit, OnDestroy {
   interviews: Array<Interview> | null = null;
 
-  constructor(private readonly service: InterviewsService, private readonly title: TitleService) {}
+  constructor(
+    private readonly service: InterviewsService,
+    private readonly title: TitleService
+  ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('My Interviews');
+    this.title.setTitle("My Interviews");
     this.service
       .my()
       .pipe(untilDestroyed(this))

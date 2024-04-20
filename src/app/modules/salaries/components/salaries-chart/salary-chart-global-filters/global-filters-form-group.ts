@@ -4,56 +4,60 @@ import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
 
 export class SalaryChartGlobalFiltersData {
-    grade: DeveloperGrade | null = null;
-    profsInclude: Array<number> = [];
-    cities: Array<KazakhstanCity> = [];
+  grade: DeveloperGrade | null = null;
+  profsInclude: Array<number> = [];
+  cities: Array<KazakhstanCity> = [];
 
-    constructor(
-        grade: DeveloperGrade | null = null,
-        profsInclude: Array<number> = [],
-        cities: Array<KazakhstanCity> = []) {
-        if (grade === DeveloperGrade.Unknown) {
-            grade = null;
-        }
-
-        this.grade = grade;
-        this.profsInclude = profsInclude;
-        this.cities = cities;
+  constructor(
+    grade: DeveloperGrade | null = null,
+    profsInclude: Array<number> = [],
+    cities: Array<KazakhstanCity> = []
+  ) {
+    if (grade === DeveloperGrade.Unknown) {
+      grade = null;
     }
 
-    equals(other: SalaryChartGlobalFiltersData): boolean {
-        // TODO mgorbatyuk: do more smart check that two arrays are not same
-        return this.grade === other.grade &&
-            this.cities.length === other.cities.length &&
-            this.profsInclude.length === other.profsInclude.length;
-    }
+    this.grade = grade;
+    this.profsInclude = profsInclude;
+    this.cities = cities;
+  }
+
+  equals(other: SalaryChartGlobalFiltersData): boolean {
+    // TODO mgorbatyuk: do more smart check that two arrays are not same
+    return (
+      this.grade === other.grade &&
+      this.cities.length === other.cities.length &&
+      this.profsInclude.length === other.profsInclude.length
+    );
+  }
 }
 
 export class GlobalFiltersFormGroup extends FormGroup {
+  readonly grades: Array<DeveloperGradeSelectItem> =
+    DeveloperGradeSelectItem.gradesSimpleOnly();
 
-    readonly grades: Array<DeveloperGradeSelectItem> = DeveloperGradeSelectItem.gradesSimpleOnly();
+  constructor(filterData: SalaryChartGlobalFiltersData | null) {
+    super({
+      grade: new FormControl(filterData?.grade, []),
+      profsToInclude: new FormControl(filterData?.profsInclude, []),
+      cities: new FormControl(filterData?.cities, []),
+    });
+  }
 
-    constructor(filterData: SalaryChartGlobalFiltersData | null) {
-        super({
-            grade: new FormControl(filterData?.grade, []),
-            profsToInclude: new FormControl(filterData?.profsInclude, []),
-            cities: new FormControl(filterData?.cities, []),
-        });
+  data(): SalaryChartGlobalFiltersData | null {
+    if (!this.valid) {
+      this.markAllAsTouched();
+      return null;
     }
 
-    data(): SalaryChartGlobalFiltersData | null {
-        if (!this.valid) {
-            this.markAllAsTouched();
-            return null;
-        }
+    const grade =
+      this.value.grade != null && this.value.grade !== "null"
+        ? (this.value.grade as DeveloperGrade)
+        : null;
 
-        const grade = this.value.grade != null && this.value.grade !== 'null'
-            ? this.value.grade as DeveloperGrade
-            : null;
+    const profsToInclude = (this.value.profsToInclude as Array<number>) ?? [];
+    const cities = (this.value.cities as Array<KazakhstanCity>) ?? [];
 
-        const profsToInclude = this.value.profsToInclude as Array<number> ?? [];
-        const cities = this.value.cities as Array<KazakhstanCity> ?? [];
-
-        return new SalaryChartGlobalFiltersData(grade, profsToInclude, cities);
-    }
+    return new SalaryChartGlobalFiltersData(grade, profsToInclude, cities);
+  }
 }

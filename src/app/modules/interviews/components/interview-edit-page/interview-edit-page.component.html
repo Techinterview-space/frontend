@@ -17,16 +17,28 @@
                 formControlName="candidateName"
                 placeholder="Type a candidate's name"
               />
-              <label for="candidateName" class="form-label">Имя кандидата</label>
-              <app-field-error [field]="formGroup.get('candidateName')"></app-field-error>
+              <label for="candidateName" class="form-label"
+                >Имя кандидата</label
+              >
+              <app-field-error
+                [field]="formGroup.get('candidateName')"
+              ></app-field-error>
             </div>
 
             <div class="mb-3">
-              <select formControlName="candidateGrade" class="form-select" aria-label="Select a grade">
+              <select
+                formControlName="candidateGrade"
+                class="form-select"
+                aria-label="Select a grade"
+              >
                 <option [value]="null" selected disabled>Выберите грейд</option>
-                <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
+                <option *ngFor="let option of grades" [value]="option.value">
+                  {{ option.label }}
+                </option>
               </select>
-              <app-field-error [field]="formGroup.get('candidateGrade')"></app-field-error>
+              <app-field-error
+                [field]="formGroup.get('candidateGrade')"
+              ></app-field-error>
             </div>
 
             <div class="mb-3">
@@ -46,7 +58,9 @@
                 <app-go-back-button></app-go-back-button>
               </div>
               <div class="d-inline-block">
-                <app-submit-button (btnSubmit)="onSave()">Сохранить</app-submit-button>
+                <app-submit-button (btnSubmit)="onSave()"
+                  >Сохранить</app-submit-button
+                >
               </div>
             </div>
           </div>
@@ -63,7 +77,9 @@
             formControlName="overallOpinion"
           ></textarea>
           <label for="overallOpinion">Общее впечатление о кандидате</label>
-          <app-field-error [field]="formGroup.get('overallOpinion')"></app-field-error>
+          <app-field-error
+            [field]="formGroup.get('overallOpinion')"
+          ></app-field-error>
           <div class="text-muted small">Поддерживается markdown</div>
         </div>
 
@@ -72,7 +88,11 @@
             <div class="mb-3 d-flex justify-content-between align-items-end">
               <div class="d-inline-block">
                 <span class="h4">Тем: {{ subjectsCount }}</span>
-                <button class="btn-link-sm ms-1" type="button" (click)="openAddSubjectsFromTemplateModal()">
+                <button
+                  class="btn-link-sm ms-1"
+                  type="button"
+                  (click)="openAddSubjectsFromTemplateModal()"
+                >
                   Добавить темы из шаблона
                 </button>
               </div>
@@ -86,21 +106,34 @@
                 >
                   Удалить все
                 </button>
-                <button type="button" class="btn-link-sm ms-1" (click)="addSubject()" title="Добавить тему">
+                <button
+                  type="button"
+                  class="btn-link-sm ms-1"
+                  (click)="addSubject()"
+                  title="Добавить тему"
+                >
                   <i class="bi bi-plus-square"></i> Добавить тему
                 </button>
               </div>
             </div>
 
-            <ul class="list-group list-group-flush mb3" formArrayName="subjects">
+            <ul
+              class="list-group list-group-flush mb3"
+              formArrayName="subjects"
+            >
               <li
                 class="list-group-item"
-                *ngFor="let child of formGroup.subjectsFormArray.controls; let subjectIndex = index"
+                *ngFor="
+                  let child of formGroup.subjectsFormArray.controls;
+                  let subjectIndex = index
+                "
               >
                 <div [formGroupName]="subjectIndex">
                   <div class="mb-3">
                     <div class="input-group">
-                      <span class="input-group-text">{{ subjectIndex + 1 }}</span>
+                      <span class="input-group-text">{{
+                        subjectIndex + 1
+                      }}</span>
                       <input
                         type="text"
                         class="form-control"
@@ -108,9 +141,18 @@
                         id="subjectTitle_{{ subjectIndex }}"
                         placeholder="О чем поговорили"
                       />
-                      <select formControlName="grade" class="form-select w-10" aria-label="Select a grade">
+                      <select
+                        formControlName="grade"
+                        class="form-select w-10"
+                        aria-label="Select a grade"
+                      >
                         <option [value]="null">Не проверил</option>
-                        <option *ngFor="let option of grades" [value]="option.value">{{ option.label }}</option>
+                        <option
+                          *ngFor="let option of grades"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </option>
                       </select>
 
                       <button
@@ -143,10 +185,15 @@
                       </button>
                     </div>
                     <div class="mb-1">
-                      <app-field-error [field]="formGroup.getSubjectTitleField(subjectIndex)"></app-field-error>
+                      <app-field-error
+                        [field]="formGroup.getSubjectTitleField(subjectIndex)"
+                      ></app-field-error>
                     </div>
 
-                    <div class="text-muted small ps-3" *ngIf="formGroup.subjectDescriptions[subjectIndex]">
+                    <div
+                      class="text-muted small ps-3"
+                      *ngIf="formGroup.subjectDescriptions[subjectIndex]"
+                    >
                       <app-text-with-linebreaks
                         [source]="formGroup.subjectDescriptions[subjectIndex]"
                       ></app-text-with-linebreaks>
@@ -156,10 +203,18 @@
                   <div class="ps-5">
                     <div class="d-flex justify-content-between">
                       <label>Комментарии</label>
-                      <span class="text-muted small">Поддерживается markdown</span>
+                      <span class="text-muted small"
+                        >Поддерживается markdown</span
+                      >
                     </div>
-                    <textarea class="form-control" rows="5" formControlName="comments"></textarea>
-                    <app-field-error [field]="formGroup.getSubjectCommentsField(subjectIndex)"></app-field-error>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      formControlName="comments"
+                    ></textarea>
+                    <app-field-error
+                      [field]="formGroup.getSubjectCommentsField(subjectIndex)"
+                    ></app-field-error>
                   </div>
                 </div>
               </li>
@@ -168,7 +223,12 @@
             <div class="mb-3" *ngIf="formGroup.subjectsCount > 0">
               <hr />
               <div class="d-flex justify-content-end">
-                <button type="button" class="btn-link-sm" (click)="addSubject()" title="Add a new subject">
+                <button
+                  type="button"
+                  class="btn-link-sm"
+                  (click)="addSubject()"
+                  title="Add a new subject"
+                >
                   <i class="bi bi-plus-square"></i> Добавить тему
                 </button>
               </div>
@@ -188,7 +248,9 @@
   <div class="mb-3">
     <select class="form-select" (change)="onInterviewTemplateSelected($event)">
       <option [value]="null" selected disabled>Выберите шаблон</option>
-      <option *ngFor="let option of templates" [value]="option.value">{{ option.label }}</option>
+      <option *ngFor="let option of templates" [value]="option.value">
+        {{ option.label }}
+      </option>
     </select>
   </div>
 

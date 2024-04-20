@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
-import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
+import { Component, Input } from "@angular/core";
+import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
+import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 
 @Component({
-  selector: 'app-confirm-dialog',
-  templateUrl: './confirm-dialog.component.html',
-  styleUrls: ['./confirm-dialog.component.scss']
+  selector: "app-confirm-dialog",
+  templateUrl: "./confirm-dialog.component.html",
+  styleUrls: ["./confirm-dialog.component.scss"],
 })
 export class ConfirmDialogComponent {
   get showModal(): boolean {
@@ -20,10 +20,10 @@ export class ConfirmDialogComponent {
   message: DialogMessage<ConfirmMsg> | null = null;
 
   @Input()
-  yesButtonCss = 'outline-danger';
+  yesButtonCss = "outline-danger";
 
   @Input()
-  noButtonCss = 'outline-secondary';
+  noButtonCss = "outline-secondary";
 
   confirm(): void {
     this.message!.message.confirm();

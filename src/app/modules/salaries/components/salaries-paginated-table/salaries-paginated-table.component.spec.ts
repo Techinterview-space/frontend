@@ -1,9 +1,13 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
-import { SalariesPaginatedTableComponent } from './salaries-paginated-table.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import {
+  mostUsedImports,
+  testUtilStubs,
+  mostUsedServices,
+} from "@shared/test-utils";
+import { SalariesPaginatedTableComponent } from "./salaries-paginated-table.component";
 
-describe('SalariesPaginatedTableComponent', () => {
+describe("SalariesPaginatedTableComponent", () => {
   let component: SalariesPaginatedTableComponent;
   let fixture: ComponentFixture<SalariesPaginatedTableComponent>;
 
@@ -12,7 +16,7 @@ describe('SalariesPaginatedTableComponent', () => {
       declarations: [SalariesPaginatedTableComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -22,7 +26,7 @@ describe('SalariesPaginatedTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

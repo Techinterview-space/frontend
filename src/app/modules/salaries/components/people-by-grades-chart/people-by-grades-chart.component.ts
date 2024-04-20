@@ -1,8 +1,8 @@
-import { formatNumber } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { DeveloperGrade } from '@models/enums';
-import { PeopleByGradesChartData } from '@services/user-salaries.service';
-import { SalariesChart } from '../salaries-chart/salaries-chart';
+import { formatNumber } from "@angular/common";
+import { Component, Input, OnInit } from "@angular/core";
+import { DeveloperGrade } from "@models/enums";
+import { PeopleByGradesChartData } from "@services/user-salaries.service";
+import { SalariesChart } from "../salaries-chart/salaries-chart";
 
 interface ProgressBarData {
   color: string;
@@ -14,19 +14,21 @@ interface ProgressBarData {
 }
 
 @Component({
-  selector: 'app-people-by-grades-chart',
-  templateUrl: './people-by-grades-chart.component.html',
-  styleUrl: './people-by-grades-chart.component.scss'
+  selector: "app-people-by-grades-chart",
+  templateUrl: "./people-by-grades-chart.component.html",
+  styleUrl: "./people-by-grades-chart.component.scss",
 })
 export class PeopleByGradesChartComponent implements OnInit {
+  static readonly defaultColor = { color: "bg-light", textColor: "text-dark" };
 
-  static readonly defaultColor = { color: 'bg-light', textColor: 'text-dark' };
-
-  readonly colorsByGrade: Map<DeveloperGrade, {color: string, textColor: string}> = new Map([
-    [DeveloperGrade.Junior, { color: 'bg-success', textColor: 'text-white' }],
-    [DeveloperGrade.Middle, { color: 'bg-warning', textColor: 'text-dark' }],
-    [DeveloperGrade.Senior, { color: 'bg-info', textColor: 'text-dark' }],
-    [DeveloperGrade.Lead, { color: 'bg-primary', textColor: 'text-white' }],
+  readonly colorsByGrade: Map<
+    DeveloperGrade,
+    { color: string; textColor: string }
+  > = new Map([
+    [DeveloperGrade.Junior, { color: "bg-success", textColor: "text-white" }],
+    [DeveloperGrade.Middle, { color: "bg-warning", textColor: "text-dark" }],
+    [DeveloperGrade.Senior, { color: "bg-info", textColor: "text-dark" }],
+    [DeveloperGrade.Lead, { color: "bg-primary", textColor: "text-white" }],
     [DeveloperGrade.Unknown, PeopleByGradesChartComponent.defaultColor],
   ]);
 
@@ -61,33 +63,44 @@ export class PeopleByGradesChartComponent implements OnInit {
     }
 
     if (this.source.peopleByGradesChartDataForLocal != null) {
-      this.totalCountLocal = this.source.peopleByGradesChartDataForLocal.allCount;
+      this.totalCountLocal =
+        this.source.peopleByGradesChartDataForLocal.allCount;
       this.barsForLocal = this.prepareData(
-        this.source.peopleByGradesChartDataForLocal, this.showPercents);
+        this.source.peopleByGradesChartDataForLocal,
+        this.showPercents
+      );
     }
 
     if (this.source.peopleByGradesChartDataForRemote != null) {
-      this.totalCountRemote = this.source.peopleByGradesChartDataForRemote.allCount;
+      this.totalCountRemote =
+        this.source.peopleByGradesChartDataForRemote.allCount;
       this.barsForRemote = this.prepareData(
-        this.source.peopleByGradesChartDataForRemote, this.showPercents);
+        this.source.peopleByGradesChartDataForRemote,
+        this.showPercents
+      );
     }
   }
 
-  private prepareData(data: PeopleByGradesChartData, showPercents: boolean): Array<ProgressBarData> {
+  private prepareData(
+    data: PeopleByGradesChartData,
+    showPercents: boolean
+  ): Array<ProgressBarData> {
     const totalCount = data.allCount;
 
     const result = data.data
       .filter((item) => item.grade !== DeveloperGrade.Unknown)
       .map((item, index) => {
-        const color = this.colorsByGrade.get(item.grade) ?? PeopleByGradesChartComponent.defaultColor;
+        const color =
+          this.colorsByGrade.get(item.grade) ??
+          PeopleByGradesChartComponent.defaultColor;
         const width = (item.count / totalCount) * 100;
         const value = showPercents
-          ? formatNumber(width, 'en-US', '1.0-2') + '%'
-          : formatNumber(item.count, 'en-US', '1.0-0');
+          ? formatNumber(width, "en-US", "1.0-2") + "%"
+          : formatNumber(item.count, "en-US", "1.0-0");
 
         const maxValue = showPercents
-          ? '100'
-          : formatNumber(totalCount, 'en-US', '1.0-0');
+          ? "100"
+          : formatNumber(totalCount, "en-US", "1.0-0");
 
         return {
           color: color.color,
@@ -97,30 +110,32 @@ export class PeopleByGradesChartComponent implements OnInit {
           width: width,
           label: DeveloperGrade[item.grade],
         };
-    });
+      });
 
-    const noGradeData = data.data.find((item) => item.grade === DeveloperGrade.Unknown);
+    const noGradeData = data.data.find(
+      (item) => item.grade === DeveloperGrade.Unknown
+    );
     if (noGradeData != null) {
-      const color = this.colorsByGrade.get(DeveloperGrade.Unknown) ?? PeopleByGradesChartComponent.defaultColor;
+      const color =
+        this.colorsByGrade.get(DeveloperGrade.Unknown) ??
+        PeopleByGradesChartComponent.defaultColor;
       const width = (noGradeData.count / totalCount) * 100;
       const value = showPercents
-          ? formatNumber(width, 'en-US', '1.0-2') + '%'
-          : formatNumber(noGradeData.count, 'en-US', '1.0-0');
+        ? formatNumber(width, "en-US", "1.0-2") + "%"
+        : formatNumber(noGradeData.count, "en-US", "1.0-0");
 
-        const maxValue = showPercents
-          ? '100'
-          : formatNumber(totalCount, 'en-US', '1.0-0');
+      const maxValue = showPercents
+        ? "100"
+        : formatNumber(totalCount, "en-US", "1.0-0");
 
-      result.push(
-        {
-          color: color.color,
-          textColor: color.textColor,
-          value: value,
-          maxValue: maxValue,
-          width: width,
-          label: "Грейд не указан",
-        }
-      );
+      result.push({
+        color: color.color,
+        textColor: color.textColor,
+        value: value,
+        maxValue: maxValue,
+        width: width,
+        label: "Грейд не указан",
+      });
     }
 
     return result;

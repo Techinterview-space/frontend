@@ -1,4 +1,4 @@
-import Assertion from '@shared/validation/assertion';
+import Assertion from "@shared/validation/assertion";
 
 export interface DateStruct {
   /**
@@ -33,16 +33,19 @@ export class DateExtended implements DateStruct {
   }
 
   static diffInMonthsBetweenDates(from: Date, to: Date): number {
-    return (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth());
+    return (
+      (to.getFullYear() - from.getFullYear()) * 12 +
+      (to.getMonth() - from.getMonth())
+    );
   }
 
   static fromNgbStruct(date: DateStruct): DateExtended {
-    Assertion.notNull(date, 'date', DateExtended.name);
+    Assertion.notNull(date, "date", DateExtended.name);
     return new DateExtended(new Date(date.year, date.month - 1, date.day));
   }
 
   constructor(public readonly value: Date | null) {
-    Assertion.notNull(value, 'value');
+    Assertion.notNull(value, "value");
   }
 
   format(): string {
@@ -51,13 +54,13 @@ export class DateExtended implements DateStruct {
     const year = this.year.toString();
 
     if (month.length < 2) {
-      month = '0' + month;
+      month = "0" + month;
     }
     if (day.length < 2) {
-      day = '0' + day;
+      day = "0" + day;
     }
 
-    return [year, month, day].join('-');
+    return [year, month, day].join("-");
   }
 
   /** Gets the day-of-the-month, using local time. */
@@ -91,22 +94,40 @@ export class DateExtended implements DateStruct {
   }
 
   startOfTheDay(): Date {
-    return new Date(this.value!.getFullYear(), this.value!.getMonth(), this.value!.getDate(), 0, 0, 0, 0);
+    return new Date(
+      this.value!.getFullYear(),
+      this.value!.getMonth(),
+      this.value!.getDate(),
+      0,
+      0,
+      0,
+      0
+    );
   }
 
   endOfTheDay(): Date {
-    return new Date(this.value!.getFullYear(), this.value!.getMonth(), this.value!.getDate(), 23, 59, 59, 0);
+    return new Date(
+      this.value!.getFullYear(),
+      this.value!.getMonth(),
+      this.value!.getDate(),
+      23,
+      59,
+      59,
+      0
+    );
   }
 
   endOfTheMonth(): Date {
-    return new DateExtended(new Date(this.value!.getFullYear(), this.value!.getMonth() + 1, 0)).endOfTheDay();
+    return new DateExtended(
+      new Date(this.value!.getFullYear(), this.value!.getMonth() + 1, 0)
+    ).endOfTheDay();
   }
 
   asDateStruct(): DateStruct {
     return {
       year: this.value!.getFullYear(),
       month: this.value!.getMonth() + 1,
-      day: this.value!.getDate()
+      day: this.value!.getDate(),
     };
   }
 
@@ -137,7 +158,7 @@ export class DateExtended implements DateStruct {
   }
 
   private fetchDate(date: Date | DateExtended): Date {
-    Assertion.notNull(date, 'date');
+    Assertion.notNull(date, "date");
     return date instanceof DateExtended ? date.value! : date;
   }
 

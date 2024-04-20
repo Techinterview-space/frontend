@@ -1,10 +1,10 @@
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Injectable } from '@angular/core';
+import { NgxSpinnerService } from "ngx-spinner";
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class SpinnerService {
-  private readonly visibleTimerSpinnerName = 'timer';
-  private readonly invisibleSpinnerName = 'transparent';
+  private readonly visibleTimerSpinnerName = "timer";
+  private readonly invisibleSpinnerName = "transparent";
 
   constructor(private readonly loaderService: NgxSpinnerService) {}
 

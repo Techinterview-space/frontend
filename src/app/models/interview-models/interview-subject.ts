@@ -1,4 +1,4 @@
-import { DeveloperGrade } from '@models/enums';
+import { DeveloperGrade } from "@models/enums";
 
 export interface InterviewSubject {
   title: string;

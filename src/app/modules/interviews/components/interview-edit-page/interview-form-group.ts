@@ -1,12 +1,21 @@
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DeveloperGrade } from '@models/enums';
-import { Interview, InterviewTemplate } from '@models/interview-models';
-import { Label } from '@models/user-label.model';
-import { InterviewCreateRequest, InterviewUpdateRequest } from '@services/interviews.service';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { DeveloperGrade } from "@models/enums";
+import { Interview, InterviewTemplate } from "@models/interview-models";
+import { Label } from "@models/user-label.model";
+import {
+  InterviewCreateRequest,
+  InterviewUpdateRequest,
+} from "@services/interviews.service";
 
 export class InterviewFormGroup extends FormGroup {
   get subjectsFormArray(): FormArray {
-    return this.get('subjects') as FormArray;
+    return this.get("subjects") as FormArray;
   }
 
   get subjectsCount(): number {
@@ -20,21 +29,43 @@ export class InterviewFormGroup extends FormGroup {
   constructor(interview: Interview | null = null) {
     if (interview == null) {
       super({
-        candidateName: new FormControl(null, [Validators.required, Validators.max(150)]),
-        overallOpinion: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(20000)]),
+        candidateName: new FormControl(null, [
+          Validators.required,
+          Validators.max(150),
+        ]),
+        overallOpinion: new FormControl(null, [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(20000),
+        ]),
         candidateGrade: new FormControl(null, [Validators.required]),
         subjects: new FormArray([]),
       });
     } else {
       super({
-        candidateName: new FormControl(interview.candidateName, [Validators.required, Validators.max(150)]),
-        overallOpinion: new FormControl(interview.overallOpinion, [Validators.required, Validators.min(1), Validators.max(20000)]),
-        candidateGrade: new FormControl(interview.candidateGrade, [Validators.required]),
+        candidateName: new FormControl(interview.candidateName, [
+          Validators.required,
+          Validators.max(150),
+        ]),
+        overallOpinion: new FormControl(interview.overallOpinion, [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(20000),
+        ]),
+        candidateGrade: new FormControl(interview.candidateGrade, [
+          Validators.required,
+        ]),
         subjects: new FormArray([]),
       });
 
       interview.subjects?.forEach((subject) => {
-        this.subjectsFormArray.push(this.createSubjectFormGroup(subject.title, subject.grade, subject.comments));
+        this.subjectsFormArray.push(
+          this.createSubjectFormGroup(
+            subject.title,
+            subject.grade,
+            subject.comments
+          )
+        );
       });
     }
 
@@ -43,14 +74,16 @@ export class InterviewFormGroup extends FormGroup {
   }
 
   addSubjectsFromTemplate(interviewTemplate: InterviewTemplate): void {
-    const overallOpinionField = this.get('overallOpinion');
+    const overallOpinionField = this.get("overallOpinion");
 
     if (overallOpinionField != null && overallOpinionField.value == null) {
       overallOpinionField.setValue(interviewTemplate.overallOpinion);
     }
 
     interviewTemplate.subjects?.forEach((subject) => {
-      this.subjectsFormArray.push(this.createSubjectFormGroup(subject.title, null, null));
+      this.subjectsFormArray.push(
+        this.createSubjectFormGroup(subject.title, null, null)
+      );
       this.subjectDescriptions.push(subject.description);
     });
   }
@@ -98,42 +131,49 @@ export class InterviewFormGroup extends FormGroup {
   }
 
   getSubjectTitleField(subjectIndex: number): AbstractControl {
-    return this.subjectsFormArray.controls[subjectIndex]?.get('title') as AbstractControl;
+    return this.subjectsFormArray.controls[subjectIndex]?.get(
+      "title"
+    ) as AbstractControl;
   }
 
   getSubjectCommentsField(subjectIndex: number): AbstractControl {
-    return this.subjectsFormArray.controls[subjectIndex]?.get('comments') as AbstractControl;
+    return this.subjectsFormArray.controls[subjectIndex]?.get(
+      "comments"
+    ) as AbstractControl;
   }
 
   createRequest(selectedLabels: Array<Label>): InterviewCreateRequest | null {
     if (!this.valid) {
-      console.error('createRequest invalid', this.errors);
+      console.error("createRequest invalid", this.errors);
       this.markAllAsTouched();
       return null;
     }
 
     const subjects = this.subjectsFormArray.controls.map((subject) => {
-      const grade = subject.get('grade')?.value as string;
-      const comments = subject.get('comments')?.value as string;
+      const grade = subject.get("grade")?.value as string;
+      const comments = subject.get("comments")?.value as string;
 
       return {
-        title: subject.get('title')?.value,
+        title: subject.get("title")?.value,
         grade: grade != null ? (Number(grade) as DeveloperGrade) : null,
-        comments
+        comments,
       };
     });
 
-    const candidateGrade = this.get('candidateGrade')?.value as string;
-    const candidateName = this.get('candidateName')?.value as string;
+    const candidateGrade = this.get("candidateGrade")?.value as string;
+    const candidateName = this.get("candidateName")?.value as string;
 
     return {
       candidateName: candidateName,
-      overallOpinion: this.get('overallOpinion')?.value as string,
-      candidateGrade: candidateGrade != null ? (Number(candidateGrade) as DeveloperGrade) : null,
+      overallOpinion: this.get("overallOpinion")?.value as string,
+      candidateGrade:
+        candidateGrade != null
+          ? (Number(candidateGrade) as DeveloperGrade)
+          : null,
       subjects,
       labels: selectedLabels,
-      organizationId: this.get('organizationId')?.value as string | null,
-      candidateCardId: this.get('candidateCardId')?.value as string | null
+      organizationId: this.get("organizationId")?.value as string | null,
+      candidateCardId: this.get("candidateCardId")?.value as string | null,
     };
   }
 
@@ -145,7 +185,7 @@ export class InterviewFormGroup extends FormGroup {
     }
 
     if (this.interviewId == null) {
-      throw Error('There is no template id');
+      throw Error("There is no template id");
     }
 
     return {
@@ -156,7 +196,7 @@ export class InterviewFormGroup extends FormGroup {
       subjects: createRequest.subjects,
       labels: createRequest.labels,
       organizationId: createRequest.organizationId,
-      candidateCardId: createRequest.candidateCardId
+      candidateCardId: createRequest.candidateCardId,
     };
   }
 
@@ -168,7 +208,7 @@ export class InterviewFormGroup extends FormGroup {
     return new FormGroup({
       title: new FormControl(title, [Validators.required, Validators.max(150)]),
       grade: new FormControl(grade),
-      comments: new FormControl(comments, [Validators.max(1000)])
+      comments: new FormControl(comments, [Validators.max(1000)]),
     });
   }
 }

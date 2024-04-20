@@ -1,11 +1,15 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { InterviewsService } from '@services/interviews.service';
-import { mostUsedImports, testUtilStubs, mostUsedServices } from '@shared/test-utils';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { InterviewsService } from "@services/interviews.service";
+import {
+  mostUsedImports,
+  testUtilStubs,
+  mostUsedServices,
+} from "@shared/test-utils";
 
-import { MyInterviewsComponent } from './my-interviews.component';
+import { MyInterviewsComponent } from "./my-interviews.component";
 
-describe('MyInterviewsComponent', () => {
+describe("MyInterviewsComponent", () => {
   let component: MyInterviewsComponent;
   let fixture: ComponentFixture<MyInterviewsComponent>;
 
@@ -14,7 +18,7 @@ describe('MyInterviewsComponent', () => {
       declarations: [MyInterviewsComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices, InterviewsService],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -24,7 +28,7 @@ describe('MyInterviewsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

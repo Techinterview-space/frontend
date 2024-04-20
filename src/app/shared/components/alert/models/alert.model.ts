@@ -1,4 +1,4 @@
-import { AlertType } from './alert-type.model';
+import { AlertType } from "./alert-type.model";
 
 export class Alert {
   constructor(

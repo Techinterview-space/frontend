@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Label } from '@models/user-label.model';
-import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
+import { Injectable } from "@angular/core";
+import { Label } from "@models/user-label.model";
+import { Observable } from "rxjs";
+import { ApiService } from "./api.service";
 
 @Injectable()
 export class UserLabelsService {
@@ -12,12 +12,12 @@ export class UserLabelsService {
   }
 
   my(): Observable<Array<Label>> {
-    return this.api.get<Array<Label>>(this.apiUrl + 'my');
+    return this.api.get<Array<Label>>(this.apiUrl + "my");
   }
 
   /** For Admin */
   empty(): Observable<Array<Label>> {
-    return this.api.get<Array<Label>>(this.apiUrl + 'empty');
+    return this.api.get<Array<Label>>(this.apiUrl + "empty");
   }
 
   update(model: Label): Observable<void> {

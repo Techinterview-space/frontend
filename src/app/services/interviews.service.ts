@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { InterviewSubject } from '@models/interview-models/interview-subject';
-import { DeveloperGrade } from '@models/enums';
-import { Interview } from '@models/interview-models/interview';
-import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
-import { Label } from '@models/user-label.model';
+import { Injectable } from "@angular/core";
+import { InterviewSubject } from "@models/interview-models/interview-subject";
+import { DeveloperGrade } from "@models/enums";
+import { Interview } from "@models/interview-models/interview";
+import { Observable } from "rxjs";
+import { ApiService } from "./api.service";
+import { Label } from "@models/user-label.model";
 
 export interface InterviewCreateRequest {
   candidateName: string;
@@ -37,22 +37,24 @@ export class InterviewsService {
   }
 
   markdown(id: string): Observable<InterviewMarkdownRespose> {
-    return this.api.get<InterviewMarkdownRespose>(this.apiUrl + id + '/markdown');
+    return this.api.get<InterviewMarkdownRespose>(
+      this.apiUrl + id + "/markdown"
+    );
   }
 
   pdf(id: string): Observable<File> {
     const httpOptions = {
-      responseType: 'blob' as 'json'
+      responseType: "blob" as "json",
     };
-    return this.api.get<File>(this.apiUrl + id + '/download', httpOptions);
+    return this.api.get<File>(this.apiUrl + id + "/download", httpOptions);
   }
 
   // TODO Remove
   pdfSync(id: string): Observable<File> {
     const httpOptions = {
-      responseType: 'blob' as 'json'
+      responseType: "blob" as "json",
     };
-    return this.api.get<File>(this.apiUrl + id + '/download-sync', httpOptions);
+    return this.api.get<File>(this.apiUrl + id + "/download-sync", httpOptions);
   }
 
   update(model: InterviewUpdateRequest): Observable<void> {
@@ -72,6 +74,6 @@ export class InterviewsService {
   }
 
   my(): Observable<Array<Interview>> {
-    return this.api.get<Array<Interview>>(this.apiUrl + 'my');
+    return this.api.get<Array<Interview>>(this.apiUrl + "my");
   }
 }

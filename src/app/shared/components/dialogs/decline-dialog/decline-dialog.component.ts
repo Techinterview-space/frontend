@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { DeclineFormMsg } from '@shared/components/dialogs/models/decline-msg';
-import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
-import Assertion from '@shared/validation/assertion';
-import { DeclineForm } from '../models/decline-form';
+import { Component, Input } from "@angular/core";
+import { DeclineFormMsg } from "@shared/components/dialogs/models/decline-msg";
+import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
+import Assertion from "@shared/validation/assertion";
+import { DeclineForm } from "../models/decline-form";
 
 @Component({
-  selector: 'app-decline-dialog',
-  templateUrl: './decline-dialog.component.html',
-  styleUrls: ['./decline-dialog.component.scss']
+  selector: "app-decline-dialog",
+  templateUrl: "./decline-dialog.component.html",
+  styleUrls: ["./decline-dialog.component.scss"],
 })
 export class DeclineDialogComponent {
   get showModal(): boolean {
@@ -26,11 +26,11 @@ export class DeclineDialogComponent {
   message: DialogMessage<DeclineFormMsg> | null = null;
 
   get messageSubject(): string {
-    return this.message?.subject ?? '';
+    return this.message?.subject ?? "";
   }
 
   decline(): void {
-    Assertion.notNull(this.message, 'message');
+    Assertion.notNull(this.message, "message");
     this.message!.message.declineForm.markAllAsTouched();
     if (this.message!.message.declineForm.valid) {
       this.message!.message.confirm();
@@ -39,7 +39,7 @@ export class DeclineDialogComponent {
   }
 
   close(): void {
-    Assertion.notNull(this.message, 'message');
+    Assertion.notNull(this.message, "message");
     this.message!.close();
     this.message = null;
   }

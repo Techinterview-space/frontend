@@ -12,7 +12,9 @@
   (change)="onSelectChange($event)"
 >
   <ng-template ng-label-tmp let-item="item">
-    <span [style.backgroundColor]="item.hexColor" class="px-3 ng-value-label">{{ item.title }}</span>
+    <span [style.backgroundColor]="item.hexColor" class="px-3 ng-value-label">{{
+      item.title
+    }}</span>
     <span
       [style.backgroundColor]="item.hexColor"
       class="ng-value-icon right border-0"
@@ -22,6 +24,8 @@
     >
   </ng-template>
   <ng-template ng-option-tmp let-item="item" let-index="index">
-    <span [style.backgroundColor]="item.hexColor" class="px-3 ng-value-label">{{ item.title }}</span>
+    <span [style.backgroundColor]="item.hexColor" class="px-3 ng-value-label">{{
+      item.title
+    }}</span>
   </ng-template>
 </ng-select>

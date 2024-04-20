@@ -1,17 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TitleService } from '@services/title.service';
-import { AlertService } from '@shared/components/alert/services/alert.service';
-import { ConfirmMsg } from '@shared/components/dialogs/models/confirm-msg';
-import { DialogMessage } from '@shared/components/dialogs/models/dialog-message';
-import { untilDestroyed } from '@shared/subscriptions/until-destroyed';
-import { WorkIndusrtiesService } from '@services/work-industry.service';
-import { LabelEntityAdmiDto } from '@services/label-entity.model';
-import { LabelEntityEditForm } from '../label-entity-edit-form';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { TitleService } from "@services/title.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
+import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
+import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { WorkIndusrtiesService } from "@services/work-industry.service";
+import { LabelEntityAdmiDto } from "@services/label-entity.model";
+import { LabelEntityEditForm } from "../label-entity-edit-form";
 
 @Component({
-  templateUrl: './work-indusrties-paginated-table.component.html'
+  templateUrl: "./work-indusrties-paginated-table.component.html",
 })
-export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy {
+export class WorkIndustriesPaginatedTableComponent
+  implements OnInit, OnDestroy
+{
   items: Array<LabelEntityAdmiDto> | null = null;
 
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
@@ -29,7 +31,7 @@ export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy 
   }
 
   ngOnInit(): void {
-    this.title.setTitle('Industries');
+    this.title.setTitle("Industries");
     this.service
       .all()
       .pipe(untilDestroyed(this))
@@ -49,7 +51,6 @@ export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy 
   }
 
   onEditFormSubmit(): void {
-
     if (this.editForm == null) {
       return;
     }
@@ -59,32 +60,32 @@ export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy 
       if (updateRequest == null) {
         return;
       }
-  
+
       this.service
         .update(updateRequest)
         .pipe(untilDestroyed(this))
         .subscribe(() => {
-          this.alert.success('The industry was updated');
+          this.alert.success("The industry was updated");
           this.editForm = null;
           this.ngOnInit();
         });
 
-        return;
+      return;
     }
 
     const createRequest = this.editForm.createRequestOrNull();
-      if (createRequest == null) {
-        return;
-      }
-  
-      this.service
-        .create(createRequest)
-        .pipe(untilDestroyed(this))
-        .subscribe(() => {
-          this.alert.success('The industry was created');
-          this.editForm = null;
-          this.ngOnInit();
-        });
+    if (createRequest == null) {
+      return;
+    }
+
+    this.service
+      .create(createRequest)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success("The industry was created");
+        this.editForm = null;
+        this.ngOnInit();
+      });
   }
 
   onEditModalDlgClose(): void {
@@ -93,20 +94,16 @@ export class WorkIndustriesPaginatedTableComponent implements OnInit, OnDestroy 
 
   delete(item: LabelEntityAdmiDto): void {
     this.confirmDeletionMessage = new DialogMessage(
-      new ConfirmMsg(
-        'Delete the industry',
-        'Are you sure to delete?',
-        () => {
-          this.service
-            .delete(item.id!)
-            .pipe(untilDestroyed(this))
-            .subscribe(() => {
-              this.alert.success('The industry was removed');
-              this.confirmDeletionMessage = null;
-              this.ngOnInit();
-            });
-        }
-      )
+      new ConfirmMsg("Delete the industry", "Are you sure to delete?", () => {
+        this.service
+          .delete(item.id!)
+          .pipe(untilDestroyed(this))
+          .subscribe(() => {
+            this.alert.success("The industry was removed");
+            this.confirmDeletionMessage = null;
+            this.ngOnInit();
+          });
+      })
     );
   }
 }

@@ -1,4 +1,4 @@
 export interface SelectBoxItem<TIdType> {
-    id: TIdType;
-    name: string;
+  id: TIdType;
+  name: string;
 }

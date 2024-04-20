@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { IsDesktopGuard } from './is-desktop.guard';
+import { IsDesktopGuard } from "./is-desktop.guard";
 
-describe('IsDesktopGuard', () => {
+describe("IsDesktopGuard", () => {
   let guard: IsDesktopGuard;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('IsDesktopGuard', () => {
     guard = TestBed.inject(IsDesktopGuard);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(guard).toBeTruthy();
   });
 });
