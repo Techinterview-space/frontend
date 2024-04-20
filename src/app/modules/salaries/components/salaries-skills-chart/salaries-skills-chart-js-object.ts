@@ -4,8 +4,8 @@ import { UserSalary } from "@models/salaries/salary.model";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 export class SalariesSkillsChartJsObject extends Chart {
-  private readonly datasets: Array<ChartDatasetItem> = [];
   private readonly uniqueSkills: Array<LabelEntityDto> = [];
+  private readonly datasets: Array<ChartDatasetItem> = [];
 
   constructor(
     canvasId: string,
@@ -18,6 +18,7 @@ export class SalariesSkillsChartJsObject extends Chart {
       salaries,
       skills
     );
+
     datasets.push(new ChartDatasetItem(uniqueSkills, salaries, false));
 
     super(canvasId, {
