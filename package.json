@@ -11,7 +11,7 @@
     "test": "ng test",
     "test-headless-ci-only": "ng test --browsers ChromiumNoSandbox",
     "lint": "ng lint",
-    "prettier": "pretty-quick",
+    "prettier": "pretty-quick --staged",
     "bundle:analyze": "ng build --stats-json && webpack-bundle-analyzer dist/petrel.interviewer/stats.json"
   },
   "private": true,
