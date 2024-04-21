@@ -20,6 +20,8 @@ export class SalariesByGradeBlockComponent implements OnInit {
   @Input()
   source: Array<SalariesByGrade> | null = null;
 
+  totalCount: number = 0;
+
   ngOnInit(): void {
     if (this.source == null) {
       this.items = [];
@@ -27,6 +29,7 @@ export class SalariesByGradeBlockComponent implements OnInit {
     }
 
     this.items = this.source.map((x) => {
+      this.totalCount += x.count;
       return {
         gradeAsString: DeveloperGrade[x.grade],
         grade: x.grade,

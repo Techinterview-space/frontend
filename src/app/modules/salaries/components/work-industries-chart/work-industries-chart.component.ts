@@ -3,6 +3,20 @@ import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { WorkIndustriesChartJsObject } from "./work-industries-chart-js-object";
 import { LabelEntityDto } from "@services/label-entity.model";
 
+class TableRow {
+  readonly title: string;
+  readonly part: number;
+
+  constructor(
+    private readonly skill: LabelEntityDto,
+    readonly value: number,
+    private readonly totalCount: number
+  ) {
+    this.title = skill.title;
+    this.part = (value / totalCount) * 100;
+  }
+}
+
 @Component({
   selector: "app-work-industries-chart",
   templateUrl: "./work-industries-chart.component.html",
@@ -23,10 +37,39 @@ export class WorkIndustriesChartComponent {
 
   chartDataLocal: WorkIndustriesChartJsObject | null = null;
   showNoDataArea = false;
+  tableRows: Array<TableRow> | null = null;
+  totalCount = 0;
 
   readonly canvasId = "canvas_" + Math.random().toString(36);
 
   constructor() {}
+
+  ngOnInit(): void {
+    if (
+      this.salaries == null ||
+      this.salaries.length === 0 ||
+      this.industries.length === 0
+    ) {
+      return;
+    }
+
+    const uniqueItems = WorkIndustriesChartJsObject.prepareUniqueIndustries(
+      this.salaries,
+      this.industries
+    );
+
+    const salariesWithIndustry = this.salaries.filter((x) => x.skillId != null);
+    this.tableRows = uniqueItems
+      .map((x) => {
+        const value = salariesWithIndustry.filter(
+          (s) => s.workIndustryId === x.id
+        ).length;
+
+        this.totalCount += value;
+        return new TableRow(x, value, salariesWithIndustry.length ?? 0);
+      })
+      .sort((a, b) => b.part - a.part);
+  }
 
   ngAfterViewInit() {
     this.initChart();

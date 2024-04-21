@@ -38,6 +38,7 @@ export class SalariesSkillsChartComponent implements OnInit {
   chartDataLocal: SalariesSkillsChartJsObject | null = null;
   showNoDataArea = false;
   tableRows: Array<TableRow> | null = null;
+  totalCount = 0;
 
   readonly canvasId = "canvas_" + Math.random().toString(36);
 
@@ -62,6 +63,8 @@ export class SalariesSkillsChartComponent implements OnInit {
         const value = salariesWithSkill.filter(
           (x) => x.skillId === skill.id
         ).length;
+
+        this.totalCount += value;
         return new TableRow(skill, value, salariesWithSkill.length ?? 0);
       })
       .sort((a, b) => b.part - a.part);
