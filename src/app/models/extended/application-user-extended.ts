@@ -34,6 +34,10 @@ export class ApplicationUserExtended implements ApplicationUser {
     return this.instance.identityId;
   }
 
+  get salariesCount(): number {
+    return this.instance.salariesCount;
+  }
+
   get updatedAt(): Date {
     return this.instance.updatedAt;
   }

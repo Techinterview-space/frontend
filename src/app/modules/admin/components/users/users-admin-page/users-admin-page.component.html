@@ -14,7 +14,8 @@
             <th>Email</th>
             <th>Роли</th>
             <th>Активный</th>
-            <th>Зарегестрирован</th>
+            <th>Кол-во анкет</th>
+            <th>Зарегистрирован</th>
             <th></th>
           </thead>
           <tbody>
@@ -35,6 +36,7 @@
               <td>
                 <app-status-label [status]="item.isActive"></app-status-label>
               </td>
+              <td>{{ item.salariesCount }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:ss" }}</td>
               <td>
                 <button
