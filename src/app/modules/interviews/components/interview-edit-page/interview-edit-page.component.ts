@@ -58,18 +58,6 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
       .subscribe((id) => {
         this.interviewId = id;
 
-        if (this.interviewId != null) {
-          this.setTitle("Редактирование заметки");
-          this.service
-            .byId(this.interviewId)
-            .pipe(untilDestroyed(this))
-            .subscribe((i) => {
-              this.formGroup = new InterviewFormGroup(i);
-              this.selectedLabels = [...this.selectedLabels, ...i.labels];
-            });
-          return;
-        }
-
         this.templateService
           .availableForInterview()
           .pipe(untilDestroyed(this))
@@ -77,8 +65,22 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
             this.templates = templates.map(
               (t) => new InterviewTemplateSelectItem(t)
             );
-            this.formGroup = new InterviewFormGroup(null);
           });
+
+        if (this.interviewId == null) {
+          this.setTitle("Новое интервью");
+          this.formGroup = new InterviewFormGroup(null);
+          return;
+        }
+
+        this.setTitle("Редактирование заметки");
+          this.service
+            .byId(this.interviewId)
+            .pipe(untilDestroyed(this))
+            .subscribe((i) => {
+              this.formGroup = new InterviewFormGroup(i);
+              this.selectedLabels = [...this.selectedLabels, ...i.labels];
+            });
       });
 
     this.userLabelsService
