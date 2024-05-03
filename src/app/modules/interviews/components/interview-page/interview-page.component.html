@@ -8,20 +8,25 @@
       <div class="card">
         <div class="card-body">
           <ul class="list-group list-group-flush">
+
             <li class="list-group-item">
-              <div class="text-muted small">Interviewer</div>
+              <app-go-back-button></app-go-back-button>
+            </li>
+
+            <li class="list-group-item">
+              <div class="text-muted small">Интервью провел</div>
               <div class="small">
                 {{ interview.interviewer?.email }}
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Candidate name</div>
+              <div class="text-muted small">Кандидат</div>
               <div class="small">
                 {{ interview.candidateName }}
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Grade</div>
+              <div class="text-muted small">Грейд</div>
               <div class="">
                 <app-developer-grade-label
                   [grade]="interview.candidateGrade"
@@ -29,13 +34,13 @@
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Subjects</div>
+              <div class="text-muted small">Тем</div>
               <div>
                 {{ interview.subjects?.length ?? 0 }}
               </div>
             </li>
             <li class="list-group-item" *ngIf="interview.labels.length > 0">
-              <div class="text-muted small">Labels</div>
+              <div class="text-muted small">Тэги</div>
               <div>
                 <app-label
                   *ngFor="let item of interview.labels"
@@ -44,13 +49,13 @@
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Last update</div>
+              <div class="text-muted small">Обновлено</div>
               <div>
-                {{ interview.updatedAt | date: "HH:mm yyyy-MM-dd" }}
+                {{ interview.updatedAt | date: "yyyy-MM-dd HH:mm" }}
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Export</div>
+              <div class="text-muted small">Экспорт</div>
               <div>
                 <app-loading-button
                   [css]="'btn btn-sm btn-outline-dark ms-1'"
@@ -67,13 +72,13 @@
               </div>
             </li>
             <li class="list-group-item">
-              <div class="text-muted small">Actions</div>
+              <div class="text-muted small">Действия</div>
               <div>
                 <a
                   routerLink="/interviews/{{ interview.id }}/edit"
                   class="btn-link-sm"
                   title="Edit the interview"
-                  >Edit</a
+                  >Редактировать</a
                 >
                 <button
                   type="button"
@@ -81,17 +86,11 @@
                   title="Delete the interview"
                   (click)="delete()"
                 >
-                  Delete
+                  Удалить
                 </button>
               </div>
             </li>
           </ul>
-        </div>
-      </div>
-
-      <div class="card mt-3">
-        <div class="card-body d-flex justify-content-between">
-          <app-go-back-button></app-go-back-button>
         </div>
       </div>
     </div>
@@ -109,8 +108,6 @@
 
       <div class="card mt-3">
         <div class="card-body">
-          <div class="h5">Subjects discussed</div>
-
           <ul
             class="list-group list-group-flush"
             *ngIf="
@@ -133,10 +130,8 @@
                   ></app-developer-grade-label
                 ></span>
               </div>
-              <div class="ps-5" *ngIf="item.comments">
-                <div class="small">
-                  <markdown>{{ item.comments }}</markdown>
-                </div>
+              <div class="ps-3 small" *ngIf="item.comments">
+                <markdown>{{ item.comments }}</markdown>
               </div>
             </li>
           </ul>

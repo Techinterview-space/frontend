@@ -9,12 +9,9 @@ export class TextWithLinebreaksComponent implements OnInit {
   @Input()
   source: string | null = null;
 
-  text = "";
   hasText = false;
 
   ngOnInit(): void {
-    this.text =
-      this.source != null ? this.source.replace(/\r?\n/g, "<br />") : "";
-    this.hasText = this.text.length > 0;
+    this.hasText = this.source != null && this.source.length > 0;
   }
 }
