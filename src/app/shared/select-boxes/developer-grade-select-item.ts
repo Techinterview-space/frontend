@@ -30,7 +30,6 @@ export class DeveloperGradeSelectItem implements SelectItem<DeveloperGrade> {
       .filter(
         (grade) =>
           grade != DeveloperGrade.Unknown &&
-          grade != DeveloperGrade.JuniorMinus &&
           grade != DeveloperGrade.JuniorStrong &&
           grade != DeveloperGrade.MiddleMinus &&
           grade != DeveloperGrade.MiddleStrong &&

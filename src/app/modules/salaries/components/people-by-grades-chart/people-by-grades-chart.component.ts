@@ -25,6 +25,7 @@ export class PeopleByGradesChartComponent implements OnInit {
     DeveloperGrade,
     { color: string; textColor: string }
   > = new Map([
+    [DeveloperGrade.Trainee, { color: "bg-light", textColor: "text-dark" }],
     [DeveloperGrade.Junior, { color: "bg-success", textColor: "text-white" }],
     [DeveloperGrade.Middle, { color: "bg-warning", textColor: "text-dark" }],
     [DeveloperGrade.Senior, { color: "bg-info", textColor: "text-dark" }],

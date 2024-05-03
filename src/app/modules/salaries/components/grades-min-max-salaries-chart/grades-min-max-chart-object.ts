@@ -8,6 +8,10 @@ import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";
 export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
   static readonly grades: Array<{ grade: DeveloperGrade; label: string }> = [
     {
+      grade: DeveloperGrade.Trainee,
+      label: DeveloperGrade[DeveloperGrade.Trainee],
+    },
+    {
       grade: DeveloperGrade.Junior,
       label: DeveloperGrade[DeveloperGrade.Junior],
     },
