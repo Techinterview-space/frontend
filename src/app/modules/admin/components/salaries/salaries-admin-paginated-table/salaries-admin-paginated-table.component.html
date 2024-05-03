@@ -105,7 +105,9 @@
         <td>{{ item.gender }}</td>
         <td>{{ item.yearOfStartingWork }}</td>
         <td>{{ item.profession }}</td>
-        <td>{{ item.grade }}</td>
+        <td>
+          <app-developer-grade-label [grade]="item.gradeAsEnum"></app-developer-grade-label>
+        </td>
         <td>{{ item.company }}</td>
         <td>{{ item.city }}</td>
         <td>{{ item.skill }}</td>

@@ -15,6 +15,7 @@ export class TestApplicationUser implements ApplicationUser {
     this.createdAt = new Date();
     this.updatedAt = new Date();
     this.fullname = `${this.firstName} ${this.lastName}`;
+    this.salariesCount = 0;
   }
 
   email: string | null;
@@ -28,6 +29,7 @@ export class TestApplicationUser implements ApplicationUser {
   createdAt: Date;
   updatedAt: Date;
   fullname: string;
+  salariesCount: number;
 
   asExtended(): ApplicationUserExtended {
     return new ApplicationUserExtended(this);

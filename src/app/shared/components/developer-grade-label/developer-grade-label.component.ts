@@ -4,6 +4,7 @@ import { SplittedByWhitespacesString } from "../../value-objects/splitted-by-whi
 
 @Component({
   selector: "app-developer-grade-label",
+  styleUrls: ["./developer-grade-label.component.scss"],
   templateUrl: "./developer-grade-label.component.html",
 })
 export class DeveloperGradeLabelComponent implements OnInit {
@@ -16,6 +17,9 @@ export class DeveloperGradeLabelComponent implements OnInit {
   ngOnInit(): void {
     switch (this.grade) {
       case DeveloperGrade.Trainee:
+        this.style = "light text-dark";
+        break;
+
       case DeveloperGrade.Junior:
       case DeveloperGrade.JuniorStrong:
         this.style = "success";
@@ -24,19 +28,19 @@ export class DeveloperGradeLabelComponent implements OnInit {
       case DeveloperGrade.MiddleMinus:
       case DeveloperGrade.Middle:
       case DeveloperGrade.MiddleStrong:
-        this.style = "primary";
+        this.style = "warning text-dark";
         break;
 
       case DeveloperGrade.SeniorMinus:
       case DeveloperGrade.Senior:
       case DeveloperGrade.SeniorStrong:
-        this.style = "warning text-dark";
+        this.style = "info text-dark";
         break;
 
       case DeveloperGrade.LeadMinus:
       case DeveloperGrade.Lead:
       case DeveloperGrade.LeadStrong:
-        this.style = "info text-dark";
+        this.style = "primary";
         break;
 
       default:
@@ -49,7 +53,7 @@ export class DeveloperGradeLabelComponent implements OnInit {
         DeveloperGrade[this.grade]
       ).value;
     } else {
-      this.title = "Unknown";
+      this.title = "Не указан";
     }
   }
 }

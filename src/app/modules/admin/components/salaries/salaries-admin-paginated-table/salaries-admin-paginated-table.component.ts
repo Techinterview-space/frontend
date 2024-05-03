@@ -10,7 +10,6 @@ import { SalaryAdminItem } from "../salary-admin-item";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { SalariesTableFilter } from "../salaries-table-filter";
-import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
   selector: "app-salaries-admin-paginated-table",

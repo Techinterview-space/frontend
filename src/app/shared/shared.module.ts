@@ -37,7 +37,6 @@ import { MarkdownModule } from "ngx-markdown";
 import { ShareButtonComponent } from "./components/share-button/share-button.component";
 import { LabelsNgSelectComponent } from "./components/labels-ng-select/labels-ng-select.component";
 import { NgSelectModule } from "@ng-select/ng-select";
-import { GradeLabelComponent } from "./components/grade-label/grade-label.component";
 
 const componentsToDeclareAndExport = [
   AlertComponent,
@@ -70,7 +69,6 @@ const componentsToDeclareAndExport = [
   UserLinkComponent,
   ShareButtonComponent,
   LabelsNgSelectComponent,
-  GradeLabelComponent,
 ];
 
 @NgModule({

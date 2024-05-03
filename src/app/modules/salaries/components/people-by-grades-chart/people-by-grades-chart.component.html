@@ -53,11 +53,8 @@
 
   <div class="">
     <span>Значения цветов</span>
-    <span class="ms-2 badge bg-light text-dark">Trainee</span>
-    <span class="ms-2 badge bg-success">Junior</span>
-    <span class="ms-2 badge bg-warning text-dark">Middle</span>
-    <span class="ms-2 badge bg-info text-dark">Senior</span>
-    <span class="ms-2 badge bg-primary">Lead</span>
-    <span class="ms-2 badge bg-light text-dark">Не указан грейд</span>
+    <span *ngFor="let grade of grades" class="ms-2">
+      <app-developer-grade-label [grade]="grade"></app-developer-grade-label>
+    </span>
   </div>
 </div>

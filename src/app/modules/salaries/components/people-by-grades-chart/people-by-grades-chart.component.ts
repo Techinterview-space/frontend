@@ -1,6 +1,6 @@
 import { formatNumber } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
-import { DeveloperGrade } from "@models/enums";
+import { DeveloperGrade, DeveloperGradeEnum } from "@models/enums";
 import { PeopleByGradesChartData } from "@services/user-salaries.service";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
 
@@ -19,19 +19,8 @@ interface ProgressBarData {
   styleUrl: "./people-by-grades-chart.component.scss",
 })
 export class PeopleByGradesChartComponent implements OnInit {
-  static readonly defaultColor = { color: "bg-light", textColor: "text-dark" };
 
-  readonly colorsByGrade: Map<
-    DeveloperGrade,
-    { color: string; textColor: string }
-  > = new Map([
-    [DeveloperGrade.Trainee, { color: "bg-light", textColor: "text-dark" }],
-    [DeveloperGrade.Junior, { color: "bg-success", textColor: "text-white" }],
-    [DeveloperGrade.Middle, { color: "bg-warning", textColor: "text-dark" }],
-    [DeveloperGrade.Senior, { color: "bg-info", textColor: "text-dark" }],
-    [DeveloperGrade.Lead, { color: "bg-primary", textColor: "text-white" }],
-    [DeveloperGrade.Unknown, PeopleByGradesChartComponent.defaultColor],
-  ]);
+  readonly grades = DeveloperGradeEnum.grades;
 
   @Input()
   source: SalariesChart | null = null;
@@ -91,9 +80,7 @@ export class PeopleByGradesChartComponent implements OnInit {
     const result = data.data
       .filter((item) => item.grade !== DeveloperGrade.Unknown)
       .map((item, index) => {
-        const color =
-          this.colorsByGrade.get(item.grade) ??
-          PeopleByGradesChartComponent.defaultColor;
+        const color = DeveloperGradeEnum.getColorData(item.grade);
         const width = (item.count / totalCount) * 100;
         const value = showPercents
           ? formatNumber(width, "en-US", "1.0-2") + "%"
@@ -104,8 +91,8 @@ export class PeopleByGradesChartComponent implements OnInit {
           : formatNumber(totalCount, "en-US", "1.0-0");
 
         return {
-          color: color.color,
-          textColor: color.textColor,
+          color: color.cssBackground,
+          textColor: color.cssText,
           value: value,
           maxValue: maxValue,
           width: width,
@@ -116,10 +103,9 @@ export class PeopleByGradesChartComponent implements OnInit {
     const noGradeData = data.data.find(
       (item) => item.grade === DeveloperGrade.Unknown
     );
+
     if (noGradeData != null) {
-      const color =
-        this.colorsByGrade.get(DeveloperGrade.Unknown) ??
-        PeopleByGradesChartComponent.defaultColor;
+      const color = DeveloperGradeEnum.getColorData(DeveloperGrade.Unknown);
       const width = (noGradeData.count / totalCount) * 100;
       const value = showPercents
         ? formatNumber(width, "en-US", "1.0-2") + "%"
@@ -130,8 +116,8 @@ export class PeopleByGradesChartComponent implements OnInit {
         : formatNumber(totalCount, "en-US", "1.0-0");
 
       result.push({
-        color: color.color,
-        textColor: color.textColor,
+        color: color.cssBackground,
+        textColor: color.cssText,
         value: value,
         maxValue: maxValue,
         width: width,

@@ -13,6 +13,7 @@ export class SalaryTableRow {
   readonly currency: string;
   readonly company: string;
   readonly grade: string | null;
+  readonly gradeAsEnum: DeveloperGrade | null;
   readonly profession: string;
   readonly gender: string;
   readonly age: string;
@@ -37,6 +38,8 @@ export class SalaryTableRow {
     this.yearOfStartingWork = item.yearOfStartingWork?.toString() ?? "-";
     this.gender = item.gender != null ? GenderEnum.label(item.gender) : "-";
     this.grade = item.grade != null ? DeveloperGrade[item.grade] : null;
+    this.gradeAsEnum = item.grade;
+
     this.profession =
       professions.find((p) => p.id == item.professionId)?.title || "-";
     this.city = item.city != null ? KazakhstanCity[item.city] : "-";
