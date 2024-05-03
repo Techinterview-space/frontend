@@ -15,7 +15,7 @@ export class DeveloperGradeLabelComponent implements OnInit {
 
   ngOnInit(): void {
     switch (this.grade) {
-      case DeveloperGrade.JuniorMinus:
+      case DeveloperGrade.Trainee:
       case DeveloperGrade.Junior:
       case DeveloperGrade.JuniorStrong:
         this.style = "success";

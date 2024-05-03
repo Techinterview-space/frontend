@@ -1,6 +1,7 @@
 export enum DeveloperGrade {
   Unknown = 0,
-  JuniorMinus = 1,
+  Trainee = 1,
+
   Junior = 2,
   JuniorStrong = 3,
 

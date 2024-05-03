@@ -9,6 +9,9 @@
         <div class="card-body">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
+              <app-go-back-button></app-go-back-button>
+            </li>
+            <li class="list-group-item">
               <div class="text-muted small">Автор</div>
               <div class="small">
                 {{ interviewTemplate.author?.email }}
@@ -44,7 +47,7 @@
             <li class="list-group-item">
               <div class="text-muted small">Обновлено</div>
               <div>
-                {{ interviewTemplate.updatedAt | date: "HH:mm yyyy-MM-dd" }}
+                {{ interviewTemplate.updatedAt | date: "yyyy-MM-dd HH:mm" }}
               </div>
             </li>
           </ul>
@@ -53,9 +56,6 @@
 
       <div class="card mt-3">
         <div class="card-body d-flex justify-content-between">
-          <div class="d-inline-block">
-            <app-go-back-button></app-go-back-button>
-          </div>
           <div class="d-inline-block small" *ngIf="showEditButtons">
             <a
               routerLink="/interviews/templates/{{ interviewTemplate.id }}/edit"
@@ -77,17 +77,19 @@
     </div>
 
     <div class="col-sm-9">
+
+      <div class="card mb-3" *ngIf="interviewTemplate.overallOpinion">
+        <div class="card-body">
+          <div class="small text-muted">
+            Шаблон для поля "Общее впечатление"
+          </div>
+
+          <markdown>{{ interviewTemplate.overallOpinion }}</markdown>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-body">
-          <div class="mb-3" *ngIf="interviewTemplate.overallOpinion">
-            <div>
-              <div class="small text-muted">
-                Шаблон для поля "Общее впечатление"
-              </div>
-              <markdown>{{ interviewTemplate.overallOpinion }}</markdown>
-            </div>
-            <hr />
-          </div>
           <ul
             class="list-group list-group-flush"
             *ngIf="
@@ -98,7 +100,7 @@
             "
           >
             <li
-              class="list-group-item"
+              class="list-group-item pb-5"
               *ngFor="let item of interviewTemplate.subjects; let i = index"
             >
               <div class="d-flex justify-content-between">

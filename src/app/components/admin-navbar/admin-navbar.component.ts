@@ -57,7 +57,7 @@ export class AdminNavbarComponent {
         ],
       },
       {
-        title: "Зарплаты",
+        title: "Анкеты зарплат",
         links: [
           {
             title: "Анкеты в статистике",

@@ -112,7 +112,7 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
   }
 
   private setTitle(): void {
-    this.pageTitle = `Interview with ${this.interview!.candidateName}`;
+    this.pageTitle = `Интервью для ${this.interview!.candidateName}`;
     this.title.setTitle(this.pageTitle);
   }
 }

@@ -14,6 +14,7 @@ import { MarkdownModule } from "ngx-markdown";
 import { InterviewMarkdownModalDialogComponent } from "./components/interview-page/interview-markdown-modal-dialog/interview-markdown-modal-dialog.component";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { InterviewsHomeComponent } from "./components/interviews-home/interviews-home.component";
+import { TextWithLinebreaksComponent } from "./components/text-with-linebreaks/text-with-linebreaks.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { InterviewsHomeComponent } from "./components/interviews-home/interviews
     PublicInterviewTemplatesComponent,
     InterviewMarkdownModalDialogComponent,
     InterviewsHomeComponent,
+    TextWithLinebreaksComponent,
   ],
   imports: [
     CommonModule,

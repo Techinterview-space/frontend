@@ -90,6 +90,7 @@ export class InterviewFormGroup extends FormGroup {
 
   clearSubjects(): void {
     this.subjectsFormArray.clear();
+    this.subjectDescriptions.splice(0, this.subjectDescriptions.length);
   }
 
   addSubject(): void {
