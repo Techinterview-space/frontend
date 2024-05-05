@@ -20,6 +20,7 @@ import { LabelEntityDto } from "@services/label-entity.model";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { FileDownloadAnchor } from "@shared/value-objects/file-download-anchor";
 import { TitleService } from "@services/title.service";
+import { SurveyService } from "@services/salaries-survey.service";
 
 @Component({
   templateUrl: "./salaries-chart.component.html",
@@ -45,6 +46,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   showAdjustCurrentSalaryProfessionModal = false;
   isAuthenticated = false;
   hasPredefinedFilter = false;
+  shouldShowSurveyBlock = false;
 
   gradeFilter: DeveloperGrade | null = null;
 
@@ -211,6 +213,10 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       });
   }
 
+  closeSurveyBlock(): void {
+    this.shouldShowSurveyBlock = false;
+  }
+
   private loadChartWithFilter(
     data: SalaryChartGlobalFiltersData | null = null
   ): void {
@@ -234,8 +240,10 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
               ? new CurrentUserSalaryLabelData(x.currentUserSalary)
               : null;
 
+          // mgorbatyuk: 1 is a 'Developer' which I going to get rid off.
           const developerProfessionId = 1;
           this.showDataStub = false;
+          this.shouldShowSurveyBlock = !x.HasRecentSurveyReply;
           this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
             x.currentUserSalary.professionId === developerProfessionId;

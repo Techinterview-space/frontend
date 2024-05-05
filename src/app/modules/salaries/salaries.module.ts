@@ -23,6 +23,7 @@ import { PeopleByAgeChartComponent } from "./components/people-by-age-chart/peop
 import { PeopleByExperienceChartComponent } from "./components/people-by-experience-chart/people-by-experience-chart.component";
 import { SalariesByGradeBlockComponent } from "./components/salaries-chart/salaries-by-grade/salaries-by-grade-block.component";
 import { SalariesPaginatedTableComponent } from "./components/salaries-paginated-table/salaries-paginated-table.component";
+import { SalariesSurveyBlockComponent } from "./components/salaries-survey-block/salaries-survey-block.component";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SalariesPaginatedTableComponent } from "./components/salaries-paginated
     PeopleByExperienceChartComponent,
     SalariesByGradeBlockComponent,
     SalariesPaginatedTableComponent,
+    SalariesSurveyBlockComponent,
   ],
   imports: [
     CommonModule,

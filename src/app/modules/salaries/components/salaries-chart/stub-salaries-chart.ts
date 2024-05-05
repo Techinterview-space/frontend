@@ -29,6 +29,7 @@ export class StubSalariesChart extends SalariesChart {
           StubSalariesChart.getRandomNumber(1_200, 600) * 1000,
         localSalariesByGrade: [],
         remoteSalariesByGrade: [],
+        HasRecentSurveyReply: true,
         shouldAddOwnSalary: true,
         currentUserSalary: null,
         totalCountInStats: data?.totalCountInStats ?? 0,

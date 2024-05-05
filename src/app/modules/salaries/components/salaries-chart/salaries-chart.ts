@@ -40,11 +40,15 @@ export class SalariesChart {
 
   readonly hasRemoteSalaries: boolean;
   readonly hasAuthentication: boolean;
+  readonly hasRecentSurveyReply: boolean;
 
   constructor(
     readonly data: SalariesChartResponse,
     readonly allProfessions: Array<LabelEntityDto>
   ) {
+
+    this.hasRecentSurveyReply = data.HasRecentSurveyReply;
+
     this.averageSalary = SalariesChart.formatNumber(data.averageSalary) ?? "";
     this.medianSalary = SalariesChart.formatNumber(data.medianSalary) ?? "";
 
