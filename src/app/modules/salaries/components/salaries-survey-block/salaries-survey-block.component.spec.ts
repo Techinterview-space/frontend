@@ -7,6 +7,7 @@ import {
   mostUsedServices,
 } from "@shared/test-utils";
 import { SalariesSurveyBlockComponent } from "./salaries-survey-block.component";
+import { SurveyService } from "@services/salaries-survey.service";
 
 describe("SalariesSurveyBlockComponent", () => {
   let component: SalariesSurveyBlockComponent;
@@ -16,7 +17,7 @@ describe("SalariesSurveyBlockComponent", () => {
     await TestBed.configureTestingModule({
       declarations: [SalariesSurveyBlockComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices],
+      providers: [...testUtilStubs, ...mostUsedServices, SurveyService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

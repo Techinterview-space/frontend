@@ -47,7 +47,7 @@ export class SalariesChart {
     readonly allProfessions: Array<LabelEntityDto>
   ) {
 
-    this.hasRecentSurveyReply = data.HasRecentSurveyReply;
+    this.hasRecentSurveyReply = data.hasRecentSurveyReply;
 
     this.averageSalary = SalariesChart.formatNumber(data.averageSalary) ?? "";
     this.medianSalary = SalariesChart.formatNumber(data.medianSalary) ?? "";

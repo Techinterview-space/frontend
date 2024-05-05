@@ -243,7 +243,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           // mgorbatyuk: 1 is a 'Developer' which I going to get rid off.
           const developerProfessionId = 1;
           this.showDataStub = false;
-          this.shouldShowSurveyBlock = !x.HasRecentSurveyReply;
+          this.shouldShowSurveyBlock = !x.hasRecentSurveyReply;
           this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
             x.currentUserSalary.professionId === developerProfessionId;

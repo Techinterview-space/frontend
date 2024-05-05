@@ -43,7 +43,7 @@ export interface SalariesChartResponse {
   hasAuthentication: boolean;
   salaries: UserSalary[];
   totalCountInStats: number;
-  HasRecentSurveyReply: boolean;
+  hasRecentSurveyReply: boolean;
   shouldAddOwnSalary: boolean;
   rangeStart: Date;
   rangeEnd: Date;

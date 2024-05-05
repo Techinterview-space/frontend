@@ -25,15 +25,15 @@ export class SalariesSurveyForm extends FormGroup {
 
     readonly expectationReplyOptions: Array<CheckboxRadioOption<ExpectationReplyType>> = [
         {
-            label: "Зарплаты такие, как и предполагал",
+            label: "Зарплаты такие, как и предполагал(а)",
             value: ExpectationReplyType.Expected,
         },
         {
-            label: "Думал, что зарплаты меньше",
+            label: "Я думал(а), что зарплаты меньше",
             value: ExpectationReplyType.ExpectedLower,
         },
         {
-            label: "Думал, что зарплаты выше",
+            label: "Я думал(а), что зарплаты выше",
             value: ExpectationReplyType.ExpectedHigher,
         },
     ];
@@ -65,13 +65,17 @@ export class SalariesSurveyForm extends FormGroup {
         const usefulnessReply = this.get("usefulnessReply")?.value;
         const expectationReply = this.get("expectationReply")?.value;
 
-        if (usefulnessReply == null || expectationReply == null) {
+        if (usefulnessReply == null ||
+            expectationReply == null) {
             return null;
         }
 
+        const usefulnessReplyAsEnum = Number(usefulnessReply) as UsefulnessReplyType;
+        const expectationReplyAsEnum = Number(expectationReply) as ExpectationReplyType;
+
         return {
-            usefulnessReply,
-            expectationReply,
+            usefulnessReply: usefulnessReplyAsEnum,
+            expectationReply: expectationReplyAsEnum,
         };
     }
 }
