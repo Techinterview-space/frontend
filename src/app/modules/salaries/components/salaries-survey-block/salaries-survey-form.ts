@@ -30,11 +30,11 @@ export class SalariesSurveyForm extends FormGroup {
         },
         {
             label: "Я думал(а), что зарплаты меньше",
-            value: ExpectationReplyType.ExpectedLower,
+            value: ExpectationReplyType.MoreThanExpected,
         },
         {
             label: "Я думал(а), что зарплаты выше",
-            value: ExpectationReplyType.ExpectedHigher,
+            value: ExpectationReplyType.LessThanExpected,
         },
     ];
 

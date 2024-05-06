@@ -11,6 +11,7 @@ import { SkillsPaginatedTableComponent } from "./components/label-entities/skill
 import { WorkIndustriesPaginatedTableComponent } from "./components/label-entities/work-industries-paginated-table/work-indusrties-paginated-table.component";
 import { ProfessionsPaginatedTableComponent } from "./components/label-entities/professions-paginated-table/professions-paginated-table.component";
 import { TelegramBotUsagesComponent } from "./components/telegram/telegram-bot-usages/telegram-bot-usages.component";
+import { SalariesSurveyPageComponent } from "./components/salaries/salaries-survey-page/salaries-survey-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: "salaries/salaries-adding-trend-chart",
     component: SalariesAddingChartComponent,
+  },
+  {
+    path: "salaries/salaries-survey",
+    component: SalariesSurveyPageComponent,
   },
   { path: "telegram/bot-usages", component: TelegramBotUsagesComponent },
 ];

@@ -18,6 +18,7 @@ import { SkillsPaginatedTableComponent } from "./components/label-entities/skill
 import { WorkIndustriesPaginatedTableComponent } from "./components/label-entities/work-industries-paginated-table/work-indusrties-paginated-table.component";
 import { ProfessionsPaginatedTableComponent } from "./components/label-entities/professions-paginated-table/professions-paginated-table.component";
 import { TelegramBotUsagesComponent } from "./components/telegram/telegram-bot-usages/telegram-bot-usages.component";
+import { SalariesSurveyPageComponent } from "./components/salaries/salaries-survey-page/salaries-survey-page.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TelegramBotUsagesComponent } from "./components/telegram/telegram-bot-u
     WorkIndustriesPaginatedTableComponent,
     ProfessionsPaginatedTableComponent,
     TelegramBotUsagesComponent,
+    SalariesSurveyPageComponent,
   ],
   imports: [
     CommonModule,

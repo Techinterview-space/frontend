@@ -71,6 +71,10 @@ export class AdminNavbarComponent {
             title: "Тренд добавления анкет",
             url: "/admin/salaries/salaries-adding-trend-chart",
           },
+          {
+            title: "Опрос о пользе статистики",
+            url: "/admin/salaries/salaries-survey",
+          },
         ],
       },
       {

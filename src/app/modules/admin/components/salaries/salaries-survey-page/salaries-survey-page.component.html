@@ -1,0 +1,60 @@
+<app-page-header>Результат опроса о пользе</app-page-header>
+
+<div class="container my-5">
+  <div class="card">
+    <div class="card-body" *ngIf="data != null">
+      <div class="">
+
+        <div class="mb-2">
+          <span class="me-2">Кол-во анкет:</span>
+          <span>{{ data.countOfRecords }}</span>
+        </div>
+
+        <div *ngIf="progressBarForUsefullness" class="mb-3">
+          <div class="mb-1">Ответы респондентов о пользе статистики</div>
+          <div class="progress" (click)="toggleCountAndPercent()">
+            <div
+              *ngFor="let item of progressBarForUsefullness"
+              class="progress-bar progress-bar-striped {{ item.color }}"
+              role="progressbar"
+              [attr.aria-label]="item.label"
+              [ngStyle]="{ width: item.width + '%' }"
+              [attr.aria-label]="item.value"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <strong
+                title="{{ item.label }} - {{ item.value }}"
+                class="{{ item.textColor }}"
+                >{{ item.value }}</strong
+              >
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="progressBarForExpectation" class="mb-3">
+          <div class="mb-1">Ответы респондентов об ожиданиях</div>
+          <div class="progress" (click)="toggleCountAndPercent()">
+            <div
+              *ngFor="let item of progressBarForExpectation"
+              class="progress-bar progress-bar-striped {{ item.color }}"
+              role="progressbar"
+              [attr.aria-label]="item.label"
+              [ngStyle]="{ width: item.width + '%' }"
+              [attr.aria-label]="item.value"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <strong
+                title="{{ item.label }} - {{ item.value }}"
+                class="{{ item.textColor }}"
+                >{{ item.value }}</strong
+              >
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

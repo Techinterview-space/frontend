@@ -13,8 +13,8 @@ export enum UsefulnessReplyType {
 export enum ExpectationReplyType {
     Undefined = 0,
     Expected = 1,
-    ExpectedHigher = 2,
-    ExpectedLower = 3,
+    MoreThanExpected = 2,
+    LessThanExpected = 3,
 }
 
 export interface SalariesStatSurveyData {
@@ -27,6 +27,17 @@ export interface SalariesStatSurveyReply extends SalariesStatSurveyData {
     createdAt: Date;
 }
 
+export interface SalariesSurveyStatDataItem {
+  countOfReplies: number;
+  partitionInPercent: number;
+}
+
+export interface SalariesSurveyStatData {
+  countOfRecords: number;
+  usefulnessData: Map<UsefulnessReplyType, SalariesSurveyStatDataItem>;
+  expectationData: Map<ExpectationReplyType, SalariesSurveyStatDataItem>;
+}
+
 @Injectable()
 export class SurveyService {
   private readonly apiUrl: string;
@@ -37,5 +48,9 @@ export class SurveyService {
 
   salariesSatGapeReply(data: SalariesStatSurveyData): Observable<SalariesStatSurveyReply> {
     return this.api.post<SalariesStatSurveyReply>(this.apiUrl + 'salaries-stat-page-reply', data);
+  }
+
+  getSalariesStatSurveyData(): Observable<SalariesSurveyStatData> {
+    return this.api.get<SalariesSurveyStatData>(this.apiUrl + 'salaries-stats');
   }
 }
