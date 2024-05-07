@@ -32,10 +32,15 @@ export interface SalariesSurveyStatDataItem {
   partitionInPercent: number;
 }
 
+export interface SalariesSurveyReplyDataItem<TEnum> {
+  replyType: TEnum;
+  data: SalariesSurveyStatDataItem;
+}
+
 export interface SalariesSurveyStatData {
   countOfRecords: number;
-  usefulnessData: Map<UsefulnessReplyType, SalariesSurveyStatDataItem>;
-  expectationData: Map<ExpectationReplyType, SalariesSurveyStatDataItem>;
+  usefulnessData: Array<SalariesSurveyReplyDataItem<UsefulnessReplyType>>;
+  expectationData: Array<SalariesSurveyReplyDataItem<ExpectationReplyType>>;
 }
 
 @Injectable()

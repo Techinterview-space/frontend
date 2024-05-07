@@ -1,6 +1,6 @@
 import { formatNumber } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ExpectationReplyType, SalariesSurveyStatData, SalariesSurveyStatDataItem, SurveyService, UsefulnessReplyType } from "@services/salaries-survey.service";
+import { ExpectationReplyType, SalariesSurveyReplyDataItem, SalariesSurveyStatData, SurveyService, UsefulnessReplyType } from "@services/salaries-survey.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
@@ -31,7 +31,10 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     cssText: "-text-dark",
   };
 
-  colorsByUsefulness: Map<
+  readonly usefullnesLegendItems: Array<ProgressBarColorData>;
+  readonly expectationLegendItems: Array<ProgressBarColorData>;
+
+  static readonly colorsByUsefulness: Map<
     UsefulnessReplyType,
     ProgressBarColorData
   > = new Map([
@@ -43,23 +46,23 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     ],
     [UsefulnessReplyType.No, {
       label: "Нет",
-      cssBackground: "bg-secondary",
-      cssText: "",
+      cssBackground: "bg-warning",
+      cssText: "text-dark",
     }],
     [UsefulnessReplyType.NotSure, {
       label: "Не уверен",
-      cssBackground: "bg-warning",
+      cssBackground: "bg-light border border-2",
       cssText: "text-dark",
     }],
   ]);
 
-  colorsByExpectation: Map<
+  static readonly colorsByExpectation: Map<
     ExpectationReplyType,
     ProgressBarColorData
     > = new Map([
     [ExpectationReplyType.Expected, {
         label: "Ожидаемо",
-        cssBackground: "bg-light",
+        cssBackground: "bg-info",
         cssText: "text-dark",
       }
     ],
@@ -69,7 +72,7 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
       cssText: "",
     }],
     [ExpectationReplyType.LessThanExpected, {
-      label: "Ьутьшу ожидаемого",
+      label: "Ниже ожидаемого",
       cssBackground: "bg-warning",
       cssText: "text-dark",
     }],
@@ -87,6 +90,21 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     private readonly titleService: TitleService
   ) {
     this.titleService.setTitle("Результаты опроса о пользе статистики");
+
+    this.usefullnesLegendItems = [
+      SalariesSurveyPageComponent.colorsByUsefulness.get(UsefulnessReplyType.Yes) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByUsefulness.get(UsefulnessReplyType.No) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByUsefulness.get(UsefulnessReplyType.NotSure) ?? SalariesSurveyPageComponent.defaultColor,
+    ];
+
+    this.expectationLegendItems = [
+      SalariesSurveyPageComponent.colorsByExpectation.get(ExpectationReplyType.Expected) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByExpectation.get(ExpectationReplyType.MoreThanExpected) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByExpectation.get(ExpectationReplyType.LessThanExpected) ?? SalariesSurveyPageComponent.defaultColor,
+    ];
+
+    console.log(this.usefullnesLegendItems);
+    console.log(this.expectationLegendItems);
   }
 
   ngOnInit(): void {
@@ -96,6 +114,7 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.data = x;
+        this.initCharts();
       });
   }
 
@@ -113,69 +132,57 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.progressBarForUsefullness = this.prepareData(
+    this.progressBarForUsefullness = this.prepareData<UsefulnessReplyType>(
       this.data.usefulnessData,
       this.data.countOfRecords,
-      this.showPercents
+      this.showPercents,
+      (replyType) => {
+        const colorData = SalariesSurveyPageComponent.colorsByUsefulness.get(replyType);
+        return colorData ?? SalariesSurveyPageComponent.defaultColor;
+      }
     );
 
-    this.progressBarForExpectation = this.prepareData(
+    this.progressBarForExpectation = this.prepareData<ExpectationReplyType>(
       this.data.expectationData,
       this.data.countOfRecords,
-      this.showPercents
+      this.showPercents,
+      (replyType) => {
+        const colorData = SalariesSurveyPageComponent.colorsByExpectation.get(replyType);
+        return colorData ?? SalariesSurveyPageComponent.defaultColor;
+      }
     );
   }
 
-  private prepareData(
-    dictionary: Map<UsefulnessReplyType | ExpectationReplyType, SalariesSurveyStatDataItem>,
+  private prepareData<TEnum>(
+    data: Array<SalariesSurveyReplyDataItem<TEnum>>,
     totalCount: number,
-    showPercents: boolean
+    showPercents: boolean,
+    giveColorData: (replyType: TEnum) => ProgressBarColorData
   ): Array<ProgressBarData> {
 
     var result: Array<ProgressBarData> = [];
-    dictionary
+    data
       .forEach((item, index) => {
 
-        let cssBackground = "";
-        let cssText = "";
-        let label = "";
-
-        if (this.isInstance(index, UsefulnessReplyType)) {
-          const usefulnessColorData = this.colorsByUsefulness.get(index as UsefulnessReplyType) ?? SalariesSurveyPageComponent.defaultColor;
-          cssBackground = usefulnessColorData.cssBackground;
-          cssText = usefulnessColorData.cssText;
-          label = usefulnessColorData.label;
-        } else if (this.isInstance(index, ExpectationReplyType)) {
-
-          const expectationColorData = this.colorsByExpectation.get(index as ExpectationReplyType) ?? SalariesSurveyPageComponent.defaultColor;
-          cssBackground = expectationColorData.cssBackground;
-          cssText = expectationColorData.cssText;
-          label = expectationColorData.label;
-        }
-
+        const colorData = giveColorData(item.replyType);
         const value = showPercents
-          ? formatNumber(item.partitionInPercent, "en-US", "1.0-2") + "%"
-          : formatNumber(item.countOfReplies, "en-US", "1.0-0");
+          ? formatNumber(item.data.partitionInPercent, "en-US", "1.0-2") + "%"
+          : formatNumber(item.data.countOfReplies, "en-US", "1.0-0");
 
         const maxValue = showPercents
           ? "100"
           : formatNumber(totalCount, "en-US", "1.0-0");
 
         result.push({
-          color: cssBackground,
-          textColor: cssText,
+          color: colorData.cssBackground,
+          textColor: colorData.cssText,
           value: value,
           maxValue: maxValue,
-          width: item.partitionInPercent,
-          label: label,
+          width: item.data.partitionInPercent,
+          label: colorData.label,
         });
       });
 
     return result;
-  }
-
-  // TODO mgorbatyuk: move to utils
-  private isInstance<T extends object>(value: string | number, type: T): type is T {
-    return Object.values(type).includes(value)
   }
 }

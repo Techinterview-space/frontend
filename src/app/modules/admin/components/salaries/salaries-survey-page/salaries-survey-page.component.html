@@ -5,13 +5,13 @@
     <div class="card-body" *ngIf="data != null">
       <div class="">
 
-        <div class="mb-2">
+        <div class="mb-3">
           <span class="me-2">Кол-во анкет:</span>
           <span>{{ data.countOfRecords }}</span>
         </div>
 
-        <div *ngIf="progressBarForUsefullness" class="mb-3">
-          <div class="mb-1">Ответы респондентов о пользе статистики</div>
+        <div *ngIf="progressBarForUsefullness" class="mb-5">
+          <div class="mb-3 h4">Полезность статистики</div>
           <div class="progress" (click)="toggleCountAndPercent()">
             <div
               *ngFor="let item of progressBarForUsefullness"
@@ -30,10 +30,15 @@
               >
             </div>
           </div>
+          <div class="mt-2">
+            <span
+              *ngFor="let item of usefullnesLegendItems"
+              class="ms-2 badge rounded-pill {{ item.cssBackground }} {{ item.cssText }}">{{ item.label }}</span>
+          </div>
         </div>
 
-        <div *ngIf="progressBarForExpectation" class="mb-3">
-          <div class="mb-1">Ответы респондентов об ожиданиях</div>
+        <div *ngIf="progressBarForExpectation" class="">
+          <div class="mb-3 h4">Ожидания респондентов от статистики</div>
           <div class="progress" (click)="toggleCountAndPercent()">
             <div
               *ngFor="let item of progressBarForExpectation"
@@ -51,6 +56,11 @@
                 >{{ item.value }}</strong
               >
             </div>
+          </div>
+          <div class="mt-2">
+            <span
+              *ngFor="let item of expectationLegendItems"
+              class="ms-2 px-3 badge rounded-pill {{ item.cssBackground }} {{ item.cssText }}">{{ item.label }}</span>
           </div>
         </div>
 
