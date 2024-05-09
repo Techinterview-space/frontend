@@ -43,12 +43,21 @@ export interface SalariesSurveyStatData {
   expectationData: Array<SalariesSurveyReplyDataItem<ExpectationReplyType>>;
 }
 
+export interface GetUserSalariesSurveyDataResponse {
+  hasRecentSurveyReply: boolean;
+  lastSurveyReplyDate: Date | null;
+}
+
 @Injectable()
 export class SurveyService {
   private readonly apiUrl: string;
 
   constructor(private readonly api: ApiService) {
     this.apiUrl = `/api/survey/`;
+  }
+
+  getUserSalariesSurveyDataResponse(): Observable<GetUserSalariesSurveyDataResponse> {
+    return this.api.get<GetUserSalariesSurveyDataResponse>(this.apiUrl + 'salaries-user-stat-data');
   }
 
   salariesSatGapeReply(data: SalariesStatSurveyData): Observable<SalariesStatSurveyReply> {

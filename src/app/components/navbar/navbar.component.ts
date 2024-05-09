@@ -139,6 +139,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
             url: "/salaries",
             show: true,
           },
+          {
+            title: "Опрос о пользе статистики",
+            url: "/salaries/survey",
+            show: true,
+          },
         ],
       },
     ];

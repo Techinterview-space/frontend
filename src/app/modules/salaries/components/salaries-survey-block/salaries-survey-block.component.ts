@@ -10,9 +10,6 @@ import { SalariesSurveyForm } from "./salaries-survey-form";
 })
 export class SalariesSurveyBlockComponent implements OnInit {
 
-  @Input()
-  sourceChart: SalariesChart | null = null;
-
   showThankYouBlock = false;
   formGroup: SalariesSurveyForm | null = null;
 
