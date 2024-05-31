@@ -94,7 +94,8 @@ export class CitiesDoughnutChartObject extends Chart {
       item.count++;
     });
 
-    return uniqueItems;
+    return uniqueItems
+      .sort((x, y) => y.count - x.count);
   }
 }
 

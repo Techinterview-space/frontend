@@ -25,6 +25,7 @@ import { SalariesByGradeBlockComponent } from "./components/salaries-chart/salar
 import { SalariesPaginatedTableComponent } from "./components/salaries-paginated-table/salaries-paginated-table.component";
 import { SalariesSurveyBlockComponent } from "./components/salaries-survey-block/salaries-survey-block.component";
 import { SalariesSurveyPageComponent } from "./components/salaries-survey-page/salaries-survey-page.component";
+import { SalariesAddingChartComponent } from "./components/salaries-chart/salaries-adding-chart/salaries-adding-chart.component";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SalariesSurveyPageComponent } from "./components/salaries-survey-page/s
     SalariesPaginatedTableComponent,
     SalariesSurveyBlockComponent,
     SalariesSurveyPageComponent,
+    SalariesAddingChartComponent,
   ],
   imports: [
     CommonModule,

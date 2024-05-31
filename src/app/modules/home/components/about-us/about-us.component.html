@@ -17,28 +17,12 @@
 
       <div class="mb-3 mt-5">
         <div class="mb-1 h5">Контрибьюторы</div>
-        <div>
+        <div *ngFor="let item of contributors">
           <a
             class="text-reset link-without-underline"
-            href="https://github.com/indicozy"
+            href="{{ item.link }}"
             target="_blank"
-            >&#64;indicozy</a
-          >
-        </div>
-        <div>
-          <a
-            class="text-reset link-without-underline"
-            href="https://github.com/sanch941"
-            target="_blank"
-            >&#64;sanch941</a
-          >
-        </div>
-        <div>
-          <a
-            class="text-reset link-without-underline"
-            href="https://github.com/maximgorbatyuk"
-            target="_blank"
-            >&#64;maximgorbatyuk</a
+            >&#64;{{ item.username }}</a
           >
         </div>
       </div>

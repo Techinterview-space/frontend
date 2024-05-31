@@ -5,7 +5,6 @@ import { BackgroundJobsComponent } from "./components/background-jobs/background
 import { InterviewTemplatesAdminPageComponent } from "./components/interviews/interview-templates-admin-page/interview-templates-admin-page.component";
 import { UsersAdminPageComponent } from "./components/users/users-admin-page/users-admin-page.component";
 import { SalariesAdminPageComponent } from "./components/salaries/salaries-admin-page/salaries-admin-page.component";
-import { SalariesAddingChartComponent } from "./components/salaries/salaries-adding-chart/salaries-adding-chart.component";
 import { SalariesNotInStatsAdminPageComponent } from "./components/salaries/salaries-not-in-stat-admin-page/salaries-not-in-stat-admin-page.component";
 import { SkillsPaginatedTableComponent } from "./components/label-entities/skills-paginated-table/skills-paginated-table.component";
 import { WorkIndustriesPaginatedTableComponent } from "./components/label-entities/work-industries-paginated-table/work-indusrties-paginated-table.component";
@@ -28,10 +27,6 @@ const routes: Routes = [
   {
     path: "salaries/not-in-stats",
     component: SalariesNotInStatsAdminPageComponent,
-  },
-  {
-    path: "salaries/salaries-adding-trend-chart",
-    component: SalariesAddingChartComponent,
   },
   {
     path: "salaries/salaries-survey",
