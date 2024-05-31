@@ -27,8 +27,16 @@ export class SalaryChartGlobalFiltersData {
     return (
       this.grade === other.grade &&
       this.cities.length === other.cities.length &&
-      this.profsInclude.length === other.profsInclude.length
+      this.isEqualArrays(this.profsInclude, other.profsInclude)
     );
+  }
+
+  private isEqualArrays<T>(a: Array<T>, b: Array<T>): boolean {
+    if (a.length !== b.length) {
+      return false;
+    }
+
+    return a.every((x, i) => x === b[i]);
   }
 }
 

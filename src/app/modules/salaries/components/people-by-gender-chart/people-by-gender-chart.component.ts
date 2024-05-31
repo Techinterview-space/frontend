@@ -87,6 +87,7 @@ export class PeopleByGenderChartComponent implements OnInit {
     const result: Array<TableRow> = [];
     salariesGroupedByGender
       .filter((item) => item.gender != null)
+      .sort((x, y) => x.gender! - y.gender!)
       .forEach((item) => {
         result.push({
           value: item.salaries.length,
