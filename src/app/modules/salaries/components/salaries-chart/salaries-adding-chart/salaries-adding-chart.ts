@@ -1,5 +1,5 @@
 import { RandomRgbColor } from "@modules/salaries/components/random-rgb-color";
-import { SalariesAddingTrendAdminChart } from "@services/user-salaries.service";
+import { SalariesAddingTrendChart } from "@services/user-salaries.service";
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
 
 interface ChartDatasetType {
@@ -14,7 +14,7 @@ interface ChartDatasetType {
 export class SalariesAddingChart extends Chart {
   private readonly datasets: Array<ChartDatasetType> = [];
 
-  constructor(canvasId: string, chartData: SalariesAddingTrendAdminChart) {
+  constructor(canvasId: string, chartData: SalariesAddingTrendChart) {
     const randomColor = new RandomRgbColor();
     const datasets: Array<ChartDatasetType> = [
       {

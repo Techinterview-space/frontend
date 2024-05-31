@@ -116,16 +116,18 @@ export interface SalariesChartFilterData {
   cities: Array<KazakhstanCity> | null;
 }
 
-export interface SalariesAddingTrendAdminChart {
+export interface SalariesAddingTrendChartParams {
+  grade: DeveloperGrade | null;
+  profsInclude: Array<number> | null;
+  cities: Array<KazakhstanCity> | null;
+}
+
+export interface SalariesAddingTrendChart {
   labels: string[];
   items: Array<{
     count: number;
     startedAt: Date;
   }>;
-
-  salariesPerUser: number;
-  usersWhoLeftSalary: number;
-  allUsersCount: number;
 }
 
 export enum SalariesAdminOrderingType {
@@ -179,9 +181,12 @@ export class UserSalariesService {
     );
   }
 
-  addingSalariesaTrendAdminChart(): Observable<SalariesAddingTrendAdminChart> {
-    return this.api.get<SalariesAddingTrendAdminChart>(
-      this.root + "salaries-adding-trend-chart"
+  addingSalariesaTrendChart(
+    params: SalariesAddingTrendChartParams
+  ): Observable<SalariesAddingTrendChart> {
+    return this.api.get<SalariesAddingTrendChart>(
+      this.root + "salaries-adding-trend-chart?" +
+      new ConvertObjectToHttpParams(params).get()
     );
   }
 
