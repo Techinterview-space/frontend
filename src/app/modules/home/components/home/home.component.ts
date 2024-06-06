@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   readonly uwuLinkDark = "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/uwu_dark_1000.png";
 
   showUwu = false;
+  loaded = false;
 
   constructor(
     titleService: TitleService,
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.activatedRoute.getQueryParam("uwu")
       .pipe(untilDestroyed(this))
       .subscribe((uwu) => {
+        this.loaded = true;
         this.showUwu = uwu === "true";
       });
   }

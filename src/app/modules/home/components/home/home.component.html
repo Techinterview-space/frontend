@@ -1,20 +1,20 @@
 <div class="container">
 
-  <div *ngIf="showUwu; else noUwu" class="pt-5">
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="mb-3 uwu-image">
-        <img
-          src="{{getUwuLink()}}"
-          alt="UwU"
-          class="img-fluid"
-        />
+  <div *ngIf="loaded; else notLoaded">
+    <div *ngIf="showUwu; else noUwu" class="pt-5">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="mb-3 uwu-image">
+          <img
+            src="{{getUwuLink()}}"
+            alt="UwU"
+            class="img-fluid"
+          />
+        </div>
+        <div
+          class="display-1 uwu-title">Зарплаты в IT</div>
       </div>
-      <div
-        class="display-1 uwu-title">Зарплаты в IT</div>
     </div>
   </div>
-
-  
 </div>
 
 <div class="mt-5">
@@ -142,4 +142,8 @@
       />
     </div>
   </div>
+</ng-template>
+
+<ng-template #notLoaded>
+  <div class="stub"></div>
 </ng-template>
