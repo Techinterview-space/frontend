@@ -29,6 +29,14 @@ export class ActivatedRouteExtended {
     );
   }
 
+  getQueryParam(paramName: string): Observable<string> {
+    return this.activatedRoute.queryParams.pipe(
+      map((params) => {
+        return params[paramName] ?? null;
+      })
+    );
+  }
+
   getParam(paramName: string): Observable<string | null> {
     return this.activatedRoute.paramMap.pipe(
       map((params) => {
