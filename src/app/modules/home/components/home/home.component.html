@@ -1,17 +1,11 @@
 <div class="container">
-
   <div *ngIf="loaded; else notLoaded">
     <div *ngIf="showUwu; else noUwu" class="pt-5">
       <div class="d-flex flex-column justify-content-center align-items-center">
         <div class="mb-3 uwu-image">
-          <img
-            src="{{getUwuLink()}}"
-            alt="UwU"
-            class="img-fluid"
-          />
+          <img src="{{ getUwuLink() }}" alt="UwU" class="img-fluid" />
         </div>
-        <div
-          class="display-1 uwu-title">Зарплаты в IT</div>
+        <div class="display-1 uwu-title">Зарплаты в IT</div>
       </div>
     </div>
   </div>
@@ -28,13 +22,13 @@
             Казахстане.
           </div>
           <div class="mt-1 feature-subtitle">
-            В 2024 году мы решили, что не хватает актуальной и публичной
-            статистики по зарплатам в IT сфере в казахстанских компаниях, и
-            нужно это исправить.
+            В 2024 году мы решили, что на рынке не хватает актуальной и
+            публичной статистики по зарплатам в IT сфере в казахстанских
+            компаниях, и нужно это исправить.
           </div>
           <div class="feature-subtitle">
-            Хочешь узнать, сколько попросить в следующий раз на собеседовании -
-            посмотри в собранной статистике.
+            Хочешь узнать, сколько попросить в следующий раз на собеседовании
+            &mdash; посмотри в собранной статистике.
           </div>
           <div class="mt-5">
             <a routerLink="/salaries" class="btn btn-huge btn-primary"
@@ -46,8 +40,7 @@
           <img
             class="img-fluid"
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_transparent_1000.png"
-            alt="Main"
-          />
+            alt="Main" />
         </div>
       </div>
     </div>
@@ -60,8 +53,8 @@
           <div class="feature-title">Заметки к техническим интервью</div>
           <div class="mt-3 feature-subtitle">
             Если ты проводишь технические собеседования и хочешь создать шаблон
-            и сохранять фидбеки, чтобы потом делиться ими с коллегами - тебе
-            сюда.
+            и сохранять фидбеки, чтобы потом делиться ими с коллегами &mdash;
+            тебе сюда.
           </div>
           <div class="mt-5">
             <a routerLink="/interviews" class="btn btn-huge btn-outline-primary"
@@ -74,8 +67,7 @@
           <img
             class="img-fluid"
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_interview_transparent_1000.png"
-            alt="Main"
-          />
+            alt="Main" />
         </div>
       </div>
     </div>
@@ -84,40 +76,40 @@
   <div class="feature bg-white">
     <div class="container">
       <div class="feature-title">
-        Наш проект - некоммерческий и в свободном доступе.
+        Наш проект &mdash; некоммерческий и в свободном доступе.
       </div>
       <div class="mt-1 feature-title">Так будет всегда.</div>
       <div class="mt-3 feature-subtitle">
-        Мы верим, что этот проект должен быть бесплатным для всех. Мы открыли
-        исходный код и будем рады новым контрибьютерам.
+        Мы&nbsp;верим, что этот проект должен быть бесплатным для всех.
+        Мы&nbsp;открыли исходный код и&nbsp;будем рады новым контрибьюторам.
       </div>
       <div class="mt-1 feature-subtitle">
-        Если вы хотите поддержать нас, то тут наш донатом на бусти. Мы
-        благодарны любой помощи.
+        Вы можете поддержать через Boosty или купить нам кофе с помощью кнопок
+        ниже. Мы благодарны любой помощи.
       </div>
       <div class="mb-5 mt-3">
         <a
           href="https://github.com/orgs/Techinterview-space/repositories"
           class="me-3 mb-2 btn btn-lg btn-outline-dark"
-          target="_blank"
-        >
+          rel="noopener noreferrer"
+          target="_blank">
           <i class="bi bi-github me-2"></i>Исходный код</a
         >
 
         <a
           href="https://buymeacoffee.com/maximgorbatyuk"
+          rel="noopener noreferrer"
           class="me-3 mb-2 btn btn-lg btn-outline-dark"
-          target="_blank"
-        >
+          target="_blank">
           <i class="bi bi-cup-hot-fill me-2"></i>Buy me a coffee</a
         >
 
         <a
           href="https://boosty.to/ake111aa"
+          rel="noopener noreferrer"
           class="me-3 mb-2 btn btn-lg btn-outline-dark"
-          target="_blank"
-        >
-          <i class="bi bi-cash-coin me-2"></i>Поддержать на boosty</a
+          target="_blank">
+          <i class="bi bi-cash-coin me-2"></i>Поддержать на Boosty</a
         >
       </div>
     </div>
@@ -126,7 +118,6 @@
 
 <ng-template #noUwu>
   <div class="row pt-5">
-
     <div class="col-sm-6 d-flex align-items-center">
       <div class="d-inline-block my-5">
         <div class="display-1">Tech.Interview</div>
@@ -138,8 +129,7 @@
       <img
         src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_transparent_1000.png"
         alt="Interviewer"
-        class="img-fluid"
-      />
+        class="img-fluid" />
     </div>
   </div>
 </ng-template>
