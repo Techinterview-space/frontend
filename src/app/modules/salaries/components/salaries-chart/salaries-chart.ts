@@ -9,6 +9,7 @@ import {
 import { SalariesPerProfession } from "../salaries-per-profession";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { LabelEntityDto } from "@services/label-entity.model";
+import { CurrencyData } from "@services/admin-tools.service";
 
 export class SalariesChart {
   readonly averageSalary: string;
@@ -41,6 +42,8 @@ export class SalariesChart {
   readonly hasRemoteSalaries: boolean;
   readonly hasAuthentication: boolean;
   readonly hasRecentSurveyReply: boolean;
+
+  readonly currencies: CurrencyData[]
 
   constructor(
     readonly data: SalariesChartResponse,
@@ -91,6 +94,8 @@ export class SalariesChart {
     this.developersByAgeChartData = data.developersByAgeChartData;
     this.developersByExperienceYearsChartData =
       data.developersByExperienceYearsChartData;
+
+    this.currencies = data.currencies;
   }
 
   public static formatNumber(value: number | null): string | null {

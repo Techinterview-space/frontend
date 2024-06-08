@@ -11,6 +11,7 @@ import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { LabelEntityDto } from "./label-entity.model";
 import { Gender } from "@models/enums/gender.enum";
+import { CurrencyData } from "./admin-tools.service";
 
 export interface CreateUserSalaryRequest extends EditUserSalaryRequest {
   value: number;
@@ -65,6 +66,8 @@ export interface SalariesChartResponse {
 
   developersByAgeChartData: DevelopersByCategoryChartData | null;
   developersByExperienceYearsChartData: DevelopersByCategoryChartData | null;
+
+  currencies: CurrencyData[];
 }
 
 export interface DevelopersByCategoryChartData {

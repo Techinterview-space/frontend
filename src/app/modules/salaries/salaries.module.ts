@@ -26,6 +26,7 @@ import { SalariesPaginatedTableComponent } from "./components/salaries-paginated
 import { SalariesSurveyBlockComponent } from "./components/salaries-survey-block/salaries-survey-block.component";
 import { SalariesSurveyPageComponent } from "./components/salaries-survey-page/salaries-survey-page.component";
 import { SalariesAddingChartComponent } from "./components/salaries-chart/salaries-adding-chart/salaries-adding-chart.component";
+import { CurrencySelectBoxComponent } from "./components/salaries-chart/currency-select-box/currency-select-box.component";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { SalariesAddingChartComponent } from "./components/salaries-chart/salari
     SalariesSurveyBlockComponent,
     SalariesSurveyPageComponent,
     SalariesAddingChartComponent,
+    CurrencySelectBoxComponent,
   ],
   imports: [
     CommonModule,

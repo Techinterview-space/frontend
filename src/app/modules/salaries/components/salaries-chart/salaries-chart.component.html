@@ -196,6 +196,12 @@
         class="mt-5 mb-5"
       >
         <div class="mb-5">
+          <app-currency-select-box
+            [currencies]="salariesChart.currencies"
+          ></app-currency-select-box>
+        </div>
+
+        <div class="mb-5">
           <app-salary-chart-global-filters
             [filterData]="filterData"
             [professions]="professions"

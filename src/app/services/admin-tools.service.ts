@@ -14,7 +14,7 @@ export enum CurrencyType {
   CAD,
 }
 
-export interface Currency {
+export interface CurrencyData {
   value: number;
   currency: CurrencyType;
   currencyString: string;
@@ -29,8 +29,8 @@ export class AdminToolsService {
     this.apiUrl = `/api/admin-tools/`;
   }
 
-  getCurrencies(): Observable<Currency[]> {
-    return this.api.get<Currency[]>(this.apiUrl + "currencies");
+  getCurrencies(): Observable<CurrencyData[]> {
+    return this.api.get<CurrencyData[]>(this.apiUrl + "currencies");
   }
 
   getConfigs(): Observable<object> {

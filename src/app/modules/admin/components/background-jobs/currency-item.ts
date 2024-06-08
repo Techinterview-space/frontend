@@ -1,8 +1,8 @@
-import { Currency, CurrencyType } from "@services/admin-tools.service";
+import { CurrencyData, CurrencyType } from "@services/admin-tools.service";
 
-export class CurrencyItem implements Currency {
+export class CurrencyItem implements CurrencyData {
 
-    constructor(private readonly item: Currency) {
+    constructor(private readonly item: CurrencyData) {
         this.value = item.value;
         this.currency = item.currency;
         this.currencyString = CurrencyType[item.currency];

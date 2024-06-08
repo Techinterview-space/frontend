@@ -3,8 +3,7 @@ import { TitleService } from "@services/title.service";
 import { HealthCheckService } from "@shared/health-check/health-check.service";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { HealthCheckItem } from "../health-check-table/health-check-item";
-import { JobItem } from "../jobs-table/job-item";
-import { AdminToolsService, Currency } from "@services/admin-tools.service";
+import { AdminToolsService } from "@services/admin-tools.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CurrencyItem } from "./currency-item";
 

@@ -1,29 +1,26 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   mostUsedImports,
-  mostUsedServices,
   testUtilStubs,
+  mostUsedServices,
 } from "@shared/test-utils";
+import { CurrencySelectBoxComponent } from "./currency-select-box.component";
 
-import { BackgroundJobsComponent } from "./background-jobs.component";
-import { AdminToolsService } from "@services/admin-tools.service";
-
-describe("BackgroundJobsComponent", () => {
-  let component: BackgroundJobsComponent;
-  let fixture: ComponentFixture<BackgroundJobsComponent>;
+describe("CurrencySelectBoxComponent", () => {
+  let component: CurrencySelectBoxComponent;
+  let fixture: ComponentFixture<CurrencySelectBoxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BackgroundJobsComponent],
+      declarations: [CurrencySelectBoxComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices, AdminToolsService],
+      providers: [...testUtilStubs, ...mostUsedServices],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BackgroundJobsComponent);
+    fixture = TestBed.createComponent(CurrencySelectBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
