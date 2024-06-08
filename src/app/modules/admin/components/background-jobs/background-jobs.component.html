@@ -11,7 +11,31 @@
       </div>
 
       <div class="mt-5">
-        <div class="mb-3 h5">Authorization token</div>
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th>Валюта</th>
+              <th>Курс</th>
+              <th>Дата</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of currencies" class="small">
+              <td>{{ item.currencyString }}</td>
+              <td>{{ item.value }} kzt</td>
+              <td>{{ item.pubDate | date: "yyyy-MM-dd" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-5">
+        <div class="mb-3 h5">Конфиги</div>
+        <pre class="small">{{ configs }}</pre>
+      </div>
+
+      <div class="mt-5">
+        <div class="mb-3 h5">Токен авторизации</div>
         <code class="small">{{ authorizationToken }}</code>
       </div>
     </div>

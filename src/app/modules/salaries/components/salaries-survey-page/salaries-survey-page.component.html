@@ -4,7 +4,90 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="" *ngIf="!userData.hasRecentSurveyReply; else userHasResponse">
+      
+      <div class="" *ngIf="userData.hasRecentSurveyReply && data != null">
+        <div class="">
+
+          <div class="mb-5">
+            <div class="mb-3 h3">Спасибо за обратную связь!</div>
+
+            <div class="mb-2">
+              Вы уже оставили когда-то свое мнение о предоставленной статистике.
+            </div>
+            <div>
+              Ниже представлена общая статистика по результатам опроса. Посмотрите, как много людей думают так же, как вы.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <span class="me-2">Кол-во ответов:</span>
+            <span>{{ data.countOfRecords }}</span>
+          </div>
+  
+          <div *ngIf="progressBarForUsefullness" class="mb-5">
+            <div class="mb-3 h4">Полезность статистики</div>
+            <div class="progress" (click)="toggleCountAndPercent()">
+              <div
+                *ngFor="let item of progressBarForUsefullness"
+                class="progress-bar progress-bar-striped {{ item.color }}"
+                role="progressbar"
+                [attr.aria-label]="item.label"
+                [ngStyle]="{ width: item.width + '%' }"
+                [attr.aria-label]="item.value"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <strong
+                  title="{{ item.label }} - {{ item.value }}"
+                  class="{{ item.textColor }}"
+                  >{{ item.value }}</strong
+                >
+              </div>
+            </div>
+            <div class="mt-2">
+              <span class="me-2">
+                Значения:
+              </span>
+              <span
+                *ngFor="let item of usefullnesLegendItems"
+                class="ms-2 badge rounded-pill {{ item.cssBackground }} {{ item.cssText }}">{{ item.label }}</span>
+            </div>
+          </div>
+  
+          <div *ngIf="progressBarForExpectation" class="">
+            <div class="mb-3 h4">Ожидания респондентов от статистики</div>
+            <div class="progress" (click)="toggleCountAndPercent()">
+              <div
+                *ngFor="let item of progressBarForExpectation"
+                class="progress-bar progress-bar-striped {{ item.color }}"
+                role="progressbar"
+                [attr.aria-label]="item.label"
+                [ngStyle]="{ width: item.width + '%' }"
+                [attr.aria-label]="item.value"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <strong
+                  title="{{ item.label }} - {{ item.value }}"
+                  class="{{ item.textColor }}"
+                  >{{ item.value }}</strong
+                >
+              </div>
+            </div>
+            <div class="mt-2">
+              <span class="me-2">
+                Значения:
+              </span>
+              <span
+                *ngFor="let item of expectationLegendItems"
+                class="ms-2 px-3 badge rounded-pill {{ item.cssBackground }} {{ item.cssText }}">{{ item.label }}</span>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+
+      <div class="" *ngIf="!userData.hasRecentSurveyReply">
         <div class="mb-1">
           Нам важно мнение пользователей о предоставленной статистике. 
           Интересно взглянуть на то, как респонденты оценивают свою зарплату и какие ожидания у них относительно рынка труда в Казахстане.
@@ -18,6 +101,7 @@
             ></app-salaries-survey-block>
         </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -25,15 +109,5 @@
 <ng-template #dataLoading>
   <div class="container mt-5">
     <app-data-loader></app-data-loader>
-  </div>
-</ng-template>
-
-<ng-template #userHasResponse>
-  <div class="mb-3">
-    <div class="h3 mb-3">Спасибо за участие в опросе!</div>
-    <div class="mb-2">Ранее вы уже оставляли ответ на опрос. В скором времени и тут будут результаты опроса, чтобы сделать процесс прозрачным.</div>
-    <div>
-      <a [routerLink]="['/salaries']">Перейти к зарплатной статистике</a>
-    </div>
   </div>
 </ng-template>

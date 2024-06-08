@@ -67,14 +67,6 @@ export class AdminNavbarComponent {
             title: "Анкеты вне статистики",
             url: "/admin/salaries/not-in-stats",
           },
-          {
-            title: "Тренд добавления анкет",
-            url: "/admin/salaries/salaries-adding-trend-chart",
-          },
-          {
-            title: "Опрос о пользе статистики",
-            url: "/admin/salaries/salaries-survey",
-          },
         ],
       },
       {
