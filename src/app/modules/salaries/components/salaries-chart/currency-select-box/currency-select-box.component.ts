@@ -65,5 +65,6 @@ export class CurrencySelectBoxComponent implements OnInit {
 
     const selectedCurrencyData = this.currencies!.find(x => x.currency === e.item);
     console.log("Currency selected: ", selectedCurrencyData);
+    this.chart?.setCurrentCurrency(e.item);
   }
 }
