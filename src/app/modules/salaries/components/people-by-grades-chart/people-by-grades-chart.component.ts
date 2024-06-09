@@ -33,9 +33,6 @@ export class PeopleByGradesChartComponent implements OnInit {
 
   showPercents = true;
 
-  @Input()
-  title: string | null = null;
-
   constructor() {}
 
   ngOnInit(): void {

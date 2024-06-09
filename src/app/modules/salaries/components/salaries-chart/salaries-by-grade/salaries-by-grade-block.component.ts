@@ -4,6 +4,7 @@ import { SalariesByGrade } from "@services/user-salaries.service";
 import { SalariesChart } from "../salaries-chart";
 import { formatNumber } from "@angular/common";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { CurrencyType } from "@services/admin-tools.service";
 
 interface Item extends SalariesByGrade {
   gradeAsString: string;
@@ -27,6 +28,8 @@ export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
 
   totalCount: number = 0;
 
+  currentCurrencyLabel: string | null = null;
+
   ngOnInit(): void {
 
     if (this.chart == null) {
@@ -40,6 +43,7 @@ export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.items = null;
         this.totalCount = 0;
+        this.currentCurrencyLabel = null;
 
         this.recaulculate();
       });
@@ -52,6 +56,7 @@ export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.currentCurrencyLabel = this.chart!.getCurrentCurrencyLabel();
     this.items = source.map((x) => {
       this.totalCount += x.count;
       return {

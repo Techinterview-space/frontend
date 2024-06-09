@@ -1,30 +1,47 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { SalariesChart } from "../salaries-chart";
 import { formatNumber } from "@angular/common";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
   selector: "app-salary-block-value",
   templateUrl: "./salary-block-value.component.html",
   styleUrl: "./salary-block-value.component.scss",
 })
-export class SalaryBlockValueComponent {
+export class SalaryBlockValueComponent implements OnInit, OnDestroy {
   @Input()
   source: SalariesChart | null = null;
 
-  get median(): string {
-    return SalaryBlockValueComponent.formatNumber(this.source?.medianSalary);
+  median: string | null = null;
+  average: string | null = null;
+  medianRemote: string | null = null;
+  averageRemote: string | null = null;
+  currentCurrencyLabel: string = "";
+
+  ngOnInit(): void {
+    this.recalculcate();
+
+    if (this.source != null) {
+      this.source.currentCurrencyChanged$
+        .pipe(untilDestroyed(this))
+        .subscribe(() => {
+          this.recalculcate();
+        });
+    }
   }
 
-  get average(): string {
-    return SalaryBlockValueComponent.formatNumber(this.source?.averageSalary);
-  }
+  ngOnDestroy(): void {}
 
-  get medianRemote(): string {
-    return SalaryBlockValueComponent.formatNumber(this.source?.medianRemoteSalary);
-  }
+  private recalculcate(): void {
+    if (this.source == null) {
+      return;
+    }
 
-  get averageRemote(): string {
-    return SalaryBlockValueComponent.formatNumber(this.source?.averageRemoteSalary);
+    this.median = SalaryBlockValueComponent.formatNumber(this.source.medianSalary);
+    this.average = SalaryBlockValueComponent.formatNumber(this.source.averageSalary);
+    this.medianRemote = SalaryBlockValueComponent.formatNumber(this.source.medianRemoteSalary);
+    this.averageRemote = SalaryBlockValueComponent.formatNumber(this.source.averageRemoteSalary);
+    this.currentCurrencyLabel = this.source.getCurrentCurrencyLabel();
   }
 
   private static formatNumber(value: number | null | undefined): string {

@@ -129,6 +129,18 @@ export class SalariesChart implements SalariesChartResponse {
     this.currentCurrencyChanged$.next(this.currentCurrency);
   }
 
+  public getCurrentCurrencyLabel(): string {
+    if (this.currentCurrency.currency === CurrencyType.KZT) {
+      return "тг";
+    }
+
+    if (this.currentCurrency.currency === CurrencyType.USD) {
+      return "usd";
+    }
+
+    return this.currentCurrency.currencyString;
+  }
+
   private getDefaultCurrency(): CurrencyData {
     return this.currencies.find((x) => x.currency === CurrencyType.KZT)
     ?? {

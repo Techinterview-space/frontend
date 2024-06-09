@@ -316,7 +316,6 @@
         <div class="mt-5 mb-5">
           <app-salaries-by-grades-chart
             [chart]="salariesChart.salariesByMoneyBarChart"
-            [title]="'Казахстанские компании'"
             [salaries]="salariesChart.salariesPerProfessionForLocal"
             [professions]="professions"
           >
@@ -326,9 +325,6 @@
         <div class="mt-5 mb-5" *ngIf="salariesChart.hasRemoteSalaries">
           <app-salaries-by-grades-chart
             [chart]="salariesChart.salariesByMoneyBarChartForRemote"
-            [title]="
-              'Зарплаты тех, кто работает удаленно в иностранных компаниях'
-            "
             [salaries]="salariesChart.salariesPerProfessionForRemote"
             [professions]="professions"
           >
