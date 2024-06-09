@@ -3,7 +3,7 @@
 
   <div class="mb-3" *ngIf="barsForLocal.length > 0">
     <div class="mb-3">
-      <span>Казахстанские компании:</span>
+      <span>Казахстанские компании (тенге)</span>
       <span class="ms-2">{{ totalCountLocal }} анкет</span>
     </div>
     <div class="progress" (click)="toggleCountAndPercent()">
@@ -28,7 +28,7 @@
 
   <div class="mb-3" *ngIf="barsForRemote.length > 0">
     <div class="mb-3">
-      <span>Иностранные компании:</span>
+      <span>Иностранные компании (тенге)</span>
       <span class="ms-2">{{ totalCountRemote }} анкет</span>
     </div>
     <div class="progress" (click)="toggleCountAndPercent()">

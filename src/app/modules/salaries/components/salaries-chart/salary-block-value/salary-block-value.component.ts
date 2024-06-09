@@ -1,28 +1,55 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { SalariesChart } from "../salaries-chart";
+import { formatNumber } from "@angular/common";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
   selector: "app-salary-block-value",
   templateUrl: "./salary-block-value.component.html",
   styleUrl: "./salary-block-value.component.scss",
 })
-export class SalaryBlockValueComponent {
+export class SalaryBlockValueComponent implements OnInit, OnDestroy {
   @Input()
   source: SalariesChart | null = null;
 
-  get median(): string {
-    return this.source?.medianSalary ?? "";
+  median: string | null = null;
+  average: string | null = null;
+  medianRemote: string | null = null;
+  averageRemote: string | null = null;
+  currentCurrencyLabel: string = "";
+
+  ngOnInit(): void {
+    this.recalculcate();
+
+    if (this.source != null) {
+      this.source.currentCurrencyChanged$
+        .pipe(untilDestroyed(this))
+        .subscribe(() => {
+          this.recalculcate();
+        });
+    }
   }
 
-  get average(): string {
-    return this.source?.averageSalary ?? "";
+  ngOnDestroy(): void {}
+
+  private recalculcate(): void {
+    if (this.source == null) {
+      return;
+    }
+
+    this.median = SalaryBlockValueComponent.formatNumber(this.source.medianSalary);
+    this.average = SalaryBlockValueComponent.formatNumber(this.source.averageSalary);
+    this.medianRemote = SalaryBlockValueComponent.formatNumber(this.source.medianRemoteSalary);
+    this.averageRemote = SalaryBlockValueComponent.formatNumber(this.source.averageRemoteSalary);
+    this.currentCurrencyLabel = this.source.getCurrentCurrencyLabel();
   }
 
-  get medianRemote(): string {
-    return this.source?.medianRemoteSalary ?? "";
-  }
+  private static formatNumber(value: number | null | undefined): string {
 
-  get averageRemote(): string {
-    return this.source?.averageRemoteSalary ?? "";
+    if (value == null) {
+      return "";
+    }
+
+    return formatNumber(value, "en-US", "1.0-2");
   }
 }

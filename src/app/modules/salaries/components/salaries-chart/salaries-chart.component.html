@@ -197,7 +197,7 @@
       >
         <div class="mb-5">
           <app-currency-select-box
-            [currencies]="salariesChart.currencies"
+            [chart]="salariesChart"
           ></app-currency-select-box>
         </div>
 
@@ -223,13 +223,15 @@
             <div class="col-md-6 mb-3">
               <div class="h5 mb-2">Казахстан</div>
               <app-salaries-by-grade-block
-                [source]="salariesChart.localSalariesByGrade"
+                [chart]="salariesChart"
+                [showLocal]="true"
               ></app-salaries-by-grade-block>
             </div>
             <div class="col-md-6 mb-3">
               <div class="h5 mb-2">Удаленка</div>
               <app-salaries-by-grade-block
-                [source]="salariesChart.remoteSalariesByGrade"
+                [chart]="salariesChart"
+                [showLocal]="false"
               ></app-salaries-by-grade-block>
             </div>
           </div>
@@ -314,7 +316,6 @@
         <div class="mt-5 mb-5">
           <app-salaries-by-grades-chart
             [chart]="salariesChart.salariesByMoneyBarChart"
-            [title]="'Казахстанские компании'"
             [salaries]="salariesChart.salariesPerProfessionForLocal"
             [professions]="professions"
           >
@@ -324,9 +325,6 @@
         <div class="mt-5 mb-5" *ngIf="salariesChart.hasRemoteSalaries">
           <app-salaries-by-grades-chart
             [chart]="salariesChart.salariesByMoneyBarChartForRemote"
-            [title]="
-              'Зарплаты тех, кто работает удаленно в иностранных компаниях'
-            "
             [salaries]="salariesChart.salariesPerProfessionForRemote"
             [professions]="professions"
           >
