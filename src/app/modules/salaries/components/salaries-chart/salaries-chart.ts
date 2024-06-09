@@ -10,6 +10,7 @@ import { SalariesPerProfession } from "../salaries-per-profession";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { LabelEntityDto } from "@services/label-entity.model";
 import { CurrencyData, CurrencyType } from "@services/admin-tools.service";
+import { Subject } from "rxjs";
 
 export class SalariesChart implements SalariesChartResponse {
 
@@ -82,7 +83,7 @@ export class SalariesChart implements SalariesChartResponse {
   readonly developersByExperienceYearsChartData: DevelopersByCategoryChartData | null;
 
   get hasRemoteSalaries(): boolean {
-    return this.salariesPerProfessionForRemote != null && this.salariesPerProfessionForRemote.length > 0
+    return this._salariesPerProfessionForRemote != null && this._salariesPerProfessionForRemote.length > 0
   }
 
   readonly hasAuthentication: boolean;
@@ -95,6 +96,8 @@ export class SalariesChart implements SalariesChartResponse {
   readonly shouldAddOwnSalary: boolean;
   readonly rangeStart: Date;
   readonly rangeEnd: Date;
+
+  public readonly currentCurrencyChanged$: Subject<CurrencyData> = new Subject();
 
   constructor(
     readonly data: SalariesChartResponse,
@@ -123,6 +126,7 @@ export class SalariesChart implements SalariesChartResponse {
   public setCurrentCurrency(currencyType: CurrencyType): void {
     this.currentCurrency = this.currencies.find((x) => x.currency === currencyType) ?? this.getDefaultCurrency();
     this.recalculateData(this.data, this.allProfessions, this.currentCurrency);
+    this.currentCurrencyChanged$.next(this.currentCurrency);
   }
 
   private getDefaultCurrency(): CurrencyData {
@@ -156,9 +160,10 @@ export class SalariesChart implements SalariesChartResponse {
 
     if (data.localSalariesByGrade != null) {
       this._localSalariesByGrade = data.localSalariesByGrade.map((x) => {
-        x.averageSalary = x.averageSalary != null ? x.averageSalary / currentCurrency.value : null;
-        x.medianSalary = x.medianSalary != null ? x.medianSalary / currentCurrency.value : null;
-        return x;
+        const result = { ...x };
+        result.averageSalary = x.averageSalary != null ? x.averageSalary / currentCurrency.value : null;
+        result.medianSalary = x.medianSalary != null ? x.medianSalary / currentCurrency.value : null;
+        return result;
       });
     } else {
       this._localSalariesByGrade = [];
@@ -166,9 +171,10 @@ export class SalariesChart implements SalariesChartResponse {
 
     if (data.remoteSalariesByGrade != null) {
       this._remoteSalariesByGrade = data.remoteSalariesByGrade.map((x) => {
-        x.averageSalary = x.averageSalary != null ? x.averageSalary / currentCurrency.value : null;
-        x.medianSalary = x.medianSalary != null ? x.medianSalary / currentCurrency.value : null;
-        return x;
+        const result = { ...x };
+        result.averageSalary = x.averageSalary != null ? x.averageSalary / currentCurrency.value : null;
+        result.medianSalary = x.medianSalary != null ? x.medianSalary / currentCurrency.value : null;
+        return result;
       });
     } else {
       this._remoteSalariesByGrade = [];
@@ -185,7 +191,7 @@ export class SalariesChart implements SalariesChartResponse {
     this._salariesByMoneyBarChart = data.salariesByMoneyBarChart;
     this._salariesByMoneyBarChartForRemote = data.salariesByMoneyBarChartForRemote;
 
-    const salariesPerProfession = SalariesPerProfession.from(this.salaries, allProfessions);
+    const salariesPerProfession = SalariesPerProfession.from(this._salaries, allProfessions);
 
     this._salariesPerProfessionForLocal = salariesPerProfession.local;
     this._salariesPerProfessionForRemote = salariesPerProfession.remote;

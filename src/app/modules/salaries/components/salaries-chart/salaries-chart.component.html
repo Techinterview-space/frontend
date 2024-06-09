@@ -223,13 +223,15 @@
             <div class="col-md-6 mb-3">
               <div class="h5 mb-2">Казахстан</div>
               <app-salaries-by-grade-block
-                [source]="salariesChart.localSalariesByGrade"
+                [chart]="salariesChart"
+                [showLocal]="true"
               ></app-salaries-by-grade-block>
             </div>
             <div class="col-md-6 mb-3">
               <div class="h5 mb-2">Удаленка</div>
               <app-salaries-by-grade-block
-                [source]="salariesChart.remoteSalariesByGrade"
+                [chart]="salariesChart"
+                [showLocal]="false"
               ></app-salaries-by-grade-block>
             </div>
           </div>
