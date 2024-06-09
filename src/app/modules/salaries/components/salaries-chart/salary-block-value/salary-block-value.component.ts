@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { SalariesChart } from "../salaries-chart";
+import { formatNumber } from "@angular/common";
 
 @Component({
   selector: "app-salary-block-value",
@@ -11,18 +12,27 @@ export class SalaryBlockValueComponent {
   source: SalariesChart | null = null;
 
   get median(): string {
-    return this.source?.medianSalary ?? "";
+    return SalaryBlockValueComponent.formatNumber(this.source?.medianSalary);
   }
 
   get average(): string {
-    return this.source?.averageSalary ?? "";
+    return SalaryBlockValueComponent.formatNumber(this.source?.averageSalary);
   }
 
   get medianRemote(): string {
-    return this.source?.medianRemoteSalary ?? "";
+    return SalaryBlockValueComponent.formatNumber(this.source?.medianRemoteSalary);
   }
 
   get averageRemote(): string {
-    return this.source?.averageRemoteSalary ?? "";
+    return SalaryBlockValueComponent.formatNumber(this.source?.averageRemoteSalary);
+  }
+
+  private static formatNumber(value: number | null | undefined): string {
+
+    if (value == null) {
+      return "";
+    }
+
+    return formatNumber(value, "en-US", "1.0-2");
   }
 }

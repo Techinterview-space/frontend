@@ -9,14 +9,15 @@ import {
 import { SalariesPerProfession } from "../salaries-per-profession";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { LabelEntityDto } from "@services/label-entity.model";
-import { CurrencyData } from "@services/admin-tools.service";
+import { CurrencyData, CurrencyType } from "@services/admin-tools.service";
 
-export class SalariesChart {
-  readonly averageSalary: string;
-  readonly medianSalary: string;
+export class SalariesChart implements SalariesChartResponse {
 
-  readonly averageRemoteSalary: string | null;
-  readonly medianRemoteSalary: string | null;
+  readonly averageSalary: number;
+  readonly medianSalary: number;
+
+  readonly averageRemoteSalary: number | null;
+  readonly medianRemoteSalary: number | null;
 
   readonly localSalariesByGrade: Array<SalariesByGrade>;
   readonly remoteSalariesByGrade: Array<SalariesByGrade>;
@@ -31,7 +32,6 @@ export class SalariesChart {
   readonly salariesPerProfessionForRemote: Array<SalariesPerProfession> | null;
 
   readonly currentUserSalary: UserSalaryAdminDto | null = null;
-  readonly currentUserSalaryValue: string | null = null;
 
   readonly peopleByGradesChartDataForLocal: PeopleByGradesChartData | null;
   readonly peopleByGradesChartDataForRemote: PeopleByGradesChartData | null;
@@ -43,27 +43,32 @@ export class SalariesChart {
   readonly hasAuthentication: boolean;
   readonly hasRecentSurveyReply: boolean;
 
-  readonly currencies: CurrencyData[]
+  readonly currencies: CurrencyData[];
+  currentCurrency: CurrencyData;
+
+  readonly totalCountInStats: number;
+  readonly shouldAddOwnSalary: boolean;
+  readonly rangeStart: Date;
+  readonly rangeEnd: Date;
 
   constructor(
     readonly data: SalariesChartResponse,
     readonly allProfessions: Array<LabelEntityDto>
   ) {
 
+    this.currencies = data.currencies;
+    this.currentCurrency = this.getDefaultCurrency();
+
     this.hasRecentSurveyReply = data.hasRecentSurveyReply;
 
-    this.averageSalary = SalariesChart.formatNumber(data.averageSalary) ?? "";
-    this.medianSalary = SalariesChart.formatNumber(data.medianSalary) ?? "";
+    this.averageSalary = data.averageSalary;
+    this.medianSalary = data.averageSalary;
 
     this.localSalariesByGrade = data.localSalariesByGrade ?? [];
     this.remoteSalariesByGrade = data.remoteSalariesByGrade ?? [];
 
-    this.averageRemoteSalary = SalariesChart.formatNumber(
-      data.averageRemoteSalary
-    );
-    this.medianRemoteSalary = SalariesChart.formatNumber(
-      data.medianRemoteSalary
-    );
+    this.averageRemoteSalary = data.averageRemoteSalary;
+    this.medianRemoteSalary = data.medianRemoteSalary;
 
     this.countOfRecords = data.totalCountInStats;
     this.salaries = data.salaries;
@@ -83,9 +88,6 @@ export class SalariesChart {
     this.hasAuthentication = data.hasAuthentication;
 
     this.currentUserSalary = data.currentUserSalary;
-    this.currentUserSalaryValue = data.currentUserSalary
-      ? SalariesChart.formatNumber(data.currentUserSalary.value)
-      : null;
 
     this.peopleByGradesChartDataForLocal = data.peopleByGradesChartDataForLocal;
     this.peopleByGradesChartDataForRemote =
@@ -95,10 +97,23 @@ export class SalariesChart {
     this.developersByExperienceYearsChartData =
       data.developersByExperienceYearsChartData;
 
-    this.currencies = data.currencies;
+    this.totalCountInStats = data.totalCountInStats;
+    this.shouldAddOwnSalary = data.shouldAddOwnSalary;
+    this.rangeStart = data.rangeStart;
+    this.rangeEnd = data.rangeEnd;
   }
 
-  public static formatNumber(value: number | null): string | null {
-    return value != null ? formatNumber(value, "en-US", "1.0-2") : null;
+  public setCurrentCurrency(currencyType: CurrencyType): void {
+    this.currentCurrency = this.currencies.find((x) => x.currency === currencyType) ?? this.getDefaultCurrency();
+  }
+
+  private getDefaultCurrency(): CurrencyData {
+    return this.currencies.find((x) => x.currency === CurrencyType.KZT)
+    ?? {
+      value: 1,
+      currency: CurrencyType.KZT,
+      currencyString: "тг",
+      pubDate: new Date(),
+    };
   }
 }

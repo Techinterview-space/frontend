@@ -1,5 +1,5 @@
-<div *ngIf="currencies && currencies.length > 0" title="Cooming soon">
-  <label>Выберите валюту отображения статистики</label>
+<div *ngIf="currenciesAsItems && currenciesAsItems.length > 0" title="Cooming soon">
+  <label>Выберите валюту отображения статистики (дата курса: {{currencyDate | date: "yyyy-MM-dd" }})</label>
     <ng-select
       [items]="currenciesAsItems"
       [selectOnTab]="true"
@@ -9,7 +9,6 @@
       appendTo="body"
       [(ngModel)]="selectedCurrency"
       (change)="onSelectionChange($event)"
-      [readonly]="true"
     >
     </ng-select>
 

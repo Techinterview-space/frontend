@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { DeveloperGrade } from "@models/enums";
 import { SalariesByGrade } from "@services/user-salaries.service";
 import { SalariesChart } from "../salaries-chart";
+import { formatNumber } from "@angular/common";
 
 interface Item extends SalariesByGrade {
   gradeAsString: string;
@@ -37,9 +38,8 @@ export class SalariesByGradeBlockComponent implements OnInit {
         hasData: x.hasData,
         averageSalary: x.averageSalary,
         medianSalary: x.medianSalary,
-        medianSalaryAsString: SalariesChart.formatNumber(x.medianSalary) ?? "",
-        averageSalaryAsString:
-          SalariesChart.formatNumber(x.averageSalary) ?? "",
+        medianSalaryAsString: x.medianSalary != null ? formatNumber(x.medianSalary, "en-US", "1.0-2") : "",
+        averageSalaryAsString: x.averageSalary != null ? formatNumber(x.averageSalary, "en-US", "1.0-2") : "",
       };
     });
   }
