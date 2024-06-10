@@ -22,7 +22,7 @@ export class AboutUsComponent {
     },
     {
       link: "https://github.com/galymzhanxyz",
-      username: "galymzhanxyzh",
+      username: "galymzhanxyz",
     },
     {
       link: "https://github.com/maximgorbatyuk",

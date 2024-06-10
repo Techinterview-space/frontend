@@ -164,6 +164,7 @@ export class SalariesChart implements SalariesChartResponse {
 
     this._currentUserSalary = data.currentUserSalary;
     if (data.currentUserSalary != null) {
+      this._currentUserSalary = { ...data.currentUserSalary };
       this._currentUserSalary!.value = data.currentUserSalary.value / currentCurrency.value;
     }
 
