@@ -1,4 +1,4 @@
-FROM node:21-alpine3.18 AS compile-image
+FROM node:22-alpine3.19 AS compile-image
 
 WORKDIR /app
 COPY . .
