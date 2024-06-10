@@ -66,11 +66,7 @@ export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
         indexAxis: "y",
         maintainAspectRatio: false,
         responsive: true,
-        elements: {
-          boxplot: {
-            itemRadius: 2,
-          },
-        },
+        elements: {},
         plugins: {
           legend: {
             position: "bottom",
