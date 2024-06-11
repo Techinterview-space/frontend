@@ -169,7 +169,7 @@ export class SalariesChart implements SalariesChartResponse {
     }
 
     this._averageSalary = data.averageSalary / currentCurrency.value;
-    this._medianSalary = data.averageSalary / currentCurrency.value;
+    this._medianSalary = data.medianSalary / currentCurrency.value;
 
     if (data.localSalariesByGrade != null) {
       this._localSalariesByGrade = data.localSalariesByGrade.map((x) => {
