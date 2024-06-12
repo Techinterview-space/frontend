@@ -25,6 +25,10 @@ export class AboutUsComponent {
       username: "galymzhanxyz",
     },
     {
+      link: "https://github.com/drugoi",
+      username: "drugoi",
+    },
+    {
       link: "https://github.com/maximgorbatyuk",
       username: "maximgorbatyuk",
     },
