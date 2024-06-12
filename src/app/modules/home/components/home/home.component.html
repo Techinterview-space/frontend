@@ -2,8 +2,8 @@
   <div *ngIf="loaded; else notLoaded">
     <div *ngIf="showUwu; else noUwu" class="pt-5">
       <div class="d-flex flex-column justify-content-center align-items-center">
-        <div class="mb-3 uwu-image">
-          <img src="{{ getUwuLink() }}" alt="UwU" class="img-fluid" />
+        <div class="mb-3 uwu-image" *ngIf="uwuImageLink">
+          <img src="{{ uwuImageLink }}" alt="UwU" class="img-fluid" />
         </div>
         <div class="display-1 uwu-title">Зарплаты в IT</div>
       </div>

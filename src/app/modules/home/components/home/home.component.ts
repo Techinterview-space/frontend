@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   readonly uwuLinkDark = "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/uwu_dark_1000.png";
 
   showUwu = false;
+  uwuImageLink: string | null = null;
   loaded = false;
 
   constructor(
@@ -27,23 +28,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.activatedRoute = new ActivatedRouteExtended(activatedRoute);
   }
 
-  getUwuLink(): string {
-    const date = new Date(Date.now());
-    return date.getSeconds() % 2 === 0
-      ? this.uwuLinkLight
-      : this.uwuLinkDark;
-  }
-
   ngOnInit(): void {
     this.activatedRoute.getQueryParam("uwu")
       .pipe(untilDestroyed(this))
       .subscribe((uwu) => {
         this.loaded = true;
         this.showUwu = uwu === "true";
+
+        if (this.showUwu) {
+          this.uwuImageLink = this.getUwuLink();
+        }
       });
   }
 
   ngOnDestroy(): void {
     // Do nothing
+  }
+
+  private getUwuLink(): string {
+    const date = new Date(Date.now());
+    return date.getSeconds() % 2 === 0
+      ? this.uwuLinkLight
+      : this.uwuLinkDark;
   }
 }
