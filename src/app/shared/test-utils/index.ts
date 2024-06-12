@@ -25,6 +25,8 @@ import { TitleService } from "@services/title.service";
 import { CookieService } from "ngx-cookie-service";
 import { MockAuthService } from "./mock-auth.service";
 import { NgSelectModule } from "@ng-select/ng-select";
+import { GoogleAnalyticsService } from "ngx-google-analytics";
+import { MockGoogleAnalyticsService } from "./mock-google-analytics.service";
 
 export * from "./mock-activated-route";
 export * from "./mock-auth.service";
@@ -47,6 +49,7 @@ export const mostUsedServices = [
   ApiService,
   TitleService,
   CookieService,
+  { provide: GoogleAnalyticsService, useClass: MockGoogleAnalyticsService },
 ];
 
 export const mostUsedImports = [

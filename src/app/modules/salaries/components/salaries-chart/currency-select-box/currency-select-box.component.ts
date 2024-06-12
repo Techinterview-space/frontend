@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { CurrencyData, CurrencyType } from "@services/admin-tools.service";
 import { SelectItem } from "@shared/select-boxes/select-item";
 import { SalariesChart } from "../salaries-chart";
+import { GoogleAnalyticsService } from "ngx-google-analytics";
 
 @Component({
   selector: "app-currency-select-box",
@@ -21,7 +22,9 @@ export class CurrencySelectBoxComponent implements OnInit {
   currencies: Array<CurrencyData> | null = null;
   currencyDate: Date | null = null;
 
-  constructor() {}
+  constructor(
+    private readonly gtag: GoogleAnalyticsService
+  ) {}
 
   ngOnInit(): void {
 
@@ -63,7 +66,7 @@ export class CurrencySelectBoxComponent implements OnInit {
       return;
     }
 
-    const selectedCurrencyData = this.currencies!.find(x => x.currency === e.item);
+    this.gtag.event("currency_selected", "currency_select_box");
     this.chart?.setCurrentCurrency(e.item);
   }
 }
