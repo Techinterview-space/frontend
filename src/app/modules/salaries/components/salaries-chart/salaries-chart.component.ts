@@ -20,7 +20,6 @@ import { LabelEntityDto } from "@services/label-entity.model";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { FileDownloadAnchor } from "@shared/value-objects/file-download-anchor";
 import { TitleService } from "@services/title.service";
-import { SurveyService } from "@services/salaries-survey.service";
 
 @Component({
   templateUrl: "./salaries-chart.component.html",

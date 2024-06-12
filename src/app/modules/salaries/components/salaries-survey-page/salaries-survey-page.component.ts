@@ -6,6 +6,7 @@ import { AuthService } from "@shared/services/auth/auth.service";
 import { CookieService } from "ngx-cookie-service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { formatNumber } from "@angular/common";
+import { GoogleAnalyticsService } from "ngx-google-analytics";
 
 interface ProgressBarData {
   color: string;
@@ -96,7 +97,8 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
-    private readonly titleService: TitleService
+    private readonly titleService: TitleService,
+    private readonly gtag: GoogleAnalyticsService
   ) {
     titleService.setTitle("Опрос о пользе зарплатной статистики");
 
@@ -127,6 +129,8 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
                 this.data = x;
                 this.initCharts();
               });
+          } else {
+            this.gtag.event("survey_shown", "salaries_survey_page");
           }
         });
 
