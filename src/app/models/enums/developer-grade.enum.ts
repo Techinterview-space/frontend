@@ -54,7 +54,7 @@ export class DeveloperGradeEnum {
     [DeveloperGrade.Junior, {
       label: "Junior",
       cssBackground: "bg-success",
-      cssText: "",
+      cssText: "text-light",
     }],
     [DeveloperGrade.Middle, {
       label: "Middle",
@@ -69,7 +69,7 @@ export class DeveloperGradeEnum {
     [DeveloperGrade.Lead, {
       label: "Lead",
       cssBackground: "bg-primary",
-      cssText: "",
+      cssText: "text-light",
     }],
     [DeveloperGrade.Unknown, DeveloperGradeEnum.defaultColor],
   ]);

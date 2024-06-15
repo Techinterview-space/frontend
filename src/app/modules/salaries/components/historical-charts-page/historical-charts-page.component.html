@@ -12,14 +12,18 @@
           (filtersApplied)="applyGlobalFilters($event)"
           (filtersReset)="resetGlobalFilters()"
           (shareClicked)="share($event)"
-        >
-          </app-salary-chart-global-filters
-        >
+        />
       </div>
 
-      <div>
+      <div class="mb-5">
         <app-historical-salaries-chart
-          [data]="data.salariesCountWeekByWeekChart"></app-historical-salaries-chart>
+          [data]="data.salariesCountWeekByWeekChart"
+          />
+      </div>
+
+      <div *ngIf="data.salariesCountWeekByWeekChart.hasGradeItems" class="mb-5">
+        <app-historical-salaries-by-grade-chart
+          [data]="data.salariesCountWeekByWeekChart"/>
       </div>
     </div>
   </div>

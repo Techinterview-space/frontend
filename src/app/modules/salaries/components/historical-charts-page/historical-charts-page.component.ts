@@ -42,7 +42,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     private readonly gtag: GoogleAnalyticsService,
     activatedRouteSource: ActivatedRoute
   ) {
-    titleService.setTitle("Опрос о пользе зарплатной статистики");
+    titleService.setTitle("Исторические данные");
     this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
   }
  

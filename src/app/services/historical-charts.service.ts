@@ -20,7 +20,8 @@ export interface SalariesCountWeekByWeekChartGradeItem extends SalariesCountWeek
 export interface SalariesCountWeekByWeekChart {
   weekEnds: Array<Date>;
   totalCountItems: Array<SalariesCountWeekByWeekChartItem>;
-  grades: Array<SalariesCountWeekByWeekChartGradeItem>;
+  gradeItems: Array<SalariesCountWeekByWeekChartGradeItem>;
+  hasGradeItems: boolean;
 }
 
 export interface GetSalariesHistoricalChartResponse {
