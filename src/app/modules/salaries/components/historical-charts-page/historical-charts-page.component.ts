@@ -4,7 +4,6 @@ import { TitleService } from "@services/title.service";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { CookieService } from "ngx-cookie-service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
-import { formatNumber } from "@angular/common";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
 import {
   GetSalariesHistoricalChartResponse,
@@ -31,6 +30,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
   data: GetSalariesHistoricalChartResponse | null = null;
   filterData = new SalaryChartGlobalFiltersData();
   isAuthenticated = false;
+  shouldAddOwnSalary = false;
 
   skills: Array<LabelEntityDto> = [];
   industries: Array<LabelEntityDto> = [];
@@ -155,6 +155,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
       .subscribe((x) => {
         this.isAuthenticated = x.hasAuthentication;
         this.data = x;
+        this.shouldAddOwnSalary = x.shouldAddOwnSalary;
       });
   }
 }

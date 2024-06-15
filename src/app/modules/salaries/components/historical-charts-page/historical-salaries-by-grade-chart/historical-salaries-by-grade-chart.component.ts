@@ -24,7 +24,7 @@ export class HistoricalSalariesByGradeChartComponent implements OnInit {
   chart: HistoricalSalariesByGradeChartObject | null = null;
 
   ngOnInit(): void {
-    if (this.data == null) {
+    if (this.data == null || !this.data.hasGradeItems) {
       return;
     }
 

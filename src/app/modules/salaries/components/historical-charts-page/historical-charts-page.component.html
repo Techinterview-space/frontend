@@ -1,8 +1,21 @@
 <app-page-header>Исторические данные</app-page-header>
 
 <div class="container mt-5 mb-5" *ngIf="data; else dataLoading">
-  <div class="card">
+  <div class="card" *ngIf="!data.shouldAddOwnSalary; else noCurrentSalary">
     <div class="card-body">
+      <div class="mb-5 h2">Тенденция изменения зарплат</div>
+
+      <div class="mb-5">
+        <p>
+          Графики отображают тенденцию измнения зарплат за определенный отрезок
+          времени. График покажет 4 линии по оси Y слева на зарплатные значения:
+          медианная и средняя для компаний в Казахстане и на удаленке. Еще одна
+          линия по оси Y справа покажет, сколько было релевантных анкет на
+          определенный момент времени.
+        </p>
+        <p>Фильтр позволит ограничить выборку анкет по желаемым критериям.</p>
+      </div>
+
       <div class="mb-5">
         <app-salary-chart-global-filters
           [filterData]="filterData"
@@ -31,5 +44,22 @@
 <ng-template #dataLoading>
   <div class="container mt-5">
     <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #noCurrentSalary>
+  <div class="container mt-5">
+    <div class="card card-body">
+      <div class="mb-3">
+        Доступ к статистике открыватся только после того, как пользователь
+        добавляет актуальную зарплату. Пожалуйста, перейдите по ссылке ниже,
+        чтобы перейти к форме заполнния анкеты.
+      </div>
+      <div>
+        <a routerLink="/salaries" class="btn btn-link">
+          Перейти к форм анкеты
+        </a>
+      </div>
+    </div>
   </div>
 </ng-template>
