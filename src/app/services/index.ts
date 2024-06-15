@@ -17,6 +17,7 @@ import { TelegramBotService } from "./telegram-bot.service";
 import { SurveyService } from "./salaries-survey.service";
 import { MetaTagService } from "./meta-tags.service";
 import { AdminToolsService } from "./admin-tools.service";
+import { HistoricalChartsService } from "./historical-charts.service";
 
 export * from "./authorization.service";
 export * from "./api.service";
@@ -48,4 +49,5 @@ export const applicationServices = [
   SurveyService,
   MetaTagService,
   AdminToolsService,
+  HistoricalChartsService,
 ];

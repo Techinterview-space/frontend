@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { SalaryChartGlobalFiltersData } from "../salary-chart-global-filters/global-filters-form-group";
+import { SalaryChartGlobalFiltersData } from "../../shared/global-filters-form-group";
 import { LabelEntityDto } from "@services/label-entity.model";
 import { KazakhstanCityEnum } from "@models/salaries/kazakhstan-city";
 import { DeveloperGrade } from "@models/enums";

@@ -4,18 +4,17 @@ import { Currency } from "./currency";
 import { KazakhstanCity } from "./kazakhstan-city";
 import { Gender } from "@models/enums/gender.enum";
 
-export interface UserSalaryAdminDto extends UserSalary {
-  id: string;
-  updatedAt: Date | null;
-}
-
-export interface UserSalary {
+export interface UserSalarySimple {
   value: number;
   quarter: number;
   year: number;
   currency: Currency;
   company: CompanyType;
   grade: DeveloperGrade | null;
+  createdAt: Date;
+}
+
+export interface UserSalary extends UserSalarySimple {
   city: KazakhstanCity | null;
   gender: Gender | null;
   age: number | null;
@@ -25,5 +24,9 @@ export interface UserSalary {
   skillId: number | null;
   workIndustryId: number | null;
   professionId: number | null;
-  createdAt: Date;
+}
+
+export interface UserSalaryAdminDto extends UserSalary {
+  id: string;
+  updatedAt: Date | null;
 }

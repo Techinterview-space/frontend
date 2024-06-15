@@ -5,7 +5,7 @@ import {
 } from "@services/user-salaries.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { SalariesAddingChart } from "./salaries-adding-chart";
-import { SalaryChartGlobalFiltersData } from "../salary-chart-global-filters/global-filters-form-group";
+import { SalaryChartGlobalFiltersData } from "../../shared/global-filters-form-group";
 
 @Component({
   selector: "app-salaries-adding-chart",

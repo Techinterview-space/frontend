@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import {
   GlobalFiltersFormGroup,
   SalaryChartGlobalFiltersData,
-} from "./global-filters-form-group";
+} from "../../shared/global-filters-form-group";
 import { SelectItem } from "@shared/select-boxes/select-item";
 import {
   KazakhstanCity,
