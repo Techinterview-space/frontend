@@ -16,30 +16,51 @@ export class HistoricalSalariesChartObject extends Chart {
     private readonly datasets: Array<ChartDatasetType> = [];
 
     constructor(canvasId: string, chartData: SalariesCountWeekByWeekChart) {
-        const randomColor = new RandomRgbColor();
 
         // По датасету на медиану и среднюю
         const datasets: Array<ChartDatasetType> = [
-          {
-            label: "Все анкеты",
-            data: [],
-            borderWidth: 1,
-            borderColor: randomColor.toString(1),
-            backgroundColor: randomColor.toString(0.5),
-            pointStyle: false as PointStyle,
-            yAxisID: 'y',
-          },
-          {
-            label: "Количество анкет",
-            data: chartData.totalCountItems.map(x => x.totalCount),
-            borderWidth: 1,
-            borderColor: randomColor.toString(1),
-            backgroundColor: randomColor.toString(0.5),
-            pointStyle: false as PointStyle,
-            yAxisID: 'y1',
-          },
+          new DatasetItem(
+            "Количество анкет",
+            chartData.totalCountItems.map(x => x.totalCount),
+            4,
+            new RandomRgbColor(),
+            false as PointStyle,
+            'y1'
+          ),
+          new DatasetItem(
+            "Медиана, КЗ",
+            chartData.totalCountItems.map(x => x.localMedian),
+            2,
+            new RandomRgbColor(),
+            false as PointStyle,
+            'y'
+          ),
+          new DatasetItem(
+            "Средняя, КЗ",
+            chartData.totalCountItems.map(x => x.localAverage),
+            2,
+            new RandomRgbColor(),
+            false as PointStyle,
+            'y'
+          ),
+          new DatasetItem(
+            "Медиана, удаленка",
+            chartData.totalCountItems.map(x => x.remoteMedian),
+            2,
+            new RandomRgbColor(),
+            false as PointStyle,
+            'y'
+          ),
+          new DatasetItem(
+            "Средняя, удаленка",
+            chartData.totalCountItems.map(x => x.remoteAverage),
+            2,
+            new RandomRgbColor(),
+            false as PointStyle,
+            'y'
+          ),
         ];
-    
+
         super(canvasId, {
           type: "line" as ChartType,
           data: {
@@ -79,4 +100,22 @@ export class HistoricalSalariesChartObject extends Chart {
     
         this.datasets = datasets;
       }
+}
+
+class DatasetItem implements ChartDatasetType {
+
+  constructor(
+    readonly label: string,
+    readonly data: number[],
+    readonly borderWidth: number,
+    readonly color: RandomRgbColor,
+    readonly pointStyle: PointStyle,
+    readonly yAxisID: "y1" | "y"
+  ) {
+    this.borderColor = color.toString(1);
+    this.backgroundColor = color.toString(0.5);
+  }
+
+  readonly borderColor: string;
+  readonly backgroundColor: string;
 }

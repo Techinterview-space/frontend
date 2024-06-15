@@ -149,7 +149,6 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     .subscribe((x) => {
       this.isAuthenticated = x.hasAuthentication;
       this.data = x;
-      console.log(this.data);
     });
   }
 }

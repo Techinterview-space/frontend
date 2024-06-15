@@ -16,7 +16,6 @@ export class HistoricalSalariesChartComponent implements OnInit {
  
   ngOnInit(): void {
 
-    console.log(this.data);
     if (this.data == null) {
       return;
     }
