@@ -4,7 +4,6 @@ import { ApiService } from "./api.service";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { DeveloperGrade } from "@models/enums";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
-import { UserSalary, UserSalarySimple } from "@models/salaries/salary.model";
 
 export interface SalariesCountWeekByWeekChartItem {
   totalCount: number;
@@ -25,8 +24,6 @@ export interface SalariesCountWeekByWeekChart {
 }
 
 export interface GetSalariesHistoricalChartResponse {
-  salaries: Array<UserSalarySimple>;
-
   from: Date;
   to: Date;
   chartFrom: Date;
