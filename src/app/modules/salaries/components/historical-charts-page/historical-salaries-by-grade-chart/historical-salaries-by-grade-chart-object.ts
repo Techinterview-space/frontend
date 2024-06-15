@@ -143,7 +143,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         items.map((x) => x.localMedian),
         2,
         new RandomRgbColor(),
-        false as PointStyle,
+        true as PointStyle,
         grade,
         "y",
         hidden
@@ -153,7 +153,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         items.map((x) => x.localAverage),
         2,
         new RandomRgbColor(),
-        false as PointStyle,
+        true as PointStyle,
         grade,
         "y",
         hidden
@@ -163,7 +163,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         items.map((x) => x.remoteMedian),
         2,
         new RandomRgbColor(),
-        false as PointStyle,
+        true as PointStyle,
         grade,
         "y",
         hidden
@@ -173,7 +173,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         items.map((x) => x.remoteAverage),
         2,
         new RandomRgbColor(),
-        false as PointStyle,
+        true as PointStyle,
         grade,
         "y",
         hidden
