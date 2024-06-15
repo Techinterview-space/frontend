@@ -11,6 +11,9 @@ import { SalariesChartActivatedRoute } from "../shared/salaries-activated-route"
 import { SalaryChartGlobalFiltersData } from "../shared/global-filters-form-group";
 import { UserSalariesService } from "@services/user-salaries.service";
 import { LabelEntityDto } from "@services/label-entity.model";
+import { DeveloperGrade } from "@models/enums";
+import { ApiBackendAbsoluteUrl, ClipboardCopier } from "@shared/value-objects/clipboard-copier";
+import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 
 @Component({
   templateUrl: "./historical-charts-page.component.html",
@@ -64,6 +67,47 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     this.titleService.resetTitle();
   }
 
+  applyGlobalFilters(data: SalaryChartGlobalFiltersData): void {
+    if (this.filterData.equals(data)) {
+      return;
+    }
+
+    this.filterData = data;
+    const selectedGrade = data.grade ? DeveloperGrade[data.grade] : "empty";
+    this.gtag.event("salaries_filters_applied", "historical_data", selectedGrade);
+    this.load(data);
+  }
+
+  resetGlobalFilters(): void {
+    const newFilterData = new SalaryChartGlobalFiltersData();
+    if (this.filterData.equals(newFilterData)) {
+      return;
+    }
+
+    this.filterData = newFilterData;
+    this.gtag.event("salaries_filters_reset", "historical_data");
+
+    if (this.router.url.indexOf("?") > 0) {
+      this.router.navigateByUrl(
+        this.router.url.substring(0, this.router.url.indexOf("?"))
+      );
+      return;
+    }
+
+    this.load();
+  }
+
+  share(data: SalaryChartGlobalFiltersData): void {
+    this.filterData = data;
+    this.gtag.event("salaries_share_clicked", "historical_data");
+
+    const currentUrl = new ApiBackendAbsoluteUrl("/chart-share").asString();
+    const shareUrl = `${currentUrl}?${new ConvertObjectToHttpParams(
+      this.filterData
+    ).get()}`;
+    new ClipboardCopier(shareUrl).execute();
+  }
+
   load(data: SalaryChartGlobalFiltersData | null = null): void {
     this.data = null;
 
@@ -105,6 +149,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     .subscribe((x) => {
       this.isAuthenticated = x.hasAuthentication;
       this.data = x;
+      console.log(this.data);
     });
   }
 }

@@ -28,6 +28,7 @@ import { SalariesSurveyPageComponent } from "./components/salaries-survey-page/s
 import { SalariesAddingChartComponent } from "./components/salaries-chart/salaries-adding-chart/salaries-adding-chart.component";
 import { CurrencySelectBoxComponent } from "./components/salaries-chart/currency-select-box/currency-select-box.component";
 import { HistoricalChartsPageComponent } from "./components/historical-charts-page/historical-charts-page.component";
+import { HistoricalSalariesChartComponent } from "./components/historical-charts-page/historical-salaries-chart/historical-charts-page.component";
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { HistoricalChartsPageComponent } from "./components/historical-charts-pa
     SalariesAddingChartComponent,
     CurrencySelectBoxComponent,
     HistoricalChartsPageComponent,
+    HistoricalSalariesChartComponent
   ],
   imports: [
     CommonModule,

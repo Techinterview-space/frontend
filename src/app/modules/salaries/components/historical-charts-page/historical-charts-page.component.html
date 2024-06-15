@@ -4,11 +4,23 @@
 
   <div class="card">
     <div class="card-body">
-      
-      
 
-      
+      <div class="mb-5">
+        <app-salary-chart-global-filters
+          [filterData]="filterData"
+          [professions]="professions"
+          (filtersApplied)="applyGlobalFilters($event)"
+          (filtersReset)="resetGlobalFilters()"
+          (shareClicked)="share($event)"
+        >
+          </app-salary-chart-global-filters
+        >
+      </div>
 
+      <div>
+        <app-historical-salaries-chart
+          [data]="data.salariesCountWeekByWeekChart"></app-historical-salaries-chart>
+      </div>
     </div>
   </div>
 </div>
