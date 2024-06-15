@@ -1,0 +1,816 @@
+{
+    "salariesCountWeekByWeekChart": {
+        "weekEnds": [
+            "2024-02-03T05:00:10.5964449",
+            "2024-02-10T05:00:10.5964449",
+            "2024-02-17T05:00:10.5964449",
+            "2024-02-24T05:00:10.5964449",
+            "2024-03-02T05:00:10.5964449",
+            "2024-03-09T05:00:10.5964449",
+            "2024-03-16T05:00:10.5964449",
+            "2024-03-23T05:00:10.5964449",
+            "2024-03-30T05:00:10.5964449",
+            "2024-04-06T05:00:10.5964449",
+            "2024-04-13T05:00:10.5964449",
+            "2024-04-20T05:00:10.5964449",
+            "2024-04-27T05:00:10.5964449",
+            "2024-05-04T05:00:10.5964449",
+            "2024-05-11T05:00:10.5964449",
+            "2024-05-18T05:00:10.5964449",
+            "2024-05-25T05:00:10.5964449",
+            "2024-06-01T05:00:10.5964449",
+            "2024-06-08T05:00:10.5964449",
+            "2024-06-15T05:00:10.5964449"
+        ],
+        "totalCountItems": [
+            {
+                "totalCount": 641,
+                "localMedian": 700000,
+                "localAverage": 794265.146484375,
+                "remoteMedian": 1400000,
+                "remoteAverage": 1443414.9302325582
+            },
+            {
+                "totalCount": 701,
+                "localMedian": 700000,
+                "localAverage": 787367.8914590747,
+                "remoteMedian": 1470000,
+                "remoteAverage": 1469098.0287769784
+            },
+            {
+                "totalCount": 726,
+                "localMedian": 700000,
+                "localAverage": 788989.2881646656,
+                "remoteMedian": 1470000,
+                "remoteAverage": 1480102.2797202796
+            },
+            {
+                "totalCount": 759,
+                "localMedian": 700000,
+                "localAverage": 800337.3032786886,
+                "remoteMedian": 1480000,
+                "remoteAverage": 1485601.5167785236
+            },
+            {
+                "totalCount": 772,
+                "localMedian": 700000,
+                "localAverage": 802770.0722311396,
+                "remoteMedian": 1480000,
+                "remoteAverage": 1485601.5167785236
+            },
+            {
+                "totalCount": 782,
+                "localMedian": 700000,
+                "localAverage": 806797.7027027027,
+                "remoteMedian": 1500000,
+                "remoteAverage": 1483494.2875816994
+            },
+            {
+                "totalCount": 928,
+                "localMedian": 700000,
+                "localAverage": 803129.6485411141,
+                "remoteMedian": 1435000,
+                "remoteAverage": 1479750.7241379311
+            },
+            {
+                "totalCount": 978,
+                "localMedian": 700000,
+                "localAverage": 810782.6503759399,
+                "remoteMedian": 1435000,
+                "remoteAverage": 1480154.9333333333
+            },
+            {
+                "totalCount": 1017,
+                "localMedian": 700000,
+                "localAverage": 815091.6826347306,
+                "remoteMedian": 1425000,
+                "remoteAverage": 1472528.076923077
+            },
+            {
+                "totalCount": 1041,
+                "localMedian": 700000,
+                "localAverage": 815573.5764294049,
+                "remoteMedian": 1460000,
+                "remoteAverage": 1477533.206521739
+            },
+            {
+                "totalCount": 1085,
+                "localMedian": 700000,
+                "localAverage": 808815.762806236,
+                "remoteMedian": 1470000,
+                "remoteAverage": 1519070.1069518717
+            },
+            {
+                "totalCount": 1173,
+                "localMedian": 700000,
+                "localAverage": 810014.9742798354,
+                "remoteMedian": 1400000,
+                "remoteAverage": 1496348.8059701493
+            },
+            {
+                "totalCount": 1210,
+                "localMedian": 700000,
+                "localAverage": 809258.8138138138,
+                "remoteMedian": 1400000,
+                "remoteAverage": 1505745.0663507108
+            },
+            {
+                "totalCount": 1265,
+                "localMedian": 700000,
+                "localAverage": 802990.9443911792,
+                "remoteMedian": 1366306.5,
+                "remoteAverage": 1478410.8513513512
+            },
+            {
+                "totalCount": 1296,
+                "localMedian": 700000,
+                "localAverage": 807915.2343017807,
+                "remoteMedian": 1377000,
+                "remoteAverage": 1478810.9475982534
+            },
+            {
+                "totalCount": 1306,
+                "localMedian": 700000,
+                "localAverage": 807396.0584958218,
+                "remoteMedian": 1377000,
+                "remoteAverage": 1478810.9475982534
+            },
+            {
+                "totalCount": 1345,
+                "localMedian": 700000,
+                "localAverage": 806082.8141831239,
+                "remoteMedian": 1377000,
+                "remoteAverage": 1476418.6450216451
+            },
+            {
+                "totalCount": 1428,
+                "localMedian": 700000,
+                "localAverage": 807632.0598146588,
+                "remoteMedian": 1355613,
+                "remoteAverage": 1472709.9958506224
+            },
+            {
+                "totalCount": 1484,
+                "localMedian": 700000,
+                "localAverage": 807066.872874494,
+                "remoteMedian": 1355613,
+                "remoteAverage": 1481016.502008032
+            },
+            {
+                "totalCount": 1697,
+                "localMedian": 700000,
+                "localAverage": 825096.4335465529,
+                "remoteMedian": 1400000,
+                "remoteAverage": 1489812.1103448276
+            }
+        ],
+        "gradeItems": [
+            {
+                "grade": 2,
+                "totalCount": 172,
+                "localMedian": 350000,
+                "localAverage": 358982.0512820513,
+                "remoteMedian": 375000,
+                "remoteAverage": 657789.5625
+            },
+            {
+                "grade": 5,
+                "totalCount": 283,
+                "localMedian": 718500,
+                "localAverage": 775343.75,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1187634.4237288137
+            },
+            {
+                "grade": 8,
+                "totalCount": 121,
+                "localMedian": 1300000,
+                "localAverage": 1268116.524390244,
+                "remoteMedian": 2000000,
+                "remoteAverage": 2006921.8461538462
+            },
+            {
+                "grade": 11,
+                "totalCount": 55,
+                "localMedian": 1600000,
+                "localAverage": 1559767.441860465,
+                "remoteMedian": 1625000,
+                "remoteAverage": 1958792.5
+            },
+            {
+                "grade": 2,
+                "totalCount": 190,
+                "localMedian": 345000,
+                "localAverage": 355524.1379310345,
+                "remoteMedian": 375000,
+                "remoteAverage": 657789.5625
+            },
+            {
+                "grade": 5,
+                "totalCount": 307,
+                "localMedian": 725000,
+                "localAverage": 775526.5306122449,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1194684.3709677418
+            },
+            {
+                "grade": 8,
+                "totalCount": 127,
+                "localMedian": 1275000,
+                "localAverage": 1259351.8452380951,
+                "remoteMedian": 2000000,
+                "remoteAverage": 2010559.3488372094
+            },
+            {
+                "grade": 11,
+                "totalCount": 67,
+                "localMedian": 1500000,
+                "localAverage": 1517692.3076923077,
+                "remoteMedian": 1650000,
+                "remoteAverage": 1955034
+            },
+            {
+                "grade": 2,
+                "totalCount": 197,
+                "localMedian": 340000,
+                "localAverage": 354395.55555555556,
+                "remoteMedian": 400000,
+                "remoteAverage": 663213.7058823529
+            },
+            {
+                "grade": 5,
+                "totalCount": 316,
+                "localMedian": 745000,
+                "localAverage": 777644.2687747036,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1193181.4444444445
+            },
+            {
+                "grade": 8,
+                "totalCount": 134,
+                "localMedian": 1225000,
+                "localAverage": 1249950.611111111,
+                "remoteMedian": 2000000,
+                "remoteAverage": 2019410.2727272727
+            },
+            {
+                "grade": 11,
+                "totalCount": 69,
+                "localMedian": 1500000,
+                "localAverage": 1528679.2452830188,
+                "remoteMedian": 1825000,
+                "remoteAverage": 2032844.375
+            },
+            {
+                "grade": 2,
+                "totalCount": 205,
+                "localMedian": 330000,
+                "localAverage": 353984.94623655913,
+                "remoteMedian": 400000,
+                "remoteAverage": 635507
+            },
+            {
+                "grade": 5,
+                "totalCount": 325,
+                "localMedian": 720000,
+                "localAverage": 777839.6946564886,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1193181.4444444445
+            },
+            {
+                "grade": 8,
+                "totalCount": 145,
+                "localMedian": 1250000,
+                "localAverage": 1270914.696969697,
+                "remoteMedian": 1950000,
+                "remoteAverage": 2001175.043478261
+            },
+            {
+                "grade": 11,
+                "totalCount": 74,
+                "localMedian": 1625000,
+                "localAverage": 1550357.142857143,
+                "remoteMedian": 2000000,
+                "remoteAverage": 2123639.4444444445
+            },
+            {
+                "grade": 2,
+                "totalCount": 210,
+                "localMedian": 330000,
+                "localAverage": 353200,
+                "remoteMedian": 400000,
+                "remoteAverage": 635507
+            },
+            {
+                "grade": 5,
+                "totalCount": 330,
+                "localMedian": 725000,
+                "localAverage": 778629.213483146,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1193181.4444444445
+            },
+            {
+                "grade": 8,
+                "totalCount": 147,
+                "localMedian": 1300000,
+                "localAverage": 1290302.5247524753,
+                "remoteMedian": 1950000,
+                "remoteAverage": 2001175.043478261
+            },
+            {
+                "grade": 11,
+                "totalCount": 75,
+                "localMedian": 1650000,
+                "localAverage": 1552982.4561403508,
+                "remoteMedian": 2000000,
+                "remoteAverage": 2123639.4444444445
+            },
+            {
+                "grade": 2,
+                "totalCount": 210,
+                "localMedian": 330000,
+                "localAverage": 353200,
+                "remoteMedian": 400000,
+                "remoteAverage": 635507
+            },
+            {
+                "grade": 5,
+                "totalCount": 336,
+                "localMedian": 750000,
+                "localAverage": 783372.6937269373,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1202622.0153846154
+            },
+            {
+                "grade": 8,
+                "totalCount": 150,
+                "localMedian": 1300000,
+                "localAverage": 1293888.8834951457,
+                "remoteMedian": 1900000,
+                "remoteAverage": 1997320.255319149
+            },
+            {
+                "grade": 11,
+                "totalCount": 76,
+                "localMedian": 1650000,
+                "localAverage": 1552982.4561403508,
+                "remoteMedian": 2000000,
+                "remoteAverage": 2053974.2105263157
+            },
+            {
+                "grade": 2,
+                "totalCount": 249,
+                "localMedian": 320000,
+                "localAverage": 351537.9912663755,
+                "remoteMedian": 375000,
+                "remoteAverage": 618731.65
+            },
+            {
+                "grade": 5,
+                "totalCount": 401,
+                "localMedian": 750000,
+                "localAverage": 776779.8165137614,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1185654.472972973
+            },
+            {
+                "grade": 8,
+                "totalCount": 179,
+                "localMedian": 1300000,
+                "localAverage": 1277321.5853658537,
+                "remoteMedian": 1900000,
+                "remoteAverage": 2001572.357142857
+            },
+            {
+                "grade": 11,
+                "totalCount": 89,
+                "localMedian": 1675000,
+                "localAverage": 1588382.3529411764,
+                "remoteMedian": 2000000,
+                "remoteAverage": 1973595.7142857143
+            },
+            {
+                "grade": 2,
+                "totalCount": 260,
+                "localMedian": 300000,
+                "localAverage": 349800.8333333333,
+                "remoteMedian": 375000,
+                "remoteAverage": 618731.65
+            },
+            {
+                "grade": 5,
+                "totalCount": 426,
+                "localMedian": 750000,
+                "localAverage": 774361.0315186246,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1195953.6493506494
+            },
+            {
+                "grade": 8,
+                "totalCount": 187,
+                "localMedian": 1300000,
+                "localAverage": 1279345.3875968992,
+                "remoteMedian": 1900000,
+                "remoteAverage": 1996367.4827586208
+            },
+            {
+                "grade": 11,
+                "totalCount": 95,
+                "localMedian": 1600000,
+                "localAverage": 1668969.8630136987,
+                "remoteMedian": 1825000,
+                "remoteAverage": 1924795.9090909092
+            },
+            {
+                "grade": 2,
+                "totalCount": 269,
+                "localMedian": 300000,
+                "localAverage": 347428.22580645164,
+                "remoteMedian": 350000,
+                "remoteAverage": 595088.3333333334
+            },
+            {
+                "grade": 5,
+                "totalCount": 443,
+                "localMedian": 745000,
+                "localAverage": 773641.095890411,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1199210.6538461538
+            },
+            {
+                "grade": 8,
+                "totalCount": 194,
+                "localMedian": 1300000,
+                "localAverage": 1286658.4926470588,
+                "remoteMedian": 1900000,
+                "remoteAverage": 1996367.4827586208
+            },
+            {
+                "grade": 11,
+                "totalCount": 101,
+                "localMedian": 1590000,
+                "localAverage": 1660060.759493671,
+                "remoteMedian": 1825000,
+                "remoteAverage": 1924795.9090909092
+            },
+            {
+                "grade": 2,
+                "totalCount": 279,
+                "localMedian": 310000,
+                "localAverage": 350570.54263565893,
+                "remoteMedian": 350000,
+                "remoteAverage": 595088.3333333334
+            },
+            {
+                "grade": 5,
+                "totalCount": 450,
+                "localMedian": 720000,
+                "localAverage": 774002.6881720431,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1199210.6538461538
+            },
+            {
+                "grade": 8,
+                "totalCount": 196,
+                "localMedian": 1300000,
+                "localAverage": 1278880.8333333333,
+                "remoteMedian": 1900000,
+                "remoteAverage": 1996367.4827586208
+            },
+            {
+                "grade": 11,
+                "totalCount": 106,
+                "localMedian": 1625000,
+                "localAverage": 1684814.6341463414,
+                "remoteMedian": 1825000,
+                "remoteAverage": 1925479.5833333333
+            },
+            {
+                "grade": 2,
+                "totalCount": 291,
+                "localMedian": 325000,
+                "localAverage": 352315.55555555556,
+                "remoteMedian": 350000,
+                "remoteAverage": 595088.3333333334
+            },
+            {
+                "grade": 5,
+                "totalCount": 473,
+                "localMedian": 700000,
+                "localAverage": 764989.8218829517,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1206730.3875
+            },
+            {
+                "grade": 8,
+                "totalCount": 200,
+                "localMedian": 1300000,
+                "localAverage": 1275784.0780141845,
+                "remoteMedian": 1900000,
+                "remoteAverage": 2118462.9491525423
+            },
+            {
+                "grade": 11,
+                "totalCount": 111,
+                "localMedian": 1590000,
+                "localAverage": 1663618.3908045976,
+                "remoteMedian": 1825000,
+                "remoteAverage": 1925479.5833333333
+            },
+            {
+                "grade": 2,
+                "totalCount": 317,
+                "localMedian": 325000,
+                "localAverage": 352911.6438356164,
+                "remoteMedian": 350000,
+                "remoteAverage": 591874.2
+            },
+            {
+                "grade": 5,
+                "totalCount": 509,
+                "localMedian": 700000,
+                "localAverage": 764011.8483412323,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1206188.8620689656
+            },
+            {
+                "grade": 8,
+                "totalCount": 220,
+                "localMedian": 1200000,
+                "localAverage": 1277889.5886075948,
+                "remoteMedian": 1950000,
+                "remoteAverage": 2112730.870967742
+            },
+            {
+                "grade": 11,
+                "totalCount": 117,
+                "localMedian": 1590000,
+                "localAverage": 1656288.1720430108,
+                "remoteMedian": 1825000,
+                "remoteAverage": 1925479.5833333333
+            },
+            {
+                "grade": 2,
+                "totalCount": 327,
+                "localMedian": 335000,
+                "localAverage": 355960.9271523179,
+                "remoteMedian": 350000,
+                "remoteAverage": 591874.2
+            },
+            {
+                "grade": 5,
+                "totalCount": 523,
+                "localMedian": 700000,
+                "localAverage": 761928.2407407408,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1202795.7802197803
+            },
+            {
+                "grade": 8,
+                "totalCount": 226,
+                "localMedian": 1200000,
+                "localAverage": 1275661.8322981365,
+                "remoteMedian": 1900000,
+                "remoteAverage": 2108481.7538461536
+            },
+            {
+                "grade": 11,
+                "totalCount": 124,
+                "localMedian": 1590000,
+                "localAverage": 1654482.4742268042,
+                "remoteMedian": 2000000,
+                "remoteAverage": 1947393.4814814816
+            },
+            {
+                "grade": 2,
+                "totalCount": 343,
+                "localMedian": 327500,
+                "localAverage": 354921.01910828025,
+                "remoteMedian": 350000,
+                "remoteAverage": 576788.1034482758
+            },
+            {
+                "grade": 5,
+                "totalCount": 542,
+                "localMedian": 700000,
+                "localAverage": 754671.875,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1203929.9574468085
+            },
+            {
+                "grade": 8,
+                "totalCount": 239,
+                "localMedian": 1200000,
+                "localAverage": 1252597.3823529412,
+                "remoteMedian": 1900000,
+                "remoteAverage": 2056540.7826086956
+            },
+            {
+                "grade": 11,
+                "totalCount": 130,
+                "localMedian": 1500000,
+                "localAverage": 1641114.563106796,
+                "remoteMedian": 2000000,
+                "remoteAverage": 1947393.4814814816
+            },
+            {
+                "grade": 2,
+                "totalCount": 348,
+                "localMedian": 330000,
+                "localAverage": 356066.4576802508,
+                "remoteMedian": 350000,
+                "remoteAverage": 576788.1034482758
+            },
+            {
+                "grade": 5,
+                "totalCount": 551,
+                "localMedian": 700000,
+                "localAverage": 756121.1453744493,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1204741.381443299
+            },
+            {
+                "grade": 8,
+                "totalCount": 252,
+                "localMedian": 1200000,
+                "localAverage": 1260399.7486033519,
+                "remoteMedian": 1862000,
+                "remoteAverage": 2036319.3698630137
+            },
+            {
+                "grade": 11,
+                "totalCount": 133,
+                "localMedian": 1545000,
+                "localAverage": 1636649.0566037735,
+                "remoteMedian": 2000000,
+                "remoteAverage": 1947393.4814814816
+            },
+            {
+                "grade": 2,
+                "totalCount": 349,
+                "localMedian": 330000,
+                "localAverage": 356360,
+                "remoteMedian": 350000,
+                "remoteAverage": 576788.1034482758
+            },
+            {
+                "grade": 5,
+                "totalCount": 559,
+                "localMedian": 700000,
+                "localAverage": 754435.064935065,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1204741.381443299
+            },
+            {
+                "grade": 8,
+                "totalCount": 252,
+                "localMedian": 1200000,
+                "localAverage": 1260399.7486033519,
+                "remoteMedian": 1862000,
+                "remoteAverage": 2036319.3698630137
+            },
+            {
+                "grade": 11,
+                "totalCount": 134,
+                "localMedian": 1590000,
+                "localAverage": 1638175.7009345794,
+                "remoteMedian": 2000000,
+                "remoteAverage": 1947393.4814814816
+            },
+            {
+                "grade": 2,
+                "totalCount": 362,
+                "localMedian": 330000,
+                "localAverage": 357421.021021021,
+                "remoteMedian": 350000,
+                "remoteAverage": 576788.1034482758
+            },
+            {
+                "grade": 5,
+                "totalCount": 574,
+                "localMedian": 700000,
+                "localAverage": 757759.8739495798,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1200152.1836734693
+            },
+            {
+                "grade": 8,
+                "totalCount": 256,
+                "localMedian": 1200000,
+                "localAverage": 1260118.434065934,
+                "remoteMedian": 1841000,
+                "remoteAverage": 2031098.8378378379
+            },
+            {
+                "grade": 11,
+                "totalCount": 139,
+                "localMedian": 1555000,
+                "localAverage": 1629953.5714285714,
+                "remoteMedian": 2000000,
+                "remoteAverage": 1947393.4814814816
+            },
+            {
+                "grade": 2,
+                "totalCount": 384,
+                "localMedian": 330000,
+                "localAverage": 360850.8474576271,
+                "remoteMedian": 350000,
+                "remoteAverage": 573561.8333333334
+            },
+            {
+                "grade": 5,
+                "totalCount": 613,
+                "localMedian": 700000,
+                "localAverage": 758946.3654223968,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1193316.4807692308
+            },
+            {
+                "grade": 8,
+                "totalCount": 267,
+                "localMedian": 1200000,
+                "localAverage": 1264607.0572916667,
+                "remoteMedian": 1820000,
+                "remoteAverage": 2026350.8533333333
+            },
+            {
+                "grade": 11,
+                "totalCount": 149,
+                "localMedian": 1565000,
+                "localAverage": 1627456.6666666667,
+                "remoteMedian": 2000000,
+                "remoteAverage": 1993276.7586206896
+            },
+            {
+                "grade": 2,
+                "totalCount": 399,
+                "localMedian": 322500,
+                "localAverage": 360514.1304347826,
+                "remoteMedian": 350000,
+                "remoteAverage": 582801.7741935484
+            },
+            {
+                "grade": 5,
+                "totalCount": 634,
+                "localMedian": 700000,
+                "localAverage": 758683.7429111531,
+                "remoteMedian": 1100000,
+                "remoteAverage": 1188046.8
+            },
+            {
+                "grade": 8,
+                "totalCount": 279,
+                "localMedian": 1200000,
+                "localAverage": 1263669.4278606966,
+                "remoteMedian": 1810000,
+                "remoteAverage": 2029183.5128205128
+            },
+            {
+                "grade": 11,
+                "totalCount": 153,
+                "localMedian": 1600000,
+                "localAverage": 1641421.138211382,
+                "remoteMedian": 2000000,
+                "remoteAverage": 2110167.533333333
+            },
+            {
+                "grade": 2,
+                "totalCount": 431,
+                "localMedian": 330000,
+                "localAverage": 361275.75757575757,
+                "remoteMedian": 350000,
+                "remoteAverage": 564195.8571428572
+            },
+            {
+                "grade": 5,
+                "totalCount": 725,
+                "localMedian": 715000,
+                "localAverage": 768454.355848435,
+                "remoteMedian": 1125000,
+                "remoteAverage": 1202004.2542372881
+            },
+            {
+                "grade": 8,
+                "totalCount": 337,
+                "localMedian": 1200000,
+                "localAverage": 1266964.8125,
+                "remoteMedian": 1800000,
+                "remoteAverage": 1997724.8865979381
+            },
+            {
+                "grade": 11,
+                "totalCount": 182,
+                "localMedian": 1565000,
+                "localAverage": 1623816.2162162163,
+                "remoteMedian": 2000000,
+                "remoteAverage": 2114789.4411764704
+            }
+        ]
+    },
+    "shouldAddOwnSalary": false,
+    "hasAuthentication": true,
+    "from": "2023-06-15T05:00:10.5964449+00:00",
+    "to": "2024-06-15T05:00:10.5964449+00:00",
+    "chartFrom": "0001-01-01T00:00:00+00:00",
+    "chartTo": "0001-01-01T00:00:00+00:00"
+}
