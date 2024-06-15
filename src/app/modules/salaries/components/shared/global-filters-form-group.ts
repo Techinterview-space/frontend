@@ -23,7 +23,6 @@ export class SalaryChartGlobalFiltersData {
   }
 
   equals(other: SalaryChartGlobalFiltersData): boolean {
-    // TODO mgorbatyuk: do more smart check that two arrays are not same
     return (
       this.grade === other.grade &&
       this.cities.length === other.cities.length &&

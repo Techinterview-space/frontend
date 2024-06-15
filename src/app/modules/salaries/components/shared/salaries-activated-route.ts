@@ -1,7 +1,7 @@
 import { DeveloperGrade } from "@models/enums";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { Observable, map } from "rxjs";
-import { SalaryChartGlobalFiltersData } from "./salary-chart-global-filters/global-filters-form-group";
+import { SalaryChartGlobalFiltersData } from "./global-filters-form-group";
 import { ActivatedRoute } from "@angular/router";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 

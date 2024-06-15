@@ -5,7 +5,7 @@ import {
 } from "@services/user-salaries.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { SalariesAddingChart } from "./salaries-adding-chart";
-import { SalaryChartGlobalFiltersData } from "../salary-chart-global-filters/global-filters-form-group";
+import { SalaryChartGlobalFiltersData } from "../../shared/global-filters-form-group";
 
 @Component({
   selector: "app-salaries-adding-chart",
@@ -13,16 +13,13 @@ import { SalaryChartGlobalFiltersData } from "../salary-chart-global-filters/glo
   styleUrl: "./salaries-adding-chart.component.scss",
 })
 export class SalariesAddingChartComponent implements OnInit, OnDestroy {
-
   @Input()
   filter: SalaryChartGlobalFiltersData | null = null;
 
   data: SalariesAddingTrendChart | null = null;
   chart: SalariesAddingChart | null = null;
 
-  constructor(
-    private readonly service: UserSalariesService
-  ) {}
+  constructor(private readonly service: UserSalariesService) {}
 
   ngOnInit(): void {
     this.chart = null;
@@ -35,7 +32,10 @@ export class SalariesAddingChartComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.data = x;
-        this.chart = new SalariesAddingChart("canvas-adding-trend-chart", this.data);
+        this.chart = new SalariesAddingChart(
+          "canvas-adding-trend-chart",
+          this.data
+        );
       });
   }
 

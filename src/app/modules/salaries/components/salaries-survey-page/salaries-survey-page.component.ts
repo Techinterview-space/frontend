@@ -1,6 +1,13 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { ExpectationReplyType, GetUserSalariesSurveyDataResponse, SalariesSurveyReplyDataItem, SalariesSurveyStatData, SurveyService, UsefulnessReplyType } from "@services/salaries-survey.service";
+import {
+  ExpectationReplyType,
+  GetUserSalariesSurveyDataResponse,
+  SalariesSurveyReplyDataItem,
+  SalariesSurveyStatData,
+  SurveyService,
+  UsefulnessReplyType,
+} from "@services/salaries-survey.service";
 import { TitleService } from "@services/title.service";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { CookieService } from "ngx-cookie-service";
@@ -29,7 +36,6 @@ interface ProgressBarColorData {
   styleUrls: ["./salaries-survey-page.component.scss"],
 })
 export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
-
   static readonly defaultColor: ProgressBarColorData = {
     label: "Нет данных",
     cssBackground: "bg-light",
@@ -43,44 +49,60 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     UsefulnessReplyType,
     ProgressBarColorData
   > = new Map([
-    [UsefulnessReplyType.Yes, {
+    [
+      UsefulnessReplyType.Yes,
+      {
         label: "Да",
         cssBackground: "bg-success",
         cssText: "",
-      }
+      },
     ],
-    [UsefulnessReplyType.No, {
-      label: "Нет",
-      cssBackground: "bg-warning",
-      cssText: "text-dark",
-    }],
-    [UsefulnessReplyType.NotSure, {
-      label: "Не уверен",
-      cssBackground: "bg-light border border-2",
-      cssText: "text-dark",
-    }],
+    [
+      UsefulnessReplyType.No,
+      {
+        label: "Нет",
+        cssBackground: "bg-warning",
+        cssText: "text-dark",
+      },
+    ],
+    [
+      UsefulnessReplyType.NotSure,
+      {
+        label: "Не уверен",
+        cssBackground: "bg-light border border-2",
+        cssText: "text-dark",
+      },
+    ],
   ]);
 
   static readonly colorsByExpectation: Map<
     ExpectationReplyType,
     ProgressBarColorData
-    > = new Map([
-    [ExpectationReplyType.Expected, {
+  > = new Map([
+    [
+      ExpectationReplyType.Expected,
+      {
         label: "Ожидаемо",
         cssBackground: "bg-info",
         cssText: "text-dark",
-      }
+      },
     ],
-    [ExpectationReplyType.MoreThanExpected, {
-      label: "Выше ожидаемого",
-      cssBackground: "bg-success",
-      cssText: "",
-    }],
-    [ExpectationReplyType.LessThanExpected, {
-      label: "Ниже ожидаемого",
-      cssBackground: "bg-warning",
-      cssText: "text-dark",
-    }],
+    [
+      ExpectationReplyType.MoreThanExpected,
+      {
+        label: "Выше ожидаемого",
+        cssBackground: "bg-success",
+        cssText: "",
+      },
+    ],
+    [
+      ExpectationReplyType.LessThanExpected,
+      {
+        label: "Ниже ожидаемого",
+        cssBackground: "bg-warning",
+        cssText: "text-dark",
+      },
+    ],
   ]);
 
   data: SalariesSurveyStatData | null = null;
@@ -103,27 +125,41 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     titleService.setTitle("Опрос о пользе зарплатной статистики");
 
     this.usefullnesLegendItems = [
-      SalariesSurveyPageComponent.colorsByUsefulness.get(UsefulnessReplyType.Yes) ?? SalariesSurveyPageComponent.defaultColor,
-      SalariesSurveyPageComponent.colorsByUsefulness.get(UsefulnessReplyType.No) ?? SalariesSurveyPageComponent.defaultColor,
-      SalariesSurveyPageComponent.colorsByUsefulness.get(UsefulnessReplyType.NotSure) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByUsefulness.get(
+        UsefulnessReplyType.Yes
+      ) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByUsefulness.get(
+        UsefulnessReplyType.No
+      ) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByUsefulness.get(
+        UsefulnessReplyType.NotSure
+      ) ?? SalariesSurveyPageComponent.defaultColor,
     ];
 
     this.expectationLegendItems = [
-      SalariesSurveyPageComponent.colorsByExpectation.get(ExpectationReplyType.Expected) ?? SalariesSurveyPageComponent.defaultColor,
-      SalariesSurveyPageComponent.colorsByExpectation.get(ExpectationReplyType.MoreThanExpected) ?? SalariesSurveyPageComponent.defaultColor,
-      SalariesSurveyPageComponent.colorsByExpectation.get(ExpectationReplyType.LessThanExpected) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByExpectation.get(
+        ExpectationReplyType.Expected
+      ) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByExpectation.get(
+        ExpectationReplyType.MoreThanExpected
+      ) ?? SalariesSurveyPageComponent.defaultColor,
+      SalariesSurveyPageComponent.colorsByExpectation.get(
+        ExpectationReplyType.LessThanExpected
+      ) ?? SalariesSurveyPageComponent.defaultColor,
     ];
   }
- 
+
   ngOnInit(): void {
-     if (this.authService.isAuthenticated()) {
-       this.service.getUserSalariesSurveyDataResponse()
+    if (this.authService.isAuthenticated()) {
+      this.service
+        .getUserSalariesSurveyDataResponse()
         .pipe(untilDestroyed(this))
         .subscribe((data) => {
           this.userData = data;
 
           if (data.hasRecentSurveyReply) {
-            this.service.getSalariesStatSurveyData()
+            this.service
+              .getSalariesStatSurveyData()
               .pipe(untilDestroyed(this))
               .subscribe((x) => {
                 this.data = x;
@@ -134,7 +170,7 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
           }
         });
 
-       return;
+      return;
     }
 
     this.cookieService.set("url", this.router.url);
@@ -162,7 +198,8 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
       this.data.countOfRecords,
       this.showPercents,
       (replyType) => {
-        const colorData = SalariesSurveyPageComponent.colorsByUsefulness.get(replyType);
+        const colorData =
+          SalariesSurveyPageComponent.colorsByUsefulness.get(replyType);
         return colorData ?? SalariesSurveyPageComponent.defaultColor;
       }
     );
@@ -172,7 +209,8 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
       this.data.countOfRecords,
       this.showPercents,
       (replyType) => {
-        const colorData = SalariesSurveyPageComponent.colorsByExpectation.get(replyType);
+        const colorData =
+          SalariesSurveyPageComponent.colorsByExpectation.get(replyType);
         return colorData ?? SalariesSurveyPageComponent.defaultColor;
       }
     );
@@ -184,29 +222,26 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     showPercents: boolean,
     giveColorData: (replyType: TEnum) => ProgressBarColorData
   ): Array<ProgressBarData> {
-
     var result: Array<ProgressBarData> = [];
-    data
-      .forEach((item, index) => {
+    data.forEach((item, index) => {
+      const colorData = giveColorData(item.replyType);
+      const value = showPercents
+        ? formatNumber(item.data.partitionInPercent, "en-US", "1.0-2") + "%"
+        : formatNumber(item.data.countOfReplies, "en-US", "1.0-0");
 
-        const colorData = giveColorData(item.replyType);
-        const value = showPercents
-          ? formatNumber(item.data.partitionInPercent, "en-US", "1.0-2") + "%"
-          : formatNumber(item.data.countOfReplies, "en-US", "1.0-0");
+      const maxValue = showPercents
+        ? "100"
+        : formatNumber(totalCount, "en-US", "1.0-0");
 
-        const maxValue = showPercents
-          ? "100"
-          : formatNumber(totalCount, "en-US", "1.0-0");
-
-        result.push({
-          color: colorData.cssBackground,
-          textColor: colorData.cssText,
-          value: value,
-          maxValue: maxValue,
-          width: item.data.partitionInPercent,
-          label: colorData.label,
-        });
+      result.push({
+        color: colorData.cssBackground,
+        textColor: colorData.cssText,
+        value: value,
+        maxValue: maxValue,
+        width: item.data.partitionInPercent,
+        label: colorData.label,
       });
+    });
 
     return result;
   }

@@ -8,9 +8,9 @@ import { AuthService } from "@shared/services/auth/auth.service";
 import { CookieService } from "ngx-cookie-service";
 import { StubSalariesChart } from "./stub-salaries-chart";
 import { DeveloperGrade } from "@models/enums";
-import { SalaryChartGlobalFiltersData } from "./salary-chart-global-filters/global-filters-form-group";
+import { SalaryChartGlobalFiltersData } from "../shared/global-filters-form-group";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
-import { SalariesChartActivatedRoute } from "./salaries-activated-route";
+import { SalariesChartActivatedRoute } from "../shared/salaries-activated-route";
 import {
   ApiBackendAbsoluteUrl,
   ClipboardCopier,

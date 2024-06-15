@@ -20,14 +20,14 @@
           <tbody>
             <tr class="small" *ngFor="let item of items; let i = index">
               <td>{{ item.username }}</td>
-              <td>{{ item.usageCount | number: "1.0-0" }}</td>
+              <td>{{ item.usageCount | number : "1.0-0" }}</td>
               <td>{{ item.channelName ?? "-" }}</td>
               <td>{{ item.usageTypeAsString }}</td>
               <td title="{{ item.receivedMessageText }}">
                 {{ item.receivedMessageText }}
               </td>
-              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
-              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.createdAt | date : "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date : "yyyy-MM-dd HH:mm" }}</td>
             </tr>
           </tbody>
         </table>

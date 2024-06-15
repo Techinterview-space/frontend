@@ -142,7 +142,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
           {
             title: "Опрос о пользе статистики",
             url: "/salaries/survey",
-            show: true,
+            show: hasCurrentUser,
+          },
+          {
+            title: "Исторические данные",
+            url: "/salaries/historical-data",
+            show: hasCurrentUser,
           },
         ],
       },

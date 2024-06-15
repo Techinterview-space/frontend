@@ -8,7 +8,6 @@
       <div class="card">
         <div class="card-body">
           <ul class="list-group list-group-flush">
-
             <li class="list-group-item">
               <app-go-back-button></app-go-back-button>
             </li>
@@ -51,7 +50,7 @@
             <li class="list-group-item">
               <div class="text-muted small">Обновлено</div>
               <div>
-                {{ interview.updatedAt | date: "yyyy-MM-dd HH:mm" }}
+                {{ interview.updatedAt | date : "yyyy-MM-dd HH:mm" }}
               </div>
             </li>
             <li class="list-group-item">

@@ -23,7 +23,7 @@
             <tr *ngFor="let item of currencies" class="small">
               <td>{{ item.currencyString }}</td>
               <td>{{ item.value }} kzt</td>
-              <td>{{ item.pubDate | date: "yyyy-MM-dd" }}</td>
+              <td>{{ item.pubDate | date : "yyyy-MM-dd" }}</td>
             </tr>
           </tbody>
         </table>

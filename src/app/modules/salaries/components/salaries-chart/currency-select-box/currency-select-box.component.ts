@@ -10,7 +10,6 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
   styleUrl: "./currency-select-box.component.scss",
 })
 export class CurrencySelectBoxComponent implements OnInit {
-
   @Input()
   chart: SalariesChart | null = null;
 
@@ -22,45 +21,39 @@ export class CurrencySelectBoxComponent implements OnInit {
   currencies: Array<CurrencyData> | null = null;
   currencyDate: Date | null = null;
 
-  constructor(
-    private readonly gtag: GoogleAnalyticsService
-  ) {}
+  constructor(private readonly gtag: GoogleAnalyticsService) {}
 
   ngOnInit(): void {
-
     if (!this.chart) {
       return;
     }
 
     this.currencies = this.chart.currencies;
     if (this.currencies.length === 0) {
-      this.currencies.push(
-        {
-          value: 1,
-          currency: CurrencyType.KZT,
-          currencyString: "тг",
-          pubDate: new Date(),
-        }
-      );
+      this.currencies.push({
+        value: 1,
+        currency: CurrencyType.KZT,
+        currencyString: "тг",
+        pubDate: new Date(),
+      });
     }
 
-    this.currenciesAsItems = this.currencies
-      .map((x) => {
-        return {
-          value: CurrencyType[x.currency],
-          label: x.currency === CurrencyType.KZT
+    this.currenciesAsItems = this.currencies.map((x) => {
+      return {
+        value: CurrencyType[x.currency],
+        label:
+          x.currency === CurrencyType.KZT
             ? CurrencyType[x.currency]
             : `${CurrencyType[x.currency]} (${x.value} тг.)`,
-          item: x.currency,
-        };
-      });
+        item: x.currency,
+      };
+    });
 
     this.selectedCurrency = this.currenciesAsItems[0].item;
     this.currencyDate = this.currencies[0].pubDate;
   }
 
   onSelectionChange(e: SelectItem<CurrencyType>): void {
-
     if (e == null) {
       // clear selection
       return;

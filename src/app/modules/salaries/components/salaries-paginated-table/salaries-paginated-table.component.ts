@@ -5,7 +5,7 @@ import {
   SelectBoxItemsResponse,
   UserSalariesService,
 } from "@services/user-salaries.service";
-import { SalaryChartGlobalFiltersData } from "../salaries-chart/salary-chart-global-filters/global-filters-form-group";
+import { SalaryChartGlobalFiltersData } from "../shared/global-filters-form-group";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { SalaryTableRow } from "./salary-table-row";
 import { LabelEntityDto } from "@services/label-entity.model";
