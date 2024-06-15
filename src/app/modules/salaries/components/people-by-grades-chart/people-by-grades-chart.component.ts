@@ -19,7 +19,6 @@ interface ProgressBarData {
   styleUrl: "./people-by-grades-chart.component.scss",
 })
 export class PeopleByGradesChartComponent implements OnInit {
-
   readonly grades = DeveloperGradeEnum.grades;
 
   @Input()

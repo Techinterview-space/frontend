@@ -16,16 +16,14 @@ interface GradeToggleButton {
   styleUrls: ["./historical-salaries-by-grade-chart.component.scss"],
 })
 export class HistoricalSalariesByGradeChartComponent implements OnInit {
-
   gradesButtons: Array<GradeToggleButton> = [];
 
   @Input()
   data: SalariesCountWeekByWeekChart | null = null;
 
   chart: HistoricalSalariesByGradeChartObject | null = null;
- 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     if (this.data == null) {
       return;
     }
@@ -39,7 +37,8 @@ export class HistoricalSalariesByGradeChartComponent implements OnInit {
 
     this.chart = new HistoricalSalariesByGradeChartObject(
       "canvas-historical-chart-by-grade",
-      this.data);
+      this.data
+    );
   }
 
   private createGradeToggleButton(grade: DeveloperGrade): GradeToggleButton {
@@ -50,7 +49,7 @@ export class HistoricalSalariesByGradeChartComponent implements OnInit {
       textCss: color.cssText,
       toggle: () => {
         this.chart?.toggle(grade);
-      }
+      },
     };
   }
 }

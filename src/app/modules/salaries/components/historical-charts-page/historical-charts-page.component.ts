@@ -6,13 +6,19 @@ import { CookieService } from "ngx-cookie-service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { formatNumber } from "@angular/common";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
-import { GetSalariesHistoricalChartResponse, HistoricalChartsService } from "@services/historical-charts.service";
+import {
+  GetSalariesHistoricalChartResponse,
+  HistoricalChartsService,
+} from "@services/historical-charts.service";
 import { SalariesChartActivatedRoute } from "../shared/salaries-activated-route";
 import { SalaryChartGlobalFiltersData } from "../shared/global-filters-form-group";
 import { UserSalariesService } from "@services/user-salaries.service";
 import { LabelEntityDto } from "@services/label-entity.model";
 import { DeveloperGrade } from "@models/enums";
-import { ApiBackendAbsoluteUrl, ClipboardCopier } from "@shared/value-objects/clipboard-copier";
+import {
+  ApiBackendAbsoluteUrl,
+  ClipboardCopier,
+} from "@shared/value-objects/clipboard-copier";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 
 @Component({
@@ -20,7 +26,6 @@ import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-
   styleUrls: ["./historical-charts-page.component.scss"],
 })
 export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
-
   readonly activatedRoute: SalariesChartActivatedRoute;
 
   data: GetSalariesHistoricalChartResponse | null = null;
@@ -45,10 +50,9 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     titleService.setTitle("Исторические данные");
     this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
   }
- 
-  ngOnInit(): void {
-     if (this.authService.isAuthenticated()) {
 
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
       this.activatedRoute
         .getQueryParams()
         .pipe(untilDestroyed(this))
@@ -56,7 +60,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
           this.filterData = x;
           this.load(this.filterData);
         });
-       return;
+      return;
     }
 
     this.cookieService.set("url", this.router.url);
@@ -74,7 +78,11 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
 
     this.filterData = data;
     const selectedGrade = data.grade ? DeveloperGrade[data.grade] : "empty";
-    this.gtag.event("salaries_filters_applied", "historical_data", selectedGrade);
+    this.gtag.event(
+      "salaries_filters_applied",
+      "historical_data",
+      selectedGrade
+    );
     this.load(data);
   }
 
@@ -114,7 +122,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     const shouldLoadSelectBoxItems =
       this.skills.length === 0 ||
       this.industries.length === 0 ||
-      this.professions. length === 0 ||
+      this.professions.length === 0 ||
       this.initialLoading;
 
     if (shouldLoadSelectBoxItems) {
@@ -138,17 +146,15 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
 
   loadChartWithFilter(data: SalaryChartGlobalFiltersData | null = null): void {
     this.service
-    .salariesChart(
-      {
+      .salariesChart({
         grade: data?.grade ?? null,
         profsInclude: data?.profsInclude ?? null,
         cities: data?.cities ?? null,
-      }
-    )
-    .pipe(untilDestroyed(this))
-    .subscribe((x) => {
-      this.isAuthenticated = x.hasAuthentication;
-      this.data = x;
-    });
+      })
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.isAuthenticated = x.hasAuthentication;
+        this.data = x;
+      });
   }
 }

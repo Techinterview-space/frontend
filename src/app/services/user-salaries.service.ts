@@ -188,8 +188,9 @@ export class UserSalariesService {
     params: SalariesAddingTrendChartParams
   ): Observable<SalariesAddingTrendChart> {
     return this.api.get<SalariesAddingTrendChart>(
-      this.root + "salaries-adding-trend-chart?" +
-      new ConvertObjectToHttpParams(params).get()
+      this.root +
+        "salaries-adding-trend-chart?" +
+        new ConvertObjectToHttpParams(params).get()
     );
   }
 

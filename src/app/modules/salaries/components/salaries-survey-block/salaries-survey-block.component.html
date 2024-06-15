@@ -1,21 +1,14 @@
-<div
-  *ngIf="formGroup"
-  class="alert alert-primary p-5"
-  role="alert">
-
+<div *ngIf="formGroup" class="alert alert-primary p-5" role="alert">
   <div *ngIf="showThankYouBlock">
-    <div class="mb-3 h2 alert-heading">
-      Спасибо за ваш отзыв!
-    </div>
+    <div class="mb-3 h2 alert-heading">Спасибо за ваш отзыв!</div>
   </div>
 
   <div *ngIf="!showThankYouBlock">
-    <div class="mb-3 h3 alert-heading">
-      Была ли статистика полезной?
-    </div>
-  
+    <div class="mb-3 h3 alert-heading">Была ли статистика полезной?</div>
+
     <div class="mb-3">
-      Надеемся, что предоставленные данные были полезны для вас. Пожалуйста, оцените нашу работу.
+      Надеемся, что предоставленные данные были полезны для вас. Пожалуйста,
+      оцените нашу работу.
     </div>
 
     <div>
@@ -25,19 +18,22 @@
             <b>Была ли статистика полезной для вас?</b>
           </div>
           <div
-            *ngFor="let choice of formGroup.usefullnessReplyOptions; let i=index"
-            class="form-check">
+            *ngFor="
+              let choice of formGroup.usefullnessReplyOptions;
+              let i = index
+            "
+            class="form-check"
+          >
             <input
-                class="form-check-input"
-                type="radio"
-                name="usefullnessReply"
-                id="usefullnessReply{{i}}"
-                [value]="choice.value"
-                (change)="formGroup.onCheckUsefulnessReply($event)" />
-            <label
-              class="form-check-label"
-              for="usefullnessReply{{i}}">
-              {{choice.label}}
+              class="form-check-input"
+              type="radio"
+              name="usefullnessReply"
+              id="usefullnessReply{{ i }}"
+              [value]="choice.value"
+              (change)="formGroup.onCheckUsefulnessReply($event)"
+            />
+            <label class="form-check-label" for="usefullnessReply{{ i }}">
+              {{ choice.label }}
             </label>
           </div>
           <app-field-error
@@ -50,19 +46,22 @@
             <b>Зарплаты оказались такими, как вы предполагали?</b>
           </div>
           <div
-            *ngFor="let choice of formGroup.expectationReplyOptions; let i=index"
-            class="form-check">
+            *ngFor="
+              let choice of formGroup.expectationReplyOptions;
+              let i = index
+            "
+            class="form-check"
+          >
             <input
-                class="form-check-input"
-                type="radio"
-                name="expectationReply"
-                id="expectationReply{{i}}"
-                [value]="choice.value"
-                (change)="formGroup.onCheckExpectationReply($event)" />
-            <label
-              class="form-check-label"
-              for="expectationReply{{i}}">
-              {{choice.label}}
+              class="form-check-input"
+              type="radio"
+              name="expectationReply"
+              id="expectationReply{{ i }}"
+              [value]="choice.value"
+              (change)="formGroup.onCheckExpectationReply($event)"
+            />
+            <label class="form-check-label" for="expectationReply{{ i }}">
+              {{ choice.label }}
             </label>
           </div>
           <app-field-error
@@ -73,7 +72,6 @@
         <div>
           <app-submit-button (btnSubmit)="reply()">Отправить</app-submit-button>
         </div>
-
       </form>
     </div>
   </div>

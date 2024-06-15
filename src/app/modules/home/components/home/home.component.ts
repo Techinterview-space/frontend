@@ -10,26 +10,25 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
   private readonly activatedRoute: ActivatedRouteExtended;
 
-  readonly uwuLinkLight = "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/uwu_light_1000.png";
-  readonly uwuLinkDark = "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/uwu_dark_1000.png";
+  readonly uwuLinkLight =
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/uwu_light_1000.png";
+  readonly uwuLinkDark =
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/uwu_dark_1000.png";
 
   showUwu = false;
   uwuImageLink: string | null = null;
   loaded = false;
 
-  constructor(
-    titleService: TitleService,
-    activatedRoute: ActivatedRoute
-  ) {
+  constructor(titleService: TitleService, activatedRoute: ActivatedRoute) {
     titleService.resetTitle();
     this.activatedRoute = new ActivatedRouteExtended(activatedRoute);
   }
 
   ngOnInit(): void {
-    this.activatedRoute.getQueryParam("uwu")
+    this.activatedRoute
+      .getQueryParam("uwu")
       .pipe(untilDestroyed(this))
       .subscribe((uwu) => {
         this.loaded = true;
@@ -47,8 +46,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private getUwuLink(): string {
     const date = new Date(Date.now());
-    return date.getSeconds() % 2 === 0
-      ? this.uwuLinkLight
-      : this.uwuLinkDark;
+    return date.getSeconds() % 2 === 0 ? this.uwuLinkLight : this.uwuLinkDark;
   }
 }

@@ -16,7 +16,11 @@ describe("HistoricalChartsPageComponent", () => {
     await TestBed.configureTestingModule({
       declarations: [HistoricalChartsPageComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices, HistoricalChartsService],
+      providers: [
+        ...testUtilStubs,
+        ...mostUsedServices,
+        HistoricalChartsService,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

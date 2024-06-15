@@ -20,20 +20,22 @@
       </thead>
       <tbody>
         <tr class="small" *ngFor="let item of items; let i = index">
-          <td>{{ item.value | number: "1.0-0" }}</td>
+          <td>{{ item.value | number : "1.0-0" }}</td>
           <td>{{ item.quarter }}.{{ item.year }}</td>
           <td>{{ item.age }}</td>
           <td>{{ item.gender }}</td>
           <td>{{ item.yearOfStartingWork }}</td>
           <td>{{ item.profession }}</td>
           <td>
-            <app-developer-grade-label [grade]="item.gradeAsEnum"></app-developer-grade-label>
+            <app-developer-grade-label
+              [grade]="item.gradeAsEnum"
+            ></app-developer-grade-label>
           </td>
           <td>{{ item.company }}</td>
           <td>{{ item.city }}</td>
           <td>{{ item.skill }}</td>
           <td>{{ item.industry }}</td>
-          <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+          <td>{{ item.createdAt | date : "yyyy-MM-dd HH:mm" }}</td>
         </tr>
       </tbody>
     </table>

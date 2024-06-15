@@ -59,7 +59,7 @@ import { HistoricalSalariesByGradeChartComponent } from "./components/historical
     CurrencySelectBoxComponent,
     HistoricalChartsPageComponent,
     HistoricalSalariesChartComponent,
-    HistoricalSalariesByGradeChartComponent
+    HistoricalSalariesByGradeChartComponent,
   ],
   imports: [
     CommonModule,

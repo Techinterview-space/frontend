@@ -37,15 +37,22 @@ export class SalaryBlockValueComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.median = SalaryBlockValueComponent.formatNumber(this.source.medianSalary);
-    this.average = SalaryBlockValueComponent.formatNumber(this.source.averageSalary);
-    this.medianRemote = SalaryBlockValueComponent.formatNumber(this.source.medianRemoteSalary);
-    this.averageRemote = SalaryBlockValueComponent.formatNumber(this.source.averageRemoteSalary);
+    this.median = SalaryBlockValueComponent.formatNumber(
+      this.source.medianSalary
+    );
+    this.average = SalaryBlockValueComponent.formatNumber(
+      this.source.averageSalary
+    );
+    this.medianRemote = SalaryBlockValueComponent.formatNumber(
+      this.source.medianRemoteSalary
+    );
+    this.averageRemote = SalaryBlockValueComponent.formatNumber(
+      this.source.averageRemoteSalary
+    );
     this.currentCurrencyLabel = this.source.getCurrentCurrencyLabel();
   }
 
   private static formatNumber(value: number | null | undefined): string {
-
     if (value == null) {
       return "";
     }

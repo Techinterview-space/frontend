@@ -1,13 +1,10 @@
 <app-page-header>Опрос о пользе зарплатной статистики</app-page-header>
 
 <div class="container mt-5 mb-5" *ngIf="userData; else dataLoading">
-
   <div class="card">
     <div class="card-body">
-      
       <div class="" *ngIf="userData.hasRecentSurveyReply && data != null">
         <div class="">
-
           <div class="mb-5">
             <div class="mb-3 h3">Спасибо за обратную связь!</div>
 
@@ -15,7 +12,8 @@
               Вы уже оставили когда-то свое мнение о предоставленной статистике.
             </div>
             <div>
-              Ниже представлена общая статистика по результатам опроса. Посмотрите, как много людей думают так же, как вы.
+              Ниже представлена общая статистика по результатам опроса.
+              Посмотрите, как много людей думают так же, как вы.
             </div>
           </div>
 
@@ -23,7 +21,7 @@
             <span class="me-2">Кол-во ответов:</span>
             <span>{{ data.countOfRecords }}</span>
           </div>
-  
+
           <div *ngIf="progressBarForUsefullness" class="mb-5">
             <div class="mb-3 h4">Полезность статистики</div>
             <div class="progress" (click)="toggleCountAndPercent()">
@@ -45,15 +43,17 @@
               </div>
             </div>
             <div class="mt-2">
-              <span class="me-2">
-                Значения:
-              </span>
+              <span class="me-2"> Значения: </span>
               <span
                 *ngFor="let item of usefullnesLegendItems"
-                class="ms-2 badge rounded-pill {{ item.cssBackground }} {{ item.cssText }}">{{ item.label }}</span>
+                class="ms-2 badge rounded-pill {{ item.cssBackground }} {{
+                  item.cssText
+                }}"
+                >{{ item.label }}</span
+              >
             </div>
           </div>
-  
+
           <div *ngIf="progressBarForExpectation" class="">
             <div class="mb-3 h4">Ожидания респондентов от статистики</div>
             <div class="progress" (click)="toggleCountAndPercent()">
@@ -75,33 +75,32 @@
               </div>
             </div>
             <div class="mt-2">
-              <span class="me-2">
-                Значения:
-              </span>
+              <span class="me-2"> Значения: </span>
               <span
                 *ngFor="let item of expectationLegendItems"
-                class="ms-2 px-3 badge rounded-pill {{ item.cssBackground }} {{ item.cssText }}">{{ item.label }}</span>
+                class="ms-2 px-3 badge rounded-pill {{ item.cssBackground }} {{
+                  item.cssText
+                }}"
+                >{{ item.label }}</span
+              >
             </div>
           </div>
-  
         </div>
       </div>
 
       <div class="" *ngIf="!userData.hasRecentSurveyReply">
         <div class="mb-1">
-          Нам важно мнение пользователей о предоставленной статистике. 
-          Интересно взглянуть на то, как респонденты оценивают свою зарплату и какие ожидания у них относительно рынка труда в Казахстане.
+          Нам важно мнение пользователей о предоставленной статистике. Интересно
+          взглянуть на то, как респонденты оценивают свою зарплату и какие
+          ожидания у них относительно рынка труда в Казахстане.
         </div>
-        <div class="mb-5">
-          Пожалуйста, примите участие в опросе.
-        </div>
+        <div class="mb-5">Пожалуйста, примите участие в опросе.</div>
         <div class="ps-1 pe-1">
           <app-salaries-survey-block
             (closeButtonClick)="closeSurveyBlock()"
-            ></app-salaries-survey-block>
+          ></app-salaries-survey-block>
         </div>
       </div>
-
     </div>
   </div>
 </div>

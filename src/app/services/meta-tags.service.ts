@@ -4,49 +4,47 @@ import { environment } from "@environments/environment";
 import { TitleService } from "@services/title.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MetaTagService {
   constructor(
     private readonly title: TitleService,
-    private readonly meta: Meta) {}
+    private readonly meta: Meta
+  ) {}
 
-  updateChartMetaTags(
-    title: string,
-    description: string,
-    url: string): void {
-
+  updateChartMetaTags(title: string, description: string, url: string): void {
     this.title.setTitle(title);
-    url = url.startsWith('/') ? url : `/${url}`;
+    url = url.startsWith("/") ? url : `/${url}`;
 
     this.removeTags();
     this.meta.addTags([
-      { property: 'og:title', content: title },
-      { name: 'twitter:title', content: title },
+      { property: "og:title", content: title },
+      { name: "twitter:title", content: title },
 
-      { name: 'description', content: description },
-      { property: 'og:description', content: description },
-      { name: 'twitter:description', content: description },
+      { name: "description", content: description },
+      { property: "og:description", content: description },
+      { name: "twitter:description", content: description },
 
-      { property: 'og:url', content: environment.baseUrl + url },
+      { property: "og:url", content: environment.baseUrl + url },
     ]);
   }
 
   returnDefaultMetaTags(): void {
     this.removeTags();
 
-    const title = 'Techinterview.space';
-    const description = 'Зарплаты в IT в Казахстане. Цифры, графики, фильтр. Всё как все мы любим';
+    const title = "Techinterview.space";
+    const description =
+      "Зарплаты в IT в Казахстане. Цифры, графики, фильтр. Всё как все мы любим";
 
     this.meta.addTags([
-      { property: 'og:title', content: title },
-      { name: 'twitter:title', content: title },
+      { property: "og:title", content: title },
+      { name: "twitter:title", content: title },
 
-      { name: 'description', content: description },
-      { property: 'og:description', content: description },
-      { name: 'twitter:description', content: description },
+      { name: "description", content: description },
+      { property: "og:description", content: description },
+      { name: "twitter:description", content: description },
 
-      { property: 'og:url', content: environment.baseUrl },
+      { property: "og:url", content: environment.baseUrl },
     ]);
   }
 

@@ -32,16 +32,20 @@ export class SalariesAdminPaginatedTableComponent {
   showExcludeButton = false;
 
   @Output()
-  loadDataRequested: EventEmitter<AdminAllSalariesQueryParams> = new EventEmitter<AdminAllSalariesQueryParams>();
+  loadDataRequested: EventEmitter<AdminAllSalariesQueryParams> =
+    new EventEmitter<AdminAllSalariesQueryParams>();
 
   @Output()
-  approveRequested: EventEmitter<SalaryAdminItem> = new EventEmitter<SalaryAdminItem>();
+  approveRequested: EventEmitter<SalaryAdminItem> =
+    new EventEmitter<SalaryAdminItem>();
 
   @Output()
-  excludeRequested: EventEmitter<SalaryAdminItem> = new EventEmitter<SalaryAdminItem>();
+  excludeRequested: EventEmitter<SalaryAdminItem> =
+    new EventEmitter<SalaryAdminItem>();
 
   @Output()
-  deleteRequested: EventEmitter<SalaryAdminItem> = new EventEmitter<SalaryAdminItem>();
+  deleteRequested: EventEmitter<SalaryAdminItem> =
+    new EventEmitter<SalaryAdminItem>();
 
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
 

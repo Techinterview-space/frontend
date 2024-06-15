@@ -25,7 +25,6 @@ export interface DeveloperGradeLabel {
 }
 
 export class DeveloperGradeEnum {
-
   static readonly grades: Array<DeveloperGrade> = [
     DeveloperGrade.Trainee,
     DeveloperGrade.Junior,
@@ -41,40 +40,55 @@ export class DeveloperGradeEnum {
     cssText: "text-dark",
   };
 
-  static readonly colorsByGrade: Map<
-    DeveloperGrade,
-    DeveloperGradeLabel
-  > = new Map([
-    [DeveloperGrade.Trainee, {
-        label: "Trainee",
-        cssBackground: "bg-light",
-        cssText: "text-dark",
-      }
-    ],
-    [DeveloperGrade.Junior, {
-      label: "Junior",
-      cssBackground: "bg-success",
-      cssText: "text-light",
-    }],
-    [DeveloperGrade.Middle, {
-      label: "Middle",
-      cssBackground: "bg-warning",
-      cssText: "text-dark",
-    }],
-    [DeveloperGrade.Senior, {
-      label: "Senior",
-      cssBackground: "bg-info",
-      cssText: "text-dark",
-    }],
-    [DeveloperGrade.Lead, {
-      label: "Lead",
-      cssBackground: "bg-primary",
-      cssText: "text-light",
-    }],
-    [DeveloperGrade.Unknown, DeveloperGradeEnum.defaultColor],
-  ]);
+  static readonly colorsByGrade: Map<DeveloperGrade, DeveloperGradeLabel> =
+    new Map([
+      [
+        DeveloperGrade.Trainee,
+        {
+          label: "Trainee",
+          cssBackground: "bg-light",
+          cssText: "text-dark",
+        },
+      ],
+      [
+        DeveloperGrade.Junior,
+        {
+          label: "Junior",
+          cssBackground: "bg-success",
+          cssText: "text-light",
+        },
+      ],
+      [
+        DeveloperGrade.Middle,
+        {
+          label: "Middle",
+          cssBackground: "bg-warning",
+          cssText: "text-dark",
+        },
+      ],
+      [
+        DeveloperGrade.Senior,
+        {
+          label: "Senior",
+          cssBackground: "bg-info",
+          cssText: "text-dark",
+        },
+      ],
+      [
+        DeveloperGrade.Lead,
+        {
+          label: "Lead",
+          cssBackground: "bg-primary",
+          cssText: "text-light",
+        },
+      ],
+      [DeveloperGrade.Unknown, DeveloperGradeEnum.defaultColor],
+    ]);
 
   static getColorData(grade: DeveloperGrade): DeveloperGradeLabel {
-    return DeveloperGradeEnum.colorsByGrade.get(grade) ?? DeveloperGradeEnum.defaultColor;
+    return (
+      DeveloperGradeEnum.colorsByGrade.get(grade) ??
+      DeveloperGradeEnum.defaultColor
+    );
   }
 }

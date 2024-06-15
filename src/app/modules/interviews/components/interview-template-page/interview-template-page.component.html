@@ -47,7 +47,7 @@
             <li class="list-group-item">
               <div class="text-muted small">Обновлено</div>
               <div>
-                {{ interviewTemplate.updatedAt | date: "yyyy-MM-dd HH:mm" }}
+                {{ interviewTemplate.updatedAt | date : "yyyy-MM-dd HH:mm" }}
               </div>
             </li>
           </ul>
@@ -77,7 +77,6 @@
     </div>
 
     <div class="col-sm-9">
-
       <div class="card mb-3" *ngIf="interviewTemplate.overallOpinion">
         <div class="card-body">
           <div class="small text-muted">

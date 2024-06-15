@@ -7,13 +7,14 @@ import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 
 export interface SalariesCountWeekByWeekChartItem {
   totalCount: number;
-  localMedian: number,
-  localAverage: number,
-  remoteMedian: number,
-  remoteAverage: number,
+  localMedian: number;
+  localAverage: number;
+  remoteMedian: number;
+  remoteAverage: number;
 }
 
-export interface SalariesCountWeekByWeekChartGradeItem extends SalariesCountWeekByWeekChartItem {
+export interface SalariesCountWeekByWeekChartGradeItem
+  extends SalariesCountWeekByWeekChartItem {
   grade: DeveloperGrade;
 }
 
@@ -50,8 +51,11 @@ export class HistoricalChartsService {
     this.apiUrl = `/api/historical-charts/`;
   }
 
-  salariesChart(params: SalariesChartFilterData): Observable<GetSalariesHistoricalChartResponse> {
+  salariesChart(
+    params: SalariesChartFilterData
+  ): Observable<GetSalariesHistoricalChartResponse> {
     return this.api.get<GetSalariesHistoricalChartResponse>(
-      this.apiUrl + 'salaries?' + new ConvertObjectToHttpParams(params).get());
+      this.apiUrl + "salaries?" + new ConvertObjectToHttpParams(params).get()
+    );
   }
 }

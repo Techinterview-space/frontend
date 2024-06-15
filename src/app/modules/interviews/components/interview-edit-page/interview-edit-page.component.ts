@@ -74,13 +74,13 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
         }
 
         this.setTitle("Редактирование заметки");
-          this.service
-            .byId(this.interviewId)
-            .pipe(untilDestroyed(this))
-            .subscribe((i) => {
-              this.formGroup = new InterviewFormGroup(i);
-              this.selectedLabels = [...this.selectedLabels, ...i.labels];
-            });
+        this.service
+          .byId(this.interviewId)
+          .pipe(untilDestroyed(this))
+          .subscribe((i) => {
+            this.formGroup = new InterviewFormGroup(i);
+            this.selectedLabels = [...this.selectedLabels, ...i.labels];
+          });
       });
 
     this.userLabelsService

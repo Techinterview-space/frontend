@@ -8,20 +8,19 @@ import { HistoricalSalariesChartObject } from "./historical-salaries-chart-objec
   styleUrls: ["./historical-salaries-chart.component.scss"],
 })
 export class HistoricalSalariesChartComponent implements OnInit {
-
   @Input()
   data: SalariesCountWeekByWeekChart | null = null;
 
   chart: HistoricalSalariesChartObject | null = null;
- 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     if (this.data == null) {
       return;
     }
 
     this.chart = new HistoricalSalariesChartObject(
       "canvas-historical-chart",
-      this.data);
+      this.data
+    );
   }
 }

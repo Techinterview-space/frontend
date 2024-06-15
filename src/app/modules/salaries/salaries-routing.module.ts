@@ -14,7 +14,7 @@ const routes: Routes = [
     component: SalariesSurveyPageComponent,
   },
   {
-    path: 'historical-data',
+    path: "historical-data",
     component: HistoricalChartsPageComponent,
   },
 ];

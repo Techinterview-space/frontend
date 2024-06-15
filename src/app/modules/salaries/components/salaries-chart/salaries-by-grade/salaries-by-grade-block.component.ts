@@ -31,7 +31,6 @@ export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
   currentCurrencyLabel: string | null = null;
 
   ngOnInit(): void {
-
     if (this.chart == null) {
       this.items = [];
       return;
@@ -50,7 +49,9 @@ export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
   }
 
   private recaulculate(): void {
-    const source = this.showLocal ? this.chart!.localSalariesByGrade : this.chart!.remoteSalariesByGrade;
+    const source = this.showLocal
+      ? this.chart!.localSalariesByGrade
+      : this.chart!.remoteSalariesByGrade;
     if (source == null) {
       this.items = [];
       return;
@@ -66,8 +67,14 @@ export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
         hasData: x.hasData,
         averageSalary: x.averageSalary,
         medianSalary: x.medianSalary,
-        medianSalaryAsString: x.medianSalary != null ? formatNumber(x.medianSalary, "en-US", "1.0-2") : "",
-        averageSalaryAsString: x.averageSalary != null ? formatNumber(x.averageSalary, "en-US", "1.0-2") : "",
+        medianSalaryAsString:
+          x.medianSalary != null
+            ? formatNumber(x.medianSalary, "en-US", "1.0-2")
+            : "",
+        averageSalaryAsString:
+          x.averageSalary != null
+            ? formatNumber(x.averageSalary, "en-US", "1.0-2")
+            : "",
       };
     });
   }

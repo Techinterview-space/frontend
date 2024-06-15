@@ -12,15 +12,18 @@ export class SalaryBlockRemoteValueComponent {
   source: SalariesChart | null = null;
 
   get median(): string {
-    return SalaryBlockRemoteValueComponent.formatNumber(this.source?.medianRemoteSalary);
+    return SalaryBlockRemoteValueComponent.formatNumber(
+      this.source?.medianRemoteSalary
+    );
   }
 
   get average(): string {
-    return SalaryBlockRemoteValueComponent.formatNumber(this.source?.averageRemoteSalary);
+    return SalaryBlockRemoteValueComponent.formatNumber(
+      this.source?.averageRemoteSalary
+    );
   }
 
   private static formatNumber(value: number | null | undefined): string {
-
     if (value == null) {
       return "";
     }

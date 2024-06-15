@@ -10,7 +10,6 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
   styleUrl: "./salaries-survey-block.component.scss",
 })
 export class SalariesSurveyBlockComponent implements OnInit {
-
   showThankYouBlock = false;
   formGroup: SalariesSurveyForm | null = null;
 

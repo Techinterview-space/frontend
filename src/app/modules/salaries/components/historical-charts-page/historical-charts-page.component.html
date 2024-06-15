@@ -1,10 +1,8 @@
 <app-page-header>Исторические данные</app-page-header>
 
 <div class="container mt-5 mb-5" *ngIf="data; else dataLoading">
-
   <div class="card">
     <div class="card-body">
-
       <div class="mb-5">
         <app-salary-chart-global-filters
           [filterData]="filterData"
@@ -18,12 +16,13 @@
       <div class="mb-5">
         <app-historical-salaries-chart
           [data]="data.salariesCountWeekByWeekChart"
-          />
+        />
       </div>
 
       <div *ngIf="data.salariesCountWeekByWeekChart.hasGradeItems" class="mb-5">
         <app-historical-salaries-by-grade-chart
-          [data]="data.salariesCountWeekByWeekChart"/>
+          [data]="data.salariesCountWeekByWeekChart"
+        />
       </div>
     </div>
   </div>

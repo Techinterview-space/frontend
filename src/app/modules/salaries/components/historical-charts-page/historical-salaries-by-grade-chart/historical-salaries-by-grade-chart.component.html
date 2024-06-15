@@ -4,15 +4,17 @@
 
 <div class="mb-3">
   <div class="mb-2">
-    Ниже вы можете включить группы графиков для соответствующего грейда.
-    Будет показано по 4 линии на графике: медиана и средняя в Казахстане и медиана и средняя на удаленке.
+    Ниже вы можете включить группы графиков для соответствующего грейда. Будет
+    показано по 4 линии на графике: медиана и средняя в Казахстане и медиана и
+    средняя на удаленке.
   </div>
   <div class="">
     <button
       *ngFor="let button of gradesButtons"
       type="button"
       class="me-2 btn btn-sm {{ button.bgCss }} {{ button.textCss }}"
-      (click)="button.toggle()">
+      (click)="button.toggle()"
+    >
       {{ button.label }}
     </button>
   </div>
