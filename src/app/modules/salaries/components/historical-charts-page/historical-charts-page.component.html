@@ -32,7 +32,13 @@
         />
       </div>
 
-      <div *ngIf="data.salariesCountWeekByWeekChart && data.salariesCountWeekByWeekChart.hasGradeItems" class="mb-5">
+      <div
+        *ngIf="
+          data.salariesCountWeekByWeekChart &&
+          data.salariesCountWeekByWeekChart.hasGradeItems
+        "
+        class="mb-5"
+      >
         <app-historical-salaries-by-grade-chart
           [data]="data.salariesCountWeekByWeekChart"
         />

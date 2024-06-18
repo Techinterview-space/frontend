@@ -60,6 +60,14 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
           this.filterData = x;
           this.load(this.filterData);
         });
+
+      this.service
+        .surveyChart()
+        .pipe(untilDestroyed(this))
+        .subscribe((x) => {
+          console.log(x);
+        });
+
       return;
     }
 
