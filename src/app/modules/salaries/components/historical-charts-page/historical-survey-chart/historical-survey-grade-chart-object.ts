@@ -165,7 +165,7 @@ export class HistoricalSurveyGradeChartObject extends Chart {
         items.map((x) => totalCountDispatcher(x)),
         4,
         new RandomRgbColor(),
-        false as PointStyle,
+        "circle",
         "y1",
         "line",
         "0"

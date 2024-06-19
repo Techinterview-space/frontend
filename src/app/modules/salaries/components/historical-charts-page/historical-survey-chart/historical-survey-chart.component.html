@@ -5,6 +5,22 @@
   </div>
 </div>
 
+<div class="mb-2">
+  <div class="mb-1">
+    Ниже вы можете включить группы графиков для соответствующего грейда
+  </div>
+  <div class="">
+    <button
+      *ngFor="let button of gradesButtons"
+      type="button"
+      class="me-2 btn btn-sm {{ button.bgCss }} {{ button.textCss }}"
+      (click)="button.toggle()"
+    >
+      {{ button.label }}
+    </button>
+  </div>
+</div>
+
 <div class="mb-5">
   <div class="h4 mb-3">Польза статистики по мнению тех, кто работает на Казахстан</div>
   <div class="chart-container">

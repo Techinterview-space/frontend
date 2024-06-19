@@ -3,7 +3,7 @@
 <div class="container mt-5" *ngIf="data; else dataLoading">
   <div *ngIf="!data.shouldAddOwnSalary; else noCurrentSalary">
     <div class="card card-body">
-      <div class="mb-5 h2">Тенденция изменения зарплат</div>
+      <div class="mb-3 h1">Тенденция изменения медианы и средней зарплаты</div>
 
       <div class="mb-5">
         <p>
@@ -49,7 +49,7 @@
 
 <div class="container mt-5" *ngIf="surveyData; else dataLoading">
   <div class="card card-body">
-    <div class="mb-5 h2">Тенденция опроса о статистике</div>
+    <div class="mb-3 h1">Тенденция мнения о статистике</div>
 
     <div class="mt-5">
       <app-historical-survey-chart [data]="surveyData" />

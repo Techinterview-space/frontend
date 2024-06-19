@@ -24,7 +24,7 @@ export class HistoricalSurveyChartObject extends Chart {
         data.items.map((x) => x.totalCount),
         4,
         new RandomRgbColor(),
-        false as PointStyle,
+        "circle",
         "y1"
       ),
     ];

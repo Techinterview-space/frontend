@@ -4,6 +4,15 @@ import { HistoricalSurveyChartObject } from "./historical-survey-chart-object";
 import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
 import { HistoricalSurveyGradeChartObject } from "./historical-survey-grade-chart-object";
 import { HistoricalSurveyExpectationGradeChartObject } from "./historical-survey-expectation-grade-chart-object";
+import { DeveloperGrade, DeveloperGradeEnum } from "@models/enums";
+
+interface GradeToggleButton {
+  label: string;
+  bgCss: string;
+  textCss: string;
+  toggle(): void;
+}
+
 @Component({
   selector: "app-historical-survey-chart",
   templateUrl: "./historical-survey-chart.component.html",
@@ -12,6 +21,8 @@ import { HistoricalSurveyExpectationGradeChartObject } from "./historical-survey
 export class HistoricalSurveyChartComponent implements OnInit {
   @Input()
   data: HistoricalSurveyChartResponse | null = null;
+
+  gradesButtons: Array<GradeToggleButton> = [];
 
   surveyChart: HistoricalSurveyChartObject | null = null;
 
@@ -25,6 +36,13 @@ export class HistoricalSurveyChartComponent implements OnInit {
     if (this.data == null) {
       return;
     }
+
+    this.gradesButtons = [
+      this.createGradeToggleButton(DeveloperGrade.Junior),
+      this.createGradeToggleButton(DeveloperGrade.Middle),
+      this.createGradeToggleButton(DeveloperGrade.Senior),
+      this.createGradeToggleButton(DeveloperGrade.Lead),
+    ];
 
     this.surveyChart = new HistoricalSurveyChartObject(
       "historical-survey-chart",
@@ -58,5 +76,20 @@ export class HistoricalSurveyChartComponent implements OnInit {
       (x) => x.remoteExpectationPercentage,
       (x) => x.remoteCount
     );
+  }
+
+  private createGradeToggleButton(grade: DeveloperGrade): GradeToggleButton {
+    const color = DeveloperGradeEnum.getColorData(grade);
+    return {
+      label: color.label,
+      bgCss: color.cssBackground,
+      textCss: color.cssText,
+      toggle: () => {
+        this.surveyGradeLocalChart?.toggle(grade);
+        this.surveyGradeRemoteChart?.toggle(grade);
+        this.surveyExpectationGradeLocalChart?.toggle(grade);
+        this.surveyExpectationGradeRemoteChart?.toggle(grade);
+      },
+    };
   }
 }
