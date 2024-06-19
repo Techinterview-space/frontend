@@ -8,7 +8,11 @@ import { RgbColor } from "../../rgb-color";
 export class HistoricalSurveyGradeChartObject extends Chart {
   private readonly datasets: Array<DatasetItem> = [];
 
-  constructor(canvasId: string, chartData: HistoricalSurveyChartResponse) {
+  constructor(
+    canvasId: string,
+    chartData: HistoricalSurveyChartResponse,
+    dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => UsefulnessPercentage[],
+    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number) {
 
     const items = chartData.surveyResultsByWeeksChart.gradeItems;
 
@@ -17,25 +21,33 @@ export class HistoricalSurveyGradeChartObject extends Chart {
         DeveloperGrade.Junior,
         items,
         "1",
-        0
+        0,
+        dispatcher,
+        totalCountDispatcher
       ),
       ...HistoricalSurveyGradeChartObject.prepareDatasetsForGrade(
         DeveloperGrade.Middle,
         items,
         "2",
-        20
+        20,
+        dispatcher,
+        totalCountDispatcher
       ),
       ...HistoricalSurveyGradeChartObject.prepareDatasetsForGrade(
         DeveloperGrade.Senior,
         items,
         "3",
-        30
+        30,
+        dispatcher,
+        totalCountDispatcher
       ),
       ...HistoricalSurveyGradeChartObject.prepareDatasetsForGrade(
         DeveloperGrade.Lead,
         items,
         "4",
-        40
+        40,
+        dispatcher,
+        totalCountDispatcher
       ),
     ];
 
@@ -95,7 +107,9 @@ export class HistoricalSurveyGradeChartObject extends Chart {
     grade: DeveloperGrade,
     gradeItems: SurveyResultsByWeeksChartGradeItem[],
     stack: string,
-    darken = 0
+    darken = 0,
+    dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => UsefulnessPercentage[],
+    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
   ): Array<DatasetItem> {
     const items = gradeItems.filter((x) => x.grade === grade);
     const postfix = DeveloperGrade[grade];
@@ -104,7 +118,7 @@ export class HistoricalSurveyGradeChartObject extends Chart {
         grade,
         "Да, " + postfix,
         items.map((x) => HistoricalSurveyGradeChartObject
-          .getUsefulnessPercentage(UsefulnessReplyType.Yes, x.localUsefulnessPercentage)),
+          .getUsefulnessPercentage(UsefulnessReplyType.Yes, dispatcher(x))),
         1,
         RgbColor.green(darken),
         false as PointStyle,
@@ -119,7 +133,7 @@ export class HistoricalSurveyGradeChartObject extends Chart {
         grade,
         "Нет, " + postfix,
         items.map((x) => HistoricalSurveyGradeChartObject
-          .getUsefulnessPercentage(UsefulnessReplyType.No, x.localUsefulnessPercentage)),
+          .getUsefulnessPercentage(UsefulnessReplyType.No, dispatcher(x))),
         1,
         RgbColor.red(darken),
         false as PointStyle,
@@ -134,7 +148,7 @@ export class HistoricalSurveyGradeChartObject extends Chart {
         grade,
         "Не уверен, " + postfix,
         items.map((x) => HistoricalSurveyGradeChartObject
-          .getUsefulnessPercentage(UsefulnessReplyType.NotSure, x.localUsefulnessPercentage)),
+          .getUsefulnessPercentage(UsefulnessReplyType.NotSure, dispatcher(x))),
         1,
         RgbColor.grey(darken),
         false as PointStyle,
@@ -148,7 +162,7 @@ export class HistoricalSurveyGradeChartObject extends Chart {
       new DatasetItem(
         grade,
         "Количество ответов, " + postfix,
-        items.map((x) => x.totalCount),
+        items.map((x) => totalCountDispatcher(x)),
         4,
         new RandomRgbColor(),
         false as PointStyle,

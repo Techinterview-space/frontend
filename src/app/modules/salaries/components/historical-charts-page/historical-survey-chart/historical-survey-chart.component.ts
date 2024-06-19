@@ -14,8 +14,12 @@ export class HistoricalSurveyChartComponent implements OnInit {
   data: HistoricalSurveyChartResponse | null = null;
 
   surveyChart: HistoricalSurveyChartObject | null = null;
-  surveyGradeChart: HistoricalSurveyGradeChartObject | null = null;
-  surveyExpectationGradeChart: HistoricalSurveyExpectationGradeChartObject | null = null;
+
+  surveyGradeLocalChart: HistoricalSurveyGradeChartObject | null = null;
+  surveyGradeRemoteChart: HistoricalSurveyGradeChartObject | null = null;
+
+  surveyExpectationGradeLocalChart: HistoricalSurveyExpectationGradeChartObject | null = null;
+  surveyExpectationGradeRemoteChart: HistoricalSurveyExpectationGradeChartObject | null = null;
 
   ngOnInit(): void {
     if (this.data == null) {
@@ -27,14 +31,32 @@ export class HistoricalSurveyChartComponent implements OnInit {
       this.data
     );
 
-    this.surveyGradeChart = new HistoricalSurveyGradeChartObject(
-      "historical-survey-grade-chart",
-      this.data
+    this.surveyGradeLocalChart = new HistoricalSurveyGradeChartObject(
+      "historical-survey-grade-local-chart",
+      this.data,
+      (x) => x.localUsefulnessPercentage,
+      (x) => x.localCount
     );
 
-    this.surveyExpectationGradeChart = new HistoricalSurveyExpectationGradeChartObject(
-      "historical-survey-expectation-grade-chart",
-      this.data
+    this.surveyGradeRemoteChart = new HistoricalSurveyGradeChartObject(
+      "historical-survey-grade-remote-chart",
+      this.data,
+      (x) => x.remoteUsefulnessPercentage,
+      (x) => x.remoteCount
+    );
+
+    this.surveyExpectationGradeLocalChart = new HistoricalSurveyExpectationGradeChartObject(
+      "historical-survey-expectation-grade-local-chart",
+      this.data,
+      (x) => x.localExpectationPercentage,
+      (x) => x.localCount
+    );
+
+    this.surveyExpectationGradeRemoteChart = new HistoricalSurveyExpectationGradeChartObject(
+      "historical-survey-expectation-grade-remote-chart",
+      this.data,
+      (x) => x.remoteExpectationPercentage,
+      (x) => x.remoteCount
     );
   }
 }

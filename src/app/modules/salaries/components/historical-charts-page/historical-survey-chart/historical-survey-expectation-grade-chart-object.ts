@@ -8,7 +8,11 @@ import { RgbColor } from "../../rgb-color";
 export class HistoricalSurveyExpectationGradeChartObject extends Chart {
   private readonly datasets: Array<DatasetItem> = [];
 
-  constructor(canvasId: string, chartData: HistoricalSurveyChartResponse) {
+  constructor(
+    canvasId: string,
+    chartData: HistoricalSurveyChartResponse,
+    dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => ExpectationPercentage[],
+    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number) {
 
     const items = chartData.surveyResultsByWeeksChart.gradeItems;
 
@@ -17,25 +21,33 @@ export class HistoricalSurveyExpectationGradeChartObject extends Chart {
         DeveloperGrade.Junior,
         items,
         "1",
-        0
+        0,
+        dispatcher,
+        totalCountDispatcher
       ),
       ...HistoricalSurveyExpectationGradeChartObject.prepareDatasetsForGrade(
         DeveloperGrade.Middle,
         items,
         "2",
-        20
+        20,
+        dispatcher,
+        totalCountDispatcher
       ),
       ...HistoricalSurveyExpectationGradeChartObject.prepareDatasetsForGrade(
         DeveloperGrade.Senior,
         items,
         "3",
-        30
+        30,
+        dispatcher,
+        totalCountDispatcher
       ),
       ...HistoricalSurveyExpectationGradeChartObject.prepareDatasetsForGrade(
         DeveloperGrade.Lead,
         items,
         "4",
-        40
+        40,
+        dispatcher,
+        totalCountDispatcher
       ),
     ];
 
@@ -95,7 +107,9 @@ export class HistoricalSurveyExpectationGradeChartObject extends Chart {
     grade: DeveloperGrade,
     gradeItems: SurveyResultsByWeeksChartGradeItem[],
     stack: string,
-    darken = 0
+    darken = 0,
+    dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => ExpectationPercentage[],
+    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
   ): Array<DatasetItem> {
     const items = gradeItems.filter((x) => x.grade === grade);
     const postfix = DeveloperGrade[grade];
@@ -104,7 +118,7 @@ export class HistoricalSurveyExpectationGradeChartObject extends Chart {
         grade,
         "Выше ожиданий, " + postfix,
         items.map((x) => HistoricalSurveyExpectationGradeChartObject
-          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, x.localExpectationPercentage)),
+          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, dispatcher(x))),
         1,
         RgbColor.green(darken),
         false as PointStyle,
@@ -148,7 +162,7 @@ export class HistoricalSurveyExpectationGradeChartObject extends Chart {
       new DatasetItem(
         grade,
         "Количество ответов, " + postfix,
-        items.map((x) => x.totalCount),
+        items.map((x) => totalCountDispatcher(x)),
         4,
         new RandomRgbColor(),
         false as PointStyle,
