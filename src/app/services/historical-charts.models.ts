@@ -40,6 +40,8 @@ export interface ExpectationPercentage {
 
 export interface SurveyResultsByWeeksChartGradeItem {
   grade: number;
+  localCount: number;
+  remoteCount: number;
   totalCount: number;
   localUsefulnessPercentage: UsefulnessPercentage[];
   remoteUsefulnessPercentage: UsefulnessPercentage[];

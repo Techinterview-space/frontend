@@ -69,7 +69,6 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
         .pipe(untilDestroyed(this))
         .subscribe((x) => {
           this.surveyData = x;
-          console.log(x);
         });
 
       return;
