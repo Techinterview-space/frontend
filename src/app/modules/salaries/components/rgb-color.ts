@@ -25,4 +25,8 @@ export class RgbColor {
   static grey(darken = 0): RgbColor {
     return new RgbColor(170 - darken, 170 - darken, 171 - darken);
   }
+
+  static blue(darken = 0): RgbColor {
+    return new RgbColor(0 - darken, 158 - darken, 255 - darken);
+  }
 }
