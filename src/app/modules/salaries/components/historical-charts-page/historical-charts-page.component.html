@@ -49,9 +49,8 @@
 
 <div class="container mt-5" *ngIf="surveyData; else dataLoading">
   <div class="card card-body">
-    <div class="mb-3 h1">Тенденция мнения о статистике</div>
-
-    <div class="mt-5">
+    <div class="mb-5 h1">Обратная связь по статистике</div>
+    <div class="">
       <app-historical-survey-chart [data]="surveyData" />
     </div>
   </div>
