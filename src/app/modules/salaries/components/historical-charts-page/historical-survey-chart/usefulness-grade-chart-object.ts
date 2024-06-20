@@ -16,39 +16,51 @@ export class UsefulnessGradeChartObject extends Chart {
 
     const items = chartData.surveyResultsByWeeksChart.gradeItems;
 
+    const juniors = UsefulnessGradeChartObject.prepareDatasetsForGrade(
+      DeveloperGrade.Junior,
+      items,
+      "1",
+      0,
+      dispatcher,
+      totalCountDispatcher
+    );
+
+    const middles = UsefulnessGradeChartObject.prepareDatasetsForGrade(
+      DeveloperGrade.Middle,
+      items,
+      "2",
+      30,
+      dispatcher,
+      totalCountDispatcher
+    );
+
+    const seniors = UsefulnessGradeChartObject.prepareDatasetsForGrade(
+      DeveloperGrade.Senior,
+      items,
+      "3",
+      60,
+      dispatcher,
+      totalCountDispatcher
+    );
+
+    const leads = UsefulnessGradeChartObject.prepareDatasetsForGrade(
+      DeveloperGrade.Lead,
+      items,
+      "4",
+      90,
+      dispatcher,
+      totalCountDispatcher
+    );
+
     const datasets: Array<DatasetItem> = [
-      ...UsefulnessGradeChartObject.prepareDatasetsForGrade(
-        DeveloperGrade.Junior,
-        items,
-        "1",
-        0,
-        dispatcher,
-        totalCountDispatcher
-      ),
-      ...UsefulnessGradeChartObject.prepareDatasetsForGrade(
-        DeveloperGrade.Middle,
-        items,
-        "2",
-        30,
-        dispatcher,
-        totalCountDispatcher
-      ),
-      ...UsefulnessGradeChartObject.prepareDatasetsForGrade(
-        DeveloperGrade.Senior,
-        items,
-        "3",
-        60,
-        dispatcher,
-        totalCountDispatcher
-      ),
-      ...UsefulnessGradeChartObject.prepareDatasetsForGrade(
-        DeveloperGrade.Lead,
-        items,
-        "4",
-        90,
-        dispatcher,
-        totalCountDispatcher
-      ),
+      juniors.countSet,
+      middles.countSet,
+      seniors.countSet,
+      leads.countSet,
+      ...juniors.sets,
+      ...middles.sets,
+      ...seniors.sets,
+      ...leads.sets,
     ];
 
     super(canvasId, {
@@ -110,10 +122,10 @@ export class UsefulnessGradeChartObject extends Chart {
     darken = 0,
     dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => UsefulnessPercentage[],
     totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
-  ): Array<DatasetItem> {
+  ): { sets:  Array<DatasetItem>, countSet: DatasetItem } {
     const items = gradeItems.filter((x) => x.grade === grade);
     const postfix = DeveloperGrade[grade];
-    return [
+    const sets = [
       new DatasetItem(
         grade,
         "Нет, " + postfix,
@@ -159,18 +171,21 @@ export class UsefulnessGradeChartObject extends Chart {
         1,
         0.8
       ),
-      new DatasetItem(
-        grade,
-        "Количество ответов, " + postfix,
-        items.map((x) => totalCountDispatcher(x)),
-        4,
-        new RandomRgbColor(),
-        "circle",
-        "y1",
-        "line",
-        "0"
-      ),
     ];
+
+    const countSet = new DatasetItem(
+      grade,
+      "Количество ответов, " + postfix,
+      items.map((x) => totalCountDispatcher(x)),
+      4,
+      new RandomRgbColor(),
+      "circle",
+      "y1",
+      "line",
+      "0"
+    );
+
+    return { sets, countSet };
   }
 
   static getUsefulnessPercentage(

@@ -16,39 +16,51 @@ export class ExpectationGradeChartObject extends Chart {
 
     const items = chartData.surveyResultsByWeeksChart.gradeItems;
 
+    const juniorsSets = ExpectationGradeChartObject.prepareDatasetsForGrade(
+      DeveloperGrade.Junior,
+      items,
+      "1",
+      0,
+      dispatcher,
+      totalCountDispatcher
+    );
+
+    const middleSets = ExpectationGradeChartObject.prepareDatasetsForGrade(
+      DeveloperGrade.Middle,
+      items,
+      "2",
+      30,
+      dispatcher,
+      totalCountDispatcher
+    );
+
+    const seniorSets = ExpectationGradeChartObject.prepareDatasetsForGrade(
+      DeveloperGrade.Senior,
+      items,
+      "3",
+      60,
+      dispatcher,
+      totalCountDispatcher
+    );
+
+    const leadSets = ExpectationGradeChartObject.prepareDatasetsForGrade(
+      DeveloperGrade.Lead,
+      items,
+      "4",
+      90,
+      dispatcher,
+      totalCountDispatcher
+    );
+
     const datasets: Array<DatasetItem> = [
-      ...ExpectationGradeChartObject.prepareDatasetsForGrade(
-        DeveloperGrade.Junior,
-        items,
-        "1",
-        0,
-        dispatcher,
-        totalCountDispatcher
-      ),
-      ...ExpectationGradeChartObject.prepareDatasetsForGrade(
-        DeveloperGrade.Middle,
-        items,
-        "2",
-        30,
-        dispatcher,
-        totalCountDispatcher
-      ),
-      ...ExpectationGradeChartObject.prepareDatasetsForGrade(
-        DeveloperGrade.Senior,
-        items,
-        "3",
-        60,
-        dispatcher,
-        totalCountDispatcher
-      ),
-      ...ExpectationGradeChartObject.prepareDatasetsForGrade(
-        DeveloperGrade.Lead,
-        items,
-        "4",
-        90,
-        dispatcher,
-        totalCountDispatcher
-      ),
+      juniorsSets.countSet,
+      middleSets.countSet,
+      seniorSets.countSet,
+      leadSets.countSet,
+      ...juniorsSets.sets,
+      ...middleSets.sets,
+      ...seniorSets.sets,
+      ...leadSets.sets,
     ];
 
     super(canvasId, {
@@ -110,10 +122,10 @@ export class ExpectationGradeChartObject extends Chart {
     darken = 0,
     dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => ExpectationPercentage[],
     totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
-  ): Array<DatasetItem> {
+  ): { sets:  Array<DatasetItem>, countSet: DatasetItem } {
     const items = gradeItems.filter((x) => x.grade === grade);
     const postfix = DeveloperGrade[grade];
-    return [
+    const sets = [
       new DatasetItem(
         grade,
         "Ниже ожиданий, " + postfix,
@@ -159,18 +171,21 @@ export class ExpectationGradeChartObject extends Chart {
         1,
         0.8
       ),
-      new DatasetItem(
-        grade,
-        "Количество ответов, " + postfix,
-        items.map((x) => totalCountDispatcher(x)),
-        4,
-        new RandomRgbColor(),
-        'circle',
-        "y1",
-        "line",
-        stack
-      ),
     ];
+
+    const countSet = new DatasetItem(
+      grade,
+      "Количество ответов, " + postfix,
+      items.map((x) => totalCountDispatcher(x)),
+      4,
+      new RandomRgbColor(),
+      'circle',
+      "y1",
+      "line",
+      stack
+    );
+
+    return { sets, countSet };
   }
 
   static getExpectationReplyType(

@@ -14,6 +14,16 @@ export class UsefulnessChartObject extends Chart {
 
     const data = chartData.surveyResultsByWeeksChart;
     const datasets: Array<DatasetItem> = [
+      new DatasetItem(
+        "Количество ответов",
+        data.items.map((x) => x.totalCount),
+        4,
+        new RandomRgbColor(),
+        "circle",
+        "y1",
+        "line",
+        "0"
+      ),
       ...UsefulnessChartObject.prepareExpectationDatasets(
         data.items,
         "Казахстанские компании",
@@ -27,16 +37,6 @@ export class UsefulnessChartObject extends Chart {
         "2",
         50,
         (x) => x.remoteUsefulnessPercentage
-      ),
-      new DatasetItem(
-        "Количество ответов",
-        data.items.map((x) => x.totalCount),
-        4,
-        new RandomRgbColor(),
-        "circle",
-        "y1",
-        "line",
-        "0"
       ),
     ];
 
