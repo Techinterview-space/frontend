@@ -11,6 +11,7 @@ export interface HistoricalSurveyChartResponse {
   to: Date;
   chartFrom: Date;
   chartTo: Date;
+  hasRecentSurveyReply: boolean;
 }
 
 export interface SurveyResultsByWeeksChart {

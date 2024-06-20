@@ -78,6 +78,18 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     this.authService.login();
   }
 
+  closeSurveyBlock(): void {
+    this.surveyData = null;
+    this.service
+        .surveyChart()
+        .pipe(untilDestroyed(this))
+        .subscribe((x) => {
+          this.surveyData = x;
+        });
+
+    this.gtag.event("survey_closed", "historical_data");
+  }
+
   ngOnDestroy(): void {
     this.titleService.resetTitle();
   }
