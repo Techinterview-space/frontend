@@ -133,7 +133,7 @@ export class ExpectationGradeChartObject extends Chart {
         grade,
         "Ожидаемо, " + postfix,
         items.map((x) => ExpectationGradeChartObject
-          .getExpectationReplyType(ExpectationReplyType.Expected, x.localExpectationPercentage)),
+          .getExpectationReplyType(ExpectationReplyType.Expected, dispatcher(x))),
         1,
         RgbColor.blue(darken),
         false as PointStyle,
@@ -148,7 +148,7 @@ export class ExpectationGradeChartObject extends Chart {
         grade,
         "Ниже ожиданий, " + postfix,
         items.map((x) => ExpectationGradeChartObject
-          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, x.localExpectationPercentage)),
+          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, dispatcher(x))),
         1,
         RgbColor.red(darken),
         false as PointStyle,

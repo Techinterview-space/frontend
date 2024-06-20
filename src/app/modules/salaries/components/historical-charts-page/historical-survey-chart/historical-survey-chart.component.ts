@@ -4,6 +4,7 @@ import { HistoricalSurveyChartResponse } from "@services/historical-charts.model
 import { UsefulnessGradeChartObject } from "./usefulness-grade-chart-object";
 import { ExpectationGradeChartObject } from "./expectation-grade-chart-object";
 import { DeveloperGrade, DeveloperGradeEnum } from "@models/enums";
+import { UsefulnessChartObject } from "./usefulness-chart-object";
 
 interface GradeToggleButton {
   label: string;
@@ -23,10 +24,11 @@ export class HistoricalSurveyChartComponent implements OnInit {
 
   gradesButtons: Array<GradeToggleButton> = [];
 
+  usefulnessChart: UsefulnessChartObject | null = null;
   expectationChart: ExpectationChartObject | null = null;
 
   usefulnessGradeLocalChart: UsefulnessGradeChartObject | null = null;
-  usefulnessRemoteChart: UsefulnessGradeChartObject | null = null;
+  usefulnessGradeRemoteChart: UsefulnessGradeChartObject | null = null;
 
   expectationGradeLocalChart: ExpectationGradeChartObject | null = null;
   expectationGradeRemoteChart: ExpectationGradeChartObject | null = null;
@@ -43,6 +45,11 @@ export class HistoricalSurveyChartComponent implements OnInit {
       this.createGradeToggleButton(DeveloperGrade.Lead),
     ];
 
+    this.usefulnessChart = new UsefulnessChartObject(
+      "usefulness-chart",
+      this.data
+    );
+
     this.expectationChart = new ExpectationChartObject(
       "expectation-chart",
       this.data
@@ -55,7 +62,7 @@ export class HistoricalSurveyChartComponent implements OnInit {
       (x) => x.localCount
     );
 
-    this.usefulnessRemoteChart = new UsefulnessGradeChartObject(
+    this.usefulnessGradeRemoteChart = new UsefulnessGradeChartObject(
       "usefulness-grade-remote-chart",
       this.data,
       (x) => x.remoteUsefulnessPercentage,
@@ -85,7 +92,7 @@ export class HistoricalSurveyChartComponent implements OnInit {
       textCss: color.cssText,
       toggle: () => {
         this.usefulnessGradeLocalChart?.toggle(grade);
-        this.usefulnessRemoteChart?.toggle(grade);
+        this.usefulnessGradeRemoteChart?.toggle(grade);
         this.expectationGradeLocalChart?.toggle(grade);
         this.expectationGradeRemoteChart?.toggle(grade);
       },

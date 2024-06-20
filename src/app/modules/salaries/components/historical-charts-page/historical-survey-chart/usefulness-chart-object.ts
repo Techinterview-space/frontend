@@ -1,11 +1,11 @@
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
 import { RandomRgbColor } from "../../random-rgb-color";
-import { ExpectationPercentage, HistoricalSurveyChartResponse, SurveyResultsByWeeksChartItem } from "@services/historical-charts.models";
-import { ExpectationReplyType } from "@services/salaries-survey.service";
+import { HistoricalSurveyChartResponse, SurveyResultsByWeeksChartItem, UsefulnessPercentage } from "@services/historical-charts.models";
+import { UsefulnessReplyType } from "@services/salaries-survey.service";
 import { RgbColor } from "../../rgb-color";
 
 
-export class ExpectationChartObject extends Chart {
+export class UsefulnessChartObject extends Chart {
   private readonly datasets: Array<DatasetItem> = [];
 
   constructor(
@@ -14,19 +14,19 @@ export class ExpectationChartObject extends Chart {
 
     const data = chartData.surveyResultsByWeeksChart;
     const datasets: Array<DatasetItem> = [
-      ...ExpectationChartObject.prepareExpectationDatasets(
+      ...UsefulnessChartObject.prepareExpectationDatasets(
         data.items,
         "Казахстанские компании",
         "1",
         0,
-        (x) => x.localExpectationPercentage
+        (x) => x.localUsefulnessPercentage
       ),
-      ...ExpectationChartObject.prepareExpectationDatasets(
+      ...UsefulnessChartObject.prepareExpectationDatasets(
         data.items,
         "Удаленка",
         "2",
         50,
-        (x) => x.remoteExpectationPercentage
+        (x) => x.remoteUsefulnessPercentage
       ),
       new DatasetItem(
         "Количество ответов",
@@ -88,13 +88,13 @@ export class ExpectationChartObject extends Chart {
     postfix: string,
     stack: string,
     darken = 0,
-    dispatcher: (x: SurveyResultsByWeeksChartItem) => ExpectationPercentage[]
+    dispatcher: (x: SurveyResultsByWeeksChartItem) => UsefulnessPercentage[]
   ): Array<DatasetItem> {
     return [
       new DatasetItem(
-        "Выше ожиданий, " + postfix,
-        items.map((x) => ExpectationChartObject
-          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, dispatcher(x))),
+        "Да, " + postfix,
+        items.map((x) => UsefulnessChartObject
+          .getExpectationReplyType(UsefulnessReplyType.Yes, dispatcher(x))),
         1,
         RgbColor.green(darken),
         false as PointStyle,
@@ -105,11 +105,11 @@ export class ExpectationChartObject extends Chart {
         0.8
       ),
       new DatasetItem(
-        "Ожидаемо, " + postfix,
-        items.map((x) => ExpectationChartObject
-          .getExpectationReplyType(ExpectationReplyType.Expected, dispatcher(x))),
+        "Не уверен, " + postfix,
+        items.map((x) => UsefulnessChartObject
+          .getExpectationReplyType(UsefulnessReplyType.NotSure, dispatcher(x))),
         1,
-        RgbColor.blue(darken),
+        RgbColor.grey(darken),
         false as PointStyle,
         "y",
         "bar",
@@ -118,9 +118,9 @@ export class ExpectationChartObject extends Chart {
         0.8
       ),
       new DatasetItem(
-        "Ниже ожиданий, " + postfix,
-        items.map((x) => ExpectationChartObject
-          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, dispatcher(x))),
+        "Нет, " + postfix,
+        items.map((x) => UsefulnessChartObject
+          .getExpectationReplyType(UsefulnessReplyType.No, dispatcher(x))),
         1,
         RgbColor.red(darken),
         false as PointStyle,
@@ -134,8 +134,8 @@ export class ExpectationChartObject extends Chart {
   }
 
   static getExpectationReplyType(
-    type: ExpectationReplyType,
-    records: ExpectationPercentage[]
+    type: UsefulnessReplyType,
+    records: UsefulnessPercentage[]
   ) : number {
     const record = records.find((x) => x.replyType === type);
     return record ? record.percentage : 0;
