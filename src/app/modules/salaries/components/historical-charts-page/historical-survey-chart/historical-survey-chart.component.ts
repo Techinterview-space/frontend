@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ExpectationChartObject } from "./expectation-chart-object";
 import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
-import { HistoricalSurveyGradeChartObject } from "./historical-survey-grade-chart-object";
+import { UsefulnessGradeChartObject } from "./usefulness-grade-chart-object";
 import { ExpectationGradeChartObject } from "./expectation-grade-chart-object";
 import { DeveloperGrade, DeveloperGradeEnum } from "@models/enums";
 
@@ -25,8 +25,8 @@ export class HistoricalSurveyChartComponent implements OnInit {
 
   expectationChart: ExpectationChartObject | null = null;
 
-  surveyGradeLocalChart: HistoricalSurveyGradeChartObject | null = null;
-  surveyGradeRemoteChart: HistoricalSurveyGradeChartObject | null = null;
+  usefulnessGradeLocalChart: UsefulnessGradeChartObject | null = null;
+  usefulnessRemoteChart: UsefulnessGradeChartObject | null = null;
 
   expectationGradeLocalChart: ExpectationGradeChartObject | null = null;
   expectationGradeRemoteChart: ExpectationGradeChartObject | null = null;
@@ -48,15 +48,15 @@ export class HistoricalSurveyChartComponent implements OnInit {
       this.data
     );
 
-    this.surveyGradeLocalChart = new HistoricalSurveyGradeChartObject(
-      "historical-survey-grade-local-chart",
+    this.usefulnessGradeLocalChart = new UsefulnessGradeChartObject(
+      "usefulness-grade-local-chart",
       this.data,
       (x) => x.localUsefulnessPercentage,
       (x) => x.localCount
     );
 
-    this.surveyGradeRemoteChart = new HistoricalSurveyGradeChartObject(
-      "historical-survey-grade-remote-chart",
+    this.usefulnessRemoteChart = new UsefulnessGradeChartObject(
+      "usefulness-grade-remote-chart",
       this.data,
       (x) => x.remoteUsefulnessPercentage,
       (x) => x.remoteCount
@@ -84,8 +84,8 @@ export class HistoricalSurveyChartComponent implements OnInit {
       bgCss: color.cssBackground,
       textCss: color.cssText,
       toggle: () => {
-        this.surveyGradeLocalChart?.toggle(grade);
-        this.surveyGradeRemoteChart?.toggle(grade);
+        this.usefulnessGradeLocalChart?.toggle(grade);
+        this.usefulnessRemoteChart?.toggle(grade);
         this.expectationGradeLocalChart?.toggle(grade);
         this.expectationGradeRemoteChart?.toggle(grade);
       },
