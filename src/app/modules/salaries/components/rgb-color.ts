@@ -18,6 +18,10 @@ export class RgbColor {
     return new RgbColor(219 - darken, 61 - darken, 67 - darken);
   }
 
+  static lightGreen(darken = 0): RgbColor {
+    return new RgbColor(35 - darken, 255 - darken, 0 - darken);
+  }
+
   static green(darken = 0): RgbColor {
     return new RgbColor(16 - darken, 98 - darken, 43 - darken);
   }

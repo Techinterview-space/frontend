@@ -116,11 +116,11 @@ export class ExpectationGradeChartObject extends Chart {
     return [
       new DatasetItem(
         grade,
-        "Выше ожиданий, " + postfix,
+        "Ниже ожиданий, " + postfix,
         items.map((x) => ExpectationGradeChartObject
-          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, dispatcher(x))),
+          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, dispatcher(x))),
         1,
-        RgbColor.green(darken),
+        RgbColor.red(darken),
         false as PointStyle,
         "y",
         "bar",
@@ -146,11 +146,11 @@ export class ExpectationGradeChartObject extends Chart {
       ),
       new DatasetItem(
         grade,
-        "Ниже ожиданий, " + postfix,
+        "Выше ожиданий, " + postfix,
         items.map((x) => ExpectationGradeChartObject
-          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, dispatcher(x))),
+          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, dispatcher(x))),
         1,
-        RgbColor.red(darken),
+        RgbColor.lightGreen(darken),
         false as PointStyle,
         "y",
         "bar",

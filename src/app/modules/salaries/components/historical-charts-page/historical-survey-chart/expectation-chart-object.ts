@@ -92,11 +92,11 @@ export class ExpectationChartObject extends Chart {
   ): Array<DatasetItem> {
     return [
       new DatasetItem(
-        "Выше ожиданий, " + postfix,
+        "Ниже ожиданий, " + postfix,
         items.map((x) => ExpectationChartObject
-          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, dispatcher(x))),
+          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, dispatcher(x))),
         1,
-        RgbColor.green(darken),
+        RgbColor.red(darken),
         false as PointStyle,
         "y",
         "bar",
@@ -118,11 +118,11 @@ export class ExpectationChartObject extends Chart {
         0.8
       ),
       new DatasetItem(
-        "Ниже ожиданий, " + postfix,
+        "Выше ожиданий, " + postfix,
         items.map((x) => ExpectationChartObject
-          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, dispatcher(x))),
+          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, dispatcher(x))),
         1,
-        RgbColor.red(darken),
+        RgbColor.lightGreen(darken),
         false as PointStyle,
         "y",
         "bar",

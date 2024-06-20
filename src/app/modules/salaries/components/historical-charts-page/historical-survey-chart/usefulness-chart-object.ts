@@ -92,11 +92,11 @@ export class UsefulnessChartObject extends Chart {
   ): Array<DatasetItem> {
     return [
       new DatasetItem(
-        "Да, " + postfix,
+        "Нет, " + postfix,
         items.map((x) => UsefulnessChartObject
-          .getExpectationReplyType(UsefulnessReplyType.Yes, dispatcher(x))),
+          .getExpectationReplyType(UsefulnessReplyType.No, dispatcher(x))),
         1,
-        RgbColor.green(darken),
+        RgbColor.red(darken),
         false as PointStyle,
         "y",
         "bar",
@@ -118,11 +118,11 @@ export class UsefulnessChartObject extends Chart {
         0.8
       ),
       new DatasetItem(
-        "Нет, " + postfix,
+        "Да, " + postfix,
         items.map((x) => UsefulnessChartObject
-          .getExpectationReplyType(UsefulnessReplyType.No, dispatcher(x))),
+          .getExpectationReplyType(UsefulnessReplyType.Yes, dispatcher(x))),
         1,
-        RgbColor.red(darken),
+        RgbColor.lightGreen(darken),
         false as PointStyle,
         "y",
         "bar",

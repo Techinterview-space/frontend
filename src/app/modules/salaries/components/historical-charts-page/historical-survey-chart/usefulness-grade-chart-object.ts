@@ -29,7 +29,7 @@ export class UsefulnessGradeChartObject extends Chart {
         DeveloperGrade.Middle,
         items,
         "2",
-        20,
+        30,
         dispatcher,
         totalCountDispatcher
       ),
@@ -37,7 +37,7 @@ export class UsefulnessGradeChartObject extends Chart {
         DeveloperGrade.Senior,
         items,
         "3",
-        30,
+        60,
         dispatcher,
         totalCountDispatcher
       ),
@@ -45,7 +45,7 @@ export class UsefulnessGradeChartObject extends Chart {
         DeveloperGrade.Lead,
         items,
         "4",
-        40,
+        90,
         dispatcher,
         totalCountDispatcher
       ),
@@ -116,21 +116,6 @@ export class UsefulnessGradeChartObject extends Chart {
     return [
       new DatasetItem(
         grade,
-        "Да, " + postfix,
-        items.map((x) => UsefulnessGradeChartObject
-          .getUsefulnessPercentage(UsefulnessReplyType.Yes, dispatcher(x))),
-        1,
-        RgbColor.green(darken),
-        false as PointStyle,
-        "y",
-        "bar",
-        stack,
-        false,
-        1,
-        0.8
-      ),
-      new DatasetItem(
-        grade,
         "Нет, " + postfix,
         items.map((x) => UsefulnessGradeChartObject
           .getUsefulnessPercentage(UsefulnessReplyType.No, dispatcher(x))),
@@ -151,6 +136,21 @@ export class UsefulnessGradeChartObject extends Chart {
           .getUsefulnessPercentage(UsefulnessReplyType.NotSure, dispatcher(x))),
         1,
         RgbColor.grey(darken),
+        false as PointStyle,
+        "y",
+        "bar",
+        stack,
+        false,
+        1,
+        0.8
+      ),
+      new DatasetItem(
+        grade,
+        "Да, " + postfix,
+        items.map((x) => UsefulnessGradeChartObject
+          .getUsefulnessPercentage(UsefulnessReplyType.Yes, dispatcher(x))),
+        1,
+        RgbColor.lightGreen(darken),
         false as PointStyle,
         "y",
         "bar",
