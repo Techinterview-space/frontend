@@ -1,17 +1,17 @@
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
 import { RandomRgbColor } from "../../random-rgb-color";
-import { HistoricalSurveyChartResponse, SurveyResultsByWeeksChartItem, UsefulnessPercentage } from "@services/historical-charts.models";
+import {
+  HistoricalSurveyChartResponse,
+  SurveyResultsByWeeksChartItem,
+  UsefulnessPercentage,
+} from "@services/historical-charts.models";
 import { UsefulnessReplyType } from "@services/salaries-survey.service";
 import { RgbColor } from "../../rgb-color";
-
 
 export class UsefulnessChartObject extends Chart {
   private readonly datasets: Array<DatasetItem> = [];
 
-  constructor(
-    canvasId: string,
-    chartData: HistoricalSurveyChartResponse) {
-
+  constructor(canvasId: string, chartData: HistoricalSurveyChartResponse) {
     const data = chartData.surveyResultsByWeeksChart;
     const datasets: Array<DatasetItem> = [
       new DatasetItem(
@@ -93,8 +93,12 @@ export class UsefulnessChartObject extends Chart {
     return [
       new DatasetItem(
         "Нет, " + postfix,
-        items.map((x) => UsefulnessChartObject
-          .getExpectationReplyType(UsefulnessReplyType.No, dispatcher(x))),
+        items.map((x) =>
+          UsefulnessChartObject.getExpectationReplyType(
+            UsefulnessReplyType.No,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.red(darken),
         false as PointStyle,
@@ -106,8 +110,12 @@ export class UsefulnessChartObject extends Chart {
       ),
       new DatasetItem(
         "Не уверен, " + postfix,
-        items.map((x) => UsefulnessChartObject
-          .getExpectationReplyType(UsefulnessReplyType.NotSure, dispatcher(x))),
+        items.map((x) =>
+          UsefulnessChartObject.getExpectationReplyType(
+            UsefulnessReplyType.NotSure,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.grey(darken),
         false as PointStyle,
@@ -119,8 +127,12 @@ export class UsefulnessChartObject extends Chart {
       ),
       new DatasetItem(
         "Да, " + postfix,
-        items.map((x) => UsefulnessChartObject
-          .getExpectationReplyType(UsefulnessReplyType.Yes, dispatcher(x))),
+        items.map((x) =>
+          UsefulnessChartObject.getExpectationReplyType(
+            UsefulnessReplyType.Yes,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.lightGreen(darken),
         false as PointStyle,
@@ -136,7 +148,7 @@ export class UsefulnessChartObject extends Chart {
   static getExpectationReplyType(
     type: UsefulnessReplyType,
     records: UsefulnessPercentage[]
-  ) : number {
+  ): number {
     const record = records.find((x) => x.replyType === type);
     return record ? record.percentage : 0;
   }
@@ -153,7 +165,7 @@ class DatasetItem {
     readonly type: "line" | "bar",
     readonly stack: string,
     borderColorOpacity: number = 1,
-    bgColorOpacity: number = 0.5,
+    bgColorOpacity: number = 0.5
   ) {
     this.borderColor = color.toString(borderColorOpacity);
     this.backgroundColor = color.toString(bgColorOpacity);

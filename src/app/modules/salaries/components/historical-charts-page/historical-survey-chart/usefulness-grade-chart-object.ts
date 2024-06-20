@@ -1,8 +1,16 @@
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
 import { RandomRgbColor } from "../../random-rgb-color";
-import { ExpectationPercentage, HistoricalSurveyChartResponse, SurveyResultsByWeeksChartGradeItem, UsefulnessPercentage } from "@services/historical-charts.models";
+import {
+  ExpectationPercentage,
+  HistoricalSurveyChartResponse,
+  SurveyResultsByWeeksChartGradeItem,
+  UsefulnessPercentage,
+} from "@services/historical-charts.models";
 import { DeveloperGrade } from "@models/enums";
-import { ExpectationReplyType, UsefulnessReplyType } from "@services/salaries-survey.service";
+import {
+  ExpectationReplyType,
+  UsefulnessReplyType,
+} from "@services/salaries-survey.service";
 import { RgbColor } from "../../rgb-color";
 
 export class UsefulnessGradeChartObject extends Chart {
@@ -11,9 +19,11 @@ export class UsefulnessGradeChartObject extends Chart {
   constructor(
     canvasId: string,
     chartData: HistoricalSurveyChartResponse,
-    dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => UsefulnessPercentage[],
-    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number) {
-
+    dispatcher: (
+      x: SurveyResultsByWeeksChartGradeItem
+    ) => UsefulnessPercentage[],
+    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
+  ) {
     const items = chartData.surveyResultsByWeeksChart.gradeItems;
 
     const juniors = UsefulnessGradeChartObject.prepareDatasetsForGrade(
@@ -66,9 +76,9 @@ export class UsefulnessGradeChartObject extends Chart {
     super(canvasId, {
       type: "line" as ChartType,
       data: {
-        labels: chartData.surveyResultsByWeeksChart
-          .weekEnds
-          .map((x) => x.toISOString().slice(0, 10)),
+        labels: chartData.surveyResultsByWeeksChart.weekEnds.map((x) =>
+          x.toISOString().slice(0, 10)
+        ),
         datasets: datasets,
       },
       options: {
@@ -108,9 +118,7 @@ export class UsefulnessGradeChartObject extends Chart {
   }
 
   toggle(grade: DeveloperGrade): void {
-    this.datasets
-      .filter((x) => x.grade === grade)
-      .forEach((x) => x.toggle());
+    this.datasets.filter((x) => x.grade === grade).forEach((x) => x.toggle());
 
     this.update();
   }
@@ -120,17 +128,23 @@ export class UsefulnessGradeChartObject extends Chart {
     gradeItems: SurveyResultsByWeeksChartGradeItem[],
     stack: string,
     darken = 0,
-    dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => UsefulnessPercentage[],
+    dispatcher: (
+      x: SurveyResultsByWeeksChartGradeItem
+    ) => UsefulnessPercentage[],
     totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
-  ): { sets:  Array<DatasetItem>, countSet: DatasetItem } {
+  ): { sets: Array<DatasetItem>; countSet: DatasetItem } {
     const items = gradeItems.filter((x) => x.grade === grade);
     const postfix = DeveloperGrade[grade];
     const sets = [
       new DatasetItem(
         grade,
         "Нет, " + postfix,
-        items.map((x) => UsefulnessGradeChartObject
-          .getUsefulnessPercentage(UsefulnessReplyType.No, dispatcher(x))),
+        items.map((x) =>
+          UsefulnessGradeChartObject.getUsefulnessPercentage(
+            UsefulnessReplyType.No,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.red(darken),
         false as PointStyle,
@@ -144,8 +158,12 @@ export class UsefulnessGradeChartObject extends Chart {
       new DatasetItem(
         grade,
         "Не уверен, " + postfix,
-        items.map((x) => UsefulnessGradeChartObject
-          .getUsefulnessPercentage(UsefulnessReplyType.NotSure, dispatcher(x))),
+        items.map((x) =>
+          UsefulnessGradeChartObject.getUsefulnessPercentage(
+            UsefulnessReplyType.NotSure,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.grey(darken),
         false as PointStyle,
@@ -159,8 +177,12 @@ export class UsefulnessGradeChartObject extends Chart {
       new DatasetItem(
         grade,
         "Да, " + postfix,
-        items.map((x) => UsefulnessGradeChartObject
-          .getUsefulnessPercentage(UsefulnessReplyType.Yes, dispatcher(x))),
+        items.map((x) =>
+          UsefulnessGradeChartObject.getUsefulnessPercentage(
+            UsefulnessReplyType.Yes,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.lightGreen(darken),
         false as PointStyle,
@@ -191,7 +213,7 @@ export class UsefulnessGradeChartObject extends Chart {
   static getUsefulnessPercentage(
     type: UsefulnessReplyType,
     records: UsefulnessPercentage[]
-  ) : number {
+  ): number {
     const record = records.find((x) => x.replyType === type);
     return record ? record.percentage : 0;
   }
@@ -199,7 +221,7 @@ export class UsefulnessGradeChartObject extends Chart {
   static getExpectationReplyType(
     type: ExpectationReplyType,
     records: ExpectationPercentage[]
-  ) : number {
+  ): number {
     const record = records.find((x) => x.replyType === type);
     return record ? record.percentage : 0;
   }
@@ -218,7 +240,7 @@ class DatasetItem {
     readonly stack: string,
     hidden = false,
     borderColorOpacity: number = 1,
-    bgColorOpacity: number = 0.5,
+    bgColorOpacity: number = 0.5
   ) {
     this.borderColor = color.toString(borderColorOpacity);
     this.backgroundColor = color.toString(bgColorOpacity);

@@ -1,17 +1,17 @@
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
 import { RandomRgbColor } from "../../random-rgb-color";
-import { ExpectationPercentage, HistoricalSurveyChartResponse, SurveyResultsByWeeksChartItem } from "@services/historical-charts.models";
+import {
+  ExpectationPercentage,
+  HistoricalSurveyChartResponse,
+  SurveyResultsByWeeksChartItem,
+} from "@services/historical-charts.models";
 import { ExpectationReplyType } from "@services/salaries-survey.service";
 import { RgbColor } from "../../rgb-color";
-
 
 export class ExpectationChartObject extends Chart {
   private readonly datasets: Array<DatasetItem> = [];
 
-  constructor(
-    canvasId: string,
-    chartData: HistoricalSurveyChartResponse) {
-
+  constructor(canvasId: string, chartData: HistoricalSurveyChartResponse) {
     const data = chartData.surveyResultsByWeeksChart;
     const datasets: Array<DatasetItem> = [
       new DatasetItem(
@@ -93,8 +93,12 @@ export class ExpectationChartObject extends Chart {
     return [
       new DatasetItem(
         "Ниже ожиданий, " + postfix,
-        items.map((x) => ExpectationChartObject
-          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, dispatcher(x))),
+        items.map((x) =>
+          ExpectationChartObject.getExpectationReplyType(
+            ExpectationReplyType.LessThanExpected,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.red(darken),
         false as PointStyle,
@@ -106,8 +110,12 @@ export class ExpectationChartObject extends Chart {
       ),
       new DatasetItem(
         "Ожидаемо, " + postfix,
-        items.map((x) => ExpectationChartObject
-          .getExpectationReplyType(ExpectationReplyType.Expected, dispatcher(x))),
+        items.map((x) =>
+          ExpectationChartObject.getExpectationReplyType(
+            ExpectationReplyType.Expected,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.blue(darken),
         false as PointStyle,
@@ -119,8 +127,12 @@ export class ExpectationChartObject extends Chart {
       ),
       new DatasetItem(
         "Выше ожиданий, " + postfix,
-        items.map((x) => ExpectationChartObject
-          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, dispatcher(x))),
+        items.map((x) =>
+          ExpectationChartObject.getExpectationReplyType(
+            ExpectationReplyType.MoreThanExpected,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.lightGreen(darken),
         false as PointStyle,
@@ -136,7 +148,7 @@ export class ExpectationChartObject extends Chart {
   static getExpectationReplyType(
     type: ExpectationReplyType,
     records: ExpectationPercentage[]
-  ) : number {
+  ): number {
     const record = records.find((x) => x.replyType === type);
     return record ? record.percentage : 0;
   }
@@ -153,7 +165,7 @@ class DatasetItem {
     readonly type: "line" | "bar",
     readonly stack: string,
     borderColorOpacity: number = 1,
-    bgColorOpacity: number = 0.5,
+    bgColorOpacity: number = 0.5
   ) {
     this.borderColor = color.toString(borderColorOpacity);
     this.backgroundColor = color.toString(bgColorOpacity);

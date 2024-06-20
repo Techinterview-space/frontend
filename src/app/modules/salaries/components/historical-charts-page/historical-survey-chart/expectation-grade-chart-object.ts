@@ -1,6 +1,11 @@
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
 import { RandomRgbColor } from "../../random-rgb-color";
-import { ExpectationPercentage, HistoricalSurveyChartResponse, SurveyResultsByWeeksChartGradeItem, UsefulnessPercentage } from "@services/historical-charts.models";
+import {
+  ExpectationPercentage,
+  HistoricalSurveyChartResponse,
+  SurveyResultsByWeeksChartGradeItem,
+  UsefulnessPercentage,
+} from "@services/historical-charts.models";
 import { DeveloperGrade } from "@models/enums";
 import { ExpectationReplyType } from "@services/salaries-survey.service";
 import { RgbColor } from "../../rgb-color";
@@ -11,9 +16,11 @@ export class ExpectationGradeChartObject extends Chart {
   constructor(
     canvasId: string,
     chartData: HistoricalSurveyChartResponse,
-    dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => ExpectationPercentage[],
-    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number) {
-
+    dispatcher: (
+      x: SurveyResultsByWeeksChartGradeItem
+    ) => ExpectationPercentage[],
+    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
+  ) {
     const items = chartData.surveyResultsByWeeksChart.gradeItems;
 
     const juniorsSets = ExpectationGradeChartObject.prepareDatasetsForGrade(
@@ -66,9 +73,9 @@ export class ExpectationGradeChartObject extends Chart {
     super(canvasId, {
       type: "line" as ChartType,
       data: {
-        labels: chartData.surveyResultsByWeeksChart
-          .weekEnds
-          .map((x) => x.toISOString().slice(0, 10)),
+        labels: chartData.surveyResultsByWeeksChart.weekEnds.map((x) =>
+          x.toISOString().slice(0, 10)
+        ),
         datasets: datasets,
       },
       options: {
@@ -108,9 +115,7 @@ export class ExpectationGradeChartObject extends Chart {
   }
 
   toggle(grade: DeveloperGrade): void {
-    this.datasets
-      .filter((x) => x.grade === grade)
-      .forEach((x) => x.toggle());
+    this.datasets.filter((x) => x.grade === grade).forEach((x) => x.toggle());
 
     this.update();
   }
@@ -120,17 +125,23 @@ export class ExpectationGradeChartObject extends Chart {
     gradeItems: SurveyResultsByWeeksChartGradeItem[],
     stack: string,
     darken = 0,
-    dispatcher: (x: SurveyResultsByWeeksChartGradeItem) => ExpectationPercentage[],
+    dispatcher: (
+      x: SurveyResultsByWeeksChartGradeItem
+    ) => ExpectationPercentage[],
     totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
-  ): { sets:  Array<DatasetItem>, countSet: DatasetItem } {
+  ): { sets: Array<DatasetItem>; countSet: DatasetItem } {
     const items = gradeItems.filter((x) => x.grade === grade);
     const postfix = DeveloperGrade[grade];
     const sets = [
       new DatasetItem(
         grade,
         "Ниже ожиданий, " + postfix,
-        items.map((x) => ExpectationGradeChartObject
-          .getExpectationReplyType(ExpectationReplyType.LessThanExpected, dispatcher(x))),
+        items.map((x) =>
+          ExpectationGradeChartObject.getExpectationReplyType(
+            ExpectationReplyType.LessThanExpected,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.red(darken),
         false as PointStyle,
@@ -144,8 +155,12 @@ export class ExpectationGradeChartObject extends Chart {
       new DatasetItem(
         grade,
         "Ожидаемо, " + postfix,
-        items.map((x) => ExpectationGradeChartObject
-          .getExpectationReplyType(ExpectationReplyType.Expected, dispatcher(x))),
+        items.map((x) =>
+          ExpectationGradeChartObject.getExpectationReplyType(
+            ExpectationReplyType.Expected,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.blue(darken),
         false as PointStyle,
@@ -159,8 +174,12 @@ export class ExpectationGradeChartObject extends Chart {
       new DatasetItem(
         grade,
         "Выше ожиданий, " + postfix,
-        items.map((x) => ExpectationGradeChartObject
-          .getExpectationReplyType(ExpectationReplyType.MoreThanExpected, dispatcher(x))),
+        items.map((x) =>
+          ExpectationGradeChartObject.getExpectationReplyType(
+            ExpectationReplyType.MoreThanExpected,
+            dispatcher(x)
+          )
+        ),
         1,
         RgbColor.lightGreen(darken),
         false as PointStyle,
@@ -179,7 +198,7 @@ export class ExpectationGradeChartObject extends Chart {
       items.map((x) => totalCountDispatcher(x)),
       4,
       new RandomRgbColor(),
-      'circle',
+      "circle",
       "y1",
       "line",
       stack
@@ -191,7 +210,7 @@ export class ExpectationGradeChartObject extends Chart {
   static getExpectationReplyType(
     type: ExpectationReplyType,
     records: ExpectationPercentage[]
-  ) : number {
+  ): number {
     const record = records.find((x) => x.replyType === type);
     return record ? record.percentage : 0;
   }
@@ -210,7 +229,7 @@ class DatasetItem {
     readonly stack: string,
     hidden = false,
     borderColorOpacity: number = 1,
-    bgColorOpacity: number = 0.5,
+    bgColorOpacity: number = 0.5
   ) {
     this.borderColor = color.toString(borderColorOpacity);
     this.backgroundColor = color.toString(bgColorOpacity);

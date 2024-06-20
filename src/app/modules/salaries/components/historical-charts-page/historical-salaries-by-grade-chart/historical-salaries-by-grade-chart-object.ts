@@ -83,7 +83,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         null,
         "y1",
         false
-      ),
+      )
     );
 
     super(canvasId, {
