@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { SalariesCountWeekByWeekChart } from "@services/historical-charts.service";
-import { HistoricalSurveyChartObject } from "./historical-survey-chart-object";
+import { ExpectationChartObject } from "./expectation-chart-object";
 import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
 import { HistoricalSurveyGradeChartObject } from "./historical-survey-grade-chart-object";
-import { HistoricalSurveyExpectationGradeChartObject } from "./historical-survey-expectation-grade-chart-object";
+import { ExpectationGradeChartObject } from "./expectation-grade-chart-object";
 import { DeveloperGrade, DeveloperGradeEnum } from "@models/enums";
 
 interface GradeToggleButton {
@@ -24,13 +23,13 @@ export class HistoricalSurveyChartComponent implements OnInit {
 
   gradesButtons: Array<GradeToggleButton> = [];
 
-  surveyChart: HistoricalSurveyChartObject | null = null;
+  expectationChart: ExpectationChartObject | null = null;
 
   surveyGradeLocalChart: HistoricalSurveyGradeChartObject | null = null;
   surveyGradeRemoteChart: HistoricalSurveyGradeChartObject | null = null;
 
-  surveyExpectationGradeLocalChart: HistoricalSurveyExpectationGradeChartObject | null = null;
-  surveyExpectationGradeRemoteChart: HistoricalSurveyExpectationGradeChartObject | null = null;
+  expectationGradeLocalChart: ExpectationGradeChartObject | null = null;
+  expectationGradeRemoteChart: ExpectationGradeChartObject | null = null;
 
   ngOnInit(): void {
     if (this.data == null) {
@@ -44,8 +43,8 @@ export class HistoricalSurveyChartComponent implements OnInit {
       this.createGradeToggleButton(DeveloperGrade.Lead),
     ];
 
-    this.surveyChart = new HistoricalSurveyChartObject(
-      "historical-survey-chart",
+    this.expectationChart = new ExpectationChartObject(
+      "expectation-chart",
       this.data
     );
 
@@ -63,15 +62,15 @@ export class HistoricalSurveyChartComponent implements OnInit {
       (x) => x.remoteCount
     );
 
-    this.surveyExpectationGradeLocalChart = new HistoricalSurveyExpectationGradeChartObject(
-      "historical-survey-expectation-grade-local-chart",
+    this.expectationGradeLocalChart = new ExpectationGradeChartObject(
+      "expectation-grade-local-chart",
       this.data,
       (x) => x.localExpectationPercentage,
       (x) => x.localCount
     );
 
-    this.surveyExpectationGradeRemoteChart = new HistoricalSurveyExpectationGradeChartObject(
-      "historical-survey-expectation-grade-remote-chart",
+    this.expectationGradeRemoteChart = new ExpectationGradeChartObject(
+      "expectation-grade-remote-chart",
       this.data,
       (x) => x.remoteExpectationPercentage,
       (x) => x.remoteCount
@@ -87,8 +86,8 @@ export class HistoricalSurveyChartComponent implements OnInit {
       toggle: () => {
         this.surveyGradeLocalChart?.toggle(grade);
         this.surveyGradeRemoteChart?.toggle(grade);
-        this.surveyExpectationGradeLocalChart?.toggle(grade);
-        this.surveyExpectationGradeRemoteChart?.toggle(grade);
+        this.expectationGradeLocalChart?.toggle(grade);
+        this.expectationGradeRemoteChart?.toggle(grade);
       },
     };
   }
