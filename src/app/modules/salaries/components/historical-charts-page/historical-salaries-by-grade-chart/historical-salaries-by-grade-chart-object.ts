@@ -24,18 +24,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
   private readonly datasets: Array<ChartDatasetType> = [];
 
   constructor(canvasId: string, chartData: SalariesCountWeekByWeekChart) {
-    const datasets: Array<ChartDatasetType> = [
-      new DatasetItem(
-        "Количество анкет",
-        chartData.totalCountItems.map((x) => x.totalCount),
-        4,
-        new RandomRgbColor(),
-        false as PointStyle,
-        null,
-        "y1",
-        false
-      ),
-    ];
+    const datasets: Array<ChartDatasetType> = [];
 
     const juniorSalaries = [];
     const middleSalaries = [];
@@ -68,22 +57,32 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
       ...HistoricalSalariesByGradeChartObject.getDatasetForGrade(
         DeveloperGrade.Junior,
         juniorSalaries,
-        true
+        false
       ),
       ...HistoricalSalariesByGradeChartObject.getDatasetForGrade(
         DeveloperGrade.Middle,
         middleSalaries,
-        true
+        false
       ),
       ...HistoricalSalariesByGradeChartObject.getDatasetForGrade(
         DeveloperGrade.Senior,
         seniorSalaries,
-        true
+        false
       ),
       ...HistoricalSalariesByGradeChartObject.getDatasetForGrade(
         DeveloperGrade.Lead,
         leadSalaries,
-        true
+        false
+      ),
+      new DatasetItem(
+        "Количество анкет",
+        chartData.totalCountItems.map((x) => x.totalCount),
+        4,
+        new RandomRgbColor(),
+        "circle",
+        null,
+        "y1",
+        false
       )
     );
 

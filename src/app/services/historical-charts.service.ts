@@ -4,6 +4,7 @@ import { ApiService } from "./api.service";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { DeveloperGrade } from "@models/enums";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
+import { HistoricalSurveyChartResponse } from "./historical-charts.models";
 
 export interface SalariesCountWeekByWeekChartItem {
   totalCount: number;
@@ -57,5 +58,9 @@ export class HistoricalChartsService {
     return this.api.get<GetSalariesHistoricalChartResponse>(
       this.apiUrl + "salaries?" + new ConvertObjectToHttpParams(params).get()
     );
+  }
+
+  surveyChart(): Observable<HistoricalSurveyChartResponse> {
+    return this.api.get<HistoricalSurveyChartResponse>(this.apiUrl + "survey");
   }
 }

@@ -19,14 +19,6 @@ export class HistoricalSalariesChartObject extends Chart {
     // По датасету на медиану и среднюю
     const datasets: Array<ChartDatasetType> = [
       new DatasetItem(
-        "Количество анкет",
-        chartData.totalCountItems.map((x) => x.totalCount),
-        4,
-        new RandomRgbColor(),
-        false as PointStyle,
-        "y1"
-      ),
-      new DatasetItem(
         "Медиана, КЗ",
         chartData.totalCountItems.map((x) => x.localMedian),
         2,
@@ -57,6 +49,14 @@ export class HistoricalSalariesChartObject extends Chart {
         new RandomRgbColor(),
         true as PointStyle,
         "y"
+      ),
+      new DatasetItem(
+        "Количество анкет",
+        chartData.totalCountItems.map((x) => x.totalCount),
+        4,
+        new RandomRgbColor(),
+        "circle",
+        "y1"
       ),
     ];
 

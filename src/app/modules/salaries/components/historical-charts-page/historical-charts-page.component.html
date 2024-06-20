@@ -1,9 +1,9 @@
 <app-page-header>Исторические данные</app-page-header>
 
-<div class="container mt-5 mb-5" *ngIf="data; else dataLoading">
-  <div class="card" *ngIf="!data.shouldAddOwnSalary; else noCurrentSalary">
-    <div class="card-body">
-      <div class="mb-5 h2">Тенденция изменения зарплат</div>
+<div class="container mt-5" *ngIf="data; else dataLoading">
+  <div *ngIf="!data.shouldAddOwnSalary; else noCurrentSalary">
+    <div class="card card-body">
+      <div class="mb-3 h1">Тенденция изменения медианы и средней зарплаты</div>
 
       <div class="mb-5">
         <p>
@@ -32,11 +32,26 @@
         />
       </div>
 
-      <div *ngIf="data.salariesCountWeekByWeekChart && data.salariesCountWeekByWeekChart.hasGradeItems" class="mb-5">
+      <div
+        *ngIf="
+          data.salariesCountWeekByWeekChart &&
+          data.salariesCountWeekByWeekChart.hasGradeItems
+        "
+        class="mb-5"
+      >
         <app-historical-salaries-by-grade-chart
           [data]="data.salariesCountWeekByWeekChart"
         />
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5" *ngIf="surveyData; else dataLoading">
+  <div class="card card-body">
+    <div class="mb-5 h1">Обратная связь по статистике</div>
+    <div class="">
+      <app-historical-survey-chart [data]="surveyData" />
     </div>
   </div>
 </div>
