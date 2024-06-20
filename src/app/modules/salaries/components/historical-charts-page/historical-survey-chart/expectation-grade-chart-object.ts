@@ -29,7 +29,7 @@ export class ExpectationGradeChartObject extends Chart {
         DeveloperGrade.Middle,
         items,
         "2",
-        20,
+        30,
         dispatcher,
         totalCountDispatcher
       ),
@@ -37,7 +37,7 @@ export class ExpectationGradeChartObject extends Chart {
         DeveloperGrade.Senior,
         items,
         "3",
-        30,
+        60,
         dispatcher,
         totalCountDispatcher
       ),
@@ -45,7 +45,7 @@ export class ExpectationGradeChartObject extends Chart {
         DeveloperGrade.Lead,
         items,
         "4",
-        40,
+        90,
         dispatcher,
         totalCountDispatcher
       ),
@@ -168,7 +168,7 @@ export class ExpectationGradeChartObject extends Chart {
         'circle',
         "y1",
         "line",
-        "0"
+        stack
       ),
     ];
   }
