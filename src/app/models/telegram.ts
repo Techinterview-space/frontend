@@ -17,3 +17,13 @@ export enum TelegramBotUsageType {
   SupergroupMention = 3,
   InlineQuery = 4,
 }
+
+export interface TelegramUserSettings {
+  id: string;
+  chatId: number;
+  userId: number;
+  username: string;
+  sendBotRegularStatsUpdates: boolean;
+  createdAt: string;
+  updatedAt: string;
+}

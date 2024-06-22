@@ -1,0 +1,53 @@
+<app-page-header>Настройки пользователей</app-page-header>
+
+<div class="container my-5" *ngIf="items; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div
+        class="table-responsive mb-3"
+        *ngIf="items && items.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
+          <thead class="small">
+            <th>Никнейм</th>
+            <th>Chat ID</th>
+            <th>User ID</th>
+            <th>Создано</th>
+            <th>Обновлено</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr class="small" *ngFor="let item of items; let i = index">
+              <td>{{ item.username }}</td>
+              <td>{{ item.chatId }}</td>
+              <td>{{ item.userId }}</td>
+              <td>{{ item.createdAt | date : "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date : "yyyy-MM-dd HH:mm" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">Нет данных.</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>

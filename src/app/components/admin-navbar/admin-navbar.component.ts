@@ -76,6 +76,10 @@ export class AdminNavbarComponent {
             title: "Использование бота",
             url: "/admin/telegram/bot-usages",
           },
+          {
+            title: "Настройки пользователей",
+            url: "/admin/telegram/user-settings",
+          },
         ],
       },
       {
