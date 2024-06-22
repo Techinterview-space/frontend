@@ -3,6 +3,12 @@
 <div class="container my-5" *ngIf="items; else dataLoading">
   <div class="card">
     <div class="card-body">
+      <div class="mb-3">
+        <button class="btn btn-sm btn-primary" (click)="create()">
+          Создать
+        </button>
+      </div>
+
       <div
         class="table-responsive mb-3"
         *ngIf="items && items.length > 0; else nothingToShow"
@@ -23,6 +29,18 @@
               <td>{{ item.userId }}</td>
               <td>{{ item.createdAt | date : "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date : "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <button type="button" class="btn-link-sm" (click)="edit(item)">
+                  Редактировать
+                </button>
+                <button
+                  type="button"
+                  class="btn-link-sm ms-1 text-danger"
+                  (click)="openDeleteDialog(item)"
+                >
+                  Удалить
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -51,3 +69,58 @@
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>
+
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Редактировать специальность'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label>Название</label>
+      <input type="text" class="form-control" formControlName="username" />
+      <app-field-error [field]="editForm.get('username')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Chat ID</label>
+      <input type="text" class="form-control" formControlName="chatId" />
+      <app-field-error [field]="editForm.get('chatId')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>User ID</label>
+      <input type="text" class="form-control" formControlName="userId" />
+      <app-field-error [field]="editForm.get('userId')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <input
+        type="checkbox"
+        id="sendBotRegularStatsUpdates"
+        class="form-check-input"
+        formControlName="sendBotRegularStatsUpdates"
+      />
+      <label class="form-check-label" for="sendBotRegularStatsUpdates">
+        Отправлять ли регулярно данные по статистике</label
+      >
+      <app-field-error
+        [field]="editForm.get('sendBotRegularStatsUpdates')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+  </form>
+</app-dialog>

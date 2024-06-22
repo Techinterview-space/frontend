@@ -10,7 +10,8 @@ export interface UpdateTelegramUserSettingsBody {
   sendBotRegularStatsUpdates: boolean;
 }
 
-export interface CreateTelegramUserSettingsBody extends UpdateTelegramUserSettingsBody {
+export interface CreateTelegramUserSettingsBody
+  extends UpdateTelegramUserSettingsBody {
   chatId: number;
   userId: number;
   username: string;
@@ -46,18 +47,26 @@ export class TelegramBotService {
     );
   }
 
-  createUserSettings(data: CreateTelegramUserSettingsBody): Observable<TelegramUserSettings> {
+  createUserSettings(
+    data: CreateTelegramUserSettingsBody
+  ): Observable<TelegramUserSettings> {
     return this.api.post<TelegramUserSettings>(
-      this.apiUrl + "bot-user-settings", data);
+      this.apiUrl + "bot-user-settings",
+      data
+    );
   }
 
-  updateUserSettings(id: string, data: UpdateTelegramUserSettingsBody): Observable<TelegramUserSettings> {
+  updateUserSettings(
+    id: string,
+    data: UpdateTelegramUserSettingsBody
+  ): Observable<TelegramUserSettings> {
     return this.api.put<TelegramUserSettings>(
-      this.apiUrl + "bot-user-settings/" + id, data);
+      this.apiUrl + "bot-user-settings/" + id,
+      data
+    );
   }
 
   deleteUserSettings(id: string): Observable<void> {
-    return this.api.delete<void>(
-      this.apiUrl + "bot-user-settings/" + id);
+    return this.api.delete<void>(this.apiUrl + "bot-user-settings/" + id);
   }
 }
