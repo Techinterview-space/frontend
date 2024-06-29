@@ -1,11 +1,13 @@
-<div class="container">
-  <div *ngIf="loaded; else notLoaded">
-    <div *ngIf="showUwu; else noUwu" class="pt-5">
-      <div class="d-flex flex-column justify-content-center align-items-center">
-        <div class="mb-3 uwu-image" *ngIf="uwuImageLink">
-          <img src="{{ uwuImageLink }}" alt="UwU" class="img-fluid" />
+<div class="">
+  <div class="container">
+    <div *ngIf="loaded; else notLoaded">
+      <div *ngIf="showUwu; else noUwu" class="pt-5">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <div class="mb-3 uwu-image" *ngIf="uwuImageLink">
+            <img src="{{ uwuImageLink }}" alt="UwU" class="img-fluid" />
+          </div>
+          <div class="display-1 uwu-title">Зарплаты в IT</div>
         </div>
-        <div class="display-1 uwu-title">Зарплаты в IT</div>
       </div>
     </div>
   </div>
@@ -122,20 +124,24 @@
 </div>
 
 <ng-template #noUwu>
-  <div class="row pt-5">
-    <div class="col-sm-6 d-flex align-items-center">
-      <div class="d-inline-block my-5">
-        <div class="display-1">Tech.Interview</div>
-        <div class="lead">Зарплаты в IT</div>
-        <div class="lead">Заметки к техническим интервью</div>
+
+  <div class="no-uwu-content">
+    <div class="mt-3 mb-1 text-center">
+      <div>
+        <span class="display-1">Techinterview.space</span>
+      </div>
+      <div class="lead">
+        <span class="me-3">Зарплаты в IT.</span>
+        <span>Заметки к техническим интервью.</span>
       </div>
     </div>
-    <div class="col-sm-6">
+  
+    <div class="pt-1 d-flex justify-content-center">
       <img
-        src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_transparent_1000.png"
-        alt="Interviewer"
-        class="img-fluid"
-      />
+          src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_transparent_1000.png"
+          alt="Interviewer"
+          class="img-fluid w-50"
+        />
     </div>
   </div>
 </ng-template>

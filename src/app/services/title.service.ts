@@ -11,10 +11,10 @@ export class TitleService {
   setTitle(title: string): void {
     Assertion.stringNotNullOrEmpty(title, "title");
 
-    this.titleService.setTitle(title + " - Tech.Interview");
+    this.titleService.setTitle(title + " - Techinterview.space");
   }
 
   public resetTitle(): void {
-    this.titleService.setTitle("Tech.Interview");
+    this.titleService.setTitle("Techinterview.space");
   }
 }
