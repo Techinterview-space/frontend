@@ -4,7 +4,7 @@ import { ApiService } from "./api.service";
 import { DeveloperGrade } from "@models/enums";
 import { CompanyType } from "@models/salaries/company-type";
 import { Currency } from "@models/salaries/currency";
-import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { SalarySourceType, UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { PageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
@@ -117,6 +117,9 @@ export interface SalariesChartFilterData {
   grade: DeveloperGrade | null;
   profsInclude: Array<number> | null;
   cities: Array<KazakhstanCity> | null;
+  salarySourceType: SalarySourceType | null;
+  quarterTo: number | null;
+  yearTo: number | null;
 }
 
 export interface SalariesAddingTrendChartParams {
@@ -180,6 +183,16 @@ export class UserSalariesService {
     return this.api.get<PaginatedList<UserSalaryAdminDto>>(
       this.root +
         "not-in-stats?" +
+        new ConvertObjectToHttpParams(pageParams).get()
+    );
+  }
+
+  sourcedSalaries(
+    pageParams: AdminAllSalariesQueryParams
+  ): Observable<PaginatedList<UserSalaryAdminDto>> {
+    return this.api.get<PaginatedList<UserSalaryAdminDto>>(
+      this.root +
+        "sourced-salaries?" +
         new ConvertObjectToHttpParams(pageParams).get()
     );
   }

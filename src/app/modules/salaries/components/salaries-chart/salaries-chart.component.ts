@@ -224,6 +224,9 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
         grade: data?.grade ?? null,
         profsInclude: data?.profsInclude ?? null,
         cities: data?.cities ?? null,
+        salarySourceType: data?.salarySourceType ?? null,
+        quarterTo: data?.quarterTo ?? null,
+        yearTo: data?.yearTo ?? null,
       })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {

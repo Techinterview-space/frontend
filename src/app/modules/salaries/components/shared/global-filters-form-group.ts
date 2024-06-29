@@ -1,12 +1,16 @@
 import { FormControl, FormGroup } from "@angular/forms";
 import { DeveloperGrade } from "@models/enums";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
+import { SalarySourceType } from "@models/salaries/salary.model";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
 
 export class SalaryChartGlobalFiltersData {
   grade: DeveloperGrade | null = null;
   profsInclude: Array<number> = [];
   cities: Array<KazakhstanCity> = [];
+  salarySourceType: SalarySourceType | null = null;
+  quarterTo: number | null = null;
+  yearTo: number | null = null;
 
   constructor(
     grade: DeveloperGrade | null = null,

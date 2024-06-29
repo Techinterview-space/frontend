@@ -3,7 +3,7 @@ import { GenderEnum } from "@models/enums/gender.enum";
 import { CompanyType } from "@models/salaries/company-type";
 import { Currency } from "@models/salaries/currency";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
-import { UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { SalarySourceType, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 export class SalaryAdminItem {
@@ -22,6 +22,7 @@ export class SalaryAdminItem {
   readonly city: string;
   readonly skill: string;
   readonly industry: string;
+  readonly salarySourceType: string | null;
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
@@ -53,6 +54,11 @@ export class SalaryAdminItem {
       item.workIndustryId != null
         ? industries.find((x) => x.id == item.workIndustryId)?.title ?? "-"
         : "-";
+
+    this.salarySourceType = item.salarySourceType
+      ? SalarySourceType[item.salarySourceType]
+      : null;
+
     this.createdAt = item.createdAt;
     this.updatedAt = item.updatedAt ?? item.createdAt;
   }
