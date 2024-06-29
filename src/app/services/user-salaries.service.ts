@@ -117,6 +117,7 @@ export interface SalariesChartFilterData {
   grade: DeveloperGrade | null;
   profsInclude: Array<number> | null;
   cities: Array<KazakhstanCity> | null;
+  skills: Array<number> | null;
   salarySourceType: SalarySourceType | null;
   quarterTo: number | null;
   yearTo: number | null;

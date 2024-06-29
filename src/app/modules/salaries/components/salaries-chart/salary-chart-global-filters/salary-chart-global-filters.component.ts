@@ -26,6 +26,9 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
   @Input()
   professions: Array<LabelEntityDto> = [];
 
+  @Input()
+  skills: Array<LabelEntityDto> = [];
+
   @Output()
   readonly filtersApplied = new EventEmitter<SalaryChartGlobalFiltersData>();
 
@@ -37,11 +40,20 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
 
   form: GlobalFiltersFormGroup | null = null;
   professionsAsOptions: Array<SelectItem<number>> = [];
+  skillsAsOptions: Array<SelectItem<number>> = [];
 
   constructor(private readonly alert: AlertService) {}
 
   ngOnInit(): void {
     this.professionsAsOptions = this.professions.map((x) => {
+      return {
+        value: x.id.toString(),
+        item: x.id,
+        label: x.title,
+      };
+    });
+
+    this.skillsAsOptions = this.skills.map((x) => {
       return {
         value: x.id.toString(),
         item: x.id,

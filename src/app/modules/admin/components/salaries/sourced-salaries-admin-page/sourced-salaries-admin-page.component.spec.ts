@@ -6,15 +6,15 @@ import {
   testUtilStubs,
   mostUsedServices,
 } from "@shared/test-utils";
-import { SalariesNotInStatsAdminPageComponent } from "./salaries-not-in-stat-admin-page.component";
+import { SourcedSalariesAdminPageComponent } from "./sourced-salaries-admin-page.component";
 
-describe("SalariesNotInStatsAdminPageComponent", () => {
-  let component: SalariesNotInStatsAdminPageComponent;
-  let fixture: ComponentFixture<SalariesNotInStatsAdminPageComponent>;
+describe("SourcedSalariesAdminPageComponent", () => {
+  let component: SourcedSalariesAdminPageComponent;
+  let fixture: ComponentFixture<SourcedSalariesAdminPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SalariesNotInStatsAdminPageComponent],
+      declarations: [SourcedSalariesAdminPageComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices, UserAdminService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -22,7 +22,7 @@ describe("SalariesNotInStatsAdminPageComponent", () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SalariesNotInStatsAdminPageComponent);
+    fixture = TestBed.createComponent(SourcedSalariesAdminPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

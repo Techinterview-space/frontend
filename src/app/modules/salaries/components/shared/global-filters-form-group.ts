@@ -8,6 +8,7 @@ export class SalaryChartGlobalFiltersData {
   grade: DeveloperGrade | null = null;
   profsInclude: Array<number> = [];
   cities: Array<KazakhstanCity> = [];
+  skills: Array<number> = [];
   salarySourceType: SalarySourceType | null = null;
   quarterTo: number | null = null;
   yearTo: number | null = null;
@@ -15,7 +16,11 @@ export class SalaryChartGlobalFiltersData {
   constructor(
     grade: DeveloperGrade | null = null,
     profsInclude: Array<number> = [],
-    cities: Array<KazakhstanCity> = []
+    cities: Array<KazakhstanCity> = [],
+    skills: Array<number> = [],
+    salarySourceType: SalarySourceType | null = null,
+    quarterTo: number | null = null,
+    yearTo: number | null = null
   ) {
     if (grade === DeveloperGrade.Unknown) {
       grade = null;
@@ -24,13 +29,21 @@ export class SalaryChartGlobalFiltersData {
     this.grade = grade;
     this.profsInclude = profsInclude;
     this.cities = cities;
+    this.skills = skills;
+    this.salarySourceType = salarySourceType;
+    this.quarterTo = quarterTo;
+    this.yearTo = yearTo;
   }
 
   equals(other: SalaryChartGlobalFiltersData): boolean {
     return (
       this.grade === other.grade &&
       this.cities.length === other.cities.length &&
-      this.isEqualArrays(this.profsInclude, other.profsInclude)
+      this.isEqualArrays(this.profsInclude, other.profsInclude) &&
+      this.isEqualArrays(this.skills, other.skills) &&
+      this.salarySourceType === other.salarySourceType &&
+      this.quarterTo === other.quarterTo &&
+      this.yearTo === other.yearTo
     );
   }
 
@@ -52,6 +65,10 @@ export class GlobalFiltersFormGroup extends FormGroup {
       grade: new FormControl(filterData?.grade, []),
       profsToInclude: new FormControl(filterData?.profsInclude, []),
       cities: new FormControl(filterData?.cities, []),
+      skills: new FormControl(filterData?.skills, []),
+      salarySourceType: new FormControl(filterData?.salarySourceType, []),
+      quarterTo: new FormControl(filterData?.quarterTo, []),
+      yearTo: new FormControl(filterData?.yearTo, []),
     });
   }
 
@@ -68,7 +85,22 @@ export class GlobalFiltersFormGroup extends FormGroup {
 
     const profsToInclude = (this.value.profsToInclude as Array<number>) ?? [];
     const cities = (this.value.cities as Array<KazakhstanCity>) ?? [];
+    const skills = (this.value.skills as Array<number>) ?? [];
+    const salarySourceType =
+      this.value.salarySourceType != null && this.value.salarySourceType !== "null"
+      ? this.value.salarySourceType as SalarySourceType
+      : null;
 
-    return new SalaryChartGlobalFiltersData(grade, profsToInclude, cities);
+    const quarterTo = this.value.quarterTo ?? null;
+    const yearTo = this.value.yearTo ?? null;
+
+    return new SalaryChartGlobalFiltersData(
+      grade,
+      profsToInclude,
+      cities,
+      skills,
+      salarySourceType,
+      quarterTo,
+      yearTo);
   }
 }
