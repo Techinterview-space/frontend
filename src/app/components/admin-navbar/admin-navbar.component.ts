@@ -67,6 +67,10 @@ export class AdminNavbarComponent {
             title: "Анкеты вне статистики",
             url: "/admin/salaries/not-in-stats",
           },
+          {
+            title: "Импортированные анкеты",
+            url: "/admin/salaries/imported-salaries",
+          },
         ],
       },
       {

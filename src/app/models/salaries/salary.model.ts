@@ -4,6 +4,11 @@ import { Currency } from "./currency";
 import { KazakhstanCity } from "./kazakhstan-city";
 import { Gender } from "@models/enums/gender.enum";
 
+export enum SalarySourceType {
+  Undefined = 0,
+  KolesaDevelopersCsv2022 = 1,
+}
+
 export interface UserSalarySimple {
   value: number;
   quarter: number;
@@ -24,6 +29,7 @@ export interface UserSalary extends UserSalarySimple {
   skillId: number | null;
   workIndustryId: number | null;
   professionId: number | null;
+  sourceType: SalarySourceType | null;
 }
 
 export interface UserSalaryAdminDto extends UserSalary {

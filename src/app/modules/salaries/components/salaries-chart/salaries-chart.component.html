@@ -205,11 +205,25 @@
           <app-salary-chart-global-filters
             [filterData]="filterData"
             [professions]="professions"
+            [skills]="skills"
             (filtersApplied)="applyGlobalFilters($event)"
             (filtersReset)="resetGlobalFilters()"
             (shareClicked)="share($event)"
           >
           </app-salary-chart-global-filters>
+
+          <div class="mt-3 alert alert-info" *ngIf="kolesaImportedSalariesWasSelected">
+            <div class="h5">Внимание!</div>
+            <div class="mt-2">
+              Вы просматриваете импортированную статистику <a href="https://zerttey.kolesa.group/developers-2022?utm=techinterview.space" target="_blank" class="text-reset">исследования зарплат работников в IT</a> от 2022 года, проведенного компанией
+              <a href="https://kolesa.group?utm=techinterview.space" target="_blank" class="text-reset">Kolesa Group</a>. 
+              Статистика была собрана в ноябре-декабре 2021 года и включает в себя данные о зарплатах, специализациях и опыте работы. 
+              Список валют показывает те рейты, которые были актуальны на декабрь 2021 года по данным нацбанка РК.
+            </div>
+            <div class="mt-2">
+              Спасибо команде Kolesa Group за предоставленные данные.
+            </div>
+          </div>
         </div>
 
         <div class="mb-5 display-4 chapter-title">
@@ -344,7 +358,7 @@
           <span>Исходные данные</span>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" *ngIf="showSalariesPaginatedTable">
           <app-salaries-paginated-table
             [filter]="filterData"
             [skills]="skills"
@@ -353,14 +367,14 @@
           ></app-salaries-paginated-table>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" *ngIf="noImportSourceWasSelected">
           <app-salaries-adding-chart
             [filter]="filterData"
           ></app-salaries-adding-chart>
         </div>
 
         <div class="mb-3">
-          <div class="mb-5">
+          <div class="mb-5" *ngIf="noImportSourceWasSelected">
             <div>
               Сырые данные можно выгрузить в
               <button

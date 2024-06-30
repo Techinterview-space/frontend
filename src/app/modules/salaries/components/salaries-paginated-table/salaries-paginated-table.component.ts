@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { PaginatedList } from "@models/paginated-list";
 import { UserSalary } from "@models/salaries/salary.model";
 import {
-  SelectBoxItemsResponse,
   UserSalariesService,
 } from "@services/user-salaries.service";
 import { SalaryChartGlobalFiltersData } from "../shared/global-filters-form-group";
@@ -32,6 +31,7 @@ export class SalariesPaginatedTableComponent implements OnInit, OnDestroy {
   filter: SalaryChartGlobalFiltersData | null = null;
 
   source: PaginatedList<UserSalary> | null = null;
+
   private currentPage = 1;
 
   constructor(private readonly service: UserSalariesService) {}
@@ -52,6 +52,10 @@ export class SalariesPaginatedTableComponent implements OnInit, OnDestroy {
         profsInclude: this.filter?.profsInclude ?? [],
         grade: this.filter?.grade ?? null,
         cities: this.filter?.cities ?? [],
+        skills: this.filter?.skills ?? [],
+        salarySourceType: this.filter?.salarySourceType ?? null,
+        quarterTo: this.filter?.quarterTo ?? null,
+        yearTo: this.filter?.yearTo ?? null,
       })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {

@@ -1,17 +1,27 @@
 import { FormControl, FormGroup } from "@angular/forms";
 import { DeveloperGrade } from "@models/enums";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
+import { SalarySourceType } from "@models/salaries/salary.model";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
+import { SelectItem } from "@shared/select-boxes/select-item";
 
 export class SalaryChartGlobalFiltersData {
   grade: DeveloperGrade | null = null;
   profsInclude: Array<number> = [];
   cities: Array<KazakhstanCity> = [];
+  skills: Array<number> = [];
+  salarySourceType: SalarySourceType | null = null;
+  quarterTo: number | null = null;
+  yearTo: number | null = null;
 
   constructor(
     grade: DeveloperGrade | null = null,
     profsInclude: Array<number> = [],
-    cities: Array<KazakhstanCity> = []
+    cities: Array<KazakhstanCity> = [],
+    skills: Array<number> = [],
+    salarySourceType: SalarySourceType | null = null,
+    quarterTo: number | null = null,
+    yearTo: number | null = null
   ) {
     if (grade === DeveloperGrade.Unknown) {
       grade = null;
@@ -20,13 +30,21 @@ export class SalaryChartGlobalFiltersData {
     this.grade = grade;
     this.profsInclude = profsInclude;
     this.cities = cities;
+    this.skills = skills;
+    this.salarySourceType = salarySourceType;
+    this.quarterTo = quarterTo;
+    this.yearTo = yearTo;
   }
 
   equals(other: SalaryChartGlobalFiltersData): boolean {
     return (
       this.grade === other.grade &&
       this.cities.length === other.cities.length &&
-      this.isEqualArrays(this.profsInclude, other.profsInclude)
+      this.isEqualArrays(this.profsInclude, other.profsInclude) &&
+      this.isEqualArrays(this.skills, other.skills) &&
+      this.salarySourceType === other.salarySourceType &&
+      this.quarterTo === other.quarterTo &&
+      this.yearTo === other.yearTo
     );
   }
 
@@ -43,11 +61,23 @@ export class GlobalFiltersFormGroup extends FormGroup {
   readonly grades: Array<DeveloperGradeSelectItem> =
     DeveloperGradeSelectItem.gradesSimpleOnly();
 
+  readonly sourceTypes: Array<SelectItem<SalarySourceType>> = [
+    {
+      value: SalarySourceType.KolesaDevelopersCsv2022.toString(),
+      label: "Источник: Kolesa Developers 2022",
+      item: SalarySourceType.KolesaDevelopersCsv2022,
+    },
+  ];
+
   constructor(filterData: SalaryChartGlobalFiltersData | null) {
     super({
       grade: new FormControl(filterData?.grade, []),
       profsToInclude: new FormControl(filterData?.profsInclude, []),
       cities: new FormControl(filterData?.cities, []),
+      skills: new FormControl(filterData?.skills, []),
+      salarySourceType: new FormControl(filterData?.salarySourceType, []),
+      quarterTo: new FormControl(filterData?.quarterTo, []),
+      yearTo: new FormControl(filterData?.yearTo, []),
     });
   }
 
@@ -57,14 +87,38 @@ export class GlobalFiltersFormGroup extends FormGroup {
       return null;
     }
 
-    const grade =
+    let grade =
       this.value.grade != null && this.value.grade !== "null"
         ? (this.value.grade as DeveloperGrade)
         : null;
 
+    if (grade === DeveloperGrade.Unknown) {
+      grade = null;
+    }
+
     const profsToInclude = (this.value.profsToInclude as Array<number>) ?? [];
     const cities = (this.value.cities as Array<KazakhstanCity>) ?? [];
+    const skills = (this.value.skills as Array<number>) ?? [];
 
-    return new SalaryChartGlobalFiltersData(grade, profsToInclude, cities);
+    let salarySourceType =
+      this.value.salarySourceType != null && this.value.salarySourceType !== "null"
+        ? (this.value.salarySourceType as SalarySourceType | null)
+        : null;
+
+    if (salarySourceType === SalarySourceType.Undefined) {
+      salarySourceType = null;
+    }
+
+    const quarterTo = this.value.quarterTo ?? null;
+    const yearTo = this.value.yearTo ?? null;
+
+    return new SalaryChartGlobalFiltersData(
+      grade,
+      profsToInclude,
+      cities,
+      skills,
+      salarySourceType,
+      quarterTo,
+      yearTo);
   }
 }

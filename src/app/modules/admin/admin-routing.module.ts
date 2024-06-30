@@ -11,6 +11,7 @@ import { WorkIndustriesPaginatedTableComponent } from "./components/label-entiti
 import { ProfessionsPaginatedTableComponent } from "./components/label-entities/professions-paginated-table/professions-paginated-table.component";
 import { TelegramBotUsagesComponent } from "./components/telegram/telegram-bot-usages/telegram-bot-usages.component";
 import { TelegramUserSettingsComponent } from "./components/telegram/telegram-user-settings/telegram-user-settings.component";
+import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced-salaries-admin-page/sourced-salaries-admin-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: "salaries/not-in-stats",
     component: SalariesNotInStatsAdminPageComponent,
+  },
+  {
+    path: "salaries/imported-salaries",
+    component: SourcedSalariesAdminPageComponent,
   },
   { path: "telegram/bot-usages", component: TelegramBotUsagesComponent },
   { path: "telegram/user-settings", component: TelegramUserSettingsComponent },

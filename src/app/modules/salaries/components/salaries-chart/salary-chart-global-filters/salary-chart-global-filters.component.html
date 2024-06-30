@@ -1,56 +1,82 @@
 <div>
-  <form *ngIf="form" [formGroup]="form" (ngSubmit)="apply()">
-    <div class="h3 mb-2">Фильтр</div>
-    <div class="mb-2 fst-italic">
-      Вы можете поделиться информацией с кем-то в соцсетях или телеграме. Для
-      этого сначала примените нужные фильтры, а затем нажмите на кнопку
-      "Поделиться". Ссылка будет скопирована в буфер обмена
-    </div>
-    <div class="row">
-      <div class="col-md-2 mb-1">
-        <label class="text-sm">Грейд</label>
-        <select class="form-select" formControlName="grade">
-          <option [value]="null" selected>Все грейды</option>
-          <option *ngFor="let item of form.grades" [value]="item.item">
-            {{ item.label }}
-          </option>
-        </select>
+  <div class="">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="apply()">
+      <div class="h3 mb-2">Фильтр</div>
+      <div class="mb-2 fst-italic">
+        Вы можете поделиться информацией с кем-то в соцсетях или телеграме. Для
+        этого сначала примените нужные фильтры, а затем нажмите на кнопку
+        "Поделиться". Ссылка будет скопирована в буфер обмена
       </div>
-
-      <div class="col-md-3 mb-1">
-        <label class="text-sm">Cпециализации</label>
-        <ng-select
-          [items]="professionsAsOptions"
-          [hideSelected]="true"
-          [selectOnTab]="true"
-          bindLabel="label"
-          bindValue="item"
-          placeholder="Все специальности"
-          appendTo="body"
-          formControlName="profsToInclude"
-          [multiple]="true"
-        >
-        </ng-select>
+      <div class="row">
+        <div class="col-md-2 mb-1">
+          <label class="text-sm">Грейд</label>
+          <select class="form-select" formControlName="grade">
+            <option [value]="null" selected>Все грейды</option>
+            <option *ngFor="let item of form.grades" [value]="item.item">
+              {{ item.label }}
+            </option>
+          </select>
+        </div>
+  
+        <div class="col-md-3 mb-1">
+          <label class="text-sm">Cпециализации</label>
+          <ng-select
+            [items]="professionsAsOptions"
+            [hideSelected]="true"
+            [selectOnTab]="true"
+            bindLabel="label"
+            bindValue="item"
+            placeholder="Все специальности"
+            appendTo="body"
+            formControlName="profsToInclude"
+            [multiple]="true"
+          >
+          </ng-select>
+        </div>
+  
+        <div class="col-md-3 mb-1">
+          <label class="text-sm">Города</label>
+          <ng-select
+            [items]="allCities"
+            [hideSelected]="true"
+            [selectOnTab]="true"
+            bindLabel="label"
+            bindValue="item"
+            placeholder="Выберите города"
+            appendTo="body"
+            formControlName="cities"
+            [multiple]="true"
+          >
+          </ng-select>
+        </div>
+        <div class="col-md-3 mb-1">
+          <label class="text-sm">Навыки</label>
+          <ng-select
+            [items]="skillsAsOptions"
+            [hideSelected]="true"
+            [selectOnTab]="true"
+            bindLabel="label"
+            bindValue="item"
+            placeholder="Выберите навыки"
+            appendTo="body"
+            formControlName="skills"
+            [multiple]="true"
+          >
+          </ng-select>
+        </div>
       </div>
-
-      <div class="col-md-3 mb-1">
-        <label class="text-sm">Города</label>
-        <ng-select
-          [items]="allCities"
-          [hideSelected]="true"
-          [selectOnTab]="true"
-          bindLabel="label"
-          bindValue="item"
-          placeholder="Выберите города"
-          appendTo="body"
-          formControlName="cities"
-          [multiple]="true"
-        >
-        </ng-select>
-      </div>
-
-      <div class="col-md-4 mb-1 d-flex align-items-end">
-        <div>
+      <div class="row">
+        <div class="col-md-2 mb-1">
+          <label class="text-sm">Источник данных</label>
+          <select class="form-select" formControlName="salarySourceType">
+            <option [value]="null" selected>Собственная статистика</option>
+            <option *ngFor="let item of form.sourceTypes" [value]="item.item">
+              {{ item.label }}
+            </option>
+          </select>
+        </div>
+  
+        <div class="col-md-4 mb-1 d-flex align-items-end">
           <button type="submit" class="btn btn-outline-dark">Применить</button>
           <button
             type="reset"
@@ -61,11 +87,11 @@
           </button>
           <app-share-button
             [title]="'Поделиться'"
-            [cssBtnSize]="''"
+            [cssBtnSize]="'small'"
             (shareClicked)="share()"
           ></app-share-button>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
