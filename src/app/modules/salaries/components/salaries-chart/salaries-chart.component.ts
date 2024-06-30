@@ -169,10 +169,6 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.gtag.event("salaries_filters_applied_sourcetype", "salary_chart", selectedSourceType);
 
     this.load(data);
-
-    this.noImportSourceWasSelected = data.salarySourceType == null;
-    this.kolesaImportedSalariesWasSelected
-      = data.salarySourceType === SalarySourceType.KolesaDevelopersCsv2022;
   }
 
   resetGlobalFilters(): void {
@@ -233,16 +229,19 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   private loadChartWithFilter(
     data: SalaryChartGlobalFiltersData | null = null
   ): void {
+
+    const filterToApply = {
+      grade: data?.grade ?? null,
+      profsInclude: data?.profsInclude ?? null,
+      cities: data?.cities ?? null,
+      skills: data?.skills ?? null,
+      salarySourceType: data?.salarySourceType ?? null,
+      quarterTo: data?.quarterTo ?? null,
+      yearTo: data?.yearTo ?? null,
+    };
+
     this.service
-      .charts({
-        grade: data?.grade ?? null,
-        profsInclude: data?.profsInclude ?? null,
-        cities: data?.cities ?? null,
-        skills: data?.skills ?? null,
-        salarySourceType: data?.salarySourceType ?? null,
-        quarterTo: data?.quarterTo ?? null,
-        yearTo: data?.yearTo ?? null,
-      })
+      .charts(filterToApply)
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.isAuthenticated = x.hasAuthentication;
@@ -265,6 +264,12 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
             x.currentUserSalary.professionId === developerProfessionId;
+
+          this.noImportSourceWasSelected = filterToApply.salarySourceType == null;
+          this.kolesaImportedSalariesWasSelected
+            = filterToApply.salarySourceType == SalarySourceType.KolesaDevelopersCsv2022;
+
+          console.log(filterToApply.salarySourceType);
         }
       });
   }
