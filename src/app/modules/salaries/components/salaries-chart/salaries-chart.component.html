@@ -345,7 +345,7 @@
           <span>Исходные данные</span>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" *ngIf="showSalariesPaginatedTable">
           <app-salaries-paginated-table
             [filter]="filterData"
             [skills]="skills"
@@ -354,14 +354,14 @@
           ></app-salaries-paginated-table>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" *ngIf="noImportSourceWasSelected">
           <app-salaries-adding-chart
             [filter]="filterData"
           ></app-salaries-adding-chart>
         </div>
 
         <div class="mb-3">
-          <div class="mb-5">
+          <div class="mb-5" *ngIf="noImportSourceWasSelected">
             <div>
               Сырые данные можно выгрузить в
               <button

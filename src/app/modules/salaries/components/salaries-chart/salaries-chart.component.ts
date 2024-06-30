@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { UserSalary } from "@models/salaries/salary.model";
+import { SalarySourceType, UserSalary } from "@models/salaries/salary.model";
 import { UserSalariesService } from "@services/user-salaries.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { SalariesChart } from "./salaries-chart";
@@ -46,6 +46,9 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   hasPredefinedFilter = false;
   shouldShowSurveyBlock = false;
+  kolesaImportedSalariesWasSelected = false;
+  noImportSourceWasSelected = true;
+  showSalariesPaginatedTable = false;
 
   gradeFilter: DeveloperGrade | null = null;
 
@@ -84,6 +87,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.salariesChart = null;
     this.openAddSalaryModal = false;
     this.currentUserSalary = null;
+    this.showSalariesPaginatedTable = false;
 
     const shouldLoadSelectBoxItems =
       this.skills.length === 0 ||
@@ -157,8 +161,18 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
     this.filterData = data;
     const selectedGrade = data.grade ? DeveloperGrade[data.grade] : "empty";
-    this.gtag.event("salaries_filters_applied", "salary_chart", selectedGrade);
+    const selectedSourceType = data.salarySourceType
+      ? SalarySourceType[data.salarySourceType]
+      : "empty";
+
+    this.gtag.event("salaries_filters_applied_grade", "salary_chart", selectedGrade);
+    this.gtag.event("salaries_filters_applied_sourcetype", "salary_chart", selectedSourceType);
+
     this.load(data);
+
+    this.noImportSourceWasSelected = data.salarySourceType == null;
+    this.kolesaImportedSalariesWasSelected
+      = data.salarySourceType === SalarySourceType.KolesaDevelopersCsv2022;
   }
 
   resetGlobalFilters(): void {
@@ -247,6 +261,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           const developerProfessionId = 1;
           this.showDataStub = false;
           this.shouldShowSurveyBlock = !x.hasRecentSurveyReply;
+          this.showSalariesPaginatedTable = true;
           this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
             x.currentUserSalary.professionId === developerProfessionId;

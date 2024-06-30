@@ -29,7 +29,7 @@ export interface UserSalary extends UserSalarySimple {
   skillId: number | null;
   workIndustryId: number | null;
   professionId: number | null;
-  salarySourceType: SalarySourceType | null;
+  sourceType: SalarySourceType | null;
 }
 
 export interface UserSalaryAdminDto extends UserSalary {

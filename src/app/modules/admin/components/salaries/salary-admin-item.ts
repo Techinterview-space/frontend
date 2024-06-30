@@ -22,7 +22,7 @@ export class SalaryAdminItem {
   readonly city: string;
   readonly skill: string;
   readonly industry: string;
-  readonly salarySourceType: string | null;
+  readonly sourceType: string | null;
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
@@ -55,8 +55,8 @@ export class SalaryAdminItem {
         ? industries.find((x) => x.id == item.workIndustryId)?.title ?? "-"
         : "-";
 
-    this.salarySourceType = item.salarySourceType
-      ? SalarySourceType[item.salarySourceType]
+    this.sourceType = item.sourceType
+      ? SalarySourceType[item.sourceType]
       : null;
 
     this.createdAt = item.createdAt;

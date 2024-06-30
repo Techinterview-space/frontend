@@ -3,6 +3,7 @@ import { DeveloperGrade } from "@models/enums";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { SalarySourceType } from "@models/salaries/salary.model";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
+import { SelectItem } from "@shared/select-boxes/select-item";
 
 export class SalaryChartGlobalFiltersData {
   grade: DeveloperGrade | null = null;
@@ -60,6 +61,14 @@ export class GlobalFiltersFormGroup extends FormGroup {
   readonly grades: Array<DeveloperGradeSelectItem> =
     DeveloperGradeSelectItem.gradesSimpleOnly();
 
+  readonly sourceTypes: Array<SelectItem<SalarySourceType>> = [
+    {
+      value: SalarySourceType.KolesaDevelopersCsv2022.toString(),
+      label: "Источник: Kolesa Developers 2022",
+      item: SalarySourceType.KolesaDevelopersCsv2022,
+    },
+  ];
+
   constructor(filterData: SalaryChartGlobalFiltersData | null) {
     super({
       grade: new FormControl(filterData?.grade, []),
@@ -78,18 +87,27 @@ export class GlobalFiltersFormGroup extends FormGroup {
       return null;
     }
 
-    const grade =
+    let grade =
       this.value.grade != null && this.value.grade !== "null"
         ? (this.value.grade as DeveloperGrade)
         : null;
 
+    if (grade === DeveloperGrade.Unknown) {
+      grade = null;
+    }
+
     const profsToInclude = (this.value.profsToInclude as Array<number>) ?? [];
     const cities = (this.value.cities as Array<KazakhstanCity>) ?? [];
     const skills = (this.value.skills as Array<number>) ?? [];
-    const salarySourceType =
+
+    let salarySourceType =
       this.value.salarySourceType != null && this.value.salarySourceType !== "null"
-      ? this.value.salarySourceType as SalarySourceType
-      : null;
+        ? (this.value.salarySourceType as SalarySourceType | null)
+        : null;
+
+    if (salarySourceType === SalarySourceType.Undefined) {
+      salarySourceType = null;
+    }
 
     const quarterTo = this.value.quarterTo ?? null;
     const yearTo = this.value.yearTo ?? null;
