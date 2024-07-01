@@ -64,7 +64,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
   readonly sourceTypes: Array<SelectItem<SalarySourceType>> = [
     {
       value: SalarySourceType.KolesaDevelopersCsv2022.toString(),
-      label: "Источник: Kolesa Developers 2022",
+      label: "Kolesa Developers Zerttey, 2022",
       item: SalarySourceType.KolesaDevelopersCsv2022,
     },
   ];
