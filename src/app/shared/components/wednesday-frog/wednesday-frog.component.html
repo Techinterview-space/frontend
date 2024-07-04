@@ -1,0 +1,41 @@
+<div class="mt-5 d-md-flex justify-content-end" *ngIf="showFrog">
+  <img
+    class="frog-img img-fluid"
+    src="{{ littleFrogLink }}"
+    alt="Frog who notifies about wednesday"
+    title="It's Wednesday, my dudes"
+    (click)="openModal()"
+  />
+</div>
+
+<div
+  *ngIf="showModal"
+  class="modal fade show d-block modal-dialog-centered modal-lg"
+  id="frogNotification"
+  tabindex="-1"
+  aria-labelledby="frogNotification"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body d-flex justify-content-center">
+        <img
+          class="img-fluid rounded img-thumbnail"
+          src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_frog_gentelmen.jpeg"
+          alt="Frog who notifies about wednesday"
+          title="It's Wednesday, my dudes"
+        />
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button
+          type="button"
+          class="btn btn-lg btn-block btn-outline-dark"
+          data-bs-dismiss="modal"
+          (click)="closeModal()"
+        >
+          Отлично, спасибо!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
