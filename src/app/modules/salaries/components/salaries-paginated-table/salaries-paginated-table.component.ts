@@ -1,9 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { PaginatedList } from "@models/paginated-list";
 import { UserSalary } from "@models/salaries/salary.model";
-import {
-  UserSalariesService,
-} from "@services/user-salaries.service";
+import { UserSalariesService } from "@services/user-salaries.service";
 import { SalaryChartGlobalFiltersData } from "../shared/global-filters-form-group";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { SalaryTableRow } from "./salary-table-row";

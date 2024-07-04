@@ -101,7 +101,8 @@ export class GlobalFiltersFormGroup extends FormGroup {
     const skills = (this.value.skills as Array<number>) ?? [];
 
     let salarySourceType =
-      this.value.salarySourceType != null && this.value.salarySourceType !== "null"
+      this.value.salarySourceType != null &&
+      this.value.salarySourceType !== "null"
         ? (this.value.salarySourceType as SalarySourceType | null)
         : null;
 
@@ -119,6 +120,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
       skills,
       salarySourceType,
       quarterTo,
-      yearTo);
+      yearTo
+    );
   }
 }

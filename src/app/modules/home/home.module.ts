@@ -12,6 +12,7 @@ import { AuthCallbackComponent } from "./components/auth-callback/auth-callback.
 import { PrivacyPolicyPageComponent } from "./components/privacy-policy-page/privacy-policy-page.component";
 import { AboutUsComponent } from "./components/about-us/about-us.component";
 import { LogoutCallbackComponent } from "./components/logout-callback/logout-callback.component";
+import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bot.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LogoutCallbackComponent } from "./components/logout-callback/logout-cal
     PrivacyPolicyPageComponent,
     AboutUsComponent,
     LogoutCallbackComponent,
+    TelegramBotABoutComponent,
   ],
   imports: [CommonModule, SharedModule, HomeRoutingModule],
 })

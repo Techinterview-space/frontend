@@ -10,6 +10,7 @@ import { AuthCallbackComponent } from "./components/auth-callback/auth-callback.
 import { PrivacyPolicyPageComponent } from "./components/privacy-policy-page/privacy-policy-page.component";
 import { AboutUsComponent } from "./components/about-us/about-us.component";
 import { LogoutCallbackComponent } from "./components/logout-callback/logout-callback.component";
+import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bot.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: "logout-callback", component: LogoutCallbackComponent },
   { path: "about-us", component: AboutUsComponent },
   { path: "agreements/privacy-policy", component: PrivacyPolicyPageComponent },
+  { path: "about-telegram-bot", component: TelegramBotABoutComponent },
 ];
 
 @NgModule({

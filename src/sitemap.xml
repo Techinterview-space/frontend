@@ -26,7 +26,15 @@
         <priority>0.80</priority>
     </url>
     <url>
+        <loc>https://techinterview.space/salaries/historical-data</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
         <loc>https://techinterview.space/about-us</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/about-telegram-bot</loc>
         <priority>0.80</priority>
     </url>
 </urlset>

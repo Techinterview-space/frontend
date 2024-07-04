@@ -165,8 +165,16 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       ? SalarySourceType[data.salarySourceType]
       : "empty";
 
-    this.gtag.event("salaries_filters_applied_grade", "salary_chart", selectedGrade);
-    this.gtag.event("salaries_filters_applied_sourcetype", "salary_chart", selectedSourceType);
+    this.gtag.event(
+      "salaries_filters_applied_grade",
+      "salary_chart",
+      selectedGrade
+    );
+    this.gtag.event(
+      "salaries_filters_applied_sourcetype",
+      "salary_chart",
+      selectedSourceType
+    );
 
     this.load(data);
   }
@@ -229,7 +237,6 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   private loadChartWithFilter(
     data: SalaryChartGlobalFiltersData | null = null
   ): void {
-
     const filterToApply = {
       grade: data?.grade ?? null,
       profsInclude: data?.profsInclude ?? null,
@@ -265,9 +272,11 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
             x.currentUserSalary != null &&
             x.currentUserSalary.professionId === developerProfessionId;
 
-          this.noImportSourceWasSelected = filterToApply.salarySourceType == null;
-          this.kolesaImportedSalariesWasSelected
-            = filterToApply.salarySourceType == SalarySourceType.KolesaDevelopersCsv2022;
+          this.noImportSourceWasSelected =
+            filterToApply.salarySourceType == null;
+          this.kolesaImportedSalariesWasSelected =
+            filterToApply.salarySourceType ==
+            SalarySourceType.KolesaDevelopersCsv2022;
 
           console.log(filterToApply.salarySourceType);
         }

@@ -4,7 +4,11 @@ import { ApiService } from "./api.service";
 import { DeveloperGrade } from "@models/enums";
 import { CompanyType } from "@models/salaries/company-type";
 import { Currency } from "@models/salaries/currency";
-import { SalarySourceType, UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import {
+  SalarySourceType,
+  UserSalary,
+  UserSalaryAdminDto,
+} from "@models/salaries/salary.model";
 import { PageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
