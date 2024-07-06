@@ -53,13 +53,6 @@
         ></app-salary-block-value>
 
         <div class="mb-3 mt-3">
-          <div class="text-muted mb-3 fst-italic">
-            <span
-              >* Рассчитано на основе
-              {{ salariesChart.countOfRecords }} анкет(ы)</span
-            >
-          </div>
-
           <div
             *ngIf="showDataStub && !hasPredefinedFilter"
             class="alert alert-warning"
@@ -462,7 +455,21 @@
 ></app-edit-salary-modal>
 
 <ng-template #dataLoading>
-  <div class="container mt-5">
-    <app-data-loader></app-data-loader>
+  <div class="container mt-5 mb-5">
+    <app-data-loader [title]="''">
+      <div class="mt-3">
+        <div class="text-muted h2 d-flex justify-content-center">
+          Загружаем статистику
+        </div>
+        <div class="mt-3 d-flex justify-content-center">
+          <img
+            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_transparent_1000.png"
+            class="img-fluid w-30"
+            alt="logo"
+            title="Кот Магеллан, который любит считать деньги"
+          />
+        </div>
+      </div>
+    </app-data-loader>
   </div>
 </ng-template>
