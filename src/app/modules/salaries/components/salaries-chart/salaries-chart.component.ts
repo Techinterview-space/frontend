@@ -56,7 +56,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: UserSalariesService,
-    private readonly title: TitleService,
+    title: TitleService,
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,

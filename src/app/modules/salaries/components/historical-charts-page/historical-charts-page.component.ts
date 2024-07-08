@@ -64,13 +64,6 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
           this.load(this.filterData);
         });
 
-      this.service
-        .surveyChart()
-        .pipe(untilDestroyed(this))
-        .subscribe((x) => {
-          this.surveyData = x;
-        });
-
       return;
     }
 
@@ -81,7 +74,12 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
   closeSurveyBlock(): void {
     this.surveyData = null;
     this.service
-      .surveyChart()
+      .surveyChart({
+        grade: this.filterData?.grade ?? null,
+        profsInclude: this.filterData?.profsInclude ?? null,
+        cities: this.filterData?.cities ?? null,
+        skills: this.filterData?.skills ?? null,
+      })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.surveyData = x;
@@ -141,6 +139,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
 
   load(data: SalaryChartGlobalFiltersData | null = null): void {
     this.data = null;
+    this.surveyData = null;
 
     const shouldLoadSelectBoxItems =
       this.skills.length === 0 ||
@@ -168,17 +167,27 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
   }
 
   loadChartWithFilter(data: SalaryChartGlobalFiltersData | null = null): void {
+    const filterToApply = {
+      grade: data?.grade ?? null,
+      profsInclude: data?.profsInclude ?? null,
+      cities: data?.cities ?? null,
+      skills: data?.skills ?? null,
+    };
+
     this.service
-      .salariesChart({
-        grade: data?.grade ?? null,
-        profsInclude: data?.profsInclude ?? null,
-        cities: data?.cities ?? null,
-      })
+      .salariesChart(filterToApply)
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.isAuthenticated = x.hasAuthentication;
         this.data = x;
         this.shouldAddOwnSalary = x.shouldAddOwnSalary;
+      });
+
+    this.service
+      .surveyChart(filterToApply)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.surveyData = x;
       });
   }
 }

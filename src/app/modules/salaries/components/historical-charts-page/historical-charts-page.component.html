@@ -19,7 +19,9 @@
       <div class="mb-5">
         <app-salary-chart-global-filters
           [filterData]="filterData"
+          [showSalariesSource]="false"
           [professions]="professions"
+          [skills]="skills"
           (filtersApplied)="applyGlobalFilters($event)"
           (filtersReset)="resetGlobalFilters()"
           (shareClicked)="share($event)"

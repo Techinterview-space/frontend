@@ -42,6 +42,7 @@ export interface SalariesChartFilterData {
   grade: DeveloperGrade | null;
   profsInclude: Array<number> | null;
   cities: Array<KazakhstanCity> | null;
+  skills: Array<number> | null;
 }
 
 @Injectable()
@@ -60,7 +61,11 @@ export class HistoricalChartsService {
     );
   }
 
-  surveyChart(): Observable<HistoricalSurveyChartResponse> {
-    return this.api.get<HistoricalSurveyChartResponse>(this.apiUrl + "survey");
+  surveyChart(
+    params: SalariesChartFilterData
+  ): Observable<HistoricalSurveyChartResponse> {
+    return this.api.get<HistoricalSurveyChartResponse>(
+      this.apiUrl + "survey?" + new ConvertObjectToHttpParams(params).get()
+    );
   }
 }

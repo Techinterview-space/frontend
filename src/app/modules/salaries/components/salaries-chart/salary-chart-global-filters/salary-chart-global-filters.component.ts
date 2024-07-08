@@ -29,6 +29,9 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
   @Input()
   skills: Array<LabelEntityDto> = [];
 
+  @Input()
+  showSalariesSource: boolean = true;
+
   @Output()
   readonly filtersApplied = new EventEmitter<SalaryChartGlobalFiltersData>();
 
