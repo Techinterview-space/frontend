@@ -19,7 +19,7 @@ export class PeopleByCategoryBarChartObject extends Chart {
     const randomColor = new RandomRgbColor();
     const datasets: Array<ChartDatasetType> = [
       {
-        label: "Developers",
+        label: "Ответы респондентов",
         data: source.data,
         backgroundColor: randomColor.toString(0.8),
         borderColor: randomColor.toString(1),

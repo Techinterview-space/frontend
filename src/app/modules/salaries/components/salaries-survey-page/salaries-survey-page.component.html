@@ -8,22 +8,32 @@
           <div class="mb-5">
             <div class="mb-3 h3">Спасибо за обратную связь!</div>
 
-            <div class="mb-2">
+            <div class="">
               Вы уже оставили когда-то свое мнение о предоставленной статистике.
             </div>
             <div>
               Ниже представлена общая статистика по результатам опроса.
               Посмотрите, как много людей думают так же, как вы.
             </div>
-          </div>
-
-          <div class="mb-3">
-            <span class="me-2">Кол-во ответов:</span>
-            <span>{{ data.countOfRecords }}</span>
+            <div>
+              <span class="me-2">Кол-во ответов:</span>
+              <span class="fw-bold">{{ data.countOfRecords }}</span>
+            </div>
           </div>
 
           <div *ngIf="progressBarForUsefullness" class="mb-5">
-            <div class="mb-3 h4">Полезность статистики</div>
+            <div class="mb-2 h4">"Полезна ли статистика по зарплатам?"</div>
+            <div class="mb-3">
+              <span class="me-1">Варианты ответов: </span>
+              <span
+                *ngFor="let item of usefullnesLegendItems"
+                class="ms-1 badge rounded-pill {{ item.cssBackground }} {{
+                  item.cssText
+                }}"
+                >{{ item.label }}</span
+              >
+            </div>
+
             <div class="progress" (click)="toggleCountAndPercent()">
               <div
                 *ngFor="let item of progressBarForUsefullness"
@@ -42,20 +52,23 @@
                 >
               </div>
             </div>
-            <div class="mt-2">
-              <span class="me-2"> Значения: </span>
+          </div>
+
+          <div *ngIf="progressBarForExpectation" class="">
+            <div class="mb-3 h4">
+              "Насколько ожидаемой оказалась статистика?"
+            </div>
+            <div class="mb-3">
+              <span class="me-1">Варианты ответов: </span>
               <span
-                *ngFor="let item of usefullnesLegendItems"
-                class="ms-2 badge rounded-pill {{ item.cssBackground }} {{
+                *ngFor="let item of expectationLegendItems"
+                class="ms-1 px-3 badge rounded-pill {{ item.cssBackground }} {{
                   item.cssText
                 }}"
                 >{{ item.label }}</span
               >
             </div>
-          </div>
 
-          <div *ngIf="progressBarForExpectation" class="">
-            <div class="mb-3 h4">Ожидания респондентов от статистики</div>
             <div class="progress" (click)="toggleCountAndPercent()">
               <div
                 *ngFor="let item of progressBarForExpectation"
@@ -73,16 +86,6 @@
                   >{{ item.value }}</strong
                 >
               </div>
-            </div>
-            <div class="mt-2">
-              <span class="me-2"> Значения: </span>
-              <span
-                *ngFor="let item of expectationLegendItems"
-                class="ms-2 px-3 badge rounded-pill {{ item.cssBackground }} {{
-                  item.cssText
-                }}"
-                >{{ item.label }}</span
-              >
             </div>
           </div>
         </div>

@@ -186,7 +186,10 @@
     </div>
   </div>
 
-  <div class="card mt-5" *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
+  <div
+    class="card mt-5"
+    *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
+  >
     <div class="card-body py-3 px-5">
       <div class="display-4 mb-3">Фильтр и валюта</div>
 
@@ -226,9 +229,9 @@
             class="text-reset"
             >Kolesa Group</a
           >. Статистика была собрана в ноябре-декабре 2021 года и включает в
-          себя данные о зарплатах, специализациях и опыте работы. Список
-          валют показывает те рейты, которые были актуальны на декабрь 2021
-          года по данным нацбанка РК.
+          себя данные о зарплатах, специализациях и опыте работы. Список валют
+          показывает те рейты, которые были актуальны на декабрь 2021 года по
+          данным нацбанка РК.
         </div>
         <div class="mt-2">
           Спасибо команде Kolesa Group за предоставленные данные.
@@ -236,228 +239,247 @@
       </div>
 
       <div class="mt-5" *ngIf="noImportSourceWasSelected">
-        <div class="h4">Тенденция изменения зарплат</div>
-        <div class="mt-3 fst-italic">
-          У нас также можно посмотреть тенденцию изменения медианной и средней зарплаты с течением времени. 
-          График исторических данных доступен по ссылке: 
-          <a class="btn-link-sm fst-italic font-weight-normal" routerLink="/salaries/historical-data">История зарплат</a>.
+        <div class="h4">Дополнительная статистика</div>
+        <div class="mt-3">
+          В дополнение к текущим данным, у нас также есть статистика по
+          тенденции изменения данных с течением времени, а также распределение
+          ответов обратной связи респондентов.
         </div>
+        <ul class="mt-2 font-weight-normal">
+          <li>
+            <a class="btn-link-sm" routerLink="/salaries/historical-data">
+              Тенденция измненения зарплат</a
+            >
+          </li>
+          <li>
+            <a class="btn-link-sm" routerLink="/salaries/survey">
+              Обратная связь по статистике</a
+            >
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 
-    <div class="card mt-5"  *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
-      <div class="card-body py-3 px-5">
+  <div
+    class="card mt-5"
+    *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
+  >
+    <div class="card-body py-3 px-5">
+      <div class="mb-5 display-4">
+        <span>Зарплата, специализация и индустрия</span>
+      </div>
 
-        <div class="mb-5 display-4">
-          <span>Зарплата, специализация и индустрия</span>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <div class="h4">Зарплаты по грейдам в таблицах</div>
-          <div class="row mt-3">
-            <div class="col-md-6 mb-3">
-              <div class="h5 mb-2">Казахстан</div>
-              <app-salaries-by-grade-block
-                [chart]="salariesChart"
-                [showLocal]="true"
-              ></app-salaries-by-grade-block>
-            </div>
-            <div class="col-md-6 mb-3">
-              <div class="h5 mb-2">Удаленка</div>
-              <app-salaries-by-grade-block
-                [chart]="salariesChart"
-                [showLocal]="false"
-              ></app-salaries-by-grade-block>
-            </div>
+      <div class="mt-5 mb-5">
+        <div class="h4">Зарплаты по грейдам в таблицах</div>
+        <div class="row mt-3">
+          <div class="col-md-6 mb-3">
+            <div class="h5 mb-2">Казахстан</div>
+            <app-salaries-by-grade-block
+              [chart]="salariesChart"
+              [showLocal]="true"
+            ></app-salaries-by-grade-block>
           </div>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <app-grades-min-max-chart [source]="salariesChart">
-          </app-grades-min-max-chart>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <app-people-distribution-chart
-            [chart]="salariesChart"
-          ></app-people-distribution-chart>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <app-people-by-grades-chart
-            [source]="salariesChart"
-          ></app-people-by-grades-chart>
-        </div>
-
-        <div class="mt-5 mb-5" *ngIf="skills.length > 0">
-          <app-salaries-skills-chart
-            [skills]="skills"
-            [currentSalary]="salariesChart.currentUserSalary"
-            [salaries]="salariesChart.salaries"
-            (editSalaryActionClick)="openEditSalaryAction()"
-          >
-          </app-salaries-skills-chart>
-        </div>
-
-        <div class="mt-3 mb-5" *ngIf="industries.length > 0">
-          <app-work-industries-chart
-            [industries]="industries"
-            [currentSalary]="salariesChart.currentUserSalary"
-            [salaries]="salariesChart.salaries"
-            (editSalaryActionClick)="openEditSalaryAction()"
-          >
-          </app-work-industries-chart>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mt-5"  *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
-      <div class="card-body py-3 px-5">
-
-        <div class="mb-5 display-4">
-          <span>Подробнее о респондентах</span>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <app-cities-doughnut-chart
-            [currentSalary]="salariesChart.currentUserSalary"
-            [salaries]="salariesChart.salaries"
-            (editSalaryActionClick)="openEditSalaryAction()"
-          >
-          </app-cities-doughnut-chart>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <app-people-by-gender-chart
-            [salaries]="salariesChart.salaries"
-            (editSalaryActionClick)="openEditSalaryAction()"
-            [currentSalary]="salariesChart.currentUserSalary"
-          ></app-people-by-gender-chart>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <app-people-by-age-chart
-            [source]="salariesChart"
-            (editSalaryActionClick)="openEditSalaryAction()"
-          ></app-people-by-age-chart>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <app-people-by-experience-chart
-            [source]="salariesChart"
-            (editSalaryActionClick)="openEditSalaryAction()"
-          ></app-people-by-experience-chart>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mt-5"  *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
-      <div class="card-body py-3 px-5">
-
-        <div class="mb-5 display-4">
-          <span>Сравнение зарплат и специализаций</span>
-        </div>
-
-        <div class="mt-5 mb-5">
-          <app-salaries-by-grades-chart
-            [chart]="salariesChart.salariesByMoneyBarChart"
-            [salaries]="salariesChart.salariesPerProfessionForLocal"
-            [professions]="professions"
-          >
-          </app-salaries-by-grades-chart>
-        </div>
-
-        <div class="mt-5 mb-5" *ngIf="salariesChart.hasRemoteSalaries">
-          <app-salaries-by-grades-chart
-            [chart]="salariesChart.salariesByMoneyBarChartForRemote"
-            [salaries]="salariesChart.salariesPerProfessionForRemote"
-            [professions]="professions"
-          >
-          </app-salaries-by-grades-chart>
-        </div>
-
-        <div *ngIf="shouldShowSurveyBlock" class="mt-3 mb-5">
-          <app-salaries-survey-block
-            (closeButtonClick)="closeSurveyBlock()"
-          ></app-salaries-survey-block>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mt-5"  *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
-      <div class="card-body py-3 px-5">
-
-        <div class="mb-5 display-4">
-          <span>Исходные данные</span>
-        </div>
-
-        <div class="mb-3" *ngIf="showSalariesPaginatedTable">
-          <app-salaries-paginated-table
-            [filter]="filterData"
-            [skills]="skills"
-            [industries]="industries"
-            [professions]="professions"
-          ></app-salaries-paginated-table>
-        </div>
-
-        <div class="mb-3" *ngIf="noImportSourceWasSelected">
-          <app-salaries-adding-chart
-            [filter]="filterData"
-          ></app-salaries-adding-chart>
-        </div>
-
-        <div class="mb-3">
-          <div class="mb-5" *ngIf="noImportSourceWasSelected">
-            <div>
-              Сырые данные можно выгрузить в
-              <button
-                type="button"
-                class="btn-link-sm font-weight-normal"
-                (click)="downloadCsv()"
-              >
-                CSV файл
-              </button>
-            </div>
-            <div>
-              В файл будут записаны все данные, несмотря на примененные на
-              странице фильтры.
-            </div>
-          </div>
-
-          <div class="text-muted fst-italic">
-            <div>
-              Идея подсмотрена у сервиса
-              <a
-                class="text-reset"
-                href="https://career.habr.com/salaries"
-                target="_blank"
-                >Habr.Карьера</a
-              >, за что им большая благодарность.
-            </div>
-            <div>
-              Проект opensource, исходный код доступен на
-              <a
-                class="text-reset"
-                href="https://github.com/orgs/Techinterview-space/repositories"
-                target="_blank"
-                >Github</a
-              >.
-            </div>
-            <div>
-              Вы можете поддержать проект на
-              <a
-                href="https://boosty.to/ake111aa"
-                class="text-reset"
-                target="_blank"
-                >boosty</a
-              >. Любая поддержка будет ценна.
-            </div>
+          <div class="col-md-6 mb-3">
+            <div class="h5 mb-2">Удаленка</div>
+            <app-salaries-by-grade-block
+              [chart]="salariesChart"
+              [showLocal]="false"
+            ></app-salaries-by-grade-block>
           </div>
         </div>
       </div>
-    </div>
 
+      <div class="mt-5 mb-5">
+        <app-grades-min-max-chart [source]="salariesChart">
+        </app-grades-min-max-chart>
+      </div>
+
+      <div class="mt-5 mb-5">
+        <app-people-distribution-chart
+          [chart]="salariesChart"
+        ></app-people-distribution-chart>
+      </div>
+
+      <div class="mt-5 mb-5">
+        <app-people-by-grades-chart
+          [source]="salariesChart"
+        ></app-people-by-grades-chart>
+      </div>
+
+      <div class="mt-5 mb-5" *ngIf="skills.length > 0">
+        <app-salaries-skills-chart
+          [skills]="skills"
+          [currentSalary]="salariesChart.currentUserSalary"
+          [salaries]="salariesChart.salaries"
+          (editSalaryActionClick)="openEditSalaryAction()"
+        >
+        </app-salaries-skills-chart>
+      </div>
+
+      <div class="mt-3 mb-5" *ngIf="industries.length > 0">
+        <app-work-industries-chart
+          [industries]="industries"
+          [currentSalary]="salariesChart.currentUserSalary"
+          [salaries]="salariesChart.salaries"
+          (editSalaryActionClick)="openEditSalaryAction()"
+        >
+        </app-work-industries-chart>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="card mt-5"
+    *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
+  >
+    <div class="card-body py-3 px-5">
+      <div class="mb-5 display-4">
+        <span>Подробнее о респондентах</span>
+      </div>
+
+      <div class="mt-5 mb-5">
+        <app-cities-doughnut-chart
+          [currentSalary]="salariesChart.currentUserSalary"
+          [salaries]="salariesChart.salaries"
+          (editSalaryActionClick)="openEditSalaryAction()"
+        >
+        </app-cities-doughnut-chart>
+      </div>
+
+      <div class="mt-5 mb-5">
+        <app-people-by-gender-chart
+          [salaries]="salariesChart.salaries"
+          (editSalaryActionClick)="openEditSalaryAction()"
+          [currentSalary]="salariesChart.currentUserSalary"
+        ></app-people-by-gender-chart>
+      </div>
+
+      <div class="mt-5 mb-5">
+        <app-people-by-age-chart
+          [source]="salariesChart"
+          (editSalaryActionClick)="openEditSalaryAction()"
+        ></app-people-by-age-chart>
+      </div>
+
+      <div class="mt-5 mb-5">
+        <app-people-by-experience-chart
+          [source]="salariesChart"
+          (editSalaryActionClick)="openEditSalaryAction()"
+        ></app-people-by-experience-chart>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="card mt-5"
+    *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
+  >
+    <div class="card-body py-3 px-5">
+      <div class="mb-5 display-4">
+        <span>Сравнение зарплат и специализаций</span>
+      </div>
+
+      <div class="mt-5 mb-5">
+        <app-salaries-by-grades-chart
+          [chart]="salariesChart.salariesByMoneyBarChart"
+          [salaries]="salariesChart.salariesPerProfessionForLocal"
+          [professions]="professions"
+        >
+        </app-salaries-by-grades-chart>
+      </div>
+
+      <div class="mt-5 mb-5" *ngIf="salariesChart.hasRemoteSalaries">
+        <app-salaries-by-grades-chart
+          [chart]="salariesChart.salariesByMoneyBarChartForRemote"
+          [salaries]="salariesChart.salariesPerProfessionForRemote"
+          [professions]="professions"
+        >
+        </app-salaries-by-grades-chart>
+      </div>
+
+      <div *ngIf="shouldShowSurveyBlock" class="mt-3 mb-5">
+        <app-salaries-survey-block
+          (closeButtonClick)="closeSurveyBlock()"
+        ></app-salaries-survey-block>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="card mt-5"
+    *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
+  >
+    <div class="card-body py-3 px-5">
+      <div class="mb-5 display-4">
+        <span>Исходные данные</span>
+      </div>
+
+      <div class="mb-3" *ngIf="showSalariesPaginatedTable">
+        <app-salaries-paginated-table
+          [filter]="filterData"
+          [skills]="skills"
+          [industries]="industries"
+          [professions]="professions"
+        ></app-salaries-paginated-table>
+      </div>
+
+      <div class="mb-3" *ngIf="noImportSourceWasSelected">
+        <app-salaries-adding-chart
+          [filter]="filterData"
+        ></app-salaries-adding-chart>
+      </div>
+
+      <div class="mb-3">
+        <div class="mb-5" *ngIf="noImportSourceWasSelected">
+          <div>
+            Сырые данные можно выгрузить в
+            <button
+              type="button"
+              class="btn-link-sm font-weight-normal"
+              (click)="downloadCsv()"
+            >
+              CSV файл
+            </button>
+          </div>
+          <div>
+            В файл будут записаны все данные, несмотря на примененные на
+            странице фильтры.
+          </div>
+        </div>
+
+        <div class="text-muted fst-italic">
+          <div>
+            Идея подсмотрена у сервиса
+            <a
+              class="text-reset"
+              href="https://career.habr.com/salaries"
+              target="_blank"
+              >Habr.Карьера</a
+            >, за что им большая благодарность.
+          </div>
+          <div>
+            Проект opensource, исходный код доступен на
+            <a
+              class="text-reset"
+              href="https://github.com/orgs/Techinterview-space/repositories"
+              target="_blank"
+              >Github</a
+            >.
+          </div>
+          <div>
+            Вы можете поддержать проект на
+            <a
+              href="https://boosty.to/ake111aa"
+              class="text-reset"
+              target="_blank"
+              >boosty</a
+            >. Любая поддержка будет ценна.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <app-add-salary-modal

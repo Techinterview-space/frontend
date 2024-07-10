@@ -2,7 +2,6 @@
 
 <div class="container mt-5" *ngIf="data; else dataLoading">
   <div *ngIf="!data.shouldAddOwnSalary; else noCurrentSalary">
-
     <div class="mb-5 card card-body p-5">
       <div class="h4 mb-3">Фильтр</div>
       <app-salary-chart-global-filters
@@ -17,7 +16,9 @@
     </div>
 
     <div class="card card-body p-5">
-      <div class="display-4 mb-5">Тенденция изменения медианы и средней зарплаты</div>
+      <div class="display-4 mb-5">
+        Тенденция изменения медианы и средней зарплаты
+      </div>
 
       <div class="mb-5">
         <p>
