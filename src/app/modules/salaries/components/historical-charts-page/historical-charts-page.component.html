@@ -2,8 +2,22 @@
 
 <div class="container mt-5" *ngIf="data; else dataLoading">
   <div *ngIf="!data.shouldAddOwnSalary; else noCurrentSalary">
-    <div class="card card-body">
-      <div class="mb-3 h1">Тенденция изменения медианы и средней зарплаты</div>
+
+    <div class="mb-5 card card-body p-5">
+      <div class="h4 mb-3">Фильтр</div>
+      <app-salary-chart-global-filters
+        [filterData]="filterData"
+        [showSalariesSource]="false"
+        [professions]="professions"
+        [skills]="skills"
+        (filtersApplied)="applyGlobalFilters($event)"
+        (filtersReset)="resetGlobalFilters()"
+        (shareClicked)="share($event)"
+      />
+    </div>
+
+    <div class="card card-body p-5">
+      <div class="display-4 mb-5">Тенденция изменения медианы и средней зарплаты</div>
 
       <div class="mb-5">
         <p>
@@ -14,18 +28,6 @@
           определенный момент времени.
         </p>
         <p>Фильтр позволит ограничить выборку анкет по желаемым критериям.</p>
-      </div>
-
-      <div class="mb-5">
-        <app-salary-chart-global-filters
-          [filterData]="filterData"
-          [showSalariesSource]="false"
-          [professions]="professions"
-          [skills]="skills"
-          (filtersApplied)="applyGlobalFilters($event)"
-          (filtersReset)="resetGlobalFilters()"
-          (shareClicked)="share($event)"
-        />
       </div>
 
       <div class="mb-5">
@@ -50,8 +52,8 @@
 </div>
 
 <div class="container mt-5" *ngIf="surveyData; else dataLoading">
-  <div class="card card-body">
-    <div class="mb-5 h1">Обратная связь по статистике</div>
+  <div class="card card-body p-5">
+    <div class="display-4 mb-5">Обратная связь по статистике</div>
 
     <div class="mb-5" *ngIf="!surveyData.hasRecentSurveyReply">
       <div class="mb-1">

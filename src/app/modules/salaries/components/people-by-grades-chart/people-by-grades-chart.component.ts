@@ -74,7 +74,8 @@ export class PeopleByGradesChartComponent implements OnInit {
     const totalCount = data.allCount;
 
     const result = data.data
-      .filter((item) => item.grade !== DeveloperGrade.Unknown)
+      .filter((item) => item.grade != null && item.grade !== DeveloperGrade.Unknown)
+      .sort((a, b) => a.grade - b.grade)
       .map((item, index) => {
         const color = DeveloperGradeEnum.getColorData(item.grade);
         const width = (item.count / totalCount) * 100;

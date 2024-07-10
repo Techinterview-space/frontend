@@ -183,70 +183,73 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="card mt-5" *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
+    <div class="card-body py-3 px-5">
+      <div class="display-4 mb-3">Фильтр и валюта</div>
+
+      <div class="mb-3">
+        <app-currency-select-box
+          [chart]="salariesChart"
+        ></app-currency-select-box>
+      </div>
+
+      <app-salary-chart-global-filters
+        [filterData]="filterData"
+        [professions]="professions"
+        [skills]="skills"
+        (filtersApplied)="applyGlobalFilters($event)"
+        (filtersReset)="resetGlobalFilters()"
+        (shareClicked)="share($event)"
+      >
+      </app-salary-chart-global-filters>
 
       <div
-        *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
-        class="mt-5 mb-5"
+        class="mt-3 alert alert-info"
+        *ngIf="kolesaImportedSalariesWasSelected"
       >
-        <div class="mb-5">
-          <app-currency-select-box
-            [chart]="salariesChart"
-          ></app-currency-select-box>
-        </div>
-
-        <div class="mb-5">
-          <app-salary-chart-global-filters
-            [filterData]="filterData"
-            [professions]="professions"
-            [skills]="skills"
-            (filtersApplied)="applyGlobalFilters($event)"
-            (filtersReset)="resetGlobalFilters()"
-            (shareClicked)="share($event)"
+        <div class="h5">Внимание!</div>
+        <div class="mt-2">
+          Вы просматриваете импортированную статистику
+          <a
+            href="https://zerttey.kolesa.group/developers-2022?utm_source=techinterview.space"
+            target="_blank"
+            class="text-reset"
+            >исследования зарплат работников в IT</a
           >
-          </app-salary-chart-global-filters>
-
-          <div
-            class="mt-3 alert alert-info"
-            *ngIf="kolesaImportedSalariesWasSelected"
-          >
-            <div class="h5">Внимание!</div>
-            <div class="mt-2">
-              Вы просматриваете импортированную статистику
-              <a
-                href="https://zerttey.kolesa.group/developers-2022?utm_source=techinterview.space"
-                target="_blank"
-                class="text-reset"
-                >исследования зарплат работников в IT</a
-              >
-              от 2022 года, проведенного компанией
-              <a
-                href="https://kolesa.group?utm_source=techinterview.space"
-                target="_blank"
-                class="text-reset"
-                >Kolesa Group</a
-              >. Статистика была собрана в ноябре-декабре 2021 года и включает в
-              себя данные о зарплатах, специализациях и опыте работы. Список
-              валют показывает те рейты, которые были актуальны на декабрь 2021
-              года по данным нацбанка РК.
-            </div>
-            <div class="mt-2">
-              Спасибо команде Kolesa Group за предоставленные данные.
-            </div>
-          </div>
-
-          
+          от 2022 года, проведенного компанией
+          <a
+            href="https://kolesa.group?utm_source=techinterview.space"
+            target="_blank"
+            class="text-reset"
+            >Kolesa Group</a
+          >. Статистика была собрана в ноябре-декабре 2021 года и включает в
+          себя данные о зарплатах, специализациях и опыте работы. Список
+          валют показывает те рейты, которые были актуальны на декабрь 2021
+          года по данным нацбанка РК.
         </div>
-
-        <div class="mb-5">
-          <div class="h4">Тенденция изменения зарплат</div>
-          <div class="mt-3 fst-italic" *ngIf="noImportSourceWasSelected">
-            У нас также можно посмотреть тенденцию изменения медианной и средней зарплаты с течением времени. 
-            График исторических данных доступен по ссылке: 
-            <a class="btn-link-sm fst-italic font-weight-normal" routerLink="/salaries/historical-data">История зарплат</a>.
-          </div>
+        <div class="mt-2">
+          Спасибо команде Kolesa Group за предоставленные данные.
         </div>
+      </div>
 
-        <div class="mb-5 display-4 chapter-title">
+      <div class="mt-5" *ngIf="noImportSourceWasSelected">
+        <div class="h4">Тенденция изменения зарплат</div>
+        <div class="mt-3 fst-italic">
+          У нас также можно посмотреть тенденцию изменения медианной и средней зарплаты с течением времени. 
+          График исторических данных доступен по ссылке: 
+          <a class="btn-link-sm fst-italic font-weight-normal" routerLink="/salaries/historical-data">История зарплат</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="card mt-5"  *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
+      <div class="card-body py-3 px-5">
+
+        <div class="mb-5 display-4">
           <span>Зарплата, специализация и индустрия</span>
         </div>
 
@@ -306,8 +309,13 @@
           >
           </app-work-industries-chart>
         </div>
+      </div>
+    </div>
 
-        <div class="mb-5 display-4 chapter-title">
+    <div class="card mt-5"  *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
+      <div class="card-body py-3 px-5">
+
+        <div class="mb-5 display-4">
           <span>Подробнее о респондентах</span>
         </div>
 
@@ -341,8 +349,13 @@
             (editSalaryActionClick)="openEditSalaryAction()"
           ></app-people-by-experience-chart>
         </div>
+      </div>
+    </div>
 
-        <div class="mb-5 display-4 chapter-title">
+    <div class="card mt-5"  *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
+      <div class="card-body py-3 px-5">
+
+        <div class="mb-5 display-4">
           <span>Сравнение зарплат и специализаций</span>
         </div>
 
@@ -369,12 +382,13 @@
             (closeButtonClick)="closeSurveyBlock()"
           ></app-salaries-survey-block>
         </div>
+      </div>
+    </div>
 
-        <div class="mt-3 mb-5">
-          <hr />
-        </div>
+    <div class="card mt-5"  *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart">
+      <div class="card-body py-3 px-5">
 
-        <div class="mb-5 display-4 chapter-title">
+        <div class="mb-5 display-4">
           <span>Исходные данные</span>
         </div>
 
@@ -443,7 +457,7 @@
         </div>
       </div>
     </div>
-  </div>
+
 </div>
 
 <app-add-salary-modal
