@@ -233,6 +233,17 @@
               Спасибо команде Kolesa Group за предоставленные данные.
             </div>
           </div>
+
+          
+        </div>
+
+        <div class="mb-5">
+          <div class="h4">Тенденция изменения зарплат</div>
+          <div class="mt-3 fst-italic" *ngIf="noImportSourceWasSelected">
+            У нас также можно посмотреть тенденцию изменения медианной и средней зарплаты с течением времени. 
+            График исторических данных доступен по ссылке: 
+            <a class="btn-link-sm fst-italic font-weight-normal" routerLink="/salaries/historical-data">История зарплат</a>.
+          </div>
         </div>
 
         <div class="mb-5 display-4 chapter-title">
