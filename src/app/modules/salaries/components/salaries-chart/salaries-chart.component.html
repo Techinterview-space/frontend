@@ -1,7 +1,7 @@
 <app-page-header>Зарплаты в IT в Казахстане</app-page-header>
 
 <div *ngIf="showDataStub" class="container mt-5 mb-3">
-  <div *ngIf="isAuthenticated" class="alert alert-warning" role="alert">
+  <div *ngIf="isAuthenticated" class="alert alert-warning p-5" role="alert">
     <div class="mb-2 h3">{{ isYourSalaryWithinMarketTitle }}</div>
     <div class="mb-3">
       Оставьте данные о своей зарплате, чтобы узнать, сколько зарабатывают
@@ -190,7 +190,7 @@
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
   >
-    <div class="card-body py-3 px-5">
+    <div class="card-body py-5 px-5">
       <div class="display-4 mb-3">Фильтр и валюта</div>
 
       <div class="mb-3">
@@ -265,8 +265,8 @@
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
   >
-    <div class="card-body py-3 px-5">
-      <div class="mb-5 display-4">
+    <div class="card-body py-5 px-5">
+      <div class="mb-5 display-4" id="salaryProfessionAndIndustry">
         <span>Зарплата, специализация и индустрия</span>
       </div>
 
@@ -333,7 +333,7 @@
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
   >
-    <div class="card-body py-3 px-5">
+    <div class="card-body py-5 px-5">
       <div class="mb-5 display-4">
         <span>Подробнее о респондентах</span>
       </div>
@@ -375,7 +375,7 @@
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
   >
-    <div class="card-body py-3 px-5">
+    <div class="card-body py-5 px-5">
       <div class="mb-5 display-4">
         <span>Сравнение зарплат и специализаций</span>
       </div>
@@ -410,8 +410,8 @@
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
   >
-    <div class="card-body py-3 px-5">
-      <div class="mb-5 display-4">
+    <div class="card-body py-5 px-5">
+      <div class="mb-3 display-4">
         <span>Исходные данные</span>
       </div>
 

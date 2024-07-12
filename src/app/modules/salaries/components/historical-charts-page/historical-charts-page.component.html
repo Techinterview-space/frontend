@@ -1,6 +1,6 @@
 <app-page-header>Исторические данные</app-page-header>
 
-<div class="container mt-5" *ngIf="data; else dataLoading">
+<div class="container my-5" *ngIf="data; else dataLoading">
   <div *ngIf="!data.shouldAddOwnSalary; else noCurrentSalary">
     <div class="mb-5 card card-body p-5">
       <div class="h4 mb-3">Фильтр</div>
@@ -52,24 +52,18 @@
   </div>
 </div>
 
-<div class="container mt-5" *ngIf="surveyData; else dataLoading">
+<div class="container my-5" *ngIf="surveyData; else dataLoading">
+
+  <div class="mb-5" *ngIf="!surveyData.hasRecentSurveyReply">
+    <div class="px-1">
+      <app-salaries-survey-block
+        (closeButtonClick)="closeSurveyBlock()"
+      ></app-salaries-survey-block>
+    </div>
+  </div>
+
   <div class="card card-body p-5">
     <div class="display-4 mb-5">Обратная связь по статистике</div>
-
-    <div class="mb-5" *ngIf="!surveyData.hasRecentSurveyReply">
-      <div class="mb-1">
-        Нам важно мнение пользователей о предоставленной статистике. Интересно
-        взглянуть на то, как респонденты оценивают свою зарплату и какие
-        ожидания у них относительно рынка труда в Казахстане.
-      </div>
-      <div class="mb-5">Пожалуйста, примите участие в опросе.</div>
-      <div class="ps-1 pe-1">
-        <app-salaries-survey-block
-          (closeButtonClick)="closeSurveyBlock()"
-        ></app-salaries-survey-block>
-      </div>
-    </div>
-
     <div class="">
       <app-historical-survey-chart [data]="surveyData" />
     </div>
@@ -77,13 +71,13 @@
 </div>
 
 <ng-template #dataLoading>
-  <div class="container mt-5">
+  <div class="container my-5">
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
 
 <ng-template #noCurrentSalary>
-  <div class="container mt-5">
+  <div class="container my-5">
     <div class="card card-body">
       <div class="mb-3">
         Доступ к статистике открыватся только после того, как пользователь
