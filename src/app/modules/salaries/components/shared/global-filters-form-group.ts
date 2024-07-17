@@ -39,7 +39,7 @@ export class SalaryChartGlobalFiltersData {
   equals(other: SalaryChartGlobalFiltersData): boolean {
     return (
       this.grade === other.grade &&
-      this.cities.length === other.cities.length &&
+      this.isEqualArrays(this.cities, other.cities) &&
       this.isEqualArrays(this.profsInclude, other.profsInclude) &&
       this.isEqualArrays(this.skills, other.skills) &&
       this.salarySourceType === other.salarySourceType &&
