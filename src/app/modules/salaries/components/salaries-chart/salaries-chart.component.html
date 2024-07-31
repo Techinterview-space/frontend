@@ -120,23 +120,25 @@
               >
             </div>
             <div>
-              Вы можете
+              Вы можете дополнить данные или добавить новую анкету в случае,
+              если поменяли место работы с новой зарплатой.
+            </div>
+            <div class="mt-3">
               <button
-                type="button"
-                class="btn-link-sm fst-italic font-weight-normal"
+                class="me-3 mb-2 btn btn-outline-secondary"
                 (click)="openEditSalaryAction()"
-              >
-                изменить эти данные
-              </button>
-              или
-              <button
                 type="button"
-                class="btn-link-sm fst-italic font-weight-normal"
+              >
+                <i class="bi bi-pencil me-2"></i>Дополнить анкету
+              </button>
+
+              <button
+                class="me-3 mb-2 btn btn-outline-dark"
+                type="button"
                 (click)="openAddSalaryAction()"
               >
-                добавить еще зарплату
+                <i class="bi bi-plus-lg me-2"></i>Добавить новую анкету
               </button>
-              к статистике.
             </div>
           </div>
 
