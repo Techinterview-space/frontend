@@ -40,7 +40,7 @@ export class InterviewTemplatesService {
     return this.api.put(this.apiUrl, model);
   }
 
-  create(model: InterviewTemplateCreateRequest): Observable<void> {
+  create(model: InterviewTemplateCreateRequest): Observable<string> {
     return this.api.post(this.apiUrl, model);
   }
 
