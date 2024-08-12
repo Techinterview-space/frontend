@@ -27,8 +27,9 @@ export class WednesdayFrogComponent {
   showModal = false;
 
   constructor() {
+    const WEDNESDAY = 3;
     const today = new Date();
-    this.showFrog = today.getDay() === 1;
+    this.showFrog = today.getDay() === WEDNESDAY;
   }
 
   openModal() {
