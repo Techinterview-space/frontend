@@ -19,6 +19,7 @@ import { ProfessionsPaginatedTableComponent } from "./components/label-entities/
 import { TelegramBotUsagesComponent } from "./components/telegram/telegram-bot-usages/telegram-bot-usages.component";
 import { TelegramUserSettingsComponent } from "./components/telegram/telegram-user-settings/telegram-user-settings.component";
 import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced-salaries-admin-page/sourced-salaries-admin-page.component";
+import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced
     ProfessionsPaginatedTableComponent,
     TelegramBotUsagesComponent,
     TelegramUserSettingsComponent,
+    StatDataCacheRecordsComponent,
   ],
   imports: [
     CommonModule,

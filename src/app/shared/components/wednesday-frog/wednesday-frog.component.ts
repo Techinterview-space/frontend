@@ -6,7 +6,6 @@ import { Component } from "@angular/core";
   styleUrls: ["./wednesday-frog.component.scss"],
 })
 export class WednesdayFrogComponent {
-
   readonly frogs = [
     "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_frog_gentelmen.jpeg",
     "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_todo.jpg",
@@ -33,7 +32,8 @@ export class WednesdayFrogComponent {
   }
 
   openModal() {
-    this.frogToBeShown = this.frogs[Math.floor(Math.random() * this.frogs.length)];
+    this.frogToBeShown =
+      this.frogs[Math.floor(Math.random() * this.frogs.length)];
     this.showModal = true;
   }
 

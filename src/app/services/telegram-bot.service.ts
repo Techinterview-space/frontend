@@ -4,7 +4,11 @@ import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
-import { StatDataCacheRecord, TelegramBotUsage, TelegramUserSettings } from "@models/telegram";
+import {
+  StatDataCacheChangeSubscription,
+  TelegramBotUsage,
+  TelegramUserSettings,
+} from "@models/telegram";
 
 export interface UpdateTelegramUserSettingsBody {
   sendBotRegularStatsUpdates: boolean;
@@ -70,21 +74,28 @@ export class TelegramBotService {
     return this.api.delete<void>(this.apiUrl + "bot-user-settings/" + id);
   }
 
-  getStatDataCacheRecords(
+  getStatDataChangeSubscriptions(
     pageParams: PageParams = defaultPageParams
-  ): Observable<Array<StatDataCacheRecord>> {
-    return this.api.get<Array<StatDataCacheRecord>>(
-      this.apiUrl + "cache-data-records" +
-      "?" +
-      new ConvertObjectToHttpParams(pageParams).get()
+  ): Observable<PaginatedList<StatDataCacheChangeSubscription>> {
+    return this.api.get<PaginatedList<StatDataCacheChangeSubscription>>(
+      this.apiUrl +
+        "stat-data-change-subscriptions" +
+        "?" +
+        new ConvertObjectToHttpParams(pageParams).get()
     );
   }
 
-  activateStatDataCacheRecord(id: string): Observable<void> {
-    return this.api.put<void>(`${this.apiUrl}cache-data-records/${id}/activate`, {});
+  activateStatDataChangeSubscription(id: string): Observable<void> {
+    return this.api.put<void>(
+      `${this.apiUrl}stat-data-change-subscriptions/${id}/activate`,
+      {}
+    );
   }
 
-  deactivateStatDataCacheRecord(id: string): Observable<void> {
-    return this.api.put<void>(`${this.apiUrl}cache-data-records/${id}/deactivate`, {});
+  deactivateStatDataChangeSubscription(id: string): Observable<void> {
+    return this.api.put<void>(
+      `${this.apiUrl}stat-data-change-subscriptions/${id}/deactivate`,
+      {}
+    );
   }
 }

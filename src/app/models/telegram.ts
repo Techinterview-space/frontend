@@ -29,7 +29,7 @@ export interface TelegramUserSettings {
   updatedAt: string;
 }
 
-export interface StatDataCacheRecord {
+export interface StatDataCacheChangeSubscription {
   id: string;
   name: string;
   telegramChatId: number;

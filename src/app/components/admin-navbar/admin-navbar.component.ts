@@ -81,8 +81,12 @@ export class AdminNavbarComponent {
             url: "/admin/telegram/bot-usages",
           },
           {
-            title: "Настройки пользователей",
+            title: "Подписчики бота",
             url: "/admin/telegram/user-settings",
+          },
+          {
+            title: "Подписки на регулярный апдейт по зарплатам",
+            url: "/admin/telegram/stat-data-change-subscriptions",
           },
         ],
       },
