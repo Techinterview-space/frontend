@@ -3,6 +3,7 @@ export interface TelegramBotUsage {
   usageCount: number;
   username: string;
   channelName: string | null;
+  channelId: number | null;
   usageType: TelegramBotUsageType;
   usageTypeAsString: string;
   receivedMessageText: string | null;

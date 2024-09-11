@@ -12,6 +12,7 @@
             <th>Никнейм</th>
             <th>Кол-во</th>
             <th>Канал/группа</th>
+            <th>Chat ID</th>
             <th>Тип</th>
             <th>Полученный текст</th>
             <th>Создано</th>
@@ -22,6 +23,7 @@
               <td>{{ item.username }}</td>
               <td>{{ item.usageCount | number : "1.0-0" }}</td>
               <td>{{ item.channelName ?? "-" }}</td>
+              <td>{{ item.channelId ?? "-" }}</td>
               <td>{{ item.usageTypeAsString }}</td>
               <td title="{{ item.receivedMessageText }}">
                 {{ item.receivedMessageText }}
