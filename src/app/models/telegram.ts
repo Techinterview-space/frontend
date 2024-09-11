@@ -28,3 +28,13 @@ export interface TelegramUserSettings {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface StatDataCacheRecord {
+  id: string;
+  name: string;
+  telegramChatId: number;
+  professionIds: Array<number>;
+  deletedAt: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
