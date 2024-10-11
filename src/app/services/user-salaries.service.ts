@@ -109,7 +109,7 @@ export interface PublicAllSalariesQueryParams extends PageParams {
   profsInclude: Array<number> | null;
   cities: Array<KazakhstanCity> | null;
   skills: Array<number> | null;
-  salarySourceType: SalarySourceType | null;
+  salarySourceTypes: SalarySourceType[];
   quarterTo: number | null;
   yearTo: number | null;
 }
@@ -126,7 +126,7 @@ export interface SalariesChartFilterData {
   profsInclude: Array<number> | null;
   cities: Array<KazakhstanCity> | null;
   skills: Array<number> | null;
-  salarySourceType: SalarySourceType | null;
+  salarySourceTypes: SalarySourceType[];
   quarterTo: number | null;
   yearTo: number | null;
 }

@@ -7,6 +7,7 @@ import { Gender } from "@models/enums/gender.enum";
 export enum SalarySourceType {
   Undefined = 0,
   KolesaDevelopersCsv2022 = 1,
+  KolesaDataAnalyticsCsv2024 = 2,
 }
 
 export interface UserSalarySimple {

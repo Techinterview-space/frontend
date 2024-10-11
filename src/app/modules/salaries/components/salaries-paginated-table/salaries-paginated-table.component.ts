@@ -51,7 +51,7 @@ export class SalariesPaginatedTableComponent implements OnInit, OnDestroy {
         grade: this.filter?.grade ?? null,
         cities: this.filter?.cities ?? [],
         skills: this.filter?.skills ?? [],
-        salarySourceType: this.filter?.salarySourceType ?? null,
+        salarySourceTypes: this.filter?.salarySourceTypes ?? [],
         quarterTo: this.filter?.quarterTo ?? null,
         yearTo: this.filter?.yearTo ?? null,
       })

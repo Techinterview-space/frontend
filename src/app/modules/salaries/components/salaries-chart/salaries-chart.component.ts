@@ -47,6 +47,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   hasPredefinedFilter = false;
   shouldShowSurveyBlock = false;
   kolesaImportedSalariesWasSelected = false;
+  kolesaImportedDataAnalyticsSalariesWasSelected = false;
   noImportSourceWasSelected = true;
   showSalariesPaginatedTable = false;
 
@@ -161,8 +162,8 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
     this.filterData = data;
     const selectedGrade = data.grade ? DeveloperGrade[data.grade] : "empty";
-    const selectedSourceType = data.salarySourceType
-      ? SalarySourceType[data.salarySourceType]
+    const selectedSourceType = data.salarySourceTypes.length > 0
+      ? SalarySourceType[data.salarySourceTypes[0]]
       : "empty";
 
     this.gtag.event(
@@ -242,7 +243,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       profsInclude: data?.profsInclude ?? null,
       cities: data?.cities ?? null,
       skills: data?.skills ?? null,
-      salarySourceType: data?.salarySourceType ?? null,
+      salarySourceTypes: data?.salarySourceTypes ?? [],
       quarterTo: data?.quarterTo ?? null,
       yearTo: data?.yearTo ?? null,
     };
@@ -273,12 +274,11 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
             x.currentUserSalary.professionId === developerProfessionId;
 
           this.noImportSourceWasSelected =
-            filterToApply.salarySourceType == null;
+            filterToApply.salarySourceTypes == null || filterToApply.salarySourceTypes.length === 0;
           this.kolesaImportedSalariesWasSelected =
-            filterToApply.salarySourceType ==
-            SalarySourceType.KolesaDevelopersCsv2022;
-
-          console.log(filterToApply.salarySourceType);
+            filterToApply.salarySourceTypes.length > 0 && filterToApply.salarySourceTypes[0] == SalarySourceType.KolesaDevelopersCsv2022;
+          this.kolesaImportedDataAnalyticsSalariesWasSelected =
+            filterToApply.salarySourceTypes.length > 0 && filterToApply.salarySourceTypes[0] == SalarySourceType.KolesaDataAnalyticsCsv2024;
         }
       });
   }

@@ -10,7 +10,7 @@ export class SalaryChartGlobalFiltersData {
   profsInclude: Array<number> = [];
   cities: Array<KazakhstanCity> = [];
   skills: Array<number> = [];
-  salarySourceType: SalarySourceType | null = null;
+  salarySourceTypes: SalarySourceType[];
   quarterTo: number | null = null;
   yearTo: number | null = null;
 
@@ -19,7 +19,7 @@ export class SalaryChartGlobalFiltersData {
     profsInclude: Array<number> = [],
     cities: Array<KazakhstanCity> = [],
     skills: Array<number> = [],
-    salarySourceType: SalarySourceType | null = null,
+    salarySourceTypes: SalarySourceType[] = [],
     quarterTo: number | null = null,
     yearTo: number | null = null
   ) {
@@ -31,7 +31,7 @@ export class SalaryChartGlobalFiltersData {
     this.profsInclude = profsInclude;
     this.cities = cities;
     this.skills = skills;
-    this.salarySourceType = salarySourceType;
+    this.salarySourceTypes = salarySourceTypes;
     this.quarterTo = quarterTo;
     this.yearTo = yearTo;
   }
@@ -42,7 +42,7 @@ export class SalaryChartGlobalFiltersData {
       this.isEqualArrays(this.cities, other.cities) &&
       this.isEqualArrays(this.profsInclude, other.profsInclude) &&
       this.isEqualArrays(this.skills, other.skills) &&
-      this.salarySourceType === other.salarySourceType &&
+      this.isEqualArrays(this.salarySourceTypes, other.salarySourceTypes) &&
       this.quarterTo === other.quarterTo &&
       this.yearTo === other.yearTo
     );
@@ -67,6 +67,11 @@ export class GlobalFiltersFormGroup extends FormGroup {
       label: "Kolesa Developers Zerttey, 2022",
       item: SalarySourceType.KolesaDevelopersCsv2022,
     },
+    {
+      value: SalarySourceType.KolesaDataAnalyticsCsv2024.toString(),
+      label: "Kolesa Data-специалисты, 2024",
+      item: SalarySourceType.KolesaDataAnalyticsCsv2024,
+    },
   ];
 
   constructor(filterData: SalaryChartGlobalFiltersData | null) {
@@ -75,7 +80,10 @@ export class GlobalFiltersFormGroup extends FormGroup {
       profsToInclude: new FormControl(filterData?.profsInclude, []),
       cities: new FormControl(filterData?.cities, []),
       skills: new FormControl(filterData?.skills, []),
-      salarySourceType: new FormControl(filterData?.salarySourceType, []),
+      salarySourceType: new FormControl(
+        filterData != null && filterData.salarySourceTypes.length > 0
+        ? filterData.salarySourceTypes[0]
+        : null, []),
       quarterTo: new FormControl(filterData?.quarterTo, []),
       yearTo: new FormControl(filterData?.yearTo, []),
     });
@@ -118,7 +126,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
       profsToInclude,
       cities,
       skills,
-      salarySourceType,
+      salarySourceType != null ? [ salarySourceType ] : [],
       quarterTo,
       yearTo
     );
