@@ -5,6 +5,7 @@ import { SalariesChart } from "../salaries-chart";
 import { formatNumber } from "@angular/common";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CurrencyType } from "@services/admin-tools.service";
+import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 interface Item extends SalariesByGrade {
   gradeAsString: string;
@@ -69,11 +70,11 @@ export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
         medianSalary: x.medianSalary,
         medianSalaryAsString:
           x.medianSalary != null
-            ? formatNumber(x.medianSalary, "en-US", "1.0-2")
+            ? FormatAsMoneyPipe.formatNumber(x.medianSalary)
             : "",
         averageSalaryAsString:
           x.averageSalary != null
-            ? formatNumber(x.averageSalary, "en-US", "1.0-2")
+            ? FormatAsMoneyPipe.formatNumber(x.averageSalary)
             : "",
       };
     });
