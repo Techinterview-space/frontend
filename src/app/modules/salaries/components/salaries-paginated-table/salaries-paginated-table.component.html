@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <tr class="small" *ngFor="let item of items; let i = index">
-          <td>{{ item.value | number : "1.0-0" }}</td>
+          <td>{{ item.value | formatAsMoney }}</td>
           <td>{{ item.quarter }}.{{ item.year }}</td>
           <td>{{ item.age }}</td>
           <td>{{ item.gender }}</td>

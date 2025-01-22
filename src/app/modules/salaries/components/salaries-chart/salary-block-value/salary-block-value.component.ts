@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { SalariesChart } from "../salaries-chart";
 import { formatNumber } from "@angular/common";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 @Component({
   selector: "app-salary-block-value",
@@ -37,26 +38,18 @@ export class SalaryBlockValueComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.median = SalaryBlockValueComponent.formatNumber(
+    this.median = FormatAsMoneyPipe.formatNumber(
       this.source.medianSalary
     );
-    this.average = SalaryBlockValueComponent.formatNumber(
+    this.average = FormatAsMoneyPipe.formatNumber(
       this.source.averageSalary
     );
-    this.medianRemote = SalaryBlockValueComponent.formatNumber(
+    this.medianRemote = FormatAsMoneyPipe.formatNumber(
       this.source.medianRemoteSalary
     );
-    this.averageRemote = SalaryBlockValueComponent.formatNumber(
+    this.averageRemote = FormatAsMoneyPipe.formatNumber(
       this.source.averageRemoteSalary
     );
     this.currentCurrencyLabel = this.source.getCurrentCurrencyLabel();
-  }
-
-  private static formatNumber(value: number | null | undefined): string {
-    if (value == null) {
-      return "";
-    }
-
-    return formatNumber(value, "en-US", "1.0-2");
   }
 }

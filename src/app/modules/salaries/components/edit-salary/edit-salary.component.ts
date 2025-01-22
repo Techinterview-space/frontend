@@ -21,6 +21,7 @@ import {
 import { LabelEntityDto } from "@services/label-entity.model";
 import { Gender, GenderEnum } from "@models/enums/gender.enum";
 import { formatNumber } from "@angular/common";
+import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 @Component({
   selector: "app-edit-salary-modal",
@@ -102,7 +103,7 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
     }
 
     this.salaryValue = this.showSalaryValue
-      ? formatNumber(this.salarytoBeEdited.value, "en-US", "1.0-2")
+      ? FormatAsMoneyPipe.formatNumber(this.salarytoBeEdited.value)
       : "* * * * *";
     this.form = new EditSalaryForm(
       this.salarytoBeEdited,
@@ -139,7 +140,7 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
   showOrHideSalary(): void {
     this.showSalaryValue = !this.showSalaryValue;
     this.salaryValue = this.showSalaryValue
-      ? formatNumber(this.salarytoBeEdited!.value, "en-US", "1.0-2")
+      ? FormatAsMoneyPipe.formatNumber(this.salarytoBeEdited!.value)
       : "* * * * *";
   }
 

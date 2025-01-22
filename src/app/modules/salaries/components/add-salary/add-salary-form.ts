@@ -6,6 +6,7 @@ import { Currency } from "@models/salaries/currency";
 import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { UserSalary } from "@models/salaries/salary.model";
 import { CreateUserSalaryRequest } from "@services/user-salaries.service";
+import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 export class AddSalaryForm extends FormGroup {
   static readonly digitsPattern = "^[0-9]*$";
@@ -18,7 +19,7 @@ export class AddSalaryForm extends FormGroup {
     const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
     const salaryValue =
       salarytoBeEdited?.value != null
-        ? formatNumber(salarytoBeEdited.value, "en-US", "1.0-2")
+        ? FormatAsMoneyPipe.formatNumber(salarytoBeEdited.value)
         : null;
 
     super({

@@ -38,6 +38,7 @@ import { ShareButtonComponent } from "./components/share-button/share-button.com
 import { LabelsNgSelectComponent } from "./components/labels-ng-select/labels-ng-select.component";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { WednesdayFrogComponent } from "./components/wednesday-frog/wednesday-frog.component";
+import { FormatAsMoneyPipe } from "./directives/format-as-money.pipe";
 
 const componentsToDeclareAndExport = [
   AlertComponent,
@@ -71,6 +72,7 @@ const componentsToDeclareAndExport = [
   ShareButtonComponent,
   LabelsNgSelectComponent,
   WednesdayFrogComponent,
+  FormatAsMoneyPipe,
 ];
 
 @NgModule({

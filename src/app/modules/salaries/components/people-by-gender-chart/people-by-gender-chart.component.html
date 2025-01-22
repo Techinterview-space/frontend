@@ -16,12 +16,12 @@
           <tbody>
             <tr *ngFor="let item of barsForLocal" class="small">
               <td>{{ item.label }}</td>
-              <td>{{ item.value }}</td>
-              <td>{{ item.part | number : "1.3" }}%</td>
+              <td>{{ item.value | formatAsMoney : 0 }}</td>
+              <td>{{ item.part | formatAsMoney : 3 }}%</td>
             </tr>
             <tr class="small">
               <td class="text-muted">Всего</td>
-              <td>{{ totalCountLocal }}</td>
+              <td>{{ totalCountLocal | formatAsMoney : 0 }}</td>
               <td></td>
             </tr>
           </tbody>
