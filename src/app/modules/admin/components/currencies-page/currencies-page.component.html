@@ -1,0 +1,26 @@
+<app-page-header>Курсы валюты</app-page-header>
+
+<div class="container my-5">
+  <div class="card">
+    <div class="card-body">
+      <div>
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th>Валюта</th>
+              <th>Курс</th>
+              <th>Дата</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of currencies" class="small">
+              <td>{{ item.currencyString }}</td>
+              <td>{{ item.value }} kzt</td>
+              <td>{{ item.pubDate | date : "yyyy-MM-dd" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

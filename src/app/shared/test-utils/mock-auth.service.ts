@@ -2,6 +2,9 @@ import { Subject, of, Observable } from "rxjs";
 import { IAuthService } from "../services/auth/auth.service";
 import { ApplicationUserExtended } from "@models/extended";
 import { IdToken } from "@auth0/auth0-angular";
+import { ApplicationUser } from "@models/application-user";
+import { TestApplicationUser } from "./models";
+import { UserRole } from "@models/enums";
 
 export class MockAuthService implements IAuthService {
   public readonly loggedOutInvoked$: Subject<void> = new Subject();
@@ -16,8 +19,8 @@ export class MockAuthService implements IAuthService {
     return "";
   }
 
-  completeAuthentication(): Observable<IdToken | null> {
-    return of();
+  completeAuthentication(): Observable<ApplicationUser> {
+    return of(new TestApplicationUser(UserRole.Interviewer));
   }
 
   getCurrentUser(): Observable<ApplicationUserExtended | null> {

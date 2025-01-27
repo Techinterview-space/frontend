@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { OidcUserManager } from "./oidc-user-manager.service";
 import { ApplicationUser } from "@models/application-user";
 import { AuthorizationService } from "@services/authorization.service";
-import { map } from "rxjs/operators";
+import { map, switchMap } from "rxjs/operators";
 import { ApplicationUserExtended } from "@models/extended";
 import { AuthSessionService } from "./auth.session.service";
 import { IdToken, User } from "@auth0/auth0-angular";
@@ -13,7 +13,7 @@ export interface IAuthService {
 
   login(): Promise<void>;
 
-  completeAuthentication(): Observable<IdToken | null>;
+  completeAuthentication(): Observable<ApplicationUser>;
 
   getAuthorizationHeaderValue(): string | null;
 
@@ -58,37 +58,32 @@ export class AuthService implements IAuthService {
     );
   }
 
-  login(): Promise<void> {
+  async login(): Promise<void> {
     if (this.isAuthenticated()) {
-      this.reloadInternalProperties();
-      return Promise.resolve();
+      await this.reloadInternalProperties();
     }
 
-    return this.oidcManager.login();
+    await this.oidcManager.login();
   }
 
-  reload(): void {
-    if (this.isAuthenticated()) {
-      this.reloadInternalProperties();
-    }
-  }
-
-  completeAuthentication(): Observable<IdToken | null> {
+  completeAuthentication(): Observable<ApplicationUser> {
     return this.oidcManager.completeAuthentication().pipe(
-      map((x) => {
+      switchMap((x) => {
         this.authorizationInfo = x;
-        this.reloadInternalProperties();
-        return x ?? null;
+        return this.reloadInternalProperties().pipe(map((appUser) => appUser));
       })
     );
   }
 
-  private reloadInternalProperties(): void {
+  private reloadInternalProperties(): Observable<ApplicationUser> {
     this.session.auth = this.authorizationInfo ?? null;
-
-    this.authorizationService.getMe().subscribe((appUser) => {
-      this.saveCurrentUser(appUser);
-    });
+    return this.authorizationService.getMe()
+      .pipe(
+        map((appUser) => {
+          this.saveCurrentUser(appUser);
+          return appUser;
+        })
+      );
   }
 
   private saveCurrentUser(appUser: ApplicationUser): void {

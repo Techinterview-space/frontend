@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
+import { TotpService } from "@services/totp.service";
 
 @Component({
   templateUrl: "./auth-callback.component.html",
@@ -11,12 +12,17 @@ export class AuthCallbackComponent implements OnInit {
 
   showErrorBlock = false;
   showInfoblock = true;
+  showMfaBlock = false;
+
+  showTotpInvalid = false;
+  totpCode = "";
 
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly cookieService: CookieService
+    private readonly cookieService: CookieService,
+    private readonly totpService: TotpService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -32,18 +38,48 @@ export class AuthCallbackComponent implements OnInit {
     }
 
     this.authService.completeAuthentication().subscribe((x) => {
-      if (this.cookieService.check("url")) {
-        const url = this.cookieService.get("url") ?? "";
-        this.cookieService.delete("url");
 
-        if (url.includes("?")) {
-          this.router.navigateByUrl(url);
-        } else {
-          this.router.navigate([url]);
-        }
-      } else {
-        this.router.navigate([this.urlToRedirectAfterLogin]);
+      if (x.isMfaEnabled) {
+        this.showMfaBlock = true;
+        return;
       }
+
+      this.redirectToMainPageOrUrl();
     });
+  }
+
+  validateTotp(): void {
+
+    if (this.totpCode == null ||
+        this.totpCode.length !== 6) {
+
+      this.showTotpInvalid = true;
+      return;
+    }
+
+    this.totpService.verifyTotp(this.totpCode)
+      .subscribe((result) => {
+        if (result.result) {
+          this.showTotpInvalid = false;
+          this.redirectToMainPageOrUrl();
+        }
+
+        this.showTotpInvalid = true;
+      });
+  }
+
+  private redirectToMainPageOrUrl(): void {
+    if (this.cookieService.check("url")) {
+      const url = this.cookieService.get("url") ?? "";
+      this.cookieService.delete("url");
+
+      if (url.includes("?")) {
+        this.router.navigateByUrl(url);
+      } else {
+        this.router.navigate([url]);
+      }
+    } else {
+      this.router.navigate([this.urlToRedirectAfterLogin]);
+    }
   }
 }

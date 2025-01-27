@@ -16,8 +16,10 @@ export class TestApplicationUser implements ApplicationUser {
     this.updatedAt = new Date();
     this.fullname = `${this.firstName} ${this.lastName}`;
     this.salariesCount = 0;
+    this.isMfaEnabled = false;
   }
 
+  isMfaEnabled: boolean;
   email: string | null;
   firstName: string | null;
   lastName: string | null;

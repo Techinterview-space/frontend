@@ -5,7 +5,6 @@ import { AuthService } from "@shared/services/auth/auth.service";
 import { HealthCheckItem } from "../health-check-table/health-check-item";
 import { AdminToolsService } from "@services/admin-tools.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
-import { CurrencyItem } from "./currency-item";
 
 @Component({
   selector: "app-background-jobs",
@@ -16,7 +15,6 @@ export class BackgroundJobsComponent implements OnInit, OnDestroy {
   authorizationToken: string | null = null;
   configs: string | null = null;
   healthCheckItems: Array<HealthCheckItem> = [];
-  currencies: Array<CurrencyItem> = [];
 
   constructor(
     private readonly authService: AuthService,
@@ -37,13 +35,6 @@ export class BackgroundJobsComponent implements OnInit, OnDestroy {
     ];
 
     this.checkHealth();
-
-    this.adminToolsService
-      .getCurrencies()
-      .pipe(untilDestroyed(this))
-      .subscribe((currencies) => {
-        this.currencies = currencies.map((x) => new CurrencyItem(x));
-      });
 
     this.adminToolsService
       .getConfigs()

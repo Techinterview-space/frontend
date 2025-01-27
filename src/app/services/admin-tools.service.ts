@@ -36,4 +36,8 @@ export class AdminToolsService {
   getConfigs(): Observable<object> {
     return this.api.get<object>(this.apiUrl + "configs");
   }
+
+  generateQR(value: string): Observable<string> {
+    return this.api.post<string>(this.apiUrl + "generate-qr", { value, pizelSize: 20 });
+  }
 }

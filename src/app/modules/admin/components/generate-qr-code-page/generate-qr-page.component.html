@@ -1,0 +1,14 @@
+<app-page-header>QR код</app-page-header>
+
+<div class="container my-5">
+  <div class="card">
+    <div class="card-body">
+      <input
+      type="text"
+      [(ngModel)]="qrCodeSource"
+      placeholder="Enter TOTP code"
+    />
+    <button type="button" class="btn btn-primary" (click)="generateQR()">Generate QR</button>
+    </div>
+  </div>
+</div>

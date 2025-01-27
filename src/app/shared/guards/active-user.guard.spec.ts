@@ -22,7 +22,7 @@ class AuthStub extends AuthService {
   override login(): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  override completeAuthentication(): Observable<IdToken | null> {
+  override completeAuthentication(): Observable<ApplicationUser> {
     throw new Error("Method not implemented.");
   }
   override getAuthorizationHeaderValue(): string {

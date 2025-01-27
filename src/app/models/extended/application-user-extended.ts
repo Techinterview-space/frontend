@@ -58,6 +58,10 @@ export class ApplicationUserExtended implements ApplicationUser {
     return this.instance.roles;
   }
 
+  get isMfaEnabled(): boolean {
+    return this.instance.isMfaEnabled
+  }
+
   constructor(public readonly instance: ApplicationUser) {
     Assertion.notNull(instance, "instance", ApplicationUserExtended.name);
 

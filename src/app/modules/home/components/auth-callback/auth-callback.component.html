@@ -8,9 +8,18 @@
   </div>
 </div>
 
-<div class="container" *ngIf="showInfoblock">
-  <div class="text-center mt-5">
+<div class="container">
+  <div class="text-center mt-5" *ngIf="showInfoblock">
     <div class="display-2">Please wait for a while...</div>
     <div class="display-4">We are preparing some awesome features for you</div>
   </div>
+
+  <div class="text-center mt-5" *ngIf="showMfaBlock">
+    <h2>Validate TOTP</h2>
+    <input
+      type="text"
+      [(ngModel)]="totpCode"
+      placeholder="Enter TOTP code"
+    />
+    <button type="button" class="btn btn-primary" (click)="validateTotp()">Validate</button>
 </div>
