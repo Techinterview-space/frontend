@@ -13,6 +13,7 @@ import { PrivacyPolicyPageComponent } from "./components/privacy-policy-page/pri
 import { AboutUsComponent } from "./components/about-us/about-us.component";
 import { LogoutCallbackComponent } from "./components/logout-callback/logout-callback.component";
 import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bot.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,6 @@ import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bo
     LogoutCallbackComponent,
     TelegramBotABoutComponent,
   ],
-  imports: [CommonModule, SharedModule, HomeRoutingModule],
+  imports: [CommonModule, SharedModule, HomeRoutingModule, FormsModule],
 })
 export class HomeModule {}

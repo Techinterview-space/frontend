@@ -162,9 +162,10 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
     this.filterData = data;
     const selectedGrade = data.grade ? DeveloperGrade[data.grade] : "empty";
-    const selectedSourceType = data.salarySourceTypes.length > 0
-      ? SalarySourceType[data.salarySourceTypes[0]]
-      : "empty";
+    const selectedSourceType =
+      data.salarySourceTypes.length > 0
+        ? SalarySourceType[data.salarySourceTypes[0]]
+        : "empty";
 
     this.gtag.event(
       "salaries_filters_applied_grade",
@@ -274,11 +275,16 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
             x.currentUserSalary.professionId === developerProfessionId;
 
           this.noImportSourceWasSelected =
-            filterToApply.salarySourceTypes == null || filterToApply.salarySourceTypes.length === 0;
+            filterToApply.salarySourceTypes == null ||
+            filterToApply.salarySourceTypes.length === 0;
           this.kolesaImportedSalariesWasSelected =
-            filterToApply.salarySourceTypes.length > 0 && filterToApply.salarySourceTypes[0] == SalarySourceType.KolesaDevelopersCsv2022;
+            filterToApply.salarySourceTypes.length > 0 &&
+            filterToApply.salarySourceTypes[0] ==
+              SalarySourceType.KolesaDevelopersCsv2022;
           this.kolesaImportedDataAnalyticsSalariesWasSelected =
-            filterToApply.salarySourceTypes.length > 0 && filterToApply.salarySourceTypes[0] == SalarySourceType.KolesaDataAnalyticsCsv2024;
+            filterToApply.salarySourceTypes.length > 0 &&
+            filterToApply.salarySourceTypes[0] ==
+              SalarySourceType.KolesaDataAnalyticsCsv2024;
         }
       });
   }

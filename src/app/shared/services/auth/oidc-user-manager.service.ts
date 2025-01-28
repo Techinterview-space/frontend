@@ -18,7 +18,11 @@ export class OidcUserManager {
   }
 
   login(): Promise<void> {
-    return this.auth.loginWithRedirect().toPromise();
+    return this.auth
+      .loginWithRedirect({
+        appState: { target: "/auth-callback" },
+      })
+      .toPromise();
   }
 
   completeAuthentication(): Observable<IdToken | null | undefined> {

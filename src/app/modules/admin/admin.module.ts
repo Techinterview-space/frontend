@@ -20,6 +20,8 @@ import { TelegramBotUsagesComponent } from "./components/telegram/telegram-bot-u
 import { TelegramUserSettingsComponent } from "./components/telegram/telegram-user-settings/telegram-user-settings.component";
 import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced-salaries-admin-page/sourced-salaries-admin-page.component";
 import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
+import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
+import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-c
     TelegramBotUsagesComponent,
     TelegramUserSettingsComponent,
     StatDataCacheRecordsComponent,
+    CurrenciesPageComponent,
+    GenerateQrPageComponent,
   ],
   imports: [
     CommonModule,

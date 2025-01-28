@@ -18,6 +18,7 @@ import { SurveyService } from "./salaries-survey.service";
 import { MetaTagService } from "./meta-tags.service";
 import { AdminToolsService } from "./admin-tools.service";
 import { HistoricalChartsService } from "./historical-charts.service";
+import { TotpService } from "./totp.service";
 
 export * from "./authorization.service";
 export * from "./api.service";
@@ -28,6 +29,7 @@ export * from "./interviews.service";
 export * from "./user-admin.service";
 export * from "./user-labels.service";
 export * from "./users.service";
+export * from "./totp.service";
 
 export const applicationServices = [
   SessionStorageWrapper,
@@ -50,4 +52,5 @@ export const applicationServices = [
   MetaTagService,
   AdminToolsService,
   HistoricalChartsService,
+  TotpService,
 ];

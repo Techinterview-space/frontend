@@ -13,6 +13,8 @@ import { TelegramBotUsagesComponent } from "./components/telegram/telegram-bot-u
 import { TelegramUserSettingsComponent } from "./components/telegram/telegram-user-settings/telegram-user-settings.component";
 import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced-salaries-admin-page/sourced-salaries-admin-page.component";
 import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
+import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
+import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -21,7 +23,6 @@ const routes: Routes = [
     path: "interview-templates",
     component: InterviewTemplatesAdminPageComponent,
   },
-  { path: "background-jobs", component: BackgroundJobsComponent },
   { path: "skills", component: SkillsPaginatedTableComponent },
   { path: "work-industries", component: WorkIndustriesPaginatedTableComponent },
   { path: "professions", component: ProfessionsPaginatedTableComponent },
@@ -40,6 +41,10 @@ const routes: Routes = [
     path: "telegram/stat-data-change-subscriptions",
     component: StatDataCacheRecordsComponent,
   },
+
+  { path: "tools/background-jobs", component: BackgroundJobsComponent },
+  { path: "tools/currencies", component: CurrenciesPageComponent },
+  { path: "tools/generate-qr", component: GenerateQrPageComponent },
 ];
 
 @NgModule({

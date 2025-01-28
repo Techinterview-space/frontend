@@ -23,7 +23,6 @@ import { AppPageHeaderComponent } from "./components/app-page-header/app-page-he
 import { DeveloperGradeLabelComponent } from "./components/developer-grade-label/developer-grade-label.component";
 import { VisibilityLabelComponent } from "./components/visibility-label/visibility-label.component";
 import { UserRolesLabelComponent } from "./components/user-roles-label/user-roles-label.component";
-import { UserProfilePageComponent } from "./components/user-profile-page/user-profile-page.component";
 import { DialogComponent } from "./components/dialogs/dialog/dialog.component";
 import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-spinner.component";
 import { DataLoadingInfoBlockComponent } from "./components/data-loading-info-block/data-loading-info-block.component";
@@ -61,7 +60,6 @@ const componentsToDeclareAndExport = [
   DeveloperGradeLabelComponent,
   VisibilityLabelComponent,
   UserRolesLabelComponent,
-  UserProfilePageComponent,
   LoadingSpinnerComponent,
   DataLoadingInfoBlockComponent,
   PaginationButtonsComponent,

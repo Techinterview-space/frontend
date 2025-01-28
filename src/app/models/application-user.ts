@@ -10,6 +10,7 @@ export interface ApplicationUser {
   salariesCount: number;
   emailConfirmed: boolean;
   identityId: number | null;
+  isMfaEnabled: boolean;
   deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;

@@ -24,16 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.authService
-      .getCurrentUser()
-      .pipe(untilDestroyed(this))
-      .subscribe((user) => {
-        if (user != null) {
-          this.isAuthenticated = true;
-        }
-      });
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {}
 }
