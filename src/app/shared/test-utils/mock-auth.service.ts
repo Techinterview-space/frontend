@@ -35,6 +35,12 @@ export class MockAuthService implements IAuthService {
     );
   }
 
+  getCurrentUserFromStorage(): Observable<ApplicationUserExtended | null> {
+    return of(
+      new ApplicationUserExtended(new TestApplicationUser(UserRole.Interviewer))
+    );
+  }
+
   login(): Promise<void> {
     return Promise.resolve();
   }

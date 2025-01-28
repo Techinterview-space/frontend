@@ -5,7 +5,7 @@ import { Observable, of } from "rxjs";
 import { ApplicationUserExtended } from "@models/extended";
 import { ApplicationUser } from "@models/application-user";
 import { ActiveUserGuard } from "./active-user.guard";
-import { IdToken } from "@auth0/auth0-angular";
+import { CheckTotpResponse } from "@services/authorization.service";
 
 class AuthStub extends AuthService {
   constructor(private readonly user: ApplicationUser | null) {
@@ -22,9 +22,11 @@ class AuthStub extends AuthService {
   override login(): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  override completeAuthentication(): Observable<ApplicationUser> {
+
+  override completeAuthentication(): Observable<CheckTotpResponse> {
     throw new Error("Method not implemented.");
   }
+
   override getAuthorizationHeaderValue(): string {
     throw new Error("Method not implemented.");
   }

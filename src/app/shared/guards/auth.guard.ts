@@ -26,7 +26,6 @@ export class AuthGuard implements CanActivate {
 
     if (state !== null && state.url != null) {
       // set expire date + 10 hours
-      console.log("Url to redirect", state.url);
       this.cookieService.set("url", state.url, Date.now(), "/");
     }
 

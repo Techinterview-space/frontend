@@ -37,35 +37,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly spinner: SpinnerService,
-    private readonly healthService: HealthCheckService
+    private readonly spinner: SpinnerService
   ) {}
 
   ngOnInit(): void {
     this.setupSubscribers();
-    this.authService
-      .getCurrentUser()
-      //.pipe(untilDestroyed(this))
-      .subscribe((currentUser) => {
-        if (currentUser != null) {
-          this.currentUser = currentUser;
-        }
+    this.loginButtonAvailable = true;
 
+    this.authService
+      .getCurrentUserFromStorage()
+      .pipe(untilDestroyed(this))
+      .subscribe((user) => {
+        this.currentUser = user;
         this.renderNavbar();
       });
-
-    this.healthService
-      .appHealth()
-      .pipe(untilDestroyed(this))
-      .subscribe(
-        (result) => {
-          this.loginButtonAvailable = true;
-        },
-        (err) => {
-          console.error(err);
-          this.healthCheckError = true;
-        }
-      );
   }
 
   private setupSubscribers(): void {

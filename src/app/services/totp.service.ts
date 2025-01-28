@@ -17,8 +17,12 @@ export interface VerifyTotpResponse {
 export class TotpService {
   constructor(private api: ApiService) {}
 
-  setupTotp(): Observable<SetupTotpResponse> {
-    return this.api.get("/api/totp/setup");
+  enableMfa(): Observable<SetupTotpResponse> {
+    return this.api.post("/api/totp/enable");
+  }
+
+  disableMfa(): Observable<void> {
+    return this.api.post("/api/totp/disable");
   }
 
   verifyTotp(code: string): Observable<VerifyTotpResponse> {

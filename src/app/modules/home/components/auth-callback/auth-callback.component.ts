@@ -1,13 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { TotpService } from "@services/totp.service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
   templateUrl: "./auth-callback.component.html",
 })
-export class AuthCallbackComponent implements OnInit {
+export class AuthCallbackComponent implements OnInit, OnDestroy {
   private readonly urlToRedirectAfterLogin = "/me";
 
   showErrorBlock = false;
@@ -16,6 +17,7 @@ export class AuthCallbackComponent implements OnInit {
 
   showTotpInvalid = false;
   totpCode = "";
+  totpCodeSent = false;
 
   constructor(
     private readonly authService: AuthService,
@@ -33,27 +35,32 @@ export class AuthCallbackComponent implements OnInit {
       this.route.snapshot.fragment.indexOf("error") >= 0
     ) {
       this.showErrorBlock = true;
+      this.showMfaBlock = false;
       this.showInfoblock = false;
       return Promise.resolve();
     }
 
-    this.authService.completeAuthentication().subscribe((x) => {
-      if (x.isMfaEnabled) {
-        this.showMfaBlock = true;
-        this.showInfoblock = false;
-        return;
-      }
+    this.authService
+      .completeAuthentication()
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        if (x.isMfaEnabled) {
+          this.showMfaBlock = true;
+          this.showInfoblock = false;
+        } else {
+          this.showInfoblock = true;
 
-      this.showInfoblock = true;
-      this.authService.getCurrentUser().subscribe((user) => {
-        this.redirectToMainPageOrUrl();
+          this.authService.getCurrentUser().subscribe((user) => {
+            this.redirectToMainPageOrUrl();
+          });
+        }
       });
-    });
   }
 
   validateTotp(): void {
     if (this.totpCode == null || this.totpCode.length !== 6) {
       this.showTotpInvalid = true;
+      this.totpCodeSent = false;
       return;
     }
 
@@ -61,6 +68,8 @@ export class AuthCallbackComponent implements OnInit {
       if (result.result) {
         this.showTotpInvalid = false;
         this.showInfoblock = true;
+        this.totpCodeSent = true;
+
         this.authService.getCurrentUser().subscribe((user) => {
           this.redirectToMainPageOrUrl();
         });
@@ -68,6 +77,7 @@ export class AuthCallbackComponent implements OnInit {
 
       this.showInfoblock = false;
       this.showTotpInvalid = true;
+      this.totpCodeSent = false;
     });
   }
 
@@ -85,4 +95,6 @@ export class AuthCallbackComponent implements OnInit {
       this.router.navigate([this.urlToRedirectAfterLogin]);
     }
   }
+
+  ngOnDestroy(): void {}
 }

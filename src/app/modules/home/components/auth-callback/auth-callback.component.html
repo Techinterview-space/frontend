@@ -1,28 +1,41 @@
-<div *ngIf="showErrorBlock" class="container">
-  <div class="card">
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card w-50">
     <div class="card-body">
-      <p class="text-danger" role="alert">
+      <p class="text-danger py-5" role="alert" *ngIf="showErrorBlock">
         Произошла ошибка. Попробуйте позднее.
       </p>
+
+      <div class="text-center py-5" *ngIf="showInfoblock">
+        <div class="display-3">Добро пожаловать</div>
+        <div class="mt-3">Загружаем данные</div>
+        <div class="mt-3 text-center">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
+      </div>
+
+      <div class="text-center py-5 px-5" *ngIf="showMfaBlock">
+        <div class="">
+          <div class="h2">Введите код MFA (TOTP)</div>
+          <div class="mt-3">
+            <input
+              type="text"
+              [(ngModel)]="totpCode"
+              placeholder="Введите 6 цифр TOTP"
+              class="form-control"
+            />
+          </div>
+          <div class="mt-3">
+            <button
+              type="button"
+              [disabled]="totpCodeSent"
+              class="btn btn-primary w-100"
+              (click)="validateTotp()"
+            >
+              Отправить
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="text-center mt-5" *ngIf="showInfoblock">
-    <div class="display-2">Добро пожаловать</div>
-    <div class="display-4">Загружаем данные</div>
-  </div>
-
-  <div class="text-center mt-5" *ngIf="showMfaBlock">
-    <h2>Введите код MFA (TOTP)</h2>
-    <input
-      type="text"
-      [(ngModel)]="totpCode"
-      placeholder="Введите 6 цифр TOTP"
-    />
-    <button type="button" class="btn btn-primary" (click)="validateTotp()">
-      Отправить
-    </button>
   </div>
 </div>

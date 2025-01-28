@@ -1,7 +1,85 @@
 <app-page-header>{{ user?.fullName }}</app-page-header>
 
 <div class="container mt-5 mb-5" *ngIf="user; else dataLoading">
-  <app-user-profile-page [user]="user"></app-user-profile-page>
+  <div class="row" *ngIf="user">
+    <div class="col-sm-3">
+      <div class="card card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="small text-muted">Email</div>
+            <div class="small">
+              {{ user.email ?? "-" }}
+            </div>
+          </li>
+
+          <li class="list-group-item" *ngIf="!user.emailConfirmed">
+            <div class="small text-muted">Статус email</div>
+            <div class="">
+              <span class="badge bg-warning text-dark">Не подтвержден</span>
+            </div>
+          </li>
+
+          <li class="list-group-item" *ngIf="user.deletedAt">
+            <div class="small text-muted">Статус аккаунта</div>
+            <div class="">
+              <span class="badge bg-danger text-light">Удален</span>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="small text-muted">Роли</div>
+            <div>
+              <app-user-roles-label
+                [userRoles]="user.roles"
+              ></app-user-roles-label>
+            </div>
+          </li>
+
+          <li class="list-group-item" *ngIf="user.isMfaEnabled">
+            <div class="small text-muted">Статус MFA</div>
+            <div>
+              <div class="">
+                <span class="badge bg-success text-light">Включен</span>
+              </div>
+              <div class="mt-2">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  (click)="openDisableMfaDialog()"
+                >
+                  Выключить MFA
+                </button>
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item" *ngIf="!user.isMfaEnabled">
+            <div class="small text-muted">Статус MFA</div>
+            <div>
+              <div class="">
+                <span class="badge bg-secondary text-light">Выключен</span>
+              </div>
+              <div class="mt-2">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  (click)="openMfaSetupDialog()"
+                >
+                  Настроить MFA
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+      <div class="card card-body">
+        <div class="text-muted">Пока работаем над этим.</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <ng-template #dataLoading>
@@ -9,3 +87,19 @@
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
+
+<app-dialog
+  [show]="!!mfaQrCodeImage"
+  (closed)="onQrModalDlgClose()"
+  [header]="'Просканируйте QR для добавления MFA'"
+  [additionalCss]="'modal-lg'"
+>
+  <div class="text-center">
+    <img [src]="mfaQrCodeImage" class="img-fluid" alt="QR code" />
+  </div>
+</app-dialog>
+
+<app-confirm-dialog
+  *ngIf="confirmDisablingMfaMessage"
+  [message]="confirmDisablingMfaMessage"
+></app-confirm-dialog>

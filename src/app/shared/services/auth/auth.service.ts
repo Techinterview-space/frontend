@@ -14,6 +14,8 @@ import { IdToken, User } from "@auth0/auth0-angular";
 export interface IAuthService {
   getCurrentUser(): Observable<ApplicationUserExtended | null>;
 
+  getCurrentUserFromStorage(): Observable<ApplicationUserExtended | null>;
+
   login(): Promise<void>;
 
   completeAuthentication(): Observable<CheckTotpResponse>;
@@ -61,12 +63,24 @@ export class AuthService implements IAuthService {
     );
   }
 
-  async login(): Promise<void> {
-    if (this.isAuthenticated()) {
-      await this.reloadInternalProperties();
+  getCurrentUserFromStorage(): Observable<ApplicationUserExtended | null> {
+    this.tryLoadUserFromSession();
+
+    if (this.authorizationInfo == null) {
+      return of(null);
     }
 
-    await this.oidcManager.login();
+    if (this.applicationUser != null) {
+      return of(this.applicationUser);
+    }
+
+    return of(null);
+  }
+
+  async login(): Promise<void> {
+    if (this.applicationUser == null) {
+      await this.oidcManager.login();
+    }
   }
 
   completeAuthentication(): Observable<CheckTotpResponse> {
@@ -142,6 +156,7 @@ export class AuthService implements IAuthService {
     if (this.authorizationInfo == null) {
       this.authorizationInfo = this.session.auth;
       const user = this.session.applicationUser;
+
       this.applicationUser =
         user != null ? new ApplicationUserExtended(user) : null;
     }
