@@ -4,6 +4,7 @@ import { UserSalary } from "@models/salaries/salary.model";
 import { DeveloperGrade } from "@models/enums";
 import { CompanyType } from "@models/salaries/company-type";
 import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";
+import { PercentileCollection } from "@shared/value-objects/percentile-collection";
 
 export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
   static readonly grades: Array<{ grade: DeveloperGrade; label: string }> = [
@@ -128,13 +129,16 @@ class ChartDatasetItem {
       return;
     }
 
-    this.min = salaries[0].value;
-    this.max = salaries[salaries.length - 1].value;
-    this.median = salaries[Math.floor(salaries.length / 2)].value;
-    this.q1 = salaries[Math.floor(salaries.length / 4)].value;
-    this.q3 = salaries[Math.floor((salaries.length * 3) / 4)].value;
-    this.mean = salaries.reduce((a, b) => a + b.value, 0) / salaries.length;
+    const itemsForChart = new PercentileCollection(salaries).getValues();
 
-    this.items = salaries.map((s) => s.value);
+    this.min = itemsForChart[0].value;
+    this.max = itemsForChart[itemsForChart.length - 1].value;
+    this.median = itemsForChart[Math.floor(itemsForChart.length / 2)].value;
+    this.q1 = itemsForChart[Math.floor(itemsForChart.length / 4)].value;
+    this.q3 = itemsForChart[Math.floor((itemsForChart.length * 3) / 4)].value;
+    this.mean =
+      itemsForChart.reduce((a, b) => a + b.value, 0) / itemsForChart.length;
+
+    this.items = itemsForChart.map((s) => s.value);
   }
 }
