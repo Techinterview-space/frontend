@@ -27,7 +27,10 @@
     [show]="shoQrCodeDialog"
     (closed)="onQrModalDlgClose()"
     [header]="'Сгенерированный QR'"
+    [additionalCss]="'modal-lg'"
   >
-    <img [src]="generatedQRBase64" alt="QR code" />
+    <div class="text-center">
+      <img [src]="generatedQRBase64" alt="QR code" />
+    </div>
   </app-dialog>
 </div>
