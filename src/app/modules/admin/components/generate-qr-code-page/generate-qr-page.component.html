@@ -3,12 +3,31 @@
 <div class="container my-5">
   <div class="card">
     <div class="card-body">
-      <input
-      type="text"
-      [(ngModel)]="qrCodeSource"
-      placeholder="Enter TOTP code"
-    />
-    <button type="button" class="btn btn-primary" (click)="generateQR()">Generate QR</button>
+      <div class="mb-3">
+        <input
+          type="text"
+          [(ngModel)]="qrCodeSource"
+          class="form-control"
+          placeholder="Enter TOTP code"
+        />
+      </div>
+      <div class="mb-3">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="generateQrCode()"
+        >
+          Generate QR
+        </button>
+      </div>
     </div>
   </div>
+
+  <app-dialog
+    [show]="shoQrCodeDialog"
+    (closed)="onQrModalDlgClose()"
+    [header]="'Сгенерированный QR'"
+  >
+    <img [src]="generatedQRBase64" alt="QR code" />
+  </app-dialog>
 </div>

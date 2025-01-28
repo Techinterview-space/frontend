@@ -38,34 +38,37 @@ export class AuthCallbackComponent implements OnInit {
     }
 
     this.authService.completeAuthentication().subscribe((x) => {
-
       if (x.isMfaEnabled) {
         this.showMfaBlock = true;
+        this.showInfoblock = false;
         return;
       }
 
-      this.redirectToMainPageOrUrl();
+      this.showInfoblock = true;
+      this.authService.getCurrentUser().subscribe((user) => {
+        this.redirectToMainPageOrUrl();
+      });
     });
   }
 
   validateTotp(): void {
-
-    if (this.totpCode == null ||
-        this.totpCode.length !== 6) {
-
+    if (this.totpCode == null || this.totpCode.length !== 6) {
       this.showTotpInvalid = true;
       return;
     }
 
-    this.totpService.verifyTotp(this.totpCode)
-      .subscribe((result) => {
-        if (result.result) {
-          this.showTotpInvalid = false;
+    this.totpService.verifyTotp(this.totpCode).subscribe((result) => {
+      if (result.result) {
+        this.showTotpInvalid = false;
+        this.showInfoblock = true;
+        this.authService.getCurrentUser().subscribe((user) => {
           this.redirectToMainPageOrUrl();
-        }
+        });
+      }
 
-        this.showTotpInvalid = true;
-      });
+      this.showInfoblock = false;
+      this.showTotpInvalid = true;
+    });
   }
 
   private redirectToMainPageOrUrl(): void {

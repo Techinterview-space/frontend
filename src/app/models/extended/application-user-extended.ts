@@ -59,7 +59,7 @@ export class ApplicationUserExtended implements ApplicationUser {
   }
 
   get isMfaEnabled(): boolean {
-    return this.instance.isMfaEnabled
+    return this.instance.isMfaEnabled;
   }
 
   constructor(public readonly instance: ApplicationUser) {

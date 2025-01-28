@@ -2,7 +2,10 @@ import { Subject, Observable, of } from "rxjs";
 import { Injectable } from "@angular/core";
 import { OidcUserManager } from "./oidc-user-manager.service";
 import { ApplicationUser } from "@models/application-user";
-import { AuthorizationService } from "@services/authorization.service";
+import {
+  AuthorizationService,
+  CheckTotpResponse,
+} from "@services/authorization.service";
 import { map, switchMap } from "rxjs/operators";
 import { ApplicationUserExtended } from "@models/extended";
 import { AuthSessionService } from "./auth.session.service";
@@ -13,7 +16,7 @@ export interface IAuthService {
 
   login(): Promise<void>;
 
-  completeAuthentication(): Observable<ApplicationUser>;
+  completeAuthentication(): Observable<CheckTotpResponse>;
 
   getAuthorizationHeaderValue(): string | null;
 
@@ -66,24 +69,27 @@ export class AuthService implements IAuthService {
     await this.oidcManager.login();
   }
 
-  completeAuthentication(): Observable<ApplicationUser> {
+  completeAuthentication(): Observable<CheckTotpResponse> {
     return this.oidcManager.completeAuthentication().pipe(
       switchMap((x) => {
         this.authorizationInfo = x;
-        return this.reloadInternalProperties().pipe(map((appUser) => appUser));
+        this.session.auth = this.authorizationInfo ?? null;
+
+        return this.authorizationService
+          .checkTotpRequired()
+          .pipe(map((r) => r));
       })
     );
   }
 
   private reloadInternalProperties(): Observable<ApplicationUser> {
     this.session.auth = this.authorizationInfo ?? null;
-    return this.authorizationService.getMe()
-      .pipe(
-        map((appUser) => {
-          this.saveCurrentUser(appUser);
-          return appUser;
-        })
-      );
+    return this.authorizationService.getMe().pipe(
+      map((appUser) => {
+        this.saveCurrentUser(appUser);
+        return appUser;
+      })
+    );
   }
 
   private saveCurrentUser(appUser: ApplicationUser): void {

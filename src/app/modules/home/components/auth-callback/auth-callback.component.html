@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <p class="text-danger" role="alert">
-        Oops, there was an error, please try to login again.
+        Произошла ошибка. Попробуйте позднее.
       </p>
     </div>
   </div>
@@ -10,16 +10,19 @@
 
 <div class="container">
   <div class="text-center mt-5" *ngIf="showInfoblock">
-    <div class="display-2">Please wait for a while...</div>
-    <div class="display-4">We are preparing some awesome features for you</div>
+    <div class="display-2">Добро пожаловать</div>
+    <div class="display-4">Загружаем данные</div>
   </div>
 
   <div class="text-center mt-5" *ngIf="showMfaBlock">
-    <h2>Validate TOTP</h2>
+    <h2>Введите код MFA (TOTP)</h2>
     <input
       type="text"
       [(ngModel)]="totpCode"
-      placeholder="Enter TOTP code"
+      placeholder="Введите 6 цифр TOTP"
     />
-    <button type="button" class="btn btn-primary" (click)="validateTotp()">Validate</button>
+    <button type="button" class="btn btn-primary" (click)="validateTotp()">
+      Отправить
+    </button>
+  </div>
 </div>

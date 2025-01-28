@@ -82,8 +82,10 @@ export class GlobalFiltersFormGroup extends FormGroup {
       skills: new FormControl(filterData?.skills, []),
       salarySourceType: new FormControl(
         filterData != null && filterData.salarySourceTypes.length > 0
-        ? filterData.salarySourceTypes[0]
-        : null, []),
+          ? filterData.salarySourceTypes[0]
+          : null,
+        []
+      ),
       quarterTo: new FormControl(filterData?.quarterTo, []),
       yearTo: new FormControl(filterData?.yearTo, []),
     });
@@ -126,7 +128,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
       profsToInclude,
       cities,
       skills,
-      salarySourceType != null ? [ salarySourceType ] : [],
+      salarySourceType != null ? [salarySourceType] : [],
       quarterTo,
       yearTo
     );

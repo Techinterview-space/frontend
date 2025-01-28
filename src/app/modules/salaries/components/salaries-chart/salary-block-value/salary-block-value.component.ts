@@ -38,12 +38,8 @@ export class SalaryBlockValueComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.median = FormatAsMoneyPipe.formatNumber(
-      this.source.medianSalary
-    );
-    this.average = FormatAsMoneyPipe.formatNumber(
-      this.source.averageSalary
-    );
+    this.median = FormatAsMoneyPipe.formatNumber(this.source.medianSalary);
+    this.average = FormatAsMoneyPipe.formatNumber(this.source.averageSalary);
     this.medianRemote = FormatAsMoneyPipe.formatNumber(
       this.source.medianRemoteSalary
     );

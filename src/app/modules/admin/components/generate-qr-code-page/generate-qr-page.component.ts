@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { TitleService } from "@services/title.service";
 import { AdminToolsService } from "@services/admin-tools.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
@@ -8,9 +8,8 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
   styleUrls: ["./generate-qr-page.component.scss"],
 })
 export class GenerateQrPageComponent implements OnDestroy {
-
+  shoQrCodeDialog = false;
   qrCodeSource: string | null = null;
-
   generatedQRBase64: string | null = null;
 
   constructor(
@@ -21,7 +20,6 @@ export class GenerateQrPageComponent implements OnDestroy {
   }
 
   generateQrCode(): void {
-
     if (this.qrCodeSource == null) {
       return;
     }
@@ -29,9 +27,15 @@ export class GenerateQrPageComponent implements OnDestroy {
     this.adminToolsService
       .generateQR(this.qrCodeSource)
       .pipe(untilDestroyed(this))
-      .subscribe((qrCode) => {
-        this.generatedQRBase64 = qrCode;
+      .subscribe((r) => {
+        this.generatedQRBase64 = "data:image/jpg;base64," + r.imageBase64;
+        this.shoQrCodeDialog = true;
       });
+  }
+
+  onQrModalDlgClose(): void {
+    this.shoQrCodeDialog = false;
+    this.generatedQRBase64 = null;
   }
 
   ngOnDestroy(): void {

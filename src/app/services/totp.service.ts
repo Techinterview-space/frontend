@@ -8,7 +8,7 @@ export interface SetupTotpResponse {
 }
 
 export interface VerifyTotpResponse {
-    result: boolean;
+  result: boolean;
 }
 
 @Injectable({
@@ -21,7 +21,7 @@ export class TotpService {
     return this.api.get("/api/totp/setup");
   }
 
-    verifyTotp(code: string): Observable<VerifyTotpResponse> {
-        return this.api.post("/api/totp/verify", { totpCode: code });
-    }
+  verifyTotp(code: string): Observable<VerifyTotpResponse> {
+    return this.api.post("/api/totp/verify", { totpCode: code });
+  }
 }

@@ -21,6 +21,10 @@ export interface CurrencyData {
   pubDate: Date;
 }
 
+export interface GenerateQrResponse {
+  imageBase64: string;
+}
+
 @Injectable()
 export class AdminToolsService {
   private readonly apiUrl: string;
@@ -37,7 +41,10 @@ export class AdminToolsService {
     return this.api.get<object>(this.apiUrl + "configs");
   }
 
-  generateQR(value: string): Observable<string> {
-    return this.api.post<string>(this.apiUrl + "generate-qr", { value, pizelSize: 20 });
+  generateQR(value: string): Observable<GenerateQrResponse> {
+    return this.api.post<GenerateQrResponse>(this.apiUrl + "generate-qr", {
+      value,
+      pizelSize: 20,
+    });
   }
 }

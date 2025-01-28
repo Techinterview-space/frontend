@@ -94,8 +94,16 @@ export class AdminNavbarComponent {
         title: "Инструменты",
         links: [
           {
-            title: "Хз как назвать",
-            url: "/admin/background-jobs",
+            title: "Общее",
+            url: "/admin/tools/background-jobs",
+          },
+          {
+            title: "Курсы валют",
+            url: "/admin/tools/currencies",
+          },
+          {
+            title: "QR код",
+            url: "/admin/tools/generate-qr",
           },
         ],
       },
