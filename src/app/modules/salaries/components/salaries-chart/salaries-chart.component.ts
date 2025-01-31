@@ -122,7 +122,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     }
 
     this.cookieService.set("url", this.router.url);
-    this.authService.login();
+    this.authService.login().pipe(untilDestroyed(this)).subscribe();
   }
 
   openEditSalaryAction(): void {

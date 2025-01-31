@@ -101,7 +101,7 @@ export class InterviewsHomeComponent implements OnInit, OnDestroy {
   getStarted(): void {
     if (this.currentUser == null) {
       this.spinner.showTimer();
-      this.authService.login().then();
+      this.authService.login().pipe(untilDestroyed(this)).subscribe();
       return;
     }
 

@@ -174,7 +174,7 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     }
 
     this.cookieService.set("url", this.router.url);
-    this.authService.login();
+    this.authService.login().pipe(untilDestroyed(this)).subscribe();
   }
 
   closeSurveyBlock(): void {}

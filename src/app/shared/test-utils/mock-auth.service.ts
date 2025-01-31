@@ -41,8 +41,8 @@ export class MockAuthService implements IAuthService {
     );
   }
 
-  login(): Promise<void> {
-    return Promise.resolve();
+  login(): Observable<void> {
+    return of();
   }
 
   signout(): void {

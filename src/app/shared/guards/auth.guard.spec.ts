@@ -8,6 +8,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { SpinnerService } from "@shared/services/spinners/spinner-service";
 import { testUtilStubs, mostUsedServices } from "@shared/test-utils";
 import { CookieService } from "ngx-cookie-service";
+import { of } from "rxjs";
 
 describe("AuthGuard", () => {
   let authServiceMock: AuthService;
@@ -42,7 +43,7 @@ describe("AuthGuard", () => {
   });
 
   it("should return false for canActivate", () => {
-    spyOn(authServiceMock, "login").and.returnValue(Promise.resolve());
+    spyOn(authServiceMock, "login").and.returnValue(of());
     spyOn(authServiceMock, "isAuthenticated").and.returnValue(false);
     const guard = new AuthGuard(
       TestBed.inject(Router),

@@ -16,7 +16,7 @@ export interface IAuthService {
 
   getCurrentUserFromStorage(): Observable<ApplicationUserExtended | null>;
 
-  login(): Promise<void>;
+  login(): Observable<void>;
 
   completeAuthentication(): Observable<CheckTotpResponse>;
 
@@ -77,10 +77,12 @@ export class AuthService implements IAuthService {
     return of(null);
   }
 
-  async login(): Promise<void> {
+  login(): Observable<void> {
     if (this.applicationUser == null) {
-      await this.oidcManager.login();
+      return this.oidcManager.login();
     }
+
+    return of();
   }
 
   completeAuthentication(): Observable<CheckTotpResponse> {

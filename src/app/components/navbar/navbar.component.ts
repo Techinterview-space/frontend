@@ -142,12 +142,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {}
 
   login(): void {
-    if (!this.loginButtonAvailable) {
-      return;
-    }
-
     this.spinner.showTimer();
-    this.authService.login().then();
+    this.authService.login().pipe(untilDestroyed(this)).subscribe();
   }
 
   logout(): void {

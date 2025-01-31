@@ -19,7 +19,7 @@ class AuthStub extends AuthService {
     );
   }
 
-  override login(): Promise<void> {
+  override login(): Observable<void> {
     throw new Error("Method not implemented.");
   }
 
