@@ -118,7 +118,9 @@ class ChartDatasetItem {
   readonly mean: number;
 
   constructor(salaries: Array<UserSalary>) {
-    if (salaries.length === 0) {
+
+    const itemsForChart = new PercentileCollection(salaries).getValues();
+    if (itemsForChart.length === 0) {
       this.min = 0;
       this.max = 0;
       this.median = 0;
@@ -128,8 +130,6 @@ class ChartDatasetItem {
       this.items = [];
       return;
     }
-
-    const itemsForChart = new PercentileCollection(salaries).getValues();
 
     this.min = itemsForChart[0].value;
     this.max = itemsForChart[itemsForChart.length - 1].value;
