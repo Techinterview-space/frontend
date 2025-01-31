@@ -2,38 +2,14 @@
   <div class="h5 mb-3">{{ title }}</div>
 
   <div class="row">
-    <div class="col-md-3">
-      <div
-        class="text-muted mb-1 d-flex justify-content-between align-items-center"
-      >
-        <span>Кликабельно <i class="bi bi-caret-down-fill"></i></span>
-        <span>Кол-во анкет</span>
-      </div>
-
-      <ul *ngIf="salaries" class="list-group list-group-flush">
-        <button
-          *ngFor="let item of salaries"
-          (click)="toggleBarDatasetByProfession(item)"
-          type="button"
-          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-        >
-          <span class="{{ item.turnedOn ? 'fw-bolder' : '' }}">
-            {{ item.professionName }}
-          </span>
-          <span
-            class="badge bg-{{
-              item.turnedOn ? 'primary' : 'secondary'
-            }} rounded-pill"
-            >{{ item.items.length }}</span
-          >
-        </button>
-      </ul>
-    </div>
-
-    <div class="col-md-9" *ngIf="canvasId">
+    <div class="" *ngIf="canvasId">
       <div id="canvas-container">
         <canvas [attr.id]="canvasId">{{ chartDataLocal }}</canvas>
       </div>
+    </div>
+    <div class="small text-muted fst-italic">
+      Для графика использованы 90% анкет. Первые 5% и последние 5% не
+      учитываются.
     </div>
   </div>
 </div>

@@ -38,7 +38,6 @@ export class StubSalariesChart extends SalariesChart {
           items: StubSalariesChart.salaryLabels.map((x) =>
             StubSalariesChart.getRandomNumber(100, 25)
           ),
-          itemsByProfession: [],
           labels: StubSalariesChart.salaryLabels,
         },
         salariesByMoneyBarChartForRemote: null,

@@ -87,15 +87,9 @@ export interface PeopleByGradesChartData {
   }>;
 }
 
-export interface SalariesByProfessionMoneyBarChartItem {
-  profession: number;
-  items: Array<number>;
-}
-
 export interface SalariesByMoneyBarChart {
   labels: string[];
   items: Array<number>;
-  itemsByProfession: Array<SalariesByProfessionMoneyBarChartItem>;
 }
 
 export interface CreateSalaryRecordResponse {
