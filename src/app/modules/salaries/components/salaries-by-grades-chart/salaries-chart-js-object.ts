@@ -17,10 +17,7 @@ interface ChartDatasetType {
 export class SalariesChartJsObject extends Chart {
   private readonly datasets: Array<ChartDatasetType> = [];
 
-  constructor(
-    canvasId: string,
-    chartData: SalariesByMoneyBarChart
-  ) {
+  constructor(canvasId: string, chartData: SalariesByMoneyBarChart) {
     const randomColor = new RandomRgbColor();
     const datasets: Array<ChartDatasetType> = [];
 

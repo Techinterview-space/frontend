@@ -16,9 +16,6 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
   @Input()
   title: string | null = null;
 
-  @Input()
-  salaries: Array<SalariesPerProfession> | null = null;
-
   chartDataLocal: SalariesChartJsObject | null = null;
 
   readonly canvasId = "canvas_" + Math.random().toString(36);
@@ -38,14 +35,11 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
   }
 
   private initChart(): void {
-    if (this.chart == null || this.salaries == null) {
+    if (this.chart == null) {
       return;
     }
 
-    this.chartDataLocal = new SalariesChartJsObject(
-      this.canvasId,
-      this.chart
-    );
+    this.chartDataLocal = new SalariesChartJsObject(this.canvasId, this.chart);
 
     var chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
