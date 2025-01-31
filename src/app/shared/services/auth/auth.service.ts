@@ -78,11 +78,15 @@ export class AuthService implements IAuthService {
   }
 
   login(): Observable<void> {
-    if (this.applicationUser == null) {
-      return this.oidcManager.login();
-    }
+    return this.getCurrentUserFromStorage().pipe(
+      switchMap((x) => {
+        if (x == null) {
+          return this.oidcManager.login();
+        }
 
-    return of();
+        return of();
+      })
+    );
   }
 
   completeAuthentication(): Observable<CheckTotpResponse> {
@@ -94,16 +98,6 @@ export class AuthService implements IAuthService {
         return this.authorizationService
           .checkTotpRequired()
           .pipe(map((r) => r));
-      })
-    );
-  }
-
-  private reloadInternalProperties(): Observable<ApplicationUser> {
-    this.session.auth = this.authorizationInfo ?? null;
-    return this.authorizationService.getMe().pipe(
-      map((appUser) => {
-        this.saveCurrentUser(appUser);
-        return appUser;
       })
     );
   }

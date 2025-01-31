@@ -28,10 +28,6 @@ export class SalariesPerProfession {
     for (let index = 0; index < salaries.length; index++) {
       const salary = salaries[index];
       if (salary.company == CompanyType.Local) {
-        if (salary.professionId == null) {
-          console.error("Profession is null", salary);
-        }
-
         localSalaries.push(salary);
       } else {
         remoteSalaries.push(salary);

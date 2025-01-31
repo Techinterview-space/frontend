@@ -27,7 +27,7 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
     private readonly totpService: TotpService
   ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     // TODO Maxim: check for implementation. What should we do if no error exists?
     // check for error
     if (
@@ -37,7 +37,7 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
       this.showErrorBlock = true;
       this.showMfaBlock = false;
       this.showInfoblock = false;
-      return Promise.resolve();
+      return;
     }
 
     this.authService
