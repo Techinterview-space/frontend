@@ -19,26 +19,10 @@ export class SalariesChartJsObject extends Chart {
 
   constructor(
     canvasId: string,
-    chartData: SalariesByMoneyBarChart,
-    professions: Array<LabelEntityDto>
+    chartData: SalariesByMoneyBarChart
   ) {
     const randomColor = new RandomRgbColor();
     const datasets: Array<ChartDatasetType> = [];
-
-    chartData.itemsByProfession.forEach((x, i) => {
-      const color = new RandomRgbColor();
-      datasets.push({
-        profession: x.profession,
-        label:
-          professions.find((p) => p.id == x.profession)?.title ?? "Unknown",
-        data: x.items,
-        borderWidth: 2,
-        borderColor: color.toString(1),
-        backgroundColor: color.toString(0.7),
-        type: "line" as ChartType,
-        pointStyle: false as PointStyle,
-      });
-    });
 
     datasets.push({
       profession: null,
@@ -91,17 +75,6 @@ export class SalariesChartJsObject extends Chart {
     });
 
     this.datasets = datasets;
-  }
-
-  hideProfessionDatasets(): void {
-    for (let index = 0; index < this.datasets.length; index++) {
-      const dataset = this.datasets[index];
-      if (dataset.profession != null) {
-        this.setDatasetVisibility(index, false);
-      }
-    }
-
-    this.update();
   }
 
   toggleDatasetByProfession(professionId: number | null): void {

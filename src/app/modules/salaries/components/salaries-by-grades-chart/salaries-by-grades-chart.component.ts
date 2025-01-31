@@ -19,9 +19,6 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
   @Input()
   salaries: Array<SalariesPerProfession> | null = null;
 
-  @Input()
-  professions: Array<LabelEntityDto> = [];
-
   chartDataLocal: SalariesChartJsObject | null = null;
 
   readonly canvasId = "canvas_" + Math.random().toString(36);
@@ -40,11 +37,6 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
     // ignored
   }
 
-  toggleBarDatasetByProfession(item: SalariesPerProfession): void {
-    item.toggle();
-    this.chartDataLocal?.toggleDatasetByProfession(item.profession);
-  }
-
   private initChart(): void {
     if (this.chart == null || this.salaries == null) {
       return;
@@ -52,11 +44,8 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
 
     this.chartDataLocal = new SalariesChartJsObject(
       this.canvasId,
-      this.chart,
-      this.professions
+      this.chart
     );
-
-    this.chartDataLocal.hideProfessionDatasets();
 
     var chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
