@@ -56,18 +56,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private setupSubscribers(): void {
     this.authService.loggedOutInvoked$
-      .pipe(untilDestroyed(this))
       .subscribe(() => {
         this.currentUser = null;
         this.renderNavbar();
       });
 
-    this.authService.loggedOut$.pipe(untilDestroyed(this)).subscribe(() => {
+    this.authService.loggedOut$.subscribe(() => {
       this.currentUser = null;
       this.renderNavbar();
     });
 
-    this.authService.loggedIn$.pipe(untilDestroyed(this)).subscribe((user) => {
+    this.authService.loggedIn$.subscribe((user) => {
       this.currentUser = user;
       this.renderNavbar();
     });
