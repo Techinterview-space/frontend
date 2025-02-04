@@ -392,6 +392,10 @@
       </div>
 
       <div class="mt-5 mb-5">
+        <app-salaries-by-city-chart [chart]="salariesChart" />
+      </div>
+
+      <div class="mt-5 mb-5">
         <app-people-by-gender-chart
           [salaries]="salariesChart.salaries"
           (editSalaryActionClick)="openEditSalaryAction()"

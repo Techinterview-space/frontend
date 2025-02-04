@@ -118,7 +118,6 @@ class ChartDatasetItem {
   readonly mean: number;
 
   constructor(salaries: Array<UserSalary>) {
-
     const itemsForChart = new PercentileCollection(salaries).getValues();
     if (itemsForChart.length === 0) {
       this.min = 0;

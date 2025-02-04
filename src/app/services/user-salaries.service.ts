@@ -77,7 +77,17 @@ export interface SalariesChartResponse {
   salariesByUserAgeChartForLocalSalaries: SalariesByAgeOrExperienceChart | null;
   salariesByUserAgeChartForRemoteSalaries: SalariesByAgeOrExperienceChart | null;
 
+  salariesByCityChartForLocal: SalariesByCityChart | null;
+  salariesByCityChartForRemote: SalariesByCityChart | null;
+
   currencies: CurrencyData[];
+}
+
+export interface SalariesByCityChart {
+  labels: Array<string>;
+  itemsCount: Array<number>;
+  medianSalaries: Array<number>;
+  averageSalaries: Array<number>;
 }
 
 export interface SalariesByAgeOrExperienceChart {

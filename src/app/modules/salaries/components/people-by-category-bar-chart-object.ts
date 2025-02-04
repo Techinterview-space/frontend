@@ -29,26 +29,27 @@ export class PeopleByCategoryBarChartObject extends Chart {
     super(canvasId, {
       type: "bar",
       data: {
-        labels: source.labels.map((x, i) => {
-          if (source.data[i] === 0) {
-            return null;
-          }
+        labels: source.labels
+          .map((x, i) => {
+            if (source.data[i] === 0) {
+              return null;
+            }
 
-          if (i === 0) {
-            return `< ${x.end}`;
-          }
+            if (i === 0) {
+              return `< ${x.end}`;
+            }
 
-          if (i === source.labels.length - 1) {
-            return `> ${x.start}`;
-          }
+            if (i === source.labels.length - 1) {
+              return `> ${x.start}`;
+            }
 
-          if (x.end - x.start === 1) {
-            return `до ${x.end}`;
-          }
+            if (x.end - x.start === 1) {
+              return `до ${x.end}`;
+            }
 
-          return `${x.start}-${x.end}`;
-        })
-        .filter((x) => x != null),
+            return `${x.start}-${x.end}`;
+          })
+          .filter((x) => x != null),
         datasets: datasets,
       },
       options: {

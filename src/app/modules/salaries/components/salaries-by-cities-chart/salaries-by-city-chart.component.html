@@ -1,14 +1,13 @@
 <div class="">
-  <div class="h4 mb-3">Зарплаты по возрасту респондента</div>
+  <div class="h4 mb-3">Зарплаты по городам</div>
 
   <div class="fst-italic">
-    График показывает медиану и среднюю зарплату по возрастной группе
-    респондентов
+    График показывает медиану и среднюю зарплату с разбивкой по городам
   </div>
 
-  <div class="mt-5">
+  <div class="mt-3">
     <div class="h5">Казахстанские компании</div>
-    <div class="" *ngIf="canvasIdLocal">
+    <div class="" *ngIf="canvasIdLocal; else noData">
       <div id="canvas-container">
         <canvas [attr.id]="canvasIdLocal">{{ chartDataLocal }}</canvas>
       </div>
@@ -17,10 +16,14 @@
 
   <div class="mt-5">
     <div class="h5">Зарплаты на валютной удаленке</div>
-    <div class="" *ngIf="canvasIdRemote">
+    <div class="" *ngIf="canvasIdRemote; else noData">
       <div id="canvas-container">
         <canvas [attr.id]="canvasIdRemote">{{ chartDataRemote }}</canvas>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #noData>
+  <div class="alert alert-warning">Данных пока нет</div>
+</ng-template>

@@ -10,7 +10,6 @@ import { SalariesByAgeOrExperienceChart } from "@services/user-salaries.service"
   styleUrl: "./salaries-by-experience-chart.component.scss",
 })
 export class SalariesByExperienceChartComponent {
-
   @Input()
   chart: SalariesChart | null = null;
 
@@ -31,14 +30,22 @@ export class SalariesByExperienceChartComponent {
       return;
     }
 
-    if (this.chart.salariesByExperienceChartForLocalSalaries != null && this.chart.salariesByExperienceChartForLocalSalaries.medianSalaries.length > 0) {
+    if (
+      this.chart.salariesByExperienceChartForLocalSalaries != null &&
+      this.chart.salariesByExperienceChartForLocalSalaries.medianSalaries
+        .length > 0
+    ) {
       this.chartDataLocal = this.initChartWithParams(
         this.canvasIdLocal,
         this.chart.salariesByExperienceChartForLocalSalaries
       );
     }
 
-    if (this.chart.salariesByExperienceChartForRemoteSalaries != null && this.chart.salariesByExperienceChartForRemoteSalaries.medianSalaries.length > 0) {
+    if (
+      this.chart.salariesByExperienceChartForRemoteSalaries != null &&
+      this.chart.salariesByExperienceChartForRemoteSalaries.medianSalaries
+        .length > 0
+    ) {
       this.chartDataLocal = this.initChartWithParams(
         this.canvasIdRemote,
         this.chart.salariesByExperienceChartForRemoteSalaries
@@ -48,11 +55,9 @@ export class SalariesByExperienceChartComponent {
 
   private initChartWithParams(
     canvasId: string,
-    data: SalariesByAgeOrExperienceChart): SalariesByAgeOrExperienceChartObject {
-
-    const chart = new SalariesByAgeOrExperienceChartObject(
-      canvasId,
-      data);
+    data: SalariesByAgeOrExperienceChart
+  ): SalariesByAgeOrExperienceChartObject {
+    const chart = new SalariesByAgeOrExperienceChartObject(canvasId, data);
 
     var chartEl = document.getElementById(canvasId);
     if (chartEl != null && chartEl.parentElement != null) {

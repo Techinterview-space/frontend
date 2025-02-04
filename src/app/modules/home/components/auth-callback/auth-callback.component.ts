@@ -70,7 +70,7 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
         this.showInfoblock = true;
         this.totpCodeSent = true;
 
-        this.authService.getCurrentUser().subscribe((user) => {
+        this.authService.getCurrentUserFromBackend().subscribe((user) => {
           this.redirectToMainPageOrUrl();
         });
       }

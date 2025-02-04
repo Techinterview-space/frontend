@@ -14,6 +14,8 @@ import { IdToken, User } from "@auth0/auth0-angular";
 export interface IAuthService {
   getCurrentUser(): Observable<ApplicationUserExtended | null>;
 
+  getCurrentUserFromBackend(): Observable<ApplicationUserExtended | null>;
+
   getCurrentUserFromStorage(): Observable<ApplicationUserExtended | null>;
 
   login(): Observable<void>;
@@ -55,6 +57,10 @@ export class AuthService implements IAuthService {
       return of(this.applicationUser);
     }
 
+    return this.getCurrentUserFromBackend();
+  }
+
+  getCurrentUserFromBackend(): Observable<ApplicationUserExtended | null> {
     return this.authorizationService.getMe().pipe(
       map((appUser) => {
         this.saveCurrentUser(appUser);
