@@ -407,10 +407,22 @@
       </div>
 
       <div class="mt-5 mb-5">
+        <app-salaries-by-age-chart
+          [chart]="salariesChart"
+        ></app-salaries-by-age-chart>
+      </div>
+
+      <div class="mt-5 mb-5">
         <app-people-by-experience-chart
           [source]="salariesChart"
           (editSalaryActionClick)="openEditSalaryAction()"
         ></app-people-by-experience-chart>
+      </div>
+
+      <div class="mt-5 mb-5">
+        <app-salaries-by-experience-chart
+          [chart]="salariesChart"
+        ></app-salaries-by-experience-chart>
       </div>
     </div>
   </div>

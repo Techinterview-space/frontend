@@ -2,6 +2,7 @@ import { formatNumber } from "@angular/common";
 import {
   DevelopersByCategoryChartData,
   PeopleByGradesChartData,
+  SalariesByAgeOrExperienceChart,
   SalariesByGrade,
   SalariesByMoneyBarChart,
   SalariesChartResponse,
@@ -76,6 +77,26 @@ export class SalariesChart implements SalariesChartResponse {
     return this._currentUserSalary;
   }
 
+  private _salariesByExperienceChartForLocalSalaries: SalariesByAgeOrExperienceChart | null = null;
+  get salariesByExperienceChartForLocalSalaries(): SalariesByAgeOrExperienceChart | null {
+    return this._salariesByExperienceChartForLocalSalaries;
+  }
+
+  private _salariesByExperienceChartForRemoteSalaries: SalariesByAgeOrExperienceChart | null = null;
+  get salariesByExperienceChartForRemoteSalaries(): SalariesByAgeOrExperienceChart | null {
+    return this._salariesByExperienceChartForRemoteSalaries;
+  }
+
+  private _salariesByUserAgeChartForLocalSalaries: SalariesByAgeOrExperienceChart | null = null;
+  get salariesByUserAgeChartForLocalSalaries(): SalariesByAgeOrExperienceChart | null{
+    return this._salariesByUserAgeChartForLocalSalaries;
+  }
+
+  private _salariesByUserAgeChartForRemoteSalaries: SalariesByAgeOrExperienceChart | null = null;
+  get salariesByUserAgeChartForRemoteSalaries(): SalariesByAgeOrExperienceChart | null {
+    return this._salariesByUserAgeChartForRemoteSalaries;
+  }
+
   readonly countOfRecords: number;
 
   readonly peopleByGradesChartDataForLocal: PeopleByGradesChartData | null;
@@ -127,8 +148,15 @@ export class SalariesChart implements SalariesChartResponse {
     this.peopleByGradesChartDataForRemote =
       data.peopleByGradesChartDataForRemote;
 
+    this._salariesByExperienceChartForLocalSalaries = data.salariesByExperienceChartForLocalSalaries;
+    this._salariesByExperienceChartForRemoteSalaries = data.salariesByExperienceChartForRemoteSalaries;
+    this._salariesByUserAgeChartForLocalSalaries = data.salariesByUserAgeChartForLocalSalaries;
+    this._salariesByUserAgeChartForRemoteSalaries = data.salariesByUserAgeChartForRemoteSalaries;
+
     this.recalculateData(data, allProfessions, this.currentCurrency);
   }
+
+  
 
   public setCurrentCurrency(currencyType: CurrencyType): void {
     this.currentCurrency =

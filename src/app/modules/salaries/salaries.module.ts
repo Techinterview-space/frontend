@@ -31,6 +31,8 @@ import { HistoricalChartsPageComponent } from "./components/historical-charts-pa
 import { HistoricalSalariesChartComponent } from "./components/historical-charts-page/historical-salaries-chart/historical-charts-page.component";
 import { HistoricalSalariesByGradeChartComponent } from "./components/historical-charts-page/historical-salaries-by-grade-chart/historical-salaries-by-grade-chart.component";
 import { HistoricalSurveyChartComponent } from "./components/historical-charts-page/historical-survey-chart/historical-survey-chart.component";
+import { SalariesByAgeChartComponent } from "./components/salaries-by-age-chart/salaries-by-age-chart.component";
+import { SalariesByExperienceChartComponent } from "./components/salaries-by-experience-chart/salaries-by-experience-chart.component";
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { HistoricalSurveyChartComponent } from "./components/historical-charts-p
     HistoricalSalariesChartComponent,
     HistoricalSalariesByGradeChartComponent,
     HistoricalSurveyChartComponent,
+    SalariesByAgeChartComponent,
+    SalariesByExperienceChartComponent,
   ],
   imports: [
     CommonModule,

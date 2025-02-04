@@ -71,7 +71,20 @@ export interface SalariesChartResponse {
   developersByAgeChartData: DevelopersByCategoryChartData | null;
   developersByExperienceYearsChartData: DevelopersByCategoryChartData | null;
 
+  salariesByExperienceChartForLocalSalaries: SalariesByAgeOrExperienceChart | null;
+  salariesByExperienceChartForRemoteSalaries: SalariesByAgeOrExperienceChart | null;
+
+  salariesByUserAgeChartForLocalSalaries: SalariesByAgeOrExperienceChart | null;
+  salariesByUserAgeChartForRemoteSalaries: SalariesByAgeOrExperienceChart | null;
+
   currencies: CurrencyData[];
+}
+
+export interface SalariesByAgeOrExperienceChart {
+  labels: Array<{ start: number; end: number }>;
+  medianSalaries: Array<number>;
+  averageSalaries: Array<number>;
+  itemsCount: Array<number>;
 }
 
 export interface DevelopersByCategoryChartData {

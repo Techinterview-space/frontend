@@ -30,6 +30,10 @@ export class PeopleByCategoryBarChartObject extends Chart {
       type: "bar",
       data: {
         labels: source.labels.map((x, i) => {
+          if (source.data[i] === 0) {
+            return null;
+          }
+
           if (i === 0) {
             return `< ${x.end}`;
           }
@@ -43,7 +47,8 @@ export class PeopleByCategoryBarChartObject extends Chart {
           }
 
           return `${x.start}-${x.end}`;
-        }),
+        })
+        .filter((x) => x != null),
         datasets: datasets,
       },
       options: {

@@ -1,0 +1,26 @@
+<div class="">
+  <div class="h4 mb-3">Зарплаты по возрасту респондента</div>
+
+  <div class="fst-italic">
+    График показывает медиану и среднюю зарплату по возрастной группе респондентов
+  </div>
+
+  <div class="mt-5">
+    <div class="h5">Казахстанские компании</div>
+    <div class="" *ngIf="canvasIdLocal">
+      <div id="canvas-container">
+        <canvas [attr.id]="canvasIdLocal">{{ chartDataLocal }}</canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <div class="h5">Зарплаты на валютной удаленке</div>
+    <div class="" *ngIf="canvasIdRemote">
+      <div id="canvas-container">
+        <canvas [attr.id]="canvasIdRemote">{{ chartDataRemote }}</canvas>
+      </div>
+    </div>
+  </div>
+
+</div>

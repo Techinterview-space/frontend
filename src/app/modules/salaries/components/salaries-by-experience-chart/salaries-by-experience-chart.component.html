@@ -1,0 +1,22 @@
+<div class="">
+  <div class="h4 mb-3">Зарплаты по опыту работы респондента</div>
+
+  <div class="fst-italic">
+    График показывает медиану и среднюю зарплату по опыту работы респондентов (сгруппировано по годам)
+  </div>
+
+  <div class="mt-5" *ngIf="canvasIdLocal">
+    <div class="h5">Казахстанские компании</div>
+    <div id="canvas-container">
+      <canvas [attr.id]="canvasIdLocal">{{ chartDataLocal }}</canvas>
+    </div>
+  </div>
+
+  <div class="mt-5" *ngIf="canvasIdRemote">
+    <div class="h5">Зарплаты на валютной удаленке</div>
+    <div id="canvas-container">
+      <canvas [attr.id]="canvasIdRemote">{{ chartDataRemote }}</canvas>
+    </div>
+  </div>
+
+</div>

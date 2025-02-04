@@ -49,6 +49,10 @@ export class StubSalariesChart extends SalariesChart {
         developersByExperienceYearsChartData: null,
         hasAuthentication: false,
         currencies: [],
+        salariesByUserAgeChartForLocalSalaries: null,
+        salariesByUserAgeChartForRemoteSalaries: null,
+        salariesByExperienceChartForLocalSalaries: null,
+        salariesByExperienceChartForRemoteSalaries: null,
       },
       []
     );
