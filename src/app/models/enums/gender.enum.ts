@@ -43,4 +43,23 @@ export class GenderEnum {
         return new SplittedByWhitespacesString(Gender[item]).value;
     }
   }
+
+  static labelPlural(item: Gender): string {
+    switch (item) {
+      case Gender.Female:
+        return "Женщины";
+
+      case Gender.Male:
+        return "Мужчины";
+
+      case Gender.PreferNotToSay:
+        return "Предпочту не указывать";
+
+      case Gender.Other:
+        return "Другое";
+
+      default:
+        return new SplittedByWhitespacesString(Gender[item]).value;
+    }
+  }
 }

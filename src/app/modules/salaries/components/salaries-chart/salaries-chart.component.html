@@ -404,6 +404,10 @@
       </div>
 
       <div class="mt-5 mb-5">
+        <app-salaries-by-gender-chart [chart]="salariesChart" />
+      </div>
+
+      <div class="mt-5 mb-5">
         <app-people-by-age-chart
           [source]="salariesChart"
           (editSalaryActionClick)="openEditSalaryAction()"
