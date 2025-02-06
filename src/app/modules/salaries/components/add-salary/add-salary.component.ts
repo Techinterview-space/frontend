@@ -88,6 +88,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
         };
       });
 
+    console.log("asdasd");
     this.addSalaryForm = new AddSalaryForm(null, this.industries.length > 0);
   }
 

@@ -18,7 +18,6 @@ interface TableRow {
   styleUrl: "./people-by-gender-chart.component.scss",
 })
 export class PeopleByGenderChartComponent implements OnInit {
-
   @Input()
   chartData: SalariesChart | null = null;
 
@@ -43,7 +42,6 @@ export class PeopleByGenderChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-
     if (this.chartData == null) {
       return;
     }
@@ -62,13 +60,15 @@ export class PeopleByGenderChartComponent implements OnInit {
     if (localSararies.length > 0) {
       this.totalCountLocal = localSararies.length;
       this.barsForLocal = this.prepareData(localSararies);
-      this.salariesByGenderChartForLocal = this.chartData.salariesByGenderChartForLocal;
+      this.salariesByGenderChartForLocal =
+        this.chartData.salariesByGenderChartForLocal;
     }
 
     if (remoteSararies.length > 0) {
       this.totalCountRemote = remoteSararies.length;
       this.barsForRemote = this.prepareData(remoteSararies);
-      this.salariesByGenderChartForRemote = this.chartData.salariesByGenderChartForRemote;
+      this.salariesByGenderChartForRemote =
+        this.chartData.salariesByGenderChartForRemote;
     }
   }
 

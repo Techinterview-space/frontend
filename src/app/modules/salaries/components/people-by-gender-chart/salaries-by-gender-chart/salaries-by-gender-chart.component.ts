@@ -27,10 +27,7 @@ export class SalariesByGenderChartComponent {
       return;
     }
 
-    this.chartData = this.initChartWithParams(
-      this.canvasId,
-      this.source
-    );
+    this.chartData = this.initChartWithParams(this.canvasId, this.source);
   }
 
   private initChartWithParams(
