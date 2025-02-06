@@ -34,6 +34,7 @@ import { HistoricalSurveyChartComponent } from "./components/historical-charts-p
 import { SalariesByAgeChartComponent } from "./components/salaries-by-age-chart/salaries-by-age-chart.component";
 import { SalariesByExperienceChartComponent } from "./components/salaries-by-experience-chart/salaries-by-experience-chart.component";
 import { SalariesByCityChartComponent } from "./components/salaries-by-cities-chart/salaries-by-city-chart.component";
+import { SalariesByGenderChartComponent } from "./components/people-by-gender-chart/salaries-by-gender-chart/salaries-by-gender-chart.component";
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { SalariesByCityChartComponent } from "./components/salaries-by-cities-ch
     SalariesByAgeChartComponent,
     SalariesByExperienceChartComponent,
     SalariesByCityChartComponent,
+    SalariesByGenderChartComponent,
   ],
   imports: [
     CommonModule,

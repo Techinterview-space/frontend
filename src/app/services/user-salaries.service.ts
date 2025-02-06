@@ -80,7 +80,21 @@ export interface SalariesChartResponse {
   salariesByCityChartForLocal: SalariesByCityChart | null;
   salariesByCityChartForRemote: SalariesByCityChart | null;
 
+  salariesByGenderChartForLocal: SalariesByGenderChart | null;
+  salariesByGenderChartForRemote: SalariesByGenderChart | null;
+
   currencies: CurrencyData[];
+}
+
+export interface SalariesByGenderChart {
+  labels: Array<string>;
+  datasetByGender: Array<SalariesByGenderChartGenderItem>;
+}
+
+export interface SalariesByGenderChartGenderItem {
+  gender: Gender;
+  averageSalaries: number[];
+  medianSalaries: number[];
 }
 
 export interface SalariesByCityChart {

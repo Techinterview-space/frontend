@@ -4,6 +4,7 @@ import {
   PeopleByGradesChartData,
   SalariesByAgeOrExperienceChart,
   SalariesByCityChart,
+  SalariesByGenderChart,
   SalariesByGrade,
   SalariesByMoneyBarChart,
   SalariesChartResponse,
@@ -112,6 +113,16 @@ export class SalariesChart implements SalariesChartResponse {
     return this._salariesByCityChartForRemote;
   }
 
+  private _salariesByGenderChartForLocal: SalariesByGenderChart | null = null;
+  get salariesByGenderChartForLocal(): SalariesByGenderChart | null {
+    return this._salariesByGenderChartForLocal;
+  }
+
+  private _salariesByGenderChartForRemote: SalariesByGenderChart | null = null;
+  get salariesByGenderChartForRemote(): SalariesByGenderChart | null {
+    return this._salariesByGenderChartForRemote;
+  }
+
   readonly countOfRecords: number;
 
   readonly peopleByGradesChartDataForLocal: PeopleByGradesChartData | null;
@@ -174,6 +185,9 @@ export class SalariesChart implements SalariesChartResponse {
 
     this._salariesByCityChartForLocal = data.salariesByCityChartForLocal;
     this._salariesByCityChartForRemote = data.salariesByCityChartForRemote;
+
+    this._salariesByGenderChartForLocal = data.salariesByGenderChartForLocal;
+    this._salariesByGenderChartForRemote = data.salariesByGenderChartForRemote;
 
     this.recalculateData(data, allProfessions, this.currentCurrency);
   }

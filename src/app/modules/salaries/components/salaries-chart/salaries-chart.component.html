@@ -319,7 +319,7 @@
         </div>
       </div>
 
-      <div class="mt-5 mb-5" *ngIf="salariesChart.hasRemoteSalaries">
+      <div class="mt-10 mb-5" *ngIf="salariesChart.hasRemoteSalaries">
         <div class="h4">Зарплаты валютных удаленщиков</div>
         <div class="mt-3">
           <app-salaries-by-grade-block
@@ -334,24 +334,24 @@
         </div>
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-grades-min-max-chart [source]="salariesChart">
         </app-grades-min-max-chart>
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-people-distribution-chart
           [chart]="salariesChart"
         ></app-people-distribution-chart>
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-people-by-grades-chart
           [source]="salariesChart"
         ></app-people-by-grades-chart>
       </div>
 
-      <div class="mt-5 mb-5" *ngIf="skills.length > 0">
+      <div class="mt-10 mb-5" *ngIf="skills.length > 0">
         <app-salaries-skills-chart
           [skills]="skills"
           [currentSalary]="salariesChart.currentUserSalary"
@@ -361,7 +361,7 @@
         </app-salaries-skills-chart>
       </div>
 
-      <div class="mt-3 mb-5" *ngIf="industries.length > 0">
+      <div class="mt-10 mb-5" *ngIf="industries.length > 0">
         <app-work-industries-chart
           [industries]="industries"
           [currentSalary]="salariesChart.currentUserSalary"
@@ -391,39 +391,38 @@
         </app-cities-doughnut-chart>
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-salaries-by-city-chart [chart]="salariesChart" />
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-people-by-gender-chart
-          [salaries]="salariesChart.salaries"
+          [chartData]="salariesChart"
           (editSalaryActionClick)="openEditSalaryAction()"
-          [currentSalary]="salariesChart.currentUserSalary"
-        ></app-people-by-gender-chart>
+        />
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-people-by-age-chart
           [source]="salariesChart"
           (editSalaryActionClick)="openEditSalaryAction()"
         ></app-people-by-age-chart>
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-salaries-by-age-chart
           [chart]="salariesChart"
         ></app-salaries-by-age-chart>
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-people-by-experience-chart
           [source]="salariesChart"
           (editSalaryActionClick)="openEditSalaryAction()"
         ></app-people-by-experience-chart>
       </div>
 
-      <div class="mt-5 mb-5">
+      <div class="mt-10 mb-5">
         <app-salaries-by-experience-chart
           [chart]="salariesChart"
         ></app-salaries-by-experience-chart>
