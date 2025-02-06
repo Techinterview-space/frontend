@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Gender, GenderEnum } from "@models/enums/gender.enum";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { CompanyType } from "@models/salaries/company-type";
+import { SalariesByGenderChart } from "@services/user-salaries.service";
+import { SalariesChart } from "../salaries-chart/salaries-chart";
 
 interface TableRow {
   value: number;
@@ -17,14 +19,12 @@ interface TableRow {
 })
 export class PeopleByGenderChartComponent implements OnInit {
   @Input()
-  salaries: Array<UserSalary> = [];
-
-  @Input()
-  currentSalary: UserSalaryAdminDto | null = null;
+  chartData: SalariesChart | null = null;
 
   @Output()
   editSalaryActionClick = new EventEmitter<void>();
 
+  currentSalary: UserSalaryAdminDto | null = null;
   barsForLocal: Array<TableRow> = [];
   barsForRemote: Array<TableRow> = [];
 
@@ -33,32 +33,42 @@ export class PeopleByGenderChartComponent implements OnInit {
 
   showPercents = true;
 
+  salariesByGenderChartForLocal: SalariesByGenderChart | null = null;
+  salariesByGenderChartForRemote: SalariesByGenderChart | null = null;
+
   @Input()
   title: string | null = null;
 
   constructor() {}
 
   ngOnInit(): void {
-    if (this.salaries.length === 0) {
+    if (this.chartData == null) {
       return;
     }
 
-    const localSararies = this.salaries.filter(
+    this.currentSalary = this.chartData.currentUserSalary;
+    const salaries = this.chartData.salaries;
+
+    const localSararies = salaries.filter(
       (item) => item.company === CompanyType.Local
     );
 
-    const remoteSararies = this.salaries.filter(
+    const remoteSararies = salaries.filter(
       (item) => item.company === CompanyType.Remote
     );
 
     if (localSararies.length > 0) {
       this.totalCountLocal = localSararies.length;
       this.barsForLocal = this.prepareData(localSararies);
+      this.salariesByGenderChartForLocal =
+        this.chartData.salariesByGenderChartForLocal;
     }
 
     if (remoteSararies.length > 0) {
       this.totalCountRemote = remoteSararies.length;
       this.barsForRemote = this.prepareData(remoteSararies);
+      this.salariesByGenderChartForRemote =
+        this.chartData.salariesByGenderChartForRemote;
     }
   }
 

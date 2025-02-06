@@ -1,7 +1,7 @@
 import { Chart } from "chart.js/auto";
 import { SalariesByGenderChart } from "@services/user-salaries.service";
-import { RandomRgbColor } from "../random-rgb-color";
 import { GenderEnum } from "@models/enums/gender.enum";
+import { RandomRgbColor } from "../../random-rgb-color";
 
 interface ChartDatasetType {
   label: string;
@@ -17,6 +17,7 @@ export class SalariesByGenderChartObject extends Chart {
     canvasId: string,
     private readonly source: SalariesByGenderChart
   ) {
+    console.log(canvasId);
     const datasets = source.datasetByGender.map((x) => {
       const color = new RandomRgbColor();
       return {

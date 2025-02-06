@@ -1,58 +1,89 @@
 <div class="">
   <div class="h4 mb-3">Гендер респондента в таблицах</div>
 
-  <div class="row">
-    <div class="col-md-6 mb-2" *ngIf="barsForLocal.length > 0">
-      <div class="h5 mb-2">Казахстан</div>
-      <div>
-        <table class="table table-hover table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Гендер</th>
-              <th scope="col">Кол-во анкет</th>
-              <th scope="col">Доля</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of barsForLocal" class="small">
-              <td>{{ item.label }}</td>
-              <td>{{ item.value | formatAsMoney : 0 }}</td>
-              <td>{{ item.part | formatAsMoney : 3 }}%</td>
-            </tr>
-            <tr class="small">
-              <td class="text-muted">Всего</td>
-              <td>{{ totalCountLocal | formatAsMoney : 0 }}</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div
+    class="mt-1 fst-italic"
+    *ngIf="
+      currentSalary != null && currentSalary.gender == null;
+      else hasGenderInSalary
+    "
+  >
+    <div class="alert alert-warning p-3">
+      Вы пока не указали ваш пол. Уточнить данные
+      <button
+        type="button"
+        class="btn-link-sm fst-italic font-weight-normal"
+        (click)="openEditSalaryAction()"
+      >
+        можно тут
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-2" *ngIf="barsForLocal.length > 0">
+    <div class="h5 mb-2">Казахстанские компании</div>
+    <div>
+      <table class="table table-hover table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Гендер</th>
+            <th scope="col">Кол-во анкет</th>
+            <th scope="col">Доля</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of barsForLocal" class="small">
+            <td>{{ item.label }}</td>
+            <td>{{ item.value | formatAsMoney : 0 }}</td>
+            <td>{{ item.part | formatAsMoney : 3 }}%</td>
+          </tr>
+          <tr class="small">
+            <td class="text-muted">Всего</td>
+            <td>{{ totalCountLocal | formatAsMoney : 0 }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="col-md-6 mb-2" *ngIf="barsForRemote.length > 0">
-      <div class="h5 mb-2">Удаленка</div>
-      <div>
-        <table class="table table-hover table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Гендер</th>
-              <th scope="col">Кол-во анкет</th>
-              <th scope="col">Доля</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of barsForRemote" class="small">
-              <td>{{ item.label }}</td>
-              <td>{{ item.value }}</td>
-              <td>{{ item.part | number : "1.3" }}%</td>
-            </tr>
-            <tr class="small">
-              <td class="text-muted">Всего</td>
-              <td>{{ totalCountRemote }}</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="mt-2" *ngIf="salariesByGenderChartForLocal != null">
+      <app-salaries-by-gender-chart [source]="salariesByGenderChartForLocal" />
+      <div class="mt-1 fst-italic">
+        График показывает средние зарплаты по гендеру и грейду респондента
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5" *ngIf="barsForRemote.length > 0">
+    <div class="h5 mb-2">Валютная удаленка</div>
+    <div>
+      <table class="table table-hover table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Гендер</th>
+            <th scope="col">Кол-во анкет</th>
+            <th scope="col">Доля</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of barsForRemote" class="small">
+            <td>{{ item.label }}</td>
+            <td>{{ item.value }}</td>
+            <td>{{ item.part | number : "1.3" }}%</td>
+          </tr>
+          <tr class="small">
+            <td class="text-muted">Всего</td>
+            <td>{{ totalCountRemote }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-2" *ngIf="salariesByGenderChartForRemote != null">
+      <app-salaries-by-gender-chart [source]="salariesByGenderChartForRemote" />
+      <div class="mt-1 fst-italic">
+        График показывает средние зарплаты по гендеру и грейду респондента
       </div>
     </div>
   </div>
@@ -64,9 +95,8 @@
       else hasGenderInSalary
     "
   >
-    <div>Вы пока не указали ваш пол.</div>
-    <div>
-      Уточнить данные
+    <div class="alert alert-warning p-3">
+      Вы пока не указали ваш пол. Уточнить данные
       <button
         type="button"
         class="btn-link-sm fst-italic font-weight-normal"

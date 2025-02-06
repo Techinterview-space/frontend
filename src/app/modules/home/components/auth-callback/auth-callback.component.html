@@ -22,6 +22,7 @@
               [(ngModel)]="totpCode"
               placeholder="Введите 6 цифр TOTP"
               class="form-control"
+              (keyup.enter)="validateTotp()"
             />
           </div>
           <div class="mt-3">
