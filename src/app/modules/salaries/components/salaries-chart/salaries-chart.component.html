@@ -397,14 +397,8 @@
 
       <div class="mt-5 mb-5">
         <app-people-by-gender-chart
-          [salaries]="salariesChart.salaries"
-          (editSalaryActionClick)="openEditSalaryAction()"
-          [currentSalary]="salariesChart.currentUserSalary"
-        ></app-people-by-gender-chart>
-      </div>
-
-      <div class="mt-5 mb-5">
-        <app-salaries-by-gender-chart [chart]="salariesChart" />
+          [chartData]="salariesChart"
+          (editSalaryActionClick)="openEditSalaryAction()" />
       </div>
 
       <div class="mt-5 mb-5">
