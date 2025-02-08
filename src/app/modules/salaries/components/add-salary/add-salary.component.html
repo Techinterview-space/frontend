@@ -275,6 +275,45 @@
             </div>
           </div>
 
+          <div class="mb-3">
+            <label>Когда вы начали карьеру? (Год)</label>
+            <input
+              formControlName="yearOfStartingWork"
+              type="text"
+              class="form-control"
+            />
+            <app-field-error
+              [field]="addSalaryForm.get('yearOfStartingWork')"
+              [max]="currentYear"
+              [min]="1960"
+            ></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <label>Ваш пол</label>
+            <select
+              formControlName="gender"
+              class="form-select"
+              aria-label="Ваш пол"
+            >
+              <option [value]="null" selected disabled>Ваш пол</option>
+              <option *ngFor="let option of genders" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+            <app-field-error [field]="addSalaryForm.get('gender')"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <label>Сколько вам полных лет?</label>
+            <input formControlName="age" type="text" class="form-control" />
+            <app-field-error
+              [field]="addSalaryForm.get('age')"
+              [max]="120"
+              [min]="12"
+            ></app-field-error>
+          </div>
+
           <div class="row">
             <div class="col-6">
               <button

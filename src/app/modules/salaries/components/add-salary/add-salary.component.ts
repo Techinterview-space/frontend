@@ -7,7 +7,6 @@ import {
   Output,
 } from "@angular/core";
 import { UserSalariesService } from "@services/user-salaries.service";
-import { AddSalaryForm } from "./add-salary-form";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CompanyTypeSelectItem } from "@shared/select-boxes/company-type-select-item";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
@@ -24,6 +23,7 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { pipe } from "rxjs";
 import { EditSalaryForm } from "./edit-salary-form";
+import { Gender, GenderEnum } from "@models/enums/gender.enum";
 
 @Component({
   templateUrl: "./add-salary.component.html",
@@ -52,6 +52,8 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
     DeveloperGradeSelectItem.gradesSimpleOnly();
   readonly cities: Array<SelectItem<KazakhstanCity>> =
     KazakhstanCityEnum.options();
+  readonly genders: Array<SelectItem<Gender>> = GenderEnum.options();
+  readonly currentYear = new Date().getFullYear();
 
   skillsAsOptions: Array<SelectItem<number>> = [];
   industriesAsOptions: Array<SelectItem<number>> = [];
