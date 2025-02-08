@@ -5,27 +5,35 @@
     <div class="card-body py-5 px-10">
       <div class="mb-5 mt-1">
         <div class="mb-1 text-muted small fst-italic">
-          Для того, чтобы просматривать график зарплат, вам нужно сначала
-          внести свою. График открывается, только если среди данных есть ваша
-          зарплата за последний год.
+          Для того, чтобы просматривать график зарплат, вам нужно сначала внести
+          свою. График открывается, только если среди данных есть ваша зарплата
+          за последний год.
         </div>
         <div class="fst-italic text-muted small">
           Отправляя данные, вы соглашаетесь, что
-          <strong>обезличенная</strong> зарплата будет учтена при рассчетах
-          и составлении графиков. Мы гарантируем, что конфиденциальность
-          ваших данных будет соблюдена.
+          <strong>обезличенная</strong> зарплата будет учтена при рассчетах и
+          составлении графиков. Мы гарантируем, что конфиденциальность ваших
+          данных будет соблюдена.
         </div>
       </div>
-    
+
       <form
         *ngIf="addSalaryForm"
         [formGroup]="addSalaryForm"
         (ngSubmit)="addSalarySubmitAction()"
       >
-
         <div class="" *ngIf="currentStep === 1">
           <div class="mb-3 progress">
-            <div class="progress-bar progress-bar-striped bg-info text-dark" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">1</div>
+            <div
+              class="progress-bar progress-bar-striped bg-info text-dark"
+              role="progressbar"
+              style="width: 33%"
+              aria-valuenow="33"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              1
+            </div>
           </div>
 
           <div class="mb-3">
@@ -45,7 +53,7 @@
               [min]="75000"
             ></app-field-error>
           </div>
-      
+
           <div class="mb-3">
             <div class="row mb-1">
               <div class="col-6">
@@ -61,7 +69,7 @@
                   [min]="1"
                 ></app-field-error>
               </div>
-      
+
               <div class="col-6">
                 <label>Год</label>
                 <input
@@ -76,7 +84,7 @@
                 ></app-field-error>
               </div>
             </div>
-      
+
             <div class="text-muted fst-italic small">
               <div>
                 Квартал и год необходим для того, чтобы в статистике учитывать
@@ -92,7 +100,7 @@
               </div>
             </div>
           </div>
-      
+
           <div class="mb-3">
             <select
               formControlName="company"
@@ -113,7 +121,7 @@
               [field]="addSalaryForm.get('company')"
             ></app-field-error>
           </div>
-      
+
           <div class="mb-3">
             <label class="text-sm">Ваша специализация</label>
             <ng-select
@@ -134,7 +142,11 @@
           <div class="row">
             <div class="col-6"></div>
             <div class="col-6">
-              <button class="btn btn-outline-primary btn-lg w-100 py-3" type="button" (click)="nextStep()">
+              <button
+                class="btn btn-outline-primary btn-lg w-100 py-3"
+                type="button"
+                (click)="nextStep()"
+              >
                 Далее
               </button>
             </div>
@@ -143,7 +155,16 @@
 
         <div class="" *ngIf="currentStep === 2">
           <div class="mb-3 progress">
-            <div class="progress-bar progress-bar-striped bg-info text-dark" role="progressbar" style="width: 66%;" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">2</div>
+            <div
+              class="progress-bar progress-bar-striped bg-info text-dark"
+              role="progressbar"
+              style="width: 66%"
+              aria-valuenow="66"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              2
+            </div>
           </div>
 
           <div class="mb-3">
@@ -162,7 +183,7 @@
               [field]="addSalaryForm.get('grade')"
             ></app-field-error>
           </div>
-      
+
           <div class="mb-3" *ngIf="skillsAsOptions.length > 0">
             <label class="text-sm"
               >Ваш основной фреймворк или язык программирования</label
@@ -181,7 +202,7 @@
               [field]="addSalaryForm.get('skillId')"
             ></app-field-error>
           </div>
-      
+
           <div class="mb-3" *ngIf="industriesAsOptions.length > 0">
             <label class="text-sm">Сфера, где вы работаете</label>
             <ng-select
@@ -198,7 +219,7 @@
               [field]="addSalaryForm.get('workIndustryId')"
             ></app-field-error>
           </div>
-      
+
           <div class="mb-3">
             <div>
               <label class="">В каком городе Казахстана Вы живете?</label>
@@ -220,12 +241,20 @@
 
           <div class="row">
             <div class="col-6">
-              <button class="btn btn-outline-secondary btn-lg w-100 py-3" type="button" (click)="previousStep()">
+              <button
+                class="btn btn-outline-secondary btn-lg w-100 py-3"
+                type="button"
+                (click)="previousStep()"
+              >
                 Назад
               </button>
             </div>
             <div class="col-6">
-              <button class="btn btn-outline-primary btn-lg w-100 py-3" type="button" (click)="nextStep()">
+              <button
+                class="btn btn-outline-primary btn-lg w-100 py-3"
+                type="button"
+                (click)="nextStep()"
+              >
                 Далее
               </button>
             </div>
@@ -234,12 +263,25 @@
 
         <div class="" *ngIf="currentStep === 3">
           <div class="mb-3 progress">
-            <div class="progress-bar progress-bar-striped bg-info text-dark" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">3</div>
+            <div
+              class="progress-bar progress-bar-striped bg-info text-dark"
+              role="progressbar"
+              style="width: 100%"
+              aria-valuenow="100"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              3
+            </div>
           </div>
 
           <div class="row">
             <div class="col-6">
-              <button class="btn btn-outline-secondary btn-lg w-100 py-3" type="button" (click)="previousStep()">
+              <button
+                class="btn btn-outline-secondary btn-lg w-100 py-3"
+                type="button"
+                (click)="previousStep()"
+              >
                 Назад
               </button>
             </div>
@@ -250,7 +292,7 @@
             </div>
           </div>
         </div>
-    
+
         <div *ngIf="errorMessage" class="mb-3 alert alert-danger">
           {{ errorMessage }}
         </div>

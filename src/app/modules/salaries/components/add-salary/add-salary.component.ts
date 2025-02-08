@@ -29,7 +29,6 @@ import { pipe } from "rxjs";
   styleUrl: "./add-salary.component.scss",
 })
 export class AddSalaryComponent implements OnInit, OnDestroy {
-
   @Output()
   closed: EventEmitter<void> = new EventEmitter();
 
@@ -66,7 +65,6 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-
     this.isAuthenticated = this.authService.isAuthenticated();
     if (!this.isAuthenticated) {
       this.authService
@@ -78,44 +76,46 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
     }
 
     this.service
-        .selectBoxItems()
-        .pipe(untilDestroyed(this))
-        .subscribe((x) => {
+      .selectBoxItems()
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.professions = x.professions;
+        this.industries = x.industries;
+        this.skills = x.skills;
 
-          this.professions = x.professions;
-          this.industries = x.industries;
-          this.skills = x.skills;
-
-          this.skillsAsOptions = this.skills.map((x) => {
-            return {
-              value: x.id.toString(),
-              item: x.id,
-              label: x.title,
-            };
-          });
-      
-          this.industriesAsOptions = this.industries.map((x) => {
-            return {
-              value: x.id.toString(),
-              item: x.id,
-              label: x.title,
-            };
-          });
-      
-          const professionIdToSkip = 1;
-          this.professionsAsOptions = this.professions
-            .filter((x) => x.id !== professionIdToSkip)
-            .map((x) => {
-              return {
-                value: x.id.toString(),
-                item: x.id,
-                label: x.title,
-              };
-            });
-
-            this.currentStep = 1;
-            this.addSalaryForm = new AddSalaryForm(null, this.industries.length > 0);
+        this.skillsAsOptions = this.skills.map((x) => {
+          return {
+            value: x.id.toString(),
+            item: x.id,
+            label: x.title,
+          };
         });
+
+        this.industriesAsOptions = this.industries.map((x) => {
+          return {
+            value: x.id.toString(),
+            item: x.id,
+            label: x.title,
+          };
+        });
+
+        const professionIdToSkip = 1;
+        this.professionsAsOptions = this.professions
+          .filter((x) => x.id !== professionIdToSkip)
+          .map((x) => {
+            return {
+              value: x.id.toString(),
+              item: x.id,
+              label: x.title,
+            };
+          });
+
+        this.currentStep = 1;
+        this.addSalaryForm = new AddSalaryForm(
+          null,
+          this.industries.length > 0
+        );
+      });
   }
 
   previousStep(): void {
@@ -151,7 +151,6 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
           this.alert.success("Зарплата успешно записана");
           this.gtag.event("salary_added", "salary_chart");
           this.router.navigateByUrl("/salaries");
-
         } else {
           const error = "За данный квартал уже есть запись";
           this.alert.error(error);
