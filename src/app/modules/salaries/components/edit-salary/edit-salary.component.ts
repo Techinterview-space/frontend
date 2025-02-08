@@ -7,7 +7,7 @@ import {
   Output,
 } from "@angular/core";
 import { UserSalariesService } from "@services/user-salaries.service";
-import { EditSalaryForm } from "./edit-salary-form";
+import { EditSalaryForm } from "../add-salary/edit-salary-form";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CompanyTypeSelectItem } from "@shared/select-boxes/company-type-select-item";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
@@ -113,7 +113,7 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
 
   addSalarySubmitAction(): void {
     this.errorMessage = null;
-    const data = this.form?.createRequestOrNull();
+    const data = this.form?.createEditRequestOrNull();
     if (data == null || this.salarytoBeEdited == null) {
       return;
     }

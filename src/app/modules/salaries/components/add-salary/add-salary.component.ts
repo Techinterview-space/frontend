@@ -23,6 +23,7 @@ import { Router } from "@angular/router";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { pipe } from "rxjs";
+import { EditSalaryForm } from "./edit-salary-form";
 
 @Component({
   templateUrl: "./add-salary.component.html",
@@ -39,7 +40,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
   industries: Array<LabelEntityDto> = [];
   skills: Array<LabelEntityDto> = [];
 
-  addSalaryForm: AddSalaryForm | null = null;
+  addSalaryForm: EditSalaryForm | null = null;
   errorMessage: string | null = null;
   isAuthenticated = false;
 
@@ -111,7 +112,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
           });
 
         this.currentStep = 1;
-        this.addSalaryForm = new AddSalaryForm(
+        this.addSalaryForm = new EditSalaryForm(
           null,
           this.industries.length > 0
         );
@@ -137,7 +138,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
 
   addSalarySubmitAction(): void {
     this.errorMessage = null;
-    const data = this.addSalaryForm?.createRequestOrNull();
+    const data = this.addSalaryForm?.createAddRequestOrNull();
     if (data == null) {
       return;
     }
