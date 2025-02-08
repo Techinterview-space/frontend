@@ -9,7 +9,7 @@
     "serve-prod": "ng serve --configuration=production",
     "serve-staging": "ng serve --configuration=staging -o",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --browsers ChromiumNoSandbox",
     "test-headless-ci-only": "ng test --browsers ChromiumNoSandbox",
     "lint": "ng lint",
     "pretty": "pretty-quick",
