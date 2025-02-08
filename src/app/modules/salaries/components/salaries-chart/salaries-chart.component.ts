@@ -40,7 +40,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   downloadedFile: File | null = null;
 
   showDataStub = false;
-  openAddSalaryModal = false;
+  shouldAddOwnSalary = false;
   openEditCurrentSalaryModal = false;
   showAdjustCurrentSalaryProfessionModal = false;
   isAuthenticated = false;
@@ -86,7 +86,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   load(data: SalaryChartGlobalFiltersData | null = null): void {
     this.salariesChart = null;
-    this.openAddSalaryModal = false;
+    this.shouldAddOwnSalary = false;
     this.currentUserSalary = null;
     this.showSalariesPaginatedTable = false;
 
@@ -116,13 +116,15 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   openAddSalaryAction(): void {
     if (this.isAuthenticated) {
-      this.openAddSalaryModal = true;
       this.gtag.event("salary_add_modal_opened", "salary_chart");
+      this.router.navigateByUrl("/salaries/add-new");
       return;
     }
 
     this.cookieService.set("url", this.router.url);
-    this.authService.login().pipe(untilDestroyed(this)).subscribe();
+    this.authService.login()
+      .pipe(untilDestroyed(this))
+      .subscribe();
   }
 
   openEditSalaryAction(): void {
@@ -133,20 +135,9 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     }
   }
 
-  closeAddSalaryAction(): void {
-    this.openAddSalaryModal = false;
-    this.gtag.event("salary_add_modal_closed_without_adding", "salary_chart");
-  }
-
   closeEditSalaryAction(): void {
     this.openEditCurrentSalaryModal = false;
     this.gtag.event("salary_edit_modal_closed_without_editing", "salary_chart");
-  }
-
-  onSalaryAdded(salary: UserSalary): void {
-    this.openAddSalaryModal = false;
-    this.gtag.event("salary_added", "salary_chart");
-    this.load();
   }
 
   onSalaryUpdated(salary: UserSalary): void {
@@ -255,7 +246,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       .subscribe((x) => {
         this.isAuthenticated = x.hasAuthentication;
         if (x.shouldAddOwnSalary) {
-          this.openAddSalaryModal = this.isAuthenticated;
+          this.shouldAddOwnSalary = this.isAuthenticated;
           this.showDataStub = true;
           this.salariesChart = new StubSalariesChart(x);
         } else {
