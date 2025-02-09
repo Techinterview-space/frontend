@@ -7,7 +7,6 @@ import {
   Output,
 } from "@angular/core";
 import { UserSalariesService } from "@services/user-salaries.service";
-import { AddSalaryForm } from "./add-salary-form";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CompanyTypeSelectItem } from "@shared/select-boxes/company-type-select-item";
 import { DeveloperGradeSelectItem } from "@shared/select-boxes/developer-grade-select-item";
@@ -19,30 +18,33 @@ import {
   KazakhstanCityEnum,
 } from "@models/salaries/kazakhstan-city";
 import { LabelEntityDto } from "@services/label-entity.model";
+import { Router } from "@angular/router";
+import { GoogleAnalyticsService } from "ngx-google-analytics";
+import { AuthService } from "@shared/services/auth/auth.service";
+import { pipe } from "rxjs";
+import { EditSalaryForm } from "./edit-salary-form";
+import { Gender, GenderEnum } from "@models/enums/gender.enum";
 
 @Component({
-  selector: "app-add-salary-modal",
   templateUrl: "./add-salary.component.html",
   styleUrl: "./add-salary.component.scss",
 })
 export class AddSalaryComponent implements OnInit, OnDestroy {
-  @Input()
-  skills: Array<LabelEntityDto> = [];
-
-  @Input()
-  industries: Array<LabelEntityDto> = [];
-
-  @Input()
-  professions: Array<LabelEntityDto> = [];
-
   @Output()
   closed: EventEmitter<void> = new EventEmitter();
 
   @Output()
   salaryAdded: EventEmitter<UserSalary> = new EventEmitter();
 
-  addSalaryForm: AddSalaryForm | null = null;
+  professions: Array<LabelEntityDto> = [];
+  industries: Array<LabelEntityDto> = [];
+  skills: Array<LabelEntityDto> = [];
+
+  addSalaryForm: EditSalaryForm | null = null;
   errorMessage: string | null = null;
+  isAuthenticated = false;
+
+  currentStep = 1;
 
   readonly companyTypes: Array<CompanyTypeSelectItem> =
     CompanyTypeSelectItem.allItems();
@@ -50,6 +52,8 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
     DeveloperGradeSelectItem.gradesSimpleOnly();
   readonly cities: Array<SelectItem<KazakhstanCity>> =
     KazakhstanCityEnum.options();
+  readonly genders: Array<SelectItem<Gender>> = GenderEnum.options();
+  readonly currentYear = new Date().getFullYear();
 
   skillsAsOptions: Array<SelectItem<number>> = [];
   industriesAsOptions: Array<SelectItem<number>> = [];
@@ -57,44 +61,87 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: UserSalariesService,
-    private readonly alert: AlertService
+    private readonly alert: AlertService,
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly gtag: GoogleAnalyticsService
   ) {}
 
   ngOnInit(): void {
-    this.skillsAsOptions = this.skills.map((x) => {
-      return {
-        value: x.id.toString(),
-        item: x.id,
-        label: x.title,
-      };
-    });
+    this.isAuthenticated = this.authService.isAuthenticated();
+    if (!this.isAuthenticated) {
+      this.authService
+        .login()
+        .pipe(untilDestroyed(this))
+        .subscribe((x) => {});
 
-    this.industriesAsOptions = this.industries.map((x) => {
-      return {
-        value: x.id.toString(),
-        item: x.id,
-        label: x.title,
-      };
-    });
+      return;
+    }
 
-    const professionIdToSkip = 1;
-    this.professionsAsOptions = this.professions
-      .filter((x) => x.id !== professionIdToSkip)
-      .map((x) => {
-        return {
-          value: x.id.toString(),
-          item: x.id,
-          label: x.title,
-        };
+    this.service
+      .selectBoxItems()
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.professions = x.professions;
+        this.industries = x.industries;
+        this.skills = x.skills;
+
+        this.skillsAsOptions = this.skills.map((x) => {
+          return {
+            value: x.id.toString(),
+            item: x.id,
+            label: x.title,
+          };
+        });
+
+        this.industriesAsOptions = this.industries.map((x) => {
+          return {
+            value: x.id.toString(),
+            item: x.id,
+            label: x.title,
+          };
+        });
+
+        const professionIdToSkip = 1;
+        this.professionsAsOptions = this.professions
+          .filter((x) => x.id !== professionIdToSkip)
+          .map((x) => {
+            return {
+              value: x.id.toString(),
+              item: x.id,
+              label: x.title,
+            };
+          });
+
+        this.currentStep = 1;
+        this.addSalaryForm = new EditSalaryForm(
+          null,
+          this.industries.length > 0,
+          true
+        );
       });
+  }
 
-    console.log("asdasd");
-    this.addSalaryForm = new AddSalaryForm(null, this.industries.length > 0);
+  previousStep(): void {
+    if (this.currentStep === 1) {
+      return;
+    }
+
+    this.currentStep = this.currentStep - 1;
+  }
+
+  nextStep(): void {
+    if (this.currentStep === 3) {
+      this.addSalarySubmitAction();
+      return;
+    }
+
+    this.currentStep = this.currentStep + 1;
   }
 
   addSalarySubmitAction(): void {
     this.errorMessage = null;
-    const data = this.addSalaryForm?.createRequestOrNull();
+    const data = this.addSalaryForm?.createAddRequestOrNull();
     if (data == null) {
       return;
     }
@@ -106,7 +153,8 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
         if (x.isSuccess && x.createdSalary) {
           this.errorMessage = null;
           this.alert.success("Зарплата успешно записана");
-          this.salaryAdded.emit(x.createdSalary);
+          this.gtag.event("salary_added", "salary_chart");
+          this.router.navigateByUrl("/salaries");
         } else {
           const error = "За данный квартал уже есть запись";
           this.alert.error(error);
@@ -117,9 +165,5 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // ignored
-  }
-
-  close(): void {
-    this.closed.emit();
   }
 }

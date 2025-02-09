@@ -506,15 +506,6 @@
   </div>
 </div>
 
-<app-add-salary-modal
-  *ngIf="openAddSalaryModal"
-  [skills]="skills"
-  [industries]="industries"
-  [professions]="professions"
-  (closed)="closeAddSalaryAction()"
-  (salaryAdded)="onSalaryAdded($event)"
-></app-add-salary-modal>
-
 <app-edit-salary-modal
   *ngIf="openEditCurrentSalaryModal && salariesChart"
   [skills]="skills"

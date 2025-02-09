@@ -1,0 +1,12 @@
+<div class="progress" *ngIf="widthInPercent">
+  <div
+    class="progress-bar progress-bar-striped bg-info text-dark"
+    role="progressbar"
+    [ngStyle]="{ width: widthInPercent + '%' }"
+    [attr.aria-valuenow]="widthInPercent"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  >
+    {{ value }}
+  </div>
+</div>
