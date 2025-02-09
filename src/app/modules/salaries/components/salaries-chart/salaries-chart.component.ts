@@ -22,8 +22,9 @@ import { FileDownloadAnchor } from "@shared/value-objects/file-download-anchor";
 import { TitleService } from "@services/title.service";
 
 @Component({
-  templateUrl: "./salaries-chart.component.html",
-  styleUrl: "./salaries-chart.component.scss",
+    templateUrl: "./salaries-chart.component.html",
+    styleUrl: "./salaries-chart.component.scss",
+    standalone: false
 })
 export class SalariesChartComponent implements OnInit, OnDestroy {
   readonly isYourSalaryWithinMarketTitle = "Ваша зарплата «в рынке»?";

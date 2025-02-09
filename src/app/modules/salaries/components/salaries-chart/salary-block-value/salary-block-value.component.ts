@@ -5,9 +5,10 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 @Component({
-  selector: "app-salary-block-value",
-  templateUrl: "./salary-block-value.component.html",
-  styleUrl: "./salary-block-value.component.scss",
+    selector: "app-salary-block-value",
+    templateUrl: "./salary-block-value.component.html",
+    styleUrl: "./salary-block-value.component.scss",
+    standalone: false
 })
 export class SalaryBlockValueComponent implements OnInit, OnDestroy {
   @Input()

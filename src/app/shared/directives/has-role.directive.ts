@@ -12,7 +12,8 @@ import { ApplicationUserExtended } from "@models/extended";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Directive({
-  selector: "[appHasRole]",
+    selector: "[appHasRole]",
+    standalone: false
 })
 // Copied from https://blog.strongbrew.io/display-a-component-based-on-role/
 export class HasRoleDirective implements OnInit, OnDestroy {

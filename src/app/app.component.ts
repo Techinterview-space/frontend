@@ -4,9 +4,10 @@ import { AuthService } from "./shared/services/auth/auth.service";
 import { untilDestroyed } from "./shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"],
+    standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated = false;

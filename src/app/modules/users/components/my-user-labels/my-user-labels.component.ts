@@ -9,7 +9,8 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { UserLabelEditForm } from "./user-label-edit-form";
 
 @Component({
-  templateUrl: "./my-user-labels.component.html",
+    templateUrl: "./my-user-labels.component.html",
+    standalone: false
 })
 export class MyUserLabelsComponent implements OnInit, OnDestroy {
   labels: Array<Label> | null = null;

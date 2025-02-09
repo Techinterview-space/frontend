@@ -3,9 +3,10 @@ import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 
 @Component({
-  selector: "app-confirm-dialog",
-  templateUrl: "./confirm-dialog.component.html",
-  styleUrls: ["./confirm-dialog.component.scss"],
+    selector: "app-confirm-dialog",
+    templateUrl: "./confirm-dialog.component.html",
+    styleUrls: ["./confirm-dialog.component.scss"],
+    standalone: false
 })
 export class ConfirmDialogComponent {
   get showModal(): boolean {

@@ -9,7 +9,8 @@ import { LabelEntityEditForm } from "../label-entity-edit-form";
 import { ProfessionsService } from "@services/professions.service";
 
 @Component({
-  templateUrl: "./professions-paginated-table.component.html",
+    templateUrl: "./professions-paginated-table.component.html",
+    standalone: false
 })
 export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
   items: Array<LabelEntityAdmiDto> | null = null;

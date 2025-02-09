@@ -16,9 +16,10 @@ interface ImageHint {
 }
 
 @Component({
-  selector: "app-interviews-home",
-  templateUrl: "./interviews-home.component.html",
-  styleUrls: ["./interviews-home.component.scss"],
+    selector: "app-interviews-home",
+    templateUrl: "./interviews-home.component.html",
+    styleUrls: ["./interviews-home.component.scss"],
+    standalone: false
 })
 export class InterviewsHomeComponent implements OnInit, OnDestroy {
   showHomePage = false;

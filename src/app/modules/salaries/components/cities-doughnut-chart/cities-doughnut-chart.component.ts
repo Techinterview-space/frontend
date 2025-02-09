@@ -10,9 +10,10 @@ import { CitiesDoughnutChartObject } from "./cities-doughnut-chart-object";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 
 @Component({
-  selector: "app-cities-doughnut-chart",
-  templateUrl: "./cities-doughnut-chart.component.html",
-  styleUrl: "./cities-doughnut-chart.component.scss",
+    selector: "app-cities-doughnut-chart",
+    templateUrl: "./cities-doughnut-chart.component.html",
+    styleUrl: "./cities-doughnut-chart.component.scss",
+    standalone: false
 })
 export class CitiesDoughnutChartComponent {
   @Input()

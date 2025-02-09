@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { PaginatedModel } from "@models/paginated-list";
 
 @Component({
-  selector: "app-pagination-buttons",
-  templateUrl: "./pagination-buttons.component.html",
+    selector: "app-pagination-buttons",
+    templateUrl: "./pagination-buttons.component.html",
+    standalone: false
 })
 export class PaginationButtonsComponent implements OnInit {
   @Input()

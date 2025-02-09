@@ -13,9 +13,10 @@ interface TableRow {
 }
 
 @Component({
-  selector: "app-people-by-gender-chart",
-  templateUrl: "./people-by-gender-chart.component.html",
-  styleUrl: "./people-by-gender-chart.component.scss",
+    selector: "app-people-by-gender-chart",
+    templateUrl: "./people-by-gender-chart.component.html",
+    styleUrl: "./people-by-gender-chart.component.scss",
+    standalone: false
 })
 export class PeopleByGenderChartComponent implements OnInit {
   @Input()

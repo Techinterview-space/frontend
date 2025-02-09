@@ -10,7 +10,8 @@ import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { UserRole } from "@models/enums";
 
 @Component({
-  templateUrl: "./me.component.html",
+    templateUrl: "./me.component.html",
+    standalone: false
 })
 export class MeComponent implements OnInit, OnDestroy {
   user: ApplicationUserExtended | null = null;

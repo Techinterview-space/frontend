@@ -14,9 +14,10 @@ interface ProgressBarData {
 }
 
 @Component({
-  selector: "app-people-by-grades-chart",
-  templateUrl: "./people-by-grades-chart.component.html",
-  styleUrl: "./people-by-grades-chart.component.scss",
+    selector: "app-people-by-grades-chart",
+    templateUrl: "./people-by-grades-chart.component.html",
+    styleUrl: "./people-by-grades-chart.component.scss",
+    standalone: false
 })
 export class PeopleByGradesChartComponent implements OnInit {
   readonly grades = DeveloperGradeEnum.grades;

@@ -12,8 +12,9 @@ import { DialogMessage } from "@shared/components/dialogs/models/dialog-message"
 import { SalariesTableFilter } from "../salaries-table-filter";
 
 @Component({
-  selector: "app-salaries-admin-paginated-table",
-  templateUrl: "./salaries-admin-paginated-table.component.html",
+    selector: "app-salaries-admin-paginated-table",
+    templateUrl: "./salaries-admin-paginated-table.component.html",
+    standalone: false
 })
 export class SalariesAdminPaginatedTableComponent {
   @Input()

@@ -7,7 +7,8 @@ import {
 import { CheckDeviceService } from "@shared/services/check-device/check-device.service";
 
 @Directive({
-  selector: "[appIsDesktop]",
+    selector: "[appIsDesktop]",
+    standalone: false
 })
 export class IsDesktopDirective implements OnInit {
   constructor(

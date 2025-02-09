@@ -14,9 +14,10 @@ interface GradeToggleButton {
 }
 
 @Component({
-  selector: "app-historical-survey-chart",
-  templateUrl: "./historical-survey-chart.component.html",
-  styleUrls: ["./historical-survey-chart.component.scss"],
+    selector: "app-historical-survey-chart",
+    templateUrl: "./historical-survey-chart.component.html",
+    styleUrls: ["./historical-survey-chart.component.scss"],
+    standalone: false
 })
 export class HistoricalSurveyChartComponent implements OnInit {
   @Input()

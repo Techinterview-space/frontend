@@ -4,9 +4,10 @@ import { SalariesByCityChart } from "@services/user-salaries.service";
 import { SalariesByCityChartObject } from "./salaries-by-city-chart-object";
 
 @Component({
-  selector: "app-salaries-by-city-chart",
-  templateUrl: "./salaries-by-city-chart.component.html",
-  styleUrl: "./salaries-by-city-chart.component.scss",
+    selector: "app-salaries-by-city-chart",
+    templateUrl: "./salaries-by-city-chart.component.html",
+    styleUrl: "./salaries-by-city-chart.component.scss",
+    standalone: false
 })
 export class SalariesByCityChartComponent {
   @Input()

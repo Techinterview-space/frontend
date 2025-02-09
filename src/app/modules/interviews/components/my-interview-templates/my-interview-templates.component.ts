@@ -10,9 +10,10 @@ import { DialogMessage } from "@shared/components/dialogs/models/dialog-message"
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-my-interview-templates",
-  templateUrl: "./my-interview-templates.component.html",
-  styleUrls: ["./my-interview-templates.component.scss"],
+    selector: "app-my-interview-templates",
+    templateUrl: "./my-interview-templates.component.html",
+    styleUrls: ["./my-interview-templates.component.scss"],
+    standalone: false
 })
 export class MyInterviewTemplatesComponent implements OnInit, OnDestroy {
   templates: Array<InterviewTemplate> | null = null;

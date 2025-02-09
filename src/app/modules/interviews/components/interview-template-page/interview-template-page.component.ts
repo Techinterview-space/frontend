@@ -12,9 +12,10 @@ import { AuthService } from "@shared/services/auth/auth.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-interview-template-page",
-  templateUrl: "./interview-template-page.component.html",
-  styleUrls: ["./interview-template-page.component.scss"],
+    selector: "app-interview-template-page",
+    templateUrl: "./interview-template-page.component.html",
+    styleUrls: ["./interview-template-page.component.scss"],
+    standalone: false
 })
 export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
   pageTitle = "";

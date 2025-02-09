@@ -18,9 +18,10 @@ class TableRow {
 }
 
 @Component({
-  selector: "app-work-industries-chart",
-  templateUrl: "./work-industries-chart.component.html",
-  styleUrl: "./work-industries-chart.component.scss",
+    selector: "app-work-industries-chart",
+    templateUrl: "./work-industries-chart.component.html",
+    styleUrl: "./work-industries-chart.component.scss",
+    standalone: false
 })
 export class WorkIndustriesChartComponent {
   @Input()

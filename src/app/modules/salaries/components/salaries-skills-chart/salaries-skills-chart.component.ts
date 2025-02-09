@@ -18,9 +18,10 @@ class TableRow {
 }
 
 @Component({
-  selector: "app-salaries-skills-chart",
-  templateUrl: "./salaries-skills-chart.component.html",
-  styleUrl: "./salaries-skills-chart.component.scss",
+    selector: "app-salaries-skills-chart",
+    templateUrl: "./salaries-skills-chart.component.html",
+    styleUrl: "./salaries-skills-chart.component.scss",
+    standalone: false
 })
 export class SalariesSkillsChartComponent implements OnInit {
   @Input()

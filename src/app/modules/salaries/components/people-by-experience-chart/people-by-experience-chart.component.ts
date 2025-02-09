@@ -11,9 +11,10 @@ import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { PeopleByCategoryBarChartObject } from "../people-by-category-bar-chart-object";
 
 @Component({
-  selector: "app-people-by-experience-chart",
-  templateUrl: "./people-by-experience-chart.component.html",
-  styleUrl: "./people-by-experience-chart.component.scss",
+    selector: "app-people-by-experience-chart",
+    templateUrl: "./people-by-experience-chart.component.html",
+    styleUrl: "./people-by-experience-chart.component.scss",
+    standalone: false
 })
 export class PeopleByExperienceChartComponent {
   @Input()

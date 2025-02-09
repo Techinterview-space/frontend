@@ -14,7 +14,8 @@ import { SalariesTableFilter } from "../salaries-table-filter";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-  templateUrl: "./salaries-admin-page.component.html",
+    templateUrl: "./salaries-admin-page.component.html",
+    standalone: false
 })
 export class SalariesAdminPageComponent implements OnInit, OnDestroy {
   salaries: Array<SalaryAdminItem> | null = null;

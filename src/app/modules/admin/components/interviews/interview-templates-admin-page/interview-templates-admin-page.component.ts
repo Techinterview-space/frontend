@@ -10,7 +10,8 @@ import { DialogMessage } from "@shared/components/dialogs/models/dialog-message"
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  templateUrl: "./interview-templates-admin-page.component.html",
+    templateUrl: "./interview-templates-admin-page.component.html",
+    standalone: false
 })
 export class InterviewTemplatesAdminPageComponent implements OnInit, OnDestroy {
   templates: PaginatedList<InterviewTemplate> | null = null;

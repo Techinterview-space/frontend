@@ -11,9 +11,10 @@ import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { PeopleByCategoryBarChartObject } from "../people-by-category-bar-chart-object";
 
 @Component({
-  selector: "app-people-by-age-chart",
-  templateUrl: "./people-by-age-chart.component.html",
-  styleUrl: "./people-by-age-chart.component.scss",
+    selector: "app-people-by-age-chart",
+    templateUrl: "./people-by-age-chart.component.html",
+    styleUrl: "./people-by-age-chart.component.scss",
+    standalone: false
 })
 export class PeopleByAgeChartComponent {
   @Input()

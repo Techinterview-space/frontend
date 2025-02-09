@@ -14,8 +14,9 @@ import { InterviewFormGroup } from "./interview-form-group";
 import { InterviewTemplateSelectItem } from "./interview-template-select-item";
 
 @Component({
-  templateUrl: "./interview-edit-page.component.html",
-  styleUrls: ["./interview-edit-page.component.scss"],
+    templateUrl: "./interview-edit-page.component.html",
+    styleUrls: ["./interview-edit-page.component.scss"],
+    standalone: false
 })
 export class InterviewEditPageComponent implements OnInit, OnDestroy {
   pageTitle = "Новая заметка к интервью";

@@ -7,7 +7,8 @@ import {
 import { CheckDeviceService } from "@shared/services/check-device/check-device.service";
 
 @Directive({
-  selector: "[appIsMobile]",
+    selector: "[appIsMobile]",
+    standalone: false
 })
 export class IsMobileDirective implements OnInit {
   constructor(

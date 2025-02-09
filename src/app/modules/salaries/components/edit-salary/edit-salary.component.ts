@@ -24,9 +24,10 @@ import { formatNumber } from "@angular/common";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 @Component({
-  selector: "app-edit-salary-modal",
-  templateUrl: "./edit-salary.component.html",
-  styleUrl: "./edit-salary.component.scss",
+    selector: "app-edit-salary-modal",
+    templateUrl: "./edit-salary.component.html",
+    styleUrl: "./edit-salary.component.scss",
+    standalone: false
 })
 export class EditSalaryComponent implements OnInit, OnDestroy {
   @Input()

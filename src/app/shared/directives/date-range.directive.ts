@@ -3,14 +3,15 @@ import { Validator, AbstractControl, NG_VALIDATORS } from "@angular/forms";
 import Assertion from "@shared/validation/assertion";
 
 @Directive({
-  selector: "[appDateRange]",
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => DateRangeValidator),
-      multi: true,
-    },
-  ],
+    selector: "[appDateRange]",
+    providers: [
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => DateRangeValidator),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class DateRangeValidator implements Validator {
   constructor(@Attribute("appDateRange") public validateDateRange: string) {

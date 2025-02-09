@@ -9,7 +9,8 @@ import { LabelEntityAdmiDto } from "@services/label-entity.model";
 import { LabelEntityEditForm } from "../label-entity-edit-form";
 
 @Component({
-  templateUrl: "./work-indusrties-paginated-table.component.html",
+    templateUrl: "./work-indusrties-paginated-table.component.html",
+    standalone: false
 })
 export class WorkIndustriesPaginatedTableComponent
   implements OnInit, OnDestroy

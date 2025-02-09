@@ -5,9 +5,10 @@ import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-my-interviews",
-  templateUrl: "./my-interviews.component.html",
-  styleUrls: ["./my-interviews.component.scss"],
+    selector: "app-my-interviews",
+    templateUrl: "./my-interviews.component.html",
+    styleUrls: ["./my-interviews.component.scss"],
+    standalone: false
 })
 export class MyInterviewsComponent implements OnInit, OnDestroy {
   interviews: Array<Interview> | null = null;

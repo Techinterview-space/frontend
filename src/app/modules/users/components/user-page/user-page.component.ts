@@ -7,9 +7,10 @@ import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended"
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-user-page",
-  templateUrl: "./user-page.component.html",
-  styleUrls: ["./user-page.component.scss"],
+    selector: "app-user-page",
+    templateUrl: "./user-page.component.html",
+    styleUrls: ["./user-page.component.scss"],
+    standalone: false
 })
 export class UserPageComponent implements OnInit, OnDestroy {
   user: ApplicationUser | null = null;

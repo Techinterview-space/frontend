@@ -5,9 +5,10 @@ import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { CompanyType } from "@models/salaries/company-type";
 
 @Component({
-  selector: "app-people-distribution-chart",
-  templateUrl: "./people-distribution-chart.component.html",
-  styleUrl: "./people-distribution-chart.component.scss",
+    selector: "app-people-distribution-chart",
+    templateUrl: "./people-distribution-chart.component.html",
+    styleUrl: "./people-distribution-chart.component.scss",
+    standalone: false
 })
 export class PeopleDistributionChartComponent {
   @Input()

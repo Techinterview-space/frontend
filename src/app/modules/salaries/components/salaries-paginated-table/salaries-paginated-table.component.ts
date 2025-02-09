@@ -8,8 +8,9 @@ import { SalaryTableRow } from "./salary-table-row";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-  selector: "app-salaries-paginated-table",
-  templateUrl: "./salaries-paginated-table.component.html",
+    selector: "app-salaries-paginated-table",
+    templateUrl: "./salaries-paginated-table.component.html",
+    standalone: false
 })
 export class SalariesPaginatedTableComponent implements OnInit, OnDestroy {
   readonly defaultPageSize = 15;

@@ -3,9 +3,10 @@ import { SalariesByGenderChart } from "@services/user-salaries.service";
 import { SalariesByGenderChartObject } from "./salaries-by-gender-chart-object";
 
 @Component({
-  selector: "app-salaries-by-gender-chart",
-  templateUrl: "./salaries-by-gender-chart.component.html",
-  styleUrl: "./salaries-by-gender-chart.component.scss",
+    selector: "app-salaries-by-gender-chart",
+    templateUrl: "./salaries-by-gender-chart.component.html",
+    styleUrl: "./salaries-by-gender-chart.component.scss",
+    standalone: false
 })
 export class SalariesByGenderChartComponent {
   @Input()

@@ -10,7 +10,8 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { UserRolesEditForm } from "./user-roles-edit-form";
 
 @Component({
-  templateUrl: "./users-admin-page.component.html",
+    templateUrl: "./users-admin-page.component.html",
+    standalone: false
 })
 export class UsersAdminPageComponent implements OnInit, OnDestroy {
   get hasSelectedUser(): boolean {

@@ -22,8 +22,9 @@ import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-
 import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
 
 @Component({
-  templateUrl: "./historical-charts-page.component.html",
-  styleUrls: ["./historical-charts-page.component.scss"],
+    templateUrl: "./historical-charts-page.component.html",
+    styleUrls: ["./historical-charts-page.component.scss"],
+    standalone: false
 })
 export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
   readonly activatedRoute: SalariesChartActivatedRoute;

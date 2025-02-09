@@ -5,9 +5,10 @@ import {
 } from "@shared/value-objects/clipboard-copier";
 
 @Component({
-  selector: "app-share-button",
-  templateUrl: "./share-button.component.html",
-  styleUrls: ["./share-button.component.scss"],
+    selector: "app-share-button",
+    templateUrl: "./share-button.component.html",
+    styleUrls: ["./share-button.component.scss"],
+    standalone: false
 })
 export class ShareButtonComponent implements OnInit {
   static readonly copyBtnDefaultTitle = "Поделиться";

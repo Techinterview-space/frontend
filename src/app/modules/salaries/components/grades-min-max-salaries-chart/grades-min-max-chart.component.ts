@@ -5,9 +5,10 @@ import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-grades-min-max-chart",
-  templateUrl: "./grades-min-max-chart.component.html",
-  styleUrl: "./grades-min-max-chart.component.scss",
+    selector: "app-grades-min-max-chart",
+    templateUrl: "./grades-min-max-chart.component.html",
+    styleUrl: "./grades-min-max-chart.component.scss",
+    standalone: false
 })
 export class GradesMinMaxChartComponent implements OnDestroy {
   @Input()

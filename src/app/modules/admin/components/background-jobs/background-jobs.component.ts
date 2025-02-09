@@ -7,9 +7,10 @@ import { AdminToolsService } from "@services/admin-tools.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-background-jobs",
-  templateUrl: "./background-jobs.component.html",
-  styleUrls: ["./background-jobs.component.scss"],
+    selector: "app-background-jobs",
+    templateUrl: "./background-jobs.component.html",
+    styleUrls: ["./background-jobs.component.scss"],
+    standalone: false
 })
 export class BackgroundJobsComponent implements OnInit, OnDestroy {
   authorizationToken: string | null = null;

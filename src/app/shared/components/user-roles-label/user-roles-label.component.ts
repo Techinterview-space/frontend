@@ -8,8 +8,9 @@ interface UserRoleLabel {
 }
 
 @Component({
-  selector: "app-user-roles-label",
-  templateUrl: "./user-roles-label.component.html",
+    selector: "app-user-roles-label",
+    templateUrl: "./user-roles-label.component.html",
+    standalone: false
 })
 export class UserRolesLabelComponent implements OnInit {
   @Input()

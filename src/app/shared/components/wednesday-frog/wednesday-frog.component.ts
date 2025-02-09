@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "app-wednesday-frog",
-  templateUrl: "./wednesday-frog.component.html",
-  styleUrls: ["./wednesday-frog.component.scss"],
+    selector: "app-wednesday-frog",
+    templateUrl: "./wednesday-frog.component.html",
+    styleUrls: ["./wednesday-frog.component.scss"],
+    standalone: false
 })
 export class WednesdayFrogComponent {
   readonly frogs = [

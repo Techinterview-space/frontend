@@ -11,9 +11,10 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { FileDownloadAnchor } from "@shared/value-objects/file-download-anchor";
 
 @Component({
-  selector: "app-interview-page",
-  templateUrl: "./interview-page.component.html",
-  styleUrls: ["./interview-page.component.scss"],
+    selector: "app-interview-page",
+    templateUrl: "./interview-page.component.html",
+    styleUrls: ["./interview-page.component.scss"],
+    standalone: false
 })
 export class InterviewPageComponent implements OnInit, OnDestroy {
   pageTitle = "";

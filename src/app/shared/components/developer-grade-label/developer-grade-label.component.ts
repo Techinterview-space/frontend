@@ -3,9 +3,10 @@ import { DeveloperGrade } from "@models/enums";
 import { SplittedByWhitespacesString } from "../../value-objects/splitted-by-whitespaces-string";
 
 @Component({
-  selector: "app-developer-grade-label",
-  styleUrls: ["./developer-grade-label.component.scss"],
-  templateUrl: "./developer-grade-label.component.html",
+    selector: "app-developer-grade-label",
+    styleUrls: ["./developer-grade-label.component.scss"],
+    templateUrl: "./developer-grade-label.component.html",
+    standalone: false
 })
 export class DeveloperGradeLabelComponent implements OnInit {
   title = "";

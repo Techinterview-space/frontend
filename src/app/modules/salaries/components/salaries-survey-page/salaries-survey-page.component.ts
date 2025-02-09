@@ -31,9 +31,10 @@ interface ProgressBarColorData {
 }
 
 @Component({
-  selector: "salaries-survey-page",
-  templateUrl: "./salaries-survey-page.component.html",
-  styleUrls: ["./salaries-survey-page.component.scss"],
+    selector: "salaries-survey-page",
+    templateUrl: "./salaries-survey-page.component.html",
+    styleUrls: ["./salaries-survey-page.component.scss"],
+    standalone: false
 })
 export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
   static readonly defaultColor: ProgressBarColorData = {

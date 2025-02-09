@@ -9,7 +9,8 @@ import { LabelEntityAdmiDto } from "@services/label-entity.model";
 import { LabelEntityEditForm } from "../label-entity-edit-form";
 
 @Component({
-  templateUrl: "./skills-paginated-table.component.html",
+    templateUrl: "./skills-paginated-table.component.html",
+    standalone: false
 })
 export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
   skills: Array<LabelEntityAdmiDto> | null = null;

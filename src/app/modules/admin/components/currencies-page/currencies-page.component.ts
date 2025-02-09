@@ -6,8 +6,9 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CurrencyItem } from "./currency-item";
 
 @Component({
-  templateUrl: "./currencies-page.component.html",
-  styleUrls: ["./currencies-page.component.scss"],
+    templateUrl: "./currencies-page.component.html",
+    styleUrls: ["./currencies-page.component.scss"],
+    standalone: false
 })
 export class CurrenciesPageComponent implements OnInit, OnDestroy {
   authorizationToken: string | null = null;

@@ -5,9 +5,10 @@ import { KazakhstanCityEnum } from "@models/salaries/kazakhstan-city";
 import { DeveloperGrade } from "@models/enums";
 
 @Component({
-  selector: "app-predefined-info-block",
-  templateUrl: "./predefined-info-block.component.html",
-  styleUrl: "./predefined-info-block.component.scss",
+    selector: "app-predefined-info-block",
+    templateUrl: "./predefined-info-block.component.html",
+    styleUrl: "./predefined-info-block.component.scss",
+    standalone: false
 })
 export class PredefinedInfoBlockComponent {
   @Input()

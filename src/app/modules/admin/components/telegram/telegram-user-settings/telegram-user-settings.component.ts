@@ -11,7 +11,8 @@ import { AlertService } from "@shared/components/alert/services/alert.service";
 import { TelegramUserSettingsEditForm } from "./settings-edit-form";
 
 @Component({
-  templateUrl: "./telegram-user-settings.component.html",
+    templateUrl: "./telegram-user-settings.component.html",
+    standalone: false
 })
 export class TelegramUserSettingsComponent implements OnInit, OnDestroy {
   items: Array<TelegramUserSettings> | null = null;

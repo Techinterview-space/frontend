@@ -10,8 +10,9 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { InterviewTemplateFormGroup } from "./interview-template-form-group";
 
 @Component({
-  templateUrl: "./interview-template-edit-page.component.html",
-  styleUrls: ["./interview-template-edit-page.component.scss"],
+    templateUrl: "./interview-template-edit-page.component.html",
+    styleUrls: ["./interview-template-edit-page.component.scss"],
+    standalone: false
 })
 export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
   pageTitle = "Создать шаблон";

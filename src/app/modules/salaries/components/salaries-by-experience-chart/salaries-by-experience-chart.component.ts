@@ -5,9 +5,10 @@ import { SalariesByAgeOrExperienceChartObject } from "../salaries-by-age-or-expe
 import { SalariesByAgeOrExperienceChart } from "@services/user-salaries.service";
 
 @Component({
-  selector: "app-salaries-by-experience-chart",
-  templateUrl: "./salaries-by-experience-chart.component.html",
-  styleUrl: "./salaries-by-experience-chart.component.scss",
+    selector: "app-salaries-by-experience-chart",
+    templateUrl: "./salaries-by-experience-chart.component.html",
+    styleUrl: "./salaries-by-experience-chart.component.scss",
+    standalone: false
 })
 export class SalariesByExperienceChartComponent {
   @Input()

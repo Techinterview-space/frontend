@@ -7,8 +7,9 @@ import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  templateUrl: "./public-interview-templates.component.html",
-  styleUrls: ["./public-interview-templates.component.scss"],
+    templateUrl: "./public-interview-templates.component.html",
+    styleUrls: ["./public-interview-templates.component.scss"],
+    standalone: false
 })
 export class PublicInterviewTemplatesComponent implements OnInit, OnDestroy {
   templates: PaginatedList<InterviewTemplate> | null = null;

@@ -26,8 +26,9 @@ import { EditSalaryForm } from "./edit-salary-form";
 import { Gender, GenderEnum } from "@models/enums/gender.enum";
 
 @Component({
-  templateUrl: "./add-salary.component.html",
-  styleUrl: "./add-salary.component.scss",
+    templateUrl: "./add-salary.component.html",
+    styleUrl: "./add-salary.component.scss",
+    standalone: false
 })
 export class AddSalaryComponent implements OnInit, OnDestroy {
   @Output()
