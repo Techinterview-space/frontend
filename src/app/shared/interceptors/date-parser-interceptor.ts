@@ -1,10 +1,4 @@
-import {
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpResponse,
-} from "@angular/common/http";
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";

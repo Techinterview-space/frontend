@@ -1,4 +1,4 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -21,40 +21,34 @@ import { MaintenanceComponent } from "@components/maintenance/maintenance.compon
 
 const appModules: any[] = [AdminModule, InterviewsModule];
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    AdminNavbarComponent,
-    MaintenanceComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule,
-    NgxSpinnerModule,
-    HttpClientModule,
-    MarkdownModule.forRoot(),
-    AuthModule.forRoot({
-      domain: environment.auth.domain,
-      clientId: environment.auth.client_id,
-      authorizationParams: {
-        redirect_uri: environment.auth.redirect_uri,
-      },
-    }),
-    ...appModules,
-    ...environment.googleAnalytics.imports,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: DateParserInterceptor,
-      multi: true,
-    },
-    ...applicationServices,
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        NavbarComponent,
+        AdminNavbarComponent,
+        MaintenanceComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        SharedModule,
+        NgxSpinnerModule,
+        MarkdownModule.forRoot(),
+        AuthModule.forRoot({
+            domain: environment.auth.domain,
+            clientId: environment.auth.client_id,
+            authorizationParams: {
+                redirect_uri: environment.auth.redirect_uri,
+            },
+        }),
+        ...appModules,
+        ...environment.googleAnalytics.imports], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: DateParserInterceptor,
+            multi: true,
+        },
+        ...applicationServices,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
