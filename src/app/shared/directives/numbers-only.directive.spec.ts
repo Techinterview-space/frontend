@@ -21,32 +21,32 @@ describe("OnlyNumberDirective", () => {
     const target = new OnlyNumberDirective(null);
 
     expect(target.isSpecialKey({ key: "Backspace" } as KeyboardEvent)).toEqual(
-      true
+      true,
     );
     expect(target.isSpecialKey({ key: "Tab" } as KeyboardEvent)).toEqual(true);
     expect(target.isSpecialKey({ key: "End" } as KeyboardEvent)).toEqual(true);
     expect(target.isSpecialKey({ key: "Home" } as KeyboardEvent)).toEqual(true);
     expect(target.isSpecialKey({ key: "Delete" } as KeyboardEvent)).toEqual(
-      true
+      true,
     );
 
     expect(target.isSpecialKey({ key: "Down" } as KeyboardEvent)).toEqual(true);
     expect(target.isSpecialKey({ key: "ArrowDown" } as KeyboardEvent)).toEqual(
-      true
+      true,
     );
     expect(target.isSpecialKey({ key: "Up" } as KeyboardEvent)).toEqual(true);
     expect(target.isSpecialKey({ key: "ArrowUp" } as KeyboardEvent)).toEqual(
-      true
+      true,
     );
     expect(target.isSpecialKey({ key: "Left" } as KeyboardEvent)).toEqual(true);
     expect(target.isSpecialKey({ key: "ArrowLeft" } as KeyboardEvent)).toEqual(
-      true
+      true,
     );
     expect(target.isSpecialKey({ key: "Right" } as KeyboardEvent)).toEqual(
-      true
+      true,
     );
     expect(target.isSpecialKey({ key: "ArrowRight" } as KeyboardEvent)).toEqual(
-      true
+      true,
     );
   });
 

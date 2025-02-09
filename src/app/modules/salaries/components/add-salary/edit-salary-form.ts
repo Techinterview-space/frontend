@@ -17,7 +17,7 @@ export class EditSalaryForm extends FormGroup {
   constructor(
     salarytoBeEditedOrNull: UserSalary | null,
     hasIndustries: boolean = false,
-    makeAllFieldsRequired: boolean = false
+    makeAllFieldsRequired: boolean = false,
   ) {
     const thisYear = new Date().getFullYear();
     const now = new Date(Date.now());
@@ -41,7 +41,7 @@ export class EditSalaryForm extends FormGroup {
           Validators.min(1),
           Validators.max(4),
           Validators.required,
-        ]
+        ],
       ),
       year: new FormControl(salarytoBeEditedOrNull?.year ?? now.getFullYear(), [
         Validators.pattern(EditSalaryForm.digitsPattern),
@@ -51,7 +51,7 @@ export class EditSalaryForm extends FormGroup {
       ]),
       currency: new FormControl(
         salarytoBeEditedOrNull?.currency ?? Currency.KZT,
-        [Validators.required]
+        [Validators.required],
       ),
       grade: new FormControl(salarytoBeEditedOrNull?.grade ?? null, [
         Validators.required,
@@ -61,7 +61,7 @@ export class EditSalaryForm extends FormGroup {
       ]),
       profession: new FormControl(
         salarytoBeEditedOrNull?.professionId ?? null,
-        [Validators.required]
+        [Validators.required],
       ),
       age: new FormControl(salarytoBeEditedOrNull?.age ?? null, [
         makeAllFieldsRequired ? Validators.required : Validators.nullValidator,
@@ -76,7 +76,7 @@ export class EditSalaryForm extends FormGroup {
             : Validators.nullValidator,
           Validators.min(1960),
           Validators.max(thisYear),
-        ]
+        ],
       ),
       city: new FormControl(salarytoBeEditedOrNull?.city ?? null, [
         makeAllFieldsRequired ? Validators.required : Validators.nullValidator,
@@ -93,7 +93,7 @@ export class EditSalaryForm extends FormGroup {
                 ? Validators.required
                 : Validators.nullValidator,
             ]
-          : []
+          : [],
       ),
     });
   }

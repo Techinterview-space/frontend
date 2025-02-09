@@ -4,10 +4,10 @@ import { formatNumber } from "@angular/common";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 @Component({
-    selector: "app-salary-block-remote-value",
-    templateUrl: "./salary-block-remote-value.component.html",
-    styleUrl: "./salary-block-remote-value.component.scss",
-    standalone: false
+  selector: "app-salary-block-remote-value",
+  templateUrl: "./salary-block-remote-value.component.html",
+  styleUrl: "./salary-block-remote-value.component.scss",
+  standalone: false,
 })
 export class SalaryBlockRemoteValueComponent {
   @Input()

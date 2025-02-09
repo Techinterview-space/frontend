@@ -5,10 +5,10 @@ import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { CompanyType } from "@models/salaries/company-type";
 
 @Component({
-    selector: "app-people-distribution-chart",
-    templateUrl: "./people-distribution-chart.component.html",
-    styleUrl: "./people-distribution-chart.component.scss",
-    standalone: false
+  selector: "app-people-distribution-chart",
+  templateUrl: "./people-distribution-chart.component.html",
+  styleUrl: "./people-distribution-chart.component.scss",
+  standalone: false,
 })
 export class PeopleDistributionChartComponent {
   @Input()
@@ -32,10 +32,10 @@ export class PeopleDistributionChartComponent {
     }
 
     const localSalaries = this.chart.salaries.filter(
-      (x) => x.company === CompanyType.Local
+      (x) => x.company === CompanyType.Local,
     );
     const remoteSalaries = this.chart.salaries.filter(
-      (x) => x.company === CompanyType.Remote
+      (x) => x.company === CompanyType.Remote,
     );
 
     if (localSalaries.length > 0) {
@@ -43,7 +43,7 @@ export class PeopleDistributionChartComponent {
         this.canvasIdLocal,
         localSalaries,
         10,
-        "Казахстан"
+        "Казахстан",
       );
     }
 
@@ -52,7 +52,7 @@ export class PeopleDistributionChartComponent {
         this.canvasIdRemote,
         remoteSalaries,
         3,
-        "Мир (удаленка)"
+        "Мир (удаленка)",
       );
     }
   }
@@ -61,14 +61,14 @@ export class PeopleDistributionChartComponent {
     canvasId: string,
     salaries: Array<UserSalary>,
     otherLimit: number,
-    title: string
+    title: string,
   ): PeopleDistributionChartObject {
     const chart = new PeopleDistributionChartObject(
       canvasId,
       salaries,
       otherLimit,
       title,
-      this.chart!.allProfessions
+      this.chart!.allProfessions,
     );
 
     var chartEl = document.getElementById(canvasId);

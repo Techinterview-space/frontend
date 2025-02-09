@@ -8,9 +8,9 @@ import { SalaryTableRow } from "./salary-table-row";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-    selector: "app-salaries-paginated-table",
-    templateUrl: "./salaries-paginated-table.component.html",
-    standalone: false
+  selector: "app-salaries-paginated-table",
+  templateUrl: "./salaries-paginated-table.component.html",
+  standalone: false,
 })
 export class SalariesPaginatedTableComponent implements OnInit, OnDestroy {
   readonly defaultPageSize = 15;
@@ -64,8 +64,8 @@ export class SalariesPaginatedTableComponent implements OnInit, OnDestroy {
               x,
               this.professions ?? [],
               this.skills ?? [],
-              this.industries ?? []
-            )
+              this.industries ?? [],
+            ),
         );
         this.source = x;
       });

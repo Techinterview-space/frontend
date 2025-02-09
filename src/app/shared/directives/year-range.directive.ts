@@ -7,15 +7,15 @@ import {
 } from "@angular/forms";
 
 @Directive({
-    selector: "[appYearRange]",
-    providers: [
-        {
-            provide: NG_VALIDATORS,
-            useExisting: forwardRef(() => YearRangeValidator),
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: "[appYearRange]",
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => YearRangeValidator),
+      multi: true,
+    },
+  ],
+  standalone: false,
 })
 export class YearRangeValidator implements Validator {
   @Input() min: number | null = null;

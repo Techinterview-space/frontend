@@ -5,10 +5,10 @@ import { SalariesSurveyForm } from "./salaries-survey-form";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
 
 @Component({
-    selector: "app-salaries-survey-block",
-    templateUrl: "./salaries-survey-block.component.html",
-    styleUrl: "./salaries-survey-block.component.scss",
-    standalone: false
+  selector: "app-salaries-survey-block",
+  templateUrl: "./salaries-survey-block.component.html",
+  styleUrl: "./salaries-survey-block.component.scss",
+  standalone: false,
 })
 export class SalariesSurveyBlockComponent implements OnInit {
   showThankYouBlock = false;
@@ -16,7 +16,7 @@ export class SalariesSurveyBlockComponent implements OnInit {
 
   constructor(
     private readonly surveyService: SurveyService,
-    private readonly gtag: GoogleAnalyticsService
+    private readonly gtag: GoogleAnalyticsService,
   ) {}
 
   ngOnInit(): void {

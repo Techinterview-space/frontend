@@ -14,9 +14,9 @@ import { InterviewFormGroup } from "./interview-form-group";
 import { InterviewTemplateSelectItem } from "./interview-template-select-item";
 
 @Component({
-    templateUrl: "./interview-edit-page.component.html",
-    styleUrls: ["./interview-edit-page.component.scss"],
-    standalone: false
+  templateUrl: "./interview-edit-page.component.html",
+  styleUrls: ["./interview-edit-page.component.scss"],
+  standalone: false,
 })
 export class InterviewEditPageComponent implements OnInit, OnDestroy {
   pageTitle = "Новая заметка к интервью";
@@ -47,7 +47,7 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
     private readonly alert: AlertService,
     private readonly router: Router,
     activatedRoute: ActivatedRoute,
-    private readonly userLabelsService: UserLabelsService
+    private readonly userLabelsService: UserLabelsService,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
   }
@@ -64,7 +64,7 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
           .pipe(untilDestroyed(this))
           .subscribe((templates) => {
             this.templates = templates.map(
-              (t) => new InterviewTemplateSelectItem(t)
+              (t) => new InterviewTemplateSelectItem(t),
             );
           });
 

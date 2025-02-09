@@ -1,4 +1,10 @@
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse } from "@angular/common/http";
+import {
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpEvent,
+  HttpErrorResponse,
+} from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { Injector, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
@@ -13,12 +19,12 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private readonly injector: Injector,
     private readonly router: Router,
-    private readonly alertService: AlertService
+    private readonly alertService: AlertService,
   ) {}
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     if (this.authService == null) {
       const authService = this.injector.get(AuthService);
@@ -35,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => this.processHttpEvent(event),
-        (error: any) => this.processHttpErrors(error)
+        (error: any) => this.processHttpErrors(error),
       ),
       // @ts-ignore
       catchError((err) => {
@@ -43,7 +49,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.router.navigateByUrl("server-unavailable");
           return of(err as any);
         }
-      })
+      }),
     );
   }
 

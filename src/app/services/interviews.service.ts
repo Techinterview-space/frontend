@@ -38,7 +38,7 @@ export class InterviewsService {
 
   markdown(id: string): Observable<InterviewMarkdownRespose> {
     return this.api.get<InterviewMarkdownRespose>(
-      this.apiUrl + id + "/markdown"
+      this.apiUrl + id + "/markdown",
     );
   }
 

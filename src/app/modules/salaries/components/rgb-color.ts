@@ -1,5 +1,9 @@
 export class RgbColor {
-  constructor(readonly _r: number, readonly _g: number, readonly _b: number) {}
+  constructor(
+    readonly _r: number,
+    readonly _g: number,
+    readonly _b: number,
+  ) {}
 
   toString(transparent: number | null): string {
     if (transparent != null) {

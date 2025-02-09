@@ -14,10 +14,10 @@ interface ProgressBarData {
 }
 
 @Component({
-    selector: "app-people-by-grades-chart",
-    templateUrl: "./people-by-grades-chart.component.html",
-    styleUrl: "./people-by-grades-chart.component.scss",
-    standalone: false
+  selector: "app-people-by-grades-chart",
+  templateUrl: "./people-by-grades-chart.component.html",
+  styleUrl: "./people-by-grades-chart.component.scss",
+  standalone: false,
 })
 export class PeopleByGradesChartComponent implements OnInit {
   readonly grades = DeveloperGradeEnum.grades;
@@ -54,7 +54,7 @@ export class PeopleByGradesChartComponent implements OnInit {
         this.source.peopleByGradesChartDataForLocal.allCount;
       this.barsForLocal = this.prepareData(
         this.source.peopleByGradesChartDataForLocal,
-        this.showPercents
+        this.showPercents,
       );
     }
 
@@ -63,20 +63,20 @@ export class PeopleByGradesChartComponent implements OnInit {
         this.source.peopleByGradesChartDataForRemote.allCount;
       this.barsForRemote = this.prepareData(
         this.source.peopleByGradesChartDataForRemote,
-        this.showPercents
+        this.showPercents,
       );
     }
   }
 
   private prepareData(
     data: PeopleByGradesChartData,
-    showPercents: boolean
+    showPercents: boolean,
   ): Array<ProgressBarData> {
     const totalCount = data.allCount;
 
     const result = data.data
       .filter(
-        (item) => item.grade != null && item.grade !== DeveloperGrade.Unknown
+        (item) => item.grade != null && item.grade !== DeveloperGrade.Unknown,
       )
       .sort((a, b) => a.grade - b.grade)
       .map((item, index) => {
@@ -101,7 +101,7 @@ export class PeopleByGradesChartComponent implements OnInit {
       });
 
     const noGradeData = data.data.find(
-      (item) => item.grade === DeveloperGrade.Unknown
+      (item) => item.grade === DeveloperGrade.Unknown,
     );
 
     if (noGradeData != null) {

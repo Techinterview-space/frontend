@@ -1,5 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from "@angular/common/http";
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 import { SpinnerService } from "@shared/services/spinners/spinner-service";
@@ -11,7 +16,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     if (NoTransparentHttpOptions.hasHeader(req)) {
       this.loaderService.showTransparent();

@@ -2,10 +2,10 @@ import { Component, Input } from "@angular/core";
 import { JobItem } from "./job-item";
 
 @Component({
-    selector: "app-jobs-table",
-    templateUrl: "./jobs-table.component.html",
-    styleUrls: ["./jobs-table.component.scss"],
-    standalone: false
+  selector: "app-jobs-table",
+  templateUrl: "./jobs-table.component.html",
+  styleUrls: ["./jobs-table.component.scss"],
+  standalone: false,
 })
 export class JobsTableComponent {
   @Input()

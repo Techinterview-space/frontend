@@ -154,7 +154,7 @@ export class SalariesChart implements SalariesChartResponse {
 
   constructor(
     readonly data: SalariesChartResponse,
-    readonly allProfessions: Array<LabelEntityDto>
+    readonly allProfessions: Array<LabelEntityDto>,
   ) {
     this.hasAuthentication = data.hasAuthentication;
     this.currencies = data.currencies;
@@ -226,7 +226,7 @@ export class SalariesChart implements SalariesChartResponse {
   private recalculateData(
     data: SalariesChartResponse,
     allProfessions: Array<LabelEntityDto>,
-    currentCurrency: CurrencyData
+    currentCurrency: CurrencyData,
   ): void {
     this._salaries = data.salaries.map((x) => {
       x.value = x.value / currentCurrency.value;
@@ -293,7 +293,7 @@ export class SalariesChart implements SalariesChartResponse {
 
     const salariesPerProfession = SalariesPerProfession.from(
       this._salaries,
-      allProfessions
+      allProfessions,
     );
 
     this._salariesPerProfessionForLocal = salariesPerProfession.local;

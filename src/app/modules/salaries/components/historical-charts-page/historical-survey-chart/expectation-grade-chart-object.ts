@@ -17,9 +17,9 @@ export class ExpectationGradeChartObject extends Chart {
     canvasId: string,
     chartData: HistoricalSurveyChartResponse,
     dispatcher: (
-      x: SurveyResultsByWeeksChartGradeItem
+      x: SurveyResultsByWeeksChartGradeItem,
     ) => ExpectationPercentage[],
-    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
+    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number,
   ) {
     const items = chartData.surveyResultsByWeeksChart.gradeItems;
 
@@ -29,7 +29,7 @@ export class ExpectationGradeChartObject extends Chart {
       "1",
       0,
       dispatcher,
-      totalCountDispatcher
+      totalCountDispatcher,
     );
 
     const middleSets = ExpectationGradeChartObject.prepareDatasetsForGrade(
@@ -38,7 +38,7 @@ export class ExpectationGradeChartObject extends Chart {
       "2",
       30,
       dispatcher,
-      totalCountDispatcher
+      totalCountDispatcher,
     );
 
     const seniorSets = ExpectationGradeChartObject.prepareDatasetsForGrade(
@@ -47,7 +47,7 @@ export class ExpectationGradeChartObject extends Chart {
       "3",
       60,
       dispatcher,
-      totalCountDispatcher
+      totalCountDispatcher,
     );
 
     const leadSets = ExpectationGradeChartObject.prepareDatasetsForGrade(
@@ -56,7 +56,7 @@ export class ExpectationGradeChartObject extends Chart {
       "4",
       90,
       dispatcher,
-      totalCountDispatcher
+      totalCountDispatcher,
     );
 
     const datasets: Array<DatasetItem> = [
@@ -74,7 +74,7 @@ export class ExpectationGradeChartObject extends Chart {
       type: "line" as ChartType,
       data: {
         labels: chartData.surveyResultsByWeeksChart.weekEnds.map((x) =>
-          x.toISOString().slice(0, 10)
+          x.toISOString().slice(0, 10),
         ),
         datasets: datasets,
       },
@@ -126,9 +126,9 @@ export class ExpectationGradeChartObject extends Chart {
     stack: string,
     darken = 0,
     dispatcher: (
-      x: SurveyResultsByWeeksChartGradeItem
+      x: SurveyResultsByWeeksChartGradeItem,
     ) => ExpectationPercentage[],
-    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number
+    totalCountDispatcher: (x: SurveyResultsByWeeksChartGradeItem) => number,
   ): { sets: Array<DatasetItem>; countSet: DatasetItem } {
     const items = gradeItems.filter((x) => x.grade === grade);
     const postfix = DeveloperGrade[grade];
@@ -139,8 +139,8 @@ export class ExpectationGradeChartObject extends Chart {
         items.map((x) =>
           ExpectationGradeChartObject.getExpectationReplyType(
             ExpectationReplyType.LessThanExpected,
-            dispatcher(x)
-          )
+            dispatcher(x),
+          ),
         ),
         1,
         RgbColor.red(darken),
@@ -150,7 +150,7 @@ export class ExpectationGradeChartObject extends Chart {
         stack,
         false,
         1,
-        0.8
+        0.8,
       ),
       new DatasetItem(
         grade,
@@ -158,8 +158,8 @@ export class ExpectationGradeChartObject extends Chart {
         items.map((x) =>
           ExpectationGradeChartObject.getExpectationReplyType(
             ExpectationReplyType.Expected,
-            dispatcher(x)
-          )
+            dispatcher(x),
+          ),
         ),
         1,
         RgbColor.blue(darken),
@@ -169,7 +169,7 @@ export class ExpectationGradeChartObject extends Chart {
         stack,
         false,
         1,
-        0.8
+        0.8,
       ),
       new DatasetItem(
         grade,
@@ -177,8 +177,8 @@ export class ExpectationGradeChartObject extends Chart {
         items.map((x) =>
           ExpectationGradeChartObject.getExpectationReplyType(
             ExpectationReplyType.MoreThanExpected,
-            dispatcher(x)
-          )
+            dispatcher(x),
+          ),
         ),
         1,
         RgbColor.lightGreen(darken),
@@ -188,7 +188,7 @@ export class ExpectationGradeChartObject extends Chart {
         stack,
         false,
         1,
-        0.8
+        0.8,
       ),
     ];
 
@@ -201,7 +201,7 @@ export class ExpectationGradeChartObject extends Chart {
       "circle",
       "y1",
       "line",
-      stack
+      stack,
     );
 
     return { sets, countSet };
@@ -209,7 +209,7 @@ export class ExpectationGradeChartObject extends Chart {
 
   static getExpectationReplyType(
     type: ExpectationReplyType,
-    records: ExpectationPercentage[]
+    records: ExpectationPercentage[],
   ): number {
     const record = records.find((x) => x.replyType === type);
     return record ? record.percentage : 0;
@@ -229,7 +229,7 @@ class DatasetItem {
     readonly stack: string,
     hidden = false,
     borderColorOpacity: number = 1,
-    bgColorOpacity: number = 0.5
+    bgColorOpacity: number = 0.5,
   ) {
     this.borderColor = color.toString(borderColorOpacity);
     this.backgroundColor = color.toString(bgColorOpacity);

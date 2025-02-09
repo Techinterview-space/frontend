@@ -2,10 +2,10 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { DialogModalCallToAction } from "./dialog-modal-call-to-action";
 
 @Component({
-    selector: "app-dialog",
-    templateUrl: "./dialog.component.html",
-    styleUrls: ["./dialog.component.scss"],
-    standalone: false
+  selector: "app-dialog",
+  templateUrl: "./dialog.component.html",
+  styleUrls: ["./dialog.component.scss"],
+  standalone: false,
 })
 export class DialogComponent {
   @Input()

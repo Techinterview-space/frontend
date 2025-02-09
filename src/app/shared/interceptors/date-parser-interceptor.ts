@@ -1,4 +1,10 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from "@angular/common/http";
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpResponse,
+} from "@angular/common/http";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
@@ -13,7 +19,7 @@ import { Iso8601Date } from "@shared/value-objects";
 export class DateParserInterceptor implements HttpInterceptor {
   public intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       tap(
@@ -25,8 +31,8 @@ export class DateParserInterceptor implements HttpInterceptor {
         },
         (err: any) => {
           // do nothing
-        }
-      )
+        },
+      ),
     );
   }
 

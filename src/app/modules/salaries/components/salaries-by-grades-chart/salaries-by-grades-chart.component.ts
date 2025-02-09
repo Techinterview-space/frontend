@@ -5,10 +5,10 @@ import { SalariesPerProfession } from "../salaries-per-profession";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
-    selector: "app-salaries-by-grades-chart",
-    templateUrl: "./salaries-by-grades-chart.component.html",
-    styleUrl: "./salaries-by-grades-chart.component.scss",
-    standalone: false
+  selector: "app-salaries-by-grades-chart",
+  templateUrl: "./salaries-by-grades-chart.component.html",
+  styleUrl: "./salaries-by-grades-chart.component.scss",
+  standalone: false,
 })
 export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
   @Input()

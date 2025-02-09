@@ -14,10 +14,10 @@ interface GradeToggleButton {
 }
 
 @Component({
-    selector: "app-historical-survey-chart",
-    templateUrl: "./historical-survey-chart.component.html",
-    styleUrls: ["./historical-survey-chart.component.scss"],
-    standalone: false
+  selector: "app-historical-survey-chart",
+  templateUrl: "./historical-survey-chart.component.html",
+  styleUrls: ["./historical-survey-chart.component.scss"],
+  standalone: false,
 })
 export class HistoricalSurveyChartComponent implements OnInit {
   @Input()
@@ -48,40 +48,40 @@ export class HistoricalSurveyChartComponent implements OnInit {
 
     this.usefulnessChart = new UsefulnessChartObject(
       "usefulness-chart",
-      this.data
+      this.data,
     );
 
     this.expectationChart = new ExpectationChartObject(
       "expectation-chart",
-      this.data
+      this.data,
     );
 
     this.usefulnessGradeLocalChart = new UsefulnessGradeChartObject(
       "usefulness-grade-local-chart",
       this.data,
       (x) => x.localUsefulnessPercentage,
-      (x) => x.localCount
+      (x) => x.localCount,
     );
 
     this.usefulnessGradeRemoteChart = new UsefulnessGradeChartObject(
       "usefulness-grade-remote-chart",
       this.data,
       (x) => x.remoteUsefulnessPercentage,
-      (x) => x.remoteCount
+      (x) => x.remoteCount,
     );
 
     this.expectationGradeLocalChart = new ExpectationGradeChartObject(
       "expectation-grade-local-chart",
       this.data,
       (x) => x.localExpectationPercentage,
-      (x) => x.localCount
+      (x) => x.localCount,
     );
 
     this.expectationGradeRemoteChart = new ExpectationGradeChartObject(
       "expectation-grade-remote-chart",
       this.data,
       (x) => x.remoteExpectationPercentage,
-      (x) => x.remoteCount
+      (x) => x.remoteCount,
     );
   }
 

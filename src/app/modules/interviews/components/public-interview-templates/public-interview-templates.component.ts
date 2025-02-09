@@ -7,16 +7,16 @@ import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-    templateUrl: "./public-interview-templates.component.html",
-    styleUrls: ["./public-interview-templates.component.scss"],
-    standalone: false
+  templateUrl: "./public-interview-templates.component.html",
+  styleUrls: ["./public-interview-templates.component.scss"],
+  standalone: false,
 })
 export class PublicInterviewTemplatesComponent implements OnInit, OnDestroy {
   templates: PaginatedList<InterviewTemplate> | null = null;
 
   constructor(
     private readonly service: InterviewTemplatesService,
-    private readonly title: TitleService
+    private readonly title: TitleService,
   ) {}
 
   ngOnInit(): void {

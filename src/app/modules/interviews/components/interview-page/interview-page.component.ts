@@ -11,10 +11,10 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { FileDownloadAnchor } from "@shared/value-objects/file-download-anchor";
 
 @Component({
-    selector: "app-interview-page",
-    templateUrl: "./interview-page.component.html",
-    styleUrls: ["./interview-page.component.scss"],
-    standalone: false
+  selector: "app-interview-page",
+  templateUrl: "./interview-page.component.html",
+  styleUrls: ["./interview-page.component.scss"],
+  standalone: false,
 })
 export class InterviewPageComponent implements OnInit, OnDestroy {
   pageTitle = "";
@@ -32,7 +32,7 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
     private readonly title: TitleService,
     private readonly alert: AlertService,
     private readonly router: Router,
-    activatedRoute: ActivatedRoute
+    activatedRoute: ActivatedRoute,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
   }
@@ -69,12 +69,12 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
               `Заметка для кандидата ${
                 this.interview!.candidateName
               } была удалена`,
-              true
+              true,
             );
             this.router.navigate(["/interviews/my"]);
           });
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -96,7 +96,7 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
   exportAsPDF(): void {
     if (this.downloadedFile != null) {
       new FileDownloadAnchor(this.downloadedFile).execute(
-        `${this.interview!.candidateName}_${this.interview!.id}.pdf`
+        `${this.interview!.candidateName}_${this.interview!.id}.pdf`,
       );
       return;
     }
@@ -107,7 +107,7 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
       .subscribe((file) => {
         this.downloadedFile = file;
         new FileDownloadAnchor(this.downloadedFile).execute(
-          `${this.interview!.candidateName}_${this.interview!.id}.pdf`
+          `${this.interview!.candidateName}_${this.interview!.id}.pdf`,
         );
       });
   }

@@ -3,7 +3,7 @@ import { SplittedByWhitespacesString } from "./splitted-by-whitespaces-string";
 describe("SplittedByWhitespacesString", () => {
   it("should split string in UpperCase", () => {
     expect(new SplittedByWhitespacesString("HelloWorld").value).toBe(
-      "Hello World"
+      "Hello World",
     );
   });
 

@@ -3,10 +3,10 @@ import { SalariesCountWeekByWeekChart } from "@services/historical-charts.servic
 import { HistoricalSalariesChartObject } from "./historical-salaries-chart-object";
 
 @Component({
-    selector: "app-historical-salaries-chart",
-    templateUrl: "./historical-salaries-chart.component.html",
-    styleUrls: ["./historical-salaries-chart.component.scss"],
-    standalone: false
+  selector: "app-historical-salaries-chart",
+  templateUrl: "./historical-salaries-chart.component.html",
+  styleUrls: ["./historical-salaries-chart.component.scss"],
+  standalone: false,
 })
 export class HistoricalSalariesChartComponent implements OnInit {
   @Input()
@@ -21,7 +21,7 @@ export class HistoricalSalariesChartComponent implements OnInit {
 
     this.chart = new HistoricalSalariesChartObject(
       "canvas-historical-chart",
-      this.data
+      this.data,
     );
   }
 }

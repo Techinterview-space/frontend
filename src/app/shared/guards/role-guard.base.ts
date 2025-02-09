@@ -14,14 +14,14 @@ import { Injectable } from "@angular/core";
 export abstract class RoleGuardBase implements CanActivate {
   constructor(
     private readonly router: Router,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) {}
 
   protected abstract roleToCheck(): UserRole;
 
   canActivate(
     route: ActivatedRouteSnapshot | null,
-    state: RouterStateSnapshot | null
+    state: RouterStateSnapshot | null,
   ): Observable<boolean> {
     return this.authService.getCurrentUser().pipe(
       map((user) => {
@@ -32,7 +32,7 @@ export abstract class RoleGuardBase implements CanActivate {
           return false;
         }
         return true;
-      })
+      }),
     );
   }
 }

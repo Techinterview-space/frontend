@@ -9,7 +9,7 @@ import { TitleService } from "@services/title.service";
 export class MetaTagService {
   constructor(
     private readonly title: TitleService,
-    private readonly meta: Meta
+    private readonly meta: Meta,
   ) {}
 
   updateChartMetaTags(title: string, description: string, url: string): void {

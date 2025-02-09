@@ -5,10 +5,10 @@ import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended"
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-    selector: "app-home",
-    templateUrl: "./home.component.html",
-    styleUrls: ["./home.component.scss"],
-    standalone: false
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"],
+  standalone: false,
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private readonly activatedRoute: ActivatedRouteExtended;

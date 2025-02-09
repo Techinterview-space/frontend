@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
-    selector: "app-interview-markdown-modal-dialog",
-    templateUrl: "./interview-markdown-modal-dialog.component.html",
-    standalone: false
+  selector: "app-interview-markdown-modal-dialog",
+  templateUrl: "./interview-markdown-modal-dialog.component.html",
+  standalone: false,
 })
 export class InterviewMarkdownModalDialogComponent implements OnInit {
   private readonly copyBtnDefaultTitle = "Copy";

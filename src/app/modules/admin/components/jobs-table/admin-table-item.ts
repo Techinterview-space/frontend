@@ -4,7 +4,7 @@ export abstract class AdminTableItem<TResult> {
   constructor(
     public readonly title: string,
     public readonly hint: string,
-    protected readonly action: () => TResult
+    protected readonly action: () => TResult,
   ) {
     Assertion.notNull(title, "title");
     Assertion.notNull(hint, "hint");

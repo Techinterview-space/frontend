@@ -11,10 +11,10 @@ interface GradeToggleButton {
 }
 
 @Component({
-    selector: "app-historical-salaries-by-grade-chart",
-    templateUrl: "./historical-salaries-by-grade-chart.component.html",
-    styleUrls: ["./historical-salaries-by-grade-chart.component.scss"],
-    standalone: false
+  selector: "app-historical-salaries-by-grade-chart",
+  templateUrl: "./historical-salaries-by-grade-chart.component.html",
+  styleUrls: ["./historical-salaries-by-grade-chart.component.scss"],
+  standalone: false,
 })
 export class HistoricalSalariesByGradeChartComponent implements OnInit {
   gradesButtons: Array<GradeToggleButton> = [];
@@ -38,7 +38,7 @@ export class HistoricalSalariesByGradeChartComponent implements OnInit {
 
     this.chart = new HistoricalSalariesByGradeChartObject(
       "canvas-historical-chart-by-grade",
-      this.data
+      this.data,
     );
   }
 

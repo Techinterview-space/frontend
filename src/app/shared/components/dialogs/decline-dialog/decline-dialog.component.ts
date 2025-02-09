@@ -5,10 +5,10 @@ import Assertion from "@shared/validation/assertion";
 import { DeclineForm } from "../models/decline-form";
 
 @Component({
-    selector: "app-decline-dialog",
-    templateUrl: "./decline-dialog.component.html",
-    styleUrls: ["./decline-dialog.component.scss"],
-    standalone: false
+  selector: "app-decline-dialog",
+  templateUrl: "./decline-dialog.component.html",
+  styleUrls: ["./decline-dialog.component.scss"],
+  standalone: false,
 })
 export class DeclineDialogComponent {
   get showModal(): boolean {

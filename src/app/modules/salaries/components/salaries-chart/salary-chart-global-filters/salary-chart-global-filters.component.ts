@@ -12,10 +12,10 @@ import { LabelEntityDto } from "@services/label-entity.model";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 
 @Component({
-    selector: "app-salary-chart-global-filters",
-    templateUrl: "./salary-chart-global-filters.component.html",
-    styleUrl: "./salary-chart-global-filters.component.scss",
-    standalone: false
+  selector: "app-salary-chart-global-filters",
+  templateUrl: "./salary-chart-global-filters.component.html",
+  styleUrl: "./salary-chart-global-filters.component.scss",
+  standalone: false,
 })
 export class SalaryChartGlobalFiltersComponent implements OnInit {
   readonly allCities: Array<SelectItem<KazakhstanCity>> =
@@ -97,7 +97,7 @@ export class SalaryChartGlobalFiltersComponent implements OnInit {
     if (data) {
       this.shareClicked.emit(data);
       this.alert.success(
-        "Ссылка скопирована в буфер обмена. Скорее отправляйте ее друзьям!"
+        "Ссылка скопирована в буфер обмена. Скорее отправляйте ее друзьям!",
       );
     }
   }

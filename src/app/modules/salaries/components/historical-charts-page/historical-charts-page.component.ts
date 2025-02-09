@@ -22,9 +22,9 @@ import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-
 import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
 
 @Component({
-    templateUrl: "./historical-charts-page.component.html",
-    styleUrls: ["./historical-charts-page.component.scss"],
-    standalone: false
+  templateUrl: "./historical-charts-page.component.html",
+  styleUrls: ["./historical-charts-page.component.scss"],
+  standalone: false,
 })
 export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
   readonly activatedRoute: SalariesChartActivatedRoute;
@@ -49,7 +49,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     private readonly cookieService: CookieService,
     private readonly titleService: TitleService,
     private readonly gtag: GoogleAnalyticsService,
-    activatedRouteSource: ActivatedRoute
+    activatedRouteSource: ActivatedRoute,
   ) {
     titleService.setTitle("Исторические данные");
     this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
@@ -103,7 +103,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     this.gtag.event(
       "salaries_filters_applied",
       "historical_data",
-      selectedGrade
+      selectedGrade,
     );
     this.load(data);
   }
@@ -119,7 +119,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
 
     if (this.router.url.indexOf("?") > 0) {
       this.router.navigateByUrl(
-        this.router.url.substring(0, this.router.url.indexOf("?"))
+        this.router.url.substring(0, this.router.url.indexOf("?")),
       );
       return;
     }
@@ -133,7 +133,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
 
     const currentUrl = new ApiBackendAbsoluteUrl("/chart-share").asString();
     const shareUrl = `${currentUrl}?${new ConvertObjectToHttpParams(
-      this.filterData
+      this.filterData,
     ).get()}`;
     new ClipboardCopier(shareUrl).execute();
   }

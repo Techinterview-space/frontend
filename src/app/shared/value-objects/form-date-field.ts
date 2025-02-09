@@ -18,8 +18,8 @@ export class FormDateField {
       Date.UTC(
         this.dateFieldValue.year,
         this.dateFieldValue.month - 1,
-        this.dateFieldValue.day
-      )
+        this.dateFieldValue.day,
+      ),
     );
   }
 

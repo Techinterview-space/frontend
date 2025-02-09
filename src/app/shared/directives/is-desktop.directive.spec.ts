@@ -8,7 +8,7 @@ describe("IsDesktopDirective", () => {
     const directive = new IsDesktopDirective(
       new ViewContainerRefStub(),
       new TemplateRefStub(),
-      new CheckDeviceService()
+      new CheckDeviceService(),
     );
     expect(directive).toBeTruthy();
   });

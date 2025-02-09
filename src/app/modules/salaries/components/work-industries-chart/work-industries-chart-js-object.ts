@@ -10,7 +10,7 @@ export class WorkIndustriesChartJsObject extends Chart {
   constructor(
     canvasId: string,
     private readonly salaries: UserSalary[],
-    private readonly industries: LabelEntityDto[]
+    private readonly industries: LabelEntityDto[],
   ) {
     const datasets: Array<ChartDatasetItem> = [];
 
@@ -67,7 +67,7 @@ export class WorkIndustriesChartJsObject extends Chart {
 
   static prepareUniqueIndustries(
     salaries: UserSalary[],
-    industries: LabelEntityDto[]
+    industries: LabelEntityDto[],
   ): LabelEntityDto[] {
     const uniqueIndustries: Array<LabelEntityDto> = [];
     salaries.forEach((x) => {
@@ -81,7 +81,7 @@ export class WorkIndustriesChartJsObject extends Chart {
       }
 
       const uniqueSkill = uniqueIndustries.find(
-        (y) => y.id === x.workIndustryId
+        (y) => y.id === x.workIndustryId,
       );
       if (uniqueSkill != null) {
         return;
@@ -102,7 +102,7 @@ class ChartDatasetItem {
   constructor(
     uniqueIndustries: Array<LabelEntityDto>,
     salaries: Array<UserSalary>,
-    includeNoData: boolean
+    includeNoData: boolean,
   ) {
     this.label = "Сфера работы";
     this.data = [];
@@ -122,7 +122,7 @@ class ChartDatasetItem {
     }
 
     const noDataSalaries = salaries.filter(
-      (x) => x.workIndustryId == null
+      (x) => x.workIndustryId == null,
     ).length;
     this.data.push(noDataSalaries);
     this.backgroundColor.push(new RandomRgbColor().toString(0.4));

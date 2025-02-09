@@ -11,8 +11,8 @@ import { AlertService } from "@shared/components/alert/services/alert.service";
 import { TelegramUserSettingsEditForm } from "./settings-edit-form";
 
 @Component({
-    templateUrl: "./telegram-user-settings.component.html",
-    standalone: false
+  templateUrl: "./telegram-user-settings.component.html",
+  standalone: false,
 })
 export class TelegramUserSettingsComponent implements OnInit, OnDestroy {
   items: Array<TelegramUserSettings> | null = null;
@@ -26,7 +26,7 @@ export class TelegramUserSettingsComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: TelegramBotService,
     titleService: TitleService,
-    private readonly alert: AlertService
+    private readonly alert: AlertService,
   ) {
     titleService.setTitle("Использование бота");
   }
@@ -72,8 +72,8 @@ export class TelegramUserSettingsComponent implements OnInit, OnDestroy {
               this.alert.success("Настройки были удалены");
               this.loadData(this.currentPage);
             });
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -120,7 +120,7 @@ export class TelegramUserSettingsComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
         this.alert.success(
-          `Настройки для пользователя ${x.username} (${x.chatId}) были созданы`
+          `Настройки для пользователя ${x.username} (${x.chatId}) были созданы`,
         );
         this.editForm = null;
         this.ngOnInit();

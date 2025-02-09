@@ -1,8 +1,8 @@
 import { ElementRef, HostListener, Directive } from "@angular/core";
 
 @Directive({
-    selector: "[appLatin]",
-    standalone: false
+  selector: "[appLatin]",
+  standalone: false,
 })
 export class LatinCharactersDirective {
   // Allow decimal numbers and latin characters values

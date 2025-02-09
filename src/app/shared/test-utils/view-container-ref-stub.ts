@@ -19,21 +19,21 @@ export class ViewContainerRefStub extends ViewContainerRef {
       injector?: Injector | undefined;
       ngModuleRef?: NgModuleRef<unknown> | undefined;
       projectableNodes?: Node[][] | undefined;
-    }
+    },
   ): ComponentRef<C> | any;
   createComponent<C>(
     componentFactory: ComponentFactory<C>,
     index?: number,
     injector?: Injector,
     projectableNodes?: any[][],
-    ngModuleRef?: NgModuleRef<any>
+    ngModuleRef?: NgModuleRef<any>,
   ): ComponentRef<C> | any;
   createComponent<C>(
     componentFactory: any,
     index?: any,
     injector?: any,
     projectableNodes?: any,
-    ngModuleRef?: any
+    ngModuleRef?: any,
   ): ComponentRef<C> | ComponentRef<C> | any {
     return null;
   }
@@ -51,7 +51,7 @@ export class ViewContainerRefStub extends ViewContainerRef {
 
   createEmbeddedView<C>(
     templateRef: TemplateRef<C>,
-    context?: C
+    context?: C,
   ): EmbeddedViewRef<C> {
     return null as unknown as EmbeddedViewRef<C>;
   }

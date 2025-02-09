@@ -11,7 +11,7 @@ declare const require: {
   context(
     path: string,
     deep?: boolean,
-    filter?: RegExp
+    filter?: RegExp,
   ): {
     <T>(id: string): T;
     keys(): string[];
@@ -21,11 +21,13 @@ declare const require: {
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting()
+  platformBrowserDynamicTesting(),
 );
 
 beforeAll(() => {
-  window.onbeforeunload = () => "Oh no!";
+  beforeEach(async () => {
+    window.onbeforeunload = () => "Oh no!"; // Prevent page reloads during tests
+  });
 });
 
 // Then we find all the tests.

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-    selector: "app-add-salary-progress-bar",
-    templateUrl: "./add-salary-progress-bar.component.html",
-    styleUrl: "./add-salary-progress-bar.component.scss",
-    standalone: false
+  selector: "app-add-salary-progress-bar",
+  templateUrl: "./add-salary-progress-bar.component.html",
+  styleUrl: "./add-salary-progress-bar.component.scss",
+  standalone: false,
 })
 export class AddSalaryProgrssBarComponent implements OnInit {
   @Input()

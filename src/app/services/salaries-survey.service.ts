@@ -58,16 +58,16 @@ export class SurveyService {
 
   getUserSalariesSurveyDataResponse(): Observable<GetUserSalariesSurveyDataResponse> {
     return this.api.get<GetUserSalariesSurveyDataResponse>(
-      this.apiUrl + "salaries-user-stat-data"
+      this.apiUrl + "salaries-user-stat-data",
     );
   }
 
   salariesSatGapeReply(
-    data: SalariesStatSurveyData
+    data: SalariesStatSurveyData,
   ): Observable<SalariesStatSurveyReply> {
     return this.api.post<SalariesStatSurveyReply>(
       this.apiUrl + "salaries-stat-page-reply",
-      data
+      data,
     );
   }
 

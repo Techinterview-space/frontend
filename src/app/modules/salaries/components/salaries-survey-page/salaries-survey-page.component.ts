@@ -31,10 +31,10 @@ interface ProgressBarColorData {
 }
 
 @Component({
-    selector: "salaries-survey-page",
-    templateUrl: "./salaries-survey-page.component.html",
-    styleUrls: ["./salaries-survey-page.component.scss"],
-    standalone: false
+  selector: "salaries-survey-page",
+  templateUrl: "./salaries-survey-page.component.html",
+  styleUrls: ["./salaries-survey-page.component.scss"],
+  standalone: false,
 })
 export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
   static readonly defaultColor: ProgressBarColorData = {
@@ -121,31 +121,31 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
     private readonly titleService: TitleService,
-    private readonly gtag: GoogleAnalyticsService
+    private readonly gtag: GoogleAnalyticsService,
   ) {
     titleService.setTitle("Опрос о пользе зарплатной статистики");
 
     this.usefullnesLegendItems = [
       SalariesSurveyPageComponent.colorsByUsefulness.get(
-        UsefulnessReplyType.Yes
+        UsefulnessReplyType.Yes,
       ) ?? SalariesSurveyPageComponent.defaultColor,
       SalariesSurveyPageComponent.colorsByUsefulness.get(
-        UsefulnessReplyType.No
+        UsefulnessReplyType.No,
       ) ?? SalariesSurveyPageComponent.defaultColor,
       SalariesSurveyPageComponent.colorsByUsefulness.get(
-        UsefulnessReplyType.NotSure
+        UsefulnessReplyType.NotSure,
       ) ?? SalariesSurveyPageComponent.defaultColor,
     ];
 
     this.expectationLegendItems = [
       SalariesSurveyPageComponent.colorsByExpectation.get(
-        ExpectationReplyType.Expected
+        ExpectationReplyType.Expected,
       ) ?? SalariesSurveyPageComponent.defaultColor,
       SalariesSurveyPageComponent.colorsByExpectation.get(
-        ExpectationReplyType.MoreThanExpected
+        ExpectationReplyType.MoreThanExpected,
       ) ?? SalariesSurveyPageComponent.defaultColor,
       SalariesSurveyPageComponent.colorsByExpectation.get(
-        ExpectationReplyType.LessThanExpected
+        ExpectationReplyType.LessThanExpected,
       ) ?? SalariesSurveyPageComponent.defaultColor,
     ];
   }
@@ -202,7 +202,7 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
         const colorData =
           SalariesSurveyPageComponent.colorsByUsefulness.get(replyType);
         return colorData ?? SalariesSurveyPageComponent.defaultColor;
-      }
+      },
     );
 
     this.progressBarForExpectation = this.prepareData<ExpectationReplyType>(
@@ -213,7 +213,7 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
         const colorData =
           SalariesSurveyPageComponent.colorsByExpectation.get(replyType);
         return colorData ?? SalariesSurveyPageComponent.defaultColor;
-      }
+      },
     );
   }
 
@@ -221,7 +221,7 @@ export class SalariesSurveyPageComponent implements OnInit, OnDestroy {
     data: Array<SalariesSurveyReplyDataItem<TEnum>>,
     totalCount: number,
     showPercents: boolean,
-    giveColorData: (replyType: TEnum) => ProgressBarColorData
+    giveColorData: (replyType: TEnum) => ProgressBarColorData,
   ): Array<ProgressBarData> {
     var result: Array<ProgressBarData> = [];
     data.forEach((item, index) => {

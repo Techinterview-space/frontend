@@ -23,14 +23,14 @@ export class PeopleDistributionChartObject extends Chart {
     salaries: Array<UserSalary>,
     otherLimit: number,
     title: string,
-    private readonly professionEntities: Array<LabelEntityDto>
+    private readonly professionEntities: Array<LabelEntityDto>,
   ) {
     const datasets: Array<ChartDatasetType> = [];
 
     let professions: Array<ProfessionItem> = [];
     salaries.forEach((x) => {
       const existingItem = professions.find(
-        (p) => p.professionId === x.professionId
+        (p) => p.professionId === x.professionId,
       );
       if (existingItem != null) {
         existingItem.count++;
@@ -48,10 +48,10 @@ export class PeopleDistributionChartObject extends Chart {
     professions = professions.sort((a, b) => b.count - a.count);
 
     const professionsToInclude = professions.filter(
-      (x) => x.count > otherLimit
+      (x) => x.count > otherLimit,
     );
     const salariesNotINcluded = professions.filter(
-      (x) => x.count <= otherLimit
+      (x) => x.count <= otherLimit,
     );
 
     if (salaries.length > 0) {

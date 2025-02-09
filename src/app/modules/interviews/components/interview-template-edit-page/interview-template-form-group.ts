@@ -53,8 +53,8 @@ export class InterviewTemplateFormGroup extends FormGroup {
         this.subjectsFormArray.push(
           InterviewTemplateFormGroup.createSubjectFormGroup(
             subject.title,
-            subject.description
-          )
+            subject.description,
+          ),
         );
       });
     }
@@ -64,7 +64,7 @@ export class InterviewTemplateFormGroup extends FormGroup {
 
   addSubject(): void {
     this.subjectsFormArray.push(
-      InterviewTemplateFormGroup.createSubjectFormGroup(null, null)
+      InterviewTemplateFormGroup.createSubjectFormGroup(null, null),
     );
   }
 
@@ -102,18 +102,18 @@ export class InterviewTemplateFormGroup extends FormGroup {
 
   getSubjectTitleField(subjectIndex: number): AbstractControl {
     return this.subjectsFormArray.controls[subjectIndex]?.get(
-      "title"
+      "title",
     ) as AbstractControl;
   }
 
   getSubjectDescriptionField(subjectIndex: number): AbstractControl {
     return this.subjectsFormArray.controls[subjectIndex]?.get(
-      "description"
+      "description",
     ) as AbstractControl;
   }
 
   createRequest(
-    selectedLabels: Array<Label>
+    selectedLabels: Array<Label>,
   ): InterviewTemplateCreateRequest | null {
     if (!this.valid) {
       this.markAllAsTouched();
@@ -138,7 +138,7 @@ export class InterviewTemplateFormGroup extends FormGroup {
   }
 
   updateRequest(
-    selectedLabels: Array<Label>
+    selectedLabels: Array<Label>,
   ): InterviewTemplateUpdateRequest | null {
     var createRequest = this.createRequest(selectedLabels);
 
@@ -163,7 +163,7 @@ export class InterviewTemplateFormGroup extends FormGroup {
 
   private static createSubjectFormGroup(
     title: string | null,
-    description: string | null
+    description: string | null,
   ): FormGroup {
     description = description ?? "Junior:\r\n\r\nMiddle: \r\n\r\nSenior:";
     return new FormGroup({

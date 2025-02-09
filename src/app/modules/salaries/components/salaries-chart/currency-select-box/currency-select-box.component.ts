@@ -5,10 +5,10 @@ import { SalariesChart } from "../salaries-chart";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
 
 @Component({
-    selector: "app-currency-select-box",
-    templateUrl: "./currency-select-box.component.html",
-    styleUrl: "./currency-select-box.component.scss",
-    standalone: false
+  selector: "app-currency-select-box",
+  templateUrl: "./currency-select-box.component.html",
+  styleUrl: "./currency-select-box.component.scss",
+  standalone: false,
 })
 export class CurrencySelectBoxComponent implements OnInit {
   @Input()

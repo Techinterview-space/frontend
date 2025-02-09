@@ -5,10 +5,10 @@ import { SalariesByAgeOrExperienceChartObject } from "../salaries-by-age-or-expe
 import { SalariesByAgeOrExperienceChart } from "@services/user-salaries.service";
 
 @Component({
-    selector: "app-salaries-by-age-chart",
-    templateUrl: "./salaries-by-age-chart.component.html",
-    styleUrl: "./salaries-by-age-chart.component.scss",
-    standalone: false
+  selector: "app-salaries-by-age-chart",
+  templateUrl: "./salaries-by-age-chart.component.html",
+  styleUrl: "./salaries-by-age-chart.component.scss",
+  standalone: false,
 })
 export class SalariesByAgeChartComponent {
   @Input()
@@ -38,7 +38,7 @@ export class SalariesByAgeChartComponent {
     ) {
       this.chartDataLocal = this.initChartWithParams(
         this.canvasIdLocal,
-        this.chart.salariesByUserAgeChartForLocalSalaries
+        this.chart.salariesByUserAgeChartForLocalSalaries,
       );
     }
 
@@ -49,14 +49,14 @@ export class SalariesByAgeChartComponent {
     ) {
       this.chartDataLocal = this.initChartWithParams(
         this.canvasIdRemote,
-        this.chart.salariesByUserAgeChartForRemoteSalaries
+        this.chart.salariesByUserAgeChartForRemoteSalaries,
       );
     }
   }
 
   private initChartWithParams(
     canvasId: string,
-    data: SalariesByAgeOrExperienceChart
+    data: SalariesByAgeOrExperienceChart,
   ): SalariesByAgeOrExperienceChartObject {
     const chart = new SalariesByAgeOrExperienceChartObject(canvasId, data);
 

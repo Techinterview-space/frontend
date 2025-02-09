@@ -9,8 +9,8 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { UserLabelEditForm } from "./user-label-edit-form";
 
 @Component({
-    templateUrl: "./my-user-labels.component.html",
-    standalone: false
+  templateUrl: "./my-user-labels.component.html",
+  standalone: false,
 })
 export class MyUserLabelsComponent implements OnInit, OnDestroy {
   labels: Array<Label> | null = null;
@@ -21,7 +21,7 @@ export class MyUserLabelsComponent implements OnInit, OnDestroy {
   constructor(
     private readonly title: TitleService,
     private readonly alert: AlertService,
-    private readonly service: UserLabelsService
+    private readonly service: UserLabelsService,
   ) {}
 
   ngOnDestroy(): void {
@@ -77,8 +77,8 @@ export class MyUserLabelsComponent implements OnInit, OnDestroy {
               this.confirmDeletionMessage = null;
               this.ngOnInit();
             });
-        }
-      )
+        },
+      ),
     );
   }
 }

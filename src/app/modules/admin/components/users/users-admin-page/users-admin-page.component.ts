@@ -10,8 +10,8 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { UserRolesEditForm } from "./user-roles-edit-form";
 
 @Component({
-    templateUrl: "./users-admin-page.component.html",
-    standalone: false
+  templateUrl: "./users-admin-page.component.html",
+  standalone: false,
 })
 export class UsersAdminPageComponent implements OnInit, OnDestroy {
   get hasSelectedUser(): boolean {
@@ -27,7 +27,7 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: UserAdminService,
-    private readonly titleService: TitleService
+    private readonly titleService: TitleService,
   ) {}
 
   ngOnInit(): void {

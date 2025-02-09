@@ -6,7 +6,7 @@ export abstract class BaseApiService<TModel> {
 
   constructor(
     protected readonly api: ApiService,
-    private readonly resourceUrlPart: string
+    private readonly resourceUrlPart: string,
   ) {
     // TODO Maxim: validate resourceUrlPart
     this.apiUrl = `/api/${this.resourceUrlPart}/`;

@@ -26,9 +26,9 @@ import { EditSalaryForm } from "./edit-salary-form";
 import { Gender, GenderEnum } from "@models/enums/gender.enum";
 
 @Component({
-    templateUrl: "./add-salary.component.html",
-    styleUrl: "./add-salary.component.scss",
-    standalone: false
+  templateUrl: "./add-salary.component.html",
+  styleUrl: "./add-salary.component.scss",
+  standalone: false,
 })
 export class AddSalaryComponent implements OnInit, OnDestroy {
   @Output()
@@ -65,7 +65,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
     private readonly alert: AlertService,
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly gtag: GoogleAnalyticsService
+    private readonly gtag: GoogleAnalyticsService,
   ) {}
 
   ngOnInit(): void {
@@ -118,7 +118,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
         this.addSalaryForm = new EditSalaryForm(
           null,
           this.industries.length > 0,
-          true
+          true,
         );
       });
   }

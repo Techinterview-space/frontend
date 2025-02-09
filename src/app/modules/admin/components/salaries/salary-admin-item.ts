@@ -33,7 +33,7 @@ export class SalaryAdminItem {
     private readonly item: UserSalaryAdminDto,
     professions: Array<LabelEntityDto>,
     skills: Array<LabelEntityDto>,
-    industries: Array<LabelEntityDto>
+    industries: Array<LabelEntityDto>,
   ) {
     this.id = item.id;
     this.value = item.value;
@@ -51,11 +51,11 @@ export class SalaryAdminItem {
     this.city = item.city != null ? KazakhstanCity[item.city] : "-";
     this.skill =
       item.skillId != null
-        ? skills.find((x) => x.id == item.skillId)?.title ?? "-"
+        ? (skills.find((x) => x.id == item.skillId)?.title ?? "-")
         : "-";
     this.industry =
       item.workIndustryId != null
-        ? industries.find((x) => x.id == item.workIndustryId)?.title ?? "-"
+        ? (industries.find((x) => x.id == item.workIndustryId)?.title ?? "-")
         : "-";
 
     this.sourceType = item.sourceType

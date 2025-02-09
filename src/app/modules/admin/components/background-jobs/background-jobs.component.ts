@@ -7,10 +7,10 @@ import { AdminToolsService } from "@services/admin-tools.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-    selector: "app-background-jobs",
-    templateUrl: "./background-jobs.component.html",
-    styleUrls: ["./background-jobs.component.scss"],
-    standalone: false
+  selector: "app-background-jobs",
+  templateUrl: "./background-jobs.component.html",
+  styleUrls: ["./background-jobs.component.scss"],
+  standalone: false,
 })
 export class BackgroundJobsComponent implements OnInit, OnDestroy {
   authorizationToken: string | null = null;
@@ -21,7 +21,7 @@ export class BackgroundJobsComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly titleService: TitleService,
     private readonly healthCheckService: HealthCheckService,
-    private readonly adminToolsService: AdminToolsService
+    private readonly adminToolsService: AdminToolsService,
   ) {
     this.titleService.setTitle("Инструменты");
   }
@@ -31,7 +31,7 @@ export class BackgroundJobsComponent implements OnInit, OnDestroy {
 
     this.healthCheckItems = [
       new HealthCheckItem("API", "API для запросов", () =>
-        this.healthCheckService.backend()
+        this.healthCheckService.backend(),
       ),
     ];
 

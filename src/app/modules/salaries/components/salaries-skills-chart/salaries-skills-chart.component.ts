@@ -10,7 +10,7 @@ class TableRow {
   constructor(
     private readonly skill: LabelEntityDto,
     readonly value: number,
-    private readonly totalCount: number
+    private readonly totalCount: number,
   ) {
     this.title = skill.title;
     this.part = (value / totalCount) * 100;
@@ -18,10 +18,10 @@ class TableRow {
 }
 
 @Component({
-    selector: "app-salaries-skills-chart",
-    templateUrl: "./salaries-skills-chart.component.html",
-    styleUrl: "./salaries-skills-chart.component.scss",
-    standalone: false
+  selector: "app-salaries-skills-chart",
+  templateUrl: "./salaries-skills-chart.component.html",
+  styleUrl: "./salaries-skills-chart.component.scss",
+  standalone: false,
 })
 export class SalariesSkillsChartComponent implements OnInit {
   @Input()
@@ -56,13 +56,13 @@ export class SalariesSkillsChartComponent implements OnInit {
 
     const uniqueSkills = SalariesSkillsChartJsObject.prepareUniqueSkills(
       this.salaries,
-      this.skills
+      this.skills,
     );
     const salariesWithSkill = this.salaries.filter((x) => x.skillId != null);
     this.tableRows = uniqueSkills
       .map((skill) => {
         const value = salariesWithSkill.filter(
-          (x) => x.skillId === skill.id
+          (x) => x.skillId === skill.id,
         ).length;
 
         this.totalCount += value;
@@ -95,7 +95,7 @@ export class SalariesSkillsChartComponent implements OnInit {
     this.chartDataLocal = new SalariesSkillsChartJsObject(
       this.canvasId,
       this.salaries,
-      this.skills
+      this.skills,
     );
 
     var chartEl = document.getElementById(this.canvasId);

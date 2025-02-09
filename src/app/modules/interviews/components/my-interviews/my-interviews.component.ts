@@ -5,17 +5,17 @@ import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-    selector: "app-my-interviews",
-    templateUrl: "./my-interviews.component.html",
-    styleUrls: ["./my-interviews.component.scss"],
-    standalone: false
+  selector: "app-my-interviews",
+  templateUrl: "./my-interviews.component.html",
+  styleUrls: ["./my-interviews.component.scss"],
+  standalone: false,
 })
 export class MyInterviewsComponent implements OnInit, OnDestroy {
   interviews: Array<Interview> | null = null;
 
   constructor(
     private readonly service: InterviewsService,
-    private readonly title: TitleService
+    private readonly title: TitleService,
   ) {}
 
   ngOnInit(): void {

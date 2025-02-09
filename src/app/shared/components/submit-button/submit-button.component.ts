@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-    selector: "app-submit-button",
-    templateUrl: "./submit-button.component.html",
-    styleUrls: ["./submit-button.component.scss"],
-    standalone: false
+  selector: "app-submit-button",
+  templateUrl: "./submit-button.component.html",
+  styleUrls: ["./submit-button.component.scss"],
+  standalone: false,
 })
 export class SubmitButtonComponent {
   @Input()

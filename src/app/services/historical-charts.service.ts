@@ -54,18 +54,18 @@ export class HistoricalChartsService {
   }
 
   salariesChart(
-    params: SalariesChartFilterData
+    params: SalariesChartFilterData,
   ): Observable<GetSalariesHistoricalChartResponse> {
     return this.api.get<GetSalariesHistoricalChartResponse>(
-      this.apiUrl + "salaries?" + new ConvertObjectToHttpParams(params).get()
+      this.apiUrl + "salaries?" + new ConvertObjectToHttpParams(params).get(),
     );
   }
 
   surveyChart(
-    params: SalariesChartFilterData
+    params: SalariesChartFilterData,
   ): Observable<HistoricalSurveyChartResponse> {
     return this.api.get<HistoricalSurveyChartResponse>(
-      this.apiUrl + "survey?" + new ConvertObjectToHttpParams(params).get()
+      this.apiUrl + "survey?" + new ConvertObjectToHttpParams(params).get(),
     );
   }
 }

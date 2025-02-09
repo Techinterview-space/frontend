@@ -6,10 +6,10 @@ interface IContributor {
 }
 
 @Component({
-    selector: "app-about-us",
-    templateUrl: "./about-us.component.html",
-    styleUrls: ["./about-us.component.scss"],
-    standalone: false
+  selector: "app-about-us",
+  templateUrl: "./about-us.component.html",
+  styleUrls: ["./about-us.component.scss"],
+  standalone: false,
 })
 export class AboutUsComponent {
   contributors: IContributor[] = [

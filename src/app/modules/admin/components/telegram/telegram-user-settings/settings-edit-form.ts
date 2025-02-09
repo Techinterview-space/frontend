@@ -26,7 +26,7 @@ export class TelegramUserSettingsEditForm extends FormGroup {
       ]),
       sendBotRegularStatsUpdates: new FormControl(
         item?.sendBotRegularStatsUpdates,
-        []
+        [],
       ),
     });
   }

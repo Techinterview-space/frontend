@@ -7,8 +7,8 @@ import { TelegramBotService } from "@services/telegram-bot.service";
 import { TelegramBotUsage } from "@models/telegram";
 
 @Component({
-    templateUrl: "./telegram-bot-usages.component.html",
-    standalone: false
+  templateUrl: "./telegram-bot-usages.component.html",
+  standalone: false,
 })
 export class TelegramBotUsagesComponent implements OnInit, OnDestroy {
   items: Array<TelegramBotUsage> | null = null;
@@ -17,7 +17,7 @@ export class TelegramBotUsagesComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: TelegramBotService,
-    titleService: TitleService
+    titleService: TitleService,
   ) {
     titleService.setTitle("Использование бота");
   }

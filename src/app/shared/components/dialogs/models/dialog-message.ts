@@ -6,7 +6,7 @@ export class DialogMessage<TMessage extends DialogMsg> {
 
   constructor(
     readonly message: TMessage,
-    private readonly closeInternal: () => void = () => {}
+    private readonly closeInternal: () => void = () => {},
   ) {
     Assertion.notNull(message, "message");
 

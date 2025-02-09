@@ -22,9 +22,9 @@ import { FileDownloadAnchor } from "@shared/value-objects/file-download-anchor";
 import { TitleService } from "@services/title.service";
 
 @Component({
-    templateUrl: "./salaries-chart.component.html",
-    styleUrl: "./salaries-chart.component.scss",
-    standalone: false
+  templateUrl: "./salaries-chart.component.html",
+  styleUrl: "./salaries-chart.component.scss",
+  standalone: false,
 })
 export class SalariesChartComponent implements OnInit, OnDestroy {
   readonly isYourSalaryWithinMarketTitle = "Ваша зарплата «в рынке»?";
@@ -63,7 +63,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
-    activatedRouteSource: ActivatedRoute
+    activatedRouteSource: ActivatedRoute,
   ) {
     this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
     title.setTitle("Зарплаты в IT в Казахстане");
@@ -160,12 +160,12 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.gtag.event(
       "salaries_filters_applied_grade",
       "salary_chart",
-      selectedGrade
+      selectedGrade,
     );
     this.gtag.event(
       "salaries_filters_applied_sourcetype",
       "salary_chart",
-      selectedSourceType
+      selectedSourceType,
     );
 
     this.load(data);
@@ -182,7 +182,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
     if (this.router.url.indexOf("?") > 0) {
       this.router.navigateByUrl(
-        this.router.url.substring(0, this.router.url.indexOf("?"))
+        this.router.url.substring(0, this.router.url.indexOf("?")),
       );
       return;
     }
@@ -196,7 +196,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
     const currentUrl = new ApiBackendAbsoluteUrl("/chart-share").asString();
     const shareUrl = `${currentUrl}?${new ConvertObjectToHttpParams(
-      this.filterData
+      this.filterData,
     ).get()}`;
     new ClipboardCopier(shareUrl).execute();
   }
@@ -227,7 +227,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   }
 
   private loadChartWithFilter(
-    data: SalaryChartGlobalFiltersData | null = null
+    data: SalaryChartGlobalFiltersData | null = null,
   ): void {
     const filterToApply = {
       grade: data?.grade ?? null,

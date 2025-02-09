@@ -22,21 +22,21 @@ export class UsefulnessChartObject extends Chart {
         "circle",
         "y1",
         "line",
-        "0"
+        "0",
       ),
       ...UsefulnessChartObject.prepareExpectationDatasets(
         data.items,
         "Казахстанские компании",
         "1",
         0,
-        (x) => x.localUsefulnessPercentage
+        (x) => x.localUsefulnessPercentage,
       ),
       ...UsefulnessChartObject.prepareExpectationDatasets(
         data.items,
         "Удаленка",
         "2",
         50,
-        (x) => x.remoteUsefulnessPercentage
+        (x) => x.remoteUsefulnessPercentage,
       ),
     ];
 
@@ -88,7 +88,7 @@ export class UsefulnessChartObject extends Chart {
     postfix: string,
     stack: string,
     darken = 0,
-    dispatcher: (x: SurveyResultsByWeeksChartItem) => UsefulnessPercentage[]
+    dispatcher: (x: SurveyResultsByWeeksChartItem) => UsefulnessPercentage[],
   ): Array<DatasetItem> {
     return [
       new DatasetItem(
@@ -96,8 +96,8 @@ export class UsefulnessChartObject extends Chart {
         items.map((x) =>
           UsefulnessChartObject.getExpectationReplyType(
             UsefulnessReplyType.No,
-            dispatcher(x)
-          )
+            dispatcher(x),
+          ),
         ),
         1,
         RgbColor.red(darken),
@@ -106,15 +106,15 @@ export class UsefulnessChartObject extends Chart {
         "bar",
         stack,
         1,
-        0.8
+        0.8,
       ),
       new DatasetItem(
         "Не уверен, " + postfix,
         items.map((x) =>
           UsefulnessChartObject.getExpectationReplyType(
             UsefulnessReplyType.NotSure,
-            dispatcher(x)
-          )
+            dispatcher(x),
+          ),
         ),
         1,
         RgbColor.grey(darken),
@@ -123,15 +123,15 @@ export class UsefulnessChartObject extends Chart {
         "bar",
         stack,
         1,
-        0.8
+        0.8,
       ),
       new DatasetItem(
         "Да, " + postfix,
         items.map((x) =>
           UsefulnessChartObject.getExpectationReplyType(
             UsefulnessReplyType.Yes,
-            dispatcher(x)
-          )
+            dispatcher(x),
+          ),
         ),
         1,
         RgbColor.lightGreen(darken),
@@ -140,14 +140,14 @@ export class UsefulnessChartObject extends Chart {
         "bar",
         stack,
         1,
-        0.8
+        0.8,
       ),
     ];
   }
 
   static getExpectationReplyType(
     type: UsefulnessReplyType,
-    records: UsefulnessPercentage[]
+    records: UsefulnessPercentage[],
   ): number {
     const record = records.find((x) => x.replyType === type);
     return record ? record.percentage : 0;
@@ -165,7 +165,7 @@ class DatasetItem {
     readonly type: "line" | "bar",
     readonly stack: string,
     borderColorOpacity: number = 1,
-    bgColorOpacity: number = 0.5
+    bgColorOpacity: number = 0.5,
   ) {
     this.borderColor = color.toString(borderColorOpacity);
     this.backgroundColor = color.toString(bgColorOpacity);

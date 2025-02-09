@@ -4,9 +4,9 @@ import { AdminToolsService } from "@services/admin-tools.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-    templateUrl: "./generate-qr-page.component.html",
-    styleUrls: ["./generate-qr-page.component.scss"],
-    standalone: false
+  templateUrl: "./generate-qr-page.component.html",
+  styleUrls: ["./generate-qr-page.component.scss"],
+  standalone: false,
 })
 export class GenerateQrPageComponent implements OnDestroy {
   shoQrCodeDialog = false;
@@ -15,7 +15,7 @@ export class GenerateQrPageComponent implements OnDestroy {
 
   constructor(
     private readonly titleService: TitleService,
-    private readonly adminToolsService: AdminToolsService
+    private readonly adminToolsService: AdminToolsService,
   ) {
     this.titleService.setTitle("Генерация QR-кода");
   }

@@ -76,10 +76,10 @@ export class SalariesSurveyForm extends FormGroup {
     }
 
     const usefulnessReplyAsEnum = Number(
-      usefulnessReply
+      usefulnessReply,
     ) as UsefulnessReplyType;
     const expectationReplyAsEnum = Number(
-      expectationReply
+      expectationReply,
     ) as ExpectationReplyType;
 
     return {

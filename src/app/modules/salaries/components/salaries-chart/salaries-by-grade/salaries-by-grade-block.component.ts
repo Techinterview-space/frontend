@@ -14,10 +14,10 @@ interface Item extends SalariesByGrade {
 }
 
 @Component({
-    selector: "app-salaries-by-grade-block",
-    templateUrl: "./salaries-by-grade-block.component.html",
-    styleUrl: "./salaries-by-grade-block.component.scss",
-    standalone: false
+  selector: "app-salaries-by-grade-block",
+  templateUrl: "./salaries-by-grade-block.component.html",
+  styleUrl: "./salaries-by-grade-block.component.scss",
+  standalone: false,
 })
 export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
   items: Array<Item> | null = null;

@@ -6,8 +6,8 @@ import { TotpService } from "@services/totp.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-    templateUrl: "./auth-callback.component.html",
-    standalone: false
+  templateUrl: "./auth-callback.component.html",
+  standalone: false,
 })
 export class AuthCallbackComponent implements OnInit, OnDestroy {
   private readonly urlToRedirectAfterLogin = "/me";
@@ -25,7 +25,7 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly cookieService: CookieService,
-    private readonly totpService: TotpService
+    private readonly totpService: TotpService,
   ) {}
 
   ngOnInit(): void {

@@ -11,10 +11,10 @@ import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { PeopleByCategoryBarChartObject } from "../people-by-category-bar-chart-object";
 
 @Component({
-    selector: "app-people-by-experience-chart",
-    templateUrl: "./people-by-experience-chart.component.html",
-    styleUrl: "./people-by-experience-chart.component.scss",
-    standalone: false
+  selector: "app-people-by-experience-chart",
+  templateUrl: "./people-by-experience-chart.component.html",
+  styleUrl: "./people-by-experience-chart.component.scss",
+  standalone: false,
 })
 export class PeopleByExperienceChartComponent {
   @Input()
@@ -53,11 +53,11 @@ export class PeopleByExperienceChartComponent {
     this.countOfResponses =
       this.source.developersByExperienceYearsChartData.data.reduce(
         (acc, item) => acc + item,
-        0
+        0,
       );
     this.chartDataLocal = new PeopleByCategoryBarChartObject(
       this.canvasId,
-      this.source.developersByExperienceYearsChartData
+      this.source.developersByExperienceYearsChartData,
     );
 
     var chartEl = document.getElementById(this.canvasId);

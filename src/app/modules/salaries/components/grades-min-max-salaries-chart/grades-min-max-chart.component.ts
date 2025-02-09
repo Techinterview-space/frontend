@@ -5,10 +5,10 @@ import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-    selector: "app-grades-min-max-chart",
-    templateUrl: "./grades-min-max-chart.component.html",
-    styleUrl: "./grades-min-max-chart.component.scss",
-    standalone: false
+  selector: "app-grades-min-max-chart",
+  templateUrl: "./grades-min-max-chart.component.html",
+  styleUrl: "./grades-min-max-chart.component.scss",
+  standalone: false,
 })
 export class GradesMinMaxChartComponent implements OnDestroy {
   @Input()
@@ -39,7 +39,7 @@ export class GradesMinMaxChartComponent implements OnDestroy {
 
     this.chartDataLocal = new GradesMinMaxSalariesChartObject(
       this.canvasId,
-      this.salaries
+      this.salaries,
     );
 
     var chartEl = document.getElementById(this.canvasId);

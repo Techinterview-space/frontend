@@ -12,10 +12,10 @@ import { AuthService } from "@shared/services/auth/auth.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-    selector: "app-interview-template-page",
-    templateUrl: "./interview-template-page.component.html",
-    styleUrls: ["./interview-template-page.component.scss"],
-    standalone: false
+  selector: "app-interview-template-page",
+  templateUrl: "./interview-template-page.component.html",
+  styleUrls: ["./interview-template-page.component.scss"],
+  standalone: false,
 })
 export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
   pageTitle = "";
@@ -32,7 +32,7 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
     private readonly title: TitleService,
     private readonly alert: AlertService,
     private readonly router: Router,
-    activatedRoute: ActivatedRoute
+    activatedRoute: ActivatedRoute,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
   }
@@ -71,12 +71,12 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
           this.service.delete(this.interviewTemplate!.id).subscribe(() => {
             this.alert.info(
               `Шаблон (${this.interviewTemplate!.title}) был удален`,
-              true
+              true,
             );
             this.router.navigate(["/interviews/templates/my"]);
           });
-        }
-      )
+        },
+      ),
     );
   }
 

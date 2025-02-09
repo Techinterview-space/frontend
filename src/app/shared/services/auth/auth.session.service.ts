@@ -22,7 +22,7 @@ export class AuthSessionService {
 
   get auth(): IdToken | null {
     const user = this.session.getItem<IdToken>(
-      this.authorizationStorageSessionKey
+      this.authorizationStorageSessionKey,
     );
     if (user == null || this.sessionExpired) {
       return null;
@@ -42,7 +42,7 @@ export class AuthSessionService {
 
   get timestamp(): Date | null {
     const timestamp = this.session.getItem<number>(
-      this.authorizationTimestampSessionKey
+      this.authorizationTimestampSessionKey,
     );
     if (timestamp != null) {
       return new Date(timestamp);

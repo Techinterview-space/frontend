@@ -49,20 +49,20 @@ export class InterviewTemplatesService {
   }
 
   all(
-    pageParams: PageParams = defaultPageParams
+    pageParams: PageParams = defaultPageParams,
   ): Observable<PaginatedList<InterviewTemplate>> {
     const params = new ConvertObjectToHttpParams(pageParams).get();
     return this.api.get<PaginatedList<InterviewTemplate>>(
-      this.apiUrl + `?${params}`
+      this.apiUrl + `?${params}`,
     );
   }
 
   public(
-    pageParams: PageParams = defaultPageParams
+    pageParams: PageParams = defaultPageParams,
   ): Observable<PaginatedList<InterviewTemplate>> {
     const params = new ConvertObjectToHttpParams(pageParams).get();
     return this.api.get<PaginatedList<InterviewTemplate>>(
-      this.apiUrl + `public?${params}`
+      this.apiUrl + `public?${params}`,
     );
   }
 
@@ -72,7 +72,7 @@ export class InterviewTemplatesService {
 
   availableForInterview(): Observable<Array<InterviewTemplate>> {
     return this.api.get<Array<InterviewTemplate>>(
-      this.apiUrl + "available-for-interview"
+      this.apiUrl + "available-for-interview",
     );
   }
 }

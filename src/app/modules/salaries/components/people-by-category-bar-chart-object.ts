@@ -14,7 +14,7 @@ export class PeopleByCategoryBarChartObject extends Chart {
 
   constructor(
     canvasId: string,
-    private readonly source: DevelopersByCategoryChartData
+    private readonly source: DevelopersByCategoryChartData,
   ) {
     const randomColor = new RandomRgbColor();
     const datasets: Array<ChartDatasetType> = [

@@ -13,10 +13,10 @@ interface TableRow {
 }
 
 @Component({
-    selector: "app-people-by-gender-chart",
-    templateUrl: "./people-by-gender-chart.component.html",
-    styleUrl: "./people-by-gender-chart.component.scss",
-    standalone: false
+  selector: "app-people-by-gender-chart",
+  templateUrl: "./people-by-gender-chart.component.html",
+  styleUrl: "./people-by-gender-chart.component.scss",
+  standalone: false,
 })
 export class PeopleByGenderChartComponent implements OnInit {
   @Input()
@@ -51,11 +51,11 @@ export class PeopleByGenderChartComponent implements OnInit {
     const salaries = this.chartData.salaries;
 
     const localSararies = salaries.filter(
-      (item) => item.company === CompanyType.Local
+      (item) => item.company === CompanyType.Local,
     );
 
     const remoteSararies = salaries.filter(
-      (item) => item.company === CompanyType.Remote
+      (item) => item.company === CompanyType.Remote,
     );
 
     if (localSararies.length > 0) {
@@ -85,7 +85,7 @@ export class PeopleByGenderChartComponent implements OnInit {
 
     salaries.forEach((item) => {
       const existingGroup = salariesGroupedByGender.find(
-        (x) => x.gender == item.gender
+        (x) => x.gender == item.gender,
       );
 
       if (existingGroup != null) {
@@ -109,7 +109,7 @@ export class PeopleByGenderChartComponent implements OnInit {
       });
 
     const noGradeData = salariesGroupedByGender.find(
-      (item) => item.gender === Gender.Undefined || item.gender == null
+      (item) => item.gender === Gender.Undefined || item.gender == null,
     );
 
     if (noGradeData != null) {
