@@ -116,7 +116,8 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
         this.currentStep = 1;
         this.addSalaryForm = new EditSalaryForm(
           null,
-          this.industries.length > 0
+          this.industries.length > 0,
+          true
         );
       });
   }

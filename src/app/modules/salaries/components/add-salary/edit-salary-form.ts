@@ -16,7 +16,8 @@ export class EditSalaryForm extends FormGroup {
 
   constructor(
     salarytoBeEditedOrNull: UserSalary | null,
-    hasIndustries: boolean = false
+    hasIndustries: boolean = false,
+    makeAllFieldsRequired: boolean = false
   ) {
     const thisYear = new Date().getFullYear();
     const now = new Date(Date.now());
@@ -63,22 +64,36 @@ export class EditSalaryForm extends FormGroup {
         [Validators.required]
       ),
       age: new FormControl(salarytoBeEditedOrNull?.age ?? null, [
-        Validators.required,
+        makeAllFieldsRequired ? Validators.required : Validators.nullValidator,
         Validators.min(12),
         Validators.max(120),
       ]),
       yearOfStartingWork: new FormControl(
         salarytoBeEditedOrNull?.yearOfStartingWork ?? null,
-        [Validators.required, Validators.min(1960), Validators.max(thisYear)]
+        [
+          makeAllFieldsRequired
+            ? Validators.required
+            : Validators.nullValidator,
+          Validators.min(1960),
+          Validators.max(thisYear),
+        ]
       ),
-      city: new FormControl(salarytoBeEditedOrNull?.city ?? null, []),
+      city: new FormControl(salarytoBeEditedOrNull?.city ?? null, [
+        makeAllFieldsRequired ? Validators.required : Validators.nullValidator,
+      ]),
       gender: new FormControl(salarytoBeEditedOrNull?.gender ?? null, [
-        Validators.required,
+        makeAllFieldsRequired ? Validators.required : Validators.nullValidator,
       ]),
       skillId: new FormControl(salarytoBeEditedOrNull?.skillId ?? null, []),
       workIndustryId: new FormControl(
         salarytoBeEditedOrNull?.workIndustryId ?? null,
-        hasIndustries ? [Validators.required] : []
+        hasIndustries
+          ? [
+              makeAllFieldsRequired
+                ? Validators.required
+                : Validators.nullValidator,
+            ]
+          : []
       ),
     });
   }
@@ -102,6 +117,16 @@ export class EditSalaryForm extends FormGroup {
       const professionId =
         this.value.profession != null ? Number(this.value.profession) : null;
 
+      const age = this.value.age != null ? Number(this.value.age) : null;
+
+      const yearOfStartingWork =
+        this.value.yearOfStartingWork != null
+          ? Number(this.value.yearOfStartingWork)
+          : null;
+
+      const gender =
+        this.value.gender != null ? Number(this.value.gender) : null;
+
       return {
         value: Number(this.value.value),
         quarter: Number(this.value.quarter),
@@ -109,9 +134,9 @@ export class EditSalaryForm extends FormGroup {
         currency: Number(this.value.currency) as Currency,
         company: Number(this.value.company) as CompanyType,
         grade: grade,
-        age: null,
-        yearOfStartingWork: null,
-        gender: null,
+        age: age,
+        yearOfStartingWork: yearOfStartingWork,
+        gender: gender,
         professionId: professionId,
         city: city != KazakhstanCity.Undefined ? city : null,
         skillId: skillId,

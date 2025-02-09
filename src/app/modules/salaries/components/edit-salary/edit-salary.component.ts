@@ -107,7 +107,8 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
       : "* * * * *";
     this.form = new EditSalaryForm(
       this.salarytoBeEdited,
-      this.industries.length > 0
+      this.industries.length > 0,
+      true
     );
   }
 
