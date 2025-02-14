@@ -43,7 +43,8 @@ export class UsefulnessRatingComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {}
 
   ratingChanged(rating: number): void {
-    this.service.salariesSatGapeReply(rating)
+    this.service
+      .salariesSatGapeReply(rating)
       .pipe(untilDestroyed(this))
       .subscribe(() => {
         this.currentMode = UsefulnessRatingComponentMode.ShowSuccessBlock;
