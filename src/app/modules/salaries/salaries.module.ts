@@ -24,13 +24,11 @@ import { PeopleByExperienceChartComponent } from "./components/people-by-experie
 import { SalariesByGradeBlockComponent } from "./components/salaries-chart/salaries-by-grade/salaries-by-grade-block.component";
 import { SalariesPaginatedTableComponent } from "./components/salaries-paginated-table/salaries-paginated-table.component";
 import { SalariesSurveyBlockComponent } from "./components/salaries-survey-block/salaries-survey-block.component";
-import { SalariesSurveyPageComponent } from "./components/salaries-survey-page/salaries-survey-page.component";
 import { SalariesAddingChartComponent } from "./components/salaries-chart/salaries-adding-chart/salaries-adding-chart.component";
 import { CurrencySelectBoxComponent } from "./components/salaries-chart/currency-select-box/currency-select-box.component";
 import { HistoricalChartsPageComponent } from "./components/historical-charts-page/historical-charts-page.component";
 import { HistoricalSalariesChartComponent } from "./components/historical-charts-page/historical-salaries-chart/historical-charts-page.component";
 import { HistoricalSalariesByGradeChartComponent } from "./components/historical-charts-page/historical-salaries-by-grade-chart/historical-salaries-by-grade-chart.component";
-import { HistoricalSurveyChartComponent } from "./components/historical-charts-page/historical-survey-chart/historical-survey-chart.component";
 import { SalariesByAgeChartComponent } from "./components/salaries-by-age-chart/salaries-by-age-chart.component";
 import { SalariesByExperienceChartComponent } from "./components/salaries-by-experience-chart/salaries-by-experience-chart.component";
 import { SalariesByCityChartComponent } from "./components/salaries-by-cities-chart/salaries-by-city-chart.component";
@@ -60,13 +58,11 @@ import { AddSalaryProgrssBarComponent } from "./components/add-salary/add-salary
     SalariesByGradeBlockComponent,
     SalariesPaginatedTableComponent,
     SalariesSurveyBlockComponent,
-    SalariesSurveyPageComponent,
     SalariesAddingChartComponent,
     CurrencySelectBoxComponent,
     HistoricalChartsPageComponent,
     HistoricalSalariesChartComponent,
     HistoricalSalariesByGradeChartComponent,
-    HistoricalSurveyChartComponent,
     SalariesByAgeChartComponent,
     SalariesByExperienceChartComponent,
     SalariesByCityChartComponent,
