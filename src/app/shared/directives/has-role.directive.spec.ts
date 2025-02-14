@@ -6,7 +6,7 @@ import {
   testUtilStubs,
   mostUsedServices,
 } from "@shared/test-utils";
-import { TestBed, async, waitForAsync } from "@angular/core/testing";
+import { TestBed, waitForAsync } from "@angular/core/testing";
 import { ViewContainerRefStub } from "@shared/test-utils/view-container-ref-stub";
 import { TemplateRefStub } from "@shared/test-utils/template-ref-stub";
 
@@ -15,7 +15,7 @@ describe("HasRoleDirective", () => {
     const t = new HasRoleDirective(
       new ViewContainerRefStub(),
       new TemplateRefStub(),
-      authService
+      authService,
     );
     t.role = role;
     t.ngOnInit();
@@ -35,8 +35,8 @@ describe("HasRoleDirective", () => {
     expect(
       target(
         "interviewer",
-        spyOnCurrentUserServiceWithUserId(spyOn, 1, UserRole.Interviewer)
-      ).isVisible
+        spyOnCurrentUserServiceWithUserId(spyOn, 1, UserRole.Interviewer),
+      ).isVisible,
     ).toBe(true);
   });
 
@@ -44,7 +44,7 @@ describe("HasRoleDirective", () => {
     const auth = spyOnCurrentUserServiceWithUserId(
       spyOn,
       1,
-      UserRole.Interviewer
+      UserRole.Interviewer,
     );
     expect(target("interviewer", auth).isVisible).toBe(true);
     expect(target("admin", auth).isVisible).toBe(false);

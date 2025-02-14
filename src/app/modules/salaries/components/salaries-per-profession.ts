@@ -8,7 +8,7 @@ export class SalariesPerProfession {
   constructor(
     readonly profession: number | null,
     readonly items: Array<UserSalary>,
-    readonly professionName: string
+    readonly professionName: string,
   ) {}
 
   toggle(): void {
@@ -17,7 +17,7 @@ export class SalariesPerProfession {
 
   static from(
     salaries: Array<UserSalary>,
-    professions: Array<LabelEntityDto>
+    professions: Array<LabelEntityDto>,
   ): {
     local: Array<SalariesPerProfession>;
     remote: Array<SalariesPerProfession>;
@@ -43,23 +43,23 @@ export class SalariesPerProfession {
 
     const local = uniqueProfessionsForLocal.map((x) => {
       const filteredSalaries = localSalaries.filter(
-        (salary) => salary.professionId == x
+        (salary) => salary.professionId == x,
       );
       return new SalariesPerProfession(
         x,
         filteredSalaries,
-        professions.find((p) => p.id == x)?.title || ""
+        professions.find((p) => p.id == x)?.title || "",
       );
     });
 
     const remote = uniqueProfessionsForRemote.map((x) => {
       const filteredSalaries = remoteSalaries.filter(
-        (salary) => salary.professionId == x
+        (salary) => salary.professionId == x,
       );
       return new SalariesPerProfession(
         x,
         filteredSalaries,
-        professions.find((p) => p.id == x)?.title || ""
+        professions.find((p) => p.id == x)?.title || "",
       );
     });
 

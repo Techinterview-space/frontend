@@ -10,6 +10,7 @@ import { ProfessionsService } from "@services/professions.service";
 
 @Component({
   templateUrl: "./professions-paginated-table.component.html",
+  standalone: false,
 })
 export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
   items: Array<LabelEntityAdmiDto> | null = null;
@@ -21,7 +22,7 @@ export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
   constructor(
     private readonly title: TitleService,
     private readonly alert: AlertService,
-    private readonly service: ProfessionsService
+    private readonly service: ProfessionsService,
   ) {}
 
   ngOnDestroy(): void {
@@ -101,7 +102,7 @@ export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
             this.confirmDeletionMessage = null;
             this.ngOnInit();
           });
-      })
+      }),
     );
   }
 }

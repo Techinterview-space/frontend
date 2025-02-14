@@ -16,7 +16,7 @@ export class SalariesByAgeOrExperienceChartObject extends Chart {
 
   constructor(
     canvasId: string,
-    private readonly source: SalariesByAgeOrExperienceChart
+    private readonly source: SalariesByAgeOrExperienceChart,
   ) {
     const medianRandomColor = new RandomRgbColor();
     const averageRandomColor = new RandomRgbColor();

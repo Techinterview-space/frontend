@@ -8,6 +8,7 @@ import {
   selector: "app-share-button",
   templateUrl: "./share-button.component.html",
   styleUrls: ["./share-button.component.scss"],
+  standalone: false,
 })
 export class ShareButtonComponent implements OnInit {
   static readonly copyBtnDefaultTitle = "Поделиться";
@@ -43,7 +44,7 @@ export class ShareButtonComponent implements OnInit {
   share(): void {
     if (this.relativeUrl != null && this.relativeUrl !== "") {
       new ClipboardCopier(
-        new AbsoluteLink(this.relativeUrl).asString()
+        new AbsoluteLink(this.relativeUrl).asString(),
       ).execute();
     }
 

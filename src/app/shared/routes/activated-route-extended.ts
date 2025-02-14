@@ -25,7 +25,7 @@ export class ActivatedRouteExtended {
           });
         });
         return result;
-      })
+      }),
     );
   }
 
@@ -33,7 +33,7 @@ export class ActivatedRouteExtended {
     return this.activatedRoute.queryParams.pipe(
       map((params) => {
         return params[paramName] ?? null;
-      })
+      }),
     );
   }
 
@@ -41,7 +41,7 @@ export class ActivatedRouteExtended {
     return this.activatedRoute.paramMap.pipe(
       map((params) => {
         return params.get(paramName) as string;
-      })
+      }),
     );
   }
 
@@ -51,7 +51,7 @@ export class ActivatedRouteExtended {
 
   getParamAsNumber(
     paramName: string,
-    throwErrorIfAintExist = true
+    throwErrorIfAintExist = true,
   ): Observable<number | null> {
     return this.activatedRoute.paramMap.pipe(
       map((params) => {
@@ -68,12 +68,12 @@ export class ActivatedRouteExtended {
         const paramAsNumber = Number(paramValue);
         if (isNaN(paramAsNumber)) {
           throw Error(
-            `A paramenter ${paramName} is not a valid number (${paramValue})`
+            `A paramenter ${paramName} is not a valid number (${paramValue})`,
           );
         }
 
         return paramAsNumber;
-      })
+      }),
     );
   }
 }

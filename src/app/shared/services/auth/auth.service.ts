@@ -43,7 +43,7 @@ export class AuthService implements IAuthService {
   constructor(
     private readonly session: AuthSessionService,
     private readonly oidcManager: OidcUserManager,
-    private readonly authorizationService: AuthorizationService
+    private readonly authorizationService: AuthorizationService,
   ) {}
 
   getCurrentUser(): Observable<ApplicationUserExtended | null> {
@@ -65,7 +65,7 @@ export class AuthService implements IAuthService {
       map((appUser) => {
         this.saveCurrentUser(appUser);
         return this.applicationUser;
-      })
+      }),
     );
   }
 
@@ -91,7 +91,7 @@ export class AuthService implements IAuthService {
         }
 
         return of();
-      })
+      }),
     );
   }
 
@@ -104,7 +104,7 @@ export class AuthService implements IAuthService {
         return this.authorizationService
           .checkTotpRequired()
           .pipe(map((r) => r));
-      })
+      }),
     );
   }
 

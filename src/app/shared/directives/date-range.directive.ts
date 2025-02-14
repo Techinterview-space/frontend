@@ -11,6 +11,7 @@ import Assertion from "@shared/validation/assertion";
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class DateRangeValidator implements Validator {
   constructor(@Attribute("appDateRange") public validateDateRange: string) {

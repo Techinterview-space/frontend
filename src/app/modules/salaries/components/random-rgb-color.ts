@@ -5,7 +5,7 @@ export class RandomRgbColor extends RgbColor {
     super(
       RandomRgbColor.randomNumber(),
       RandomRgbColor.randomNumber(),
-      RandomRgbColor.randomNumber()
+      RandomRgbColor.randomNumber(),
     );
   }
 

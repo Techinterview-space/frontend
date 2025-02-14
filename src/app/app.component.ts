@@ -7,6 +7,7 @@ import { untilDestroyed } from "./shared/subscriptions/until-destroyed";
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
+  standalone: false,
 })
 export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {}

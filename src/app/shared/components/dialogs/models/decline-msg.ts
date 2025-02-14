@@ -6,7 +6,7 @@ export class DeclineFormMsg extends ConfirmMsg {
     subject: string,
     text: string,
     public readonly declineForm: DeclineForm,
-    confirm: () => void
+    confirm: () => void,
   ) {
     super(subject, text, confirm);
   }

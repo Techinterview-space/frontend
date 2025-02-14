@@ -8,6 +8,7 @@ import { DeclineForm } from "../models/decline-form";
   selector: "app-decline-dialog",
   templateUrl: "./decline-dialog.component.html",
   styleUrls: ["./decline-dialog.component.scss"],
+  standalone: false,
 })
 export class DeclineDialogComponent {
   get showModal(): boolean {

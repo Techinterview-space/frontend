@@ -1,9 +1,9 @@
-FROM node:22-alpine3.19 AS compile-image
+FROM node:23-alpine3.20 AS compile-image
 
 WORKDIR /app
 COPY . .
 RUN npm update
-RUN npm install -g @angular/cli@17.0.8
+RUN npm install -g @angular/cli@19.1.6
 RUN npm install
 RUN npm run build-prod
 

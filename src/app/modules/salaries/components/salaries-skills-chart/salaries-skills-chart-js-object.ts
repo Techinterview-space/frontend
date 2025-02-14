@@ -10,13 +10,13 @@ export class SalariesSkillsChartJsObject extends Chart {
   constructor(
     canvasId: string,
     private readonly salaries: UserSalary[],
-    private readonly skills: LabelEntityDto[]
+    private readonly skills: LabelEntityDto[],
   ) {
     const datasets: Array<ChartDatasetItem> = [];
 
     const uniqueSkills = SalariesSkillsChartJsObject.prepareUniqueSkills(
       salaries,
-      skills
+      skills,
     );
 
     datasets.push(new ChartDatasetItem(uniqueSkills, salaries, false));
@@ -70,7 +70,7 @@ export class SalariesSkillsChartJsObject extends Chart {
 
   static prepareUniqueSkills(
     salaries: UserSalary[],
-    skills: LabelEntityDto[]
+    skills: LabelEntityDto[],
   ): LabelEntityDto[] {
     const uniqueSkills: Array<LabelEntityDto> = [];
     salaries.forEach((x) => {
@@ -103,7 +103,7 @@ class ChartDatasetItem {
   constructor(
     uniqueSkills: Array<LabelEntityDto>,
     salaries: Array<UserSalary>,
-    includeNoData: boolean
+    includeNoData: boolean,
   ) {
     this.label = "Указанные ЯП/фреймворки";
     this.data = [];

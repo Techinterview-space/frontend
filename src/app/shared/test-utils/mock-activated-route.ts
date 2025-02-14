@@ -15,11 +15,11 @@ export class ActivatedRouteMock {
       testId: "abc123",
       anotherId: "d31e8b48-7309-4c83-9884-4142efdf7271",
       id: "1",
-    })
+    }),
   );
   public queryParams = of(
     convertToParamMap({
       page: 1,
-    })
+    }),
   );
 }

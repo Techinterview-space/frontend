@@ -8,7 +8,7 @@ export class RouterStub {
   navigate(commands: any[], extras?: NavigationExtras): void {}
   navigateByUrl(
     url: string | UrlTree,
-    extras?: NavigationExtras
+    extras?: NavigationExtras,
   ): Promise<boolean> {
     return Promise.resolve(true);
   }

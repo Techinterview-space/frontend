@@ -10,7 +10,7 @@ class TableRow {
   constructor(
     private readonly skill: LabelEntityDto,
     readonly value: number,
-    private readonly totalCount: number
+    private readonly totalCount: number,
   ) {
     this.title = skill.title;
     this.part = (value / totalCount) * 100;
@@ -21,6 +21,7 @@ class TableRow {
   selector: "app-work-industries-chart",
   templateUrl: "./work-industries-chart.component.html",
   styleUrl: "./work-industries-chart.component.scss",
+  standalone: false,
 })
 export class WorkIndustriesChartComponent {
   @Input()
@@ -55,14 +56,14 @@ export class WorkIndustriesChartComponent {
 
     const uniqueItems = WorkIndustriesChartJsObject.prepareUniqueIndustries(
       this.salaries,
-      this.industries
+      this.industries,
     );
 
     const salariesWithIndustry = this.salaries.filter((x) => x.skillId != null);
     this.tableRows = uniqueItems
       .map((x) => {
         const value = salariesWithIndustry.filter(
-          (s) => s.workIndustryId === x.id
+          (s) => s.workIndustryId === x.id,
         ).length;
 
         this.totalCount += value;
@@ -95,7 +96,7 @@ export class WorkIndustriesChartComponent {
     this.chartDataLocal = new WorkIndustriesChartJsObject(
       this.canvasId,
       this.salaries,
-      this.industries
+      this.industries,
     );
 
     var chartEl = document.getElementById(this.canvasId);

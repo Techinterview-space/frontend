@@ -31,7 +31,9 @@ export class MockAuthService implements IAuthService {
 
   getCurrentUser(): Observable<ApplicationUserExtended | null> {
     return of(
-      new ApplicationUserExtended(new TestApplicationUser(UserRole.Interviewer))
+      new ApplicationUserExtended(
+        new TestApplicationUser(UserRole.Interviewer),
+      ),
     );
   }
 
@@ -41,7 +43,9 @@ export class MockAuthService implements IAuthService {
 
   getCurrentUserFromStorage(): Observable<ApplicationUserExtended | null> {
     return of(
-      new ApplicationUserExtended(new TestApplicationUser(UserRole.Interviewer))
+      new ApplicationUserExtended(
+        new TestApplicationUser(UserRole.Interviewer),
+      ),
     );
   }
 

@@ -2,7 +2,7 @@ export default class Assertion {
   public static notNull<T>(
     anyInstance: T,
     paramName: string,
-    className: string | null = null
+    className: string | null = null,
   ): void {
     if (anyInstance == null) {
       let message = `Parameter '${paramName}' should not be null`;
@@ -16,7 +16,7 @@ export default class Assertion {
 
   public static notNullOrEmpty<T extends any[] | []>(
     anyArray: T,
-    paramName: string
+    paramName: string,
   ): void {
     if (anyArray == null) {
       throw Error(`Array '${paramName}' should not be null`);
@@ -29,7 +29,7 @@ export default class Assertion {
 
   public static stringNotNullOrEmpty(
     anyString: string | null,
-    paramName: string
+    paramName: string,
   ): void {
     this.notNull(anyString, paramName);
 
@@ -40,7 +40,7 @@ export default class Assertion {
 
   public static equal<T extends number | string | boolean>(
     expected: T,
-    fact: T
+    fact: T,
   ): void {
     if (expected !== fact) {
       throw Error(`The fact '${fact}' is not equal to expected '${expected}'`);

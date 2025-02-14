@@ -117,63 +117,63 @@ describe("DateExtended", () => {
 
   it(".addDays() cases. Positive days number", () => {
     expect(target("2020-07-15").addDays(2).sameDay(target("2020-07-17"))).toBe(
-      true
+      true,
     );
     expect(target("2020-07-15").addDays(2).sameDay(target("2020-07-16"))).toBe(
-      false
+      false,
     );
     expect(target("2020-07-15").addDays(2).sameDay(target("2020-07-14"))).toBe(
-      false
+      false,
     );
 
     expect(target("2020-07-30").addDays(2).sameDay(target("2020-08-01"))).toBe(
-      true
+      true,
     );
     expect(target("2020-07-30").addDays(2).sameDay(target("2020-07-31"))).toBe(
-      false
+      false,
     );
     expect(target("2020-07-30").addDays(2).sameDay(target("2020-07-02"))).toBe(
-      false
+      false,
     );
   });
 
   it(".addDays() cases. Negative days number", () => {
     expect(target("2020-07-15").addDays(-2).sameDay(target("2020-07-13"))).toBe(
-      true
+      true,
     );
     expect(target("2020-07-15").addDays(-2).sameDay(target("2020-07-12"))).toBe(
-      false
+      false,
     );
     expect(target("2020-07-15").addDays(-2).sameDay(target("2020-07-17"))).toBe(
-      false
+      false,
     );
 
     expect(target("2020-07-30").addDays(-2).sameDay(target("2020-07-28"))).toBe(
-      true
+      true,
     );
     expect(target("2020-07-30").addDays(-2).sameDay(target("2020-07-31"))).toBe(
-      false
+      false,
     );
     expect(target("2020-07-30").addDays(-2).sameDay(target("2020-08-02"))).toBe(
-      false
+      false,
     );
   });
 
   it(".nextWorkDay() cases.", () => {
     expect(
       new DateExtended(target("2020-07-15").nextWorkDay()).sameDay(
-        target("2020-07-16")
-      )
+        target("2020-07-16"),
+      ),
     ).toBe(true);
     expect(
       new DateExtended(target("2020-12-11").nextWorkDay()).sameDay(
-        target("2020-12-14")
-      )
+        target("2020-12-14"),
+      ),
     ).toBe(true);
     expect(
       new DateExtended(target("2020-12-15").nextWorkDay()).sameDay(
-        target("2020-12-16")
-      )
+        target("2020-12-16"),
+      ),
     ).toBe(true);
   });
 });

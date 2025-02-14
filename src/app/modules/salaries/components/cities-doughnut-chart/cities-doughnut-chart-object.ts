@@ -22,12 +22,15 @@ export class CitiesDoughnutChartObject extends Chart {
   private readonly datasets: Array<ChartDatasetType> = [];
   private readonly uniqueCities: Array<CityWithCount> = [];
 
-  constructor(canvasId: string, private readonly salaries: Array<UserSalary>) {
+  constructor(
+    canvasId: string,
+    private readonly salaries: Array<UserSalary>,
+  ) {
     const datasets: Array<ChartDatasetType> = [];
 
     const uniqueCities = CitiesDoughnutChartObject.prepareUniqueItems(
       salaries,
-      KazakhstanCityEnum.allItems()
+      KazakhstanCityEnum.allItems(),
     );
     datasets.push(new ChartDatasetItem(uniqueCities, salaries, false));
 
@@ -65,7 +68,7 @@ export class CitiesDoughnutChartObject extends Chart {
     this.data.labels = items.map(
       (x) =>
         (x.city != null ? KazakhstanCityEnum.label(x.city) : "Нет данных") +
-        ` (${x.count})`
+        ` (${x.count})`,
     );
 
     if (show) {
@@ -81,7 +84,7 @@ export class CitiesDoughnutChartObject extends Chart {
 
   private static prepareUniqueItems(
     salaries: UserSalary[],
-    cities: KazakhstanCity[]
+    cities: KazakhstanCity[],
   ): CityWithCount[] {
     const uniqueItems: Array<CityWithCount> = [];
     salaries.forEach((x) => {
@@ -107,7 +110,7 @@ class ChartDatasetItem {
   constructor(
     uniqueCities: Array<CityWithCount>,
     salaries: Array<UserSalary>,
-    includeNoData: boolean
+    includeNoData: boolean,
   ) {
     this.label = "Город проживания";
     this.data = [];

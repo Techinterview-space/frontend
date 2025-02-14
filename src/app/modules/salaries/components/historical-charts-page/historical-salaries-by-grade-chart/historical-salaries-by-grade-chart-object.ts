@@ -57,22 +57,22 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
       ...HistoricalSalariesByGradeChartObject.getDatasetForGrade(
         DeveloperGrade.Junior,
         juniorSalaries,
-        false
+        false,
       ),
       ...HistoricalSalariesByGradeChartObject.getDatasetForGrade(
         DeveloperGrade.Middle,
         middleSalaries,
-        false
+        false,
       ),
       ...HistoricalSalariesByGradeChartObject.getDatasetForGrade(
         DeveloperGrade.Senior,
         seniorSalaries,
-        false
+        false,
       ),
       ...HistoricalSalariesByGradeChartObject.getDatasetForGrade(
         DeveloperGrade.Lead,
         leadSalaries,
-        false
+        false,
       ),
       new DatasetItem(
         "Количество анкет",
@@ -82,8 +82,8 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         "circle",
         null,
         "y1",
-        false
-      )
+        false,
+      ),
     );
 
     super(canvasId, {
@@ -133,7 +133,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
   private static getDatasetForGrade(
     grade: DeveloperGrade,
     items: Array<SalariesCountWeekByWeekChartGradeItem>,
-    hidden: boolean
+    hidden: boolean,
   ): Array<DatasetItem> {
     const prefix = DeveloperGrade[grade];
     return [
@@ -145,7 +145,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         true as PointStyle,
         grade,
         "y",
-        hidden
+        hidden,
       ),
       new DatasetItem(
         prefix + ", средняя, КЗ",
@@ -155,7 +155,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         true as PointStyle,
         grade,
         "y",
-        hidden
+        hidden,
       ),
       new DatasetItem(
         prefix + ", медиана, удаленка",
@@ -165,7 +165,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         true as PointStyle,
         grade,
         "y",
-        hidden
+        hidden,
       ),
       new DatasetItem(
         prefix + ", средняя, удаленка",
@@ -175,7 +175,7 @@ export class HistoricalSalariesByGradeChartObject extends Chart {
         true as PointStyle,
         grade,
         "y",
-        hidden
+        hidden,
       ),
     ];
   }
@@ -190,7 +190,7 @@ class DatasetItem implements ChartDatasetType {
     readonly pointStyle: PointStyle,
     readonly grade: DeveloperGrade | null,
     readonly yAxisID: "y1" | "y",
-    hidden: boolean
+    hidden: boolean,
   ) {
     this.borderColor = color.toString(1);
     this.backgroundColor = color.toString(0.5);

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from "@angular/core";
 @Component({
   selector: "app-status-label",
   templateUrl: "./status-label.component.html",
+  standalone: false,
 })
 export class StatusLabelComponent implements OnInit {
   title = "";

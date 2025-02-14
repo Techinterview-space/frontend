@@ -23,7 +23,7 @@ describe("DeclineDialogComponent", () => {
     fixture = TestBed.createComponent(DeclineDialogComponent);
     component = fixture.componentInstance;
     component.message = new DialogMessage(
-      new DeclineFormMsg("Ololo", "Text", new DeclineForm(), () => {})
+      new DeclineFormMsg("Ololo", "Text", new DeclineForm(), () => {}),
     );
 
     fixture.detectChanges();

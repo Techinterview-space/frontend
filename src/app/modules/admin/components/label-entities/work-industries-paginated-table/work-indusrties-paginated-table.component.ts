@@ -10,6 +10,7 @@ import { LabelEntityEditForm } from "../label-entity-edit-form";
 
 @Component({
   templateUrl: "./work-indusrties-paginated-table.component.html",
+  standalone: false,
 })
 export class WorkIndustriesPaginatedTableComponent
   implements OnInit, OnDestroy
@@ -23,7 +24,7 @@ export class WorkIndustriesPaginatedTableComponent
   constructor(
     private readonly title: TitleService,
     private readonly alert: AlertService,
-    private readonly service: WorkIndusrtiesService
+    private readonly service: WorkIndusrtiesService,
   ) {}
 
   ngOnDestroy(): void {
@@ -103,7 +104,7 @@ export class WorkIndustriesPaginatedTableComponent
             this.confirmDeletionMessage = null;
             this.ngOnInit();
           });
-      })
+      }),
     );
   }
 }

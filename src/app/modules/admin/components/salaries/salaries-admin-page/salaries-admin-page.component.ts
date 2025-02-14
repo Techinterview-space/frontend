@@ -15,6 +15,7 @@ import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
   templateUrl: "./salaries-admin-page.component.html",
+  standalone: false,
 })
 export class SalariesAdminPageComponent implements OnInit, OnDestroy {
   salaries: Array<SalaryAdminItem> | null = null;
@@ -29,7 +30,7 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: UserSalariesService,
     titleService: TitleService,
-    private readonly alert: AlertService
+    private readonly alert: AlertService,
   ) {
     titleService.setTitle("Анкеты в статистике");
   }
@@ -70,8 +71,8 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
               x,
               this.professions,
               this.skills,
-              this.industries
-            )
+              this.industries,
+            ),
         );
         this.source = x;
       });

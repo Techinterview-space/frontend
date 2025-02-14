@@ -24,7 +24,7 @@ export class JobItem extends AdminTableItem<Observable<JobResult>> {
       () => {},
       () => {
         this.executing = false;
-      }
+      },
     );
   }
 }

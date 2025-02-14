@@ -1,8 +1,3 @@
-import {
-  ExpectationReplyType,
-  UsefulnessReplyType,
-} from "./salaries-survey.service";
-
 export interface HistoricalSurveyChartResponse {
   surveyResultsByWeeksChart: SurveyResultsByWeeksChart;
   shouldAddOwnSalary: boolean;
@@ -25,17 +20,10 @@ export interface SurveyResultsByWeeksChartItem {
   totalCount: number;
   localUsefulnessPercentage: UsefulnessPercentage[];
   remoteUsefulnessPercentage: UsefulnessPercentage[];
-  localExpectationPercentage: ExpectationPercentage[];
-  remoteExpectationPercentage: ExpectationPercentage[];
 }
 
 export interface UsefulnessPercentage {
-  replyType: UsefulnessReplyType;
-  percentage: number;
-}
-
-export interface ExpectationPercentage {
-  replyType: ExpectationReplyType;
+  ratingValue: number;
   percentage: number;
 }
 
@@ -46,6 +34,4 @@ export interface SurveyResultsByWeeksChartGradeItem {
   totalCount: number;
   localUsefulnessPercentage: UsefulnessPercentage[];
   remoteUsefulnessPercentage: UsefulnessPercentage[];
-  localExpectationPercentage: ExpectationPercentage[];
-  remoteExpectationPercentage: ExpectationPercentage[];
 }

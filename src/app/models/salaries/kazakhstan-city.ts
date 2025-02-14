@@ -94,7 +94,7 @@ export class KazakhstanCityEnum {
 
   static allItems(): KazakhstanCity[] {
     return EnumHelper.getValues(KazakhstanCity).filter(
-      (x) => x !== KazakhstanCity.Undefined
+      (x) => x !== KazakhstanCity.Undefined,
     );
   }
 

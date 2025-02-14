@@ -21,7 +21,7 @@ const appRoutes: Routes = [
     path: "interviews",
     loadChildren: () =>
       import("./modules/interviews/interviews.module").then(
-        (m) => m.InterviewsModule
+        (m) => m.InterviewsModule,
       ),
   },
   {
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
     path: "salaries",
     loadChildren: () =>
       import("./modules/salaries/salaries.module").then(
-        (m) => m.SalariesModule
+        (m) => m.SalariesModule,
       ),
   },
 

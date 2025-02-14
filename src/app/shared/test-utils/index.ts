@@ -67,7 +67,7 @@ export const mostUsedImports = [
 // tslint:disable-next-line: ban-types
 export const spyOnCurrentUserServiceWithUser = (
   user: ApplicationUserExtended,
-  spyOnFn: Function
+  spyOnFn: Function,
 ): AuthService => {
   const authService = TestBed.inject(AuthService);
   spyOnFn(authService, "getCurrentUser").and.returnValue(of(user));
@@ -78,11 +78,11 @@ export const spyOnCurrentUserServiceWithUserId = (
   // tslint:disable-next-line: ban-types
   spyOnFn: Function,
   userId: number | null = null,
-  role: UserRole = UserRole.Interviewer
+  role: UserRole = UserRole.Interviewer,
 ): AuthService => {
   userId = userId != null ? userId : 1;
   const user = new ApplicationUserExtended(
-    new TestApplicationUser(role, userId)
+    new TestApplicationUser(role, userId),
   );
   return spyOnCurrentUserServiceWithUser(user, spyOnFn);
 };

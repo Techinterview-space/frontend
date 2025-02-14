@@ -13,6 +13,7 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Directive({
   selector: "[appHasRole]",
+  standalone: false,
 })
 // Copied from https://blog.strongbrew.io/display-a-component-based-on-role/
 export class HasRoleDirective implements OnInit, OnDestroy {
@@ -29,7 +30,7 @@ export class HasRoleDirective implements OnInit, OnDestroy {
   constructor(
     private readonly viewContainerRef: ViewContainerRef,
     private readonly templateRef: TemplateRef<any>,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +44,7 @@ export class HasRoleDirective implements OnInit, OnDestroy {
   }
 
   private setPropertiesBasedOnUser(
-    currentUser: ApplicationUserExtended | null
+    currentUser: ApplicationUserExtended | null,
   ): void {
     if (currentUser == null) {
       this.clear();

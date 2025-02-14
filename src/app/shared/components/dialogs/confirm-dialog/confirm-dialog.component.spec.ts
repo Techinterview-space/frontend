@@ -22,7 +22,7 @@ describe("ConfirmDialogComponent", () => {
     fixture = TestBed.createComponent(ConfirmDialogComponent);
     component = fixture.componentInstance;
     component.message = new DialogMessage(
-      new ConfirmMsg("Subject", "Text", () => {})
+      new ConfirmMsg("Subject", "Text", () => {}),
     );
     fixture.detectChanges();
   });

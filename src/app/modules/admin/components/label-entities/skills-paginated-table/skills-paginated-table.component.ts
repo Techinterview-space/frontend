@@ -10,6 +10,7 @@ import { LabelEntityEditForm } from "../label-entity-edit-form";
 
 @Component({
   templateUrl: "./skills-paginated-table.component.html",
+  standalone: false,
 })
 export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
   skills: Array<LabelEntityAdmiDto> | null = null;
@@ -21,7 +22,7 @@ export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
   constructor(
     private readonly title: TitleService,
     private readonly alert: AlertService,
-    private readonly skillService: SkillsService
+    private readonly skillService: SkillsService,
   ) {}
 
   ngOnDestroy(): void {
@@ -101,7 +102,7 @@ export class SkillsPaginatedTableComponent implements OnInit, OnDestroy {
             this.confirmDeletionMessage = null;
             this.ngOnInit();
           });
-      })
+      }),
     );
   }
 }

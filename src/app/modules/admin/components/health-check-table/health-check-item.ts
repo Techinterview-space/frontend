@@ -18,7 +18,7 @@ export class HealthCheckItem {
   constructor(
     public readonly title: string,
     public readonly hint: string,
-    private readonly action: () => Observable<HealthReport>
+    private readonly action: () => Observable<HealthReport>,
   ) {
     Assertion.notNull(title, "title");
     Assertion.notNull(hint, "hint");
@@ -38,7 +38,7 @@ export class HealthCheckItem {
       (e) => {
         this.elapsed = Date.now() - start;
         this.status = StatusMarker.Red;
-      }
+      },
     );
   }
 }

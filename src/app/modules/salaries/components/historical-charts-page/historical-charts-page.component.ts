@@ -19,17 +19,16 @@ import {
   ClipboardCopier,
 } from "@shared/value-objects/clipboard-copier";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
-import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
 
 @Component({
   templateUrl: "./historical-charts-page.component.html",
   styleUrls: ["./historical-charts-page.component.scss"],
+  standalone: false,
 })
 export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
   readonly activatedRoute: SalariesChartActivatedRoute;
 
   data: GetSalariesHistoricalChartResponse | null = null;
-  surveyData: HistoricalSurveyChartResponse | null = null;
 
   filterData = new SalaryChartGlobalFiltersData();
   isAuthenticated = false;
@@ -48,7 +47,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     private readonly cookieService: CookieService,
     private readonly titleService: TitleService,
     private readonly gtag: GoogleAnalyticsService,
-    activatedRouteSource: ActivatedRoute
+    activatedRouteSource: ActivatedRoute,
   ) {
     titleService.setTitle("Исторические данные");
     this.activatedRoute = new SalariesChartActivatedRoute(activatedRouteSource);
@@ -71,23 +70,6 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     this.authService.login().pipe(untilDestroyed(this)).subscribe();
   }
 
-  closeSurveyBlock(): void {
-    this.surveyData = null;
-    this.service
-      .surveyChart({
-        grade: this.filterData?.grade ?? null,
-        profsInclude: this.filterData?.profsInclude ?? null,
-        cities: this.filterData?.cities ?? null,
-        skills: this.filterData?.skills ?? null,
-      })
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.surveyData = x;
-      });
-
-    this.gtag.event("survey_closed", "historical_data");
-  }
-
   ngOnDestroy(): void {
     this.titleService.resetTitle();
   }
@@ -102,7 +84,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
     this.gtag.event(
       "salaries_filters_applied",
       "historical_data",
-      selectedGrade
+      selectedGrade,
     );
     this.load(data);
   }
@@ -118,7 +100,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
 
     if (this.router.url.indexOf("?") > 0) {
       this.router.navigateByUrl(
-        this.router.url.substring(0, this.router.url.indexOf("?"))
+        this.router.url.substring(0, this.router.url.indexOf("?")),
       );
       return;
     }
@@ -132,14 +114,13 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
 
     const currentUrl = new ApiBackendAbsoluteUrl("/chart-share").asString();
     const shareUrl = `${currentUrl}?${new ConvertObjectToHttpParams(
-      this.filterData
+      this.filterData,
     ).get()}`;
     new ClipboardCopier(shareUrl).execute();
   }
 
   load(data: SalaryChartGlobalFiltersData | null = null): void {
     this.data = null;
-    this.surveyData = null;
 
     const shouldLoadSelectBoxItems =
       this.skills.length === 0 ||
@@ -181,13 +162,6 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
         this.isAuthenticated = x.hasAuthentication;
         this.data = x;
         this.shouldAddOwnSalary = x.shouldAddOwnSalary;
-      });
-
-    this.service
-      .surveyChart(filterToApply)
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.surveyData = x;
       });
   }
 }

@@ -11,6 +11,7 @@ import { SalaryChartGlobalFiltersData } from "../../shared/global-filters-form-g
   selector: "app-salaries-adding-chart",
   templateUrl: "./salaries-adding-chart.component.html",
   styleUrl: "./salaries-adding-chart.component.scss",
+  standalone: false,
 })
 export class SalariesAddingChartComponent implements OnInit, OnDestroy {
   @Input()
@@ -34,7 +35,7 @@ export class SalariesAddingChartComponent implements OnInit, OnDestroy {
         this.data = x;
         this.chart = new SalariesAddingChart(
           "canvas-adding-trend-chart",
-          this.data
+          this.data,
         );
       });
   }

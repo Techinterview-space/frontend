@@ -21,7 +21,7 @@ export class SalaryChartGlobalFiltersData {
     skills: Array<number> = [],
     salarySourceTypes: SalarySourceType[] = [],
     quarterTo: number | null = null,
-    yearTo: number | null = null
+    yearTo: number | null = null,
   ) {
     if (grade === DeveloperGrade.Unknown) {
       grade = null;
@@ -84,7 +84,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
         filterData != null && filterData.salarySourceTypes.length > 0
           ? filterData.salarySourceTypes[0]
           : null,
-        []
+        [],
       ),
       quarterTo: new FormControl(filterData?.quarterTo, []),
       yearTo: new FormControl(filterData?.yearTo, []),
@@ -130,7 +130,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
       skills,
       salarySourceType != null ? [salarySourceType] : [],
       quarterTo,
-      yearTo
+      yearTo,
     );
   }
 }

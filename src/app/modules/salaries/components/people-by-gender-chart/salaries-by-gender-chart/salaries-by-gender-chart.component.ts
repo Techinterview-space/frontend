@@ -6,6 +6,7 @@ import { SalariesByGenderChartObject } from "./salaries-by-gender-chart-object";
   selector: "app-salaries-by-gender-chart",
   templateUrl: "./salaries-by-gender-chart.component.html",
   styleUrl: "./salaries-by-gender-chart.component.scss",
+  standalone: false,
 })
 export class SalariesByGenderChartComponent {
   @Input()
@@ -32,7 +33,7 @@ export class SalariesByGenderChartComponent {
 
   private initChartWithParams(
     canvasId: string,
-    data: SalariesByGenderChart
+    data: SalariesByGenderChart,
   ): SalariesByGenderChartObject {
     const chart = new SalariesByGenderChartObject(canvasId, data);
 

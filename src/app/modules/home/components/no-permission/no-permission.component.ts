@@ -4,5 +4,6 @@ import { Component } from "@angular/core";
   selector: "app-no-permission",
   templateUrl: "./no-permission.component.html",
   styleUrls: ["./no-permission.component.scss"],
+  standalone: false,
 })
 export class NoPermissionComponent {}
