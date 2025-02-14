@@ -409,6 +409,11 @@
     </div>
   </div>
 
+  <div class="cart mt-5" *ngIf="!salariesChart.hasRecentSurveyReply">
+    <app-usefulness-rating
+      [source]="salariesChart" />
+  </div>
+
   <div
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"

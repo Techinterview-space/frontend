@@ -52,16 +52,6 @@
   </div>
 </div>
 
-<div class="container my-5" *ngIf="surveyData; else dataLoading">
-  <div class="mb-5" *ngIf="!surveyData.hasRecentSurveyReply">
-    <div class="px-1">
-      <app-salaries-survey-block
-        (closeButtonClick)="closeSurveyBlock()"
-      ></app-salaries-survey-block>
-    </div>
-  </div>
-</div>
-
 <ng-template #dataLoading>
   <div class="container my-5">
     <app-data-loader></app-data-loader>

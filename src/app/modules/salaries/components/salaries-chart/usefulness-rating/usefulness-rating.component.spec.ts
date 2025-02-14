@@ -6,22 +6,21 @@ import {
   testUtilStubs,
   mostUsedServices,
 } from "@shared/test-utils";
-import { SalariesSurveyBlockComponent } from "./salaries-survey-block.component";
-import { SurveyService } from "@services/salaries-survey.service";
+import { UsefulnessRatingComponent } from "./usefulness-rating.component";
 
-describe("SalariesSurveyBlockComponent", () => {
-  let component: SalariesSurveyBlockComponent;
-  let fixture: ComponentFixture<SalariesSurveyBlockComponent>;
+describe("UsefulnessRatingComponent", () => {
+  let component: UsefulnessRatingComponent;
+  let fixture: ComponentFixture<UsefulnessRatingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SalariesSurveyBlockComponent],
+      declarations: [UsefulnessRatingComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices, SurveyService],
+      providers: [...testUtilStubs, ...mostUsedServices],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SalariesSurveyBlockComponent);
+    fixture = TestBed.createComponent(UsefulnessRatingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
