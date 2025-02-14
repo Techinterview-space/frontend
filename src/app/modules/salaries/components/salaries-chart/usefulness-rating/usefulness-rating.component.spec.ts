@@ -7,6 +7,7 @@ import {
   mostUsedServices,
 } from "@shared/test-utils";
 import { UsefulnessRatingComponent } from "./usefulness-rating.component";
+import { SurveyService } from "@services/salaries-survey.service";
 
 describe("UsefulnessRatingComponent", () => {
   let component: UsefulnessRatingComponent;
@@ -16,7 +17,7 @@ describe("UsefulnessRatingComponent", () => {
     await TestBed.configureTestingModule({
       declarations: [UsefulnessRatingComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices],
+      providers: [...testUtilStubs, ...mostUsedServices, SurveyService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
