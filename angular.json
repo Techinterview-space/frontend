@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "petrel.interviewer": {
+    "interviewer": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -21,7 +21,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/petrel.interviewer"
+              "base": "dist/interviewer"
             },
             "index": "src/index.html",
             "polyfills": ["src/polyfills.ts"],
@@ -110,13 +110,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "petrel.interviewer:build:production"
+              "buildTarget": "interviewer:build:production"
             },
             "staging": {
-              "buildTarget": "petrel.interviewer:build:staging"
+              "buildTarget": "interviewer:build:staging"
             },
             "development": {
-              "buildTarget": "petrel.interviewer:build:development"
+              "buildTarget": "interviewer:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -124,7 +124,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "petrel.interviewer:build"
+            "buildTarget": "interviewer:build"
           }
         },
         "test": {

@@ -1,5 +1,5 @@
 {
-  "name": "petrel.interviewer",
+  "name": "interviewer",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -14,7 +14,7 @@
     "lint": "ng lint",
     "pretty": "pretty-quick",
     "pretty-all": "prettier --write \"src/**/*.ts\" \"src/**/*.html\" \"src/**/*.scss\" \"src/**/*.json\" \"e2e/**/*.ts\" \"tools/**/*.ts\" \"*.json\"",
-    "bundle:analyze": "ng build --stats-json && webpack-bundle-analyzer dist/petrel.interviewer/stats.json"
+    "bundle:analyze": "ng build --stats-json && webpack-bundle-analyzer dist/interviewer/stats.json"
   },
   "private": true,
   "dependencies": {
