@@ -5,9 +5,9 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 export enum UsefulnessRatingComponentMode {
-  UserHasRepliedBefore = 'UserHasRepliedBefore',
-  ShowRatingBlock = 'ShowRatingBlock',
-  ShowSuccessBlock = 'ShowSuccessBlock',
+  UserHasRepliedBefore = "UserHasRepliedBefore",
+  ShowRatingBlock = "ShowRatingBlock",
+  ShowSuccessBlock = "ShowSuccessBlock",
 }
 
 @Component({
@@ -25,12 +25,9 @@ export class UsefulnessRatingComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: SurveyService,
     private readonly gtag: GoogleAnalyticsService,
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
-
     if (this.source == null) {
       return;
     }

@@ -25,7 +25,7 @@ getTestBed().initTestEnvironment(
 );
 
 beforeAll(() => {
-  window.onbeforeunload = () => 'Oh no!';
+  window.onbeforeunload = () => "Oh no!";
 });
 
 beforeEach(async () => {

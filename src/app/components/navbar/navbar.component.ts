@@ -134,9 +134,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   login(): void {
     this.spinner.showTimer();
-    this.authService.login()
-      .pipe(untilDestroyed(this))
-      .subscribe();
+    this.authService.login().pipe(untilDestroyed(this)).subscribe();
   }
 
   logout(): void {

@@ -13,12 +13,15 @@ export class StarRatingComponent implements OnInit {
 
   @Output()
   ratingChange = new EventEmitter<number>();
-  
+
   rating: number = 0;
   stars: StartRatingObject[] | null = null;
 
   ngOnInit(): void {
-    this.stars = Array.from({ length: 5 }, (_, i) => new StartRatingObject(i, false));
+    this.stars = Array.from(
+      { length: 5 },
+      (_, i) => new StartRatingObject(i, false),
+    );
   }
 
   setRating(value: StartRatingObject) {

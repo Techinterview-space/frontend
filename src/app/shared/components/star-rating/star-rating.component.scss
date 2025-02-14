@@ -1,12 +1,11 @@
 .star-rating {
-    display: flex;
-    gap: 5px;
-  }
-  
-  .star {
-    font-size: 36px;
-    cursor: pointer !important;
-    color: gold;
-    transition: color 0.3s;
-  }
-  
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  font-size: 36px;
+  cursor: pointer !important;
+  color: gold;
+  transition: color 0.3s;
+}
