@@ -5,6 +5,7 @@ import { JobItem } from "./job-item";
   selector: "app-jobs-table",
   templateUrl: "./jobs-table.component.html",
   styleUrls: ["./jobs-table.component.scss"],
+  standalone: false,
 })
 export class JobsTableComponent {
   @Input()

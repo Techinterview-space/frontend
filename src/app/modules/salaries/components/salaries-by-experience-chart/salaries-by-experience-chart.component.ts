@@ -8,6 +8,7 @@ import { SalariesByAgeOrExperienceChart } from "@services/user-salaries.service"
   selector: "app-salaries-by-experience-chart",
   templateUrl: "./salaries-by-experience-chart.component.html",
   styleUrl: "./salaries-by-experience-chart.component.scss",
+  standalone: false,
 })
 export class SalariesByExperienceChartComponent {
   @Input()
@@ -37,7 +38,7 @@ export class SalariesByExperienceChartComponent {
     ) {
       this.chartDataLocal = this.initChartWithParams(
         this.canvasIdLocal,
-        this.chart.salariesByExperienceChartForLocalSalaries
+        this.chart.salariesByExperienceChartForLocalSalaries,
       );
     }
 
@@ -48,14 +49,14 @@ export class SalariesByExperienceChartComponent {
     ) {
       this.chartDataLocal = this.initChartWithParams(
         this.canvasIdRemote,
-        this.chart.salariesByExperienceChartForRemoteSalaries
+        this.chart.salariesByExperienceChartForRemoteSalaries,
       );
     }
   }
 
   private initChartWithParams(
     canvasId: string,
-    data: SalariesByAgeOrExperienceChart
+    data: SalariesByAgeOrExperienceChart,
   ): SalariesByAgeOrExperienceChartObject {
     const chart = new SalariesByAgeOrExperienceChartObject(canvasId, data);
 

@@ -25,10 +25,10 @@ export class UserAdminService {
   }
 
   all(
-    pageParams: PageParams = defaultPageParams
+    pageParams: PageParams = defaultPageParams,
   ): Observable<PaginatedList<ApplicationUser>> {
     return this.api.get<PaginatedList<ApplicationUser>>(
-      this.apiUrl + "?" + new ConvertObjectToHttpParams(pageParams).get()
+      this.apiUrl + "?" + new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 

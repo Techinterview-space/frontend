@@ -15,7 +15,7 @@ class AuthStub extends AuthService {
 
   override getCurrentUser(): Observable<ApplicationUserExtended | null> {
     return of(
-      this.user != null ? new ApplicationUserExtended(this.user) : null
+      this.user != null ? new ApplicationUserExtended(this.user) : null,
     );
   }
 
@@ -44,7 +44,7 @@ describe("ActiveUserGuard", () => {
     const target = new ActiveUserGuard(new AuthStub(user));
 
     expect(target.canActiveteInternal(new ApplicationUserExtended(user))).toBe(
-      true
+      true,
     );
   });
 
@@ -54,7 +54,7 @@ describe("ActiveUserGuard", () => {
     const target = new ActiveUserGuard(new AuthStub(user));
 
     expect(target.canActiveteInternal(new ApplicationUserExtended(user))).toBe(
-      false
+      false,
     );
   });
 

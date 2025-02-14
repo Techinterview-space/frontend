@@ -3,6 +3,7 @@ import { Component, Input } from "@angular/core";
 @Component({
   selector: "app-visibility-label",
   templateUrl: "./visibility-label.component.html",
+  standalone: false,
 })
 export class VisibilityLabelComponent {
   @Input()

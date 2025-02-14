@@ -1,0 +1,12 @@
+<!-- star-rating.component.html -->
+<div class="star-rating">
+  <i
+    *ngFor="let star of stars; let index = index"
+    class="star cursor-pointer bi {{
+      star.filled ? 'bi-star-fill' : 'bi-star'
+    }}"
+    (click)="setRating(star)"
+    (mouseover)="hoverRating(star)"
+    (mouseleave)="leaveRating()"
+  ></i>
+</div>

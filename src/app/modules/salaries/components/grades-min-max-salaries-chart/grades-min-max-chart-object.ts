@@ -93,7 +93,10 @@ class ChartDataset {
   readonly itemStyle = "circle";
   readonly itemBackgroundColor = "#000";
 
-  constructor(salariesSource: Array<UserSalary>, readonly label: string) {
+  constructor(
+    salariesSource: Array<UserSalary>,
+    readonly label: string,
+  ) {
     const color = new RandomRgbColor();
     this.borderColor = color.toString(1);
     this.backgroundColor = color.toString(0.7);

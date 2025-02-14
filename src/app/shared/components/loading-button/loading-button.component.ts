@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   selector: "app-loading-button",
   templateUrl: "./loading-button.component.html",
   styleUrls: ["./loading-button.component.scss"],
+  standalone: false,
 })
 export class LoadingButtonComponent {
   @Input()

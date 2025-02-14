@@ -6,6 +6,7 @@ import { SplittedByWhitespacesString } from "../../value-objects/splitted-by-whi
   selector: "app-developer-grade-label",
   styleUrls: ["./developer-grade-label.component.scss"],
   templateUrl: "./developer-grade-label.component.html",
+  standalone: false,
 })
 export class DeveloperGradeLabelComponent implements OnInit {
   title = "";
@@ -50,7 +51,7 @@ export class DeveloperGradeLabelComponent implements OnInit {
 
     if (this.grade) {
       this.title = new SplittedByWhitespacesString(
-        DeveloperGrade[this.grade]
+        DeveloperGrade[this.grade],
       ).value;
     } else {
       this.title = "Не указан";

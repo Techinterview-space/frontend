@@ -24,7 +24,7 @@ export class HistoricalSalariesChartObject extends Chart {
         2,
         new RandomRgbColor(),
         true as PointStyle,
-        "y"
+        "y",
       ),
       new DatasetItem(
         "Средняя, КЗ",
@@ -32,7 +32,7 @@ export class HistoricalSalariesChartObject extends Chart {
         2,
         new RandomRgbColor(),
         true as PointStyle,
-        "y"
+        "y",
       ),
       new DatasetItem(
         "Медиана, удаленка",
@@ -40,7 +40,7 @@ export class HistoricalSalariesChartObject extends Chart {
         2,
         new RandomRgbColor(),
         true as PointStyle,
-        "y"
+        "y",
       ),
       new DatasetItem(
         "Средняя, удаленка",
@@ -48,7 +48,7 @@ export class HistoricalSalariesChartObject extends Chart {
         2,
         new RandomRgbColor(),
         true as PointStyle,
-        "y"
+        "y",
       ),
       new DatasetItem(
         "Количество анкет",
@@ -56,7 +56,7 @@ export class HistoricalSalariesChartObject extends Chart {
         4,
         new RandomRgbColor(),
         "circle",
-        "y1"
+        "y1",
       ),
     ];
 
@@ -106,7 +106,7 @@ class DatasetItem implements ChartDatasetType {
     readonly borderWidth: number,
     readonly color: RandomRgbColor,
     readonly pointStyle: PointStyle,
-    readonly yAxisID: "y1" | "y"
+    readonly yAxisID: "y1" | "y",
   ) {
     this.borderColor = color.toString(1);
     this.backgroundColor = color.toString(0.5);

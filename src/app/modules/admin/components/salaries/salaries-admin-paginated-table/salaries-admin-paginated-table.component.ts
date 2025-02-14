@@ -14,6 +14,7 @@ import { SalariesTableFilter } from "../salaries-table-filter";
 @Component({
   selector: "app-salaries-admin-paginated-table",
   templateUrl: "./salaries-admin-paginated-table.component.html",
+  standalone: false,
 })
 export class SalariesAdminPaginatedTableComponent {
   @Input()
@@ -69,8 +70,8 @@ export class SalariesAdminPaginatedTableComponent {
         "Вы уверены, что хотите удалить анкету?",
         () => {
           this.deleteRequested.emit(salary);
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -81,8 +82,8 @@ export class SalariesAdminPaginatedTableComponent {
         "Вы уверены, что хотите внести эту анкету в статистику?",
         () => {
           this.approveRequested.emit(salary);
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -93,8 +94,8 @@ export class SalariesAdminPaginatedTableComponent {
         "Вы уверены, что хотите убрать эту анкету из статистику?",
         () => {
           this.excludeRequested.emit(salary);
-        }
-      )
+        },
+      ),
     );
   }
 

@@ -10,6 +10,7 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
   selector: "app-user-page",
   templateUrl: "./user-page.component.html",
   styleUrls: ["./user-page.component.scss"],
+  standalone: false,
 })
 export class UserPageComponent implements OnInit, OnDestroy {
   user: ApplicationUser | null = null;
@@ -19,7 +20,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: UsersService,
     private readonly titleService: TitleService,
-    activatedRoute: ActivatedRoute
+    activatedRoute: ActivatedRoute,
   ) {
     this.activatedRoute = new ActivatedRouteExtended(activatedRoute);
   }

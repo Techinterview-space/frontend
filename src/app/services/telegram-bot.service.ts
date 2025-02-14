@@ -30,43 +30,43 @@ export class TelegramBotService {
   }
 
   botUsages(
-    pageParams: PageParams = defaultPageParams
+    pageParams: PageParams = defaultPageParams,
   ): Observable<PaginatedList<TelegramBotUsage>> {
     return this.api.get<PaginatedList<TelegramBotUsage>>(
       this.apiUrl +
         "bot-usages" +
         "?" +
-        new ConvertObjectToHttpParams(pageParams).get()
+        new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
   getUserSettings(
-    pageParams: PageParams = defaultPageParams
+    pageParams: PageParams = defaultPageParams,
   ): Observable<PaginatedList<TelegramUserSettings>> {
     return this.api.get<PaginatedList<TelegramUserSettings>>(
       this.apiUrl +
         "bot-user-settings" +
         "?" +
-        new ConvertObjectToHttpParams(pageParams).get()
+        new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
   createUserSettings(
-    data: CreateTelegramUserSettingsBody
+    data: CreateTelegramUserSettingsBody,
   ): Observable<TelegramUserSettings> {
     return this.api.post<TelegramUserSettings>(
       this.apiUrl + "bot-user-settings",
-      data
+      data,
     );
   }
 
   updateUserSettings(
     id: string,
-    data: UpdateTelegramUserSettingsBody
+    data: UpdateTelegramUserSettingsBody,
   ): Observable<TelegramUserSettings> {
     return this.api.put<TelegramUserSettings>(
       this.apiUrl + "bot-user-settings/" + id,
-      data
+      data,
     );
   }
 
@@ -75,27 +75,27 @@ export class TelegramBotService {
   }
 
   getStatDataChangeSubscriptions(
-    pageParams: PageParams = defaultPageParams
+    pageParams: PageParams = defaultPageParams,
   ): Observable<PaginatedList<StatDataCacheChangeSubscription>> {
     return this.api.get<PaginatedList<StatDataCacheChangeSubscription>>(
       this.apiUrl +
         "stat-data-change-subscriptions" +
         "?" +
-        new ConvertObjectToHttpParams(pageParams).get()
+        new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
   activateStatDataChangeSubscription(id: string): Observable<void> {
     return this.api.put<void>(
       `${this.apiUrl}stat-data-change-subscriptions/${id}/activate`,
-      {}
+      {},
     );
   }
 
   deactivateStatDataChangeSubscription(id: string): Observable<void> {
     return this.api.put<void>(
       `${this.apiUrl}stat-data-change-subscriptions/${id}/deactivate`,
-      {}
+      {},
     );
   }
 }

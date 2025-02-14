@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
   name: "formatAsMoney",
+  standalone: false,
 })
 export class FormatAsMoneyPipe implements PipeTransform {
   transform(value: number | null, fractionSize: number = 2): string {
@@ -10,7 +11,7 @@ export class FormatAsMoneyPipe implements PipeTransform {
 
   public static formatNumber(
     value: number | null | undefined,
-    fractionSize: number = 2
+    fractionSize: number = 2,
   ): string {
     if (value == null) {
       return "";

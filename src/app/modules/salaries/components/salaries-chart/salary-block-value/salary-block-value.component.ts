@@ -8,6 +8,7 @@ import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
   selector: "app-salary-block-value",
   templateUrl: "./salary-block-value.component.html",
   styleUrl: "./salary-block-value.component.scss",
+  standalone: false,
 })
 export class SalaryBlockValueComponent implements OnInit, OnDestroy {
   @Input()
@@ -41,10 +42,10 @@ export class SalaryBlockValueComponent implements OnInit, OnDestroy {
     this.median = FormatAsMoneyPipe.formatNumber(this.source.medianSalary);
     this.average = FormatAsMoneyPipe.formatNumber(this.source.averageSalary);
     this.medianRemote = FormatAsMoneyPipe.formatNumber(
-      this.source.medianRemoteSalary
+      this.source.medianRemoteSalary,
     );
     this.averageRemote = FormatAsMoneyPipe.formatNumber(
-      this.source.averageRemoteSalary
+      this.source.averageRemoteSalary,
     );
     this.currentCurrencyLabel = this.source.getCurrentCurrencyLabel();
   }

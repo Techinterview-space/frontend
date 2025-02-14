@@ -2,6 +2,7 @@ import { ElementRef, HostListener, Directive, Input } from "@angular/core";
 
 @Directive({
   selector: "[appOnlyNumber]",
+  standalone: false,
 })
 // soure: https://www.bennettnotes.com/angular-4-input-numbers-directive/
 export class OnlyNumberDirective {

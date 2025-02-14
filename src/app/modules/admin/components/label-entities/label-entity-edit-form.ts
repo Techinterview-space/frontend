@@ -16,7 +16,7 @@ export class LabelEntityEditForm extends FormGroup {
       ]),
       hexColor: new FormControl(
         item?.hexColorAsString ?? new RandomHexColor().toString(),
-        [Validators.required, Validators.maxLength(7)]
+        [Validators.required, Validators.maxLength(7)],
       ),
     });
 

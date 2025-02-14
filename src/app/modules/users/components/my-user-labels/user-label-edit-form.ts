@@ -12,7 +12,7 @@ export class UserLabelEditForm extends FormGroup {
       ]),
       hexColor: new FormControl(
         item?.hexColor ?? new RandomHexColor().toString(),
-        [Validators.required, Validators.maxLength(7)]
+        [Validators.required, Validators.maxLength(7)],
       ),
     });
 

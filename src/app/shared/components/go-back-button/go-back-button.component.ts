@@ -5,6 +5,7 @@ import { Location } from "@angular/common";
   selector: "app-go-back-button",
   templateUrl: "./go-back-button.component.html",
   styleUrls: ["./go-back-button.component.scss"],
+  standalone: false,
 })
 export class GoBackButtonComponent {
   constructor(private readonly location: Location) {}

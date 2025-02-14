@@ -6,6 +6,7 @@ import { RandomHexColor } from "@shared/value-objects/random-hex-color";
   selector: "app-labels-ng-select",
   templateUrl: "./labels-ng-select.component.html",
   styleUrls: ["./labels-ng-select.component.scss"],
+  standalone: false,
 })
 export class LabelsNgSelectComponent implements OnInit {
   @Input()

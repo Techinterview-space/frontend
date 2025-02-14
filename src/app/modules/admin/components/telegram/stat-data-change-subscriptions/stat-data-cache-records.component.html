@@ -22,9 +22,9 @@
               <td>{{ item.name }}</td>
               <td>{{ item.telegramChatId }}</td>
               <td>{{ item.professionIds }}</td>
-              <td>{{ item.deletedAt | date : "yyyy-MM-dd HH:mm" }}</td>
-              <td>{{ item.createdAt | date : "yyyy-MM-dd HH:mm" }}</td>
-              <td>{{ item.updatedAt | date : "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
                 <button
                   *ngIf="item.deletedAt != null"

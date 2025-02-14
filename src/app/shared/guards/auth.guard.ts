@@ -13,12 +13,12 @@ export class AuthGuard implements CanActivate {
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly cookieService: CookieService
+    private readonly cookieService: CookieService,
   ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot | null,
-    state: RouterStateSnapshot | null
+    state: RouterStateSnapshot | null,
   ): boolean {
     if (this.authService.isAuthenticated()) {
       return true;

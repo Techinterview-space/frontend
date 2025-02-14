@@ -21,7 +21,7 @@ export class DeveloperGradeSelectItem implements SelectItem<DeveloperGrade> {
 
   static allGrades(): DeveloperGradeSelectItem[] {
     return EnumHelper.getValues(DeveloperGrade).map(
-      (grade) => new DeveloperGradeSelectItem(grade)
+      (grade) => new DeveloperGradeSelectItem(grade),
     );
   }
 
@@ -36,7 +36,7 @@ export class DeveloperGradeSelectItem implements SelectItem<DeveloperGrade> {
           grade != DeveloperGrade.SeniorMinus &&
           grade != DeveloperGrade.SeniorStrong &&
           grade != DeveloperGrade.LeadMinus &&
-          grade != DeveloperGrade.LeadStrong
+          grade != DeveloperGrade.LeadStrong,
       )
       .map((grade) => new DeveloperGradeSelectItem(grade));
   }

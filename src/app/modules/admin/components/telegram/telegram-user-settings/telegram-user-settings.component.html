@@ -27,8 +27,8 @@
               <td>{{ item.username }}</td>
               <td>{{ item.chatId }}</td>
               <td>{{ item.userId }}</td>
-              <td>{{ item.createdAt | date : "yyyy-MM-dd HH:mm" }}</td>
-              <td>{{ item.updatedAt | date : "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
                 <button type="button" class="btn-link-sm" (click)="edit(item)">
                   Редактировать

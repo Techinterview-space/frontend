@@ -63,8 +63,8 @@ export class InterviewFormGroup extends FormGroup {
           this.createSubjectFormGroup(
             subject.title,
             subject.grade,
-            subject.comments
-          )
+            subject.comments,
+          ),
         );
       });
     }
@@ -82,7 +82,7 @@ export class InterviewFormGroup extends FormGroup {
 
     interviewTemplate.subjects?.forEach((subject) => {
       this.subjectsFormArray.push(
-        this.createSubjectFormGroup(subject.title, null, null)
+        this.createSubjectFormGroup(subject.title, null, null),
       );
       this.subjectDescriptions.push(subject.description);
     });
@@ -133,13 +133,13 @@ export class InterviewFormGroup extends FormGroup {
 
   getSubjectTitleField(subjectIndex: number): AbstractControl {
     return this.subjectsFormArray.controls[subjectIndex]?.get(
-      "title"
+      "title",
     ) as AbstractControl;
   }
 
   getSubjectCommentsField(subjectIndex: number): AbstractControl {
     return this.subjectsFormArray.controls[subjectIndex]?.get(
-      "comments"
+      "comments",
     ) as AbstractControl;
   }
 
@@ -204,7 +204,7 @@ export class InterviewFormGroup extends FormGroup {
   private createSubjectFormGroup(
     title: string | null,
     grade: DeveloperGrade | null,
-    comments: string | null
+    comments: string | null,
   ): FormGroup {
     return new FormGroup({
       title: new FormControl(title, [Validators.required, Validators.max(150)]),

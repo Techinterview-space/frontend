@@ -15,7 +15,7 @@ export class SalariesByGenderChartObject extends Chart {
 
   constructor(
     canvasId: string,
-    private readonly source: SalariesByGenderChart
+    private readonly source: SalariesByGenderChart,
   ) {
     console.log(canvasId);
     const datasets = source.datasetByGender.map((x) => {

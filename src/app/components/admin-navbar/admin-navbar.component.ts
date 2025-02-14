@@ -14,6 +14,7 @@ interface NavbarDropdown {
   selector: "app-admin-navbar",
   templateUrl: "./admin-navbar.component.html",
   styleUrls: ["./admin-navbar.component.scss"],
+  standalone: false,
 })
 export class AdminNavbarComponent {
   readonly showSearchForm = false;

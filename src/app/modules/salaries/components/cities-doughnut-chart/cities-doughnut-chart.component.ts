@@ -13,6 +13,7 @@ import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
   selector: "app-cities-doughnut-chart",
   templateUrl: "./cities-doughnut-chart.component.html",
   styleUrl: "./cities-doughnut-chart.component.scss",
+  standalone: false,
 })
 export class CitiesDoughnutChartComponent {
   @Input()
@@ -50,7 +51,7 @@ export class CitiesDoughnutChartComponent {
 
     this.chartDataLocal = new CitiesDoughnutChartObject(
       this.canvasId,
-      this.salaries
+      this.salaries,
     );
 
     var chartEl = document.getElementById(this.canvasId);

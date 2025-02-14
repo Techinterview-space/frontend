@@ -8,6 +8,7 @@ import { CurrencyItem } from "./currency-item";
 @Component({
   templateUrl: "./currencies-page.component.html",
   styleUrls: ["./currencies-page.component.scss"],
+  standalone: false,
 })
 export class CurrenciesPageComponent implements OnInit, OnDestroy {
   authorizationToken: string | null = null;
@@ -17,7 +18,7 @@ export class CurrenciesPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly titleService: TitleService,
-    private readonly adminToolsService: AdminToolsService
+    private readonly adminToolsService: AdminToolsService,
   ) {
     this.titleService.setTitle("Курсы валют");
   }

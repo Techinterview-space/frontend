@@ -4,6 +4,7 @@ import { ApplicationUser } from "@models/application-user";
 @Component({
   selector: "app-user-link",
   templateUrl: "./user-link.component.html",
+  standalone: false,
 })
 export class UserLinkComponent {
   @Input()

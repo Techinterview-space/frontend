@@ -8,6 +8,7 @@ import { StatDataCacheChangeSubscription } from "@models/telegram";
 
 @Component({
   templateUrl: "./stat-data-cache-records.component.html",
+  standalone: false,
 })
 export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
   items: Array<StatDataCacheChangeSubscription> | null = null;
@@ -16,7 +17,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: TelegramBotService,
-    titleService: TitleService
+    titleService: TitleService,
   ) {
     titleService.setTitle("Использование бота");
   }

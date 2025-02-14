@@ -8,12 +8,13 @@ import { CheckDeviceService } from "@shared/services/check-device/check-device.s
 
 @Directive({
   selector: "[appIsDesktop]",
+  standalone: false,
 })
 export class IsDesktopDirective implements OnInit {
   constructor(
     private readonly viewContainerRef: ViewContainerRef,
     private readonly templateRef: TemplateRef<any>,
-    private readonly checkDevice: CheckDeviceService
+    private readonly checkDevice: CheckDeviceService,
   ) {}
 
   ngOnInit(): void {

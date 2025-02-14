@@ -12,7 +12,10 @@ interface ChartDatasetType {
 export class SalariesByCityChartObject extends Chart {
   private readonly datasets: Array<ChartDatasetType> = [];
 
-  constructor(canvasId: string, private readonly source: SalariesByCityChart) {
+  constructor(
+    canvasId: string,
+    private readonly source: SalariesByCityChart,
+  ) {
     const medianRandomColor = new RandomRgbColor();
     const averageRandomColor = new RandomRgbColor();
 

@@ -15,6 +15,7 @@ import {
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class YearRangeValidator implements Validator {
   @Input() min: number | null = null;

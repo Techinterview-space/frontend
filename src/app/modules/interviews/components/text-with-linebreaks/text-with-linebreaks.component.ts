@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from "@angular/core";
   selector: "app-text-with-linebreaks",
   templateUrl: "./text-with-linebreaks.component.html",
   styleUrls: ["./text-with-linebreaks.component.scss"],
+  standalone: false,
 })
 export class TextWithLinebreaksComponent implements OnInit {
   @Input()
