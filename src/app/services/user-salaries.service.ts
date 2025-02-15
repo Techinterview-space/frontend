@@ -198,18 +198,18 @@ export class UserSalariesService {
   constructor(private readonly api: ApiService) {}
 
   allPaginated(
-    pageParams: PublicAllSalariesQueryParams
+    pageParams: PublicAllSalariesQueryParams,
   ): Observable<PaginatedList<UserSalary>> {
     return this.api.get<PaginatedList<UserSalary>>(
-      this.root + "?" + new ConvertObjectToHttpParams(pageParams).get()
+      this.root + "?" + new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
   allAdminPaginated(
-    pageParams: AdminAllSalariesQueryParams
+    pageParams: AdminAllSalariesQueryParams,
   ): Observable<PaginatedList<UserSalaryAdminDto>> {
     return this.api.get<PaginatedList<UserSalaryAdminDto>>(
-      this.root + "all?" + new ConvertObjectToHttpParams(pageParams).get()
+      this.root + "all?" + new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
@@ -218,50 +218,50 @@ export class UserSalariesService {
   }
 
   salariesNotInStats(
-    pageParams: AdminAllSalariesQueryParams
+    pageParams: AdminAllSalariesQueryParams,
   ): Observable<PaginatedList<UserSalaryAdminDto>> {
     return this.api.get<PaginatedList<UserSalaryAdminDto>>(
       this.root +
         "not-in-stats?" +
-        new ConvertObjectToHttpParams(pageParams).get()
+        new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
   sourcedSalaries(
-    pageParams: AdminAllSalariesQueryParams
+    pageParams: AdminAllSalariesQueryParams,
   ): Observable<PaginatedList<UserSalaryAdminDto>> {
     return this.api.get<PaginatedList<UserSalaryAdminDto>>(
       this.root +
         "sourced-salaries?" +
-        new ConvertObjectToHttpParams(pageParams).get()
+        new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
   addingSalariesaTrendChart(
-    params: SalariesAddingTrendChartParams
+    params: SalariesAddingTrendChartParams,
   ): Observable<SalariesAddingTrendChart> {
     return this.api.get<SalariesAddingTrendChart>(
       this.root +
         "salaries-adding-trend-chart?" +
-        new ConvertObjectToHttpParams(params).get()
+        new ConvertObjectToHttpParams(params).get(),
     );
   }
 
   charts(filters: SalariesChartFilterData): Observable<SalariesChartResponse> {
     return this.api.get<SalariesChartResponse>(
-      this.root + "chart?" + new ConvertObjectToHttpParams(filters).get()
+      this.root + "chart?" + new ConvertObjectToHttpParams(filters).get(),
     );
   }
 
   create(
-    data: CreateUserSalaryRequest
+    data: CreateUserSalaryRequest,
   ): Observable<CreateSalaryRecordResponse> {
     return this.api.post<CreateSalaryRecordResponse>(this.root, data);
   }
 
   update(
     id: string,
-    data: EditUserSalaryRequest
+    data: EditUserSalaryRequest,
   ): Observable<CreateSalaryRecordResponse> {
     return this.api.post<CreateSalaryRecordResponse>(this.root + id, data);
   }

@@ -51,7 +51,7 @@ export class SalariesChartActivatedRoute {
         map((queryParams) => {
           const gradeString =
             queryParams.find(
-              (x) => x.key === SalariesChartActivatedRoute.gradeRouteParamName
+              (x) => x.key === SalariesChartActivatedRoute.gradeRouteParamName,
             )?.value ?? null;
 
           let grade: DeveloperGrade | null = null;
@@ -68,7 +68,8 @@ export class SalariesChartActivatedRoute {
           const profsToIncludeValue =
             queryParams.find(
               (x) =>
-                x.key === SalariesChartActivatedRoute.profsIncludeRouteParamName
+                x.key ===
+                SalariesChartActivatedRoute.profsIncludeRouteParamName,
             )?.value ?? null;
 
           if (profsToIncludeValue && profsToIncludeValue !== "") {
@@ -78,7 +79,7 @@ export class SalariesChartActivatedRoute {
           let cities: Array<KazakhstanCity> = [];
           const citiesValue =
             queryParams.find(
-              (x) => x.key === SalariesChartActivatedRoute.ciiesParamName
+              (x) => x.key === SalariesChartActivatedRoute.ciiesParamName,
             )?.value ?? null;
 
           if (citiesValue && citiesValue !== "") {
@@ -88,7 +89,7 @@ export class SalariesChartActivatedRoute {
           }
 
           return new SalaryChartGlobalFiltersData(grade, profsInclude, cities);
-        })
+        }),
       );
   }
 }

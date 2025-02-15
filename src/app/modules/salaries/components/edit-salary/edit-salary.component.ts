@@ -27,6 +27,7 @@ import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
   selector: "app-edit-salary-modal",
   templateUrl: "./edit-salary.component.html",
   styleUrl: "./edit-salary.component.scss",
+  standalone: false,
 })
 export class EditSalaryComponent implements OnInit, OnDestroy {
   @Input()
@@ -67,7 +68,7 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: UserSalariesService,
-    private readonly alert: AlertService
+    private readonly alert: AlertService,
   ) {}
 
   ngOnInit(): void {
@@ -108,7 +109,7 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
     this.form = new EditSalaryForm(
       this.salarytoBeEdited,
       this.industries.length > 0,
-      true
+      true,
     );
   }
 
@@ -128,7 +129,7 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
           this.alert.success(
             this.salarytoBeEdited
               ? "Зарплата обновлена"
-              : "Зарплата успешно записана"
+              : "Зарплата успешно записана",
           );
           this.salaryAdded.emit(x.createdSalary);
         } else {

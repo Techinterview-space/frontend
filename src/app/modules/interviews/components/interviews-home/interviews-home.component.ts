@@ -19,6 +19,7 @@ interface ImageHint {
   selector: "app-interviews-home",
   templateUrl: "./interviews-home.component.html",
   styleUrls: ["./interviews-home.component.scss"],
+  standalone: false,
 })
 export class InterviewsHomeComponent implements OnInit, OnDestroy {
   showHomePage = false;
@@ -35,7 +36,7 @@ export class InterviewsHomeComponent implements OnInit, OnDestroy {
     private readonly titleService: TitleService,
     private readonly authService: AuthService,
     private readonly spinner: SpinnerService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {

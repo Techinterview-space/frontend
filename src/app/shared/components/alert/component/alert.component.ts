@@ -8,6 +8,7 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
   selector: "app-alert",
   templateUrl: "./alert.component.html",
   styleUrls: ["./alert.component.scss"],
+  standalone: false,
 })
 export class AlertComponent implements OnInit, OnDestroy {
   alerts: Array<Alert> = [];

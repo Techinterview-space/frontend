@@ -37,7 +37,7 @@ describe("AuthGuard", () => {
     const guard = new AuthGuard(
       TestBed.inject(Router),
       authServiceMock,
-      cookieServiceMock
+      cookieServiceMock,
     );
     expect(guard.canActivate(null, null)).toEqual(true);
   });
@@ -48,7 +48,7 @@ describe("AuthGuard", () => {
     const guard = new AuthGuard(
       TestBed.inject(Router),
       authServiceMock,
-      cookieServiceMock
+      cookieServiceMock,
     );
     expect(guard.canActivate(null, null)).toEqual(false);
   });

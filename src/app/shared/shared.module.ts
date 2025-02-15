@@ -38,6 +38,7 @@ import { LabelsNgSelectComponent } from "./components/labels-ng-select/labels-ng
 import { NgSelectModule } from "@ng-select/ng-select";
 import { WednesdayFrogComponent } from "./components/wednesday-frog/wednesday-frog.component";
 import { FormatAsMoneyPipe } from "./directives/format-as-money.pipe";
+import { StarRatingComponent } from "./components/star-rating/star-rating.component";
 
 const componentsToDeclareAndExport = [
   AlertComponent,
@@ -71,10 +72,12 @@ const componentsToDeclareAndExport = [
   LabelsNgSelectComponent,
   WednesdayFrogComponent,
   FormatAsMoneyPipe,
+  StarRatingComponent,
 ];
 
 @NgModule({
   declarations: componentsToDeclareAndExport,
+  exports: componentsToDeclareAndExport,
   imports: [
     CommonModule,
     FormsModule,
@@ -84,6 +87,5 @@ const componentsToDeclareAndExport = [
     MarkdownModule.forChild(),
   ],
   providers: [AuthGuard, AdminGuard, ActiveUserGuard],
-  exports: componentsToDeclareAndExport,
 })
 export class SharedModule {}

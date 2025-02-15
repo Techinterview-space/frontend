@@ -11,6 +11,7 @@ import { UserRole } from "@models/enums";
 
 @Component({
   templateUrl: "./me.component.html",
+  standalone: false,
 })
 export class MeComponent implements OnInit, OnDestroy {
   user: ApplicationUserExtended | null = null;
@@ -21,7 +22,7 @@ export class MeComponent implements OnInit, OnDestroy {
   constructor(
     private readonly authorizationService: AuthorizationService,
     private readonly titleService: TitleService,
-    private readonly totpService: TotpService
+    private readonly totpService: TotpService,
   ) {
     this.titleService.setTitle("Мой профиль");
   }
@@ -57,8 +58,8 @@ export class MeComponent implements OnInit, OnDestroy {
               this.confirmDisablingMfaMessage = null;
               this.reloadUser();
             });
-        }
-      )
+        },
+      ),
     );
   }
 

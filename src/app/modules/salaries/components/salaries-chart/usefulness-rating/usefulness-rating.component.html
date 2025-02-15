@@ -1,0 +1,29 @@
+<div *ngIf="source">
+  <div
+    class="alert alert-info p-5"
+    *ngIf="currentMode === 'UserHasRepliedBefore'"
+  >
+    <span class="h5">Вы уже оценили этот отчет. Спасибо за оценку!</span>
+  </div>
+
+  <div class="card" *ngIf="currentMode === 'ShowRatingBlock'">
+    <div class="card-body p-5">
+      <div class="mb-3">
+        <div class="h5 mb-1">
+          Была ли вам полезна информация в зарплатном отчете?
+        </div>
+        <div class="text-muted">
+          Оценка важна для нас, чтобы улучшить качество отчетов и графиков.
+        </div>
+      </div>
+      <app-star-rating [maxValue]="5" (ratingChange)="ratingChanged($event)" />
+    </div>
+  </div>
+
+  <div
+    class="alert alert-success p-5"
+    *ngIf="currentMode === 'ShowSuccessBlock'"
+  >
+    <span class="h5">Спасибо за оценку! Это очень важно для нас.</span>
+  </div>
+</div>

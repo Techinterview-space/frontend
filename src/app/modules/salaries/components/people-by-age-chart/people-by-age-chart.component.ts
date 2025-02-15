@@ -14,6 +14,7 @@ import { PeopleByCategoryBarChartObject } from "../people-by-category-bar-chart-
   selector: "app-people-by-age-chart",
   templateUrl: "./people-by-age-chart.component.html",
   styleUrl: "./people-by-age-chart.component.scss",
+  standalone: false,
 })
 export class PeopleByAgeChartComponent {
   @Input()
@@ -48,12 +49,12 @@ export class PeopleByAgeChartComponent {
     this.currentSalary = this.source.currentUserSalary;
     this.countOfResponses = this.source.developersByAgeChartData.data.reduce(
       (acc, item) => acc + item,
-      0
+      0,
     );
 
     this.chartDataLocal = new PeopleByCategoryBarChartObject(
       this.canvasId,
-      this.source.developersByAgeChartData
+      this.source.developersByAgeChartData,
     );
 
     var chartEl = document.getElementById(this.canvasId);

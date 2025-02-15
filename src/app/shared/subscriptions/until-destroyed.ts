@@ -16,7 +16,7 @@ export const untilDestroyed =
     const originalDestroy = componentInstance[ngDestroyMethod];
     if (!isFunction(originalDestroy)) {
       throw new Error(
-        `${componentInstance.constructor.name} is using untilDestroyed but doesn't implement 'ngOnDestroy'`
+        `${componentInstance.constructor.name} is using untilDestroyed but doesn't implement 'ngOnDestroy'`,
       );
     }
 
@@ -38,6 +38,6 @@ export const untilDestroyed =
     // @ts-ignore
     return source.pipe(
       // @ts-ignore
-      takeUntil<T>(componentInstance[takeUntilDestroyedMethod])
+      takeUntil<T>(componentInstance[takeUntilDestroyedMethod]),
     );
   };

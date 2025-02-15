@@ -1,28 +1,27 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   mostUsedImports,
-  mostUsedServices,
   testUtilStubs,
+  mostUsedServices,
 } from "@shared/test-utils";
-import { SalariesSurveyPageComponent } from "./salaries-survey-page.component";
+import { UsefulnessRatingComponent } from "./usefulness-rating.component";
 import { SurveyService } from "@services/salaries-survey.service";
 
-describe("SalariesSurveyPageComponent", () => {
-  let component: SalariesSurveyPageComponent;
-  let fixture: ComponentFixture<SalariesSurveyPageComponent>;
+describe("UsefulnessRatingComponent", () => {
+  let component: UsefulnessRatingComponent;
+  let fixture: ComponentFixture<UsefulnessRatingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SalariesSurveyPageComponent],
+      declarations: [UsefulnessRatingComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices, SurveyService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SalariesSurveyPageComponent);
+    fixture = TestBed.createComponent(UsefulnessRatingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

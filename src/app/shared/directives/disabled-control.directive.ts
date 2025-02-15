@@ -3,6 +3,7 @@ import { Directive, Input } from "@angular/core";
 
 @Directive({
   selector: "[appDisableControl]",
+  standalone: false,
 })
 // The directive is purposed to avoid warnings about 'disable' attribute and reactive form usage.
 // The source: https://netbasal.com/disabling-form-controls-when-working-with-reactive-forms-in-angular-549dd7b42110

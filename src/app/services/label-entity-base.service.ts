@@ -10,7 +10,7 @@ import {
 export abstract class LabelEntityBaseService {
   constructor(
     private readonly root: string,
-    private readonly api: ApiService
+    private readonly api: ApiService,
   ) {}
 
   all(): Observable<Array<LabelEntityAdmiDto>> {

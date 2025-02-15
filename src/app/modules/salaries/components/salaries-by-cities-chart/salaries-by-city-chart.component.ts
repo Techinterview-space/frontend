@@ -7,6 +7,7 @@ import { SalariesByCityChartObject } from "./salaries-by-city-chart-object";
   selector: "app-salaries-by-city-chart",
   templateUrl: "./salaries-by-city-chart.component.html",
   styleUrl: "./salaries-by-city-chart.component.scss",
+  standalone: false,
 })
 export class SalariesByCityChartComponent {
   @Input()
@@ -35,7 +36,7 @@ export class SalariesByCityChartComponent {
     ) {
       this.chartDataLocal = this.initChartWithParams(
         this.canvasIdLocal,
-        this.chart.salariesByCityChartForLocal
+        this.chart.salariesByCityChartForLocal,
       );
     }
 
@@ -45,14 +46,14 @@ export class SalariesByCityChartComponent {
     ) {
       this.chartDataRemote = this.initChartWithParams(
         this.canvasIdRemote,
-        this.chart.salariesByCityChartForRemote
+        this.chart.salariesByCityChartForRemote,
       );
     }
   }
 
   private initChartWithParams(
     canvasId: string,
-    data: SalariesByCityChart
+    data: SalariesByCityChart,
   ): SalariesByCityChartObject {
     const chart = new SalariesByCityChartObject(canvasId, data);
 

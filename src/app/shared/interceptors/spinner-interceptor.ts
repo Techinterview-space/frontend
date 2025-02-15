@@ -16,7 +16,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     if (NoTransparentHttpOptions.hasHeader(req)) {
       this.loaderService.showTransparent();

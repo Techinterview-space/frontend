@@ -5,7 +5,7 @@ export class Interval {
 
   constructor(
     private readonly operation: () => void,
-    private readonly ms: number
+    private readonly ms: number,
   ) {
     Assertion.notNull(operation, "operation");
   }

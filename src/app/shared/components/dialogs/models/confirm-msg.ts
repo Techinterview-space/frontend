@@ -4,7 +4,7 @@ export class ConfirmMsg extends DialogMsg {
   constructor(
     subject: string,
     public readonly text: string,
-    readonly confirm: () => void
+    readonly confirm: () => void,
   ) {
     super(subject);
   }

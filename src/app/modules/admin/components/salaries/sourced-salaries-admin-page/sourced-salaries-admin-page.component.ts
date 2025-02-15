@@ -15,6 +15,7 @@ import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
   templateUrl: "./sourced-salaries-admin-page.component.html",
+  standalone: false,
 })
 export class SourcedSalariesAdminPageComponent implements OnInit, OnDestroy {
   salaries: Array<SalaryAdminItem> | null = null;
@@ -30,7 +31,7 @@ export class SourcedSalariesAdminPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: UserSalariesService,
     titleService: TitleService,
-    private readonly alert: AlertService
+    private readonly alert: AlertService,
   ) {
     titleService.setTitle("Импортированные анкеты");
   }
@@ -71,8 +72,8 @@ export class SourcedSalariesAdminPageComponent implements OnInit, OnDestroy {
               x,
               this.professions,
               this.skills,
-              this.industries
-            )
+              this.industries,
+            ),
         );
         this.source = x;
       });

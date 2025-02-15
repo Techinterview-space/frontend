@@ -22,6 +22,7 @@ interface NavbarDropdown {
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.scss"],
+  standalone: false,
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   loginButtonAvailable = false;
@@ -37,7 +38,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly spinner: SpinnerService
+    private readonly spinner: SpinnerService,
   ) {}
 
   ngOnInit(): void {
@@ -118,11 +119,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
             title: "Статистика по зарплатам",
             url: "/salaries",
             show: true,
-          },
-          {
-            title: "Опрос о пользе статистики",
-            url: "/salaries/survey",
-            show: hasCurrentUser,
           },
           {
             title: "Исторические данные",

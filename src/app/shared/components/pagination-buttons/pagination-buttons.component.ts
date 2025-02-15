@@ -4,6 +4,7 @@ import { PaginatedModel } from "@models/paginated-list";
 @Component({
   selector: "app-pagination-buttons",
   templateUrl: "./pagination-buttons.component.html",
+  standalone: false,
 })
 export class PaginationButtonsComponent implements OnInit {
   @Input()
@@ -34,7 +35,7 @@ export class PaginationButtonsComponent implements OnInit {
     if (this.source) {
       this.lastPage = Math.ceil(this.source.totalItems / this.source.pageSize);
       const allPages = Array.from(Array(this.lastPage).keys()).map(
-        (i) => i + 1
+        (i) => i + 1,
       );
 
       if (allPages.length > 7) {

@@ -16,12 +16,12 @@ export class PermissionsService {
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly cookieService: CookieService
+    private readonly cookieService: CookieService,
   ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ): boolean {
     if (this.authService.isAuthenticated()) {
       return true;
@@ -41,7 +41,7 @@ export class PermissionsService {
 // TODO mgorbatyuk: replace with this implementation
 export const AuthGuard: CanActivateFn = (
   next: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
+  state: RouterStateSnapshot,
 ): boolean => {
   return inject(PermissionsService).canActivate(next, state);
 };

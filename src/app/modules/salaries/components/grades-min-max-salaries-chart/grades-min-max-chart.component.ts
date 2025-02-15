@@ -8,6 +8,7 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
   selector: "app-grades-min-max-chart",
   templateUrl: "./grades-min-max-chart.component.html",
   styleUrl: "./grades-min-max-chart.component.scss",
+  standalone: false,
 })
 export class GradesMinMaxChartComponent implements OnDestroy {
   @Input()
@@ -38,7 +39,7 @@ export class GradesMinMaxChartComponent implements OnDestroy {
 
     this.chartDataLocal = new GradesMinMaxSalariesChartObject(
       this.canvasId,
-      this.salaries
+      this.salaries,
     );
 
     var chartEl = document.getElementById(this.canvasId);

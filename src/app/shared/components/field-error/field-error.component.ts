@@ -5,6 +5,7 @@ import { FormGroup, AbstractControl, ValidationErrors } from "@angular/forms";
   selector: "app-field-error",
   templateUrl: "./field-error.component.html",
   styleUrls: ["./field-error.component.scss"],
+  standalone: false,
 })
 export class FieldErrorComponent implements OnInit {
   @Input() field: AbstractControl | null = null;

@@ -27,7 +27,7 @@ export class SalaryTableRow {
     private readonly item: UserSalary,
     professions: Array<LabelEntityDto>,
     skills: Array<LabelEntityDto>,
-    industries: Array<LabelEntityDto>
+    industries: Array<LabelEntityDto>,
   ) {
     this.value = item.value;
     this.quarter = item.quarter;
@@ -45,11 +45,11 @@ export class SalaryTableRow {
     this.city = item.city != null ? KazakhstanCity[item.city] : "-";
     this.skill =
       item.skillId != null
-        ? skills.find((x) => x.id == item.skillId)?.title ?? "-"
+        ? (skills.find((x) => x.id == item.skillId)?.title ?? "-")
         : "-";
     this.industry =
       item.workIndustryId != null
-        ? industries.find((x) => x.id == item.workIndustryId)?.title ?? "-"
+        ? (industries.find((x) => x.id == item.workIndustryId)?.title ?? "-")
         : "-";
     this.createdAt = item.createdAt;
   }

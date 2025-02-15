@@ -13,6 +13,7 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
   selector: "app-my-interview-templates",
   templateUrl: "./my-interview-templates.component.html",
   styleUrls: ["./my-interview-templates.component.scss"],
+  standalone: false,
 })
 export class MyInterviewTemplatesComponent implements OnInit, OnDestroy {
   templates: Array<InterviewTemplate> | null = null;
@@ -21,7 +22,7 @@ export class MyInterviewTemplatesComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: InterviewTemplatesService,
     private readonly title: TitleService,
-    private readonly alert: AlertService
+    private readonly alert: AlertService,
   ) {}
 
   ngOnInit(): void {
@@ -50,8 +51,8 @@ export class MyInterviewTemplatesComponent implements OnInit, OnDestroy {
             this.alert.info(`Шаблон (${template.title}) был удален`, true);
             this.ngOnInit();
           });
-        }
-      )
+        },
+      ),
     );
   }
 }

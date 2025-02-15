@@ -11,6 +11,7 @@ import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
   templateUrl: "./interview-templates-admin-page.component.html",
+  standalone: false,
 })
 export class InterviewTemplatesAdminPageComponent implements OnInit, OnDestroy {
   templates: PaginatedList<InterviewTemplate> | null = null;
@@ -19,7 +20,7 @@ export class InterviewTemplatesAdminPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: InterviewTemplatesService,
     private readonly title: TitleService,
-    private readonly alert: AlertService
+    private readonly alert: AlertService,
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +49,7 @@ export class InterviewTemplatesAdminPageComponent implements OnInit, OnDestroy {
             this.alert.success("Template was deleted");
             this.loadTemplates();
           });
-      })
+      }),
     );
   }
 }

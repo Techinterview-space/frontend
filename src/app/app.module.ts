@@ -1,4 +1,8 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -28,12 +32,12 @@ const appModules: any[] = [AdminModule, InterviewsModule];
     AdminNavbarComponent,
     MaintenanceComponent,
   ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     NgxSpinnerModule,
-    HttpClientModule,
     MarkdownModule.forRoot(),
     AuthModule.forRoot({
       domain: environment.auth.domain,
@@ -54,7 +58,7 @@ const appModules: any[] = [AdminModule, InterviewsModule];
       multi: true,
     },
     ...applicationServices,
+    provideHttpClient(withInterceptorsFromDi()),
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

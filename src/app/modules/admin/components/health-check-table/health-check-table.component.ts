@@ -5,6 +5,7 @@ import { HealthCheckItem } from "./health-check-item";
   selector: "app-health-check-table",
   templateUrl: "./health-check-table.component.html",
   styleUrls: ["./health-check-table.component.scss"],
+  standalone: false,
 })
 export class HealthCheckTableComponent {
   @Input()

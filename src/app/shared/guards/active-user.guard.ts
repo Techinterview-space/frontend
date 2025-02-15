@@ -15,7 +15,7 @@ export class ActiveUserGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ): Observable<boolean> {
     return this.authService
       .getCurrentUser()

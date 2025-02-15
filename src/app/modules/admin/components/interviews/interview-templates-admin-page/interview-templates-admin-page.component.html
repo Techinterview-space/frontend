@@ -28,7 +28,7 @@
                   [visibility]="item.isPublic"
                 ></app-visibility-label>
               </td>
-              <td>{{ item.updatedAt | date : "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td class="small">
                 <a
                   routerLink="/interviews/templates/{{ item.id }}"

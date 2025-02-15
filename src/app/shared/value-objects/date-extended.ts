@@ -101,7 +101,7 @@ export class DateExtended implements DateStruct {
       0,
       0,
       0,
-      0
+      0,
     );
   }
 
@@ -113,13 +113,13 @@ export class DateExtended implements DateStruct {
       23,
       59,
       59,
-      0
+      0,
     );
   }
 
   endOfTheMonth(): Date {
     return new DateExtended(
-      new Date(this.value!.getFullYear(), this.value!.getMonth() + 1, 0)
+      new Date(this.value!.getFullYear(), this.value!.getMonth() + 1, 0),
     ).endOfTheDay();
   }
 

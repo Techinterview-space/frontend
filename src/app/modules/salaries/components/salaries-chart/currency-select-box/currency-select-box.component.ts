@@ -8,6 +8,7 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
   selector: "app-currency-select-box",
   templateUrl: "./currency-select-box.component.html",
   styleUrl: "./currency-select-box.component.scss",
+  standalone: false,
 })
 export class CurrencySelectBoxComponent implements OnInit {
   @Input()

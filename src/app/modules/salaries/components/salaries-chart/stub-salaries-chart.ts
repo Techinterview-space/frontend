@@ -36,7 +36,7 @@ export class StubSalariesChart extends SalariesChart {
         salaries: [] as UserSalary[],
         salariesByMoneyBarChart: {
           items: StubSalariesChart.salaryLabels.map((x) =>
-            StubSalariesChart.getRandomNumber(100, 25)
+            StubSalariesChart.getRandomNumber(100, 25),
           ),
           labels: StubSalariesChart.salaryLabels,
         },
@@ -58,7 +58,7 @@ export class StubSalariesChart extends SalariesChart {
         salariesByGenderChartForLocal: null,
         salariesByGenderChartForRemote: null,
       },
-      []
+      [],
     );
   }
 
