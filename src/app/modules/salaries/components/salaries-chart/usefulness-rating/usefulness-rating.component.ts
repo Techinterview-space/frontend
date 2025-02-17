@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 import { SalariesChart } from "../salaries-chart";
 import { SurveyService } from "@services/salaries-survey.service";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
@@ -19,6 +26,9 @@ export enum UsefulnessRatingComponentMode {
 export class UsefulnessRatingComponent implements OnInit, OnDestroy {
   @Input()
   source: SalariesChart | null = null;
+
+  @Output()
+  userReplied: EventEmitter<void> = new EventEmitter<void>();
 
   currentMode = UsefulnessRatingComponentMode.UserHasRepliedBefore;
 
@@ -46,6 +56,7 @@ export class UsefulnessRatingComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.currentMode = UsefulnessRatingComponentMode.ShowSuccessBlock;
         this.gtag.event("salaries_survey", "rating", rating.toString());
+        this.userReplied.emit();
       });
   }
 }

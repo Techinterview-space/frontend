@@ -7,7 +7,6 @@ export interface ApplicationUser {
   lastName: string | null;
   fullname: string;
   roles: Array<UserRole>;
-  salariesCount: number;
   emailConfirmed: boolean;
   identityId: number | null;
   isMfaEnabled: boolean;

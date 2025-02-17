@@ -51,6 +51,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   kolesaImportedDataAnalyticsSalariesWasSelected = false;
   noImportSourceWasSelected = true;
   showSalariesPaginatedTable = false;
+  showThankYouForFeedback = false;
 
   gradeFilter: DeveloperGrade | null = null;
 
@@ -203,6 +204,10 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // ignore
+  }
+
+  hideOtherBlocks(): void {
+    this.showThankYouForFeedback = true;
   }
 
   downloadCsv(): void {

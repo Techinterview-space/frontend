@@ -20,10 +20,7 @@
     </div>
   </div>
 
-  <div
-    class="alert alert-success p-5"
-    *ngIf="currentMode === 'ShowSuccessBlock'"
-  >
-    <span class="h5">Спасибо за оценку! Это очень важно для нас.</span>
+  <div *ngIf="currentMode === 'ShowSuccessBlock'">
+    <app-thank-you-for-feedback></app-thank-you-for-feedback>
   </div>
 </div>

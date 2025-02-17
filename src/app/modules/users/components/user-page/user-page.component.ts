@@ -7,7 +7,6 @@ import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended"
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-user-page",
   templateUrl: "./user-page.component.html",
   styleUrls: ["./user-page.component.scss"],
   standalone: false,
@@ -35,7 +34,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
           .pipe(untilDestroyed(this))
           .subscribe((user) => {
             this.user = user;
-            this.titleService.setTitle("User profile " + user.email);
+            this.titleService.setTitle("Профиль пользователя " + user.email);
           });
       });
   }

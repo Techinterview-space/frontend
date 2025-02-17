@@ -270,6 +270,19 @@
     </div>
   </div>
 
+  <div class="cart mt-5" *ngIf="!salariesChart.hasRecentSurveyReply">
+    <div *ngIf="!showThankYouForFeedback">
+      <app-usefulness-rating
+        [source]="salariesChart"
+        (userReplied)="hideOtherBlocks()"
+      />
+    </div>
+
+    <div *ngIf="showThankYouForFeedback">
+      <app-thank-you-for-feedback></app-thank-you-for-feedback>
+    </div>
+  </div>
+
   <div
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
@@ -352,6 +365,19 @@
     </div>
   </div>
 
+  <div class="cart mt-5" *ngIf="!salariesChart.hasRecentSurveyReply">
+    <div *ngIf="!showThankYouForFeedback">
+      <app-usefulness-rating
+        [source]="salariesChart"
+        (userReplied)="hideOtherBlocks()"
+      />
+    </div>
+
+    <div *ngIf="showThankYouForFeedback">
+      <app-thank-you-for-feedback></app-thank-you-for-feedback>
+    </div>
+  </div>
+
   <div
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"
@@ -410,7 +436,16 @@
   </div>
 
   <div class="cart mt-5" *ngIf="!salariesChart.hasRecentSurveyReply">
-    <app-usefulness-rating [source]="salariesChart" />
+    <div *ngIf="!showThankYouForFeedback">
+      <app-usefulness-rating
+        [source]="salariesChart"
+        (userReplied)="hideOtherBlocks()"
+      />
+    </div>
+
+    <div *ngIf="showThankYouForFeedback">
+      <app-thank-you-for-feedback></app-thank-you-for-feedback>
+    </div>
   </div>
 
   <div

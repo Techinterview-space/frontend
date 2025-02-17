@@ -2,6 +2,7 @@ import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { ApplicationUser } from "../models";
 import { ApiService } from "./api.service";
+import { UserSalary } from "@models/salaries/salary.model";
 
 export interface CheckTotpResponse {
   id: number;
@@ -17,6 +18,10 @@ export class AuthorizationService {
 
   getMe(): Observable<ApplicationUser> {
     return this.api.get("/api/account/me");
+  }
+
+  getMySalaries(): Observable<UserSalary[]> {
+    return this.api.get("/api/account/my-salaries");
   }
 
   checkTotpRequired(): Observable<CheckTotpResponse> {

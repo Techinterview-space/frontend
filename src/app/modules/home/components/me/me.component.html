@@ -75,8 +75,56 @@
     </div>
 
     <div class="col-sm-9">
-      <div class="card card-body">
-        <div class="text-muted">Пока работаем над этим.</div>
+      <div class="card card-body pb-5">
+        <div class="d-flex justify-content-between">
+          <span class="h5">Отправленные в статистику зарплаты</span>
+          <span>
+            <button
+              type="button"
+              class="btn btn-outline-dark btn-sm"
+              (click)="toggleBlurTable()">
+              {{ blurTable ? "Показать" : "Скрыть" }} зарплаты
+            </button>
+          </span>
+        </div>
+        <div class="mt-5" *ngIf="mySalaries != null && mySalaries.length > 0">
+          <table class="table table-hover" [class.blur]="blurTable">
+            <thead class="small">
+              <th></th>
+              <th>Период</th>
+              <th>Специальность</th>
+              <th>Грейд</th>
+              <th>Компания</th>
+              <th>Город</th>
+              <th>Навык</th>
+              <th>Сфера</th>
+              <th>Добавлено</th>
+            </thead>
+            <tbody>
+              <tr class="small" *ngFor="let item of mySalaries; let i = index">
+                <td>{{ item.value | formatAsMoney }}</td>
+                <td>{{ item.quarter }}.{{ item.year }}</td>
+                <td>{{ item.profession }}</td>
+                <td>
+                  <app-developer-grade-label
+                    [grade]="item.gradeAsEnum"
+                  ></app-developer-grade-label>
+                </td>
+                <td>{{ item.company }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.skill }}</td>
+                <td>{{ item.industry }}</td>
+                <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-5 class p-5" *ngIf="mySalaries != null && mySalaries.length === 0">
+          <div class="alert alert-info">
+            <span>Вы еще не отправляли зарплаты в статистику.</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
