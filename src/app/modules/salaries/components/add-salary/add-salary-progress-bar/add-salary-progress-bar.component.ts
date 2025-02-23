@@ -18,7 +18,6 @@ export class AddSalaryProgrssBarComponent implements OnInit {
   ngOnInit(): void {
     if (this.value != null && this.maxValue != null) {
       this.widthInPercent = Math.round((this.value / this.maxValue) * 100);
-      console.log(this.widthInPercent);
     }
   }
 }

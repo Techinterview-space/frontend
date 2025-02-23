@@ -11,27 +11,6 @@ export interface HistoricalSurveyChartResponse {
 
 export interface SurveyResultsByWeeksChart {
   weekEnds: Date[];
-  items: SurveyResultsByWeeksChartItem[];
-  gradeItems: SurveyResultsByWeeksChartGradeItem[];
-  hasGradeItems: boolean;
-}
-
-export interface SurveyResultsByWeeksChartItem {
-  totalCount: number;
-  localUsefulnessPercentage: UsefulnessPercentage[];
-  remoteUsefulnessPercentage: UsefulnessPercentage[];
-}
-
-export interface UsefulnessPercentage {
-  ratingValue: number;
-  percentage: number;
-}
-
-export interface SurveyResultsByWeeksChartGradeItem {
-  grade: number;
-  localCount: number;
-  remoteCount: number;
-  totalCount: number;
-  localUsefulnessPercentage: UsefulnessPercentage[];
-  remoteUsefulnessPercentage: UsefulnessPercentage[];
+  localChartItems: number[];
+  remoteChartItems: number[];
 }

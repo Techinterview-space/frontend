@@ -49,6 +49,13 @@
         />
       </div>
     </div>
+
+    <div class="mt-5 card card-body p-5">
+      <div class="display-4 mb-5">Оценка статистики респондентами</div>
+      <div class="" *ngIf="surveyChart">
+        <app-survey-historical-chart [data]="surveyChart" />
+      </div>
+    </div>
   </div>
 </div>
 

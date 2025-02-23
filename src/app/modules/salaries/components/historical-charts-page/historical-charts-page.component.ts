@@ -19,6 +19,7 @@ import {
   ClipboardCopier,
 } from "@shared/value-objects/clipboard-copier";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
+import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
 
 @Component({
   templateUrl: "./historical-charts-page.component.html",
@@ -29,6 +30,7 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
   readonly activatedRoute: SalariesChartActivatedRoute;
 
   data: GetSalariesHistoricalChartResponse | null = null;
+  surveyChart: HistoricalSurveyChartResponse | null = null;
 
   filterData = new SalaryChartGlobalFiltersData();
   isAuthenticated = false;
@@ -161,6 +163,15 @@ export class HistoricalChartsPageComponent implements OnInit, OnDestroy {
       .subscribe((x) => {
         this.isAuthenticated = x.hasAuthentication;
         this.data = x;
+        this.shouldAddOwnSalary = x.shouldAddOwnSalary;
+      });
+
+    this.service
+      .surveyChart(filterToApply)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.isAuthenticated = x.hasAuthentication;
+        this.surveyChart = x;
         this.shouldAddOwnSalary = x.shouldAddOwnSalary;
       });
   }

@@ -17,7 +17,6 @@ export class SalariesByGenderChartObject extends Chart {
     canvasId: string,
     private readonly source: SalariesByGenderChart,
   ) {
-    console.log(canvasId);
     const datasets = source.datasetByGender.map((x) => {
       const color = new RandomRgbColor();
       return {
@@ -28,7 +27,6 @@ export class SalariesByGenderChartObject extends Chart {
       };
     });
 
-    console.log(source);
     super(canvasId, {
       type: "bar",
       data: {

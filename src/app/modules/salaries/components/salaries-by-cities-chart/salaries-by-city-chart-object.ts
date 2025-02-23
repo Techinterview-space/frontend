@@ -34,7 +34,6 @@ export class SalariesByCityChartObject extends Chart {
       },
     ];
 
-    console.log(source);
     super(canvasId, {
       type: "bar",
       data: {

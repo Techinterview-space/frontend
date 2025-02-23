@@ -35,6 +35,7 @@ import { SalariesByGenderChartComponent } from "./components/people-by-gender-ch
 import { AddSalaryProgrssBarComponent } from "./components/add-salary/add-salary-progress-bar/add-salary-progress-bar.component";
 import { UsefulnessRatingComponent } from "./components/salaries-chart/usefulness-rating/usefulness-rating.component";
 import { ThankYouForFeedbackComponent } from "./components/salaries-chart/thank-you-for-feedback/thank-you-for-feedback.component";
+import { SurveyHistoricalChartComponent } from "./components/historical-charts-page/survey-historical-chart/survey-historical-chart.component";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ThankYouForFeedbackComponent } from "./components/salaries-chart/thank-
     AddSalaryProgrssBarComponent,
     UsefulnessRatingComponent,
     ThankYouForFeedbackComponent,
+    SurveyHistoricalChartComponent,
   ],
   imports: [
     CommonModule,

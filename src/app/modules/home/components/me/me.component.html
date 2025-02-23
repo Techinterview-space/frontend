@@ -82,7 +82,8 @@
             <button
               type="button"
               class="btn btn-outline-dark btn-sm"
-              (click)="toggleBlurTable()">
+              (click)="toggleBlurTable()"
+            >
               {{ blurTable ? "Показать" : "Скрыть" }} зарплаты
             </button>
           </span>
@@ -120,7 +121,10 @@
           </table>
         </div>
 
-        <div class="mt-5 class p-5" *ngIf="mySalaries != null && mySalaries.length === 0">
+        <div
+          class="mt-5 class p-5"
+          *ngIf="mySalaries != null && mySalaries.length === 0"
+        >
           <div class="alert alert-info">
             <span>Вы еще не отправляли зарплаты в статистику.</span>
           </div>

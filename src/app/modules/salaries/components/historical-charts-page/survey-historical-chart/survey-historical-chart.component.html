@@ -1,0 +1,9 @@
+<div class="mb-3">
+  <span class="h4">Общие данные</span>
+</div>
+
+<div class="" *ngIf="canvasId">
+  <div id="canvas-container">
+    <canvas [attr.id]="canvasId">{{ chart }}</canvas>
+  </div>
+</div>
