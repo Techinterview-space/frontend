@@ -30,7 +30,7 @@ export class ProfessionsPaginatedTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.title.setTitle("Professions");
+    this.title.setTitle("Специальности");
     this.service
       .all()
       .pipe(untilDestroyed(this))

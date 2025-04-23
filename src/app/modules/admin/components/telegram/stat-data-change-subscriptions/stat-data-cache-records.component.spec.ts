@@ -6,7 +6,7 @@ import {
   mostUsedServices,
 } from "@shared/test-utils";
 import { StatDataCacheRecordsComponent } from "./stat-data-cache-records.component";
-import { TelegramBotService } from "@services/telegram-bot.service";
+import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
 
 describe("StatDataCacheRecordsComponent", () => {
   let component: StatDataCacheRecordsComponent;
@@ -16,7 +16,11 @@ describe("StatDataCacheRecordsComponent", () => {
     await TestBed.configureTestingModule({
       declarations: [StatDataCacheRecordsComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices, TelegramBotService],
+      providers: [
+        ...testUtilStubs,
+        ...mostUsedServices,
+        TelegramSubscriptionsService,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

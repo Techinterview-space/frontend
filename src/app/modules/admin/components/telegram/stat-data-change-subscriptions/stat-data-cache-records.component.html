@@ -3,6 +3,12 @@
 <div class="container my-5" *ngIf="items; else dataLoading">
   <div class="card">
     <div class="card-body">
+      <div class="mb-2">
+        <button class="btn btn-sm btn-primary" (click)="create()">
+          Создать
+        </button>
+      </div>
+
       <div
         class="table-responsive mb-3"
         *ngIf="items && items.length > 0; else nothingToShow"
@@ -10,11 +16,12 @@
         <table class="table table-hover table-sm">
           <thead class="small">
             <th>Название</th>
-            <th>Chat ID</th>
+            <th>Chat</th>
             <th>Специальности</th>
-            <th>Удалено</th>
+            <th>Не отправлять, если нет изменений</th>
             <th>Создано</th>
             <th>Обновлено</th>
+            <th>Удалено</th>
             <th></th>
           </thead>
           <tbody>
@@ -22,9 +29,16 @@
               <td>{{ item.name }}</td>
               <td>{{ item.telegramChatId }}</td>
               <td>{{ item.professionIds }}</td>
-              <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <app-status-label
+                  [status]="item.preventNotificationIfNoDifference"
+                  [defaultSuccessTitle]="'true'"
+                  [defaultFailTitle]="'false'"
+                ></app-status-label>
+              </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
                 <button
                   *ngIf="item.deletedAt != null"
@@ -37,10 +51,17 @@
                 <button
                   *ngIf="item.deletedAt == null"
                   type="button"
-                  class="btn-link-sm text-danger"
+                  class="btn-link-sm text-warning"
                   (click)="deactivate(item)"
                 >
                   Деактивировать
+                </button>
+                <button
+                  type="button"
+                  class="btn-link-sm text-danger"
+                  (click)="delete(item)"
+                >
+                  Удалить
                 </button>
               </td>
             </tr>
@@ -61,7 +82,7 @@
 <ng-template #nothingToShow>
   <div class="card">
     <div class="card-body">
-      <div class="text-center">Нет данных.</div>
+      <div class="text-center">Нет данных</div>
     </div>
   </div>
 </ng-template>
@@ -71,3 +92,66 @@
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
+
+<app-dialog
+  [show]="!!createForm"
+  (closed)="onCreateModalDlgClose()"
+  [header]="'Новая подписка'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!createForm"
+    [formGroup]="createForm"
+    (ngSubmit)="onCreateFormSubmit()"
+  >
+    <div class="mb-3">
+      <label>Имя подписки</label>
+      <input type="text" class="form-control" formControlName="name" />
+      <app-field-error [field]="createForm.get('name')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Чат/группа</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="telegramChatId"
+      />
+      <app-field-error
+        [field]="createForm.get('telegramChatId')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Специальности (через запятую)</label>
+      <input type="text" class="form-control" formControlName="professionIds" />
+      <app-field-error
+        [field]="createForm.get('professionIds')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <input
+        type="checkbox"
+        id="preventNotificationIfNoDifference"
+        class="form-check-input"
+        formControlName="preventNotificationIfNoDifference"
+      />
+      <label class="form-check-label" for="preventNotificationIfNoDifference">
+        Не отправлять сообщение, если нет изменений</label
+      >
+      <app-field-error
+        [field]="createForm.get('preventNotificationIfNoDifference')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+  </form>
+</app-dialog>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

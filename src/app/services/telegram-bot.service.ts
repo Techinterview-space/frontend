@@ -4,11 +4,7 @@ import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
-import {
-  StatDataCacheChangeSubscription,
-  TelegramBotUsage,
-  TelegramUserSettings,
-} from "@models/telegram";
+import { TelegramBotUsage, TelegramUserSettings } from "@models/telegram";
 
 export interface UpdateTelegramUserSettingsBody {
   sendBotRegularStatsUpdates: boolean;
@@ -72,30 +68,5 @@ export class TelegramBotService {
 
   deleteUserSettings(id: string): Observable<void> {
     return this.api.delete<void>(this.apiUrl + "bot-user-settings/" + id);
-  }
-
-  getStatDataChangeSubscriptions(
-    pageParams: PageParams = defaultPageParams,
-  ): Observable<PaginatedList<StatDataCacheChangeSubscription>> {
-    return this.api.get<PaginatedList<StatDataCacheChangeSubscription>>(
-      this.apiUrl +
-        "stat-data-change-subscriptions" +
-        "?" +
-        new ConvertObjectToHttpParams(pageParams).get(),
-    );
-  }
-
-  activateStatDataChangeSubscription(id: string): Observable<void> {
-    return this.api.put<void>(
-      `${this.apiUrl}stat-data-change-subscriptions/${id}/activate`,
-      {},
-    );
-  }
-
-  deactivateStatDataChangeSubscription(id: string): Observable<void> {
-    return this.api.put<void>(
-      `${this.apiUrl}stat-data-change-subscriptions/${id}/deactivate`,
-      {},
-    );
   }
 }

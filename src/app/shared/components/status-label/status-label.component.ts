@@ -12,12 +12,19 @@ export class StatusLabelComponent implements OnInit {
   @Input()
   status: boolean | null = null;
 
+  @Input()
+  defaultSuccessTitle = "Active";
+
+  @Input()
+  defaultFailTitle = "Inactive";
+
   ngOnInit(): void {
     if (this.status == null) {
       return;
     }
 
-    this.title = this.status === true ? "Active" : "Inactive";
+    this.title =
+      this.status === true ? this.defaultSuccessTitle : this.defaultFailTitle;
     this.style = this.status === true ? "success" : "warning text-dark";
   }
 }

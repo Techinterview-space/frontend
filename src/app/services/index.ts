@@ -19,6 +19,7 @@ import { MetaTagService } from "./meta-tags.service";
 import { AdminToolsService } from "./admin-tools.service";
 import { HistoricalChartsService } from "./historical-charts.service";
 import { TotpService } from "./totp.service";
+import { TelegramSubscriptionsService } from "./telegram-subscriptions.service";
 
 export * from "./authorization.service";
 export * from "./api.service";
@@ -48,6 +49,7 @@ export const applicationServices = [
   UserSalariesService,
   SkillsService,
   TelegramBotService,
+  TelegramSubscriptionsService,
   SurveyService,
   MetaTagService,
   AdminToolsService,
