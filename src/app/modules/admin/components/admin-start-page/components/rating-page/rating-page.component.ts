@@ -11,6 +11,7 @@ export class RatingPageComponent implements OnInit {
   readonly stars: number[] = [1, 2, 3, 4, 5];
 
   averageRating: number = 0;
+  count: number = 0;
 
   @Input()
   source: AverageRatingData | null = null;
@@ -18,6 +19,7 @@ export class RatingPageComponent implements OnInit {
   ngOnInit(): void {
     if (this.source) {
       this.averageRating = this.source.averageRating;
+      this.count = this.source.count;
     }
   }
 }

@@ -49,9 +49,10 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
           this.showMfaBlock = true;
           this.showInfoblock = false;
         } else {
+          this.showMfaBlock = false;
           this.showInfoblock = true;
 
-          this.authService.getCurrentUser().subscribe((user) => {
+          this.authService.getCurrentUserFromBackend().subscribe((user) => {
             this.redirectToMainPageOrUrl();
           });
         }
