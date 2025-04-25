@@ -1,13 +1,30 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  AdminDashboardResponse,
+  AdminDashboardService,
+} from "@modules/admin/services/admin-dashboard.service";
+import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  selector: "app-admin-start-page",
   templateUrl: "./admin-start-page.component.html",
   styleUrls: ["./admin-start-page.component.scss"],
   standalone: false,
 })
-export class AdminStartPageComponent implements OnInit {
-  constructor() {}
+export class AdminStartPageComponent implements OnInit, OnDestroy {
+  dashboardData: AdminDashboardResponse | null = null;
 
-  ngOnInit(): void {}
+  constructor(private dashboardService: AdminDashboardService) {}
+
+  ngOnInit(): void {
+    this.dashboardService
+      .getDashboard()
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.dashboardData = x;
+      });
+  }
+
+  ngOnDestroy(): void {
+    // ignore
+  }
 }

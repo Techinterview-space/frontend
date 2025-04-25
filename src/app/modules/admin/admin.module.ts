@@ -22,6 +22,10 @@ import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced
 import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
 import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
 import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
+import { RatingPageComponent } from "./components/admin-start-page/components/rating-page/rating-page.component";
+import { AdminDashboardService } from "./services/admin-dashboard.service";
+
+const adminServices = [AdminDashboardService];
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import { CurrenciesPageComponent } from "./components/currencies-page/currencies
     StatDataCacheRecordsComponent,
     CurrenciesPageComponent,
     GenerateQrPageComponent,
+    RatingPageComponent,
   ],
   imports: [
     CommonModule,
@@ -51,5 +56,7 @@ import { CurrenciesPageComponent } from "./components/currencies-page/currencies
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: adminServices,
+  exports: [RatingPageComponent],
 })
 export class AdminModule {}

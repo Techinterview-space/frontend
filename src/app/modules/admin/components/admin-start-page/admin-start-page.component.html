@@ -1,5 +1,11 @@
-<app-page-header>Dashboards</app-page-header>
+<app-page-header>Админка</app-page-header>
 
 <div class="container my-5">
-  <div class="card card-body p-5 text-center text-muted">Cooming soon...</div>
+  <div class="row" *ngIf="dashboardData">
+    <div class="col-md-4">
+      <app-rating-page
+        [source]="dashboardData.averageRatingData"
+      ></app-rating-page>
+    </div>
+  </div>
 </div>
