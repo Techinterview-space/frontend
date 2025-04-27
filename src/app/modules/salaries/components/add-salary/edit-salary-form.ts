@@ -267,7 +267,7 @@ export class EditSalaryForm extends FormGroup {
       case "yearOfStartingWork":
         return "Год старта вашей карьеры";
       case "gender":
-          return "Пол";
+        return "Пол";
       case "age":
         return "Сколько вам полных лет?";
 
@@ -279,20 +279,19 @@ export class EditSalaryForm extends FormGroup {
   private getPageForField(name: string): number {
     switch (name) {
       case "value":
-        case "quarter":
-          case "company":
-            case "profession":
+      case "quarter":
+      case "company":
+      case "profession":
         return 1;
 
       case "grade":
-        case "workIndustryId":
-          case "city":
-            
+      case "workIndustryId":
+      case "city":
         return 2;
 
       case "yearOfStartingWork":
-        case "gender":
-          case "age":
+      case "gender":
+      case "age":
         return 3;
 
       default:

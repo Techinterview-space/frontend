@@ -291,10 +291,23 @@
 
           <div class="mb-3" *ngIf="addSalaryForm.getInvalidFields().length > 0">
             <div class="alert alert-warning">
-              <div class="mb-2"><strong>Внимание!</strong> Следующие поля не заполнены:</div>
-              <div class="mb-2" *ngFor="let field of addSalaryForm.getInvalidFields(); let i = index">
+              <div class="mb-2">
+                <strong>Внимание!</strong> Следующие поля не заполнены:
+              </div>
+              <div
+                class="mb-2"
+                *ngFor="
+                  let field of addSalaryForm.getInvalidFields();
+                  let i = index
+                "
+              >
                 <div>{{ i + 1 }}. Страница {{ field.page }}</div>
-                <div class="ms-3" *ngFor="let control of field.fields; let j = index">{{i + 1}}.{{ j + 1 }}. {{ control }}</div>
+                <div
+                  class="ms-3"
+                  *ngFor="let control of field.fields; let j = index"
+                >
+                  {{ i + 1 }}.{{ j + 1 }}. {{ control }}
+                </div>
               </div>
             </div>
           </div>
