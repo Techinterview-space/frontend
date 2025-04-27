@@ -13,10 +13,6 @@ export interface CompanyCreateRequest {
   logoUrl: string;
 }
 
-export interface CompanyUpdateRequest extends CompanyCreateRequest {
-  id: string;
-}
-
 @Injectable()
 export class CompaniesService {
   private readonly apiUrl: string;
@@ -29,11 +25,11 @@ export class CompaniesService {
     return this.api.get<Company>(this.apiUrl + id);
   }
 
-  update(model: CompanyCreateRequest): Observable<void> {
+  update(id: string, model: CompanyCreateRequest): Observable<void> {
     throw new Error("Not implemented");
   }
 
-  create(model: CompanyUpdateRequest): Observable<void> {
+  create(model: CompanyCreateRequest): Observable<void> {
     return this.api.post(this.apiUrl, model);
   }
 

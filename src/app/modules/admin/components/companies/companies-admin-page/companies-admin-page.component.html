@@ -4,7 +4,7 @@
   <div class="card">
     <div class="card-body">
       <div class="mb-5">
-        <button class="btn btn-primary" (click)="createCompany()">
+        <button class="btn btn-primary" (click)="create()">
           Добавить компанию
         </button>
       </div>
@@ -66,3 +66,49 @@
     </div>
   </ng-template>
 </div>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>
+
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Редактировать навык'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label>Название</label>
+      <input type="text" class="form-control" formControlName="name" />
+      <app-field-error [field]="editForm.get('name')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Описание</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+      <app-field-error [field]="editForm.get('description')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Social ссылка</label>
+      <input type="text" class="form-control" formControlName="socialLink" />
+      <app-field-error [field]="editForm.get('socialLink')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>URL для логотипа</label>
+      <input type="text" class="form-control" formControlName="logoUrl" />
+      <app-field-error [field]="editForm.get('logoUrl')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+  </form>
+</app-dialog>
