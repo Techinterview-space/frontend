@@ -10,7 +10,7 @@
     "serve-staging": "ng serve --configuration=staging -o",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers ChromiumNoSandbox",
-    "test-headless-ci-only": "ng test --browsers ChromiumNoSandbox",
+    "test-headless-ci-only": "ng test --no-watch --browsers ChromiumNoSandbox",
     "lint": "ng lint",
     "pretty": "pretty-quick",
     "pretty-all": "prettier --write \"src/**/*.ts\" \"src/**/*.html\" \"src/**/*.scss\" \"src/**/*.json\" \"e2e/**/*.ts\" \"tools/**/*.ts\" \"*.json\"",
