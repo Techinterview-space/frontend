@@ -1,0 +1,68 @@
+<app-page-header>Мои заметки</app-page-header>
+
+<div class="container my-5" *ngIf="interviews; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div
+        class="table-responsive"
+        *ngIf="interviews.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover">
+          <thead>
+            <th>#</th>
+            <th>Кандидат</th>
+            <th>Грейд</th>
+            <th>Темы</th>
+            <th>Лейблы</th>
+            <th>Обновлено</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of interviews; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.candidateName }}</td>
+              <td>
+                <app-developer-grade-label
+                  [grade]="item.candidateGrade"
+                ></app-developer-grade-label>
+              </td>
+              <td>{{ item.subjects?.length ?? 0 }}</td>
+              <td>
+                <app-label
+                  *ngFor="let label of item.labels"
+                  [label]="label"
+                ></app-label>
+              </td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td class="small">
+                <a routerLink="/interviews/{{ item.id }}" class="btn-link-sm"
+                  >Открыть</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">Еще нет заметок.</div>
+
+      <div class="text-center mt-3">
+        <a routerLink="/interviews/create" class="btn btn-primary">
+          <i class="bi bi-plus-circle"></i> Начать интервью</a
+        >
+      </div>
+    </div>
+  </div>
+</ng-template>
