@@ -28,12 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Deploy ssh
         run: |
           sed -i "s,{api},${{ secrets.CR }}/frontend:${{ github.sha }},g" docker-compose.frontend.yml
       - name: copy file via ssh key
-        uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.IP }}
           username: devops
