@@ -75,6 +75,15 @@ export class AdminNavbarComponent {
         ],
       },
       {
+        title: "Компании",
+        links: [
+          {
+            title: "Все компании",
+            url: "/admin/companies",
+          },
+        ],
+      },
+      {
         title: "Telegram",
         links: [
           {

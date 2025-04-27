@@ -1,0 +1,51 @@
+<app-page-header>Компания {{ company?.name }}</app-page-header>
+
+<div class="container my-5" *ngIf="company; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-5">
+        <div>{{ company.description }}</div>
+        <div>{{ company.links }}</div>
+        <div>{{ company.logoUrl }}</div>
+        <div>{{ company.reviewsCount }}</div>
+        <div>{{ company.rating }}</div>
+        <div>{{ company.createdAt | date: "yyyy-MM-dd HH:mm" }}</div>
+        <div>{{ company.updatedAt | date: "yyyy-MM-dd HH:mm" }}</div>
+      </div>
+
+      <div
+        class="table-responsive mt-5"
+        *ngIf="company.reviews.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover">
+          <thead>
+            <th>#</th>
+            <th>Название</th>
+            <th>Рейтинг</th>
+            <th>Кол-во отзывов</th>
+            <th>Создана</th>
+            <th>Обновлена</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of company.reviews; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.rating }}</td>
+              <td>{{ item.reviewsCount }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td class="small"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>

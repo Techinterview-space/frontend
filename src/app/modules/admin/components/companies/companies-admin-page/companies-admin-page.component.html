@@ -1,0 +1,68 @@
+<app-page-header>Компании в системе</app-page-header>
+
+<div class="container my-5" *ngIf="companies; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-5">
+        <button class="btn btn-primary" (click)="createCompany()">
+          Добавить компанию
+        </button>
+      </div>
+
+      <div
+        class="table-responsive"
+        *ngIf="companies.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover">
+          <thead>
+            <th>#</th>
+            <th>Название</th>
+            <th>Рейтинг</th>
+            <th>Кол-во отзывов</th>
+            <th>Создана</th>
+            <th>Обновлена</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of companies; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.rating }}</td>
+              <td>{{ item.reviewsCount }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td class="small">
+                <a routerLink="/companies/{{ item.id }}" class="btn-link-sm"
+                  >Открыть</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-5" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #dataLoading>
+    <div class="container mt-5">
+      <app-data-loader></app-data-loader>
+    </div>
+  </ng-template>
+
+  <ng-template #nothingToShow>
+    <div class="card">
+      <div class="card-body">
+        <div class="text-center">
+          Еще нет ни одной компании, о которой можно было бы оставить отзыв.
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

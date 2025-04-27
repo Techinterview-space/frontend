@@ -3,18 +3,16 @@ import { Router } from "@angular/router";
 import { Company } from "@models/companies.model";
 import { defaultPageParams, PageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
-import { SalaryAdminItem } from "@modules/admin/components/salaries/salary-admin-item";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
-import { AdminAllSalariesQueryParams } from "@services/user-salaries.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  templateUrl: "./companies-page.component.html",
-  styleUrls: ["./companies-page.component.scss"],
+  templateUrl: "./companies-admin-page.component.html",
+  styleUrls: ["./companies-admin-page.component.scss"],
   standalone: false,
 })
-export class CompaniesPageComponent implements OnInit, OnDestroy {
+export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
   companies: Array<Company> | null = null;
   source: PaginatedList<Company> | null = null;
   currentPage: number = 1;
@@ -24,7 +22,7 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
     private readonly title: TitleService,
     private readonly router: Router,
   ) {
-    this.title.setTitle("Компании");
+    this.title.setTitle("Компании в системе");
   }
 
   ngOnInit(): void {
@@ -52,4 +50,6 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.title.resetTitle();
   }
+
+  createCompany(): void {}
 }

@@ -8,11 +8,11 @@ import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended"
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
-  templateUrl: "./company-page.component.html",
-  styleUrls: ["./company-page.component.scss"],
+  templateUrl: "./company-admin-page.component.html",
+  styleUrls: ["./company-admin-page.component.scss"],
   standalone: false,
 })
-export class CompanyPageComponent implements OnInit, OnDestroy {
+export class CompanyAdminPageComponent implements OnInit, OnDestroy {
   company: Company | null = null;
 
   private readonly activateRoute: ActivatedRouteExtended;
@@ -20,7 +20,6 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: CompaniesService,
     private readonly title: TitleService,
-    private readonly router: Router,
     activatedRoute: ActivatedRoute,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
@@ -36,7 +35,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
           .pipe(untilDestroyed(this))
           .subscribe((i) => {
             this.company = i;
-            this.title.setTitle(`Отзывы о ${this.company!.name}`);
+            this.title.setTitle(`Компания ${this.company!.name}`);
           });
       });
   }
