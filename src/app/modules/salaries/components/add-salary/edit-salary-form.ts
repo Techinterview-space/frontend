@@ -11,8 +11,21 @@ import {
 } from "@services/user-salaries.service";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
+interface InvalidFieldsGroupedByPage {
+  page: number;
+  fields: string[];
+}
+
+interface InvalidField {
+  page: number;
+  controlName: string;
+  field: string;
+}
+
 export class EditSalaryForm extends FormGroup {
   static readonly digitsPattern = "^[0-9]*$";
+
+  private _invalidFields: InvalidField[] = [];
 
   constructor(
     salarytoBeEditedOrNull: UserSalary | null,
@@ -144,6 +157,19 @@ export class EditSalaryForm extends FormGroup {
       };
     }
 
+    this._invalidFields = [];
+    const controls = this.controls;
+    for (const name in controls) {
+      const control = this.controls[name];
+      if (control.invalid) {
+        this._invalidFields.push({
+          page: this.getPageForField(name),
+          controlName: name,
+          field: this.getControlNameLable(name),
+        });
+      }
+    }
+
     this.markAllAsTouched();
     return null;
   }
@@ -192,5 +218,85 @@ export class EditSalaryForm extends FormGroup {
 
     this.markAllAsTouched();
     return null;
+  }
+
+  getInvalidFields(): InvalidFieldsGroupedByPage[] {
+    if (this._invalidFields.length === 0) {
+      return [];
+    }
+
+    const groupedByPage: InvalidFieldsGroupedByPage[] = [
+      {
+        page: 1,
+        fields: [],
+      },
+      {
+        page: 2,
+        fields: [],
+      },
+      {
+        page: 3,
+        fields: [],
+      },
+    ];
+
+    for (const invalidField of this._invalidFields) {
+      const page = invalidField.page;
+      groupedByPage[page - 1].fields.push(invalidField.field);
+    }
+
+    return groupedByPage;
+  }
+
+  private getControlNameLable(name: string): string {
+    switch (name) {
+      case "value":
+        return "Зарплата, NET";
+      case "quarter":
+        return "Квартал";
+      case "company":
+        return "Казахстанская / Удаленная компания";
+      case "profession":
+        return "Ваша специализация";
+      case "grade":
+        return "Ваш грейд";
+      case "workIndustryId":
+        return "Сфера деятельности компании";
+      case "city":
+        return "Город, в котором вы живете";
+      case "yearOfStartingWork":
+        return "Год старта вашей карьеры";
+      case "gender":
+          return "Пол";
+      case "age":
+        return "Сколько вам полных лет?";
+
+      default:
+        return "";
+    }
+  }
+
+  private getPageForField(name: string): number {
+    switch (name) {
+      case "value":
+        case "quarter":
+          case "company":
+            case "profession":
+        return 1;
+
+      case "grade":
+        case "workIndustryId":
+          case "city":
+            
+        return 2;
+
+      case "yearOfStartingWork":
+        case "gender":
+          case "age":
+        return 3;
+
+      default:
+        return 0;
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 <div class="my-5 container">
   <div class="card">
-    <div class="card-body form-container">
+    <div class="card-body p-lg-5 p-3">
       <div class="mb-5 mt-1">
         <div class="mb-1 text-muted small fst-italic">
           Для того, чтобы просматривать график зарплат, вам нужно сначала внести
@@ -287,6 +287,16 @@
               [max]="120"
               [min]="12"
             ></app-field-error>
+          </div>
+
+          <div class="mb-3" *ngIf="addSalaryForm.getInvalidFields().length > 0">
+            <div class="alert alert-warning">
+              <div class="mb-2"><strong>Внимание!</strong> Следующие поля не заполнены:</div>
+              <div class="mb-2" *ngFor="let field of addSalaryForm.getInvalidFields(); let i = index">
+                <div>{{ i + 1 }}. Страница {{ field.page }}</div>
+                <div class="ms-3" *ngFor="let control of field.fields; let j = index">{{i + 1}}.{{ j + 1 }}. {{ control }}</div>
+              </div>
+            </div>
           </div>
 
           <div class="row mt-5">
