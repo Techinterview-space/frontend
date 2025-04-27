@@ -20,10 +20,7 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.title.setTitle("My Interviews");
-    this.service
-      .my()
-      .pipe(untilDestroyed(this))
-      .subscribe((i) => (this.interviews = i));
+    
   }
 
   ngOnDestroy(): void {

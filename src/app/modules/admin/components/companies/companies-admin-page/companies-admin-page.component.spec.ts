@@ -7,16 +7,16 @@ import {
   mostUsedServices,
 } from "@shared/test-utils";
 
-import { CompaniesPageComponent } from "./companies-page.component";
+import { CompaniesAdminPageComponent } from "./companies-admin-page.component";
 import { CompaniesService } from "@services/companies.service";
 
 describe("MyInterviewsComponent", () => {
-  let component: CompaniesPageComponent;
-  let fixture: ComponentFixture<CompaniesPageComponent>;
+  let component: CompaniesAdminPageComponent;
+  let fixture: ComponentFixture<CompaniesAdminPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CompaniesPageComponent],
+      declarations: [CompaniesAdminPageComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices, CompaniesService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -24,7 +24,7 @@ describe("MyInterviewsComponent", () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CompaniesPageComponent);
+    fixture = TestBed.createComponent(CompaniesAdminPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
