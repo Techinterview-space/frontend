@@ -32,7 +32,7 @@
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td class="small">
-                <a routerLink="/companies/{{ item.id }}" class="btn-link-sm"
+                <a routerLink="/admin/companies/{{ item.id }}" class="btn-link-sm"
                   >Открыть</a
                 >
               </td>
@@ -49,23 +49,19 @@
       </div>
     </div>
   </div>
-
-  <ng-template #dataLoading>
-    <div class="container mt-5">
-      <app-data-loader></app-data-loader>
-    </div>
-  </ng-template>
-
-  <ng-template #nothingToShow>
-    <div class="card">
-      <div class="card-body">
-        <div class="text-center">
-          Еще нет ни одной компании, о которой можно было бы оставить отзыв.
-        </div>
-      </div>
-    </div>
-  </ng-template>
 </div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="text-center text-muted">
+    Еще нет ни одной компании, о которой можно было бы оставить отзыв.
+  </div>
+</ng-template>
 
 <app-confirm-dialog
   *ngIf="confirmDeletionMessage"

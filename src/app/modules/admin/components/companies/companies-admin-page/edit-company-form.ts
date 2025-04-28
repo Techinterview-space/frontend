@@ -4,7 +4,7 @@ import { CompanyCreateRequest } from "@services/companies.service";
 
 export class EditCompanyForm extends FormGroup {
 
-    private static readonly URL_LINK_PATTERN = "^https?://(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$";
+    private static readonly URL_LINK_PATTERN = "^https?://(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,10}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$";
 
     constructor(company: Company | null) {
         super({
