@@ -1,10 +1,6 @@
 <div class="card card-body p-3">
   <div class="h5">Средняя оценка</div>
-  <div class="rating">
-    <ng-container *ngFor="let star of stars; let i = index">
-      <i class="star" [class.filled]="i < averageRating">★</i>
-    </ng-container>
-  </div>
+  <app-star-rating-readonly [source]="averageRating"></app-star-rating-readonly>
   <div class="mt-1">
     <span class="h5">{{ averageRating.toFixed(2) }}</span>
     <span class="text-muted small">({{ count }})</span>

@@ -3,10 +3,11 @@
 <div class="container my-5" *ngIf="company; else dataLoading">
   <div class="card">
     <div class="card-body p-5">
-
       <div class="mb-3">
         <div class="h mb-2">
-          <span class="" *ngIf="company.reviewsCount > 0">{{ company.rating }}</span>
+          <span class="" *ngIf="company.reviewsCount > 0">{{
+            company.rating
+          }}</span>
           <span class="" *ngIf="company.reviewsCount === 0">-</span>
         </div>
 
@@ -14,7 +15,6 @@
           <span class="me-2">Отзывов:</span>
           <span class="">{{ company.reviewsCount }}</span>
         </div>
-        
       </div>
 
       <div class="mb-5">
@@ -36,7 +36,6 @@
 
   <div class="card mt-3" *ngIf="company.reviews.length > 0; else nothingToShow">
     <div class="card-body p-5">
-      
       <div *ngFor="let review of company.reviews" class="mb-5">
         <div class="mb-2">
           <button
@@ -45,12 +44,15 @@
             data-bs-toggle="collapse"
             [attr.data-bs-target]="'#collapseExample-' + review.id"
             aria-expanded="false"
-            [attr.aria-controls]="'collapseExample-' + review.id">
-              <span class="h5">{{ review.totalRating | number:'1.2-2' }}</span>
-              <i class="ms-2 bi bi-caret-down-fill"></i>
+            [attr.aria-controls]="'collapseExample-' + review.id"
+          >
+            <span class="h5">{{ review.totalRating | number: "1.2-2" }}</span>
+            <i class="ms-2 bi bi-caret-down-fill"></i>
           </button>
           <div class="ms-2 d-inline-block">
-            <app-star-rating-readonly [source]="review.totalRating"></app-star-rating-readonly>
+            <app-star-rating-readonly
+              [source]="review.totalRating"
+            ></app-star-rating-readonly>
           </div>
 
           <div class="collapse" id="collapseExample-{{ review.id }}">
@@ -59,37 +61,48 @@
                 <div class="col-md-6">
                   <div class="mb-2">
                     <span>Культура и ценности</span>
-                    <app-star-rating-readonly [source]="review.cultureAndValues"></app-star-rating-readonly>
+                    <app-star-rating-readonly
+                      [source]="review.cultureAndValues"
+                    ></app-star-rating-readonly>
                   </div>
 
                   <div *ngIf="review.codeQuality" class="mb-2">
                     <span>Качество кода</span>
-                    <app-star-rating-readonly [source]="review.codeQuality"></app-star-rating-readonly>
+                    <app-star-rating-readonly
+                      [source]="review.codeQuality"
+                    ></app-star-rating-readonly>
                   </div>
 
                   <div class="mb-2">
                     <span>Work / Life баланс</span>
                     <span>
-                      <app-star-rating-readonly [source]="review.workLifeBalance"></app-star-rating-readonly>
+                      <app-star-rating-readonly
+                        [source]="review.workLifeBalance"
+                      ></app-star-rating-readonly>
                     </span>
                   </div>
-
                 </div>
 
                 <div class="col-md-6">
                   <div class="mb-2">
                     <span>Компенсация и бонусы</span>
-                    <app-star-rating-readonly [source]="review.compensationAndBenefits"></app-star-rating-readonly>
+                    <app-star-rating-readonly
+                      [source]="review.compensationAndBenefits"
+                    ></app-star-rating-readonly>
                   </div>
 
                   <div *ngIf="review.codeQuality" class="mb-2">
                     <span>Карьерные возможности</span>
-                    <app-star-rating-readonly [source]="review.careerOpportunities"></app-star-rating-readonly>
+                    <app-star-rating-readonly
+                      [source]="review.careerOpportunities"
+                    ></app-star-rating-readonly>
                   </div>
 
                   <div class="mb-2">
                     <span>Менеджмент</span>
-                    <app-star-rating-readonly [source]="review.management"></app-star-rating-readonly>
+                    <app-star-rating-readonly
+                      [source]="review.management"
+                    ></app-star-rating-readonly>
                   </div>
                 </div>
               </div>
@@ -98,7 +111,7 @@
         </div>
 
         <div *ngIf="review.pros" class="mb-2">
-          <div  class="fw-bold text-success">Плюсы:</div>
+          <div class="fw-bold text-success">Плюсы:</div>
           <div>{{ review.pros }}</div>
         </div>
         <div *ngIf="review.cons" class="mb-2">
@@ -106,7 +119,15 @@
           <div>{{ review.cons }}</div>
         </div>
 
-        <div class="small text-muted">{{ review.createdAt | date:'dd.MM.yyyy' }}</div>
+        <div *ngIf="review.approvedAt == null" class="mb-2">
+          <div class="review-awaiting-approval-label">Ожидает одобрения</div>
+        </div>
+
+        <div *ngIf="review.outdatedAt != null" class="mb-2">
+          <div class="review-outdated-label">
+            Отзыв устарел {{ review.outdatedAt | date: "dd.MM.yyyy" }}
+          </div>
+        </div>
         <hr class="my-2" />
       </div>
     </div>

@@ -60,7 +60,6 @@ export class CompanyEmploymentTypeEnum {
 
   static options(): Array<SelectItem<CompanyEmploymentType>> {
     return CompanyEmploymentTypeEnum.employmentTypes.map((x) => {
-
       let label: string | null = null;
       switch (x) {
         case CompanyEmploymentType.Undefined:
@@ -83,7 +82,7 @@ export class CompanyEmploymentTypeEnum {
           label = x;
           break;
       }
-      
+
       return {
         label: label,
         value: label,

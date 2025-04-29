@@ -1,18 +1,7 @@
-.rating {
-  display: flex;
-  align-items: center;
+.star-container {
+  font-size: 1.2rem;
 }
 
-.star {
-  font-size: 24px;
-  color: #ccc;
-}
-
-.star.filled {
-  color: #f39c12;
-}
-
-span {
-  margin-left: 8px;
-  font-size: 18px;
+.star-full {
+  color: gold;
 }

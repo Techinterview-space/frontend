@@ -21,8 +21,12 @@
             </div>
             <div class="fst-italic d-inline-block me-3">
               <span class="text-muted me-2">Рейтинг:</span>
-              <span class="text-dark me-2" *ngIf="item.reviewsCount > 0">{{ item.rating }}</span>
-              <span class="text-dark me-2" *ngIf="item.reviewsCount === 0">-</span>
+              <span class="text-dark me-2" *ngIf="item.reviewsCount > 0">{{
+                item.rating
+              }}</span>
+              <span class="text-dark me-2" *ngIf="item.reviewsCount === 0"
+                >-</span
+              >
             </div>
           </div>
         </div>

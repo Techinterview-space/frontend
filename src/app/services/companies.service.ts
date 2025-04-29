@@ -56,7 +56,10 @@ export class CompaniesService {
     );
   }
 
-  addCompanyReview(companyId: string, review: CompanyReviewCreateRequest): Observable<void> {
+  addCompanyReview(
+    companyId: string,
+    review: CompanyReviewCreateRequest,
+  ): Observable<void> {
     return this.api.post(this.apiUrl + companyId + "/reviews", review);
   }
 }

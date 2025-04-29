@@ -31,11 +31,9 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
     private readonly alertService: AlertService,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
-    
   }
 
   ngOnInit(): void {
-    
     this.activateRoute
       .getParam("id")
       .pipe(untilDestroyed(this))
@@ -45,7 +43,9 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
           .pipe(untilDestroyed(this))
           .subscribe((i) => {
             this.company = i;
-            this.title.setTitle(`Написать отзыв о компании ${this.company!.name}`);
+            this.title.setTitle(
+              `Написать отзыв о компании ${this.company!.name}`,
+            );
             this.editForm = new CompanyReviewForm();
           });
       });
@@ -71,7 +71,9 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(() => {
         this.router.navigate(["/companies", companyId]);
-        this.alertService.success("Отзыв успешно добавлен! Он пройдет модерацию и появится на сайте через некоторое время.");
+        this.alertService.success(
+          "Отзыв успешно добавлен! Он пройдет модерацию и появится на сайте через некоторое время.",
+        );
       });
   }
 
@@ -91,7 +93,5 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
         },
       ),
     );
-
-    
   }
 }
