@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Interview } from "@models/interview-models";
 import { CompaniesService } from "@services/companies.service";
-import { InterviewsService } from "@services/interviews.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
@@ -20,7 +19,6 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.title.setTitle("My Interviews");
-    
   }
 
   ngOnDestroy(): void {

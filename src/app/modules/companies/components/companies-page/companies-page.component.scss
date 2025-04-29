@@ -1,0 +1,19 @@
+.company-list-item {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border: 1px solid #e0e0e0;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.company-list {
+  padding: 16 24px;
+}

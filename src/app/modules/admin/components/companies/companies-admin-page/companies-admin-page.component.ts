@@ -94,13 +94,13 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
     }
 
     this.service
-        .create(editRequest)
-        .pipe(untilDestroyed(this))
-        .subscribe(() => {
-          this.alert.success("Новая компания была создана");
-          this.editForm = null;
-          this.ngOnInit();
-        });
+      .create(editRequest)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success("Новая компания была создана");
+        this.editForm = null;
+        this.ngOnInit();
+      });
   }
 
   onEditModalDlgClose(): void {
@@ -109,16 +109,20 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
 
   delete(item: Company): void {
     this.confirmDeletionMessage = new DialogMessage(
-      new ConfirmMsg("Удалить компанию", "Вы уверены, что хотите удалить компанию?", () => {
-        this.service
-          .delete(item.id!)
-          .pipe(untilDestroyed(this))
-          .subscribe(() => {
-            this.alert.success("Компания была удалена");
-            this.confirmDeletionMessage = null;
-            this.ngOnInit();
-          });
-      }),
+      new ConfirmMsg(
+        "Удалить компанию",
+        "Вы уверены, что хотите удалить компанию?",
+        () => {
+          this.service
+            .delete(item.id!)
+            .pipe(untilDestroyed(this))
+            .subscribe(() => {
+              this.alert.success("Компания была удалена");
+              this.confirmDeletionMessage = null;
+              this.ngOnInit();
+            });
+        },
+      ),
     );
   }
 }

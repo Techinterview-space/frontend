@@ -5,57 +5,49 @@
     <div class="card-body p-5">
       <div class="mb-5">
         <div class="row mb-3">
-          <div class="col-md-3">
-            Описание
-          </div>
+          <div class="col-md-3">Описание</div>
           <div class="col-md-9">
             {{ company.description }}
           </div>
         </div>
 
         <div class="row mb-3">
-          <div class="col-md-3">
-            Ссылки
-          </div>
+          <div class="col-md-3">Ссылки</div>
           <div class="col-md-9">
             {{ company.links }}
           </div>
         </div>
 
         <div class="row mb-3">
-          <div class="col-md-3">
-            Логотип
-          </div>
+          <div class="col-md-3">Логотип</div>
           <div class="col-md-9">
             {{ company.logoUrl }}
           </div>
         </div>
 
         <div class="row mb-3">
-          <div class="col-md-3">
-            Кол-во отзывов
-          </div>
+          <div class="col-md-3">Кол-во отзывов</div>
           <div class="col-md-9">
             {{ company.reviewsCount }}
           </div>
         </div>
 
         <div class="row mb-3">
-          <div class="col-md-3">
-            Рейтинг
-          </div>
+          <div class="col-md-3">Рейтинг</div>
           <div class="col-md-9">
             {{ company.rating }}
           </div>
         </div>
 
         <div class="row mb-3">
-          <div class="col-md-3">
-            Даты
-          </div>
+          <div class="col-md-3">Даты</div>
           <div class="col-md-9">
-            <div>Создана: {{ company.createdAt | date: "yyyy-MM-dd HH:mm" }}</div>
-            <div>Обновление: {{ company.updatedAt | date: "yyyy-MM-dd HH:mm" }}</div>
+            <div>
+              Создана: {{ company.createdAt | date: "yyyy-MM-dd HH:mm" }}
+            </div>
+            <div>
+              Обновление: {{ company.updatedAt | date: "yyyy-MM-dd HH:mm" }}
+            </div>
           </div>
         </div>
       </div>
@@ -94,9 +86,7 @@
 </div>
 
 <ng-template #nothingToShow>
-  <div class="text-center">
-    Еще нет отзывов.
-  </div>
+  <div class="text-center">Еще нет отзывов.</div>
 </ng-template>
 
 <ng-template #dataLoading>

@@ -2,11 +2,14 @@
 
 <div class="container my-5" *ngIf="companies; else dataLoading">
   <div class="card">
-    <div class="card-body">
-      <div *ngIf="companies.length > 0; else nothingToShow">
+    <div class="card-body px-5 py-5">
+      <div
+        *ngIf="companies.length > 0; else nothingToShow"
+        class="company-list"
+      >
         <div
           *ngFor="let item of companies; let i = index"
-          class="mb-5"
+          class="mb-3 cursor-pointer company-list-item"
           (click)="navigateToCompany(item.id)"
         >
           <div class="h5">{{ item.name }}</div>
@@ -22,20 +25,20 @@
       </div>
     </div>
   </div>
+</div>
 
-  <ng-template #dataLoading>
-    <div class="container mt-5">
-      <app-data-loader></app-data-loader>
-    </div>
-  </ng-template>
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
 
-  <ng-template #nothingToShow>
-    <div class="card">
-      <div class="card-body">
-        <div class="text-center">
-          Еще нет ни одной компании, о которой можно было бы оставить отзыв.
-        </div>
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">
+        Еще нет ни одной компании, о которой можно было бы оставить отзыв.
       </div>
     </div>
-  </ng-template>
-</div>
+  </div>
+</ng-template>

@@ -32,7 +32,9 @@
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td class="small">
-                <a routerLink="/admin/companies/{{ item.id }}" class="btn-link-sm"
+                <a
+                  routerLink="/admin/companies/{{ item.id }}"
+                  class="btn-link-sm"
                   >Открыть</a
                 >
               </td>

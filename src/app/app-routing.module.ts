@@ -36,6 +36,13 @@ const appRoutes: Routes = [
         (m) => m.SalariesModule,
       ),
   },
+  {
+    path: "companies",
+    loadChildren: () =>
+      import("./modules/companies/companies.module").then(
+        (m) => m.CompaniesModule,
+      ),
+  },
 
   // Fallback when no prior route is matched
   { path: "**", redirectTo: "not-found", pathMatch: "full" },

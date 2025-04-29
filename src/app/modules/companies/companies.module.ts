@@ -5,9 +5,16 @@ import { FormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { SharedModule } from "@shared/shared.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { CompanyPageComponent } from "./components/company-page/company-page.component";
+import { AddCompanyReviewPageComponent } from "./components/add-review-page/add-review-page.component";
+import { CompaniesPageComponent } from "./components/companies-page/companies-page.component";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CompanyPageComponent,
+    AddCompanyReviewPageComponent,
+    CompaniesPageComponent,
+  ],
   imports: [
     CommonModule,
     CompaniesRoutingModule,
@@ -17,4 +24,4 @@ import { ReactiveFormsModule } from "@angular/forms";
     NgSelectModule,
   ],
 })
-export class CompanyReviewsModule {}
+export class CompaniesModule {}
