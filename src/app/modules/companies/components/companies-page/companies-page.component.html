@@ -14,6 +14,17 @@
         >
           <div class="h5">{{ item.name }}</div>
           <div class="small">{{ item.description }}</div>
+          <div class="small mt-2">
+            <div class="fst-italic d-inline-block me-3">
+              <span class="text-muted me-2">Кол-во отзывов:</span>
+              <span class="text-dark me-2">{{ item.reviewsCount }}</span>
+            </div>
+            <div class="fst-italic d-inline-block me-3">
+              <span class="text-muted me-2">Рейтинг:</span>
+              <span class="text-dark me-2" *ngIf="item.reviewsCount > 0">{{ item.rating }}</span>
+              <span class="text-dark me-2" *ngIf="item.reviewsCount === 0">-</span>
+            </div>
+          </div>
         </div>
       </div>
 

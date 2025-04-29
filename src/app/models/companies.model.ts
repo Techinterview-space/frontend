@@ -1,3 +1,5 @@
+import { SelectItem } from "@shared/select-boxes/select-item";
+
 export interface Company {
   id: string;
   name: string;
@@ -55,4 +57,38 @@ export class CompanyEmploymentTypeEnum {
     CompanyEmploymentType.Internship,
     CompanyEmploymentType.IndividualContractor,
   ];
+
+  static options(): Array<SelectItem<CompanyEmploymentType>> {
+    return CompanyEmploymentTypeEnum.employmentTypes.map((x) => {
+
+      let label: string | null = null;
+      switch (x) {
+        case CompanyEmploymentType.Undefined:
+          label = "Не указано";
+          break;
+        case CompanyEmploymentType.IndividualContractor:
+          label = "Контрактор (фрилансер)";
+          break;
+        case CompanyEmploymentType.Internship:
+          label = "Стажировка";
+          break;
+        case CompanyEmploymentType.PartTime:
+          label = "Частичная занятость";
+          break;
+        case CompanyEmploymentType.FullTime:
+          label = "Полная занятость";
+          break;
+
+        default:
+          label = x;
+          break;
+      }
+      
+      return {
+        label: label,
+        value: label,
+        item: x,
+      };
+    });
+  }
 }

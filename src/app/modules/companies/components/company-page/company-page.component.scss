@@ -1,0 +1,7 @@
+.total-rating-link {
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}

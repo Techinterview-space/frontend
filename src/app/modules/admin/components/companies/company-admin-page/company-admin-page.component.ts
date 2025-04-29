@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { Company } from "@models/companies.model";
 import { CompaniesService } from "@services/companies.service";

@@ -5,6 +5,8 @@ export class CompanyListItem {
   readonly name: string;
   readonly description: string;
   readonly links: string[];
+  readonly reviewsCount: number;
+  readonly rating: number;
 
   constructor(private readonly company: Company) {
     this.id = company.id;
@@ -15,5 +17,7 @@ export class CompanyListItem {
         : company.description;
 
     this.links = company.links;
+    this.reviewsCount = company.reviewsCount;
+    this.rating = company.rating;
   }
 }

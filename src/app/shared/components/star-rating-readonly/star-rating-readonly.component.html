@@ -1,0 +1,5 @@
+<div class="rating" *ngIf="source">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <i class="star" [class.filled]="i < source">★</i>
+  </ng-container>
+</div>
