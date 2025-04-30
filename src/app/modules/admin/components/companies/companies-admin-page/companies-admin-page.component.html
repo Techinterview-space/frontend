@@ -30,7 +30,7 @@
               <td>{{ i + 1 }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.rating }}</td>
-              <td>{{ item.reviewsCount }}</td>
+              <td>{{ item.reviews?.length ?? item.reviewsCount }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td class="small">
