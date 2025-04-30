@@ -4,11 +4,16 @@
   <div class="card">
     <div class="card-body p-5">
       <div class="mb-3">
-        <div class="h mb-2">
-          <span class="" *ngIf="company.reviewsCount > 0">{{
-            company.rating
-          }}</span>
-          <span class="" *ngIf="company.reviewsCount === 0">-</span>
+        <div class="h2 mb-2">
+          <div class="" *ngIf="company.reviewsCount > 0">
+            <span>{{ company.rating | number: "1.2-2" }}</span>
+            <div class="ms-2 d-inline-block">
+              <app-star-rating-readonly
+                [source]="company.rating"
+              ></app-star-rating-readonly>
+            </div>
+          </div>
+          <span class="" *ngIf="company.reviewsCount === 0">Нет оценок</span>
         </div>
 
         <div class="small text-muted">
@@ -17,17 +22,21 @@
         </div>
       </div>
 
-      <div class="mb-5">
+      <div class="mb-2">
         <div class="h5">О компании</div>
         <div>{{ company.description }}</div>
       </div>
 
-      <div *ngIf="company.links.length > 0" class="">
+      <div *ngIf="company.links.length > 0" class="mb-2">
         <div *ngFor="let link of company.links">
           <a href="{{ link }}" target="_blank" class="btn btn-link">{{
             link
           }}</a>
         </div>
+      </div>
+
+      <div>
+        <app-go-back-button></app-go-back-button>
       </div>
     </div>
   </div>
@@ -141,15 +150,18 @@
 </ng-template>
 
 <ng-template #nothingToShow>
-  <hr class="my-2" />
-  <div class="text-center mt-3">Еще нет отзывов.</div>
+  <div class="card">
+    <div class="card-body p-5">
+      <div class="text-center mt-3">Еще нет отзывов.</div>
 
-  <div class="text-center mt-3">
-    <a
-      routerLink="/companies/{{ company?.id }}/add-review"
-      class="btn btn-outline-primary"
-    >
-      <i class="bi bi-plus-circle"></i> Написать отзыв</a
-    >
+      <div class="text-center mt-3">
+        <a
+          routerLink="/companies/{{ company?.id }}/add-review"
+          class="btn btn-outline-primary"
+        >
+          <i class="bi bi-plus-circle"></i> Написать отзыв</a
+        >
+      </div>
+    </div>
   </div>
 </ng-template>

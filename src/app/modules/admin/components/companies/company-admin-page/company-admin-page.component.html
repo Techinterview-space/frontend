@@ -77,17 +77,46 @@
             <th>Минусы</th>
             <th>Статус</th>
             <th>Создано</th>
-            <th></th>
+            <th>Действия</th>
           </thead>
           <tbody>
             <tr *ngFor="let item of company.reviews; let i = index">
               <td>{{ i + 1 }}</td>
-              <td>{{ item.totalRating }}</td>
+              <td>{{ item.totalRating | number: "1.2-2" }}</td>
               <td>{{ item.pros?.length ?? "-" }}</td>
               <td>{{ item.cons?.length ?? "-" }}</td>
-              <td></td>
+              <td>
+                {{
+                  item.approvedAt
+                    ? "Одобрен"
+                    : item.outdatedAt
+                      ? "Отозван"
+                      : "На рассмотрении"
+                }}
+              </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
-              <td class="small"></td>
+              <td class="">
+                <button
+                  class="btn btn-link-sm"
+                  (click)="onReviewModalDlgOpen(item)"
+                >
+                  Посмотреть
+                </button>
+                <button
+                  *ngIf="item.approvedAt == null"
+                  class="btn btn-link-sm text-success"
+                  (click)="approveReview(item)"
+                >
+                  Одобрить
+                </button>
+                <button
+                  *ngIf="item.approvedAt != null && item.outdatedAt == null"
+                  class="btn btn-link-sm text-danger"
+                  (click)="outdateReview(item)"
+                >
+                  Отозвать
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -105,3 +134,75 @@
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
+
+<app-dialog
+  [show]="reviewToShow != null"
+  (closed)="onReviewModalDlgClose()"
+  [header]="'Отзыв ' + reviewToShow?.id"
+  [additionalCss]="'modal-lg'"
+>
+  <div class="" *ngIf="reviewToShow">
+    <div class="mb-2">
+      <span class="text-muted">Среднее: </span>
+      <span class="fw-bold ms-2">{{ reviewToShow?.totalRating }}</span>
+    </div>
+
+    <div class="mb-2">
+      <div class="fw-bold text-success">Плюсы</div>
+      <div class="">
+        {{ reviewToShow?.pros }}
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <div class="fw-bold text-danger">Минусы</div>
+      <div class="">
+        {{ reviewToShow?.cons }}
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Категория</th>
+              <th>Оценка</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Культура и ценности</td>
+              <td>{{ reviewToShow.cultureAndValues }}</td>
+            </tr>
+            <tr>
+              <td>Качество кода</td>
+              <td>{{ reviewToShow.codeQuality ?? "-" }}</td>
+            </tr>
+            <tr>
+              <td>Work/life баланс</td>
+              <td>{{ reviewToShow.workLifeBalance ?? "-" }}</td>
+            </tr>
+            <tr>
+              <td>Компенсация и льготы</td>
+              <td>{{ reviewToShow.compensationAndBenefits ?? "-" }}</td>
+            </tr>
+            <tr>
+              <td>Карьера</td>
+              <td>{{ reviewToShow.careerOpportunities ?? "-" }}</td>
+            </tr>
+            <tr>
+              <td>Управление</td>
+              <td>{{ reviewToShow.management ?? "-" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</app-dialog>
+
+<app-confirm-dialog
+  *ngIf="confirmMessage"
+  [message]="confirmMessage"
+></app-confirm-dialog>

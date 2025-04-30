@@ -3,6 +3,34 @@
 <div class="container my-5" *ngIf="companies; else dataLoading">
   <div class="card">
     <div class="card-body px-5 py-5">
+      <div class="company-list mb-3 row">
+        <div class="col-md-6">
+          <input
+            type="text"
+            placeholder="Название компании для поиска. Минимум 3 символа."
+            class="form-control"
+            id="searchQuery"
+            [(ngModel)]="searchQuery"
+          />
+        </div>
+        <div class="col-md-6">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            (click)="search()"
+          >
+            Найти
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-dark ms-2"
+            (click)="clearSearch()"
+          >
+            Сбросить
+          </button>
+        </div>
+      </div>
+
       <div
         *ngIf="companies.length > 0; else nothingToShow"
         class="company-list"
@@ -23,11 +51,16 @@
             </div>
             <div class="fst-italic d-inline-block me-3">
               <span class="text-muted me-2">Рейтинг:</span>
-              <span class="text-dark me-2" *ngIf="item.reviewsCount > 0">{{
-                item.rating
-              }}</span>
+              <span class="text-dark me-2" *ngIf="item.reviewsCount > 0">
+                <span>{{ item.rating | number: "1.2-2" }}</span>
+                <div class="d-inline-block ms-2">
+                  <app-star-rating-readonly
+                    [source]="item.rating"
+                  ></app-star-rating-readonly>
+                </div>
+              </span>
               <span class="text-dark me-2" *ngIf="item.reviewsCount === 0"
-                >-</span
+                >Пока нет оценок</span
               >
             </div>
           </div>

@@ -74,7 +74,7 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
           this.router.navigate(["/companies", companyId]);
           this.alertService.success(
             "Отзыв успешно добавлен! Он пройдет модерацию и появится на сайте через некоторое время.",
-            true
+            true,
           );
         },
         error: (error) => {

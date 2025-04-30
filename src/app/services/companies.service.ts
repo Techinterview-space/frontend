@@ -6,6 +6,10 @@ import { PageParams } from "@models/page-params";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { PaginatedList } from "@models/paginated-list";
 
+export interface CompaniesSearchParams extends PageParams {
+  searchQuery: string | null;
+}
+
 export interface CompanyCreateRequest {
   name: string;
   description: string;
@@ -50,7 +54,7 @@ export class CompaniesService {
     return this.api.delete(this.apiUrl + id);
   }
 
-  all(pageParams: PageParams): Observable<PaginatedList<Company>> {
+  all(pageParams: CompaniesSearchParams): Observable<PaginatedList<Company>> {
     return this.api.get<PaginatedList<Company>>(
       this.apiUrl + "?" + new ConvertObjectToHttpParams(pageParams).get(),
     );
@@ -61,5 +65,19 @@ export class CompaniesService {
     review: CompanyReviewCreateRequest,
   ): Observable<void> {
     return this.api.post(this.apiUrl + companyId + "/reviews", review);
+  }
+
+  approveReview(companyId: string, reviewId: string): Observable<void> {
+    return this.api.post(
+      this.apiUrl + companyId + "/reviews/" + reviewId + "/approve",
+      {},
+    );
+  }
+
+  outdateReview(companyId: string, reviewId: string): Observable<void> {
+    return this.api.post(
+      this.apiUrl + companyId + "/reviews/" + reviewId + "/outdate",
+      {},
+    );
   }
 }

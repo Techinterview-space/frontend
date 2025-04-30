@@ -17,6 +17,7 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   companies: Array<CompanyListItem> | null = null;
   source: PaginatedList<Company> | null = null;
   currentPage: number = 1;
+  searchQuery: string = "";
 
   constructor(
     private readonly service: CompaniesService,
@@ -30,6 +31,18 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
     this.loadData(1);
   }
 
+  search(): void {
+    console.log(this.searchQuery);
+    if (this.searchQuery.length >= 3) {
+      this.loadData(1);
+    }
+  }
+
+  clearSearch(): void {
+    this.searchQuery = "";
+    this.loadData(1);
+  }
+
   loadData(pageToLoad: number): void {
     this.companies = null;
     this.source = null;
@@ -37,6 +50,7 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
 
     this.service
       .all({
+        searchQuery: this.searchQuery,
         page: pageToLoad,
         pageSize: defaultPageParams.pageSize,
       })
