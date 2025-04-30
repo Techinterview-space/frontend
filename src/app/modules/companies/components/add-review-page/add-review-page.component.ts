@@ -69,11 +69,19 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
     this.service
       .addCompanyReview(this.company.id, request)
       .pipe(untilDestroyed(this))
-      .subscribe(() => {
-        this.router.navigate(["/companies", companyId]);
-        this.alertService.success(
-          "Отзыв успешно добавлен! Он пройдет модерацию и появится на сайте через некоторое время.",
-        );
+      .subscribe({
+        next: () => {
+          this.router.navigate(["/companies", companyId]);
+          this.alertService.success(
+            "Отзыв успешно добавлен! Он пройдет модерацию и появится на сайте через некоторое время.",
+          );
+        },
+        error: (error) => {
+          console.error("Failed to submit review:", error);
+          this.alertService.error(
+            "Не удалось добавить отзыв. Пожалуйста, попробуйте еще раз.",
+          );
+        },
       });
   }
 

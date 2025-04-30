@@ -43,8 +43,13 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
     this.source = null;
     this.currentPage = pageToLoad;
 
+    const pageParams: PageParams = {
+      ...defaultPageParams,
+      page: pageToLoad,
+    };
+
     this.service
-      .all(defaultPageParams)
+      .all(pageParams)
       .pipe(untilDestroyed(this))
       .subscribe((i) => {
         this.companies = i.results;

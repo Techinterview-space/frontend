@@ -7,10 +7,12 @@
         *ngIf="companies.length > 0; else nothingToShow"
         class="company-list"
       >
-        <div
+        <a
           *ngFor="let item of companies; let i = index"
-          class="mb-3 cursor-pointer company-list-item"
-          (click)="navigateToCompany(item.id)"
+          class="mb-3 cursor-pointer company-list-item d-block text-decoration-none"
+          (click)="navigateToCompany(item.id); $event.preventDefault()"
+          [routerLink]="['/companies', item.id]"
+          role="button"
         >
           <div class="h5">{{ item.name }}</div>
           <div class="small">{{ item.description }}</div>
@@ -29,7 +31,7 @@
               >
             </div>
           </div>
-        </div>
+        </a>
       </div>
 
       <div class="mt-5" *ngIf="source && source.results.length > 0">

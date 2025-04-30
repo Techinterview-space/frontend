@@ -13,7 +13,7 @@ export interface Company {
   userIsAllowedToAddReview: boolean;
   createdAt: Date;
   updatedAt: Date;
-  deletedAt: Date;
+  deletedAt: Date | null;
 }
 
 export interface CompanyReview {

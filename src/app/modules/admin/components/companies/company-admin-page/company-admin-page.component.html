@@ -14,14 +14,25 @@
         <div class="row mb-3">
           <div class="col-md-3">Ссылки</div>
           <div class="col-md-9">
-            {{ company.links }}
+            <div *ngFor="let link of company.links">
+              <a [href]="link" target="_blank" rel="noopener">{{ link }}</a>
+            </div>
           </div>
         </div>
 
         <div class="row mb-3">
           <div class="col-md-3">Логотип</div>
           <div class="col-md-9">
-            {{ company.logoUrl }}
+            <div *ngIf="company.logoUrl">
+              <img
+                [src]="company.logoUrl"
+                alt="Company Logo"
+                class="img-thumbnail"
+                style="max-height: 100px"
+              />
+              <div class="mt-1 small text-muted">{{ company.logoUrl }}</div>
+            </div>
+            <div *ngIf="!company.logoUrl">Логотип не загружен</div>
           </div>
         </div>
 

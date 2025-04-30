@@ -10,7 +10,7 @@ import {
 import { CompaniesAdminPageComponent } from "./companies-admin-page.component";
 import { CompaniesService } from "@services/companies.service";
 
-describe("MyInterviewsComponent", () => {
+describe("CompaniesAdminPageComponent", () => {
   let component: CompaniesAdminPageComponent;
   let fixture: ComponentFixture<CompaniesAdminPageComponent>;
 

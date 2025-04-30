@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { StarRatingReadonlyComponent } from "./star-rating-readonly.component";
+import { CommonModule } from "@angular/common";
 
 describe("StarRatingReadonlyComponent", () => {
   let component: StarRatingReadonlyComponent;
@@ -7,6 +8,7 @@ describe("StarRatingReadonlyComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [CommonModule],
       declarations: [StarRatingReadonlyComponent],
     }).compileComponents();
   });

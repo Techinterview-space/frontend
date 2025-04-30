@@ -15,13 +15,15 @@
       >
         <table class="table table-hover">
           <thead>
-            <th>#</th>
-            <th>Название</th>
-            <th>Рейтинг</th>
-            <th>Кол-во отзывов</th>
-            <th>Создана</th>
-            <th>Обновлена</th>
-            <th></th>
+            <tr>
+              <th>#</th>
+              <th>Название</th>
+              <th>Рейтинг</th>
+              <th>Кол-во отзывов</th>
+              <th>Создана</th>
+              <th>Обновлена</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of companies; let i = index">
@@ -73,7 +75,7 @@
 <app-dialog
   [show]="!!editForm"
   (closed)="onEditModalDlgClose()"
-  [header]="'Редактировать навык'"
+  [header]="'Редактировать компанию'"
 >
   <form
     class="mb-5"
