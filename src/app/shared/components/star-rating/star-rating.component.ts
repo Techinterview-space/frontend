@@ -14,7 +14,8 @@ export class StarRatingComponent implements OnInit {
   @Output()
   ratingChange = new EventEmitter<number>();
 
-  rating: number = 0;
+  ratingToShow: number = 0;
+  savedRating: number = 0;
   stars: StartRatingObject[] | null = null;
 
   ngOnInit(): void {
@@ -29,8 +30,10 @@ export class StarRatingComponent implements OnInit {
       return;
     }
 
-    this.rating = value.index + 1;
-    this.ratingChange.emit(this.rating);
+    this.ratingToShow = value.index + 1;
+    this.savedRating = this.ratingToShow;
+
+    this.ratingChange.emit(this.savedRating);
   }
 
   hoverRating(value: StartRatingObject): void {
@@ -38,9 +41,10 @@ export class StarRatingComponent implements OnInit {
       return;
     }
 
-    this.rating = value.index + 1;
+    this.ratingToShow = value.index + 1;
+
     for (const star of this.stars) {
-      star.setFilled(this.rating);
+      star.setFilled(this.ratingToShow);
     }
   }
 
@@ -50,7 +54,7 @@ export class StarRatingComponent implements OnInit {
     }
 
     for (const star of this.stars) {
-      star.setFilled(this.rating);
+      star.setFilled(this.savedRating);
     }
   }
 }
