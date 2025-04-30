@@ -8,8 +8,6 @@ import { AverageRatingData } from "../../../../services/admin-dashboard.service"
   standalone: false,
 })
 export class RatingPageComponent implements OnInit {
-  readonly stars: number[] = [1, 2, 3, 4, 5];
-
   averageRating: number = 0;
   count: number = 0;
 

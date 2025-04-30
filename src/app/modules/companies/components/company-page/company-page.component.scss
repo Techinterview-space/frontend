@@ -1,0 +1,19 @@
+.total-rating-link {
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.review-awaiting-approval-label {
+  font-weight: bold;
+  color: #b88a00;
+  font-style: italic;
+}
+
+.review-outdated-label {
+  font-weight: bold;
+  color: #3c3c3c;
+  font-style: italic;
+}

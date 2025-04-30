@@ -1,0 +1,61 @@
+<app-page-header>Компании</app-page-header>
+
+<div class="container my-5" *ngIf="companies; else dataLoading">
+  <div class="card">
+    <div class="card-body px-5 py-5">
+      <div
+        *ngIf="companies.length > 0; else nothingToShow"
+        class="company-list"
+      >
+        <a
+          *ngFor="let item of companies; let i = index"
+          class="mb-3 cursor-pointer company-list-item d-block text-decoration-none"
+          (click)="navigateToCompany(item.id); $event.preventDefault()"
+          [routerLink]="['/companies', item.id]"
+          role="button"
+        >
+          <div class="h5">{{ item.name }}</div>
+          <div class="small">{{ item.description }}</div>
+          <div class="small mt-2">
+            <div class="fst-italic d-inline-block me-3">
+              <span class="text-muted me-2">Кол-во отзывов:</span>
+              <span class="text-dark me-2">{{ item.reviewsCount }}</span>
+            </div>
+            <div class="fst-italic d-inline-block me-3">
+              <span class="text-muted me-2">Рейтинг:</span>
+              <span class="text-dark me-2" *ngIf="item.reviewsCount > 0">{{
+                item.rating
+              }}</span>
+              <span class="text-dark me-2" *ngIf="item.reviewsCount === 0"
+                >-</span
+              >
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mt-5" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">
+        Еще нет ни одной компании, о которой можно было бы оставить отзыв.
+      </div>
+    </div>
+  </div>
+</ng-template>

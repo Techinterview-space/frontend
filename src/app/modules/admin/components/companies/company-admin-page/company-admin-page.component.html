@@ -1,0 +1,107 @@
+<app-page-header>Компания {{ company?.name }}</app-page-header>
+
+<div class="container my-5" *ngIf="company; else dataLoading">
+  <div class="card">
+    <div class="card-body p-5">
+      <div class="mb-5">
+        <div class="row mb-3">
+          <div class="col-md-3">Описание</div>
+          <div class="col-md-9">
+            {{ company.description }}
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">Ссылки</div>
+          <div class="col-md-9">
+            <div *ngFor="let link of company.links">
+              <a [href]="link" target="_blank" rel="noopener">{{ link }}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">Логотип</div>
+          <div class="col-md-9">
+            <div *ngIf="company.logoUrl">
+              <img
+                [src]="company.logoUrl"
+                alt="Company Logo"
+                class="img-thumbnail"
+                style="max-height: 100px"
+              />
+              <div class="mt-1 small text-muted">{{ company.logoUrl }}</div>
+            </div>
+            <div *ngIf="!company.logoUrl">Логотип не загружен</div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">Кол-во отзывов</div>
+          <div class="col-md-9">
+            {{ company.reviewsCount }}
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">Рейтинг</div>
+          <div class="col-md-9">
+            {{ company.rating }}
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">Даты</div>
+          <div class="col-md-9">
+            <div>
+              Создана: {{ company.createdAt | date: "yyyy-MM-dd HH:mm" }}
+            </div>
+            <div>
+              Обновление: {{ company.updatedAt | date: "yyyy-MM-dd HH:mm" }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div
+        class="table-responsive mt-5"
+        *ngIf="company.reviews.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover">
+          <thead>
+            <th>#</th>
+            <th>Среднее</th>
+            <th>Плюсы</th>
+            <th>Минусы</th>
+            <th>Статус</th>
+            <th>Создано</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of company.reviews; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.totalRating }}</td>
+              <td>{{ item.pros?.length ?? "-" }}</td>
+              <td>{{ item.cons?.length ?? "-" }}</td>
+              <td></td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td class="small"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothingToShow>
+  <div class="text-center">Еще нет отзывов.</div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>

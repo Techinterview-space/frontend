@@ -39,6 +39,7 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { WednesdayFrogComponent } from "./components/wednesday-frog/wednesday-frog.component";
 import { FormatAsMoneyPipe } from "./directives/format-as-money.pipe";
 import { StarRatingComponent } from "./components/star-rating/star-rating.component";
+import { StarRatingReadonlyComponent } from "./components/star-rating-readonly/star-rating-readonly.component";
 
 const componentsToDeclareAndExport = [
   AlertComponent,
@@ -73,6 +74,7 @@ const componentsToDeclareAndExport = [
   WednesdayFrogComponent,
   FormatAsMoneyPipe,
   StarRatingComponent,
+  StarRatingReadonlyComponent,
 ];
 
 @NgModule({

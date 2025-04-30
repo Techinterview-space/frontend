@@ -15,6 +15,8 @@ import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced
 import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
 import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
 import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
+import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
+import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -35,6 +37,7 @@ const routes: Routes = [
     path: "salaries/imported-salaries",
     component: SourcedSalariesAdminPageComponent,
   },
+
   { path: "telegram/bot-usages", component: TelegramBotUsagesComponent },
   { path: "telegram/user-settings", component: TelegramUserSettingsComponent },
   {
@@ -45,6 +48,9 @@ const routes: Routes = [
   { path: "tools/background-jobs", component: BackgroundJobsComponent },
   { path: "tools/currencies", component: CurrenciesPageComponent },
   { path: "tools/generate-qr", component: GenerateQrPageComponent },
+
+  { path: "companies", component: CompaniesAdminPageComponent },
+  { path: "companies/:id", component: CompanyAdminPageComponent },
 ];
 
 @NgModule({

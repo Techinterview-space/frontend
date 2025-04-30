@@ -24,6 +24,8 @@ import { GenerateQrPageComponent } from "./components/generate-qr-code-page/gene
 import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
 import { RatingPageComponent } from "./components/admin-start-page/components/rating-page/rating-page.component";
 import { AdminDashboardService } from "./services/admin-dashboard.service";
+import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
+import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
 
 const adminServices = [AdminDashboardService];
 
@@ -48,6 +50,8 @@ const adminServices = [AdminDashboardService];
     CurrenciesPageComponent,
     GenerateQrPageComponent,
     RatingPageComponent,
+    CompaniesAdminPageComponent,
+    CompanyAdminPageComponent,
   ],
   imports: [
     CommonModule,

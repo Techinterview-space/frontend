@@ -1,0 +1,11 @@
+<div class="star-container">
+  <ng-container *ngFor="let star of fullStars">
+    <i class="bi bi-star-fill star-full"></i>
+  </ng-container>
+
+  <i *ngIf="hasHalfStar" class="bi bi-star-half star-full"></i>
+
+  <ng-container *ngFor="let star of emptyStars">
+    <i class="bi bi-star star-full"></i>
+  </ng-container>
+</div>
