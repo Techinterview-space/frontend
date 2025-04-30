@@ -35,8 +35,18 @@
         </div>
       </div>
 
-      <div>
-        <app-go-back-button></app-go-back-button>
+      <div class="d-flex justify-content-between">
+        <app-go-back-button
+          [routerLink]="'/companies'"
+          [text]="'К списку компаний'"
+        />
+        <a
+          *ngIf="company.reviewsCount > 0"
+          routerLink="/companies/{{ company?.id }}/add-review"
+          class="btn btn-outline-primary"
+        >
+          <i class="bi bi-pencil-fill"></i> Оставить отзыв</a
+        >
       </div>
     </div>
   </div>
@@ -159,7 +169,7 @@
           routerLink="/companies/{{ company?.id }}/add-review"
           class="btn btn-outline-primary"
         >
-          <i class="bi bi-plus-circle"></i> Написать отзыв</a
+          <i class="bi bi-pencil-fill"></i> Оставить первый отзыв</a
         >
       </div>
     </div>

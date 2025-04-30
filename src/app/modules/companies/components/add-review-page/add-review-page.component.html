@@ -3,6 +3,10 @@
 <div class="container my-5" *ngIf="company; else dataLoading">
   <div class="card">
     <div class="card-body">
+      <div class="mb-3 text-muted">
+        Оставленные отзывы проходят модерацию в течение некоторого времени.
+      </div>
+
       <form
         class="mb-5"
         *ngIf="!!editForm"
@@ -136,6 +140,10 @@
             >Какие плюсы работать здесь?</label
           >
           <textarea class="form-control" formControlName="pros"></textarea>
+          <div class="text-muted small">
+            Пожалуйста, расскажите подробно, что вам нравится с работе в этой
+            компании.
+          </div>
           <app-field-error [field]="editForm.get('pros')"></app-field-error>
         </div>
 
@@ -144,6 +152,10 @@
             >Какие минусы работать здесь?</label
           >
           <textarea class="form-control" formControlName="cons"></textarea>
+          <div class="text-muted small">
+            Пожалуйста, расскажите, что компании стоит улучшить в своих
+            процессах.
+          </div>
           <app-field-error [field]="editForm.get('cons')"></app-field-error>
         </div>
 

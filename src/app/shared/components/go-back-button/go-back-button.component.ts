@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Location } from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-go-back-button",
@@ -8,9 +9,22 @@ import { Location } from "@angular/common";
   standalone: false,
 })
 export class GoBackButtonComponent {
-  constructor(private readonly location: Location) {}
+  @Input()
+  text: string = "Назад";
+
+  @Input()
+  routerLink: string = "";
+
+  constructor(
+    private readonly location: Location,
+    private readonly router: Router,
+  ) {}
 
   goBack(): void {
-    this.location.back();
+    if (this.routerLink) {
+      this.router.navigate([this.routerLink]);
+    } else {
+      this.location.back();
+    }
   }
 }
