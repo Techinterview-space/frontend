@@ -18,3 +18,12 @@
 .company-list {
   padding: 16px 24px;
 }
+
+.tg-link {
+  color: rgb(33, 37, 41);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

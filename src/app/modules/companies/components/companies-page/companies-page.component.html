@@ -3,31 +3,39 @@
 <div class="container my-5" *ngIf="companies; else dataLoading">
   <div class="card">
     <div class="card-body px-5 py-5">
-      <div class="company-list mb-3 row">
-        <div class="col-md-6">
-          <input
-            type="text"
-            placeholder="Название компании для поиска. Минимум 3 символа."
-            class="form-control"
-            id="searchQuery"
-            [(ngModel)]="searchQuery"
-          />
+      <div class="company-list mb-3">
+        <div class="row">
+          <div class="col-md-6">
+            <input
+              type="text"
+              placeholder="Название компании для поиска. Минимум 3 символа."
+              class="form-control"
+              id="searchQuery"
+              [(ngModel)]="searchQuery"
+            />
+          </div>
+          <div class="col-md-6">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="search()"
+            >
+              Найти
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-dark ms-2"
+              (click)="clearSearch()"
+            >
+              Сбросить
+            </button>
+          </div>
         </div>
-        <div class="col-md-6">
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-            (click)="search()"
-          >
-            Найти
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-dark ms-2"
-            (click)="clearSearch()"
-          >
-            Сбросить
-          </button>
+        <div class="small text-muted mt-2">
+          Если какой-то компании нет в списке, напишите в тг
+          <a class="tg-link" href="https://t.me/maximgorbatyuk" target="_blank"
+            >&#64;maximgorbatyuk</a
+          >, и компания будет добавлена
         </div>
       </div>
 
