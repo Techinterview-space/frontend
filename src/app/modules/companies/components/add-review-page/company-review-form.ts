@@ -83,7 +83,7 @@ export class CompanyReviewForm extends FormGroup {
       pros: this.value.pros,
       cons: this.value.cons,
       iWorkHere: this.value.iWorkHere as boolean,
-      userEmployment: this.value.userEmployment as CompanyEmploymentType,
+      userEmployment: userEmploymentAsInt as CompanyEmploymentType,
     };
   }
 }
