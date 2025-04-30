@@ -29,7 +29,7 @@
             <tr *ngFor="let item of companies; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ item.name }}</td>
-              <td>{{ item.rating }}</td>
+              <td>{{ item.rating | number: "1.2-2" }}</td>
               <td>{{ item.reviews?.length ?? item.reviewsCount }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>

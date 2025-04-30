@@ -32,6 +32,7 @@ export interface CompanyReview {
   iWorkHere: boolean;
   userEmployment: CompanyEmploymentType;
   companyId: string;
+  companyName: string | null;
   createdAt: Date;
   approvedAt: Date | null;
   outdatedAt: Date | null;

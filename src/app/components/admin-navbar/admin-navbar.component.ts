@@ -81,6 +81,10 @@ export class AdminNavbarComponent {
             title: "Все компании",
             url: "/admin/companies",
           },
+          {
+            title: "Отзывы на модерацию",
+            url: "/admin/companies/reviews-to-approve",
+          },
         ],
       },
       {

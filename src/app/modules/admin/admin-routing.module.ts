@@ -17,6 +17,7 @@ import { CurrenciesPageComponent } from "./components/currencies-page/currencies
 import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
 import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
 import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
+import { ReviewsToApprovePageComponent } from "./components/companies/reviews-to-approve/reviews-to-approve-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -50,6 +51,10 @@ const routes: Routes = [
   { path: "tools/generate-qr", component: GenerateQrPageComponent },
 
   { path: "companies", component: CompaniesAdminPageComponent },
+  {
+    path: "companies/reviews-to-approve",
+    component: ReviewsToApprovePageComponent,
+  },
   { path: "companies/:id", component: CompanyAdminPageComponent },
 ];
 

@@ -26,6 +26,7 @@ import { RatingPageComponent } from "./components/admin-start-page/components/ra
 import { AdminDashboardService } from "./services/admin-dashboard.service";
 import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
 import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
+import { ReviewsToApprovePageComponent } from "./components/companies/reviews-to-approve/reviews-to-approve-page.component";
 
 const adminServices = [AdminDashboardService];
 
@@ -52,6 +53,7 @@ const adminServices = [AdminDashboardService];
     RatingPageComponent,
     CompaniesAdminPageComponent,
     CompanyAdminPageComponent,
+    ReviewsToApprovePageComponent,
   ],
   imports: [
     CommonModule,

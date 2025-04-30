@@ -1,7 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
-import { Company, CompanyEmploymentType } from "@models/companies.model";
+import {
+  Company,
+  CompanyEmploymentType,
+  CompanyReview,
+} from "@models/companies.model";
 import { PageParams } from "@models/page-params";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { PaginatedList } from "@models/paginated-list";
@@ -60,6 +64,10 @@ export class CompaniesService {
     );
   }
 
+  reviewsToApprove(): Observable<CompanyReview[]> {
+    return this.api.get<CompanyReview[]>(this.apiUrl + "reviews/to-approve");
+  }
+
   addCompanyReview(
     companyId: string,
     review: CompanyReviewCreateRequest,
@@ -79,5 +87,9 @@ export class CompaniesService {
       this.apiUrl + companyId + "/reviews/" + reviewId + "/outdate",
       {},
     );
+  }
+
+  deleteReview(companyId: string, reviewId: string): Observable<void> {
+    return this.api.delete(this.apiUrl + companyId + "/reviews/" + reviewId);
   }
 }
