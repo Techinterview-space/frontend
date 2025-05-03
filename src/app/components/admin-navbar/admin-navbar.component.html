@@ -29,9 +29,19 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li *ngFor="let link of dropdown.links">
-              <a class="dropdown-item" routerLink="{{ link.url }}">{{
-                link.title
-              }}</a>
+              <a
+                *ngIf="link.isExternal"
+                class="dropdown-item"
+                href="{{ link.url }}"
+                target="_blank"
+                >{{ link.title }}
+              </a>
+              <a
+                *ngIf="!link.isExternal"
+                class="dropdown-item"
+                routerLink="{{ link.url }}"
+                >{{ link.title }}</a
+              >
             </li>
           </ul>
         </li>

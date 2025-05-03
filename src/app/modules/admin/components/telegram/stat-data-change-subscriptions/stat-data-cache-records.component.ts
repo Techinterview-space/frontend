@@ -9,9 +9,11 @@ import { TelegramSubscriptionCreateForm } from "./subscription-create-form";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
+import { OpenAiDialogData } from "./open-ai-dialog-data";
 
 @Component({
   templateUrl: "./stat-data-cache-records.component.html",
+  styleUrls: ["./stat-data-cache-records.component.scss"],
   standalone: false,
 })
 export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
@@ -21,6 +23,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
 
   createForm: TelegramSubscriptionCreateForm | null = null;
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
+  openAiDialogData: OpenAiDialogData | null = null;
 
   constructor(
     private readonly service: TelegramSubscriptionsService,
@@ -116,6 +119,34 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
         this.createForm = null;
         this.ngOnInit();
       });
+  }
+
+  getOpenAiAnalysis(item: StatDataCacheChangeSubscription): void {
+    this.service
+      .getOpenAiAnalysis(item.id)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.openAiDialogData = new OpenAiDialogData(
+          "Open AI анализ",
+          JSON.stringify(x, null, 2),
+        );
+      });
+  }
+
+  getOpenAiReport(item: StatDataCacheChangeSubscription): void {
+    this.service
+      .getOpenAiReport(item.id)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.openAiDialogData = new OpenAiDialogData(
+          "Open AI данные",
+          JSON.stringify(x, null, 2),
+        );
+      });
+  }
+
+  onOpenAiDlgClose(): void {
+    this.openAiDialogData = null;
   }
 
   ngOnDestroy(): void {

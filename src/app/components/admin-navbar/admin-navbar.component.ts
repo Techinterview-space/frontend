@@ -3,6 +3,7 @@ import { Component } from "@angular/core";
 interface NavbarLink {
   title: string;
   url: string;
+  isExternal: boolean;
 }
 
 interface NavbarDropdown {
@@ -28,6 +29,7 @@ export class AdminNavbarComponent {
           {
             title: "Все юзеры",
             url: "/admin/users",
+            isExternal: false,
           },
         ],
       },
@@ -37,6 +39,7 @@ export class AdminNavbarComponent {
           {
             title: "Все шаблоны",
             url: "/admin/interview-templates",
+            isExternal: false,
           },
         ],
       },
@@ -46,14 +49,17 @@ export class AdminNavbarComponent {
           {
             title: "Специальности",
             url: "/admin/professions",
+            isExternal: false,
           },
           {
             title: "Навыки",
             url: "/admin/skills",
+            isExternal: false,
           },
           {
             title: "Сферы деятельности",
             url: "/admin/work-industries",
+            isExternal: false,
           },
         ],
       },
@@ -63,14 +69,17 @@ export class AdminNavbarComponent {
           {
             title: "Анкеты в статистике",
             url: "/admin/salaries",
+            isExternal: false,
           },
           {
             title: "Анкеты вне статистики",
             url: "/admin/salaries/not-in-stats",
+            isExternal: false,
           },
           {
             title: "Импортированные анкеты",
             url: "/admin/salaries/imported-salaries",
+            isExternal: false,
           },
         ],
       },
@@ -80,10 +89,12 @@ export class AdminNavbarComponent {
           {
             title: "Все компании",
             url: "/admin/companies",
+            isExternal: false,
           },
           {
             title: "Отзывы на модерацию",
             url: "/admin/companies/reviews-to-approve",
+            isExternal: false,
           },
         ],
       },
@@ -93,14 +104,17 @@ export class AdminNavbarComponent {
           {
             title: "Использование бота",
             url: "/admin/telegram/bot-usages",
+            isExternal: false,
           },
           {
             title: "Подписчики бота",
             url: "/admin/telegram/user-settings",
+            isExternal: false,
           },
           {
             title: "Подписки на регулярный апдейт по зарплатам",
             url: "/admin/telegram/stat-data-change-subscriptions",
+            isExternal: false,
           },
         ],
       },
@@ -110,14 +124,22 @@ export class AdminNavbarComponent {
           {
             title: "Общее",
             url: "/admin/tools/background-jobs",
+            isExternal: false,
           },
           {
             title: "Курсы валют",
             url: "/admin/tools/currencies",
+            isExternal: false,
           },
           {
             title: "QR код",
             url: "/admin/tools/generate-qr",
+            isExternal: false,
+          },
+          {
+            title: "Kibana",
+            url: "https://kibana.techinterview.space",
+            isExternal: true,
           },
         ],
       },

@@ -5,6 +5,7 @@ import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
 import { StatDataCacheChangeSubscription } from "@models/telegram";
+import { OpenAiAnalysis, OpenAiReport } from "@models/open-ai.model";
 
 export interface CreateTelegramSubscriptionBody {
   name: string;
@@ -48,5 +49,15 @@ export class TelegramSubscriptionsService {
 
   delete(id: string): Observable<void> {
     return this.api.delete<void>(`${this.apiUrl}/${id}`, {});
+  }
+
+  getOpenAiAnalysis(id: string): Observable<OpenAiAnalysis> {
+    return this.api.get<OpenAiAnalysis>(
+      `${this.apiUrl}/${id}/open-ai-analysis`,
+    );
+  }
+
+  getOpenAiReport(id: string): Observable<OpenAiReport> {
+    return this.api.get<OpenAiReport>(`${this.apiUrl}/${id}/open-ai-report`);
   }
 }
