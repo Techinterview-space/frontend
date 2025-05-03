@@ -78,8 +78,7 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
           );
         },
         error: (error) => {
-          console.error("Failed to submit review:", error);
-          this.alertService.error(
+          this.alertService.warn(
             "Не удалось добавить отзыв. Пожалуйста, попробуйте еще раз.",
           );
         },

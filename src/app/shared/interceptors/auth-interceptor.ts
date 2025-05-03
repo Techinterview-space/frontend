@@ -12,6 +12,15 @@ import { AuthService } from "../services/auth/auth.service";
 import { catchError, tap } from "rxjs/operators";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 
+interface BackendError {
+  Status: number;
+  ExceptionType: string;
+  InnerExceptionMessage: string | null;
+  Message: string;
+  RequestId: string;
+  StackTrace: string | null;
+}
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private authService: AuthService | null = null;
@@ -66,7 +75,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private checkIsNotAuthorizeError(error: HttpErrorResponse): boolean {
     const notAuthStatusCode = 401;
-    console.error(error);
     if (error.status === notAuthStatusCode) {
       return true;
     }
@@ -100,17 +108,17 @@ export class AuthInterceptor implements HttpInterceptor {
     // bad request error
     if (error.status === 400) {
       if (error.error != null) {
-        const errorMessageAsText = error.error as string;
-        const backendMessage =
-          errorMessageAsText ??
-          error.error.Message ??
-          error.error.message ??
-          null;
 
-        if (backendMessage != null) {
-          this.alertService.error(backendMessage);
+        const backendError = error.error as BackendError;
+
+        if (backendError != null) {
+          this.alertService.error(backendError.Message);
           return true;
         }
+
+        console.error(error.error);
+        this.alertService.error("Unexpected error from backend");
+        return true;
       }
 
       this.alertService.error("Request data is invalid");
