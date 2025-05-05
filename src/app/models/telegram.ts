@@ -35,6 +35,7 @@ export interface StatDataCacheChangeSubscription {
   telegramChatId: number;
   professionIds: Array<number>;
   preventNotificationIfNoDifference: boolean;
+  useAiAnalysis: boolean;
   deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;

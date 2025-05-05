@@ -108,7 +108,6 @@ export class AuthInterceptor implements HttpInterceptor {
     // bad request error
     if (error.status === 400) {
       if (error.error != null) {
-
         const backendError = error.error as BackendError;
 
         if (backendError != null) {

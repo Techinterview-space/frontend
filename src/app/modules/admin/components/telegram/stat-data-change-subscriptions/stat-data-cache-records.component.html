@@ -19,6 +19,7 @@
             <th>Chat</th>
             <th>Специальности</th>
             <th>No pushes</th>
+            <th>AI анализ</th>
             <th>Создано</th>
             <th>Обновлено</th>
             <th>Удалено</th>
@@ -32,8 +33,15 @@
               <td>
                 <app-status-label
                   [status]="item.preventNotificationIfNoDifference"
-                  [defaultSuccessTitle]="'true'"
-                  [defaultFailTitle]="'false'"
+                  [defaultSuccessTitle]="'Да'"
+                  [defaultFailTitle]="'Нет'"
+                ></app-status-label>
+              </td>
+              <td>
+                <app-status-label
+                  [status]="item.useAiAnalysis"
+                  [defaultSuccessTitle]="'Да'"
+                  [defaultFailTitle]="'Нет'"
                 ></app-status-label>
               </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
