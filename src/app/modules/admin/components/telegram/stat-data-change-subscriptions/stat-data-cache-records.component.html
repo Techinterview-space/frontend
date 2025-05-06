@@ -9,10 +9,7 @@
         </button>
       </div>
 
-      <div
-        class="table-responsive mb-3"
-        *ngIf="items && items.length > 0; else nothingToShow"
-      >
+      <div class="mb-3" *ngIf="items && items.length > 0; else nothingToShow">
         <table class="table table-hover table-sm">
           <thead class="small">
             <th>Название</th>
@@ -23,7 +20,7 @@
             <th>Создано</th>
             <th>Обновлено</th>
             <th>Удалено</th>
-            <th></th>
+            <th>Действия</th>
           </thead>
           <tbody>
             <tr class="small" *ngFor="let item of items; let i = index">
@@ -48,45 +45,52 @@
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
-                <button
-                  *ngIf="item.deletedAt != null"
-                  type="button"
-                  class="btn-link-sm text-success"
-                  (click)="activate(item)"
-                >
-                  Активировать
-                </button>
-                <button
-                  *ngIf="item.deletedAt == null"
-                  type="button"
-                  class="btn-link-sm text-warning ms-1"
-                  (click)="deactivate(item)"
-                >
-                  Деактивировать
-                </button>
-                <button
-                  type="button"
-                  class="btn-link-sm text-danger ms-1"
-                  (click)="delete(item)"
-                >
-                  Удалить
-                </button>
-
-                <button
-                  type="button"
-                  class="btn-link-sm ms-1"
-                  (click)="getOpenAiAnalysis(item)"
-                >
-                  Open AI анализ
-                </button>
-
-                <button
-                  type="button"
-                  class="btn-link-sm ms-1"
-                  (click)="getOpenAiReport(item)"
-                >
-                  Open AI данные
-                </button>
+                <div class="btn-group" role="group">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Действия
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a
+                        *ngIf="item.deletedAt != null"
+                        class="dropdown-item text-success"
+                        (click)="activate(item)"
+                        >Активировать</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        *ngIf="item.deletedAt == null"
+                        class="dropdown-item text-warning"
+                        (click)="deactivate(item)"
+                        >Деактивировать</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item text-danger"
+                        href="#"
+                        (click)="delete(item)"
+                        >Удалить</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" (click)="getOpenAiAnalysis(item)"
+                        >Open AI анализ</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" (click)="getOpenAiReport(item)"
+                        >Open AI данные</a
+                      >
+                    </li>
+                  </ul>
+                </div>
               </td>
             </tr>
           </tbody>

@@ -13,9 +13,9 @@
         class="table-responsive"
         *ngIf="companies.length > 0; else nothingToShow"
       >
-        <table class="table table-hover">
+        <table class="table table-hover table-sm">
           <thead>
-            <tr>
+            <tr class="small">
               <th>#</th>
               <th>Название</th>
               <th>Рейтинг</th>
@@ -26,7 +26,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of companies; let i = index">
+            <tr *ngFor="let item of companies; let i = index" class="small">
               <td>{{ i + 1 }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.rating | number: "1.2-2" }}</td>
