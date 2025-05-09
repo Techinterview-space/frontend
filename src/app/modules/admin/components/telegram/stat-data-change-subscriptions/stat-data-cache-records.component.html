@@ -13,14 +13,17 @@
         <table class="table table-hover table-sm">
           <thead class="small">
             <th>Название</th>
-            <th>Chat</th>
-            <th>Специальности</th>
-            <th>No pushes</th>
-            <th>AI анализ</th>
-            <th>Создано</th>
-            <th>Обновлено</th>
-            <th>Удалено</th>
-            <th>Действия</th>
+            <tr class="small">
+              <th>Chat</th>
+              <th>Специальности</th>
+              <th>No pushes</th>
+              <th>AI анализ</th>
+              <th>Последнее сообщение</th>
+              <th>Создано</th>
+              <th>Обновлено</th>
+              <th>Удалено</th>
+              <th>Действия</th>
+            </tr>
           </thead>
           <tbody>
             <tr class="small" *ngFor="let item of items; let i = index">
@@ -41,6 +44,7 @@
                   [defaultFailTitle]="'Нет'"
                 ></app-status-label>
               </td>
+              <td>{{ item.lastMessageSent | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>

@@ -60,4 +60,8 @@ export class TelegramSubscriptionsService {
   getOpenAiReport(id: string): Observable<OpenAiReport> {
     return this.api.get<OpenAiReport>(`${this.apiUrl}/${id}/open-ai-report`);
   }
+
+  sendUpdates(id: string): Observable<void> {
+    return this.api.post<void>(`${this.apiUrl}/${id}/send-updates`, {});
+  }
 }

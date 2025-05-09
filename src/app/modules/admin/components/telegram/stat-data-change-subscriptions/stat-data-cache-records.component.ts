@@ -145,6 +145,15 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       });
   }
 
+  sendUpdates(item: StatDataCacheChangeSubscription): void {
+    this.service
+      .sendUpdates(item.id)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success("Сообщение отправлено");
+      });
+  }
+
   onOpenAiDlgClose(): void {
     this.openAiDialogData = null;
   }
