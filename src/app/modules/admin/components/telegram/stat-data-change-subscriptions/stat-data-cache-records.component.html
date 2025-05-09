@@ -44,6 +44,7 @@
                   [defaultFailTitle]="'Нет'"
                 ></app-status-label>
               </td>
+              <td>{{ item.lastMessageSent | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>
