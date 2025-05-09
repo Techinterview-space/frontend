@@ -36,6 +36,7 @@ export interface StatDataCacheChangeSubscription {
   professionIds: Array<number>;
   preventNotificationIfNoDifference: boolean;
   useAiAnalysis: boolean;
+  lastMessageSent: Date | null;
   deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
