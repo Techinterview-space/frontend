@@ -4,6 +4,7 @@ export class BotUsageTableRow implements TelegramBotUsage {
   constructor(item: TelegramBotUsage) {
     this.id = item.id;
     this.usageCount = item.usageCount;
+    this.chatId = item.chatId;
     this.username = item.username;
     this.channelName = item.channelName;
     this.channelId = item.channelId;
@@ -20,6 +21,7 @@ export class BotUsageTableRow implements TelegramBotUsage {
 
   readonly id: number;
   readonly usageCount: number;
+  readonly chatId: number | null;
   readonly username: string;
   readonly channelName: string | null;
   readonly channelId: number | null;

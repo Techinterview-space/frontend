@@ -1,6 +1,7 @@
 export interface TelegramBotUsage {
   id: number;
   usageCount: number;
+  chatId: number | null;
   username: string;
   channelName: string | null;
   channelId: number | null;
