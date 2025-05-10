@@ -11,8 +11,6 @@
           <thead class="small">
             <th>Никнейм</th>
             <th>Кол-во</th>
-            <th>Название</th>
-            <th>Канал</th>
             <th>Чат</th>
             <th>Тип</th>
             <th>Полученный текст</th>
@@ -23,8 +21,6 @@
             <tr class="small" *ngFor="let item of items; let i = index">
               <td>{{ item.username }}</td>
               <td>{{ item.usageCount | formatAsMoney }}</td>
-              <td>{{ item.channelName ?? "-" }}</td>
-              <td>{{ item.channelId ?? "-" }}</td>
               <td>{{ item.chatId ?? "-" }}</td>
               <td>{{ item.usageTypeAsString }}</td>
               <td title="{{ item.receivedMessageTextOriginal }}">
