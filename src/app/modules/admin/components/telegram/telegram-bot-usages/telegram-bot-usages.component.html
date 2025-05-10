@@ -27,7 +27,7 @@
               <td>{{ item.channelId ?? "-" }}</td>
               <td>{{ item.chatId ?? "-" }}</td>
               <td>{{ item.usageTypeAsString }}</td>
-              <td title="{{ item.receivedMessageText }}">
+              <td title="{{ item.receivedMessageTextOriginal }}">
                 {{ item.receivedMessageText }}
               </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>

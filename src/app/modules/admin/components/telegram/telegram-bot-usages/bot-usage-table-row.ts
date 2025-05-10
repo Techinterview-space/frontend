@@ -15,6 +15,8 @@ export class BotUsageTableRow implements TelegramBotUsage {
       item.receivedMessageText != null && item.receivedMessageText.length > 50
         ? item.receivedMessageText.slice(0, 50) + "..."
         : null;
+
+    this.receivedMessageTextOriginal = item.receivedMessageText;
     this.createdAt = item.createdAt;
     this.updatedAt = item.updatedAt;
   }
@@ -28,6 +30,7 @@ export class BotUsageTableRow implements TelegramBotUsage {
   readonly usageType: TelegramBotUsageType;
   readonly usageTypeAsString: string;
   readonly receivedMessageText: string | null;
+  readonly receivedMessageTextOriginal: string | null;
   readonly createdAt: string;
   readonly updatedAt: string;
 }
