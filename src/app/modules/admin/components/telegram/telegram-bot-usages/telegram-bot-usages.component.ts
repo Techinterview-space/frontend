@@ -5,13 +5,14 @@ import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { TelegramBotService } from "@services/telegram-bot.service";
 import { TelegramBotUsage } from "@models/telegram";
+import { BotUsageTableRow } from "./bot-usage-table-row";
 
 @Component({
   templateUrl: "./telegram-bot-usages.component.html",
   standalone: false,
 })
 export class TelegramBotUsagesComponent implements OnInit, OnDestroy {
-  items: Array<TelegramBotUsage> | null = null;
+  items: Array<BotUsageTableRow> | null = null;
   source: PaginatedList<TelegramBotUsage> | null = null;
   currentPage: number = 1;
 
@@ -41,7 +42,7 @@ export class TelegramBotUsagesComponent implements OnInit, OnDestroy {
       })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
-        this.items = x.results;
+        this.items = x.results.map((x) => new BotUsageTableRow(x));
         this.source = x;
       });
   }
