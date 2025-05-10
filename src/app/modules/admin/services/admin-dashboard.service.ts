@@ -9,6 +9,8 @@ export interface AverageRatingData {
 
 export interface AdminDashboardResponse {
   averageRatingData: AverageRatingData;
+  totalSalaries: number;
+  totalCompanyReviews: number;
 }
 
 @Injectable({

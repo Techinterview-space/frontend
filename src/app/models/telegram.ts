@@ -40,3 +40,15 @@ export interface StatDataCacheChangeSubscription {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface TelegramInlineReplyStats {
+  usersStats: {
+    username: string;
+    count: number;
+  }[];
+  chatsStats: {
+    chatId: number;
+    chatName: string;
+    count: number;
+  }[];
+}

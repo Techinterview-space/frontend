@@ -4,7 +4,11 @@ import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
-import { TelegramBotUsage, TelegramUserSettings } from "@models/telegram";
+import {
+  TelegramBotUsage,
+  TelegramInlineReplyStats,
+  TelegramUserSettings,
+} from "@models/telegram";
 
 export interface UpdateTelegramUserSettingsBody {
   sendBotRegularStatsUpdates: boolean;
@@ -68,5 +72,11 @@ export class TelegramBotService {
 
   deleteUserSettings(id: string): Observable<void> {
     return this.api.delete<void>(this.apiUrl + "bot-user-settings/" + id);
+  }
+
+  getTelegramInlineReplyStats(): Observable<TelegramInlineReplyStats> {
+    return this.api.get<TelegramInlineReplyStats>(
+      this.apiUrl + "inline-reply-stats",
+    );
   }
 }

@@ -3,9 +3,38 @@
 <div class="container my-5">
   <div class="row" *ngIf="dashboardData">
     <div class="col-md-4">
-      <app-rating-page
-        [source]="dashboardData.averageRatingData"
-      ></app-rating-page>
+      <div class="card card-body p-3">
+        <div class="h5">Средняя оценка статистики</div>
+        <app-star-rating-readonly
+          [source]="dashboardData.averageRatingData.averageRating"
+        ></app-star-rating-readonly>
+        <div class="mt-1">
+          <span class="h5">{{
+            dashboardData.averageRatingData.averageRating.toFixed(2)
+          }}</span>
+          <span class="text-muted small ms-1"
+            >({{ dashboardData.averageRatingData.count }})</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-body p-3">
+        <div class="h5">Кол-во анкет ЗП</div>
+        <div class="mt-1 h2">
+          {{ dashboardData.totalSalaries }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-body p-3">
+        <div class="h5">Кол-во отзывов на компании</div>
+        <div class="mt-1 h2">
+          {{ dashboardData.totalCompanyReviews }}
+        </div>
+      </div>
     </div>
   </div>
 </div>

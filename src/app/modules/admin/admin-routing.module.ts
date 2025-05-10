@@ -18,6 +18,7 @@ import { GenerateQrPageComponent } from "./components/generate-qr-code-page/gene
 import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
 import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
 import { ReviewsToApprovePageComponent } from "./components/companies/reviews-to-approve/reviews-to-approve-page.component";
+import { InlineRepliesStatsComponent } from "./components/telegram/inline-replies-stats/inline-replies-stats.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: "telegram/stat-data-change-subscriptions",
     component: StatDataCacheRecordsComponent,
+  },
+  {
+    path: "telegram/inline-replies-stats",
+    component: InlineRepliesStatsComponent,
   },
 
   { path: "tools/background-jobs", component: BackgroundJobsComponent },

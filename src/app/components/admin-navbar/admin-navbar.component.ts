@@ -116,6 +116,11 @@ export class AdminNavbarComponent {
             url: "/admin/telegram/stat-data-change-subscriptions",
             isExternal: false,
           },
+          {
+            title: "Статистика ответов в Inline",
+            url: "/admin/telegram/inline-replies-stats",
+            isExternal: false,
+          },
         ],
       },
       {

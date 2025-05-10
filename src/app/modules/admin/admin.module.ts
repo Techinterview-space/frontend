@@ -22,11 +22,11 @@ import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced
 import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
 import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
 import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
-import { RatingPageComponent } from "./components/admin-start-page/components/rating-page/rating-page.component";
 import { AdminDashboardService } from "./services/admin-dashboard.service";
 import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
 import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
 import { ReviewsToApprovePageComponent } from "./components/companies/reviews-to-approve/reviews-to-approve-page.component";
+import { InlineRepliesStatsComponent } from "./components/telegram/inline-replies-stats/inline-replies-stats.component";
 
 const adminServices = [AdminDashboardService];
 
@@ -50,10 +50,10 @@ const adminServices = [AdminDashboardService];
     StatDataCacheRecordsComponent,
     CurrenciesPageComponent,
     GenerateQrPageComponent,
-    RatingPageComponent,
     CompaniesAdminPageComponent,
     CompanyAdminPageComponent,
     ReviewsToApprovePageComponent,
+    InlineRepliesStatsComponent,
   ],
   imports: [
     CommonModule,
@@ -63,6 +63,6 @@ const adminServices = [AdminDashboardService];
     ReactiveFormsModule,
   ],
   providers: adminServices,
-  exports: [RatingPageComponent],
+  exports: [],
 })
 export class AdminModule {}
