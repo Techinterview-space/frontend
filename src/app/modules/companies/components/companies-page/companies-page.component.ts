@@ -7,6 +7,7 @@ import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CompanyListItem } from "./company-list-item";
+import { GoogleAnalyticsService } from "ngx-google-analytics";
 
 @Component({
   templateUrl: "./companies-page.component.html",
@@ -23,8 +24,9 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
     private readonly service: CompaniesService,
     private readonly title: TitleService,
     private readonly router: Router,
+    private readonly gtag: GoogleAnalyticsService,
   ) {
-    this.title.setTitle("Компании");
+    this.title.setTitle("Отзывы к IT компаниям");
   }
 
   ngOnInit(): void {
@@ -34,12 +36,22 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   search(): void {
     console.log(this.searchQuery);
     if (this.searchQuery.length >= 3) {
+      this.gtag.event(
+        "company_search_query_submitted",
+        "company_reviews",
+        this.searchQuery,
+      );
       this.loadData(1);
     }
   }
 
   clearSearch(): void {
     this.searchQuery = "";
+    this.gtag.event(
+      "company_search_query_reset_submitted",
+      "company_reviews",
+      this.searchQuery,
+    );
     this.loadData(1);
   }
 
@@ -52,7 +64,7 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
       .all({
         searchQuery: this.searchQuery,
         page: pageToLoad,
-        pageSize: defaultPageParams.pageSize,
+        pageSize: 6,
       })
       .pipe(untilDestroyed(this))
       .subscribe((i) => {
@@ -63,10 +75,6 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
 
   navigateToCompany(id: string): void {
     this.router.navigate(["/companies", id]);
-  }
-
-  navigateToAddReview(id: string): void {
-    this.router.navigate(["/companies", id, "add-review"]);
   }
 
   ngOnDestroy(): void {

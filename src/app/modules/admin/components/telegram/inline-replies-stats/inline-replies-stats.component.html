@@ -6,22 +6,22 @@
       <div class="card">
         <div class="card-body">
           <div class="h5">Пользователи</div>
-      <div class="table-responsive">
-        <table class="table table-sm table-hover">
-          <thead>
-            <tr class="small">
-              <th>Никнейм</th>
-              <th>Кол-во</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of stats.usersStats" class="small">
-              <td>{{ user.username }}</td>
-              <td>{{ user.count }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <div class="table-responsive">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr class="small">
+                  <th>Никнейм</th>
+                  <th>Кол-во</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of stats.usersStats" class="small">
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.count }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -30,24 +30,24 @@
       <div class="card">
         <div class="card-body">
           <div class="h5">Публичные чаты</div>
-      <div class="table-responsive">
-        <table class="table table-sm table-hover">
-          <thead>
-            <tr class="small">
-              <th>Чат ID</th>
-              <th>Название</th>
-              <th>Кол-во</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let chat of stats.chatsStats" class="small">
-              <td>{{ chat.chatId }}</td>
-              <td>{{ chat.chatName }}</td>
-              <td>{{ chat.count }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <div class="table-responsive">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr class="small">
+                  <th>Чат ID</th>
+                  <th>Название</th>
+                  <th>Кол-во</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let chat of stats.chatsStats" class="small">
+                  <td>{{ chat.chatId }}</td>
+                  <td>{{ chat.chatName }}</td>
+                  <td>{{ chat.count }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

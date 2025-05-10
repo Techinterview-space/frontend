@@ -112,6 +112,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
         ],
       },
       {
+        title: "Отзывы",
+        show: true,
+        links: [
+          {
+            title: "Список компаний",
+            url: "/companies",
+            show: true,
+          },
+        ],
+      },
+      {
         title: "Зарплаты",
         show: true,
         links: [

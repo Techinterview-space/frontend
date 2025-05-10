@@ -40,13 +40,14 @@
           [routerLink]="'/companies'"
           [text]="'К списку компаний'"
         />
-        <a
+        <button
+          type="button"
           *ngIf="company.reviewsCount > 0"
-          routerLink="/companies/{{ company?.id }}/add-review"
+          (click)="leaveReview()"
           class="btn btn-outline-primary"
         >
-          <i class="bi bi-pencil-fill"></i> Оставить отзыв</a
-        >
+          <i class="bi bi-pencil-fill"></i> Оставить отзыв
+        </button>
       </div>
       <div class="text-muted mt-2 small">
         <div>
@@ -180,12 +181,13 @@
       <div class="text-center mt-3">Еще нет отзывов.</div>
 
       <div class="text-center mt-3">
-        <a
-          routerLink="/companies/{{ company?.id }}/add-review"
+        <button
+          type="button"
+          (click)="leaveReview()"
           class="btn btn-outline-primary"
         >
-          <i class="bi bi-pencil-fill"></i> Оставить первый отзыв</a
-        >
+          <i class="bi bi-pencil-fill"></i> Оставить первый отзыв
+        </button>
       </div>
     </div>
   </div>

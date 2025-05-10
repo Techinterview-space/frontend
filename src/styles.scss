@@ -142,6 +142,17 @@ ul.no-bullets {
   padding-right: 5.5rem;
 }
 
+.btn-purple {
+  background-color: $color-purple;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: $color-purple-darker;
+    color: white;
+  }
+}
+
 /* ng-select bootstrap-like styles. Start */
 /* https://github.com/ng-select/ng-select/issues/1955#issuecomment-1240459808 */
 /*.form-floating {

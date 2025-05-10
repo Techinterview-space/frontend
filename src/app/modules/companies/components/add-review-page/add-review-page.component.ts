@@ -9,6 +9,7 @@ import { CompanyReviewForm } from "./company-review-form";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
+import { GoogleAnalyticsService } from "ngx-google-analytics";
 @Component({
   templateUrl: "./add-review-page.component.html",
   styleUrls: ["./add-review-page.component.scss"],
@@ -29,6 +30,7 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     activatedRoute: ActivatedRoute,
     private readonly alertService: AlertService,
+    private readonly gtag: GoogleAnalyticsService,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
   }
@@ -46,6 +48,13 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
             this.title.setTitle(
               `Написать отзыв о компании ${this.company!.name}`,
             );
+
+            this.gtag.event(
+              "company_review_page_opened",
+              "company_reviews",
+              this.company!.name,
+            );
+
             this.editForm = new CompanyReviewForm();
           });
       });
@@ -71,6 +80,12 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => {
+          this.gtag.event(
+            "company_review_submitted",
+            "company_reviews",
+            this.company!.name,
+          );
+
           this.router.navigate(["/companies", companyId]);
           this.alertService.success(
             "Отзыв успешно добавлен! Он пройдет модерацию и появится на сайте через некоторое время.",
@@ -78,6 +93,12 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
           );
         },
         error: (error) => {
+          this.gtag.event(
+            "company_review_submitted_error",
+            "company_reviews",
+            this.company!.name,
+          );
+
           this.alertService.warn(
             "Не удалось добавить отзыв. Пожалуйста, попробуйте еще раз.",
           );
@@ -95,6 +116,12 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
         "Вернуться к компании",
         "Вы уверены, что отменить отзыв? Данные не сохранятся.",
         () => {
+          this.gtag.event(
+            "company_review_cancelled",
+            "company_reviews",
+            this.company!.name,
+          );
+
           this.router.navigate(["/companies", this.company!.id]);
           this.alertService.success("Отзыв был отменен");
           this.confirmCancelMessage = null;

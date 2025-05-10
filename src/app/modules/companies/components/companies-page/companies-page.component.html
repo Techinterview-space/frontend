@@ -87,7 +87,21 @@
 
 <ng-template #dataLoading>
   <div class="container mt-5">
-    <app-data-loader></app-data-loader>
+    <app-data-loader [title]="''">
+      <div class="mt-3">
+        <div class="text-muted h2 d-flex justify-content-center">
+          Загружаем список компаний
+        </div>
+        <div class="mt-3 d-flex justify-content-center">
+          <img
+            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
+            class="img-fluid w-30"
+            alt="logo"
+            title="Кот Магеллан, который любит оставлять отзывы о компаниях"
+          />
+        </div>
+      </div>
+    </app-data-loader>
   </div>
 </ng-template>
 
