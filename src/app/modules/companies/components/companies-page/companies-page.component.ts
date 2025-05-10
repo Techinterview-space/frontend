@@ -34,7 +34,6 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   }
 
   search(): void {
-    console.log(this.searchQuery);
     if (this.searchQuery.length >= 3) {
       this.gtag.event(
         "company_search_query_submitted",

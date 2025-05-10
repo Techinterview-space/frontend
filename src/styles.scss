@@ -148,9 +148,17 @@ ul.no-bullets {
   border: none;
 
   &:hover {
-    background-color: $color-purple-darker;
+    background-color: $color-purple-darkest;
     color: white;
   }
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-80 {
+  width: 80%;
 }
 
 /* ng-select bootstrap-like styles. Start */

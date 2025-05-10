@@ -171,7 +171,21 @@
 
 <ng-template #dataLoading>
   <div class="container mt-5">
-    <app-data-loader></app-data-loader>
+    <app-data-loader [title]="''">
+      <div class="mt-3 pb-5">
+        <div class="text-muted h2 d-flex justify-content-center">
+          Загружаем компанию
+        </div>
+        <div class="mt-3 d-flex justify-content-center">
+          <img
+            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
+            class="img-fluid w-30"
+            alt="logo"
+            title="Кот Магеллан, который любит оставлять отзывы о компаниях"
+          />
+        </div>
+      </div>
+    </app-data-loader>
   </div>
 </ng-template>
 
@@ -188,6 +202,15 @@
         >
           <i class="bi bi-pencil-fill"></i> Оставить первый отзыв
         </button>
+      </div>
+
+      <div class="mt-2 mb-1 d-flex justify-content-center">
+        <img
+          src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cat_reviewing_transparent_1000.png"
+          class="img-fluid w-30"
+          alt="logo"
+          title="Кот Магеллан, который любит оставлять отзывы о компаниях"
+        />
       </div>
     </div>
   </div>
