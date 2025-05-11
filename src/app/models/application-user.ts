@@ -6,6 +6,7 @@ export interface ApplicationUser {
   firstName: string | null;
   lastName: string | null;
   fullname: string;
+  pictureProfile: string | null;
   roles: Array<UserRole>;
   emailConfirmed: boolean;
   identityId: number | null;

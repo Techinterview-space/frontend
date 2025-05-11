@@ -22,6 +22,10 @@ export class ApplicationUserExtended implements ApplicationUser {
     return this.instance.fullname;
   }
 
+  get pictureProfile(): string | null {
+    return this.instance.pictureProfile;
+  }
+
   get email(): string | null {
     return this.instance.email;
   }

@@ -44,7 +44,17 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  onKeyupEvent(event: KeyboardEvent): void {
+    if (event.key === "Enter") {
+      this.search();
+    }
+  }
+
   clearSearch(): void {
+    if (this.searchQuery.length < 3) {
+      return;
+    }
+
     this.searchQuery = "";
     this.gtag.event(
       "company_search_query_reset_submitted",

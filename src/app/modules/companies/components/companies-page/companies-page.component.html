@@ -12,12 +12,15 @@
               class="form-control"
               id="searchQuery"
               [(ngModel)]="searchQuery"
+              (keyup)="onKeyupEvent($event)"
             />
           </div>
           <div class="col-md-6">
             <button
               type="button"
               class="btn btn-outline-primary"
+              [disabled]="searchQuery.length < 3"
+              [class.disabled]="searchQuery.length < 3"
               (click)="search()"
             >
               Найти

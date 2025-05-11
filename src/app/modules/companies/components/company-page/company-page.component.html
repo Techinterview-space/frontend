@@ -24,7 +24,7 @@
 
       <div class="mb-2">
         <div class="h5">О компании</div>
-        <div>{{ company.description }}</div>
+        <div [innerHTML]="company.description"></div>
       </div>
 
       <div *ngIf="company.links.length > 0" class="mb-2">
@@ -147,22 +147,30 @@
 
         <div *ngIf="review.pros" class="mb-2">
           <div class="fw-bold text-success">Плюсы:</div>
-          <div>{{ review.pros }}</div>
+          <div [innerHTML]="review.pros"></div>
         </div>
         <div *ngIf="review.cons" class="mb-2">
           <div class="fw-bold text-danger">Минусы:</div>
-          <div>{{ review.cons }}</div>
+          <div [innerHTML]="review.cons"></div>
         </div>
 
-        <div *ngIf="review.approvedAt == null" class="mb-2">
-          <div class="review-awaiting-approval-label">Ожидает одобрения</div>
-        </div>
+        <div class="d-flex justify-content-between mb-2 mt-1">
+          <span
+            *ngIf="review.approvedAt == null"
+            class="review-awaiting-approval-label"
+            >Ожидает одобрения</span
+          >
 
-        <div *ngIf="review.outdatedAt != null" class="mb-2">
-          <div class="review-outdated-label">
+          <span *ngIf="review.outdatedAt != null" class="review-outdated-label">
             Отзыв устарел {{ review.outdatedAt | date: "dd.MM.yyyy" }}
-          </div>
+          </span>
+
+          <span class="text-muted">
+            <i class="bi bi-check-circle-fill me-1"></i>
+            {{ review.createdAt | date: "dd.MM.yyyy" }}
+          </span>
         </div>
+
         <hr class="my-2" />
       </div>
     </div>

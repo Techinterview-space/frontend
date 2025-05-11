@@ -40,6 +40,16 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
           .pipe(untilDestroyed(this))
           .subscribe((i) => {
             this.company = i;
+            this.company!.description = this.company!.description?.replace(
+              /\n/g,
+              "<br />",
+            );
+
+            this.company!.reviews.forEach((r) => {
+              r.pros = r.pros?.replace(/\n/g, "<br />");
+              r.cons = r.cons?.replace(/\n/g, "<br />");
+            });
+
             this.title.setTitle(`Компания ${this.company!.name}`);
           });
       });

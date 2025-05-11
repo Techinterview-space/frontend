@@ -1,4 +1,15 @@
-<app-page-header>{{ user?.fullName }}</app-page-header>
+<app-page-header>
+  <div class="d-flex align-items-end">
+    <div class="d-inline-block mb-2">
+      <img
+        *ngIf="user?.pictureProfile"
+        [src]="user?.pictureProfile"
+        class="picture-profile"
+      />
+    </div>
+    <span class="mt-2">{{ user?.fullName }}</span>
+  </div>
+</app-page-header>
 
 <div class="container mt-5 mb-5" *ngIf="user; else dataLoading">
   <div class="row" *ngIf="user">

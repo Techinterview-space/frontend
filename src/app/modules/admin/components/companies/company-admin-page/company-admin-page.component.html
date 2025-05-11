@@ -7,7 +7,7 @@
         <div class="row mb-3">
           <div class="col-md-3">Описание</div>
           <div class="col-md-9">
-            {{ company.description }}
+            <div [innerHTML]="company.description"></div>
           </div>
         </div>
 
@@ -151,16 +151,12 @@
 
     <div class="mb-2">
       <div class="fw-bold text-success">Плюсы</div>
-      <div class="">
-        {{ reviewToShow?.pros }}
-      </div>
+      <div [innerHTML]="reviewToShow?.pros"></div>
     </div>
 
     <div class="mb-2">
       <div class="fw-bold text-danger">Минусы</div>
-      <div class="">
-        {{ reviewToShow?.cons }}
-      </div>
+      <div [innerHTML]="reviewToShow?.cons"></div>
     </div>
 
     <div class="mb-2">
