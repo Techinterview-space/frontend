@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Company } from "@models/companies.model";
-import { CompanyCreateRequest } from "@services/companies.service";
+import { CompanyEditRequest } from "@services/companies.service";
 
 export class EditCompanyForm extends FormGroup {
   private static readonly URL_LINK_PATTERN =
@@ -20,7 +20,7 @@ export class EditCompanyForm extends FormGroup {
     });
   }
 
-  editRequestOrNull(): CompanyCreateRequest | null {
+  editRequestOrNull(): CompanyEditRequest | null {
     if (!this.valid) {
       this.markAllAsTouched();
       return null;

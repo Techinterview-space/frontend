@@ -8,6 +8,7 @@ import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { EditCompanyForm } from "../shared/edit-company-form";
 
 @Component({
   templateUrl: "./company-admin-page.component.html",
@@ -18,6 +19,7 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
   company: Company | null = null;
   reviewToShow: CompanyReview | null = null;
   confirmMessage: DialogMessage<ConfirmMsg> | null = null;
+  editForm: EditCompanyForm | null = null;
 
   private readonly activateRoute: ActivatedRouteExtended;
 
@@ -59,6 +61,37 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
     this.title.resetTitle();
   }
 
+  openEditForm(): void {
+    this.editForm = new EditCompanyForm(this.company);
+  }
+
+  onEditModalDlgClose(): void {
+    this.editForm = null;
+  }
+
+  onEditFormSubmit(): void {
+    if (this.editForm == null || this.company == null) {
+      return;
+    }
+
+    const editRequest = this.editForm.editRequestOrNull();
+    if (editRequest == null) {
+      return;
+    }
+
+    this.service
+      .update(this.company.id, editRequest)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alertService.success("Компания была обновлена");
+        this.editForm = null;
+        this.ngOnInit();
+      });
+  }
+
+  recalculateRating(): void {
+    throw new Error("Not implemented");
+  }
   onReviewModalDlgClose(): void {
     this.reviewToShow = null;
   }

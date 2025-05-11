@@ -4,6 +4,46 @@
   <div class="card">
     <div class="card-body p-5">
       <div class="mb-5">
+        <div class="d-flex justify-content-end">
+          <div class="btn-group" role="group">
+            <button
+              type="button"
+              class="btn btn-outline-dark dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Действия
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  (click)="openEditForm()"
+                >
+                  Редактировать
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  (click)="recalculateRating()"
+                >
+                  Пересчитать рейтинг
+                </button>
+              </li>
+              <li>
+                <a
+                  routerLink="/companies/{{ company.id }}"
+                  class="dropdown-item"
+                  >Публичная страница</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <div class="row mb-3">
           <div class="col-md-3">Описание</div>
           <div class="col-md-9">
@@ -204,3 +244,44 @@
   *ngIf="confirmMessage"
   [message]="confirmMessage"
 ></app-confirm-dialog>
+
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Редактировать компанию'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label>Название</label>
+      <input type="text" class="form-control" formControlName="name" />
+      <app-field-error [field]="editForm.get('name')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Описание</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+      <app-field-error [field]="editForm.get('description')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Social ссылка</label>
+      <input type="text" class="form-control" formControlName="socialLink" />
+      <app-field-error [field]="editForm.get('socialLink')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>URL для логотипа</label>
+      <input type="text" class="form-control" formControlName="logoUrl" />
+      <app-field-error [field]="editForm.get('logoUrl')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+  </form>
+</app-dialog>

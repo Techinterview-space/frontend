@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Company } from "@models/companies.model";
-import { defaultPageParams, PageParams } from "@models/page-params";
+import { defaultPageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
-import { EditCompanyForm } from "./edit-company-form";
+import { EditCompanyForm } from "../shared/edit-company-form";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";

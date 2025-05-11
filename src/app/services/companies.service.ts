@@ -14,7 +14,7 @@ export interface CompaniesSearchParams extends PageParams {
   searchQuery: string | null;
 }
 
-export interface CompanyCreateRequest {
+export interface CompanyEditRequest {
   name: string;
   description: string;
   links: string[];
@@ -46,11 +46,11 @@ export class CompaniesService {
     return this.api.get<Company>(this.apiUrl + id);
   }
 
-  update(id: string, model: CompanyCreateRequest): Observable<void> {
-    throw new Error("Not implemented");
+  update(id: string, model: CompanyEditRequest): Observable<void> {
+    return this.api.post(this.apiUrl + id, model);
   }
 
-  create(model: CompanyCreateRequest): Observable<void> {
+  create(model: CompanyEditRequest): Observable<void> {
     return this.api.post(this.apiUrl, model);
   }
 
