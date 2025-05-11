@@ -16,9 +16,16 @@
           <span class="" *ngIf="company.reviewsCount === 0">Нет оценок</span>
         </div>
 
-        <div class="small text-muted">
-          <span class="me-2">Отзывов:</span>
-          <span class="">{{ company.reviewsCount }}</span>
+        <div class="small text-muted mb-1 d-flex justify-content-between">
+          <div class="d-inline-block">
+            <span class="me-2">Отзывов:</span>
+            <span class="">{{ company.reviewsCount }}</span>
+          </div>
+
+          <div class="d-inline-block" title="Просмотров">
+            <i class="bi bi-eye-fill"></i>
+            <span class="ms-2">{{ company.viewsCount }}</span>
+          </div>
         </div>
       </div>
 
@@ -49,20 +56,17 @@
           <i class="bi bi-pencil-fill"></i> Оставить отзыв
         </button>
       </div>
-      <div class="text-muted mt-2 small">
+      <div class="text-muted mt-2 fst-italic">
         <div>
-          Добавленные отзывы появляются в течение некоторого времени после
-          модерации.
+          Отзывы полностью анонимны. Вы можете смело оставить отзыв и открыть
+          страницу компании при начальстве и коллегах, и система никаким образом
+          не покажет, что вы тут уже были.
         </div>
         <div>
-          Не переживайте, если не увидели свой отзыв сразу после добавления на
-          странице компании, нужно немного подождать.
+          Не переживайте, если не увидели свой отзыв сразу после добавления -
+          отзывы проходят модерацию.
         </div>
         <div class="mt-2">
-          Отзывы полностью анонимны и после модерации ваше авторство никак не
-          будет показано.
-        </div>
-        <div>
           Отзыв - это всегда субъективно, однако будьте, пожалуйста, объективны
           настолько, насколько это возможно, чтобы помочь другим узнать больше о
           компании.

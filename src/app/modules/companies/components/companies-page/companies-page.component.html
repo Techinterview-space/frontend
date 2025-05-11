@@ -60,6 +60,10 @@
               <span class="text-muted me-2">Кол-во отзывов:</span>
               <span class="text-dark me-2">{{ item.reviewsCount }}</span>
             </div>
+            <div class="fst-italic small me-3 d-inline-block">
+              <i class="bi bi-eye-fill"></i>
+              <span class="ms-1">{{ item.viewsCount }}</span>
+            </div>
             <div class="fst-italic d-inline-block me-3">
               <span class="text-muted me-2">Рейтинг:</span>
               <span class="text-dark me-2" *ngIf="item.reviewsCount > 0">

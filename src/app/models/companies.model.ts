@@ -8,6 +8,7 @@ export interface Company {
   logoUrl: string;
   rating: number;
   reviewsCount: number;
+  viewsCount: number;
   reviews: Array<CompanyReview>;
   ratingHistory: Array<CompanyRatingHistory>;
   userIsAllowedToAddReview: boolean;

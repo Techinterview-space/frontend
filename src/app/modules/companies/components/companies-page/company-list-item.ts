@@ -8,6 +8,7 @@ export class CompanyListItem {
   readonly description: string;
   readonly links: string[];
   readonly reviewsCount: number;
+  readonly viewsCount: number;
   readonly rating: number;
 
   constructor(private readonly company: Company) {
@@ -24,6 +25,7 @@ export class CompanyListItem {
 
     this.links = company.links;
     this.reviewsCount = company.reviewsCount;
+    this.viewsCount = company.viewsCount;
     this.rating = company.rating;
   }
 }
