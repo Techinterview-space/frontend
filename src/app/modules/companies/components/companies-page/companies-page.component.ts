@@ -19,6 +19,7 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   source: PaginatedList<Company> | null = null;
   currentPage: number = 1;
   searchQuery: string = "";
+  private skipNextQueryParamsUpdate: boolean = false;
 
   constructor(
     private readonly service: CompaniesService,
@@ -32,6 +33,11 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe(params => {
+      if (this.skipNextQueryParamsUpdate) {
+        this.skipNextQueryParamsUpdate = false;
+        return;
+      }
+      
       this.currentPage = params['page'] ? Number(params['page']) : 1;
       this.searchQuery = params['search'] || '';
       this.loadData(this.currentPage, false);
@@ -45,7 +51,8 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
         "company_reviews",
         this.searchQuery,
       );
-      this.updateUrlParams(1);
+      this.currentPage = 1;
+      this.loadData(1, true);
     }
   }
 
@@ -67,22 +74,24 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
       this.searchQuery,
     );
     
+    this.skipNextQueryParamsUpdate = true;
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {},
     });
     
+    this.currentPage = 1;
     this.loadData(1, false);
   }
 
   loadData(pageToLoad: number, updateUrl: boolean = true): void {
     this.companies = null;
     this.source = null;
+    this.currentPage = pageToLoad;
 
     if (updateUrl) {
+      this.skipNextQueryParamsUpdate = true;
       this.updateUrlParams(pageToLoad);
-    } else {
-      this.currentPage = pageToLoad;
     }
 
     this.service
@@ -113,7 +122,15 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   }
 
   navigateToCompany(id: string): void {
-    this.router.navigate(["/companies", id]);
+    const state: { page: number; search?: string } = {
+      page: this.currentPage
+    };
+    
+    if (this.searchQuery && this.searchQuery.length >= 3) {
+      state.search = this.searchQuery;
+    }
+    
+    this.router.navigate(["/companies", id], { state });
   }
 
   ngOnDestroy(): void {

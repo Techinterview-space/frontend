@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { PaginatedModel } from "@models/paginated-list";
 
 @Component({
@@ -6,7 +6,7 @@ import { PaginatedModel } from "@models/paginated-list";
   templateUrl: "./pagination-buttons.component.html",
   standalone: false,
 })
-export class PaginationButtonsComponent implements OnInit {
+export class PaginationButtonsComponent implements OnInit, OnChanges {
   @Input()
   source: PaginatedModel | null = null;
 
@@ -37,6 +37,16 @@ export class PaginationButtonsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.generatePages();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['source'] || changes['currentPage']) {
+      this.generatePages();
+    }
+  }
+
+  private generatePages(): void {
     if (this.source) {
       this.lastPage = Math.ceil(this.source.totalItems / this.source.pageSize);
       const allPages = Array.from(Array(this.lastPage).keys()).map(

@@ -43,10 +43,13 @@
       </div>
 
       <div class="d-flex justify-content-between">
-        <app-go-back-button
-          [routerLink]="'/companies'"
-          [text]="'К списку компаний'"
-        />
+        <button
+          type="button"
+          class="btn btn-outline-dark small"
+          (click)="goBackToList()"
+        >
+          <span class="small"><i class="bi bi-arrow-left me-1"></i>К списку компаний</span>
+        </button>
         <button
           type="button"
           *ngIf="company.reviewsCount > 0"
