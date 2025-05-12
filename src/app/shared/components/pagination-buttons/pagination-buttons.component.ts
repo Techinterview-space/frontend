@@ -10,6 +10,9 @@ export class PaginationButtonsComponent implements OnInit {
   @Input()
   source: PaginatedModel | null = null;
 
+  @Input()
+  currentPage: number | null = null;
+
   @Output()
   pageChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -17,16 +20,18 @@ export class PaginationButtonsComponent implements OnInit {
   lastPage: number | null = null;
 
   get disablePreviousButton(): boolean {
+    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
     return (
       this.source != null &&
-      (this.source.currentPage === 1 || this.source.totalItems === 0)
+      (current === 1 || this.source.totalItems === 0)
     );
   }
 
   get disableNextButton(): boolean {
+    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
     return (
       this.source != null &&
-      (this.source.currentPage === this.lastPage ||
+      (current === this.lastPage ||
         this.source.totalItems === 0)
     );
   }
@@ -37,24 +42,26 @@ export class PaginationButtonsComponent implements OnInit {
       const allPages = Array.from(Array(this.lastPage).keys()).map(
         (i) => i + 1,
       );
+      
+      const current = this.currentPage || this.source.currentPage;
 
       if (allPages.length > 7) {
         if (
-          this.source.currentPage > 3 &&
-          this.source.currentPage < this.lastPage - 2
+          current > 3 &&
+          current < this.lastPage - 2
         ) {
           this.pages = [
             1,
             2,
             null,
-            this.source.currentPage - 1,
-            this.source.currentPage,
-            this.source.currentPage + 1,
+            current - 1,
+            current,
+            current + 1,
             null,
             this.lastPage - 1,
             this.lastPage,
           ];
-        } else if (this.source.currentPage <= 3) {
+        } else if (current <= 3) {
           this.pages = [1, 2, 3, 4, 5, null, this.lastPage - 1, this.lastPage];
         } else {
           this.pages = [
@@ -75,18 +82,20 @@ export class PaginationButtonsComponent implements OnInit {
   }
 
   previous(): void {
-    if (this.source && this.source.currentPage > 1) {
-      this.pageClicked(this.source.currentPage - 1);
+    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
+    if (this.source && current > 1) {
+      this.pageClicked(current - 1);
     }
   }
 
   next(): void {
+    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
     if (
       this.source &&
       this.lastPage &&
-      this.source.currentPage < this.lastPage
+      current < this.lastPage
     ) {
-      this.pageClicked(this.source.currentPage + 1);
+      this.pageClicked(current + 1);
     }
   }
 
@@ -100,7 +109,8 @@ export class PaginationButtonsComponent implements OnInit {
     if (page == null) {
       return "";
     }
-
-    return this.source && this.source.currentPage === page ? "active" : "";
+    
+    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
+    return this.source && current === page ? "active" : "";
   }
 }

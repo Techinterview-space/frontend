@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Company } from "@models/companies.model";
 import { defaultPageParams, PageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
@@ -24,13 +24,18 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
     private readonly service: CompaniesService,
     private readonly title: TitleService,
     private readonly router: Router,
+    private readonly route: ActivatedRoute,
     private readonly gtag: GoogleAnalyticsService,
   ) {
     this.title.setTitle("Отзывы к IT компаниям");
   }
 
   ngOnInit(): void {
-    this.loadData(1);
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe(params => {
+      this.currentPage = params['page'] ? Number(params['page']) : 1;
+      this.searchQuery = params['search'] || '';
+      this.loadData(this.currentPage, false);
+    });
   }
 
   search(): void {
@@ -40,7 +45,7 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
         "company_reviews",
         this.searchQuery,
       );
-      this.loadData(1);
+      this.updateUrlParams(1);
     }
   }
 
@@ -61,13 +66,24 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
       "company_reviews",
       this.searchQuery,
     );
-    this.loadData(1);
+    
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {},
+    });
+    
+    this.loadData(1, false);
   }
 
-  loadData(pageToLoad: number): void {
+  loadData(pageToLoad: number, updateUrl: boolean = true): void {
     this.companies = null;
     this.source = null;
-    this.currentPage = pageToLoad;
+
+    if (updateUrl) {
+      this.updateUrlParams(pageToLoad);
+    } else {
+      this.currentPage = pageToLoad;
+    }
 
     this.service
       .all({
@@ -80,6 +96,20 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
         this.companies = i.results.map((c) => new CompanyListItem(c));
         this.source = i;
       });
+  }
+
+  private updateUrlParams(page: number): void {
+    const queryParams: any = { page };
+    
+    if (this.searchQuery && this.searchQuery.length >= 3) {
+      queryParams.search = this.searchQuery;
+    }
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
+      queryParamsHandling: 'merge',
+    });
   }
 
   navigateToCompany(id: string): void {
