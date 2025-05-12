@@ -48,6 +48,7 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
         searchQuery: null,
         page: pageToLoad,
         pageSize: defaultPageParams.pageSize,
+        withRating: false,
       })
       .pipe(untilDestroyed(this))
       .subscribe((i) => {

@@ -19,6 +19,15 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   source: PaginatedList<Company> | null = null;
   currentPage: number = 1;
   searchQuery: string = "";
+  withRating: boolean = false;
+
+  get searchButtonShouldBeEnabled(): boolean {
+    return (
+      (this.searchQuery != null && this.searchQuery.length >= 3) ||
+      this.withRating === true
+    );
+  }
+
   private skipNextQueryParamsUpdate: boolean = false;
 
   constructor(
@@ -32,27 +41,30 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.pipe(untilDestroyed(this)).subscribe(params => {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       if (this.skipNextQueryParamsUpdate) {
         this.skipNextQueryParamsUpdate = false;
         return;
       }
-      
-      this.currentPage = params['page'] ? Number(params['page']) : 1;
-      this.searchQuery = params['search'] || '';
-      this.loadData(this.currentPage, false);
+
+      this.currentPage = params["page"] ? Number(params["page"]) : 1;
+      this.searchQuery = params["search"] || "";
+      this.withRating = params["withRating"] === "true";
+
+      this.loadData(this.currentPage, this.withRating, false);
     });
   }
 
   search(): void {
-    if (this.searchQuery.length >= 3) {
+    if (this.searchButtonShouldBeEnabled) {
       this.gtag.event(
         "company_search_query_submitted",
         "company_reviews",
         this.searchQuery,
       );
+
       this.currentPage = 1;
-      this.loadData(1, true);
+      this.loadData(1, this.withRating, true);
     }
   }
 
@@ -73,21 +85,26 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
       "company_reviews",
       this.searchQuery,
     );
-    
+
     this.skipNextQueryParamsUpdate = true;
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {},
     });
-    
+
     this.currentPage = 1;
-    this.loadData(1, false);
+    this.loadData(1, false, false);
   }
 
-  loadData(pageToLoad: number, updateUrl: boolean = true): void {
+  loadData(
+    pageToLoad: number,
+    withRating: boolean,
+    updateUrl: boolean = true,
+  ): void {
     this.companies = null;
     this.source = null;
     this.currentPage = pageToLoad;
+    this.withRating = withRating;
 
     if (updateUrl) {
       this.skipNextQueryParamsUpdate = true;
@@ -99,6 +116,7 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
         searchQuery: this.searchQuery,
         page: pageToLoad,
         pageSize: 6,
+        withRating: this.withRating,
       })
       .pipe(untilDestroyed(this))
       .subscribe((i) => {
@@ -109,31 +127,40 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
 
   private updateUrlParams(page: number): void {
     const queryParams: any = { page };
-    
+
     if (this.searchQuery && this.searchQuery.length >= 3) {
       queryParams.search = this.searchQuery;
+    }
+
+    if (this.withRating) {
+      queryParams.withRating = "true";
     }
 
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams,
-      queryParamsHandling: 'merge',
+      queryParamsHandling: "merge",
     });
   }
 
   navigateToCompany(id: string): void {
     const state: { page: number; search?: string } = {
-      page: this.currentPage
+      page: this.currentPage,
     };
-    
+
     if (this.searchQuery && this.searchQuery.length >= 3) {
       state.search = this.searchQuery;
     }
-    
+
     this.router.navigate(["/companies", id], { state });
   }
 
   ngOnDestroy(): void {
     this.title.resetTitle();
+  }
+
+  onChangeWithRating(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.withRating = target.value === "true";
   }
 }

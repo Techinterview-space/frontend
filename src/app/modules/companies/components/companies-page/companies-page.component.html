@@ -5,7 +5,7 @@
     <div class="card-body px-5 py-5">
       <div class="company-list mb-3">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 mb-1">
             <input
               type="text"
               placeholder="Название компании для поиска. Минимум 3 символа."
@@ -15,12 +15,24 @@
               (keyup)="onKeyupEvent($event)"
             />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 mb-1">
+            <div class="d-inline-block w-50 me-2">
+              <select
+                class="form-select"
+                id="withRating"
+                name="withRating"
+                (change)="onChangeWithRating($event)"
+              >
+                <option selected value="false">Все компании</option>
+                <option value="true">Только с рейтингом</option>
+              </select>
+            </div>
+
             <button
               type="button"
               class="btn btn-outline-primary"
-              [disabled]="searchQuery.length < 3"
-              [class.disabled]="searchQuery.length < 3"
+              [disabled]="!searchButtonShouldBeEnabled"
+              [class.disabled]="!searchButtonShouldBeEnabled"
               (click)="search()"
             >
               Найти
@@ -86,7 +98,7 @@
         <app-pagination-buttons
           [source]="source"
           [currentPage]="currentPage"
-          (pageChange)="loadData($event)"
+          (pageChange)="loadData($event, withRating)"
         ></app-pagination-buttons>
       </div>
     </div>

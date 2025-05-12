@@ -22,6 +22,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   private isAuthenticated = false;
   private previousPage: number | null = null;
   private previousSearchQuery: string | null = null;
+  private previousWithRating: boolean | null = null;
 
   constructor(
     private readonly service: CompaniesService,
@@ -35,8 +36,9 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
     const queryParams = this.router.getCurrentNavigation()?.extras.state;
     if (queryParams) {
-      this.previousPage = queryParams['page'] || null;
-      this.previousSearchQuery = queryParams['search'] || null;
+      this.previousPage = queryParams["page"] || null;
+      this.previousSearchQuery = queryParams["search"] || null;
+      this.previousWithRating = queryParams["withRating"] === "true";
     }
   }
 
@@ -74,14 +76,18 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   goBackToList(): void {
     if (this.previousPage) {
       const queryParams: any = { page: this.previousPage };
-      
+
       if (this.previousSearchQuery) {
         queryParams.search = this.previousSearchQuery;
       }
-      
-      this.router.navigate(['/companies'], { queryParams });
+
+      if (this.previousWithRating) {
+        queryParams.withRating = this.previousWithRating;
+      }
+
+      this.router.navigate(["/companies"], { queryParams });
     } else {
-      this.router.navigate(['/companies']);
+      this.router.navigate(["/companies"]);
     }
   }
 

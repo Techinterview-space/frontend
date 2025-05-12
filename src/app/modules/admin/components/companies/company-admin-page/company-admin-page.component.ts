@@ -20,6 +20,7 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
   reviewToShow: CompanyReview | null = null;
   confirmMessage: DialogMessage<ConfirmMsg> | null = null;
   editForm: EditCompanyForm | null = null;
+  companyDescription: string | null = null;
 
   private readonly activateRoute: ActivatedRouteExtended;
 
@@ -42,7 +43,7 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
           .pipe(untilDestroyed(this))
           .subscribe((i) => {
             this.company = i;
-            this.company!.description = this.company!.description?.replace(
+            this.companyDescription = this.company!.description?.replace(
               /\n/g,
               "<br />",
             );

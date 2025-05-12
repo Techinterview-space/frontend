@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from "@angular/core";
 import { PaginatedModel } from "@models/paginated-list";
 
 @Component({
@@ -20,19 +28,19 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
   lastPage: number | null = null;
 
   get disablePreviousButton(): boolean {
-    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
+    const current =
+      this.currentPage || (this.source ? this.source.currentPage : 1);
     return (
-      this.source != null &&
-      (current === 1 || this.source.totalItems === 0)
+      this.source != null && (current === 1 || this.source.totalItems === 0)
     );
   }
 
   get disableNextButton(): boolean {
-    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
+    const current =
+      this.currentPage || (this.source ? this.source.currentPage : 1);
     return (
       this.source != null &&
-      (current === this.lastPage ||
-        this.source.totalItems === 0)
+      (current === this.lastPage || this.source.totalItems === 0)
     );
   }
 
@@ -41,7 +49,7 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['source'] || changes['currentPage']) {
+    if (changes["source"] || changes["currentPage"]) {
       this.generatePages();
     }
   }
@@ -52,14 +60,11 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
       const allPages = Array.from(Array(this.lastPage).keys()).map(
         (i) => i + 1,
       );
-      
+
       const current = this.currentPage || this.source.currentPage;
 
       if (allPages.length > 7) {
-        if (
-          current > 3 &&
-          current < this.lastPage - 2
-        ) {
+        if (current > 3 && current < this.lastPage - 2) {
           this.pages = [
             1,
             2,
@@ -92,19 +97,17 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
   }
 
   previous(): void {
-    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
+    const current =
+      this.currentPage || (this.source ? this.source.currentPage : 1);
     if (this.source && current > 1) {
       this.pageClicked(current - 1);
     }
   }
 
   next(): void {
-    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
-    if (
-      this.source &&
-      this.lastPage &&
-      current < this.lastPage
-    ) {
+    const current =
+      this.currentPage || (this.source ? this.source.currentPage : 1);
+    if (this.source && this.lastPage && current < this.lastPage) {
       this.pageClicked(current + 1);
     }
   }
@@ -119,8 +122,9 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
     if (page == null) {
       return "";
     }
-    
-    const current = this.currentPage || (this.source ? this.source.currentPage : 1);
+
+    const current =
+      this.currentPage || (this.source ? this.source.currentPage : 1);
     return this.source && current === page ? "active" : "";
   }
 }

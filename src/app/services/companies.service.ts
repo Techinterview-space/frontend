@@ -12,6 +12,7 @@ import { PaginatedList } from "@models/paginated-list";
 
 export interface CompaniesSearchParams extends PageParams {
   searchQuery: string | null;
+  withRating: boolean;
 }
 
 export interface CompanyEditRequest {

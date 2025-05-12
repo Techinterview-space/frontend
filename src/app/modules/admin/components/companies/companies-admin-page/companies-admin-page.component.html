@@ -20,6 +20,7 @@
               <th>Название</th>
               <th>Рейтинг</th>
               <th>Кол-во отзывов</th>
+              <th>Просмотров</th>
               <th>Создана</th>
               <th>Обновлена</th>
               <th></th>
@@ -31,6 +32,7 @@
               <td>{{ item.name }}</td>
               <td>{{ item.rating | number: "1.2-2" }}</td>
               <td>{{ item.reviews?.length ?? item.reviewsCount }}</td>
+              <td>{{ item.viewsCount }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td class="small">
