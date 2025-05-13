@@ -75,25 +75,23 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   }
 
   clearSearch(): void {
-    if (this.searchQuery.length < 3) {
-      return;
+    if (this.searchQuery.length >= 3 || this.withRating) {
+      this.searchQuery = "";
+      this.gtag.event(
+        "company_search_query_reset_submitted",
+        "company_reviews",
+        this.searchQuery,
+      );
+
+      this.skipNextQueryParamsUpdate = true;
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {},
+      });
+
+      this.currentPage = 1;
+      this.loadData(1, false, false);
     }
-
-    this.searchQuery = "";
-    this.gtag.event(
-      "company_search_query_reset_submitted",
-      "company_reviews",
-      this.searchQuery,
-    );
-
-    this.skipNextQueryParamsUpdate = true;
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {},
-    });
-
-    this.currentPage = 1;
-    this.loadData(1, false, false);
   }
 
   loadData(
