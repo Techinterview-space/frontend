@@ -39,7 +39,7 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((id) => {
         this.service
-          .byId(id!)
+          .byIdForAdmin(id!)
           .pipe(untilDestroyed(this))
           .subscribe((i) => {
             this.company = i;

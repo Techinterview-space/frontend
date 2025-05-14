@@ -52,7 +52,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
           .byId(id!)
           .pipe(untilDestroyed(this))
           .subscribe((i) => {
-            this.company = i;
+            this.company = i.company;
             this.company!.description = this.company!.description?.replace(
               /\n/g,
               "<br />",

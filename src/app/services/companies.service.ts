@@ -39,6 +39,12 @@ export interface CompanyReviewCreateRequest {
   userEmployment: CompanyEmploymentType;
 }
 
+export interface GetCompanyResponse {
+  company: Company;
+  userIsAllowedToLeaveReview: boolean;
+  userHasAnyReview: boolean;
+}
+
 @Injectable()
 export class CompaniesService {
   private readonly apiUrl: string;
@@ -47,8 +53,12 @@ export class CompaniesService {
     this.apiUrl = `/api/companies/`;
   }
 
-  byId(id: string): Observable<Company> {
-    return this.api.get<Company>(this.apiUrl + id);
+  byId(id: string): Observable<GetCompanyResponse> {
+    return this.api.get<GetCompanyResponse>(this.apiUrl + id);
+  }
+
+  byIdForAdmin(id: string): Observable<Company> {
+    return this.api.get<Company>(this.apiUrl + id + "/for-admin");
   }
 
   update(id: string, model: CompanyUpdateRequest): Observable<void> {

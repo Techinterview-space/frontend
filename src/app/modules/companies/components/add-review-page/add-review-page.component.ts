@@ -44,7 +44,7 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
           .byId(id!)
           .pipe(untilDestroyed(this))
           .subscribe((i) => {
-            this.company = i;
+            this.company = i.company;
             this.title.setTitle(
               `Написать отзыв о компании ${this.company!.name}`,
             );
