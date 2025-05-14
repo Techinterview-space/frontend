@@ -1,6 +1,9 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Company } from "@models/companies.model";
-import { CompanyEditRequest } from "@services/companies.service";
+import {
+  CompanyEditRequest,
+  CompanyUpdateRequest,
+} from "@services/companies.service";
 
 export class EditCompanyForm extends FormGroup {
   private static readonly URL_LINK_PATTERN =
@@ -17,10 +20,15 @@ export class EditCompanyForm extends FormGroup {
       logoUrl: new FormControl(company?.logoUrl, [
         Validators.pattern(EditCompanyForm.URL_LINK_PATTERN),
       ]),
+      slug: new FormControl(company?.slug, [
+        company != null && company.slug != null
+          ? Validators.required
+          : Validators.nullValidator,
+      ]),
     });
   }
 
-  editRequestOrNull(): CompanyEditRequest | null {
+  editRequestOrNull(): CompanyUpdateRequest | null {
     if (!this.valid) {
       this.markAllAsTouched();
       return null;
@@ -37,6 +45,7 @@ export class EditCompanyForm extends FormGroup {
       description: this.value.description?.trim(),
       links: [socialLink],
       logoUrl: this.value.logoUrl?.trim(),
+      slug: this.value.slug?.trim(),
     };
   }
 }

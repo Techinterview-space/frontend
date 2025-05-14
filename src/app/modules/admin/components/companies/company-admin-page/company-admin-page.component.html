@@ -35,7 +35,7 @@
               </li>
               <li>
                 <a
-                  routerLink="/companies/{{ company.id }}"
+                  routerLink="/companies/{{ company.slug ?? company.id }}"
                   class="dropdown-item"
                   >Публичная страница</a
                 >
@@ -94,6 +94,13 @@
           <div class="col-md-3">Просмотров</div>
           <div class="col-md-9">
             {{ company.viewsCount }}
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">Slug</div>
+          <div class="col-md-9">
+            {{ company.slug }}
           </div>
         </div>
 
@@ -253,6 +260,7 @@
 ></app-confirm-dialog>
 
 <app-dialog
+  [additionalCss]="'modal-lg'"
   [show]="!!editForm"
   (closed)="onEditModalDlgClose()"
   [header]="'Редактировать компанию'"
@@ -285,6 +293,12 @@
       <label>URL для логотипа</label>
       <input type="text" class="form-control" formControlName="logoUrl" />
       <app-field-error [field]="editForm.get('logoUrl')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Slug для урла</label>
+      <input type="text" class="form-control" formControlName="slug" />
+      <app-field-error [field]="editForm.get('slug')"></app-field-error>
     </div>
 
     <div class="mb-3">

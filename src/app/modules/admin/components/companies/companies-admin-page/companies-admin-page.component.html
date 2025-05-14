@@ -21,27 +21,27 @@
               <th>Рейтинг</th>
               <th>Кол-во отзывов</th>
               <th>Просмотров</th>
+              <th>Slug</th>
               <th>Создана</th>
               <th>Обновлена</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of companies; let i = index" class="small">
               <td>{{ i + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.rating | number: "1.2-2" }}</td>
-              <td>{{ item.reviews?.length ?? item.reviewsCount }}</td>
-              <td>{{ item.viewsCount }}</td>
-              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
-              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
-              <td class="small">
+              <td>
                 <a
                   routerLink="/admin/companies/{{ item.id }}"
                   class="btn-link-sm"
-                  >Открыть</a
+                  >{{ item.name }}</a
                 >
               </td>
+              <td>{{ item.rating | number: "1.2-2" }}</td>
+              <td>{{ item.reviews?.length ?? item.reviewsCount }}</td>
+              <td>{{ item.viewsCount }}</td>
+              <td>{{ item.slug }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
             </tr>
           </tbody>
         </table>
@@ -75,6 +75,7 @@
 ></app-confirm-dialog>
 
 <app-dialog
+  [additionalCss]="'modal-lg'"
   [show]="!!editForm"
   (closed)="onEditModalDlgClose()"
   [header]="'Редактировать компанию'"

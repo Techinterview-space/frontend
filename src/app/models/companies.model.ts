@@ -9,6 +9,7 @@ export interface Company {
   rating: number;
   reviewsCount: number;
   viewsCount: number;
+  slug: string;
   reviews: Array<CompanyReview>;
   ratingHistory: Array<CompanyRatingHistory>;
   userIsAllowedToAddReview: boolean;

@@ -57,10 +57,6 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  navigateToCompany(id: string): void {
-    this.router.navigate(["/admin/companies", id]);
-  }
-
   ngOnDestroy(): void {
     this.title.resetTitle();
   }

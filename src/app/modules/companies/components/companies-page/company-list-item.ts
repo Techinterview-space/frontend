@@ -10,6 +10,7 @@ export class CompanyListItem {
   readonly reviewsCount: number;
   readonly viewsCount: number;
   readonly rating: number;
+  readonly slug: string;
 
   constructor(private readonly company: Company) {
     this.id = company.id;
@@ -27,5 +28,6 @@ export class CompanyListItem {
     this.reviewsCount = company.reviewsCount;
     this.viewsCount = company.viewsCount;
     this.rating = company.rating;
+    this.slug = company.slug;
   }
 }

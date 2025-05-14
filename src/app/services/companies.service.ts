@@ -22,6 +22,10 @@ export interface CompanyEditRequest {
   logoUrl: string;
 }
 
+export interface CompanyUpdateRequest extends CompanyEditRequest {
+  slug: string;
+}
+
 export interface CompanyReviewCreateRequest {
   cultureAndValues: number;
   codeQuality: number;
@@ -47,7 +51,7 @@ export class CompaniesService {
     return this.api.get<Company>(this.apiUrl + id);
   }
 
-  update(id: string, model: CompanyEditRequest): Observable<void> {
+  update(id: string, model: CompanyUpdateRequest): Observable<void> {
     return this.api.post(this.apiUrl + id, model);
   }
 
