@@ -2,7 +2,7 @@
 
 <div class="container my-5" *ngIf="companies; else dataLoading">
   <div class="card">
-    <div class="card-body px-5 py-5">
+    <div class="card-body mobile-px-5 mobile-py-5">
       <div class="company-list mb-3">
         <div class="row">
           <div class="col-md-6 mb-1">
@@ -15,8 +15,8 @@
               (keyup)="onKeyupEvent($event)"
             />
           </div>
-          <div class="col-md-6 mb-1">
-            <div class="d-inline-block w-50 me-2">
+          <div class="col-md-3 mb-1">
+            <div class="">
               <select
                 class="form-select"
                 id="withRating"
@@ -27,7 +27,8 @@
                 <option value="true">Только с рейтингом</option>
               </select>
             </div>
-
+          </div>
+          <div class="col-md-3 mb-1">
             <button
               type="button"
               class="btn btn-outline-primary"
@@ -117,7 +118,7 @@
         <div class="mt-3 d-flex justify-content-center">
           <img
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
-            class="img-fluid w-30"
+            class="img-fluid mobile-w-30"
             alt="logo"
             title="Кот Магеллан, который любит оставлять отзывы о компаниях"
           />
