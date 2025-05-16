@@ -161,6 +161,44 @@ ul.no-bullets {
   width: 80%;
 }
 
+.mobile-mb-3 {
+  margin-bottom: inherit;
+}
+
+@media (max-width: 768px) {
+  .mobile-mb-3 {
+    margin-bottom: 36px;
+  }
+}
+
+.mobile-px-5 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+
+  @media (max-width: 768px) {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
+
+.mobile-py-5 {
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+
+  @media (max-width: 768px) {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+.mobile-w-30 {
+  width: 30% !important;
+
+  @media (max-width: 768px) {
+    width: 100% !important;
+  }
+}
+
 /* ng-select bootstrap-like styles. Start */
 /* https://github.com/ng-select/ng-select/issues/1955#issuecomment-1240459808 */
 /*.form-floating {
