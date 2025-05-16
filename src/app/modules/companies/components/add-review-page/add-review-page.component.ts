@@ -16,9 +16,12 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
   standalone: false,
 })
 export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
+  formStep = 1;
+
   company: Company | null = null;
   editForm: CompanyReviewForm | null = null;
   confirmCancelMessage: DialogMessage<ConfirmMsg> | null = null;
+  showErrorDialog = false;
 
   readonly options = CompanyEmploymentTypeEnum.options();
 
@@ -99,34 +102,71 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
             this.company!.name,
           );
 
-          this.alertService.warn(
-            "Не удалось добавить отзыв. Пожалуйста, попробуйте еще раз.",
-          );
+          this.showErrorDialog = true;
         },
       });
   }
 
-  cancel(): void {
+  cancel(withConfirmation: boolean = true): void {
     if (this.company == null) {
       return;
     }
 
-    this.confirmCancelMessage = new DialogMessage(
-      new ConfirmMsg(
-        "Вернуться к компании",
-        "Вы уверены, что отменить отзыв? Данные не сохранятся.",
-        () => {
-          this.gtag.event(
-            "company_review_cancelled",
-            "company_reviews",
-            this.company!.name,
-          );
+    const action = () => {
+      this.gtag.event(
+        "company_review_cancelled",
+        "company_reviews",
+        this.company!.name,
+      );
 
-          this.router.navigate(["/companies", this.company!.id]);
-          this.alertService.success("Отзыв был отменен");
-          this.confirmCancelMessage = null;
-        },
-      ),
+      this.router.navigate(["/companies", this.company!.id]);
+      this.alertService.success("Отзыв был отменен");
+      this.confirmCancelMessage = null;
+    };
+
+    if (withConfirmation) {
+      this.confirmCancelMessage = new DialogMessage(
+        new ConfirmMsg(
+          "Вернуться к компании",
+          "Вы уверены, что отменить отзыв? Данные не сохранятся.",
+          () => {
+            action();
+          },
+        ),
+      );
+      return;
+    }
+
+    action();
+  }
+
+  nextStep(): void {
+    if (this.formStep === 3) {
+      return;
+    }
+
+    this.formStep++;
+    this.gtag.event(
+      "company_review_next_step",
+      "company_reviews",
+      this.company!.name,
     );
+  }
+
+  previousStep(): void {
+    if (this.formStep === 1) {
+      return;
+    }
+
+    this.formStep--;
+    this.gtag.event(
+      "company_review_previous_step",
+      "company_reviews",
+      this.company!.name,
+    );
+  }
+
+  onErrorModalClose(): void {
+    this.showErrorDialog = false;
   }
 }

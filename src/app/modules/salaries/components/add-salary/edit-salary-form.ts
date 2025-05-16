@@ -10,17 +10,10 @@ import {
   EditUserSalaryRequest,
 } from "@services/user-salaries.service";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
-
-interface InvalidFieldsGroupedByPage {
-  page: number;
-  fields: string[];
-}
-
-interface InvalidField {
-  page: number;
-  controlName: string;
-  field: string;
-}
+import {
+  InvalidField,
+  InvalidFieldsGroupedByPage,
+} from "@shared/forms/form-group-utils";
 
 export class EditSalaryForm extends FormGroup {
   static readonly digitsPattern = "^[0-9]*$";

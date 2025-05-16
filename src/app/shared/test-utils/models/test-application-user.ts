@@ -16,6 +16,7 @@ export class TestApplicationUser implements ApplicationUser {
     this.updatedAt = new Date();
     this.fullname = `${this.firstName} ${this.lastName}`;
     this.isMfaEnabled = false;
+    this.pictureProfile = null;
   }
 
   isMfaEnabled: boolean;
@@ -30,7 +31,7 @@ export class TestApplicationUser implements ApplicationUser {
   createdAt: Date;
   updatedAt: Date;
   fullname: string;
-
+  pictureProfile: string | null;
   asExtended(): ApplicationUserExtended {
     return new ApplicationUserExtended(this);
   }

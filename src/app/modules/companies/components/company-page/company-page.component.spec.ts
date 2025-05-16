@@ -9,16 +9,29 @@ import {
 
 import { CompanyPageComponent } from "./company-page.component";
 import { CompaniesService } from "@services/companies.service";
+import { Router } from "@angular/router";
+
+class RouterMock {
+  getCurrentNavigation() {
+    return { extras: { state: { message: "msg" } } };
+  }
+}
 
 describe("CompanyPageComponent", () => {
   let component: CompanyPageComponent;
   let fixture: ComponentFixture<CompanyPageComponent>;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CompanyPageComponent],
       imports: [...mostUsedImports],
-      providers: [...testUtilStubs, ...mostUsedServices, CompaniesService],
+      providers: [
+        ...testUtilStubs,
+        ...mostUsedServices,
+        CompaniesService,
+        { provide: Router, useClass: RouterMock },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

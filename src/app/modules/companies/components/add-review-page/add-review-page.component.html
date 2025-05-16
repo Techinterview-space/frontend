@@ -2,10 +2,8 @@
 
 <div class="container my-5" *ngIf="company; else dataLoading">
   <div class="card">
-    <div class="card-body">
-      <div class="mb-3 text-muted small">
-        Оставленные отзывы проходят модерацию в течение некоторого времени.
-      </div>
+    <div class="card-body mobile-px-5 mobile-py-5">
+      <div class="mb-3 fst-italic">* - обязательное поле</div>
 
       <form
         class="mb-5"
@@ -13,202 +11,278 @@
         [formGroup]="editForm"
         (ngSubmit)="onEditFormSubmit()"
       >
-        <div class="row">
-          <div class="col-md-6">
-            <div class="mb-5">
-              <label class="fw-bold text-dark">Культура и ценности *</label>
-              <app-star-rating
-                [maxValue]="5"
-                (ratingChange)="
-                  editForm.setStarRating('cultureAndValues', $event)
-                "
-              />
-              <div class="text-muted small">
-                Поставлена оценка:
-                {{ editForm.getStarRating("cultureAndValues") }}
+        <div class="mb-5">
+          <app-form-progress-bar [value]="formStep" [maxValue]="3" />
+        </div>
+
+        <div *ngIf="formStep === 1">
+          <div class="mb-5 first-step-text">
+            <p>
+              Отзывы полностью анонимны. Вы можете смело оставить отзыв и
+              открыть страницу компании при начальстве и коллегах, и система
+              никаким образом не покажет, что вы тут уже были. Не переживайте,
+              если не увидели свой отзыв сразу после добавления - отзывы
+              проходят модерацию.
+            </p>
+            <p>
+              Отзывы нельзя редактировать после отправки, но можно оставлять
+              <span class="fw-bold">каждые 3 месяца</span> новый.
+            </p>
+            <p class="">
+              Отзыв - это всегда субъективно, однако будьте, пожалуйста,
+              объективны настолько, насколько это возможно, чтобы помочь другим
+              узнать больше о компании.
+            </p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="cancel()"
+            >
+              Вернуться к компании
+            </button>
+
+            <button type="button" class="btn btn-primary" (click)="nextStep()">
+              Согласен
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="formStep === 2">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="mb-5">
+                <label class="fw-bold text-dark">Культура и ценности *</label>
+                <app-star-rating
+                  [maxValue]="5"
+                  (ratingChange)="
+                    editForm.setStarRating('cultureAndValues', $event)
+                  "
+                />
+                <div class="text-muted small">
+                  Поставлена оценка:
+                  {{ editForm.getStarRating("cultureAndValues") }}
+                </div>
+                <div class="text-muted small">
+                  Культура, атмосфера, ценности компании
+                </div>
+                <app-field-error
+                  [field]="editForm.get('cultureAndValues')"
+                ></app-field-error>
               </div>
-              <div class="text-muted small">
-                Культура, атмосфера, ценности компании
+
+              <div class="mb-5">
+                <label class="fw-bold text-dark"
+                  >Качество кода (опционально)</label
+                >
+                <app-star-rating
+                  [maxValue]="5"
+                  (ratingChange)="editForm.setStarRating('codeQuality', $event)"
+                />
+                <div class="text-muted small">
+                  Поставлена оценка: {{ editForm.getStarRating("codeQuality") }}
+                </div>
+                <div class="text-muted small">
+                  Стандарты качества кода, принятые в компании. Поле
+                  опционально.
+                </div>
+                <app-field-error
+                  [field]="editForm.get('codeQuality')"
+                ></app-field-error>
               </div>
-              <app-field-error
-                [field]="editForm.get('cultureAndValues')"
-              ></app-field-error>
+
+              <div class="mb-5">
+                <label class="fw-bold text-dark">Work / Life баланс *</label>
+                <app-star-rating
+                  [maxValue]="5"
+                  (ratingChange)="
+                    editForm.setStarRating('workLifeBalance', $event)
+                  "
+                />
+                <div class="text-muted small">
+                  Поставлена оценка:
+                  {{ editForm.getStarRating("workLifeBalance") }}
+                </div>
+                <div class="text-muted small">
+                  Как соблюдается баланс между работой и личной жизнью.
+                </div>
+                <app-field-error
+                  [field]="editForm.get('workLifeBalance')"
+                ></app-field-error>
+              </div>
             </div>
 
-            <div class="mb-5">
-              <label class="fw-bold text-dark"
-                >Качество кода (опционально)</label
+            <div class="col-md-6">
+              <div class="mb-5">
+                <label class="fw-bold text-dark"
+                  >Компенсация и бенефиты *</label
+                >
+                <app-star-rating
+                  [maxValue]="5"
+                  (ratingChange)="
+                    editForm.setStarRating('compensationAndBenefits', $event)
+                  "
+                />
+                <div class="text-muted small">
+                  Поставлена оценка:
+                  {{ editForm.getStarRating("compensationAndBenefits") }}
+                </div>
+                <div class="text-muted small">
+                  Насколько компенсация соответствует требованиям.
+                </div>
+                <app-field-error
+                  [field]="editForm.get('compensationAndBenefits')"
+                ></app-field-error>
+              </div>
+
+              <div class="mb-5">
+                <label class="fw-bold text-dark">Карьерные возможности *</label>
+                <app-star-rating
+                  [maxValue]="5"
+                  (ratingChange)="
+                    editForm.setStarRating('careerOpportunities', $event)
+                  "
+                />
+                <div class="text-muted small">
+                  Поставлена оценка:
+                  {{ editForm.getStarRating("careerOpportunities") }}
+                </div>
+                <div class="text-muted small">
+                  Внутренне развитие сотрудников, возможность построить карьеру.
+                </div>
+                <app-field-error
+                  [field]="editForm.get('careerOpportunities')"
+                ></app-field-error>
+              </div>
+
+              <div class="mb-5">
+                <label class="fw-bold text-dark">Менеджмент *</label>
+                <app-star-rating
+                  [maxValue]="5"
+                  (ratingChange)="editForm.setStarRating('management', $event)"
+                />
+                <div class="text-muted small">
+                  Поставлена оценка: {{ editForm.getStarRating("management") }}
+                </div>
+                <div class="text-muted small">
+                  Управленческие решения, требования к сотрудникам, руководство.
+                </div>
+                <app-field-error
+                  [field]="editForm.get('management')"
+                ></app-field-error>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              (click)="previousStep()"
+            >
+              Назад
+            </button>
+
+            <button type="button" class="btn btn-primary" (click)="nextStep()">
+              Далее
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="formStep === 3">
+          <div class="mb-3">
+            <label class="fw-bold text-success"
+              >Какие плюсы работать здесь? *</label
+            >
+            <textarea class="form-control" formControlName="pros"></textarea>
+            <div class="text-muted small">
+              Пожалуйста, расскажите подробно, что вам нравится с работе в этой
+              компании.
+            </div>
+            <app-field-error [field]="editForm.get('pros')"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold text-danger"
+              >Какие минусы работать здесь? *</label
+            >
+            <textarea class="form-control" formControlName="cons"></textarea>
+            <div class="text-muted small">
+              Пожалуйста, расскажите, что компании стоит улучшить в своих
+              процессах.
+            </div>
+            <app-field-error [field]="editForm.get('cons')"></app-field-error>
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold text-dark">Я работаю здесь сейчас:</label>
+            <div class="form-check d-inline-block ms-3">
+              <input
+                class="form-check-input cursor-pointer"
+                type="checkbox"
+                formControlName="iWorkHere"
+              />
+              <label class="form-check-label">Да</label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold text-dark"
+              >Я работаю/работал на компанию по формату *</label
+            >
+            <select class="form-control" formControlName="userEmployment">
+              <option *ngFor="let option of options" [value]="option.item">
+                {{ option.label }}
+              </option>
+            </select>
+            <app-field-error
+              [field]="editForm.get('userEmployment')"
+            ></app-field-error>
+          </div>
+
+          <div class="mb-3 text-muted">
+            <div class="mb-1">
+              Все отзывы проходят модерацию в течение некоторого времени. Не
+              переживайте, если не увидели свой отзыв сразу после добавления на
+              странице компании, нужно немного подождать.
+            </div>
+          </div>
+
+          <div class="mb-3" *ngIf="editForm.getInvalidFields().length > 0">
+            <div class="alert alert-warning">
+              <div class="mb-2">
+                <strong>Внимание!</strong> Следующие поля не заполнены:
+              </div>
+              <div
+                class="mb-2"
+                *ngFor="let field of editForm.getInvalidFields(); let i = index"
               >
-              <app-star-rating
-                [maxValue]="5"
-                (ratingChange)="editForm.setStarRating('codeQuality', $event)"
-              />
-              <div class="text-muted small">
-                Поставлена оценка: {{ editForm.getStarRating("codeQuality") }}
+                <div *ngIf="field.fields.length > 0">
+                  {{ i + 1 }}. Страница {{ field.page }}
+                </div>
+                <div
+                  class="ms-3"
+                  *ngFor="let control of field.fields; let j = index"
+                >
+                  {{ i + 1 }}.{{ j + 1 }}. {{ control }}
+                </div>
               </div>
-              <div class="text-muted small">
-                Стандарты качества кода, принятые в компании. Поле опционально.
-              </div>
-              <app-field-error
-                [field]="editForm.get('codeQuality')"
-              ></app-field-error>
-            </div>
-
-            <div class="mb-5">
-              <label class="fw-bold text-dark">Work / Life баланс *</label>
-              <app-star-rating
-                [maxValue]="5"
-                (ratingChange)="
-                  editForm.setStarRating('workLifeBalance', $event)
-                "
-              />
-              <div class="text-muted small">
-                Поставлена оценка:
-                {{ editForm.getStarRating("workLifeBalance") }}
-              </div>
-              <div class="text-muted small">
-                Как соблюдается баланс между работой и личной жизнью.
-              </div>
-              <app-field-error
-                [field]="editForm.get('workLifeBalance')"
-              ></app-field-error>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div class="mb-5">
-              <label class="fw-bold text-dark">Компенсация и бенефиты *</label>
-              <app-star-rating
-                [maxValue]="5"
-                (ratingChange)="
-                  editForm.setStarRating('compensationAndBenefits', $event)
-                "
-              />
-              <div class="text-muted small">
-                Поставлена оценка:
-                {{ editForm.getStarRating("compensationAndBenefits") }}
-              </div>
-              <div class="text-muted small">
-                Насколько компенсация соответствует требованиям.
-              </div>
-              <app-field-error
-                [field]="editForm.get('compensationAndBenefits')"
-              ></app-field-error>
-            </div>
-
-            <div class="mb-5">
-              <label class="fw-bold text-dark">Карьерные возможности *</label>
-              <app-star-rating
-                [maxValue]="5"
-                (ratingChange)="
-                  editForm.setStarRating('careerOpportunities', $event)
-                "
-              />
-              <div class="text-muted small">
-                Поставлена оценка:
-                {{ editForm.getStarRating("careerOpportunities") }}
-              </div>
-              <div class="text-muted small">
-                Внутренне развитие сотрудников, возможность построить карьеру.
-              </div>
-              <app-field-error
-                [field]="editForm.get('careerOpportunities')"
-              ></app-field-error>
-            </div>
-
-            <div class="mb-5">
-              <label class="fw-bold text-dark">Менеджмент *</label>
-              <app-star-rating
-                [maxValue]="5"
-                (ratingChange)="editForm.setStarRating('management', $event)"
-              />
-              <div class="text-muted small">
-                Поставлена оценка: {{ editForm.getStarRating("management") }}
-              </div>
-              <div class="text-muted small">
-                Управленческие решения, требования к сотрудникам, руководство.
-              </div>
-              <app-field-error
-                [field]="editForm.get('management')"
-              ></app-field-error>
-            </div>
+          <div class="mb-3 d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              (click)="previousStep()"
+            >
+              Назад
+            </button>
+            <button class="btn btn-primary" type="submit">
+              Сохранить отзыв
+            </button>
           </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="fw-bold text-success"
-            >Какие плюсы работать здесь?</label
-          >
-          <textarea class="form-control" formControlName="pros"></textarea>
-          <div class="text-muted small">
-            Пожалуйста, расскажите подробно, что вам нравится с работе в этой
-            компании.
-          </div>
-          <app-field-error [field]="editForm.get('pros')"></app-field-error>
-        </div>
-
-        <div class="mb-3">
-          <label class="fw-bold text-danger"
-            >Какие минусы работать здесь?</label
-          >
-          <textarea class="form-control" formControlName="cons"></textarea>
-          <div class="text-muted small">
-            Пожалуйста, расскажите, что компании стоит улучшить в своих
-            процессах.
-          </div>
-          <app-field-error [field]="editForm.get('cons')"></app-field-error>
-        </div>
-
-        <div class="mb-3">
-          <label class="fw-bold text-dark">Я работаю здесь сейчас:</label>
-          <div class="form-check d-inline-block ms-3">
-            <input
-              class="form-check-input cursor-pointer"
-              type="checkbox"
-              formControlName="iWorkHere"
-            />
-            <label class="form-check-label">Да</label>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="fw-bold text-dark"
-            >Я работаю/работал на компанию по формату *</label
-          >
-          <select class="form-control" formControlName="userEmployment">
-            <option *ngFor="let option of options" [value]="option.item">
-              {{ option.label }}
-            </option>
-          </select>
-          <app-field-error
-            [field]="editForm.get('userEmployment')"
-          ></app-field-error>
-        </div>
-
-        <div class="mb-3 fst-italic text-muted">* - обязательное поле</div>
-
-        <div class="mb-3 text-muted">
-          <div class="mb-1">
-            Внимание! Все отзывы проходят модерацию в течение некоторого
-            времени. Не переживайте, если не увидели свой отзыв сразу после
-            добавления на странице компании, нужно немного подождать.
-          </div>
-          <div class="">
-            Отзывы - помощь другим людям узнать больше о компании. Отзыв - это
-            всегда субъективно, однако будьте, пожалуйста, объективны настолько,
-            насколько это возможно.
-          </div>
-        </div>
-
-        <div class="mb-3 d-flex justify-content-between">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            (click)="cancel()"
-          >
-            Вернуться к компании
-          </button>
-          <button class="btn btn-primary" type="submit">Сохранить отзыв</button>
         </div>
       </form>
     </div>
@@ -225,3 +299,25 @@
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
+
+<app-dialog
+  [additionalCss]="'modal-lg'"
+  [show]="showErrorDialog"
+  (closed)="onErrorModalClose()"
+  [header]="'Редактировать компанию'"
+>
+  <p class="">Не удалось добавить отзыв. Пожалуйста, попробуйте еще раз.</p>
+  <p>
+    Если вы оставляли отзыв в течение последних 3 месяцев, то система не
+    позволит вам оставить новый.
+  </p>
+  <div class="d-flex justify-content-center mb-5">
+    <button
+      class="btn btn-primary btn-lg"
+      type="button"
+      (click)="cancel(false)"
+    >
+      Вернуться к компании
+    </button>
+  </div>
+</app-dialog>

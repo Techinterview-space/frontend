@@ -40,6 +40,7 @@ import { WednesdayFrogComponent } from "./components/wednesday-frog/wednesday-fr
 import { FormatAsMoneyPipe } from "./directives/format-as-money.pipe";
 import { StarRatingComponent } from "./components/star-rating/star-rating.component";
 import { StarRatingReadonlyComponent } from "./components/star-rating-readonly/star-rating-readonly.component";
+import { FormProgressBarComponent } from "./components/add-salary-progress-bar/form-progress-bar.component";
 
 const componentsToDeclareAndExport = [
   AlertComponent,
@@ -75,6 +76,7 @@ const componentsToDeclareAndExport = [
   FormatAsMoneyPipe,
   StarRatingComponent,
   StarRatingReadonlyComponent,
+  FormProgressBarComponent,
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AddSalaryProgrssBarComponent } from "./add-salary-progress-bar.component";
+import { FormProgressBarComponent } from "./form-progress-bar.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   mostUsedImports,
@@ -8,19 +8,19 @@ import {
   mostUsedServices,
 } from "@shared/test-utils";
 
-describe("AddSalaryProgrssBarComponent", () => {
-  let component: AddSalaryProgrssBarComponent;
-  let fixture: ComponentFixture<AddSalaryProgrssBarComponent>;
+describe("FormProgressBarComponent", () => {
+  let component: FormProgressBarComponent;
+  let fixture: ComponentFixture<FormProgressBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddSalaryProgrssBarComponent],
+      declarations: [FormProgressBarComponent],
       imports: [...mostUsedImports],
       providers: [...testUtilStubs, ...mostUsedServices],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddSalaryProgrssBarComponent);
+    fixture = TestBed.createComponent(FormProgressBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
