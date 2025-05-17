@@ -13,7 +13,7 @@
 
 <div class="container mt-5 mb-5" *ngIf="user; else dataLoading">
   <div class="row" *ngIf="user">
-    <div class="col-sm-3">
+    <div class="col-sm-3 mb-3">
       <div class="card card-body">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <div class="col-sm-9">
+    <div class="col-sm-9 mb-3">
       <div class="card card-body pb-5">
         <div class="d-flex justify-content-between">
           <span class="h5">Отправленные в статистику зарплаты</span>
@@ -99,7 +99,10 @@
             </button>
           </span>
         </div>
-        <div class="mt-5" *ngIf="mySalaries != null && mySalaries.length > 0">
+        <div
+          class="mt-5 table-responsive"
+          *ngIf="mySalaries != null && mySalaries.length > 0"
+        >
           <table class="table table-hover" [class.blur]="blurTable">
             <thead class="small">
               <th></th>

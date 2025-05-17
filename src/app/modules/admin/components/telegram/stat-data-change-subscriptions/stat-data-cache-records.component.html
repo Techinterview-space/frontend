@@ -9,7 +9,10 @@
         </button>
       </div>
 
-      <div class="mb-3" *ngIf="items && items.length > 0; else nothingToShow">
+      <div
+        class="mb-3 table-responsive"
+        *ngIf="items && items.length > 0; else nothingToShow"
+      >
         <table class="table table-hover table-sm">
           <thead class="small">
             <tr class="small">

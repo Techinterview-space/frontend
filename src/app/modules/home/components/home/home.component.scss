@@ -54,3 +54,35 @@
 .bg-light-blue {
   background-color: #aae4fa;
 }
+
+.website-title {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-size: calc(1.625rem + 4.5vw);
+  line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-weight: 500;
+    font-size: 2.5rem;
+    letter-spacing: 0em;
+  }
+}
+
+.website-subtitle {
+  font-size: 2.2rem;
+  font-weight: 300;
+
+  @media (max-width: 768px) {
+    font-weight: 300;
+    font-size: 1.5rem;
+  }
+}
+
+.website-image {
+  max-width: 50%;
+  height: auto;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+}
