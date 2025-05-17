@@ -107,4 +107,10 @@ export class CompaniesService {
   deleteReview(companyId: string, reviewId: string): Observable<void> {
     return this.api.delete(this.apiUrl + companyId + "/reviews/" + reviewId);
   }
+
+  recentReviews(params: PageParams): Observable<PaginatedList<CompanyReview>> {
+    return this.api.get<PaginatedList<CompanyReview>>(
+      "/api/company-reviews/recent?" + new ConvertObjectToHttpParams(params).get(),
+    );
+  }
 }

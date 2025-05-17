@@ -8,12 +8,14 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { CompanyPageComponent } from "./components/company-page/company-page.component";
 import { AddCompanyReviewPageComponent } from "./components/add-review-page/add-review-page.component";
 import { CompaniesPageComponent } from "./components/companies-page/companies-page.component";
+import { RecentReviewsPageComponent } from "./components/recent-reviews/recent-reviews-page.component";
 
 @NgModule({
   declarations: [
     CompanyPageComponent,
     AddCompanyReviewPageComponent,
     CompaniesPageComponent,
+    RecentReviewsPageComponent,
   ],
   imports: [
     CommonModule,

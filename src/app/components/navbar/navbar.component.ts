@@ -120,6 +120,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
             url: "/companies",
             show: true,
           },
+          {
+            title: "Недавние отзывы",
+            url: "/companies/recent-reviews",
+            show: true,
+          },
         ],
       },
       {

@@ -4,9 +4,14 @@ import { CompaniesPageComponent } from "./components/companies-page/companies-pa
 import { CompanyPageComponent } from "./components/company-page/company-page.component";
 import { AddCompanyReviewPageComponent } from "./components/add-review-page/add-review-page.component";
 import { AuthGuard } from "@shared/guards/auth.guard";
+import { RecentReviewsPageComponent } from "./components/recent-reviews/recent-reviews-page.component";
 
 const routes: Routes = [
   { path: "", component: CompaniesPageComponent },
+  {
+    path: "recent-reviews",
+    component: RecentReviewsPageComponent,
+  },
   { path: ":id", component: CompanyPageComponent },
   {
     path: ":id/add-review",

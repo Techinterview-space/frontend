@@ -35,6 +35,7 @@ export interface CompanyReview {
   userEmployment: CompanyEmploymentType;
   companyId: string;
   companyName: string | null;
+  companySlug: string | null;
   createdAt: Date;
   approvedAt: Date | null;
   outdatedAt: Date | null;
