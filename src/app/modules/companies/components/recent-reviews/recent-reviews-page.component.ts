@@ -13,7 +13,6 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
   standalone: false,
 })
 export class RecentReviewsPageComponent implements OnInit, OnDestroy {
-
   reviews: Array<CompanyReview> | null = null;
   source: PaginatedList<CompanyReview> | null = null;
   currentPage: number = 1;
@@ -43,10 +42,7 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  loadData(
-    pageToLoad: number,
-    updateUrl: boolean = true,
-  ): void {
+  loadData(pageToLoad: number, updateUrl: boolean = true): void {
     this.reviews = null;
     this.source = null;
     this.currentPage = pageToLoad;
@@ -63,7 +59,11 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
       })
       .pipe(untilDestroyed(this))
       .subscribe((i) => {
-        this.reviews = i.results;
+        this.reviews = i.results.map((r) => {
+          r.cons = r.cons?.replace(/\n/g, "<br />");
+          r.pros = r.pros?.replace(/\n/g, "<br />");
+          return r;
+        });
         this.source = i;
       });
   }

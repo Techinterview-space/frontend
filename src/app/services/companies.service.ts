@@ -110,7 +110,8 @@ export class CompaniesService {
 
   recentReviews(params: PageParams): Observable<PaginatedList<CompanyReview>> {
     return this.api.get<PaginatedList<CompanyReview>>(
-      "/api/company-reviews/recent?" + new ConvertObjectToHttpParams(params).get(),
+      "/api/company-reviews/recent?" +
+        new ConvertObjectToHttpParams(params).get(),
     );
   }
 }

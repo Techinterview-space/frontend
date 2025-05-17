@@ -178,9 +178,12 @@
             Отзыв устарел {{ review.outdatedAt | date: "dd.MM.yyyy" }}
           </span>
 
-          <span class="text-muted">
+          <span class="text-muted fst-italic">
             <i class="bi bi-check-circle-fill me-1"></i>
-            {{ review.createdAt | date: "dd.MM.yyyy" }}
+            <span>{{ review.createdAt | date: "dd.MM.yyyy" }}</span>
+            <span class="ms-2"
+              >(<app-time-ago [date]="review.createdAt"></app-time-ago>)</span
+            >
           </span>
         </div>
 

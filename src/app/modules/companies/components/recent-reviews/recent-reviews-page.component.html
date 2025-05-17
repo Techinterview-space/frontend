@@ -1,121 +1,124 @@
 <app-page-header>Недавние отзывы</app-page-header>
 
 <div class="container my-5" *ngIf="reviews; else dataLoading">
-  <div class="card">
-    <div class="card-body mobile-px-5 mobile-py-5">
-
+  <div class="">
+    <div *ngIf="reviews.length > 0; else nothingToShow" class="review-list">
       <div
-        *ngIf="reviews.length > 0; else nothingToShow"
-        class="company-list"
+        *ngFor="let item of reviews; let i = index"
+        class="mb-3 review-list-item"
       >
-        <div
-          *ngFor="let item of reviews; let i = index"
-          class="mb-3 cursor-pointer company-list-item d-block text-decoration-none"
-          (click)="
-            navigateToCompany(item.companySlug ?? item.id); $event.preventDefault()
-          "
-          [routerLink]="['/companies', item.companySlug ?? item.id]"
-          role="button"
-        >
-          
+        <div class="mb-3">
+          <span class="me-2">Отзыв о</span>
+          <span class="me-2 fw-bold">{{ item.companyName }}</span>
+          <button
+            type="button"
+            class="fst-italic btn-link-sm text-muted"
+            (click)="
+              navigateToCompany(item.companySlug ?? item.id);
+              $event.preventDefault()
+            "
+          >
+            Перейти <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
+        <div class="mb-2">
+          <button
+            class="btn btn-link h5 text-dark total-rating-link"
+            type="button"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapseExample-' + item.id"
+            aria-expanded="false"
+            [attr.aria-controls]="'collapseExample-' + item.id"
+          >
+            <span class="h5">{{ item.totalRating | number: "1.2-2" }}</span>
+            <i class="ms-2 bi bi-caret-down-fill"></i>
+          </button>
+          <div class="ms-2 d-inline-block">
+            <app-star-rating-readonly
+              [source]="item.totalRating"
+            ></app-star-rating-readonly>
+          </div>
 
-              <div class="mb-2">
-                <button
-                  class="btn btn-link h5 text-dark total-rating-link"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  [attr.data-bs-target]="'#collapseExample-' + item.id"
-                  aria-expanded="false"
-                  [attr.aria-controls]="'collapseExample-' + item.id"
-                >
-                  <span class="h5">{{ item.totalRating | number: "1.2-2" }}</span>
-                  <i class="ms-2 bi bi-caret-down-fill"></i>
-                </button>
-                <div class="ms-2 d-inline-block">
-                  <app-star-rating-readonly
-                    [source]="item.totalRating"
-                  ></app-star-rating-readonly>
+          <div class="collapse" id="collapseExample-{{ item.id }}">
+            <div class="card card-body small">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-2">
+                    <span>Культура и ценности</span>
+                    <app-star-rating-readonly
+                      [source]="item.cultureAndValues"
+                    ></app-star-rating-readonly>
+                  </div>
+
+                  <div *ngIf="item.codeQuality" class="mb-2">
+                    <span>Качество кода</span>
+                    <app-star-rating-readonly
+                      [source]="item.codeQuality"
+                    ></app-star-rating-readonly>
+                  </div>
+
+                  <div class="mb-2">
+                    <span>Work / Life баланс</span>
+                    <span>
+                      <app-star-rating-readonly
+                        [source]="item.workLifeBalance"
+                      ></app-star-rating-readonly>
+                    </span>
+                  </div>
                 </div>
 
-                <div class="collapse" id="collapseExample-{{ item.id }}">
-                  <div class="card card-body small">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="mb-2">
-                          <span>Культура и ценности</span>
-                          <app-star-rating-readonly
-                            [source]="item.cultureAndValues"
-                          ></app-star-rating-readonly>
-                        </div>
+                <div class="col-md-6">
+                  <div class="mb-2">
+                    <span>Компенсация и бонусы</span>
+                    <app-star-rating-readonly
+                      [source]="item.compensationAndBenefits"
+                    ></app-star-rating-readonly>
+                  </div>
 
-                        <div *ngIf="item.codeQuality" class="mb-2">
-                          <span>Качество кода</span>
-                          <app-star-rating-readonly
-                            [source]="item.codeQuality"
-                          ></app-star-rating-readonly>
-                        </div>
+                  <div class="mb-2">
+                    <span>Карьерные возможности</span>
+                    <app-star-rating-readonly
+                      [source]="item.careerOpportunities"
+                    ></app-star-rating-readonly>
+                  </div>
 
-                        <div class="mb-2">
-                          <span>Work / Life баланс</span>
-                          <span>
-                            <app-star-rating-readonly
-                              [source]="item.workLifeBalance"
-                            ></app-star-rating-readonly>
-                          </span>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="mb-2">
-                          <span>Компенсация и бонусы</span>
-                          <app-star-rating-readonly
-                            [source]="item.compensationAndBenefits"
-                          ></app-star-rating-readonly>
-                        </div>
-
-                        <div class="mb-2">
-                          <span>Карьерные возможности</span>
-                          <app-star-rating-readonly
-                            [source]="item.careerOpportunities"
-                          ></app-star-rating-readonly>
-                        </div>
-
-                        <div class="mb-2">
-                          <span>Менеджмент</span>
-                          <app-star-rating-readonly
-                            [source]="item.management"
-                          ></app-star-rating-readonly>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="mb-2">
+                    <span>Менеджмент</span>
+                    <app-star-rating-readonly
+                      [source]="item.management"
+                    ></app-star-rating-readonly>
                   </div>
                 </div>
               </div>
-
-              <div *ngIf="item.pros" class="mb-2">
-                <div class="fw-bold text-success">Плюсы:</div>
-                <div [innerHTML]="item.pros"></div>
-              </div>
-              <div *ngIf="item.cons" class="mb-2">
-                <div class="fw-bold text-danger">Минусы:</div>
-                <div [innerHTML]="item.cons"></div>
-              </div>
-
-              <div class="text-muted">
-                <i class="bi bi-check-circle-fill me-1"></i>
-                {{ item.createdAt | date: "dd.MM.yyyy" }}
-              </div>
-
+            </div>
           </div>
-      </div>
+        </div>
 
-      <div class="mt-5" *ngIf="source && source.results.length > 0">
-        <app-pagination-buttons
-          [source]="source"
-          [currentPage]="currentPage"
-          (pageChange)="loadData($event)"
-        ></app-pagination-buttons>
+        <div *ngIf="item.pros" class="mb-2">
+          <div class="fw-bold text-success">Плюсы:</div>
+          <div [innerHTML]="item.pros"></div>
+        </div>
+        <div *ngIf="item.cons" class="mb-2">
+          <div class="fw-bold text-danger">Минусы:</div>
+          <div [innerHTML]="item.cons"></div>
+        </div>
+
+        <div class="text-muted fst-italic">
+          <i class="bi bi-check-circle-fill me-1"></i>
+          <span>{{ item.createdAt | date: "dd.MM.yyyy" }}</span>
+          <span class="ms-3"
+            >(<app-time-ago [date]="item.createdAt"></app-time-ago>)</span
+          >
+        </div>
       </div>
+    </div>
+
+    <div class="mt-5" *ngIf="source && source.results.length > 0">
+      <app-pagination-buttons
+        [source]="source"
+        [currentPage]="currentPage"
+        (pageChange)="loadData($event)"
+      ></app-pagination-buttons>
     </div>
   </div>
 </div>
@@ -143,9 +146,7 @@
 <ng-template #nothingToShow>
   <div class="card">
     <div class="card-body">
-      <div class="text-center">
-        Пока не добавлено ни одного отзыва.
-      </div>
+      <div class="text-center">Пока не добавлено ни одного отзыва.</div>
     </div>
   </div>
 </ng-template>

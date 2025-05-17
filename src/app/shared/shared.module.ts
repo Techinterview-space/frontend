@@ -41,6 +41,7 @@ import { FormatAsMoneyPipe } from "./directives/format-as-money.pipe";
 import { StarRatingComponent } from "./components/star-rating/star-rating.component";
 import { StarRatingReadonlyComponent } from "./components/star-rating-readonly/star-rating-readonly.component";
 import { FormProgressBarComponent } from "./components/add-salary-progress-bar/form-progress-bar.component";
+import { TimeAgoComponent } from "./components/time-ago/time-ago.component";
 
 const componentsToDeclareAndExport = [
   AlertComponent,
@@ -77,6 +78,7 @@ const componentsToDeclareAndExport = [
   StarRatingComponent,
   StarRatingReadonlyComponent,
   FormProgressBarComponent,
+  TimeAgoComponent,
 ];
 
 @NgModule({
