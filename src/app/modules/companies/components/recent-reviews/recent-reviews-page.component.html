@@ -113,12 +113,25 @@
       </div>
     </div>
 
-    <div class="mt-5" *ngIf="source && source.results.length > 0">
-      <app-pagination-buttons
-        [source]="source"
-        [currentPage]="currentPage"
-        (pageChange)="loadData($event)"
-      ></app-pagination-buttons>
+    <div
+      class="mt-5 card mobile-px-5 mobile-py-5"
+      *ngIf="source && source.results.length > 0"
+    >
+      <div>
+        <app-pagination-buttons
+          [source]="source"
+          [currentPage]="currentPage"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+      <div class="mt-3">
+        На этой странице представлены недавно оставленные отзывы в порядке их
+        добавления с конца (последние - в начале). Если вы хотите посмотреть
+        отзывы об определенной компании, то перейдите по ссылке -
+        <a routerLink="/companies"
+          >список компаний <i class="bi bi-arrow-right"></i
+        ></a>
+      </div>
     </div>
   </div>
 </div>
