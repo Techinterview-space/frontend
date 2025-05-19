@@ -44,11 +44,10 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
     this.currentPage = pageToLoad;
 
     this.service
-      .all({
+      .allForAdmin({
         searchQuery: null,
         page: pageToLoad,
         pageSize: defaultPageParams.pageSize,
-        withRating: false,
       })
       .pipe(untilDestroyed(this))
       .subscribe((i) => {

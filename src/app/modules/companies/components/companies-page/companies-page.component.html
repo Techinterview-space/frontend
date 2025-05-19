@@ -8,7 +8,9 @@
           <div class="col-md-6 mb-1">
             <input
               type="text"
-              placeholder="Поиск. Минимум 3 символа."
+              placeholder="Поиск. Минимум {{
+                MIN_SEARCH_QUERY_LENGTH
+              }} символа"
               class="form-control"
               id="searchQuery"
               [(ngModel)]="searchQuery"

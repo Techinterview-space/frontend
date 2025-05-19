@@ -15,6 +15,8 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
   standalone: false,
 })
 export class CompaniesPageComponent implements OnInit, OnDestroy {
+  readonly MIN_SEARCH_QUERY_LENGTH = 2;
+
   companies: Array<CompanyListItem> | null = null;
   source: PaginatedList<Company> | null = null;
   currentPage: number = 1;
@@ -23,7 +25,8 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
 
   get searchButtonShouldBeEnabled(): boolean {
     return (
-      (this.searchQuery != null && this.searchQuery.length >= 3) ||
+      (this.searchQuery != null &&
+        this.searchQuery.length >= this.MIN_SEARCH_QUERY_LENGTH) ||
       this.withRating === true
     );
   }
@@ -75,7 +78,10 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   }
 
   clearSearch(): void {
-    if (this.searchQuery.length >= 3 || this.withRating) {
+    if (
+      this.searchQuery.length >= this.MIN_SEARCH_QUERY_LENGTH ||
+      this.withRating
+    ) {
       this.searchQuery = "";
       this.gtag.event(
         "company_search_query_reset_submitted",
@@ -126,7 +132,10 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   private updateUrlParams(page: number): void {
     const queryParams: any = { page };
 
-    if (this.searchQuery && this.searchQuery.length >= 3) {
+    if (
+      this.searchQuery &&
+      this.searchQuery.length >= this.MIN_SEARCH_QUERY_LENGTH
+    ) {
       queryParams.search = this.searchQuery;
     }
 
@@ -146,7 +155,10 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
       page: this.currentPage,
     };
 
-    if (this.searchQuery && this.searchQuery.length >= 3) {
+    if (
+      this.searchQuery &&
+      this.searchQuery.length >= this.MIN_SEARCH_QUERY_LENGTH
+    ) {
       state.search = this.searchQuery;
     }
 
