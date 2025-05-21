@@ -199,6 +199,16 @@ ul.no-bullets {
   }
 }
 
+.increasable-on-hover {
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
 /* ng-select bootstrap-like styles. Start */
 /* https://github.com/ng-select/ng-select/issues/1955#issuecomment-1240459808 */
 /*.form-floating {

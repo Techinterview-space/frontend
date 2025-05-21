@@ -42,4 +42,15 @@ export class AboutUsComponent {
       username: "maximgorbatyuk",
     },
   ];
+
+  readonly stickerImages = [
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/stickers/sticker_1_512.png",
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/stickers/sticker_2_512.png",
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/stickers/sticker_3_512.png",
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/stickers/sticker_4_512.png",
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/stickers/sticker_5_512.png",
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/stickers/sticker_6_512.png",
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/stickers/sticker_7_512.png",
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/stickers/sticker_8_512.png",
+  ];
 }

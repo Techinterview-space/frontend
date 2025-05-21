@@ -15,8 +15,8 @@
         </div>
       </div>
 
-      <div class="mb-3 mt-5">
-        <div class="mb-1 h5">Контрибьюторы</div>
+      <div class="my-5">
+        <div class="mb-2 h3">Контрибьюторы</div>
         <div *ngFor="let item of contributors">
           <a
             class="text-reset link-without-underline"
@@ -27,9 +27,10 @@
         </div>
       </div>
 
-      <div class="mb-3 mt-5">
-        <div class="mb-1 h5">Иллюстрации</div>
-        <div>
+      <div class="my-5">
+        <div class="h3">Иллюстрации и стикеры</div>
+        <div class="mt-3">
+          <span class="me-2">Иллюстрации:</span>
           <a
             class="text-reset link-without-underline"
             href="https://www.behance.net/just_juliette"
@@ -37,13 +38,22 @@
             >Юлия Левданская</a
           >
         </div>
-      </div>
-
-      <div class="mb-3 mt-5">
-        <div class="mb-1 h5">СМИ о нас</div>
         <div>
+          <span class="me-2">Стикеры:</span>
           <a
             class="text-reset link-without-underline"
+            href="https://www.instagram.com/_jakoja_/"
+            target="_blank"
+            >Jakoja (Жансая)</a
+          >
+        </div>
+      </div>
+
+      <div class="my-5">
+        <div class="h3">СМИ о нас</div>
+        <div class="mt-3">
+          <a
+            class="text-reset link-without-underline fst-italic"
             href="https://digitalbusiness.kz/2024-03-12/almatinets-sozdal-servis-dlya-sbora-dannih-o-zarplatah-kazahstanskih-aytishnikov/"
             target="_blank"
           >
@@ -53,9 +63,9 @@
         </div>
       </div>
 
-      <div class="mb-3 mt-5">
-        <div class="mb-1 h5">История проекта</div>
-        <div class="mt-2">
+      <div class="my-5">
+        <div class="h3">История проекта</div>
+        <div class="mt-3">
           Меня зовут Максим, я разработчик из Алматы. Изначально я создавал
           платформу для ведения заметок во время технических интервью в далеком
           2021 году.
@@ -113,9 +123,9 @@
         </div>
       </div>
 
-      <div class="mb-3 mt-5">
-        <div class="mb-1 h5">Концепция</div>
-        <div class="mt-2">
+      <div class="my-5">
+        <div class="h3">Концепция</div>
+        <div class="mt-3">
           Концепция проекта: данные в обмен на данные - пользователь оставляет
           свою анкету, а потом получает доступ к агрегированным данным других
           пользователей. Таким образом поддерживается актуальность данных и
@@ -168,9 +178,9 @@
         </div>
       </div>
 
-      <div class="mb-3 mt-5">
-        <div class="mb-1 h5">Солидному проекту &mdash; свой маскот</div>
-        <div class="mt-2">
+      <div class="my-5">
+        <div class="h3">Солидному проекту &mdash; свой маскот</div>
+        <div class="mt-3">
           <div class="mb-2">
             Так как проект был разработан еще в 2021 году, тогда же я взял
             стоковую векторную картинку просто такую, чтоб была. Невычурную,
@@ -184,17 +194,19 @@
             значит нужно претворять в жизнь.
           </div>
           <div class="mb-2">
-            С весны у проекта теперь будет свой маскот &mdash; кот Магеллан.
+            С весны у проекта теперь будет свои маскоты &mdash; кот
+            <span class="fw-bold">Магеллан</span> и кошка
+            <span class="fw-bold">Векси</span>.
           </div>
           <div class="mb-2">
-            Магеллан любит писать заметки, смотреть всякие графики, но больше
-            всего - считать деньги. Все мы - немного Магеллан. Маскотом и его
-            спутницей стали кошки моих друзей Рахимжана и Полины: кот Магеллан и
-            кошка Векси. Как они радуют меня, когда я прихожу к друзьям в гости,
-            так пусть они радуют и развлекают и посетителей сайта
+            Магеллан и Векси - кошки моих друзей Рахимжана и Полины. Магеллан
+            любит писать заметки, смотреть всякие графики, но больше всего -
+            считать деньги. Все мы - немного Магеллан. Как они радуют меня,
+            когда я прихожу к друзьям в гости, так пусть они радуют и развлекают
+            и посетителей сайта
           </div>
-          <div class="mb-2 row">
-            <div class="col-md-4 px-5 py-2">
+          <div class="my-5 row">
+            <div class="col-md-4 px-5 py-2 increasable-on-hover">
               <div>
                 <img
                   src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cats/vexi_magellain.jpg"
@@ -204,7 +216,7 @@
               </div>
               <div class="text-muted small">Магеллан и Векси вместе</div>
             </div>
-            <div class="col-md-4 px-5 py-2">
+            <div class="col-md-4 px-5 py-2 increasable-on-hover">
               <div>
                 <img
                   src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cats/magellain.jpg"
@@ -215,7 +227,7 @@
               <div class="text-muted small">Магеллан позирует для фото</div>
             </div>
 
-            <div class="col-md-4 px-5 py-2">
+            <div class="col-md-4 px-5 py-2 increasable-on-hover">
               <div>
                 <img
                   src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cats/vexi.jpg"
@@ -230,21 +242,48 @@
           </div>
           <div class="mb-2">
             Шикарные рисунки были подготовлены
-            <a
-              target="_blank"
-              href="https://www.behance.net/just_juliette"
-              class="text-reset"
+            <a target="_blank" href="https://www.behance.net/just_juliette"
               >прекрасным иллюстратором</a
             >
-            Юлией Левданской. Работа прошла профессионально и легко, и я очень
-            рад, что Юлия согласилась на сотрудничество.
+            <span class="fw-bold ms-2">Юлией Левданской</span>. Работа прошла
+            профессионально и легко, и я очень рад, что Юлия согласилась на
+            сотрудничество.
           </div>
         </div>
       </div>
 
-      <div class="mb-3 mt-5">
-        <div class="mb-1 h5">Технологии</div>
-        <div class="mt-2">
+      <div class="my-5">
+        <div class="h3">Стикеры</div>
+        <div class="mt-3">
+          <span class="me-1"
+            ><a
+              href="https://t.me/addstickers/TechinterviewSpaceCats"
+              target="_blank"
+              >Стикеры</a
+            >
+            сделаны замечательной художницей</span
+          >
+          <a
+            class="text-reset link-without-underline fw-bold"
+            href="https://www.instagram.com/_jakoja_/"
+            target="_blank"
+          >
+            Jakoja (Жансая)
+          </a>
+        </div>
+        <div class="mt-2 row row-cols-4">
+          <div *ngFor="let sticker of stickerImages" class="col p-3">
+            <img
+              [src]="sticker"
+              class="p-2 img-fluid rounded increasable-on-hover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="my-5">
+        <div class="h3">Технологии</div>
+        <div class="mt-3">
           <div>Frontend: Angular</div>
           <div>Backend: .NET</div>
           <div>База данных: PostgreSQL</div>

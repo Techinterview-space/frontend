@@ -86,7 +86,9 @@ export class CompaniesService {
     pageParams: CompaniesSearchParamsForAdmin,
   ): Observable<PaginatedList<Company>> {
     return this.api.get<PaginatedList<Company>>(
-      this.apiUrl + "for-admin?" + new ConvertObjectToHttpParams(pageParams).get(),
+      this.apiUrl +
+        "for-admin?" +
+        new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
