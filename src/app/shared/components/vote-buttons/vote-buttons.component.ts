@@ -18,6 +18,9 @@ export class VoteButtonsComponent {
   @Output()
   voteDown: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output()
+  clickWhileDisabledForAnonymous: EventEmitter<void> = new EventEmitter<void>();
+
   private voted = false;
 
   get containerTitle(): string {
@@ -50,6 +53,11 @@ export class VoteButtonsComponent {
 
   voteUpClicked() {
     if (this.disabled) {
+      if (this.voted) {
+        return;
+      }
+
+      this.clickWhileDisabledForAnonymous.emit();
       return;
     }
 
@@ -61,6 +69,11 @@ export class VoteButtonsComponent {
 
   voteDownClicked() {
     if (this.disabled) {
+      if (this.voted) {
+        return;
+      }
+
+      this.clickWhileDisabledForAnonymous.emit();
       return;
     }
 

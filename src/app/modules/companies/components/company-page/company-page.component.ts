@@ -146,4 +146,8 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
         this.alertService.success("Голос сохранен");
       });
   }
+
+  clickWhileDisabledForAnonymous(): void {
+    this.alertService.warn("Необходимо авторизоваться, чтобы оценивать отзывы");
+  }
 }

@@ -27,6 +27,7 @@
             [showVoteButtons]="isAuthenticated"
             (like)="likeClicked(item)"
             (dislike)="dislikeClicked(item)"
+            (clickWhileDisabledForAnonymous)="clickWhileDisabledForAnonymous()"
           ></app-company-review-block>
         </div>
       </div>

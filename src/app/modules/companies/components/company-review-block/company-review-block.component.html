@@ -103,6 +103,9 @@
               [disabled]="!showVoteButtons"
               (voteUp)="likeClicked()"
               (voteDown)="dislikeCliked()"
+              (clickWhileDisabledForAnonymous)="
+                clickWhileDisabledForAnonymousClick()
+              "
             ></app-vote-buttons>
           </div>
         </div>

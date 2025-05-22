@@ -20,6 +20,9 @@ export class CompanyReviewBlockComponent implements OnInit {
   @Output()
   dislike: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output()
+  clickWhileDisabledForAnonymous: EventEmitter<void> = new EventEmitter<void>();
+
   pros: string | null = null;
   cons: string | null = null;
 
@@ -38,5 +41,9 @@ export class CompanyReviewBlockComponent implements OnInit {
 
   dislikeCliked(): void {
     this.dislike.emit();
+  }
+
+  clickWhileDisabledForAnonymousClick(): void {
+    this.clickWhileDisabledForAnonymous.emit();
   }
 }
