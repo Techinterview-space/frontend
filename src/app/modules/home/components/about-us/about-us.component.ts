@@ -14,6 +14,10 @@ interface IContributor {
 export class AboutUsComponent {
   contributors: IContributor[] = [
     {
+      link: "https://github.com/nrglv",
+      username: "nrglv",
+    },
+    {
       link: "https://github.com/indicozy",
       username: "indicozy",
     },
