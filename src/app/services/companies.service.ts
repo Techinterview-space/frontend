@@ -48,6 +48,10 @@ export interface GetCompanyResponse {
   userHasAnyReview: boolean;
 }
 
+export interface VoteResponse {
+  result: boolean;
+}
+
 @Injectable()
 export class CompaniesService {
   private readonly apiUrl: string;
@@ -123,8 +127,22 @@ export class CompaniesService {
 
   recentReviews(params: PageParams): Observable<PaginatedList<CompanyReview>> {
     return this.api.get<PaginatedList<CompanyReview>>(
-      "/api/company-reviews/recent?" +
+      "/api/companies/reviews/recent?" +
         new ConvertObjectToHttpParams(params).get(),
+    );
+  }
+
+  likeReview(companyId: string, reviewId: string): Observable<VoteResponse> {
+    return this.api.post<VoteResponse>(
+      this.apiUrl + companyId + "/reviews/" + reviewId + "/like",
+      {},
+    );
+  }
+
+  dislikeReview(companyId: string, reviewId: string): Observable<VoteResponse> {
+    return this.api.post<VoteResponse>(
+      this.apiUrl + companyId + "/reviews/" + reviewId + "/dislike",
+      {},
     );
   }
 }
