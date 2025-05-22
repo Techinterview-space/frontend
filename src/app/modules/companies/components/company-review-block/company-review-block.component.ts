@@ -11,6 +11,9 @@ export class CompanyReviewBlockComponent implements OnInit {
   @Input()
   review: CompanyReview | null = null;
 
+  @Input()
+  showVoteButtons: boolean = true;
+
   @Output()
   like: EventEmitter<void> = new EventEmitter<void>();
 

@@ -88,6 +88,7 @@
         <div class="mb-2">
           <app-company-review-block
             [review]="review"
+            [showVoteButtons]="isAuthenticated"
             (like)="likeClicked(review)"
             (dislike)="dislikeClicked(review)"
           ></app-company-review-block>

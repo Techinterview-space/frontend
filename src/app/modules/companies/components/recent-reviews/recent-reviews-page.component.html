@@ -24,6 +24,7 @@
         <div class="mb-2">
           <app-company-review-block
             [review]="item"
+            [showVoteButtons]="isAuthenticated"
             (like)="likeClicked(item)"
             (dislike)="dislikeClicked(item)"
           ></app-company-review-block>

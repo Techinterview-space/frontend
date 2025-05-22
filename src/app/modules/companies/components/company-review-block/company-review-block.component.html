@@ -96,20 +96,23 @@
         </div>
       </div>
 
-      <div class="d-inline-block">
-        <div>
-          <app-vote-buttons
-            (voteUp)="likeClicked()"
-            (voteDown)="dislikeCliked()"
-          ></app-vote-buttons>
+      <div class="d-inline-block align-items-end">
+        <div class="d-flex justify-content-end" *ngIf="showVoteButtons">
+          <div>
+            <app-vote-buttons
+              (voteUp)="likeClicked()"
+              (voteDown)="dislikeCliked()"
+            ></app-vote-buttons>
+          </div>
         </div>
         <div
-          class="text-muted usefullness-rate"
+          class="usefullness-rate"
           *ngIf="review.likesRate"
           title="Польза отзыва. Лайков: {{ review.likesCount }}, Дизлайков: {{
             review.dislikesCount
           }}"
         >
+          <span>Польза отзыва:</span>
           <span class="ms-1">{{ review.likesRate | number: "1.2-2" }}%</span>
         </div>
       </div>

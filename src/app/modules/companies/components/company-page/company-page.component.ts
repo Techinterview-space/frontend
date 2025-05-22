@@ -18,9 +18,9 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
 })
 export class CompanyPageComponent implements OnInit, OnDestroy {
   company: Company | null = null;
+  isAuthenticated = false;
 
   private readonly activateRoute: ActivatedRouteExtended;
-  private isAuthenticated = false;
   private previousPage: number | null = null;
   private previousSearchQuery: string | null = null;
   private previousWithRating: boolean | null = null;

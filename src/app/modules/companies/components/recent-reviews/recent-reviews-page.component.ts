@@ -5,6 +5,7 @@ import { PaginatedList } from "@models/paginated-list";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
+import { AuthService } from "@shared/services/auth/auth.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
 
@@ -17,6 +18,7 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
   reviews: Array<CompanyReview> | null = null;
   source: PaginatedList<CompanyReview> | null = null;
   currentPage: number = 1;
+  isAuthenticated = false;
 
   private skipNextQueryParamsUpdate: boolean = false;
 
@@ -27,11 +29,13 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly gtag: GoogleAnalyticsService,
     private readonly alertService: AlertService,
+    private readonly authService: AuthService,
   ) {
     this.title.setTitle("Отзывы к IT компаниям");
   }
 
   ngOnInit(): void {
+    this.isAuthenticated = this.authService.isAuthenticated();
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       if (this.skipNextQueryParamsUpdate) {
         this.skipNextQueryParamsUpdate = false;
