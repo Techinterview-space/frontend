@@ -42,6 +42,7 @@ import { StarRatingComponent } from "./components/star-rating/star-rating.compon
 import { StarRatingReadonlyComponent } from "./components/star-rating-readonly/star-rating-readonly.component";
 import { FormProgressBarComponent } from "./components/add-salary-progress-bar/form-progress-bar.component";
 import { TimeAgoComponent } from "./components/time-ago/time-ago.component";
+import { VoteButtonsComponent } from "./components/vote-buttons/vote-buttons.component";
 
 const componentsToDeclareAndExport = [
   AlertComponent,
@@ -79,6 +80,7 @@ const componentsToDeclareAndExport = [
   StarRatingReadonlyComponent,
   FormProgressBarComponent,
   TimeAgoComponent,
+  VoteButtonsComponent,
 ];
 
 @NgModule({

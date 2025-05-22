@@ -1,0 +1,25 @@
+<div class="d-flex gap-3" [ngClass]="{ disabled: disabled }">
+  <i
+    class="bi"
+    [ngClass]="{
+      'bi-hand-thumbs-up-fill': hover === 'up',
+      'bi-hand-thumbs-up': hover !== 'up',
+      disabled: disabled,
+    }"
+    (mouseenter)="onHover('up')"
+    (mouseleave)="onLeave()"
+    (click)="voteUpClicked()"
+  ></i>
+
+  <i
+    class="bi"
+    [ngClass]="{
+      'bi-hand-thumbs-down-fill': hover === 'down',
+      'bi-hand-thumbs-down': hover !== 'down',
+      disabled: disabled,
+    }"
+    (mouseenter)="onHover('down')"
+    (mouseleave)="onLeave()"
+    (click)="voteDownClicked()"
+  ></i>
+</div>

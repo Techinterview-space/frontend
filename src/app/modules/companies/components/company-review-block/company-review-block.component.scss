@@ -1,0 +1,26 @@
+.usefullness-rate {
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+
+  &:hover {
+    color: #000000;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.i-work-here {
+  font-size: 12px;
+  font-weight: 500;
+  font-style: italic;
+  cursor: pointer;
+
+  &:hover {
+    color: #000000;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}

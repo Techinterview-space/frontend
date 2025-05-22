@@ -1,0 +1,10 @@
+.bi {
+  transition: color 0.2s ease;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -36,6 +36,10 @@ export interface CompanyReview {
   companyId: string;
   companyName: string | null;
   companySlug: string | null;
+
+  likesCount: number;
+  dislikesCount: number;
+  likesRate: number | null;
   createdAt: Date;
   approvedAt: Date | null;
   outdatedAt: Date | null;

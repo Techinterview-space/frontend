@@ -16,7 +16,7 @@ export class AlertService implements IAlertService {
 
   constructor(private router: Router) {
     // clear alert messages on route change unless 'keepAfterRouteChange' flag is true
-    this.router.events.subscribe((event: Event) => {
+    this.router.events?.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         if (this.keepAfterRouteChange) {
           // only keep for a single route change

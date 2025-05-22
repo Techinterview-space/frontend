@@ -4,6 +4,7 @@ import { CompanyReview } from "@models/companies.model";
 import { PaginatedList } from "@models/paginated-list";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
 
@@ -25,6 +26,7 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly gtag: GoogleAnalyticsService,
+    private readonly alertService: AlertService,
   ) {
     this.title.setTitle("Отзывы к IT компаниям");
   }
@@ -59,11 +61,7 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
       })
       .pipe(untilDestroyed(this))
       .subscribe((i) => {
-        this.reviews = i.results.map((r) => {
-          r.cons = r.cons?.replace(/\n/g, "<br />");
-          r.pros = r.pros?.replace(/\n/g, "<br />");
-          return r;
-        });
+        this.reviews = i.results;
         this.source = i;
       });
   }
@@ -88,5 +86,35 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.title.resetTitle();
+  }
+
+  likeClicked(review: CompanyReview): void {
+    this.gtag.event(
+      "company_review_review_liked",
+      "company_reviews",
+      review.companyName ?? review.companyId,
+    );
+
+    this.service
+      .likeReview(review.companyId, review.id)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.alertService.success("Голос сохранен");
+      });
+  }
+
+  dislikeClicked(review: CompanyReview): void {
+    this.gtag.event(
+      "company_review_review_disliked",
+      "company_reviews",
+      review.companyName ?? review.companyId,
+    );
+
+    this.service
+      .dislikeReview(review.companyId, review.id)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.alertService.success("Голос сохранен");
+      });
   }
 }

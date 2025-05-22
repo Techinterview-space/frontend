@@ -9,6 +9,7 @@ import { CompanyPageComponent } from "./components/company-page/company-page.com
 import { AddCompanyReviewPageComponent } from "./components/add-review-page/add-review-page.component";
 import { CompaniesPageComponent } from "./components/companies-page/companies-page.component";
 import { RecentReviewsPageComponent } from "./components/recent-reviews/recent-reviews-page.component";
+import { CompanyReviewBlockComponent } from "./components/company-review-block/company-review-block.component";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { RecentReviewsPageComponent } from "./components/recent-reviews/recent-r
     AddCompanyReviewPageComponent,
     CompaniesPageComponent,
     RecentReviewsPageComponent,
+    CompanyReviewBlockComponent,
   ],
   imports: [
     CommonModule,

@@ -86,105 +86,11 @@
     <div class="card-body mobile-px-5 mobile-py-5">
       <div *ngFor="let review of company.reviews" class="mb-5">
         <div class="mb-2">
-          <button
-            class="btn btn-link h5 text-dark total-rating-link"
-            type="button"
-            data-bs-toggle="collapse"
-            [attr.data-bs-target]="'#collapseExample-' + review.id"
-            aria-expanded="false"
-            [attr.aria-controls]="'collapseExample-' + review.id"
-          >
-            <span class="h5">{{ review.totalRating | number: "1.2-2" }}</span>
-            <i class="ms-2 bi bi-caret-down-fill"></i>
-          </button>
-          <div class="ms-2 d-inline-block">
-            <app-star-rating-readonly
-              [source]="review.totalRating"
-            ></app-star-rating-readonly>
-          </div>
-
-          <div class="collapse" id="collapseExample-{{ review.id }}">
-            <div class="card card-body small">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-2">
-                    <span>Культура и ценности</span>
-                    <app-star-rating-readonly
-                      [source]="review.cultureAndValues"
-                    ></app-star-rating-readonly>
-                  </div>
-
-                  <div *ngIf="review.codeQuality" class="mb-2">
-                    <span>Качество кода</span>
-                    <app-star-rating-readonly
-                      [source]="review.codeQuality"
-                    ></app-star-rating-readonly>
-                  </div>
-
-                  <div class="mb-2">
-                    <span>Work / Life баланс</span>
-                    <span>
-                      <app-star-rating-readonly
-                        [source]="review.workLifeBalance"
-                      ></app-star-rating-readonly>
-                    </span>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="mb-2">
-                    <span>Компенсация и бонусы</span>
-                    <app-star-rating-readonly
-                      [source]="review.compensationAndBenefits"
-                    ></app-star-rating-readonly>
-                  </div>
-
-                  <div class="mb-2">
-                    <span>Карьерные возможности</span>
-                    <app-star-rating-readonly
-                      [source]="review.careerOpportunities"
-                    ></app-star-rating-readonly>
-                  </div>
-
-                  <div class="mb-2">
-                    <span>Менеджмент</span>
-                    <app-star-rating-readonly
-                      [source]="review.management"
-                    ></app-star-rating-readonly>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div *ngIf="review.pros" class="mb-2">
-          <div class="fw-bold text-success">Плюсы:</div>
-          <div [innerHTML]="review.pros"></div>
-        </div>
-        <div *ngIf="review.cons" class="mb-2">
-          <div class="fw-bold text-danger">Минусы:</div>
-          <div [innerHTML]="review.cons"></div>
-        </div>
-
-        <div class="d-flex justify-content-between mb-2 mt-1">
-          <span
-            *ngIf="review.approvedAt == null"
-            class="review-awaiting-approval-label"
-            >Ожидает одобрения</span
-          >
-
-          <span *ngIf="review.outdatedAt != null" class="review-outdated-label">
-            Отзыв устарел {{ review.outdatedAt | date: "dd.MM.yyyy" }}
-          </span>
-
-          <span class="text-muted fst-italic">
-            <i class="bi bi-check-circle-fill me-1"></i>
-            <span>{{ review.createdAt | date: "dd.MM.yyyy" }}</span>
-            <span class="ms-2"
-              >(<app-time-ago [date]="review.createdAt"></app-time-ago>)</span
-            >
-          </span>
+          <app-company-review-block
+            [review]="review"
+            (like)="likeClicked(review)"
+            (dislike)="dislikeClicked(review)"
+          ></app-company-review-block>
         </div>
 
         <hr class="my-2" />

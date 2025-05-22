@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
-import { Company } from "@models/companies.model";
+import { Company, CompanyReview } from "@models/companies.model";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
@@ -32,6 +33,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
+    private readonly alertService: AlertService,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
     const queryParams = this.router.getCurrentNavigation()?.extras.state;
@@ -58,10 +60,6 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
               "<br />",
             );
 
-            this.company!.reviews.forEach((r) => {
-              r.pros = r.pros?.replace(/\n/g, "<br />");
-              r.cons = r.cons?.replace(/\n/g, "<br />");
-            });
             this.title.setTitle(`Отзывы о ${this.company!.name}`);
 
             this.gtag.event(
@@ -109,5 +107,43 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.title.resetTitle();
+  }
+
+  likeClicked(review: CompanyReview): void {
+    if (this.company == null) {
+      return;
+    }
+
+    this.gtag.event(
+      "company_review_review_liked",
+      "company_reviews",
+      this.company.name,
+    );
+
+    this.service
+      .likeReview(this.company.id, review.id)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.alertService.success("Голос сохранен");
+      });
+  }
+
+  dislikeClicked(review: CompanyReview): void {
+    if (this.company == null) {
+      return;
+    }
+
+    this.gtag.event(
+      "company_review_review_disliked",
+      "company_reviews",
+      this.company.name,
+    );
+
+    this.service
+      .dislikeReview(this.company.id, review.id)
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.alertService.success("Голос сохранен");
+      });
   }
 }

@@ -1,0 +1,118 @@
+<div *ngIf="review" class="">
+  <div class="mb-2">
+    <button
+      class="btn btn-link h5 text-dark total-rating-link"
+      type="button"
+      data-bs-toggle="collapse"
+      [attr.data-bs-target]="'#collapseExample-' + review.id"
+      aria-expanded="false"
+      [attr.aria-controls]="'collapseExample-' + review.id"
+    >
+      <span class="h5">{{ review.totalRating | number: "1.2-2" }}</span>
+      <i class="ms-2 bi bi-caret-down-fill"></i>
+    </button>
+    <div class="ms-2 d-inline-block">
+      <app-star-rating-readonly
+        [source]="review.totalRating"
+      ></app-star-rating-readonly>
+    </div>
+
+    <div class="collapse" id="collapseExample-{{ review.id }}">
+      <div class="card card-body small">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-2">
+              <span>Культура и ценности</span>
+              <app-star-rating-readonly
+                [source]="review.cultureAndValues"
+              ></app-star-rating-readonly>
+            </div>
+
+            <div *ngIf="review.codeQuality" class="mb-2">
+              <span>Качество кода</span>
+              <app-star-rating-readonly
+                [source]="review.codeQuality"
+              ></app-star-rating-readonly>
+            </div>
+
+            <div class="mb-2">
+              <span>Work / Life баланс</span>
+              <span>
+                <app-star-rating-readonly
+                  [source]="review.workLifeBalance"
+                ></app-star-rating-readonly>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="mb-2">
+              <span>Компенсация и бонусы</span>
+              <app-star-rating-readonly
+                [source]="review.compensationAndBenefits"
+              ></app-star-rating-readonly>
+            </div>
+
+            <div class="mb-2">
+              <span>Карьерные возможности</span>
+              <app-star-rating-readonly
+                [source]="review.careerOpportunities"
+              ></app-star-rating-readonly>
+            </div>
+
+            <div class="mb-2">
+              <span>Менеджмент</span>
+              <app-star-rating-readonly
+                [source]="review.management"
+              ></app-star-rating-readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="pros" class="mb-2">
+    <div class="fw-bold text-success">Плюсы:</div>
+    <div [innerHTML]="pros"></div>
+  </div>
+  <div *ngIf="cons" class="mb-2">
+    <div class="fw-bold text-danger">Минусы:</div>
+    <div [innerHTML]="cons"></div>
+  </div>
+
+  <div class="text-muted fst-italic">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="d-inline-block">
+        <div>
+          <span>{{ review.createdAt | date: "dd.MM.yyyy" }}</span>
+          <span class="ms-1"
+            >(<app-time-ago [date]="review.createdAt"></app-time-ago>)</span
+          >
+        </div>
+        <div class="i-work-here" *ngIf="review.iWorkHere">
+          <i class="bi bi-check-circle-fill me-1"></i>
+          <span>Работаю здесь</span>
+        </div>
+      </div>
+
+      <div class="d-inline-block">
+        <div>
+          <app-vote-buttons
+            (voteUp)="likeClicked()"
+            (voteDown)="dislikeCliked()"
+          ></app-vote-buttons>
+        </div>
+        <div
+          class="text-muted usefullness-rate"
+          *ngIf="review.likesRate"
+          title="Польза отзыва. Лайков: {{ review.likesCount }}, Дизлайков: {{
+            review.dislikesCount
+          }}"
+        >
+          <span class="ms-1">{{ review.likesRate | number: "1.2-2" }}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
