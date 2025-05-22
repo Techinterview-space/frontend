@@ -123,7 +123,7 @@ export class CompaniesService {
 
   recentReviews(params: PageParams): Observable<PaginatedList<CompanyReview>> {
     return this.api.get<PaginatedList<CompanyReview>>(
-      "/api/company-reviews/recent?" +
+      "/api/companies/reviews/recent?" +
         new ConvertObjectToHttpParams(params).get(),
     );
   }
