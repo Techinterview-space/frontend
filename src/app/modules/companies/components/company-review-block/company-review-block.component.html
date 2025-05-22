@@ -97,9 +97,10 @@
       </div>
 
       <div class="d-inline-block align-items-end">
-        <div class="d-flex justify-content-end" *ngIf="showVoteButtons">
+        <div class="d-flex justify-content-end">
           <div>
             <app-vote-buttons
+              [disabled]="!showVoteButtons"
               (voteUp)="likeClicked()"
               (voteDown)="dislikeCliked()"
             ></app-vote-buttons>
