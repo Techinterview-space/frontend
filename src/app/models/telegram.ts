@@ -18,6 +18,12 @@ export enum TelegramBotUsageType {
   InlineQuery = 4,
 }
 
+export enum SubscriptionRegularityType {
+  Undefined = 0,
+  Weekly = 1,
+  Monthly = 2,
+}
+
 export interface TelegramUserSettings {
   id: string;
   chatId: number;
@@ -36,6 +42,7 @@ export interface StatDataCacheChangeSubscription {
   preventNotificationIfNoDifference: boolean;
   useAiAnalysis: boolean;
   lastMessageSent: Date | null;
+  regularity: SubscriptionRegularityType;
   deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;

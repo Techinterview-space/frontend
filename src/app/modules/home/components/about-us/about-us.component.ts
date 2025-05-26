@@ -41,10 +41,6 @@ export class AboutUsComponent {
       link: "https://github.com/keksonoid",
       username: "keksonoid",
     },
-    {
-      link: "https://github.com/maximgorbatyuk",
-      username: "maximgorbatyuk",
-    },
   ];
 
   readonly stickerImages = [

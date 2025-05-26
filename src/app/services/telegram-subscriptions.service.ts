@@ -4,14 +4,23 @@ import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
-import { StatDataCacheChangeSubscription } from "@models/telegram";
+import {
+  StatDataCacheChangeSubscription,
+  SubscriptionRegularityType,
+} from "@models/telegram";
 import { OpenAiAnalysis, OpenAiReport } from "@models/open-ai.model";
 
-export interface CreateTelegramSubscriptionBody {
-  name: string;
+export interface CreateTelegramSubscriptionBody
+  extends EditTelegramSubscriptionBody {
   telegramChatId: number;
+}
+
+export interface EditTelegramSubscriptionBody {
+  name: string;
   professionIds: Array<number>;
   preventNotificationIfNoDifference: boolean;
+  regularity: SubscriptionRegularityType;
+  useAiAnalysis: boolean;
 }
 
 @Injectable()
@@ -35,6 +44,16 @@ export class TelegramSubscriptionsService {
   ): Observable<StatDataCacheChangeSubscription> {
     return this.api.post<StatDataCacheChangeSubscription>(
       `${this.apiUrl}`,
+      body,
+    );
+  }
+
+  update(
+    id: string,
+    body: EditTelegramSubscriptionBody,
+  ): Observable<StatDataCacheChangeSubscription> {
+    return this.api.post<StatDataCacheChangeSubscription>(
+      `${this.apiUrl}/${id}`,
       body,
     );
   }

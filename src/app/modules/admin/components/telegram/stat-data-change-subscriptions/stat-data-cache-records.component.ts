@@ -3,13 +3,17 @@ import { defaultPageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
-import { StatDataCacheChangeSubscription } from "@models/telegram";
+import {
+  StatDataCacheChangeSubscription,
+  SubscriptionRegularityType,
+} from "@models/telegram";
 import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
-import { TelegramSubscriptionCreateForm } from "./subscription-create-form";
+
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { OpenAiDialogData } from "./open-ai-dialog-data";
+import { TelegramSubscriptionEditForm } from "./subscription-edit-form";
 
 @Component({
   templateUrl: "./stat-data-cache-records.component.html",
@@ -21,7 +25,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
   source: PaginatedList<StatDataCacheChangeSubscription> | null = null;
   currentPage: number = 1;
 
-  createForm: TelegramSubscriptionCreateForm | null = null;
+  editForm: TelegramSubscriptionEditForm | null = null;
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
   openAiDialogData: OpenAiDialogData | null = null;
 
@@ -94,20 +98,34 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
   }
 
   create(): void {
-    this.createForm = new TelegramSubscriptionCreateForm();
+    this.editForm = new TelegramSubscriptionEditForm(null);
   }
 
-  onCreateModalDlgClose(): void {
-    this.createForm = null;
+  onEditModalDlgClose(): void {
+    this.editForm = null;
   }
 
-  onCreateFormSubmit(): void {
-    if (this.createForm == null) {
+  onEditFormSubmit(): void {
+    if (this.editForm == null) {
       return;
     }
 
-    const createRequest = this.createForm.createRequestOrNull();
+    const createRequest = this.editForm.createRequestOrNull();
     if (createRequest == null) {
+      return;
+    }
+
+    const itemId = this.editForm.getItemId();
+    if (this.editForm.hasItemToEdit() && itemId != null) {
+      this.service
+        .update(itemId, createRequest)
+        .pipe(untilDestroyed(this))
+        .subscribe(() => {
+          this.alert.success("Подписка была обновлена");
+          this.editForm = null;
+          this.ngOnInit();
+        });
+
       return;
     }
 
@@ -116,7 +134,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(() => {
         this.alert.success("Подписка была создана");
-        this.createForm = null;
+        this.editForm = null;
         this.ngOnInit();
       });
   }
@@ -156,6 +174,14 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
 
   onOpenAiDlgClose(): void {
     this.openAiDialogData = null;
+  }
+
+  openEditDlg(item: StatDataCacheChangeSubscription): void {
+    this.editForm = new TelegramSubscriptionEditForm(item);
+  }
+
+  getRegularityTitle(regularity: SubscriptionRegularityType): string {
+    return SubscriptionRegularityType[regularity];
   }
 
   ngOnDestroy(): void {
