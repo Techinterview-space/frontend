@@ -14,6 +14,7 @@ import { AboutUsComponent } from "./components/about-us/about-us.component";
 import { LogoutCallbackComponent } from "./components/logout-callback/logout-callback.component";
 import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bot.component";
 import { FormsModule } from "@angular/forms";
+import { UnsibscribeMeComponent } from "./components/unsubscribe-me/unsubscribe-me.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormsModule } from "@angular/forms";
     AboutUsComponent,
     LogoutCallbackComponent,
     TelegramBotABoutComponent,
+    UnsibscribeMeComponent,
   ],
   imports: [CommonModule, SharedModule, HomeRoutingModule, FormsModule],
 })

@@ -11,6 +11,7 @@ import { PrivacyPolicyPageComponent } from "./components/privacy-policy-page/pri
 import { AboutUsComponent } from "./components/about-us/about-us.component";
 import { LogoutCallbackComponent } from "./components/logout-callback/logout-callback.component";
 import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bot.component";
+import { UnsibscribeMeComponent } from "./components/unsubscribe-me/unsubscribe-me.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: "about-us", component: AboutUsComponent },
   { path: "agreements/privacy-policy", component: PrivacyPolicyPageComponent },
   { path: "about-telegram-bot", component: TelegramBotABoutComponent },
+  { path: "unsubscribe", component: UnsibscribeMeComponent },
 ];
 
 @NgModule({

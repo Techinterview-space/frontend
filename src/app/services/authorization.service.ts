@@ -27,4 +27,8 @@ export class AuthorizationService {
   checkTotpRequired(): Observable<CheckTotpResponse> {
     return this.api.get("/api/account/check-totp");
   }
+
+  unsubscribeMe(token: string): Observable<void> {
+    return this.api.post("/api/account/unsubscribe-me/" + token, {});
+  }
 }
