@@ -84,14 +84,15 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
   }
 
   private redirectToMainPageOrUrl(): void {
-    if (this.cookieService.check("url")) {
-      const url = this.cookieService.get("url") ?? "";
+    const urlInCookies = this.cookieService.get("url") ?? "";
+
+    if (this.cookieService.check("url") || urlInCookies.length > 0) {
       this.cookieService.delete("url");
 
-      if (url.includes("?")) {
-        this.router.navigateByUrl(url);
+      if (urlInCookies.includes("?")) {
+        this.router.navigateByUrl(urlInCookies);
       } else {
-        this.router.navigate([url]);
+        this.router.navigate([urlInCookies]);
       }
     } else {
       this.router.navigate([this.urlToRedirectAfterLogin]);

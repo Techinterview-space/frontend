@@ -24,6 +24,7 @@ import { AuthService } from "@shared/services/auth/auth.service";
 import { pipe } from "rxjs";
 import { EditSalaryForm } from "./edit-salary-form";
 import { Gender, GenderEnum } from "@models/enums/gender.enum";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   templateUrl: "./add-salary.component.html",
@@ -66,11 +67,15 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly gtag: GoogleAnalyticsService,
+    private readonly cookieService: CookieService,
   ) {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
     if (!this.isAuthenticated) {
+      console.log("set url", this.router.url);
+      this.cookieService.set("url", this.router.url);
+
       this.authService
         .login()
         .pipe(untilDestroyed(this))
