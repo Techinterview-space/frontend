@@ -140,7 +140,7 @@ export class CompanyReviewForm extends FormGroup {
       case "workLifeBalance":
         return "Work / Life баланс";
       case "compensationAndBenefits":
-        return "Компенсация и бенефиты";
+        return "Зарплата и бонусы";
       case "careerOpportunities":
         return "Карьерные возможности";
       case "management":
