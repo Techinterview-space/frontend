@@ -118,9 +118,7 @@
 
             <div class="col-md-6">
               <div class="mb-5">
-                <label class="fw-bold text-dark"
-                  >Зарплата и бонусы *</label
-                >
+                <label class="fw-bold text-dark">Зарплата и бонусы *</label>
                 <app-star-rating
                   [maxValue]="5"
                   (ratingChange)="
@@ -132,7 +130,8 @@
                   {{ editForm.getStarRating("compensationAndBenefits") }}
                 </div>
                 <div class="text-muted small">
-                  Насколько компенсация (зарплата и бонусы) соответствует требованиям.
+                  Насколько компенсация (зарплата и бонусы) соответствует
+                  требованиям.
                 </div>
                 <app-field-error
                   [field]="editForm.get('compensationAndBenefits')"

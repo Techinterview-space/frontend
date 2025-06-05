@@ -1,0 +1,7 @@
+<div class="h4 mb-3" *ngIf="title">{{ title }}</div>
+
+<div class="" *ngIf="canvasId">
+  <div id="canvas-container">
+    <canvas [attr.id]="canvasId">{{ chartData }}</canvas>
+  </div>
+</div>

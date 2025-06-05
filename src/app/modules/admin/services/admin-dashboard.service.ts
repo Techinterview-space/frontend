@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ApiService } from "@services/api.service";
+import { ItemsPerDayChartData } from "@shared/value-objects/items-per-day-chart-data";
 
 export interface AverageRatingData {
   count: number;
@@ -11,6 +12,9 @@ export interface AdminDashboardResponse {
   averageRatingData: AverageRatingData;
   totalSalaries: number;
   totalCompanyReviews: number;
+  userEmailsForLastDays: ItemsPerDayChartData;
+  reviewLikesForLastTenDays: ItemsPerDayChartData;
+  reviewsForLastTenDays: ItemsPerDayChartData;
 }
 
 @Injectable({
