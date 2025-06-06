@@ -101,7 +101,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // permissions error
     if (error.status === 403) {
-      this.router.navigate(["not-permission"]);
+      this.router.navigate(["no-permission"]);
       return true;
     }
 

@@ -16,7 +16,7 @@ import { UnsibscribeMeComponent } from "./components/unsubscribe-me/unsubscribe-
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "me", component: MeComponent },
-  { path: "not-permission", component: NoPermissionComponent },
+  { path: "no-permission", component: NoPermissionComponent },
   { path: "not-authorized", component: NotAuthorizedErrorComponent },
   { path: "server-unavailable", component: ServerUnavailableComponent },
   { path: "not-found", component: NotFoundErrorComponent },

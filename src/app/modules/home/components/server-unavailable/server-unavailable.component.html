@@ -1,26 +1,17 @@
-<div class="container">
-  <div class="mt-3 d-flex flex-column">
-    <div class="display-1 text-danger text-center">Server Unavailable</div>
-
-    <div class="mt-5 card card-body p-5">
-      <div class="h3 text-center">
-        Не паникуйте, мы работаем над этой проблемой
-      </div>
-      <div class="mt-3 display-2 text-center">¯\_(ツ)_/¯</div>
-
-      <div class="mt-5 text-center">
-        <div class="h3 text-muted">
-          На всякий случай, напишите, пожалуйста, в телеграм автору проекта:
-        </div>
-        <div class="mt-3">
-          <a
-            href="https://t.me/maximgorbatyuk"
-            target="_blank"
-            class="btn btn-lg w-50 btn-outline-dark py-2"
-            >Телеграм &#64;maximgorbatyuk</a
-          >
-        </div>
-      </div>
+<app-error-page-component [errorTitle]="'500 ошибка сервера'">
+  <div class="mt-3">
+    <p>
+      Эта ошибка может быть связана с плановыми работами над сервисом, а может
+      быть и непредвиденной ошибкой.
+    </p>
+    <p>На всякий случай, напишите, пожалуйста, в телеграм автору проекта:</p>
+    <div class="mt-3">
+      <a
+        href="https://t.me/maximgorbatyuk"
+        target="_blank"
+        class="btn btn-outline-dark py-2"
+        >Телеграм &#64;maximgorbatyuk</a
+      >
     </div>
   </div>
-</div>
+</app-error-page-component>

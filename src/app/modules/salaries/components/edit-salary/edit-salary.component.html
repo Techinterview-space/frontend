@@ -22,11 +22,17 @@
             >
               <span class="display-4">{{ salaryValue }}</span>
             </div>
-            <div class="">
+            <div class="fst-italic">
               <div>При клике будет показана ваша зарплата</div>
               <div>
                 Данные указаны за {{ salarytoBeEdited.quarter }} квартал
                 {{ salarytoBeEdited.year }} года
+              </div>
+              <div>
+                Изменить нынешнюю анкету невозможно, но вы можете
+                <a class="btn-link-sm" routerLink="/salaries/add-new"
+                  >добавить новую
+                </a>
               </div>
             </div>
           </div>

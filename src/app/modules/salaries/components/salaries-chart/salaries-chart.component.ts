@@ -20,6 +20,7 @@ import { LabelEntityDto } from "@services/label-entity.model";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { FileDownloadAnchor } from "@shared/value-objects/file-download-anchor";
 import { TitleService } from "@services/title.service";
+import { DateDifference } from "@shared/value-objects/date-difference";
 
 @Component({
   templateUrl: "./salaries-chart.component.html",
@@ -52,6 +53,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
   noImportSourceWasSelected = true;
   showSalariesPaginatedTable = false;
   showThankYouForFeedback = false;
+  showAddSalaryAlert = false;
 
   gradeFilter: DeveloperGrade | null = null;
 
@@ -260,11 +262,17 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
               ? new CurrentUserSalaryLabelData(x.currentUserSalary)
               : null;
 
-          // mgorbatyuk: 1 is a 'Developer' which I going to get rid off.
-          const developerProfessionId = 1;
+          const now = new Date(Date.now());
           this.showDataStub = false;
           this.shouldShowSurveyBlock = !x.hasRecentSurveyReply;
           this.showSalariesPaginatedTable = true;
+          this.showAddSalaryAlert =
+            x.currentUserSalary != null &&
+            new DateDifference(x.currentUserSalary.createdAt, now)
+              .differenceInMonths >= 12;
+
+          // mgorbatyuk: 1 is a 'Developer' which I'm going to get rid off.
+          const developerProfessionId = 1;
           this.showAdjustCurrentSalaryProfessionModal =
             x.currentUserSalary != null &&
             x.currentUserSalary.professionId === developerProfessionId;

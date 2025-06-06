@@ -188,6 +188,34 @@
     </div>
   </div>
 
+  <div class="mt-5" *ngIf="currentUserSalary != null && showAddSalaryAlert">
+    <div
+      class="alert alert-warning alert-dismissible fade show p-5"
+      role="alert"
+    >
+      <div class="d-flex justify-content-between">
+        <h4 class="alert-heading">Обновим ваши данные?</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <p>
+        Вы оставили анкету за {{ currentUserSalary.quarter }} квартал
+        {{ currentUserSalary.year }} года. Для поддержания актуальности данных,
+        предлагаем вам оставить новую анкету на текущий квартал.
+      </p>
+      <div class="mt-3">
+        <button class="btn btn-outline-dark" (click)="openAddSalaryAction()">
+          Добавить зарплату
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div
     class="card mt-5"
     *ngIf="!showDataStub && salariesChart.salariesByMoneyBarChart"

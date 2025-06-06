@@ -28,7 +28,7 @@ export abstract class RoleGuardBase implements CanActivate {
         const hasAdminPermissions =
           user != null && user.hasRole(this.roleToCheck());
         if (!hasAdminPermissions) {
-          this.router.navigateByUrl("not-permission");
+          this.router.navigateByUrl("no-permission");
           return false;
         }
         return true;

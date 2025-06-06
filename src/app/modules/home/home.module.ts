@@ -15,6 +15,7 @@ import { LogoutCallbackComponent } from "./components/logout-callback/logout-cal
 import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bot.component";
 import { FormsModule } from "@angular/forms";
 import { UnsibscribeMeComponent } from "./components/unsubscribe-me/unsubscribe-me.component";
+import { ErrorPageComponent } from "./components/error-page-component/error-page-component.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { UnsibscribeMeComponent } from "./components/unsubscribe-me/unsubscribe-
     LogoutCallbackComponent,
     TelegramBotABoutComponent,
     UnsibscribeMeComponent,
+    ErrorPageComponent,
   ],
+  exports: [ErrorPageComponent],
   imports: [CommonModule, SharedModule, HomeRoutingModule, FormsModule],
 })
 export class HomeModule {}
