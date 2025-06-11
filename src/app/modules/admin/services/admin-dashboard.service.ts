@@ -12,6 +12,7 @@ export interface AdminDashboardResponse {
   averageRatingData: AverageRatingData;
   totalSalaries: number;
   totalCompanyReviews: number;
+  usersWithUnsubscribeMeFromAllCount: number;
   userEmailsForLastDays: ItemsPerDayChartData;
   reviewLikesForLastTenDays: ItemsPerDayChartData;
   reviewsForLastTenDays: ItemsPerDayChartData;

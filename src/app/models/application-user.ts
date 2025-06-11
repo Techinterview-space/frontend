@@ -9,6 +9,7 @@ export interface ApplicationUser {
   pictureProfile: string | null;
   roles: Array<UserRole>;
   emailConfirmed: boolean;
+  unsubscribeMeFromAll: boolean;
   identityId: number | null;
   isMfaEnabled: boolean;
   deletedAt: Date | null;

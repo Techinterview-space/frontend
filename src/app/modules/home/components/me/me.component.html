@@ -12,137 +12,154 @@
 </app-page-header>
 
 <div class="container mt-5 mb-5" *ngIf="user; else dataLoading">
-  <div class="row" *ngIf="user">
-    <div class="col-sm-3 mb-3">
-      <div class="card card-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="small text-muted">Email</div>
-            <div class="small">
-              {{ user.email ?? "-" }}
-            </div>
-          </li>
+  <div class="card card-body">
+    <div class="h4">Профиль</div>
 
-          <li class="list-group-item" *ngIf="!user.emailConfirmed">
-            <div class="small text-muted">Статус email</div>
-            <div class="">
-              <span class="badge bg-warning text-dark">Не подтвержден</span>
-            </div>
-          </li>
-
-          <li class="list-group-item" *ngIf="user.deletedAt">
-            <div class="small text-muted">Статус аккаунта</div>
-            <div class="">
-              <span class="badge bg-danger text-light">Удален</span>
-            </div>
-          </li>
-
-          <li class="list-group-item">
-            <div class="small text-muted">Роли</div>
-            <div>
-              <app-user-roles-label
-                [userRoles]="user.roles"
-              ></app-user-roles-label>
-            </div>
-          </li>
-
-          <li class="list-group-item" *ngIf="user.isMfaEnabled">
-            <div class="small text-muted">Статус MFA</div>
-            <div>
-              <div class="">
-                <span class="badge bg-success text-light">Включен</span>
-              </div>
-              <div class="mt-2">
-                <button
-                  type="button"
-                  class="btn btn-outline-primary btn-sm"
-                  (click)="openDisableMfaDialog()"
-                >
-                  Выключить MFA
-                </button>
-              </div>
-            </div>
-          </li>
-
-          <li class="list-group-item" *ngIf="!user.isMfaEnabled">
-            <div class="small text-muted">Статус MFA</div>
-            <div>
-              <div class="">
-                <span class="badge bg-secondary text-light">Выключен</span>
-              </div>
-              <div class="mt-2">
-                <button
-                  type="button"
-                  class="btn btn-outline-primary btn-sm"
-                  (click)="openMfaSetupDialog()"
-                >
-                  Настроить MFA
-                </button>
-              </div>
-            </div>
-          </li>
-        </ul>
+    <div class="mt-3">
+      <div class="text-muted">Email</div>
+      <div class="mt-1">
+        {{ user.email ?? "-" }}
       </div>
+      <hr />
     </div>
 
-    <div class="col-sm-9 mb-3">
-      <div class="card card-body pb-5">
-        <div class="d-flex justify-content-between">
-          <span class="h5">Отправленные в статистику зарплаты</span>
-          <span>
-            <button
-              type="button"
-              class="btn btn-outline-dark btn-sm"
-              (click)="toggleBlurTable()"
-            >
-              {{ blurTable ? "Показать" : "Скрыть" }} зарплаты
-            </button>
-          </span>
-        </div>
-        <div
-          class="mt-5 table-responsive"
-          *ngIf="mySalaries != null && mySalaries.length > 0"
-        >
-          <table class="table table-hover" [class.blur]="blurTable">
-            <thead class="small">
-              <th></th>
-              <th>Период</th>
-              <th>Специальность</th>
-              <th>Грейд</th>
-              <th>Компания</th>
-              <th>Город</th>
-              <th>Навык</th>
-              <th>Сфера</th>
-              <th>Добавлено</th>
-            </thead>
-            <tbody>
-              <tr class="small" *ngFor="let item of mySalaries; let i = index">
-                <td>{{ item.value | formatAsMoney }}</td>
-                <td>{{ item.quarter }}.{{ item.year }}</td>
-                <td>{{ item.profession }}</td>
-                <td>
-                  <app-developer-grade-label
-                    [grade]="item.gradeAsEnum"
-                  ></app-developer-grade-label>
-                </td>
-                <td>{{ item.company }}</td>
-                <td>{{ item.city }}</td>
-                <td>{{ item.skill }}</td>
-                <td>{{ item.industry }}</td>
-                <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="mt-3" *ngIf="!user.emailConfirmed">
+      <div class="text-muted">Статус email</div>
+      <div class="mt-1">
+        <span class="badge bg-warning text-dark">Не подтвержден</span>
+      </div>
+      <hr />
+    </div>
 
-        <div
-          class="mt-5 class p-5"
-          *ngIf="mySalaries != null && mySalaries.length === 0"
+    <div class="mt-3">
+      <div class="text-muted">Отписка от всех емейлов</div>
+      <div class="mt-1">
+        <span
+          *ngIf="user.unsubscribeMeFromAll"
+          class="badge bg-warning text-dark"
+          >Да</span
         >
-          <div class="alert alert-info">
-            <span>Вы еще не отправляли зарплаты в статистику.</span>
-          </div>
+        <span *ngIf="!user.unsubscribeMeFromAll" class="badge bg-success"
+          >Нет</span
+        >
+      </div>
+      <div class="small text-muted">
+        <p>Емейлы отправляются в следующих случаях:</p>
+        <ul>
+          <li>Аппрув/реджект оставленного отзыва на компанию</li>
+          <li>Напоминание об зарплатной анкете годичной давности</li>
+        </ul>
+        <p>Никаких рекламных емейлов сервис никогда не отправит.</p>
+        <p>
+          Если вы хотите отписаться от всех емейлов, то можете сделать это в
+          следующем пришедшем письме
+        </p>
+      </div>
+      <hr />
+    </div>
+
+    <div class="mt-3">
+      <div class="text-muted">Роли</div>
+      <div class="mt-1">
+        <app-user-roles-label [userRoles]="user.roles"></app-user-roles-label>
+      </div>
+      <hr />
+    </div>
+
+    <div class="mt-3" *ngIf="user.isMfaEnabled">
+      <div class="text-muted">Статус MFA</div>
+      <div class="mt-1">
+        <div class="">
+          <span class="badge bg-success text-light">Включен</span>
         </div>
+        <div class="mt-2">
+          <button
+            type="button"
+            class="btn btn-outline-primary btn-sm"
+            (click)="openDisableMfaDialog()"
+          >
+            Выключить MFA
+          </button>
+        </div>
+      </div>
+      <hr />
+    </div>
+
+    <div class="mt-3" *ngIf="!user.isMfaEnabled">
+      <div class="text-muted">Статус MFA</div>
+      <div class="mt-1">
+        <div class="">
+          <span class="badge bg-secondary text-light">Выключен</span>
+        </div>
+        <div class="mt-1">
+          <button
+            type="button"
+            class="btn btn-outline-primary btn-sm"
+            (click)="openMfaSetupDialog()"
+          >
+            Настроить MFA
+          </button>
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <div class="card card-body mt-5 pb-5">
+    <div class="d-flex justify-content-between">
+      <span class="h5">Отправленные в статистику зарплаты</span>
+      <span>
+        <button
+          type="button"
+          class="btn btn-outline-dark btn-sm"
+          (click)="toggleBlurTable()"
+        >
+          {{ blurTable ? "Показать" : "Скрыть" }} зарплаты
+        </button>
+      </span>
+    </div>
+    <div
+      class="mt-5 table-responsive"
+      *ngIf="mySalaries != null && mySalaries.length > 0"
+    >
+      <table class="table table-hover" [class.blur]="blurTable">
+        <thead class="small">
+          <th></th>
+          <th>Период</th>
+          <th>Специальность</th>
+          <th>Грейд</th>
+          <th>Компания</th>
+          <th>Город</th>
+          <th>Навык</th>
+          <th>Сфера</th>
+          <th>Добавлено</th>
+        </thead>
+        <tbody>
+          <tr class="small" *ngFor="let item of mySalaries; let i = index">
+            <td>{{ item.value | formatAsMoney }}</td>
+            <td>{{ item.quarter }}.{{ item.year }}</td>
+            <td>{{ item.profession }}</td>
+            <td>
+              <app-developer-grade-label
+                [grade]="item.gradeAsEnum"
+              ></app-developer-grade-label>
+            </td>
+            <td>{{ item.company }}</td>
+            <td>{{ item.city }}</td>
+            <td>{{ item.skill }}</td>
+            <td>{{ item.industry }}</td>
+            <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div
+      class="mt-5 class p-5"
+      *ngIf="mySalaries != null && mySalaries.length === 0"
+    >
+      <div class="alert alert-info">
+        <span>Вы еще не отправляли зарплаты в статистику.</span>
       </div>
     </div>
   </div>

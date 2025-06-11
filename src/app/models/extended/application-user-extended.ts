@@ -34,6 +34,10 @@ export class ApplicationUserExtended implements ApplicationUser {
     return this.instance.emailConfirmed;
   }
 
+  get unsubscribeMeFromAll(): boolean {
+    return this.instance.unsubscribeMeFromAll;
+  }
+
   get identityId(): number | null {
     return this.instance.identityId;
   }

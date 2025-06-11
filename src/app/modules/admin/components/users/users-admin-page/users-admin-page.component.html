@@ -9,13 +9,16 @@
       >
         <table class="table table-hover table-sm">
           <thead>
-            <th>Id</th>
-            <th>Имя</th>
-            <th>Email</th>
-            <th>Роли</th>
-            <th>Активный</th>
-            <th>Зарегистрирован</th>
-            <th></th>
+            <tr class="small">
+              <th>Id</th>
+              <th>Имя</th>
+              <th>Email</th>
+              <th>Роли</th>
+              <th>Активный</th>
+              <th>Отписка</th>
+              <th>Зарегистрирован</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of users; let i = index" class="small">
@@ -34,6 +37,18 @@
               </td>
               <td>
                 <app-status-label [status]="item.isActive"></app-status-label>
+              </td>
+              <td>
+                <span
+                  *ngIf="item.unsubscribeMeFromAll"
+                  class="badge bg-warning text-dark"
+                  >Да</span
+                >
+                <span
+                  *ngIf="!item.unsubscribeMeFromAll"
+                  class="badge bg-success"
+                  >Нет</span
+                >
               </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
