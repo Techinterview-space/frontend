@@ -6,7 +6,10 @@ import { ApplicationUserExtended } from "@models/extended";
 import { defaultPageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { TitleService } from "@services/title.service";
-import { UserAdminService, UserSearchParams } from "@services/user-admin.service";
+import {
+  UserAdminService,
+  UserSearchParams,
+} from "@services/user-admin.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { UserRolesEditForm } from "./user-roles-edit-form";
 
@@ -33,8 +36,8 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
     private readonly fb: FormBuilder,
   ) {
     this.filterForm = this.fb.group({
-      email: [''],
-      unsubscribeMeFromAll: [null]
+      email: [""],
+      unsubscribeMeFromAll: [null],
     });
   }
 
@@ -53,7 +56,7 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
       ...defaultPageParams,
       page,
       email: formValue.email || null,
-      unsubscribeMeFromAll: formValue.unsubscribeMeFromAll
+      unsubscribeMeFromAll: formValue.unsubscribeMeFromAll,
     };
 
     this.service
@@ -100,8 +103,8 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
 
   resetFilters(): void {
     this.filterForm.reset({
-      email: '',
-      unsubscribeMeFromAll: null
+      email: "",
+      unsubscribeMeFromAll: null,
     });
     this.loadData(1);
   }

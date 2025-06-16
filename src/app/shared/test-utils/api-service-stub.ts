@@ -12,11 +12,19 @@ export class ApiServiceStub extends ApiService {
     throw Error("not implemented");
   }
 
-  override post<T>(url: string, body?: any, options?: HttpOptions): Observable<T> {
+  override post<T>(
+    url: string,
+    body?: any,
+    options?: HttpOptions,
+  ): Observable<T> {
     throw Error("not implemented");
   }
 
-  override put<T>(url: string, body: any, options?: HttpOptions): Observable<T> {
+  override put<T>(
+    url: string,
+    body: any,
+    options?: HttpOptions,
+  ): Observable<T> {
     throw Error("not implemented");
   }
 

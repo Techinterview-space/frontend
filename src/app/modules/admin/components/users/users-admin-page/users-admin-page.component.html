@@ -19,21 +19,35 @@
               />
             </div>
             <div class="col-md-4 mb-3">
-              <label for="unsubscribeMeFromAll" class="form-label">Отписка от всех емейлов</label>
-              <select class="form-select" id="unsubscribeMeFromAll" formControlName="unsubscribeMeFromAll">
+              <label for="unsubscribeMeFromAll" class="form-label"
+                >Отписка от всех емейлов</label
+              >
+              <select
+                class="form-select"
+                id="unsubscribeMeFromAll"
+                formControlName="unsubscribeMeFromAll"
+              >
                 <option [value]="null">Все</option>
                 <option [value]="true">Да</option>
                 <option [value]="false">Нет</option>
               </select>
             </div>
             <div class="col-md-4 mb-3 d-flex align-items-end">
-              <button type="submit" class="btn btn-outline-dark me-2">Применить</button>
-              <button type="button" class="btn btn-outline-secondary" (click)="resetFilters()">Сброс</button>
+              <button type="submit" class="btn btn-outline-dark me-2">
+                Применить
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="resetFilters()"
+              >
+                Сброс
+              </button>
             </div>
           </div>
         </form>
       </div>
-      
+
       <div
         class="table-responsive mb-3"
         *ngIf="users.length > 0; else nothingToShow"

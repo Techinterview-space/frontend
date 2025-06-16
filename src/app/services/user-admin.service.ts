@@ -30,7 +30,11 @@ export class UserAdminService {
   }
 
   all(
-    searchParams: UserSearchParams = { ...defaultPageParams, email: null, unsubscribeMeFromAll: null },
+    searchParams: UserSearchParams = {
+      ...defaultPageParams,
+      email: null,
+      unsubscribeMeFromAll: null,
+    },
   ): Observable<PaginatedList<ApplicationUser>> {
     return this.api.get<PaginatedList<ApplicationUser>>(
       this.apiUrl + "?" + new ConvertObjectToHttpParams(searchParams).get(),
