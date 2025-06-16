@@ -3,6 +3,51 @@
 <div class="container my-5" *ngIf="users; else dataLoading">
   <div class="card">
     <div class="card-body">
+      <!-- Filters Section -->
+      <div class="mb-4">
+        <h5>Фильтры</h5>
+        <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="Поиск по email"
+              />
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="unsubscribeMeFromAll" class="form-label"
+                >Отписка от всех емейлов</label
+              >
+              <select
+                class="form-select"
+                id="unsubscribeMeFromAll"
+                formControlName="unsubscribeMeFromAll"
+              >
+                <option [value]="null">Все</option>
+                <option [value]="true">Да</option>
+                <option [value]="false">Нет</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3 d-flex align-items-end">
+              <button type="submit" class="btn btn-outline-dark me-2">
+                Применить
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="resetFilters()"
+              >
+                Сброс
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
       <div
         class="table-responsive mb-3"
         *ngIf="users.length > 0; else nothingToShow"

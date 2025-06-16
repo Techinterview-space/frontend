@@ -10,6 +10,7 @@ export class TestApplicationUser implements ApplicationUser {
     this.email = "j.smith@gmail.com";
     this.roles = [role];
     this.emailConfirmed = true;
+    this.unsubscribeMeFromAll = false;
     this.identityId = id;
     this.deletedAt = null;
     this.createdAt = new Date();
@@ -25,6 +26,7 @@ export class TestApplicationUser implements ApplicationUser {
   lastName: string | null;
   roles: UserRole[];
   emailConfirmed: boolean;
+  unsubscribeMeFromAll: boolean;
   identityId: number | null;
   deletedAt: Date | null;
   id: number;

@@ -3,8 +3,8 @@ import { Subject } from "rxjs";
 import { Alert } from "../models/alert.model";
 
 export class AlertStubService implements IAlertService {
-  readonly onAlert$: Subject<Alert>;
-  readonly onAlertsClear$: Subject<void>;
+  readonly onAlert$: Subject<Alert> = new Subject<Alert>();
+  readonly onAlertsClear$: Subject<void> = new Subject<void>();
 
   success(message: string, keepAfterRouteChange: boolean): void {
     console.log(message);

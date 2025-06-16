@@ -8,19 +8,27 @@ export class ApiServiceStub extends ApiService {
     super(new HttpClientStub() as HttpClient);
   }
 
-  get<T>(url: string, options?: HttpOptions): Observable<T> {
+  override get<T>(url: string, options?: HttpOptions): Observable<T> {
     throw Error("not implemented");
   }
 
-  post<T>(url: string, body?: any, options?: HttpOptions): Observable<T> {
+  override post<T>(
+    url: string,
+    body?: any,
+    options?: HttpOptions,
+  ): Observable<T> {
     throw Error("not implemented");
   }
 
-  put<T>(url: string, body: any, options?: HttpOptions): Observable<T> {
+  override put<T>(
+    url: string,
+    body: any,
+    options?: HttpOptions,
+  ): Observable<T> {
     throw Error("not implemented");
   }
 
-  delete<T>(url: string, options?: HttpOptions): Observable<T> {
+  override delete<T>(url: string, options?: HttpOptions): Observable<T> {
     throw Error("not implemented");
   }
 }

@@ -7,6 +7,11 @@ import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
 
+export interface UserSearchParams extends PageParams {
+  email: string | null;
+  unsubscribeMeFromAll: boolean | null;
+}
+
 export interface UpdateUserRolesRequest {
   id: number;
   roles: Array<UserRole>;
@@ -25,10 +30,14 @@ export class UserAdminService {
   }
 
   all(
-    pageParams: PageParams = defaultPageParams,
+    searchParams: UserSearchParams = {
+      ...defaultPageParams,
+      email: null,
+      unsubscribeMeFromAll: null,
+    },
   ): Observable<PaginatedList<ApplicationUser>> {
     return this.api.get<PaginatedList<ApplicationUser>>(
-      this.apiUrl + "?" + new ConvertObjectToHttpParams(pageParams).get(),
+      this.apiUrl + "?" + new ConvertObjectToHttpParams(searchParams).get(),
     );
   }
 
