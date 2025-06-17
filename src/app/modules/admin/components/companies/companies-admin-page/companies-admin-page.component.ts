@@ -3,7 +3,10 @@ import { Router } from "@angular/router";
 import { Company } from "@models/companies.model";
 import { defaultPageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
-import { CompaniesService } from "@services/companies.service";
+import {
+  CompaniesSearchParamsForAdmin,
+  CompaniesService,
+} from "@services/companies.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { EditCompanyForm } from "../shared/edit-company-form";
@@ -17,13 +20,23 @@ import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
   standalone: false,
 })
 export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
+  readonly MIN_SEARCH_QUERY_LENGTH = 2;
+
   companies: Array<Company> | null = null;
   source: PaginatedList<Company> | null = null;
   currentPage: number = 1;
+  searchQuery: string = "";
 
   editForm: EditCompanyForm | null = null;
   itemToEdit: Company | null = null;
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
+
+  get searchButtonShouldBeEnabled(): boolean {
+    return (
+      this.searchQuery != null &&
+      this.searchQuery.length >= this.MIN_SEARCH_QUERY_LENGTH
+    );
+  }
 
   constructor(
     private readonly service: CompaniesService,
@@ -43,12 +56,14 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
     this.source = null;
     this.currentPage = pageToLoad;
 
+    const params: CompaniesSearchParamsForAdmin = {
+      companyName: this.searchQuery || null,
+      page: pageToLoad,
+      pageSize: defaultPageParams.pageSize,
+    };
+
     this.service
-      .allForAdmin({
-        searchQuery: null,
-        page: pageToLoad,
-        pageSize: defaultPageParams.pageSize,
-      })
+      .allForAdmin(params)
       .pipe(untilDestroyed(this))
       .subscribe((i) => {
         this.companies = i.results;
@@ -58,6 +73,27 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.title.resetTitle();
+  }
+
+  search(): void {
+    if (this.searchButtonShouldBeEnabled) {
+      this.currentPage = 1;
+      this.loadData(1);
+    }
+  }
+
+  onKeyupEvent(event: KeyboardEvent): void {
+    if (event.key === "Enter") {
+      this.search();
+    }
+  }
+
+  clearSearch(): void {
+    if (this.searchQuery.length >= this.MIN_SEARCH_QUERY_LENGTH) {
+      this.searchQuery = "";
+      this.currentPage = 1;
+      this.loadData(1);
+    }
   }
 
   edit(item: Company): void {
