@@ -8,11 +8,11 @@
     показано по 4 линии на графике: медиана и средняя в Казахстане и медиана и
     средняя на удаленке.
   </div>
-  <div class="">
+  <div class="d-flex flex-wrap gap-2">
     <button
       *ngFor="let button of gradesButtons"
       type="button"
-      class="me-2 btn btn-sm {{ button.bgCss }} {{ button.textCss }}"
+      class="btn btn-sm {{ button.bgCss }} {{ button.textCss }}"
       (click)="button.toggle()"
     >
       {{ button.label }}

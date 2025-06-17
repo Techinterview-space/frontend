@@ -1,5 +1,9 @@
 canvas {
   min-height: 250px;
+  
+  @media (max-width: 768px) {
+    min-height: 200px;
+  }
 }
 
 #canvas-container {
@@ -8,6 +12,11 @@ canvas {
   height: 100%;
   min-height: 250px;
   max-height: 500px;
+  
+  @media (max-width: 768px) {
+    min-height: 200px;
+    max-height: 350px;
+  }
 }
 
 .list-group-item {

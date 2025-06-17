@@ -23,7 +23,8 @@
   <div class="mb-2" *ngIf="barsForLocal.length > 0">
     <div class="h5 mb-2">Казахстанские компании</div>
     <div>
-      <table class="table table-hover table-sm">
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
         <thead>
           <tr>
             <th scope="col">Гендер</th>
@@ -44,6 +45,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div class="mt-2" *ngIf="salariesByGenderChartForLocal != null">
@@ -57,7 +59,8 @@
   <div class="mt-5" *ngIf="barsForRemote.length > 0">
     <div class="h5 mb-2">Валютная удаленка</div>
     <div>
-      <table class="table table-hover table-sm">
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
         <thead>
           <tr>
             <th scope="col">Гендер</th>
@@ -78,6 +81,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div class="mt-2" *ngIf="salariesByGenderChartForRemote != null">
