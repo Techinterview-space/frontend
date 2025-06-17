@@ -17,13 +17,23 @@ import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
   standalone: false,
 })
 export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
+  readonly MIN_SEARCH_QUERY_LENGTH = 2;
+
   companies: Array<Company> | null = null;
   source: PaginatedList<Company> | null = null;
   currentPage: number = 1;
+  searchQuery: string = "";
 
   editForm: EditCompanyForm | null = null;
   itemToEdit: Company | null = null;
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
+
+  get searchButtonShouldBeEnabled(): boolean {
+    return (
+      this.searchQuery != null &&
+      this.searchQuery.length >= this.MIN_SEARCH_QUERY_LENGTH
+    );
+  }
 
   constructor(
     private readonly service: CompaniesService,
@@ -45,7 +55,7 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
 
     this.service
       .allForAdmin({
-        searchQuery: null,
+        searchQuery: this.searchQuery || null,
         page: pageToLoad,
         pageSize: defaultPageParams.pageSize,
       })
@@ -58,6 +68,27 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.title.resetTitle();
+  }
+
+  search(): void {
+    if (this.searchButtonShouldBeEnabled) {
+      this.currentPage = 1;
+      this.loadData(1);
+    }
+  }
+
+  onKeyupEvent(event: KeyboardEvent): void {
+    if (event.key === "Enter") {
+      this.search();
+    }
+  }
+
+  clearSearch(): void {
+    if (this.searchQuery.length >= this.MIN_SEARCH_QUERY_LENGTH) {
+      this.searchQuery = "";
+      this.currentPage = 1;
+      this.loadData(1);
+    }
   }
 
   edit(item: Company): void {
