@@ -34,7 +34,7 @@ export class MetaTagService {
 
     const title = "Techinterview.space";
     const description =
-      "Зарплаты в IT в Казахстане. Цифры, графики, фильтр. Всё как все мы любим";
+      "Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим";
 
     this.meta.addTags([
       { property: "og:title", content: title },
