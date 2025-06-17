@@ -8,7 +8,9 @@
           <div class="col-md-6 mb-1">
             <input
               type="text"
-              placeholder="Поиск по названию компании. Минимум {{ MIN_SEARCH_QUERY_LENGTH }} символа"
+              placeholder="Поиск по названию компании. Минимум {{
+                MIN_SEARCH_QUERY_LENGTH
+              }} символа"
               class="form-control"
               id="searchQuery"
               [(ngModel)]="searchQuery"
@@ -35,7 +37,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="mb-5">
         <button class="btn btn-primary" (click)="create()">
           Добавить компанию

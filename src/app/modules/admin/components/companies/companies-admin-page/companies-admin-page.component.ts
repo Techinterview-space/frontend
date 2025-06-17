@@ -3,7 +3,10 @@ import { Router } from "@angular/router";
 import { Company } from "@models/companies.model";
 import { defaultPageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
-import { CompaniesService } from "@services/companies.service";
+import {
+  CompaniesSearchParamsForAdmin,
+  CompaniesService,
+} from "@services/companies.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { EditCompanyForm } from "../shared/edit-company-form";
@@ -53,12 +56,12 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
     this.source = null;
     this.currentPage = pageToLoad;
 
-    const params: any = {
+    const params: CompaniesSearchParamsForAdmin = {
       companyName: this.searchQuery || null,
       page: pageToLoad,
       pageSize: defaultPageParams.pageSize,
     };
-    
+
     this.service
       .allForAdmin(params)
       .pipe(untilDestroyed(this))

@@ -10,12 +10,13 @@ import { PageParams } from "@models/page-params";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { PaginatedList } from "@models/paginated-list";
 
-export interface CompaniesSearchParams extends CompaniesSearchParamsForAdmin {
+export interface CompaniesSearchParams extends PageParams {
+  searchQuery: string | null;
   withRating: boolean;
 }
 
 export interface CompaniesSearchParamsForAdmin extends PageParams {
-  searchQuery: string | null;
+  companyName: string | null;
 }
 
 export interface CompanyEditRequest {

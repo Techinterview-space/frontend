@@ -45,10 +45,10 @@ describe("CompaniesAdminPageComponent", () => {
 
   it("should clear search query and reload data", () => {
     component.searchQuery = "test";
-    spyOn(component, 'loadData');
-    
+    spyOn(component, "loadData");
+
     component.clearSearch();
-    
+
     expect(component.searchQuery).toBe("");
     expect(component.currentPage).toBe(1);
     expect(component.loadData).toHaveBeenCalledWith(1);
@@ -56,11 +56,11 @@ describe("CompaniesAdminPageComponent", () => {
 
   it("should trigger search on Enter key press", () => {
     component.searchQuery = "test";
-    spyOn(component, 'search');
-    
-    const event = new KeyboardEvent('keyup', { key: 'Enter' });
+    spyOn(component, "search");
+
+    const event = new KeyboardEvent("keyup", { key: "Enter" });
     component.onKeyupEvent(event);
-    
+
     expect(component.search).toHaveBeenCalled();
   });
 });
