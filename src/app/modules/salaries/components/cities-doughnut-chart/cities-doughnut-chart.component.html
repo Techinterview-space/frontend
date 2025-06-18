@@ -2,7 +2,7 @@
   <div class="h5 mb-3">Где живут респонденты</div>
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-12 col-md-3 mb-3 mb-md-0">
       <div class="mb-1">
         <input
           type="checkbox"
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-12 col-md-9">
       <div class="" *ngIf="canvasId">
         <div id="canvas-container">
           <canvas [attr.id]="canvasId">{{ chartDataLocal }}</canvas>

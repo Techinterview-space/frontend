@@ -23,27 +23,29 @@
   <div class="mb-2" *ngIf="barsForLocal.length > 0">
     <div class="h5 mb-2">Казахстанские компании</div>
     <div>
-      <table class="table table-hover table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Гендер</th>
-            <th scope="col">Кол-во анкет</th>
-            <th scope="col">Доля</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of barsForLocal" class="small">
-            <td>{{ item.label }}</td>
-            <td>{{ item.value | formatAsMoney: 0 }}</td>
-            <td>{{ item.part | formatAsMoney: 3 }}%</td>
-          </tr>
-          <tr class="small">
-            <td class="text-muted">Всего</td>
-            <td>{{ totalCountLocal | formatAsMoney: 0 }}</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Гендер</th>
+              <th scope="col">Кол-во анкет</th>
+              <th scope="col">Доля</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of barsForLocal" class="small">
+              <td>{{ item.label }}</td>
+              <td>{{ item.value | formatAsMoney: 0 }}</td>
+              <td>{{ item.part | formatAsMoney: 3 }}%</td>
+            </tr>
+            <tr class="small">
+              <td class="text-muted">Всего</td>
+              <td>{{ totalCountLocal | formatAsMoney: 0 }}</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="mt-2" *ngIf="salariesByGenderChartForLocal != null">
@@ -57,27 +59,29 @@
   <div class="mt-5" *ngIf="barsForRemote.length > 0">
     <div class="h5 mb-2">Валютная удаленка</div>
     <div>
-      <table class="table table-hover table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Гендер</th>
-            <th scope="col">Кол-во анкет</th>
-            <th scope="col">Доля</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of barsForRemote" class="small">
-            <td>{{ item.label }}</td>
-            <td>{{ item.value }}</td>
-            <td>{{ item.part | number: "1.3" }}%</td>
-          </tr>
-          <tr class="small">
-            <td class="text-muted">Всего</td>
-            <td>{{ totalCountRemote }}</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Гендер</th>
+              <th scope="col">Кол-во анкет</th>
+              <th scope="col">Доля</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of barsForRemote" class="small">
+              <td>{{ item.label }}</td>
+              <td>{{ item.value }}</td>
+              <td>{{ item.part | number: "1.3" }}%</td>
+            </tr>
+            <tr class="small">
+              <td class="text-muted">Всего</td>
+              <td>{{ totalCountRemote }}</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="mt-2" *ngIf="salariesByGenderChartForRemote != null">
