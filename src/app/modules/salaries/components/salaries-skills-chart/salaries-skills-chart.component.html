@@ -46,26 +46,26 @@
   <div *ngIf="tableRows" class="mt-2">
     <div class="table-responsive">
       <table class="table table-hover table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Навык</th>
-          <th scope="col">Кол-во анкет</th>
-          <th scope="col">Доля</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of tableRows" class="small">
-          <td>{{ item.title }}</td>
-          <td>{{ item.value }}</td>
-          <td>{{ item.part | number: "1.3" }}%</td>
-        </tr>
-        <tr class="small">
-          <td class="text-muted">Всего анкет с данными</td>
-          <td>{{ totalCount }}</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+        <thead>
+          <tr>
+            <th scope="col">Навык</th>
+            <th scope="col">Кол-во анкет</th>
+            <th scope="col">Доля</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tableRows" class="small">
+            <td>{{ item.title }}</td>
+            <td>{{ item.value }}</td>
+            <td>{{ item.part | number: "1.3" }}%</td>
+          </tr>
+          <tr class="small">
+            <td class="text-muted">Всего анкет с данными</td>
+            <td>{{ totalCount }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
