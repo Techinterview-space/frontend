@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { GitHubAdminService } from "@services/github-admin.service";
-import { GitHubProcessingJob, GitHubJobStatus } from "@models/github";
+import { GitHubProcessingJob } from "@models/github";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 
@@ -41,7 +41,7 @@ export class GitHubJobsPageComponent implements OnInit, OnDestroy {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
         "Delete Processing Job",
-        `Are you sure you want to delete job "${job.jobType}" (ID: ${job.id})?`,
+        `Are you sure you want to delete job "${job.username}"?`,
         () => {
           this.deleteJob(job);
         },
@@ -51,41 +51,11 @@ export class GitHubJobsPageComponent implements OnInit, OnDestroy {
 
   deleteJob(job: GitHubProcessingJob): void {
     this.service
-      .deleteProcessingJob(job.id)
+      .deleteProcessingJob(job.username)
       .pipe(untilDestroyed(this))
       .subscribe(() => {
         this.loadData(); // Reload data after deletion
       });
-  }
-
-  getStatusLabel(status: GitHubJobStatus): string {
-    switch (status) {
-      case GitHubJobStatus.Pending:
-        return "Pending";
-      case GitHubJobStatus.Processing:
-        return "Processing";
-      case GitHubJobStatus.Completed:
-        return "Completed";
-      case GitHubJobStatus.Failed:
-        return "Failed";
-      default:
-        return "Unknown";
-    }
-  }
-
-  getStatusClass(status: GitHubJobStatus): string {
-    switch (status) {
-      case GitHubJobStatus.Pending:
-        return "badge bg-warning";
-      case GitHubJobStatus.Processing:
-        return "badge bg-info";
-      case GitHubJobStatus.Completed:
-        return "badge bg-success";
-      case GitHubJobStatus.Failed:
-        return "badge bg-danger";
-      default:
-        return "badge bg-secondary";
-    }
   }
 
   ngOnDestroy(): void {

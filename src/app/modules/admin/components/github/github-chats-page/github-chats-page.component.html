@@ -1,4 +1,4 @@
-<app-page-header>GitHub Telegram Bot Chats</app-page-header>
+<app-page-header>Чаты с Github Bot</app-page-header>
 
 <div class="container my-5" *ngIf="chats; else dataLoading">
   <div class="card">
@@ -41,25 +41,18 @@
         <table class="table table-hover table-sm">
           <thead class="small">
             <th>Chat ID</th>
-            <th>Chat Name</th>
-            <th>Usage Count</th>
-            <th>GitHub Profiles</th>
-            <th>Created</th>
-            <th>Updated</th>
+            <th>Username</th>
+            <th>Обращений</th>
+            <th>Admin?</th>
+            <th>Создано</th>
+            <th>Обновлено</th>
           </thead>
           <tbody>
             <tr class="small" *ngFor="let chat of chats; let i = index">
               <td>{{ chat.chatId }}</td>
-              <td>{{ chat.chatName || "-" }}</td>
-              <td>{{ chat.usageCount | formatAsMoney }}</td>
-              <td>
-                <span *ngIf="chat.githubProfiles && chat.githubProfiles.length > 0">
-                  {{ chat.githubProfiles.length }} profile(s)
-                </span>
-                <span *ngIf="!chat.githubProfiles || chat.githubProfiles.length === 0">
-                  No profiles
-                </span>
-              </td>
+              <td>{{ chat.username }}</td>
+              <td>{{ chat.messagesCount | formatAsMoney }}</td>
+              <td>{{ chat.isAdmin }}</td>
               <td>{{ chat.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ chat.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
             </tr>

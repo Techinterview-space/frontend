@@ -1,4 +1,4 @@
-<app-page-header>GitHub Profiles</app-page-header>
+<app-page-header>Запрошенные GitHub профили</app-page-header>
 
 <div class="container my-5" *ngIf="profiles; else dataLoading">
   <div class="card">
@@ -40,40 +40,24 @@
       >
         <table class="table table-hover table-sm">
           <thead class="small">
-            <th>Avatar</th>
             <th>Username</th>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Public Repos</th>
-            <th>Followers</th>
-            <th>Following</th>
-            <th>Created</th>
-            <th>Actions</th>
+            <th>Версия</th>
+            <th>Запросов</th>
+            <th>Последний синк</th>
+            <th>Создано</th>
+            <th>Обновлено</th>
+            <th></th>
           </thead>
           <tbody>
             <tr class="small" *ngFor="let profile of profiles; let i = index">
               <td>
-                <img
-                  *ngIf="profile.avatarUrl"
-                  [src]="profile.avatarUrl"
-                  alt="Avatar"
-                  class="rounded-circle"
-                  width="32"
-                  height="32"
-                />
-                <span *ngIf="!profile.avatarUrl">-</span>
+                {{ profile.username }}
               </td>
-              <td>
-                <a [href]="profile.profileUrl" target="_blank" class="text-decoration-none">
-                  {{ profile.username }}
-                </a>
-              </td>
-              <td>{{ profile.name || "-" }}</td>
-              <td>{{ profile.location || "-" }}</td>
-              <td>{{ profile.publicRepos | formatAsMoney }}</td>
-              <td>{{ profile.followers | formatAsMoney }}</td>
-              <td>{{ profile.following | formatAsMoney }}</td>
+              <td>{{ profile.version }}</td>
+              <td>{{ profile.requestsCount }}</td>
+              <td>{{ profile.dataSyncedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ profile.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ profile.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
                 <button
                   type="button"

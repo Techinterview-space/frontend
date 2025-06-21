@@ -19,7 +19,7 @@ export class GitHubAdminService {
   private readonly apiUrl: string;
 
   constructor(private readonly api: ApiService) {
-    this.apiUrl = `/api/admin/github/`;
+    this.apiUrl = `/api/github/`;
   }
 
   getProfiles(
@@ -44,7 +44,7 @@ export class GitHubAdminService {
     return this.api.get<GitHubProcessingJob[]>(this.apiUrl + "processing-jobs");
   }
 
-  deleteProcessingJob(id: string): Observable<void> {
-    return this.api.delete<void>(this.apiUrl + "processing-jobs/" + id);
+  deleteProcessingJob(username: string): Observable<void> {
+    return this.api.delete<void>(this.apiUrl + "processing-jobs/" + username);
   }
 }

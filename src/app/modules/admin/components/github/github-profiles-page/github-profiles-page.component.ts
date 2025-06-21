@@ -20,7 +20,7 @@ export class GitHubProfilesPageComponent implements OnInit, OnDestroy {
     private readonly service: GitHubAdminService,
     titleService: TitleService,
   ) {
-    titleService.setTitle("GitHub Profiles");
+    titleService.setTitle("GitHub профили");
   }
 
   ngOnInit(): void {
