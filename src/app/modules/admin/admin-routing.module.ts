@@ -19,6 +19,9 @@ import { CompaniesAdminPageComponent } from "./components/companies/companies-ad
 import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
 import { ReviewsToApprovePageComponent } from "./components/companies/reviews-to-approve/reviews-to-approve-page.component";
 import { InlineRepliesStatsComponent } from "./components/telegram/inline-replies-stats/inline-replies-stats.component";
+import { GitHubProfilesPageComponent } from "./components/github/github-profiles-page/github-profiles-page.component";
+import { GitHubChatsPageComponent } from "./components/github/github-chats-page/github-chats-page.component";
+import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -61,6 +64,10 @@ const routes: Routes = [
     component: ReviewsToApprovePageComponent,
   },
   { path: "companies/:id", component: CompanyAdminPageComponent },
+
+  { path: "github/profiles", component: GitHubProfilesPageComponent },
+  { path: "github/chats", component: GitHubChatsPageComponent },
+  { path: "github/processing-jobs", component: GitHubJobsPageComponent },
 ];
 
 @NgModule({

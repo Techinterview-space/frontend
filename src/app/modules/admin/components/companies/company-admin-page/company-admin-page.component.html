@@ -199,18 +199,18 @@
     <div class="mb-2">
       <span class="text-muted">Среднее: </span>
       <span class="fw-bold ms-2">{{
-        reviewToShow?.totalRating | number: "1.2-2"
+        reviewToShow.totalRating | number: "1.2-2"
       }}</span>
     </div>
 
     <div class="mb-2">
       <div class="fw-bold text-success">Плюсы</div>
-      <div [innerHTML]="reviewToShow?.pros"></div>
+      <div [innerHTML]="reviewToShow.pros"></div>
     </div>
 
     <div class="mb-2">
       <div class="fw-bold text-danger">Минусы</div>
-      <div [innerHTML]="reviewToShow?.cons"></div>
+      <div [innerHTML]="reviewToShow.cons"></div>
     </div>
 
     <div class="mb-2">

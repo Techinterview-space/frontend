@@ -124,6 +124,26 @@ export class AdminNavbarComponent {
         ],
       },
       {
+        title: "Github bot",
+        links: [
+          {
+            title: "Запрошенные профили",
+            url: "/admin/github/profiles",
+            isExternal: false,
+          },
+          {
+            title: "Чаты",
+            url: "/admin/github/chats",
+            isExternal: false,
+          },
+          {
+            title: "Джобы",
+            url: "/admin/github/processing-jobs",
+            isExternal: false,
+          },
+        ],
+      },
+      {
         title: "Инструменты",
         links: [
           {
