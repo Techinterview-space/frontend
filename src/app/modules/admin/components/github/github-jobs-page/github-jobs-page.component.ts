@@ -18,7 +18,7 @@ export class GitHubJobsPageComponent implements OnInit, OnDestroy {
     private readonly service: GitHubAdminService,
     titleService: TitleService,
   ) {
-    titleService.setTitle("GitHub Processing Jobs");
+    titleService.setTitle("GitHub Джобы");
   }
 
   ngOnInit(): void {
@@ -40,8 +40,8 @@ export class GitHubJobsPageComponent implements OnInit, OnDestroy {
   openDeleteDialog(job: GitHubProcessingJob): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
-        "Delete Processing Job",
-        `Are you sure you want to delete job "${job.username}"?`,
+        "Удалить джобу",
+        `Вы уверены, что хотите удалить джобу "${job.username}"?`,
         () => {
           this.deleteJob(job);
         },
@@ -54,7 +54,7 @@ export class GitHubJobsPageComponent implements OnInit, OnDestroy {
       .deleteProcessingJob(job.username)
       .pipe(untilDestroyed(this))
       .subscribe(() => {
-        this.loadData(); // Reload data after deletion
+        this.loadData();
       });
   }
 

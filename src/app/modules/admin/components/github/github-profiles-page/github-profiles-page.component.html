@@ -2,7 +2,7 @@
 
 <div class="container my-5" *ngIf="profiles; else dataLoading">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body p-1">
       <!-- Search Field -->
       <div class="row mb-3">
         <div class="col-md-4">
@@ -62,10 +62,9 @@
                 <button
                   type="button"
                   class="btn btn-sm btn-outline-danger"
-                  disabled
-                  title="Deletion endpoint will be implemented later"
+                  (click)="openDeleteDialog(profile)"
                 >
-                  Delete
+                  Удалить
                 </button>
               </td>
             </tr>
@@ -96,3 +95,8 @@
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

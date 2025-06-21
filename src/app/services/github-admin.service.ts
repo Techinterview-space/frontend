@@ -7,11 +7,11 @@ import { ApiService } from "./api.service";
 import { GitHubProfile, GitHubChat, GitHubProcessingJob } from "@models/github";
 
 export interface GitHubProfilesQueryParams extends PageParams {
-  search?: string;
+  search: string | null;
 }
 
 export interface GitHubChatsQueryParams extends PageParams {
-  search?: string;
+  search: string | null;
 }
 
 @Injectable()
@@ -23,7 +23,7 @@ export class GitHubAdminService {
   }
 
   getProfiles(
-    params: GitHubProfilesQueryParams = defaultPageParams,
+    params: GitHubProfilesQueryParams,
   ): Observable<PaginatedList<GitHubProfile>> {
     const httpParams = new ConvertObjectToHttpParams(params).get();
     return this.api.get<PaginatedList<GitHubProfile>>(
@@ -32,7 +32,7 @@ export class GitHubAdminService {
   }
 
   getChats(
-    params: GitHubChatsQueryParams = defaultPageParams,
+    params: GitHubChatsQueryParams,
   ): Observable<PaginatedList<GitHubChat>> {
     const httpParams = new ConvertObjectToHttpParams(params).get();
     return this.api.get<PaginatedList<GitHubChat>>(
@@ -46,5 +46,9 @@ export class GitHubAdminService {
 
   deleteProcessingJob(username: string): Observable<void> {
     return this.api.delete<void>(this.apiUrl + "processing-jobs/" + username);
+  }
+
+  deleteProfile(username: string): Observable<void> {
+    return this.api.delete<void>(this.apiUrl + "profiles/" + username);
   }
 }

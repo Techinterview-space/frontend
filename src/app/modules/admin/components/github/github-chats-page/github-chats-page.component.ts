@@ -40,7 +40,7 @@ export class GitHubChatsPageComponent implements OnInit, OnDestroy {
       .getChats({
         page: this.currentPage,
         pageSize: defaultPageParams.pageSize,
-        search: this.searchQuery || undefined,
+        search: this.searchQuery || null,
       })
       .pipe(untilDestroyed(this))
       .subscribe((x) => {
