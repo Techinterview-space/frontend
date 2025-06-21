@@ -23,12 +23,16 @@ import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-c
 import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
 import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
 import { AdminDashboardService } from "./services/admin-dashboard.service";
+import { GitHubAdminService } from "@services/github-admin.service";
 import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
 import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
 import { ReviewsToApprovePageComponent } from "./components/companies/reviews-to-approve/reviews-to-approve-page.component";
 import { InlineRepliesStatsComponent } from "./components/telegram/inline-replies-stats/inline-replies-stats.component";
+import { GitHubProfilesPageComponent } from "./components/github/github-profiles-page/github-profiles-page.component";
+import { GitHubChatsPageComponent } from "./components/github/github-chats-page/github-chats-page.component";
+import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
 
-const adminServices = [AdminDashboardService];
+const adminServices = [AdminDashboardService, GitHubAdminService];
 
 @NgModule({
   declarations: [
@@ -54,6 +58,9 @@ const adminServices = [AdminDashboardService];
     CompanyAdminPageComponent,
     ReviewsToApprovePageComponent,
     InlineRepliesStatsComponent,
+    GitHubProfilesPageComponent,
+    GitHubChatsPageComponent,
+    GitHubJobsPageComponent,
   ],
   imports: [
     CommonModule,

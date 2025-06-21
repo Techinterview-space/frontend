@@ -1,0 +1,94 @@
+<app-page-header>GitHub Processing Jobs</app-page-header>
+
+<div class="container my-5" *ngIf="jobs; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="loadData()"
+        >
+          Refresh
+        </button>
+      </div>
+
+      <div
+        class="table-responsive mb-3"
+        *ngIf="jobs && jobs.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
+          <thead class="small">
+            <th>ID</th>
+            <th>Job Type</th>
+            <th>Status</th>
+            <th>GitHub Profile</th>
+            <th>Error Message</th>
+            <th>Processed At</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <tr class="small" *ngFor="let job of jobs; let i = index">
+              <td class="font-monospace">{{ job.id }}</td>
+              <td>{{ job.jobType }}</td>
+              <td>
+                <span [class]="getStatusClass(job.status)">
+                  {{ getStatusLabel(job.status) }}
+                </span>
+              </td>
+              <td>
+                <span *ngIf="job.githubProfile">
+                  <a [href]="job.githubProfile.profileUrl" target="_blank" class="text-decoration-none">
+                    {{ job.githubProfile.username }}
+                  </a>
+                </span>
+                <span *ngIf="!job.githubProfile">-</span>
+              </td>
+              <td>
+                <span *ngIf="job.errorMessage" 
+                      [title]="job.errorMessage"
+                      class="text-danger">
+                  {{ job.errorMessage.length > 50 ? (job.errorMessage | slice:0:50) + '...' : job.errorMessage }}
+                </span>
+                <span *ngIf="!job.errorMessage">-</span>
+              </td>
+              <td>
+                {{ job.processedAt ? (job.processedAt | date: "yyyy-MM-dd HH:mm") : "-" }}
+              </td>
+              <td>{{ job.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="openDeleteDialog(job)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">No processing jobs found.</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

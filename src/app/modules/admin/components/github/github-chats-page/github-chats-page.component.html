@@ -1,0 +1,92 @@
+<app-page-header>GitHub Telegram Bot Chats</app-page-header>
+
+<div class="container my-5" *ngIf="chats; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <!-- Search Field -->
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="search" class="form-label">Поиск по названию чата</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id="search"
+            name="search"
+            [(ngModel)]="searchQuery"
+            placeholder="Введите название чата..."
+          />
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-primary"
+            (click)="onSearch()"
+          >
+            Поиск
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-dark ms-2"
+            (click)="clearSearch()"
+          >
+            Сброс
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="table-responsive mb-3"
+        *ngIf="chats && chats.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
+          <thead class="small">
+            <th>Chat ID</th>
+            <th>Chat Name</th>
+            <th>Usage Count</th>
+            <th>GitHub Profiles</th>
+            <th>Created</th>
+            <th>Updated</th>
+          </thead>
+          <tbody>
+            <tr class="small" *ngFor="let chat of chats; let i = index">
+              <td>{{ chat.chatId }}</td>
+              <td>{{ chat.chatName || "-" }}</td>
+              <td>{{ chat.usageCount | formatAsMoney }}</td>
+              <td>
+                <span *ngIf="chat.githubProfiles && chat.githubProfiles.length > 0">
+                  {{ chat.githubProfiles.length }} profile(s)
+                </span>
+                <span *ngIf="!chat.githubProfiles || chat.githubProfiles.length === 0">
+                  No profiles
+                </span>
+              </td>
+              <td>{{ chat.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ chat.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">Нет данных.</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
