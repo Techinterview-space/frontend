@@ -11,7 +11,7 @@ export class TelegramBotABoutComponent implements OnDestroy {
   imageLinkToShowInModal: string | null = null;
 
   constructor(private readonly titleService: TitleService) {
-    this.titleService.setTitle("О телеграм боте");
+    this.titleService.setTitle("О ботах в Telegram");
   }
 
   openImage(link: string): void {
