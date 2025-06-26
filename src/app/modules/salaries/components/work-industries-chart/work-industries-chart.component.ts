@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
 import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { WorkIndustriesChartDataObject } from "./work-industries-chart-data-object";
 import { WorkIndustriesChartData } from "@services/user-salaries.service";
@@ -24,7 +24,7 @@ class TableRow {
   styleUrl: "./work-industries-chart.component.scss",
   standalone: false,
 })
-export class WorkIndustriesChartComponent {
+export class WorkIndustriesChartComponent implements OnInit {
   @Input()
   chartData: WorkIndustriesChartData | null = null;
 
