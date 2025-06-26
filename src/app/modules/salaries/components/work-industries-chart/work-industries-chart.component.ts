@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
-import { WorkIndustriesChartJsObject } from "./work-industries-chart-js-object";
+import { UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { WorkIndustriesChartDataObject } from "./work-industries-chart-data-object";
+import { WorkIndustriesChartData } from "@services/user-salaries.service";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 class TableRow {
@@ -8,11 +9,11 @@ class TableRow {
   readonly part: number;
 
   constructor(
-    private readonly skill: LabelEntityDto,
+    private readonly industry: LabelEntityDto,
     readonly value: number,
     private readonly totalCount: number,
   ) {
-    this.title = skill.title;
+    this.title = industry.title;
     this.part = (value / totalCount) * 100;
   }
 }
@@ -25,18 +26,15 @@ class TableRow {
 })
 export class WorkIndustriesChartComponent {
   @Input()
-  industries: Array<LabelEntityDto> = [];
+  chartData: WorkIndustriesChartData | null = null;
 
   @Input()
   currentSalary: UserSalaryAdminDto | null = null;
 
-  @Input()
-  salaries: Array<UserSalary> | null = null;
-
   @Output()
   editSalaryActionClick = new EventEmitter<void>();
 
-  chartDataLocal: WorkIndustriesChartJsObject | null = null;
+  chartDataLocal: WorkIndustriesChartDataObject | null = null;
   showNoDataArea = false;
   tableRows: Array<TableRow> | null = null;
   totalCount = 0;
@@ -46,28 +44,16 @@ export class WorkIndustriesChartComponent {
   constructor() {}
 
   ngOnInit(): void {
-    if (
-      this.salaries == null ||
-      this.salaries.length === 0 ||
-      this.industries.length === 0
-    ) {
+    if (this.chartData == null || this.chartData.items.length === 0) {
       return;
     }
 
-    const uniqueItems = WorkIndustriesChartJsObject.prepareUniqueIndustries(
-      this.salaries,
-      this.industries,
-    );
-
-    const salariesWithIndustry = this.salaries.filter((x) => x.skillId != null);
-    this.tableRows = uniqueItems
-      .map((x) => {
-        const value = salariesWithIndustry.filter(
-          (s) => s.workIndustryId === x.id,
-        ).length;
-
-        this.totalCount += value;
-        return new TableRow(x, value, salariesWithIndustry.length ?? 0);
+    const totalDataCount = this.chartData.items.reduce((sum, item) => sum + item.count, 0);
+    this.totalCount = totalDataCount;
+    
+    this.tableRows = this.chartData.items
+      .map((item) => {
+        return new TableRow(item.industry, item.count, totalDataCount);
       })
       .sort((a, b) => b.part - a.part);
   }
@@ -85,18 +71,13 @@ export class WorkIndustriesChartComponent {
   }
 
   private initChart(): void {
-    if (
-      this.salaries == null ||
-      this.salaries.length === 0 ||
-      this.industries.length === 0
-    ) {
+    if (this.chartData == null || this.chartData.items.length === 0) {
       return;
     }
 
-    this.chartDataLocal = new WorkIndustriesChartJsObject(
+    this.chartDataLocal = new WorkIndustriesChartDataObject(
       this.canvasId,
-      this.salaries,
-      this.industries,
+      this.chartData,
     );
 
     var chartEl = document.getElementById(this.canvasId);
