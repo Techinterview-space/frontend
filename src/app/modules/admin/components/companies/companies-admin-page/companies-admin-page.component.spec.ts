@@ -11,6 +11,7 @@ import { CompaniesAdminPageComponent } from "./companies-admin-page.component";
 import { CompaniesService } from "@services/companies.service";
 import { of } from "rxjs";
 import { Company } from "@models/companies.model";
+import { OpenAiChatResult } from "@models/open-ai.model";
 
 describe("CompaniesAdminPageComponent", () => {
   let component: CompaniesAdminPageComponent;
@@ -75,15 +76,16 @@ describe("CompaniesAdminPageComponent", () => {
       slug: "test-company",
     } as Company;
 
-    const mockAiResult = {
-      content: "Test analysis",
-      role: "assistant",
-      finishReason: "stop",
-      usage: {
-        promptTokens: 10,
-        completionTokens: 20,
-        totalTokens: 30,
-      },
+    const mockAiResult: OpenAiChatResult = {
+      isSuccess: true,
+      choises: [
+        {
+          message: {
+            role: "assistant",
+            content: "Test analysis",
+          },
+        },
+      ],
     };
 
     spyOn(companiesService, "getOpenAiAnalysis").and.returnValue(

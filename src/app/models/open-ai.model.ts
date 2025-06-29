@@ -35,13 +35,14 @@ export interface OpenAiAnalysis {
   report: OpenAiReport;
 }
 
+export interface OpenAiChatChoise {
+  message: {
+    role: string;
+    content: string;
+  }
+}
+
 export interface OpenAiChatResult {
-  content: string;
-  role: string;
-  finishReason: string;
-  usage: {
-    promptTokens: number;
-    completionTokens: number;
-    totalTokens: number;
-  };
+  isSuccess: boolean;
+  choises: Array<OpenAiChatChoise>;
 }
