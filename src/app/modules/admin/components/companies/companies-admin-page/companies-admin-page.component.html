@@ -169,15 +169,15 @@
 >
   <div *ngIf="aiAnalysisData">
     <div class="p-2">
-      <textarea
-        #aiAnalysisInput
-        class="form-control"
-        rows="30"
-        readonly
-      >{{ aiAnalysisJsonContent }}</textarea>
+      <textarea #aiAnalysisInput class="form-control" rows="30" readonly>{{
+        aiAnalysisJsonContent
+      }}</textarea>
     </div>
     <div class="p-1 d-flex justify-content-between">
-      <button class="btn btn-outline-secondary" (click)="onAiAnalysisModalClose()">
+      <button
+        class="btn btn-outline-secondary"
+        (click)="onAiAnalysisModalClose()"
+      >
         Закрыть
       </button>
       <button

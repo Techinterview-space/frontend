@@ -35,13 +35,13 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
   // AI Analysis modal properties
   aiAnalysisData: OpenAiChatResult | null = null;
   aiAnalysisJsonContent: string = "";
-  
+
   // Copy button properties (similar to interview markdown modal)
   private readonly copyBtnDefaultTitle = "Копировать";
   private readonly copyBtnDefaultIcon = "bi bi-clipboard2-check";
   private readonly copiedBtnTitle = "Скопировано";
   private readonly copiedBtnIcon = "bi bi-check2";
-  
+
   copyBtnTitle = this.copyBtnDefaultTitle;
   copyBtnIcon = this.copyBtnDefaultIcon;
 

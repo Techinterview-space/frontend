@@ -39,7 +39,7 @@ export interface OpenAiChatChoise {
   message: {
     role: string;
     content: string;
-  }
+  };
 }
 
 export interface OpenAiChatResult {
