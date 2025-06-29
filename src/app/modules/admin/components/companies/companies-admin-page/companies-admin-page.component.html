@@ -59,6 +59,7 @@
               <th>Slug</th>
               <th>Создана</th>
               <th>Обновлена</th>
+              <th>Действия</th>
             </tr>
           </thead>
           <tbody>
@@ -77,6 +78,15 @@
               <td>{{ item.slug }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn-link-sm"
+                  (click)="showAiAnalysis(item)"
+                >
+                  AI Анализ
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -149,4 +159,33 @@
       <button class="btn btn-primary" type="submit">Сохранить</button>
     </div>
   </form>
+</app-dialog>
+
+<app-dialog
+  [additionalCss]="'modal-lg'"
+  [show]="!!aiAnalysisData"
+  (closed)="onAiAnalysisModalClose()"
+  [header]="'AI Анализ компании'"
+>
+  <div *ngIf="aiAnalysisData">
+    <div class="p-2">
+      <textarea #aiAnalysisInput class="form-control" rows="30" readonly>{{
+        aiAnalysisJsonContent
+      }}</textarea>
+    </div>
+    <div class="p-1 d-flex justify-content-between">
+      <button
+        class="btn btn-outline-secondary"
+        (click)="onAiAnalysisModalClose()"
+      >
+        Закрыть
+      </button>
+      <button
+        class="btn btn-outline-dark"
+        (click)="copyAiAnalysis(aiAnalysisInput)"
+      >
+        <i class="{{ copyBtnIcon }}"></i> {{ copyBtnTitle }}
+      </button>
+    </div>
+  </div>
 </app-dialog>

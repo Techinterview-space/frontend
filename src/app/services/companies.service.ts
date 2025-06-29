@@ -9,6 +9,7 @@ import {
 import { PageParams } from "@models/page-params";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { PaginatedList } from "@models/paginated-list";
+import { OpenAiChatResult } from "@models/open-ai.model";
 
 export interface CompaniesSearchParams extends PageParams {
   searchQuery: string | null;
@@ -144,6 +145,12 @@ export class CompaniesService {
     return this.api.post<VoteResponse>(
       this.apiUrl + companyId + "/reviews/" + reviewId + "/dislike",
       {},
+    );
+  }
+
+  getOpenAiAnalysis(companyIdentifier: string): Observable<OpenAiChatResult> {
+    return this.api.get<OpenAiChatResult>(
+      this.apiUrl + companyIdentifier + "/open-ai-analysis",
     );
   }
 }
