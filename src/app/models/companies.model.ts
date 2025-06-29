@@ -1,5 +1,11 @@
 import { SelectItem } from "@shared/select-boxes/select-item";
 
+export interface AiHtmlAnalysis {
+  test: string;
+  html: string;
+  createdAt: Date;
+}
+
 export interface Company {
   id: string;
   name: string;
@@ -13,6 +19,7 @@ export interface Company {
   reviews: Array<CompanyReview>;
   ratingHistory: Array<CompanyRatingHistory>;
   userIsAllowedToAddReview: boolean;
+  aiAnalysis: AiHtmlAnalysis | null;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;

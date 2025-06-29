@@ -166,6 +166,11 @@ export class AdminNavbarComponent {
             url: "https://kibana.techinterview.space",
             isExternal: true,
           },
+          {
+            title: "OpenAI API usage",
+            url: "https://platform.openai.com/usage",
+            isExternal: true,
+          }
         ],
       },
     ];

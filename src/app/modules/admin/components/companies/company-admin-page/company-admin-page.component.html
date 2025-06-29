@@ -34,6 +34,15 @@
                 </button>
               </li>
               <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  (click)="runAiAnalysis()"
+                >
+                  Запустить AI анализ
+                </button>
+              </li>
+              <li>
                 <a
                   routerLink="/companies/{{ company.slug ?? company.id }}"
                   class="dropdown-item"
@@ -114,6 +123,11 @@
               Обновление: {{ company.updatedAt | date: "yyyy-MM-dd HH:mm" }}
             </div>
           </div>
+        </div>
+
+        <div class="mb-2 alert alert-info" *ngIf="company.aiAnalysis">
+          <div class="fw-bold text-info">AI анализ</div>
+          <div [innerHTML]="company.aiAnalysis.html"></div>
         </div>
       </div>
 

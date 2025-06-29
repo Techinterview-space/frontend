@@ -59,6 +59,7 @@
               <th>Slug</th>
               <th>Создана</th>
               <th>Обновлена</th>
+              <th>AI анализ</th>
               <th>Действия</th>
             </tr>
           </thead>
@@ -78,6 +79,9 @@
               <td>{{ item.slug }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                {{ item.aiAnalysis?.createdAt | date: "yyyy-MM-dd HH:mm" }}
+              </td>
               <td>
                 <button
                   type="button"
