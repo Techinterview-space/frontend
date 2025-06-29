@@ -45,4 +45,5 @@ export interface OpenAiChatChoise {
 export interface OpenAiChatResult {
   isSuccess: boolean;
   choises: Array<OpenAiChatChoise>;
+  model: string;
 }

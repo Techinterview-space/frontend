@@ -3,6 +3,7 @@ import { SelectItem } from "@shared/select-boxes/select-item";
 export interface AiHtmlAnalysis {
   test: string;
   html: string;
+  model: string;
   createdAt: Date;
 }
 

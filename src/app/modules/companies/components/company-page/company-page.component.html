@@ -1,7 +1,7 @@
 <app-page-header>{{ company?.name }}</app-page-header>
 
 <div class="container my-5" *ngIf="company; else dataLoading">
-  <div class="card">
+  <div class="card mb-5">
     <div class="card-body mobile-px-5 mobile-py-5">
       <div class="mb-3">
         <div class="h2 mb-2">
@@ -80,9 +80,24 @@
     </div>
   </div>
 
+  <div class="mb-5" *ngIf="company.aiAnalysis">
+    <div class="alert alert-info p-5">
+      <div [innerHTML]="company.aiAnalysis.html"></div>
+      <div class="fst-italic text-info">
+        <div>
+          Сформировано
+          {{ company.aiAnalysis.createdAt | date: "yyyy-MM-dd HH:mm" }}
+        </div>
+        <div>
+          Модель: <b>{{ company.aiAnalysis.model }}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="h3 mt-5">Отзывы</div>
 
-  <div class="card mt-3" *ngIf="company.reviews.length > 0; else nothingToShow">
+  <div class="card" *ngIf="company.reviews.length > 0; else nothingToShow">
     <div class="card-body mobile-px-5 mobile-py-5">
       <div *ngFor="let review of company.reviews" class="mb-5">
         <div class="mb-2">

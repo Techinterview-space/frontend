@@ -106,7 +106,7 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
         this.alertService.success("AI анализ был завершен");
         this.company = null;
         this.ngOnInit();
-    });
+      });
   }
 
   onReviewModalDlgClose(): void {

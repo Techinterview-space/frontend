@@ -170,7 +170,7 @@ export class AdminNavbarComponent {
             title: "OpenAI API usage",
             url: "https://platform.openai.com/usage",
             isExternal: true,
-          }
+          },
         ],
       },
     ];
