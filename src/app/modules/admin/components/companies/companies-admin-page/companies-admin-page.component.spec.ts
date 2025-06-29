@@ -9,10 +9,13 @@ import {
 
 import { CompaniesAdminPageComponent } from "./companies-admin-page.component";
 import { CompaniesService } from "@services/companies.service";
+import { of } from "rxjs";
+import { Company } from "@models/companies.model";
 
 describe("CompaniesAdminPageComponent", () => {
   let component: CompaniesAdminPageComponent;
   let fixture: ComponentFixture<CompaniesAdminPageComponent>;
+  let companiesService: CompaniesService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,6 +29,7 @@ describe("CompaniesAdminPageComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CompaniesAdminPageComponent);
     component = fixture.componentInstance;
+    companiesService = TestBed.inject(CompaniesService);
     fixture.detectChanges();
   });
 
@@ -62,5 +66,62 @@ describe("CompaniesAdminPageComponent", () => {
     component.onKeyupEvent(event);
 
     expect(component.search).toHaveBeenCalled();
+  });
+
+  it("should show AI analysis modal when showAiAnalysis is called", () => {
+    const mockCompany: Company = {
+      id: "1",
+      name: "Test Company",
+      slug: "test-company",
+    } as Company;
+
+    const mockAiResult = {
+      content: "Test analysis",
+      role: "assistant",
+      finishReason: "stop",
+      usage: {
+        promptTokens: 10,
+        completionTokens: 20,
+        totalTokens: 30,
+      },
+    };
+
+    spyOn(companiesService, "getOpenAiAnalysis").and.returnValue(
+      of(mockAiResult),
+    );
+
+    component.showAiAnalysis(mockCompany);
+
+    expect(companiesService.getOpenAiAnalysis).toHaveBeenCalledWith(
+      "test-company",
+    );
+    expect(component.aiAnalysisData).toEqual(mockAiResult);
+    expect(component.aiAnalysisJsonContent).toContain("Test analysis");
+  });
+
+  it("should close AI analysis modal", () => {
+    component.aiAnalysisData = {} as any;
+    component.aiAnalysisJsonContent = "test content";
+
+    component.onAiAnalysisModalClose();
+
+    expect(component.aiAnalysisData).toBeNull();
+    expect(component.aiAnalysisJsonContent).toBe("");
+  });
+
+  it("should copy AI analysis content", () => {
+    const mockInputElement = {
+      select: jasmine.createSpy("select"),
+      setSelectionRange: jasmine.createSpy("setSelectionRange"),
+    };
+
+    spyOn(document, "execCommand");
+
+    component.copyAiAnalysis(mockInputElement);
+
+    expect(mockInputElement.select).toHaveBeenCalled();
+    expect(document.execCommand).toHaveBeenCalledWith("copy");
+    expect(mockInputElement.setSelectionRange).toHaveBeenCalledWith(0, 0);
+    expect(component.copyBtnTitle).toBe("Скопировано");
   });
 });

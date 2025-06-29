@@ -13,6 +13,7 @@ import { EditCompanyForm } from "../shared/edit-company-form";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
+import { OpenAiChatResult } from "@models/open-ai.model";
 
 @Component({
   templateUrl: "./companies-admin-page.component.html",
@@ -30,6 +31,19 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
   editForm: EditCompanyForm | null = null;
   itemToEdit: Company | null = null;
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
+
+  // AI Analysis modal properties
+  aiAnalysisData: OpenAiChatResult | null = null;
+  aiAnalysisJsonContent: string = "";
+  
+  // Copy button properties (similar to interview markdown modal)
+  private readonly copyBtnDefaultTitle = "Копировать";
+  private readonly copyBtnDefaultIcon = "bi bi-clipboard2-check";
+  private readonly copiedBtnTitle = "Скопировано";
+  private readonly copiedBtnIcon = "bi bi-check2";
+  
+  copyBtnTitle = this.copyBtnDefaultTitle;
+  copyBtnIcon = this.copyBtnDefaultIcon;
 
   get searchButtonShouldBeEnabled(): boolean {
     return (
@@ -160,5 +174,41 @@ export class CompaniesAdminPageComponent implements OnInit, OnDestroy {
         },
       ),
     );
+  }
+
+  showAiAnalysis(company: Company): void {
+    this.service
+      .getOpenAiAnalysis(company.slug)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (result) => {
+          this.aiAnalysisData = result;
+          this.aiAnalysisJsonContent = JSON.stringify(result, null, 2);
+        },
+        error: (error) => {
+          this.alert.error("Ошибка при получении AI анализа: " + error.message);
+        },
+      });
+  }
+
+  onAiAnalysisModalClose(): void {
+    this.aiAnalysisData = null;
+    this.aiAnalysisJsonContent = "";
+    this.copyBtnTitle = this.copyBtnDefaultTitle;
+    this.copyBtnIcon = this.copyBtnDefaultIcon;
+  }
+
+  copyAiAnalysis(inputElement: any): void {
+    inputElement.select();
+    document.execCommand("copy");
+    inputElement.setSelectionRange(0, 0);
+
+    this.copyBtnTitle = this.copiedBtnTitle;
+    this.copyBtnIcon = this.copiedBtnIcon;
+
+    setTimeout(() => {
+      this.copyBtnTitle = this.copyBtnDefaultTitle;
+      this.copyBtnIcon = this.copyBtnDefaultIcon;
+    }, 1000);
   }
 }

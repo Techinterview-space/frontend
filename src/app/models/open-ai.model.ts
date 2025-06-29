@@ -34,3 +34,14 @@ export interface OpenAiAnalysis {
   bearer: string;
   report: OpenAiReport;
 }
+
+export interface OpenAiChatResult {
+  content: string;
+  role: string;
+  finishReason: string;
+  usage: {
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+  };
+}
