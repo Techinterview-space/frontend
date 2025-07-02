@@ -162,6 +162,11 @@ export class AdminNavbarComponent {
             isExternal: false,
           },
           {
+            title: "OpenAI Prompts",
+            url: "/admin/openai-prompts",
+            isExternal: false,
+          },
+          {
             title: "Kibana",
             url: "https://kibana.techinterview.space",
             isExternal: true,

@@ -86,6 +86,7 @@ describe("CompaniesAdminPageComponent", () => {
           },
         },
       ],
+      model: "gpt-4o",
     };
 
     spyOn(companiesService, "getOpenAiAnalysis").and.returnValue(
