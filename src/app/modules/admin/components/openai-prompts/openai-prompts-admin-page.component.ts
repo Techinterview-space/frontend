@@ -16,7 +16,6 @@ import { OpenAiPromptForm } from "./openai-prompt-form";
 })
 export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
   prompts: Array<OpenAiPrompt> | null = null;
-  isLoading = false;
 
   editForm: OpenAiPromptForm | null = null;
   itemToEdit: OpenAiPrompt | null = null;
@@ -27,7 +26,7 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
     private readonly title: TitleService,
     private readonly alert: AlertService,
   ) {
-    this.title.setTitle("OpenAI Prompts");
+    this.title.setTitle("OpenAI промпты");
   }
 
   ngOnInit(): void {
@@ -39,32 +38,24 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
   }
 
   loadData(): void {
-    this.isLoading = true;
     this.prompts = null;
 
     this.service
       .getAll()
       .pipe(untilDestroyed(this))
-      .subscribe({
-        next: (prompts) => {
-          this.prompts = prompts;
-          this.isLoading = false;
-        },
-        error: (error) => {
-          this.alert.error("Ошибка при загрузке промптов: " + error.message);
-          this.isLoading = false;
-        },
+      .subscribe((prompts) => {
+        this.prompts = prompts;
       });
   }
 
   create(): void {
-    this.editForm = new OpenAiPromptForm(null);
     this.itemToEdit = null;
+    this.editForm = new OpenAiPromptForm(null);
   }
 
   edit(item: OpenAiPrompt): void {
-    this.editForm = new OpenAiPromptForm(item);
     this.itemToEdit = item;
+    this.editForm = new OpenAiPromptForm(item);
   }
 
   onEditFormSubmit(): void {
@@ -74,47 +65,32 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
 
     this.editForm.markAllAsTouched();
 
-    if (this.itemToEdit != null) {
-      const updateRequest = this.editForm.updateRequestOrNull(this.itemToEdit.id);
-      if (updateRequest == null) {
-        return;
-      }
+    const request = this.editForm.getEditRequestOrNull();
+    if (request == null) {
+      return;
+    }
 
+    if (this.itemToEdit != null) {
       this.service
-        .update(updateRequest)
+        .update(request)
         .pipe(untilDestroyed(this))
-        .subscribe({
-          next: () => {
-            this.alert.success("Промпт был обновлен");
-            this.editForm = null;
-            this.itemToEdit = null;
-            this.loadData();
-          },
-          error: (error) => {
-            this.alert.error("Ошибка при обновлении промпта: " + error.message);
-          },
+        .subscribe(() => {
+          this.alert.success("Промпт был обновлен");
+          this.editForm = null;
+          this.itemToEdit = null;
+          this.loadData();
         });
 
       return;
     }
 
-    const createRequest = this.editForm.createRequestOrNull();
-    if (createRequest == null) {
-      return;
-    }
-
     this.service
-      .create(createRequest)
+      .create(request)
       .pipe(untilDestroyed(this))
-      .subscribe({
-        next: () => {
-          this.alert.success("Новый промпт был создан");
-          this.editForm = null;
-          this.loadData();
-        },
-        error: (error) => {
-          this.alert.error("Ошибка при создании промпта: " + error.message);
-        },
+      .subscribe(() => {
+        this.alert.success("Новый промпт был создан");
+        this.editForm = null;
+        this.loadData();
       });
   }
 
@@ -127,21 +103,15 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
     this.confirmMessage = new DialogMessage(
       new ConfirmMsg(
         "Удалить промпт",
-        `Вы уверены, что хотите удалить промпт "${item.title}"?`,
+        `Вы уверены, что хотите удалить промпт "${item.id}"?`,
         () => {
           this.service
             .delete(item.id)
             .pipe(untilDestroyed(this))
-            .subscribe({
-              next: () => {
-                this.alert.success("Промпт был удален");
-                this.confirmMessage = null;
-                this.loadData();
-              },
-              error: (error) => {
-                this.alert.error("Ошибка при удалении промпта: " + error.message);
-                this.confirmMessage = null;
-              },
+            .subscribe(() => {
+              this.alert.success("Промпт был удален");
+              this.confirmMessage = null;
+              this.loadData();
             });
         },
       ),

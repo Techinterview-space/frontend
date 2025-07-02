@@ -34,7 +34,11 @@ import { GitHubChatsPageComponent } from "./components/github/github-chats-page/
 import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
 import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
 
-const adminServices = [AdminDashboardService, GitHubAdminService, OpenAiPromptsService];
+const adminServices = [
+  AdminDashboardService,
+  GitHubAdminService,
+  OpenAiPromptsService,
+];
 
 @NgModule({
   declarations: [

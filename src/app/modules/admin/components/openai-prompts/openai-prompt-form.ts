@@ -1,52 +1,52 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import {
   OpenAiPrompt,
-  OpenAiPromptCreateRequest,
-  OpenAiPromptUpdateRequest,
+  OpenAiPromptEditRequest,
+  OpenAiPromptType,
+  AiEngine,
 } from "@models/openai-prompt.model";
 
 export class OpenAiPromptForm extends FormGroup {
-  constructor(prompt: OpenAiPrompt | null) {
+  constructor(private readonly prompt: OpenAiPrompt | null) {
     super({
-      title: new FormControl(prompt?.title ?? "", [
-        Validators.required,
-        Validators.maxLength(255),
+      id: new FormControl(prompt?.id ?? "", [
+        Validators.required
       ]),
-      content: new FormControl(prompt?.content ?? "", [
+      prompt: new FormControl(prompt?.prompt ?? "", [
         Validators.required,
         Validators.maxLength(5000),
+      ]),
+      model: new FormControl(prompt?.model ?? "", [
+        Validators.required,
+        Validators.maxLength(200),
+      ]),
+      engine: new FormControl(prompt?.engine ?? "", [
+        Validators.required
       ]),
     });
   }
 
-  get title(): FormControl {
-    return this.get("title") as FormControl;
-  }
-
-  get content(): FormControl {
-    return this.get("content") as FormControl;
-  }
-
-  createRequestOrNull(): OpenAiPromptCreateRequest | null {
+  getEditRequestOrNull(): OpenAiPromptEditRequest | null {
     if (!this.valid) {
+      this.markAllAsTouched();
+      return null;
+    }
+
+    var idAsNumber = Number(this.value.id);
+    if (isNaN(idAsNumber)) {
+      return null;
+    }
+
+    var engineAsNumber = Number(this.value.engine);
+    if (isNaN(engineAsNumber)) {
       return null;
     }
 
     return {
-      title: this.title.value,
-      content: this.content.value,
-    };
-  }
-
-  updateRequestOrNull(id: number): OpenAiPromptUpdateRequest | null {
-    if (!this.valid) {
-      return null;
-    }
-
-    return {
-      id: id,
-      title: this.title.value,
-      content: this.content.value,
+      id: idAsNumber as OpenAiPromptType,
+      prompt: this.value.prompt,
+      model: this.value.model,
+      engine: engineAsNumber as AiEngine,
     };
   }
 }
