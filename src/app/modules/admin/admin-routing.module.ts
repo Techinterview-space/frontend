@@ -22,6 +22,7 @@ import { InlineRepliesStatsComponent } from "./components/telegram/inline-replie
 import { GitHubProfilesPageComponent } from "./components/github/github-profiles-page/github-profiles-page.component";
 import { GitHubChatsPageComponent } from "./components/github/github-chats-page/github-chats-page.component";
 import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
+import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -68,6 +69,8 @@ const routes: Routes = [
   { path: "github/profiles", component: GitHubProfilesPageComponent },
   { path: "github/chats", component: GitHubChatsPageComponent },
   { path: "github/processing-jobs", component: GitHubJobsPageComponent },
+
+  { path: "openai-prompts", component: OpenAiPromptsAdminPageComponent },
 ];
 
 @NgModule({

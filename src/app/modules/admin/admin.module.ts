@@ -24,6 +24,7 @@ import { GenerateQrPageComponent } from "./components/generate-qr-code-page/gene
 import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
 import { AdminDashboardService } from "./services/admin-dashboard.service";
 import { GitHubAdminService } from "@services/github-admin.service";
+import { OpenAiPromptsService } from "@services/openai-prompts.service";
 import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
 import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
 import { ReviewsToApprovePageComponent } from "./components/companies/reviews-to-approve/reviews-to-approve-page.component";
@@ -31,8 +32,9 @@ import { InlineRepliesStatsComponent } from "./components/telegram/inline-replie
 import { GitHubProfilesPageComponent } from "./components/github/github-profiles-page/github-profiles-page.component";
 import { GitHubChatsPageComponent } from "./components/github/github-chats-page/github-chats-page.component";
 import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
+import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
 
-const adminServices = [AdminDashboardService, GitHubAdminService];
+const adminServices = [AdminDashboardService, GitHubAdminService, OpenAiPromptsService];
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ const adminServices = [AdminDashboardService, GitHubAdminService];
     GitHubProfilesPageComponent,
     GitHubChatsPageComponent,
     GitHubJobsPageComponent,
+    OpenAiPromptsAdminPageComponent,
   ],
   imports: [
     CommonModule,

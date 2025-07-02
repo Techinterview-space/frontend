@@ -1,0 +1,127 @@
+<app-page-header>OpenAI Prompts</app-page-header>
+
+<div class="container my-5">
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="create()">
+        <i class="bi bi-plus-circle me-2"></i>
+        Создать промпт
+      </button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isLoading">
+    <div class="col">
+      <app-data-loader></app-data-loader>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!isLoading && prompts && prompts.length > 0">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Название</th>
+              <th>Содержание</th>
+              <th>Создан</th>
+              <th>Обновлен</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of prompts">
+              <td>{{ item.id }}</td>
+              <td>{{ item.title }}</td>
+              <td>
+                <div class="text-truncate" style="max-width: 300px;">
+                  {{ item.content }}
+                </div>
+              </td>
+              <td>
+                {{ item.createdAt | date : "short" }}
+              </td>
+              <td>
+                {{ item.updatedAt | date : "short" }}
+              </td>
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-secondary me-1"
+                  (click)="edit(item)"
+                  title="Редактировать"
+                >
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="delete(item)"
+                  title="Удалить"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!isLoading && prompts && prompts.length === 0">
+    <div class="col text-center text-muted">
+      <p>Промпты не найдены.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Edit/Create Modal -->
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="itemToEdit ? 'Редактировать промпт' : 'Создать промпт'"
+  [additionalCss]="'modal-lg'"
+>
+  <form
+    class="mb-3"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label class="form-label">Название <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" formControlName="title" />
+      <app-field-error [field]="editForm.get('title')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Содержание <span class="text-danger">*</span></label>
+      <textarea
+        class="form-control"
+        formControlName="content"
+        rows="10"
+        placeholder="Введите содержание промпта..."
+      ></textarea>
+      <app-field-error [field]="editForm.get('content')"></app-field-error>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-secondary me-2"
+        (click)="onEditModalDlgClose()"
+      >
+        Отмена
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">
+        {{ itemToEdit ? "Обновить" : "Создать" }}
+      </button>
+    </div>
+  </form>
+</app-dialog>
+
+<!-- Confirm Delete Dialog -->
+<app-confirm-dialog
+  *ngIf="confirmMessage"
+  [message]="confirmMessage"
+></app-confirm-dialog>
