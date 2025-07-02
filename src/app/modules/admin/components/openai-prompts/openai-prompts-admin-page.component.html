@@ -116,8 +116,13 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Движок <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" formControlName="engine" />
+      <label class="form-label"
+        >Движок <span class="text-danger">*</span></label
+      >
+      <select class="form-select" formControlName="engine">
+        <option value="1">Chat GPT</option>
+        <option value="2">Claude</option>
+      </select>
       <app-field-error [field]="editForm.get('engine')"></app-field-error>
     </div>
 
@@ -129,10 +134,7 @@
       >
         Отмена
       </button>
-      <button
-        type="submit"
-        class="btn btn-primary"
-      >
+      <button type="submit" class="btn btn-primary">
         {{ itemToEdit ? "Обновить" : "Создать" }}
       </button>
     </div>

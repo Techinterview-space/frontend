@@ -9,9 +9,7 @@ import {
 export class OpenAiPromptForm extends FormGroup {
   constructor(private readonly prompt: OpenAiPrompt | null) {
     super({
-      id: new FormControl(prompt?.id ?? "", [
-        Validators.required
-      ]),
+      id: new FormControl(prompt?.id ?? "", [Validators.required]),
       prompt: new FormControl(prompt?.prompt ?? "", [
         Validators.required,
         Validators.maxLength(5000),
@@ -20,9 +18,7 @@ export class OpenAiPromptForm extends FormGroup {
         Validators.required,
         Validators.maxLength(200),
       ]),
-      engine: new FormControl(prompt?.engine ?? "", [
-        Validators.required
-      ]),
+      engine: new FormControl(prompt?.engine ?? "", [Validators.required]),
     });
   }
 
