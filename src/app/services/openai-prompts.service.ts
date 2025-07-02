@@ -3,8 +3,8 @@ import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
 import {
   OpenAiPrompt,
-  OpenAiPromptCreateRequest,
-  OpenAiPromptUpdateRequest,
+  OpenAiPromptType,
+  OpenAiPromptEditRequest,
 } from "@models/openai-prompt.model";
 
 @Injectable()
@@ -12,22 +12,22 @@ export class OpenAiPromptsService {
   private readonly apiUrl: string;
 
   constructor(private readonly api: ApiService) {
-    this.apiUrl = "/api/openai-prompts/";
+    this.apiUrl = "/api/admin/ai-prompts";
   }
 
   getAll(): Observable<Array<OpenAiPrompt>> {
     return this.api.get<Array<OpenAiPrompt>>(this.apiUrl);
   }
 
-  create(model: OpenAiPromptCreateRequest): Observable<void> {
+  create(model: OpenAiPromptEditRequest): Observable<void> {
     return this.api.post(this.apiUrl, model);
   }
 
-  update(model: OpenAiPromptUpdateRequest): Observable<void> {
-    return this.api.post(this.apiUrl + "update", model);
+  update(model: OpenAiPromptEditRequest): Observable<void> {
+    return this.api.put(this.apiUrl, model);
   }
 
-  delete(id: number): Observable<void> {
+  delete(id: OpenAiPromptType): Observable<void> {
     return this.api.delete(this.apiUrl + id);
   }
 }

@@ -1,18 +1,27 @@
+export enum OpenAiPromptType {
+  Undefined = 0,
+  Company = 1,
+  Chat = 2,
+}
+
+export enum AiEngine {
+  Undefined = 0,
+  OpenAi = 1,
+  Claude = 2,
+}
+
 export interface OpenAiPrompt {
-  id: number;
-  title: string;
-  content: string;
+  id: OpenAiPromptType;
+  prompt: string;
+  model: string;
+  engine: AiEngine;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface OpenAiPromptCreateRequest {
-  title: string;
-  content: string;
-}
-
-export interface OpenAiPromptUpdateRequest {
-  id: number;
-  title: string;
-  content: string;
+export interface OpenAiPromptEditRequest {
+  id: OpenAiPromptType | null;
+  prompt: string;
+  model: string;
+  engine: AiEngine;
 }
