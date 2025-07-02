@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { OpenAiPrompt } from "@models/openai-prompt.model";
+import {
+  OpenAiPrompt,
+  OpenAiPromptTypeHelper,
+} from "@models/openai-prompt.model";
 import { OpenAiPromptsService } from "@services/openai-prompts.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
@@ -7,6 +10,7 @@ import { AlertService } from "@shared/components/alert/services/alert.service";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { OpenAiPromptForm } from "./openai-prompt-form";
+import { OpenAiPromptTableRecord } from "./openai-prompt-table-record";
 
 @Component({
   selector: "app-openai-prompts-admin-page",
@@ -15,7 +19,7 @@ import { OpenAiPromptForm } from "./openai-prompt-form";
   standalone: false,
 })
 export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
-  prompts: Array<OpenAiPrompt> | null = null;
+  prompts: Array<OpenAiPromptTableRecord> | null = null;
 
   editForm: OpenAiPromptForm | null = null;
   itemToEdit: OpenAiPrompt | null = null;
@@ -44,7 +48,7 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
       .getAll()
       .pipe(untilDestroyed(this))
       .subscribe((prompts) => {
-        this.prompts = prompts;
+        this.prompts = prompts.map((p) => new OpenAiPromptTableRecord(p));
       });
   }
 
@@ -53,9 +57,9 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
     this.editForm = new OpenAiPromptForm(null);
   }
 
-  edit(item: OpenAiPrompt): void {
-    this.itemToEdit = item;
-    this.editForm = new OpenAiPromptForm(item);
+  edit(item: OpenAiPromptTableRecord): void {
+    this.itemToEdit = item.source;
+    this.editForm = new OpenAiPromptForm(item.source);
   }
 
   onEditFormSubmit(): void {
@@ -100,7 +104,7 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
     this.itemToEdit = null;
   }
 
-  activate(item: OpenAiPrompt): void {
+  activate(item: OpenAiPromptTableRecord): void {
     this.service
       .activate(item.id)
       .pipe(untilDestroyed(this))
@@ -110,7 +114,7 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  deactivate(item: OpenAiPrompt): void {
+  deactivate(item: OpenAiPromptTableRecord): void {
     this.service
       .deactivate(item.id)
       .pipe(untilDestroyed(this))
@@ -120,7 +124,7 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  delete(item: OpenAiPrompt): void {
+  delete(item: OpenAiPromptTableRecord): void {
     this.confirmMessage = new DialogMessage(
       new ConfirmMsg(
         "Удалить промпт",
