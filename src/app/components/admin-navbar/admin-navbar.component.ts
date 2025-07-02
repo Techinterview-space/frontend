@@ -24,28 +24,18 @@ export class AdminNavbarComponent {
   constructor() {
     this.dropdowns = [
       {
-        title: "Юзеры",
+        title: "Данные",
         links: [
           {
-            title: "Все юзеры",
+            title: "Пользователи",
             url: "/admin/users",
             isExternal: false,
           },
-        ],
-      },
-      {
-        title: "Шаблоны",
-        links: [
           {
             title: "Все шаблоны",
             url: "/admin/interview-templates",
             isExternal: false,
           },
-        ],
-      },
-      {
-        title: "Справочники",
-        links: [
           {
             title: "Специальности",
             url: "/admin/professions",
@@ -99,7 +89,7 @@ export class AdminNavbarComponent {
         ],
       },
       {
-        title: "Telegram",
+        title: "Зарплатный бот",
         links: [
           {
             title: "Использование бота",
@@ -124,7 +114,7 @@ export class AdminNavbarComponent {
         ],
       },
       {
-        title: "Github bot",
+        title: "Github Profile Bot",
         links: [
           {
             title: "Запрошенные профили",
@@ -144,10 +134,30 @@ export class AdminNavbarComponent {
         ],
       },
       {
+        title: "AI",
+        links: [
+          {
+            title: "OpenAI промпты",
+            url: "/admin/openai-prompts",
+            isExternal: false,
+          },
+          {
+            title: "OpenAI API usage",
+            url: "https://platform.openai.com/usage",
+            isExternal: true,
+          },
+          {
+            title: "Claude API usage",
+            url: "https://console.anthropic.com/usage",
+            isExternal: true,
+          },
+        ]
+      },
+      {
         title: "Инструменты",
         links: [
           {
-            title: "Общее",
+            title: "Настройки",
             url: "/admin/tools/background-jobs",
             isExternal: false,
           },
@@ -162,18 +172,8 @@ export class AdminNavbarComponent {
             isExternal: false,
           },
           {
-            title: "OpenAI Prompts",
-            url: "/admin/openai-prompts",
-            isExternal: false,
-          },
-          {
             title: "Kibana",
             url: "https://kibana.techinterview.space",
-            isExternal: true,
-          },
-          {
-            title: "OpenAI API usage",
-            url: "https://platform.openai.com/usage",
             isExternal: true,
           },
         ],
