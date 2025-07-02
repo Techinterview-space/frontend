@@ -67,12 +67,13 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
 
     const request = this.editForm.getEditRequestOrNull();
     if (request == null) {
+      this.alert.error("Некорректные данные");
       return;
     }
 
     if (this.itemToEdit != null) {
       this.service
-        .update(request)
+        .update(this.itemToEdit.id, request)
         .pipe(untilDestroyed(this))
         .subscribe(() => {
           this.alert.success("Промпт был обновлен");
@@ -97,6 +98,26 @@ export class OpenAiPromptsAdminPageComponent implements OnInit, OnDestroy {
   onEditModalDlgClose(): void {
     this.editForm = null;
     this.itemToEdit = null;
+  }
+
+  activate(item: OpenAiPrompt): void {
+    this.service
+      .activate(item.id)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success("Промпт был активирован");
+        this.loadData();
+      });
+  }
+
+  deactivate(item: OpenAiPrompt): void {
+    this.service
+      .deactivate(item.id)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success("Промпт был деактивирован");
+        this.loadData();
+      });
   }
 
   delete(item: OpenAiPrompt): void {

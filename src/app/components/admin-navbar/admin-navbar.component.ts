@@ -151,7 +151,7 @@ export class AdminNavbarComponent {
             url: "https://console.anthropic.com/usage",
             isExternal: true,
           },
-        ]
+        ],
       },
       {
         title: "Инструменты",

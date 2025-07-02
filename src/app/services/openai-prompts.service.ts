@@ -23,11 +23,19 @@ export class OpenAiPromptsService {
     return this.api.post(this.apiUrl, model);
   }
 
-  update(model: OpenAiPromptEditRequest): Observable<void> {
-    return this.api.put(this.apiUrl, model);
+  update(id: string, model: OpenAiPromptEditRequest): Observable<void> {
+    return this.api.put(this.apiUrl + "/" + id, model);
   }
 
-  delete(id: OpenAiPromptType): Observable<void> {
+  activate(id: string): Observable<void> {
+    return this.api.put(this.apiUrl + "/" + id + "/activate", null);
+  }
+
+  deactivate(id: string): Observable<void> {
+    return this.api.put(this.apiUrl + "/" + id + "/deactivate", null);
+  }
+
+  delete(id: string): Observable<void> {
     return this.api.delete(this.apiUrl + id);
   }
 }

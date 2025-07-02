@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { OpenAiPromptsAdminPageComponent } from "./openai-prompts-admin-page.component";
-import { mostUsedImports, mostUsedServices, testUtilStubs } from "@shared/test-utils";
+import {
+  mostUsedImports,
+  mostUsedServices,
+  testUtilStubs,
+} from "@shared/test-utils";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { OpenAiPromptsService } from "@services/openai-prompts.service";
 

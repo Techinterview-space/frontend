@@ -9,7 +9,7 @@ import {
 export class OpenAiPromptForm extends FormGroup {
   constructor(private readonly prompt: OpenAiPrompt | null) {
     super({
-      id: new FormControl(prompt?.id ?? "", [Validators.required]),
+      type: new FormControl(prompt?.type ?? "", [Validators.required]),
       prompt: new FormControl(prompt?.prompt ?? "", [
         Validators.required,
         Validators.maxLength(5000),
@@ -28,8 +28,8 @@ export class OpenAiPromptForm extends FormGroup {
       return null;
     }
 
-    var idAsNumber = Number(this.value.id);
-    if (isNaN(idAsNumber)) {
+    var typeAsNumber = Number(this.value.type);
+    if (isNaN(typeAsNumber)) {
       return null;
     }
 
@@ -39,7 +39,7 @@ export class OpenAiPromptForm extends FormGroup {
     }
 
     return {
-      id: idAsNumber as OpenAiPromptType,
+      type: typeAsNumber as OpenAiPromptType,
       prompt: this.value.prompt,
       model: this.value.model,
       engine: engineAsNumber as AiEngine,

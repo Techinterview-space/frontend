@@ -16,10 +16,11 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Тип</th>
               <th>Промпт</th>
               <th>Модель</th>
               <th>Движок</th>
+              <th>Активен</th>
               <th>Создан</th>
               <th>Обновлен</th>
               <th>Действия</th>
@@ -27,7 +28,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of prompts">
-              <td>{{ item.id }}</td>
+              <td>{{ item.type }}</td>
               <td>
                 <div class="text-truncate" style="max-width: 300px">
                   {{ item.prompt }}
@@ -35,6 +36,7 @@
               </td>
               <td>{{ item.model }}</td>
               <td>{{ item.engine }}</td>
+              <td>{{ item.isActive ? "Да" : "Нет" }}</td>
               <td>
                 {{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}
               </td>
@@ -43,7 +45,23 @@
               </td>
               <td>
                 <button
-                  class="btn btn-sm btn-outline-secondary me-1"
+                  *ngIf="!item.isActive"
+                  class="btn btn-sm btn-outline-success me-1"
+                  (click)="activate(item)"
+                  title="Активировать"
+                >
+                  <i class="bi bi-check-circle"></i>
+                </button>
+                <button
+                  *ngIf="item.isActive"
+                  class="btn btn-sm btn-outline-danger me-1"
+                  (click)="deactivate(item)"
+                  title="Деактивировать"
+                >
+                  <i class="bi bi-x-circle"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-dark me-1"
                   (click)="edit(item)"
                   title="Редактировать"
                 >
@@ -89,9 +107,12 @@
     (ngSubmit)="onEditFormSubmit()"
   >
     <div class="mb-3">
-      <label class="form-label">ID <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" formControlName="id" />
-      <app-field-error [field]="editForm.get('id')"></app-field-error>
+      <label class="form-label">Тип <span class="text-danger">*</span></label>
+      <select class="form-select" formControlName="type">
+        <option value="1">Компания</option>
+        <option value="2">Чат</option>
+      </select>
+      <app-field-error [field]="editForm.get('type')"></app-field-error>
     </div>
 
     <div class="mb-3">

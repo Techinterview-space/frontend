@@ -11,16 +11,18 @@ export enum AiEngine {
 }
 
 export interface OpenAiPrompt {
-  id: OpenAiPromptType;
+  id: string;
+  type: OpenAiPromptType;
   prompt: string;
   model: string;
   engine: AiEngine;
+  isActive: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface OpenAiPromptEditRequest {
-  id: OpenAiPromptType | null;
+  type: OpenAiPromptType;
   prompt: string;
   model: string;
   engine: AiEngine;
