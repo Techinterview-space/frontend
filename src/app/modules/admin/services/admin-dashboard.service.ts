@@ -17,7 +17,9 @@ export interface AdminDashboardResponse {
   reviewLikesForLastTenDays: ItemsPerDayChartData;
   reviewsForLastTenDays: ItemsPerDayChartData;
   salariesBotMessages: ItemsPerDayChartData;
+  inlineClicksToSalariesBot: ItemsPerDayChartData;
   githubProfileBotMessages: ItemsPerDayChartData;
+  inlineClicksToGithubProfileBot: ItemsPerDayChartData;
 }
 
 @Injectable({

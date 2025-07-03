@@ -92,11 +92,6 @@ export class AdminNavbarComponent {
         title: "Зарплатный бот",
         links: [
           {
-            title: "Использование бота",
-            url: "/admin/telegram/bot-usages",
-            isExternal: false,
-          },
-          {
             title: "Подписчики бота",
             url: "/admin/telegram/user-settings",
             isExternal: false,
@@ -104,11 +99,6 @@ export class AdminNavbarComponent {
           {
             title: "Подписки на регулярный апдейт по зарплатам",
             url: "/admin/telegram/stat-data-change-subscriptions",
-            isExternal: false,
-          },
-          {
-            title: "Статистика ответов в Inline",
-            url: "/admin/telegram/inline-replies-stats",
             isExternal: false,
           },
         ],

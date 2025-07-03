@@ -28,7 +28,7 @@ export class TelegramUserSettingsComponent implements OnInit, OnDestroy {
     titleService: TitleService,
     private readonly alert: AlertService,
   ) {
-    titleService.setTitle("Использование бота");
+    titleService.setTitle("Настройки пользователей бота");
   }
 
   ngOnInit(): void {

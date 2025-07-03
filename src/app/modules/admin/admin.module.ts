@@ -16,7 +16,6 @@ import { SalariesNotInStatsAdminPageComponent } from "./components/salaries/sala
 import { SkillsPaginatedTableComponent } from "./components/label-entities/skills-paginated-table/skills-paginated-table.component";
 import { WorkIndustriesPaginatedTableComponent } from "./components/label-entities/work-industries-paginated-table/work-indusrties-paginated-table.component";
 import { ProfessionsPaginatedTableComponent } from "./components/label-entities/professions-paginated-table/professions-paginated-table.component";
-import { TelegramBotUsagesComponent } from "./components/telegram/telegram-bot-usages/telegram-bot-usages.component";
 import { TelegramUserSettingsComponent } from "./components/telegram/telegram-user-settings/telegram-user-settings.component";
 import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced-salaries-admin-page/sourced-salaries-admin-page.component";
 import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
@@ -28,7 +27,6 @@ import { OpenAiPromptsService } from "@services/openai-prompts.service";
 import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
 import { CompanyAdminPageComponent } from "./components/companies/company-admin-page/company-admin-page.component";
 import { ReviewsToApprovePageComponent } from "./components/companies/reviews-to-approve/reviews-to-approve-page.component";
-import { InlineRepliesStatsComponent } from "./components/telegram/inline-replies-stats/inline-replies-stats.component";
 import { GitHubProfilesPageComponent } from "./components/github/github-profiles-page/github-profiles-page.component";
 import { GitHubChatsPageComponent } from "./components/github/github-chats-page/github-chats-page.component";
 import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
@@ -55,7 +53,6 @@ const adminServices = [
     SkillsPaginatedTableComponent,
     WorkIndustriesPaginatedTableComponent,
     ProfessionsPaginatedTableComponent,
-    TelegramBotUsagesComponent,
     TelegramUserSettingsComponent,
     StatDataCacheRecordsComponent,
     CurrenciesPageComponent,
@@ -63,7 +60,6 @@ const adminServices = [
     CompaniesAdminPageComponent,
     CompanyAdminPageComponent,
     ReviewsToApprovePageComponent,
-    InlineRepliesStatsComponent,
     GitHubProfilesPageComponent,
     GitHubChatsPageComponent,
     GitHubJobsPageComponent,

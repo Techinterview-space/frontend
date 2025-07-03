@@ -73,10 +73,4 @@ export class TelegramBotService {
   deleteUserSettings(id: string): Observable<void> {
     return this.api.delete<void>(this.apiUrl + "bot-user-settings/" + id);
   }
-
-  getTelegramInlineReplyStats(): Observable<TelegramInlineReplyStats> {
-    return this.api.get<TelegramInlineReplyStats>(
-      this.apiUrl + "inline-reply-stats",
-    );
-  }
 }
