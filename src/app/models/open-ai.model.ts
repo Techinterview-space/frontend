@@ -34,3 +34,16 @@ export interface OpenAiAnalysis {
   bearer: string;
   report: OpenAiReport;
 }
+
+export interface OpenAiChatChoise {
+  message: {
+    role: string;
+    content: string;
+  };
+}
+
+export interface OpenAiChatResult {
+  isSuccess: boolean;
+  choises: Array<OpenAiChatChoise>;
+  model: string;
+}

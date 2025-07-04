@@ -1,0 +1,169 @@
+<app-page-header>OpenAI промпты</app-page-header>
+
+<div class="container my-5">
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="create()">
+        <i class="bi bi-plus-circle me-2"></i>
+        Создать промпт
+      </button>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="prompts; else dataLoading">
+    <div class="card-body p-3" *ngIf="prompts.length > 0; else nothingToShow">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr class="small">
+              <th>Тип</th>
+              <th>Промпт</th>
+              <th>Модель</th>
+              <th>Движок</th>
+              <th>Активен</th>
+              <th>Создан</th>
+              <th>Обновлен</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of prompts" class="small">
+              <td>{{ item.type }}</td>
+              <td>
+                <div class="text-truncate" style="max-width: 300px">
+                  {{ item.prompt }}
+                </div>
+              </td>
+              <td>{{ item.model }}</td>
+              <td>{{ item.engine }}</td>
+              <td>{{ item.isActive ? "Да" : "Нет" }}</td>
+              <td>
+                {{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}
+              </td>
+              <td>
+                {{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}
+              </td>
+              <td>
+                <button
+                  *ngIf="!item.isActive"
+                  class="btn btn-sm btn-outline-success me-1"
+                  (click)="activate(item)"
+                  title="Активировать"
+                >
+                  <i class="bi bi-check-circle"></i>
+                </button>
+                <button
+                  *ngIf="item.isActive"
+                  class="btn btn-sm btn-outline-danger me-1"
+                  (click)="deactivate(item)"
+                  title="Деактивировать"
+                >
+                  <i class="bi bi-x-circle"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-dark me-1"
+                  (click)="edit(item)"
+                  title="Редактировать"
+                >
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="delete(item)"
+                  title="Удалить"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothingToShow>
+  <div class="text-center">Промпты не найдены.</div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<!-- Edit/Create Modal -->
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="itemToEdit ? 'Редактировать промпт' : 'Создать промпт'"
+  [additionalCss]="'modal-lg'"
+>
+  <form
+    *ngIf="!!editForm"
+    class="mb-3"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label class="form-label">Тип <span class="text-danger">*</span></label>
+      <select class="form-select" formControlName="type">
+        <option value="1">Компания</option>
+        <option value="2">Чат</option>
+      </select>
+      <app-field-error [field]="editForm.get('type')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label"
+        >Промпт <span class="text-danger">*</span></label
+      >
+      <textarea
+        class="form-control"
+        formControlName="prompt"
+        rows="10"
+        placeholder="Введите содержание промпта..."
+      ></textarea>
+      <app-field-error [field]="editForm.get('prompt')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label"
+        >Модель <span class="text-danger">*</span></label
+      >
+      <input type="text" class="form-control" formControlName="model" />
+      <app-field-error [field]="editForm.get('model')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label"
+        >Движок <span class="text-danger">*</span></label
+      >
+      <select class="form-select" formControlName="engine">
+        <option value="1">Chat GPT</option>
+        <option value="2">Claude</option>
+      </select>
+      <app-field-error [field]="editForm.get('engine')"></app-field-error>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-secondary me-2"
+        (click)="onEditModalDlgClose()"
+      >
+        Отмена
+      </button>
+      <button type="submit" class="btn btn-primary">
+        {{ itemToEdit ? "Обновить" : "Создать" }}
+      </button>
+    </div>
+  </form>
+</app-dialog>
+
+<!-- Confirm Delete Dialog -->
+<app-confirm-dialog
+  *ngIf="confirmMessage"
+  [message]="confirmMessage"
+></app-confirm-dialog>

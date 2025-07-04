@@ -18,15 +18,15 @@ describe("TelegramBotABoutComponent", () => {
   let mockViewportScroller: jasmine.SpyObj<ViewportScroller>;
 
   beforeEach(async () => {
-    const viewportScrollerSpy = jasmine.createSpyObj('ViewportScroller', [
-      'scrollToAnchor',
+    const viewportScrollerSpy = jasmine.createSpyObj("ViewportScroller", [
+      "scrollToAnchor",
     ]);
-    
+
     mockActivatedRoute = {
       fragment: of(null),
       paramMap: of(new Map()),
       queryParams: of({}),
-      snapshot: { fragment: "" }
+      snapshot: { fragment: "" },
     };
 
     await TestBed.configureTestingModule({
@@ -34,14 +34,18 @@ describe("TelegramBotABoutComponent", () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [...mostUsedImports],
       providers: [
-        ...testUtilStubs.filter(provider => provider.provide !== ActivatedRoute),
+        ...testUtilStubs.filter(
+          (provider) => provider.provide !== ActivatedRoute,
+        ),
         ...mostUsedServices,
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: ViewportScroller, useValue: viewportScrollerSpy },
       ],
     }).compileComponents();
 
-    mockViewportScroller = TestBed.inject(ViewportScroller) as jasmine.SpyObj<ViewportScroller>;
+    mockViewportScroller = TestBed.inject(
+      ViewportScroller,
+    ) as jasmine.SpyObj<ViewportScroller>;
   });
 
   beforeEach(() => {
@@ -55,22 +59,24 @@ describe("TelegramBotABoutComponent", () => {
   });
 
   it("should scroll to anchor when fragment is provided", (done) => {
-    const testFragment = 'techinterview-salary-assistant-header';
+    const testFragment = "techinterview-salary-assistant-header";
     mockActivatedRoute.fragment = of(testFragment);
-    
+
     component.ngOnInit();
-    
+
     setTimeout(() => {
-      expect(mockViewportScroller.scrollToAnchor).toHaveBeenCalledWith(testFragment);
+      expect(mockViewportScroller.scrollToAnchor).toHaveBeenCalledWith(
+        testFragment,
+      );
       done();
     }, 150);
   });
 
   it("should not scroll when no fragment is provided", () => {
     mockActivatedRoute.fragment = of(null);
-    
+
     component.ngOnInit();
-    
+
     expect(mockViewportScroller.scrollToAnchor).not.toHaveBeenCalled();
   });
 });

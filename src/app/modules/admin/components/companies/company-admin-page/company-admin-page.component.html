@@ -1,126 +1,148 @@
 <app-page-header>Компания {{ company?.name }}</app-page-header>
 
 <div class="container my-5" *ngIf="company; else dataLoading">
-  <div class="card">
+  <div class="card mb-5">
     <div class="card-body p-5">
-      <div class="mb-5">
-        <div class="d-flex justify-content-end">
-          <div class="btn-group" role="group">
-            <button
-              type="button"
-              class="btn btn-outline-dark dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Действия
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-item"
-                  (click)="openEditForm()"
-                >
-                  Редактировать
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-item"
-                  (click)="recalculateRating()"
-                >
-                  Пересчитать рейтинг
-                </button>
-              </li>
-              <li>
-                <a
-                  routerLink="/companies/{{ company.slug ?? company.id }}"
-                  class="dropdown-item"
-                  >Публичная страница</a
-                >
-              </li>
-            </ul>
-          </div>
+      <div class="d-flex justify-content-end">
+        <div class="btn-group" role="group">
+          <button
+            type="button"
+            class="btn btn-outline-dark dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Действия
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <button
+                type="button"
+                class="dropdown-item"
+                (click)="openEditForm()"
+              >
+                Редактировать
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item"
+                (click)="recalculateRating()"
+              >
+                Пересчитать рейтинг
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item"
+                (click)="runAiAnalysis()"
+              >
+                Запустить AI анализ
+              </button>
+            </li>
+            <li>
+              <a
+                routerLink="/companies/{{ company.slug ?? company.id }}"
+                class="dropdown-item"
+                >Публичная страница</a
+              >
+            </li>
+          </ul>
         </div>
+      </div>
 
-        <div class="row mb-3">
-          <div class="col-md-3">Описание</div>
-          <div class="col-md-9">
-            <div [innerHTML]="companyDescription"></div>
-          </div>
+      <div class="row mb-3">
+        <div class="col-md-3">Описание</div>
+        <div class="col-md-9">
+          <div [innerHTML]="companyDescription"></div>
         </div>
+      </div>
 
-        <div class="row mb-3">
-          <div class="col-md-3">Ссылки</div>
-          <div class="col-md-9">
-            <div *ngFor="let link of company.links">
-              <a [href]="link" target="_blank" rel="noopener">{{ link }}</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-md-3">Логотип</div>
-          <div class="col-md-9">
-            <div *ngIf="company.logoUrl">
-              <img
-                [src]="company.logoUrl"
-                alt="Company Logo"
-                class="img-thumbnail"
-                style="max-height: 100px"
-              />
-              <div class="mt-1 small text-muted">{{ company.logoUrl }}</div>
-            </div>
-            <div *ngIf="!company.logoUrl">Логотип не загружен</div>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-md-3">Кол-во отзывов</div>
-          <div class="col-md-9">
-            {{ company.reviews?.length ?? company.reviewsCount }}
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-md-3">Рейтинг</div>
-          <div class="col-md-9">
-            {{ company.rating }}
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-md-3">Просмотров</div>
-          <div class="col-md-9">
-            {{ company.viewsCount }}
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-md-3">Slug</div>
-          <div class="col-md-9">
-            {{ company.slug }}
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-md-3">Даты</div>
-          <div class="col-md-9">
-            <div>
-              Создана: {{ company.createdAt | date: "yyyy-MM-dd HH:mm" }}
-            </div>
-            <div>
-              Обновление: {{ company.updatedAt | date: "yyyy-MM-dd HH:mm" }}
-            </div>
+      <div class="row mb-3">
+        <div class="col-md-3">Ссылки</div>
+        <div class="col-md-9">
+          <div *ngFor="let link of company.links">
+            <a [href]="link" target="_blank" rel="noopener">{{ link }}</a>
           </div>
         </div>
       </div>
 
-      <hr />
+      <div class="row mb-3">
+        <div class="col-md-3">Логотип</div>
+        <div class="col-md-9">
+          <div *ngIf="company.logoUrl">
+            <img
+              [src]="company.logoUrl"
+              alt="Company Logo"
+              class="img-thumbnail"
+              style="max-height: 100px"
+            />
+            <div class="mt-1 small text-muted">{{ company.logoUrl }}</div>
+          </div>
+          <div *ngIf="!company.logoUrl">Логотип не загружен</div>
+        </div>
+      </div>
 
+      <div class="row mb-3">
+        <div class="col-md-3">Кол-во отзывов</div>
+        <div class="col-md-9">
+          {{ company.reviews?.length ?? company.reviewsCount }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-3">Рейтинг</div>
+        <div class="col-md-9">
+          {{ company.rating }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-3">Просмотров</div>
+        <div class="col-md-9">
+          {{ company.viewsCount }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-3">Slug</div>
+        <div class="col-md-9">
+          {{ company.slug }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-3">Даты</div>
+        <div class="col-md-9">
+          <div>Создана: {{ company.createdAt | date: "yyyy-MM-dd HH:mm" }}</div>
+          <div>
+            Обновление: {{ company.updatedAt | date: "yyyy-MM-dd HH:mm" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5" *ngIf="company.aiAnalysis">
+    <div class="alert alert-info p-5">
+      <div [innerHTML]="company.aiAnalysis.html"></div>
+      <div class="fst-italic text-info">
+        <div>
+          Сформировано
+          {{ company.aiAnalysis.createdAt | date: "yyyy-MM-dd HH:mm" }}
+        </div>
+        <div>
+          Модель: <b>{{ company.aiAnalysis.model }}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body p-5">
       <div
-        class="table-responsive mt-5"
+        class="table-responsive"
         *ngIf="company.reviews.length > 0; else nothingToShow"
       >
         <table class="table table-hover">

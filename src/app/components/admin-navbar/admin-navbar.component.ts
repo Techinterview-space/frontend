@@ -24,28 +24,18 @@ export class AdminNavbarComponent {
   constructor() {
     this.dropdowns = [
       {
-        title: "Юзеры",
+        title: "Данные",
         links: [
           {
-            title: "Все юзеры",
+            title: "Пользователи",
             url: "/admin/users",
             isExternal: false,
           },
-        ],
-      },
-      {
-        title: "Шаблоны",
-        links: [
           {
             title: "Все шаблоны",
             url: "/admin/interview-templates",
             isExternal: false,
           },
-        ],
-      },
-      {
-        title: "Справочники",
-        links: [
           {
             title: "Специальности",
             url: "/admin/professions",
@@ -99,13 +89,8 @@ export class AdminNavbarComponent {
         ],
       },
       {
-        title: "Telegram",
+        title: "Зарплатный бот",
         links: [
-          {
-            title: "Использование бота",
-            url: "/admin/telegram/bot-usages",
-            isExternal: false,
-          },
           {
             title: "Подписчики бота",
             url: "/admin/telegram/user-settings",
@@ -116,15 +101,10 @@ export class AdminNavbarComponent {
             url: "/admin/telegram/stat-data-change-subscriptions",
             isExternal: false,
           },
-          {
-            title: "Статистика ответов в Inline",
-            url: "/admin/telegram/inline-replies-stats",
-            isExternal: false,
-          },
         ],
       },
       {
-        title: "Github bot",
+        title: "Github Profile Bot",
         links: [
           {
             title: "Запрошенные профили",
@@ -144,10 +124,30 @@ export class AdminNavbarComponent {
         ],
       },
       {
+        title: "AI",
+        links: [
+          {
+            title: "OpenAI промпты",
+            url: "/admin/openai-prompts",
+            isExternal: false,
+          },
+          {
+            title: "OpenAI API usage",
+            url: "https://platform.openai.com/usage",
+            isExternal: true,
+          },
+          {
+            title: "Claude API usage",
+            url: "https://console.anthropic.com/usage",
+            isExternal: true,
+          },
+        ],
+      },
+      {
         title: "Инструменты",
         links: [
           {
-            title: "Общее",
+            title: "Настройки",
             url: "/admin/tools/background-jobs",
             isExternal: false,
           },

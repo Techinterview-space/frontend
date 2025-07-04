@@ -15,7 +15,7 @@ export class TelegramBotABoutComponent implements OnInit, OnDestroy {
   constructor(
     private readonly titleService: TitleService,
     private readonly route: ActivatedRoute,
-    private readonly viewportScroller: ViewportScroller
+    private readonly viewportScroller: ViewportScroller,
   ) {
     this.titleService.setTitle("О ботах в Telegram");
   }

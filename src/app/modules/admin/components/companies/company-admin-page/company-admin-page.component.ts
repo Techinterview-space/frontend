@@ -93,6 +93,22 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
   recalculateRating(): void {
     throw new Error("Not implemented");
   }
+
+  runAiAnalysis(): void {
+    if (this.company == null) {
+      return;
+    }
+
+    this.service
+      .getOpenAiAnalysis(this.company.id)
+      .pipe(untilDestroyed(this))
+      .subscribe((result) => {
+        this.alertService.success("AI анализ был завершен");
+        this.company = null;
+        this.ngOnInit();
+      });
+  }
+
   onReviewModalDlgClose(): void {
     this.reviewToShow = null;
   }
