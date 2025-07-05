@@ -62,10 +62,7 @@ class ChartDatasetItem {
   readonly data: Array<number>;
   readonly backgroundColor: Array<string>;
 
-  constructor(
-    chartData: SalariesSkillsChartData,
-    includeNoData: boolean,
-  ) {
+  constructor(chartData: SalariesSkillsChartData, includeNoData: boolean) {
     this.label = "Указанные ЯП/фреймворки";
     this.data = [];
     this.backgroundColor = [];

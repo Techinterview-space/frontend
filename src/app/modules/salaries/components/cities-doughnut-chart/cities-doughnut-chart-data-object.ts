@@ -23,7 +23,9 @@ export class CitiesDoughnutChartDataObject extends Chart {
     super(canvasId, {
       type: "doughnut",
       data: {
-        labels: chartData.items.map((x) => KazakhstanCityEnum.label(x.city) + ` (${x.count})`),
+        labels: chartData.items.map(
+          (x) => KazakhstanCityEnum.label(x.city) + ` (${x.count})`,
+        ),
         datasets: datasets,
       },
       options: {
@@ -45,7 +47,7 @@ export class CitiesDoughnutChartDataObject extends Chart {
 
   toggleNoDataArea(show: boolean): void {
     this.data.labels = this.chartData.items.map(
-      (x) => KazakhstanCityEnum.label(x.city) + ` (${x.count})`
+      (x) => KazakhstanCityEnum.label(x.city) + ` (${x.count})`,
     );
 
     if (show && this.chartData.noDataCount > 0) {
@@ -64,10 +66,7 @@ class ChartDatasetItem implements ChartDatasetType {
   readonly backgroundColor: Array<string>;
   readonly hoverOffset: number;
 
-  constructor(
-    chartData: CitiesDoughnutChartData,
-    includeNoData: boolean,
-  ) {
+  constructor(chartData: CitiesDoughnutChartData, includeNoData: boolean) {
     this.label = "Город проживания";
     this.data = [];
     this.backgroundColor = [];

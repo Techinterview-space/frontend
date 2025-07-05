@@ -62,10 +62,7 @@ class ChartDatasetItem {
   readonly data: Array<number>;
   readonly backgroundColor: Array<string>;
 
-  constructor(
-    chartData: WorkIndustriesChartData,
-    includeNoData: boolean,
-  ) {
+  constructor(chartData: WorkIndustriesChartData, includeNoData: boolean) {
     this.label = "Сфера работы";
     this.data = [];
     this.backgroundColor = [];

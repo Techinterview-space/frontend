@@ -48,9 +48,12 @@ export class WorkIndustriesChartComponent implements OnInit {
       return;
     }
 
-    const totalDataCount = this.chartData.items.reduce((sum, item) => sum + item.count, 0);
+    const totalDataCount = this.chartData.items.reduce(
+      (sum, item) => sum + item.count,
+      0,
+    );
     this.totalCount = totalDataCount;
-    
+
     this.tableRows = this.chartData.items
       .map((item) => {
         return new TableRow(item.industry, item.count, totalDataCount);
