@@ -208,7 +208,8 @@ export class SalariesChart implements SalariesChartResponse {
     this.citiesDoughnutChartData = data.citiesDoughnutChartData;
 
     this.gradesMinMaxChartData = data.gradesMinMaxChartData;
-    this.professionsDistributionChartData = data.professionsDistributionChartData;
+    this.professionsDistributionChartData =
+      data.professionsDistributionChartData;
     this.peopleByGenderChartData = data.peopleByGenderChartData;
 
     this.recalculateData(data, allProfessions, this.currentCurrency);

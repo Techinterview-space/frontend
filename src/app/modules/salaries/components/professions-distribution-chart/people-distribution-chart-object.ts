@@ -20,10 +20,8 @@ export class PeopleDistributionChartObject extends Chart {
     const datasets: Array<ChartDatasetType> = [];
 
     // Filter professions that meet the minimum count threshold
-    const professionsToInclude = data.items.filter(
-      (x) => x.count > otherLimit,
-    );
-    
+    const professionsToInclude = data.items.filter((x) => x.count > otherLimit);
+
     if (data.totalCount > 0) {
       const dataForDataset = professionsToInclude.map((x) => {
         return {

@@ -2,7 +2,10 @@ import { Chart } from "chart.js/auto";
 import { RandomRgbColor } from "../random-rgb-color";
 import { DeveloperGrade } from "@models/enums";
 import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";
-import { GradesMinMaxChartData, GradeBoxPlotData } from "@services/user-salaries.service";
+import {
+  GradesMinMaxChartData,
+  GradeBoxPlotData,
+} from "@services/user-salaries.service";
 
 export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
   static readonly grades: Array<{ grade: DeveloperGrade; label: string }> = [
@@ -31,11 +34,15 @@ export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
     const datasets: Array<ChartDataset> = [];
 
     if (chartData.localData.length > 0) {
-      datasets.push(new ChartDataset(chartData.localData, "Казахстанская компания"));
+      datasets.push(
+        new ChartDataset(chartData.localData, "Казахстанская компания"),
+      );
     }
 
     if (chartData.remoteData.length > 0) {
-      datasets.push(new ChartDataset(chartData.remoteData, "Иностранная компания"));
+      datasets.push(
+        new ChartDataset(chartData.remoteData, "Иностранная компания"),
+      );
     }
 
     super(canvasId, {
@@ -82,7 +89,7 @@ class ChartDataset {
     this.backgroundColor = color.toString(0.7);
 
     this.data = GradesMinMaxSalariesChartObject.grades.map((g) => {
-      const gradeBoxPlot = gradeData.find(data => data.grade === g.grade);
+      const gradeBoxPlot = gradeData.find((data) => data.grade === g.grade);
       return new ChartDatasetItem(gradeBoxPlot);
     });
   }

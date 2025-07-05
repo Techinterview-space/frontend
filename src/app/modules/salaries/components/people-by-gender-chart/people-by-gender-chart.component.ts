@@ -47,19 +47,27 @@ export class PeopleByGenderChartComponent implements OnInit {
     }
 
     this.currentSalary = this.chartData.currentUserSalary;
-    
+
     const peopleByGenderData = this.chartData.peopleByGenderChartData;
     if (peopleByGenderData != null) {
       if (peopleByGenderData.localData.totalCount > 0) {
         this.totalCountLocal = peopleByGenderData.localData.totalCount;
-        this.barsForLocal = this.prepareDataFromChartData(peopleByGenderData.localData.items, peopleByGenderData.localData.noGenderCount, peopleByGenderData.localData.noGenderPercentage);
+        this.barsForLocal = this.prepareDataFromChartData(
+          peopleByGenderData.localData.items,
+          peopleByGenderData.localData.noGenderCount,
+          peopleByGenderData.localData.noGenderPercentage,
+        );
         this.salariesByGenderChartForLocal =
           this.chartData.salariesByGenderChartForLocal;
       }
 
       if (peopleByGenderData.remoteData.totalCount > 0) {
         this.totalCountRemote = peopleByGenderData.remoteData.totalCount;
-        this.barsForRemote = this.prepareDataFromChartData(peopleByGenderData.remoteData.items, peopleByGenderData.remoteData.noGenderCount, peopleByGenderData.remoteData.noGenderPercentage);
+        this.barsForRemote = this.prepareDataFromChartData(
+          peopleByGenderData.remoteData.items,
+          peopleByGenderData.remoteData.noGenderCount,
+          peopleByGenderData.remoteData.noGenderPercentage,
+        );
         this.salariesByGenderChartForRemote =
           this.chartData.salariesByGenderChartForRemote;
       }
@@ -73,10 +81,10 @@ export class PeopleByGenderChartComponent implements OnInit {
   private prepareDataFromChartData(
     genderItems: Array<{ gender: Gender; count: number; percentage: number }>,
     noGenderCount: number,
-    noGenderPercentage: number
+    noGenderPercentage: number,
   ): Array<TableRow> {
     const result: Array<TableRow> = [];
-    
+
     // Add items with known gender
     genderItems
       .filter((item) => item.gender != null && item.gender !== Gender.Undefined)

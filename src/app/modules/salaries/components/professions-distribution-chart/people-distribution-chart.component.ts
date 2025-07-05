@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { PeopleDistributionChartObject } from "./people-distribution-chart-object";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
-import { ProfessionsDistributionChartData, ProfessionDistributionData } from "@services/user-salaries.service";
+import {
+  ProfessionsDistributionChartData,
+  ProfessionDistributionData,
+} from "@services/user-salaries.service";
 
 @Component({
   selector: "app-people-distribution-chart",
