@@ -46,7 +46,6 @@ export interface SalariesByGrade {
 
 export interface SalariesChartResponse {
   hasAuthentication: boolean;
-  salaries: UserSalary[];
   totalCountInStats: number;
   hasRecentSurveyReply: boolean;
   shouldAddOwnSalary: boolean;

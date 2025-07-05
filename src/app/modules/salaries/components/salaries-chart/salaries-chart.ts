@@ -52,11 +52,6 @@ export class SalariesChart implements SalariesChartResponse {
     return this._remoteSalariesByGrade;
   }
 
-  private _salaries: Array<UserSalary> = [];
-  get salaries(): Array<UserSalary> {
-    return this._salaries;
-  }
-
   private _salariesByMoneyBarChart: SalariesByMoneyBarChart | null = null;
   get salariesByMoneyBarChart(): SalariesByMoneyBarChart | null {
     return this._salariesByMoneyBarChart;
@@ -66,18 +61,6 @@ export class SalariesChart implements SalariesChartResponse {
     null;
   get salariesByMoneyBarChartForRemote(): SalariesByMoneyBarChart | null {
     return this._salariesByMoneyBarChartForRemote;
-  }
-
-  private _salariesPerProfessionForLocal: Array<SalariesPerProfession> | null =
-    null;
-  get salariesPerProfessionForLocal(): Array<SalariesPerProfession> | null {
-    return this._salariesPerProfessionForLocal;
-  }
-
-  private _salariesPerProfessionForRemote: Array<SalariesPerProfession> | null =
-    null;
-  get salariesPerProfessionForRemote(): Array<SalariesPerProfession> | null {
-    return this._salariesPerProfessionForRemote;
   }
 
   private _currentUserSalary: UserSalaryAdminDto | null = null;
@@ -145,13 +128,6 @@ export class SalariesChart implements SalariesChartResponse {
   readonly developersByAgeChartData: DevelopersByCategoryChartData | null;
   readonly developersByExperienceYearsChartData: DevelopersByCategoryChartData | null;
 
-  get hasRemoteSalaries(): boolean {
-    return (
-      this._salariesPerProfessionForRemote != null &&
-      this._salariesPerProfessionForRemote.length > 0
-    );
-  }
-
   readonly hasAuthentication: boolean;
   readonly hasRecentSurveyReply: boolean;
 
@@ -162,6 +138,8 @@ export class SalariesChart implements SalariesChartResponse {
   readonly shouldAddOwnSalary: boolean;
   readonly rangeStart: Date;
   readonly rangeEnd: Date;
+
+  readonly hasRemoteSalaries: boolean;
 
   public readonly currentCurrencyChanged$: Subject<CurrencyData> =
     new Subject();
@@ -213,6 +191,10 @@ export class SalariesChart implements SalariesChartResponse {
     this.peopleByGenderChartData = data.peopleByGenderChartData;
 
     this.recalculateData(data, allProfessions, this.currentCurrency);
+
+    this.hasRemoteSalaries =
+      data.salariesByMoneyBarChartForRemote != null &&
+      data.salariesByMoneyBarChartForRemote.items.length > 0;
   }
 
   public setCurrentCurrency(currencyType: CurrencyType): void {
@@ -251,11 +233,6 @@ export class SalariesChart implements SalariesChartResponse {
     allProfessions: Array<LabelEntityDto>,
     currentCurrency: CurrencyData,
   ): void {
-    this._salaries = data.salaries.map((x) => {
-      x.value = x.value / currentCurrency.value;
-      return x;
-    });
-
     this._currentUserSalary = data.currentUserSalary;
     if (data.currentUserSalary != null) {
       this._currentUserSalary = { ...data.currentUserSalary };
@@ -313,13 +290,5 @@ export class SalariesChart implements SalariesChartResponse {
     this._salariesByMoneyBarChart = data.salariesByMoneyBarChart;
     this._salariesByMoneyBarChartForRemote =
       data.salariesByMoneyBarChartForRemote;
-
-    const salariesPerProfession = SalariesPerProfession.from(
-      this._salaries,
-      allProfessions,
-    );
-
-    this._salariesPerProfessionForLocal = salariesPerProfession.local;
-    this._salariesPerProfessionForRemote = salariesPerProfession.remote;
   }
 }
