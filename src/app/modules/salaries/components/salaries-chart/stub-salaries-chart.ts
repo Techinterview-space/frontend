@@ -33,7 +33,6 @@ export class StubSalariesChart extends SalariesChart {
         shouldAddOwnSalary: true,
         currentUserSalary: null,
         totalCountInStats: data?.totalCountInStats ?? 0,
-        salaries: [] as UserSalary[],
         salariesByMoneyBarChart: {
           items: StubSalariesChart.salaryLabels.map((x) =>
             StubSalariesChart.getRandomNumber(100, 25),
@@ -60,6 +59,9 @@ export class StubSalariesChart extends SalariesChart {
         salariesSkillsChartData: null,
         workIndustriesChartData: null,
         citiesDoughnutChartData: null,
+        gradesMinMaxChartData: null,
+        professionsDistributionChartData: null,
+        peopleByGenderChartData: null,
       },
       [],
     );
