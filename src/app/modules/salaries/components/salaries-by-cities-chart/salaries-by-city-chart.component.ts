@@ -26,7 +26,7 @@ export class SalariesByCityChartComponent {
   }
 
   private initChart(): void {
-    if (this.chart == null || this.chart.salaries.length == 0) {
+    if (this.chart == null) {
       return;
     }
 

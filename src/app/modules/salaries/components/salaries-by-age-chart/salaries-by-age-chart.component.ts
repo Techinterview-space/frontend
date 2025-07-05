@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import { UserSalary } from "@models/salaries/salary.model";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { SalariesByAgeOrExperienceChartObject } from "../salaries-by-age-or-experience-chart-object";
 import { SalariesByAgeOrExperienceChart } from "@services/user-salaries.service";
@@ -27,7 +26,7 @@ export class SalariesByAgeChartComponent {
   }
 
   private initChart(): void {
-    if (this.chart == null || this.chart.salaries.length == 0) {
+    if (this.chart == null) {
       return;
     }
 
