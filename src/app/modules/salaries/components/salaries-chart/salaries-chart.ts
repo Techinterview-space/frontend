@@ -11,6 +11,9 @@ import {
   SalariesSkillsChartData,
   WorkIndustriesChartData,
   CitiesDoughnutChartData,
+  GradesMinMaxChartData,
+  ProfessionsDistributionChartData,
+  PeopleByGenderChartData,
 } from "@services/user-salaries.service";
 import { SalariesPerProfession } from "../salaries-per-profession";
 import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
@@ -130,6 +133,10 @@ export class SalariesChart implements SalariesChartResponse {
   readonly workIndustriesChartData: WorkIndustriesChartData | null;
   readonly citiesDoughnutChartData: CitiesDoughnutChartData | null;
 
+  readonly gradesMinMaxChartData: GradesMinMaxChartData | null;
+  readonly professionsDistributionChartData: ProfessionsDistributionChartData | null;
+  readonly peopleByGenderChartData: PeopleByGenderChartData | null;
+
   readonly countOfRecords: number;
 
   readonly peopleByGradesChartDataForLocal: PeopleByGradesChartData | null;
@@ -199,6 +206,10 @@ export class SalariesChart implements SalariesChartResponse {
     this.salariesSkillsChartData = data.salariesSkillsChartData;
     this.workIndustriesChartData = data.workIndustriesChartData;
     this.citiesDoughnutChartData = data.citiesDoughnutChartData;
+
+    this.gradesMinMaxChartData = data.gradesMinMaxChartData;
+    this.professionsDistributionChartData = data.professionsDistributionChartData;
+    this.peopleByGenderChartData = data.peopleByGenderChartData;
 
     this.recalculateData(data, allProfessions, this.currentCurrency);
   }

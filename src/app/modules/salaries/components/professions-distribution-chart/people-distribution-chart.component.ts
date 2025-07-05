@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { PeopleDistributionChartObject } from "./people-distribution-chart-object";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
-import { CompanyType } from "@models/salaries/company-type";
+import { ProfessionsDistributionChartData, ProfessionDistributionData } from "@services/user-salaries.service";
 
 @Component({
   selector: "app-people-distribution-chart",
@@ -27,30 +26,28 @@ export class PeopleDistributionChartComponent {
   }
 
   private initChart(): void {
-    if (this.chart == null || this.chart.salaries.length == 0) {
+    if (this.chart == null) {
       return;
     }
 
-    const localSalaries = this.chart.salaries.filter(
-      (x) => x.company === CompanyType.Local,
-    );
-    const remoteSalaries = this.chart.salaries.filter(
-      (x) => x.company === CompanyType.Remote,
-    );
+    const chartData = this.chart.professionsDistributionChartData;
+    if (chartData == null) {
+      return;
+    }
 
-    if (localSalaries.length > 0) {
+    if (chartData.localData.totalCount > 0) {
       this.chartDataLocal = this.initChartWithParams(
         this.canvasIdLocal,
-        localSalaries,
+        chartData.localData,
         10,
         "Казахстан",
       );
     }
 
-    if (remoteSalaries.length > 0) {
+    if (chartData.remoteData.totalCount > 0) {
       this.chartDataRemote = this.initChartWithParams(
         this.canvasIdRemote,
-        remoteSalaries,
+        chartData.remoteData,
         3,
         "Мир (удаленка)",
       );
@@ -59,16 +56,15 @@ export class PeopleDistributionChartComponent {
 
   private initChartWithParams(
     canvasId: string,
-    salaries: Array<UserSalary>,
+    data: ProfessionDistributionData,
     otherLimit: number,
     title: string,
   ): PeopleDistributionChartObject {
     const chart = new PeopleDistributionChartObject(
       canvasId,
-      salaries,
+      data,
       otherLimit,
       title,
-      this.chart!.allProfessions,
     );
 
     var chartEl = document.getElementById(canvasId);

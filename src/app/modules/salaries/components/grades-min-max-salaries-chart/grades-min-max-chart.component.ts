@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy } from "@angular/core";
-import { UserSalary } from "@models/salaries/salary.model";
 import { GradesMinMaxSalariesChartObject } from "./grades-min-max-chart-object";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { GradesMinMaxChartData } from "@services/user-salaries.service";
 
 @Component({
   selector: "app-grades-min-max-chart",
@@ -14,7 +14,7 @@ export class GradesMinMaxChartComponent implements OnDestroy {
   @Input()
   source: SalariesChart | null = null;
 
-  salaries: Array<UserSalary> | null = null;
+  chartData: GradesMinMaxChartData | null = null;
   chartDataLocal: GradesMinMaxSalariesChartObject | null = null;
 
   readonly canvasId = "canvas_" + Math.random().toString(36);
@@ -32,14 +32,14 @@ export class GradesMinMaxChartComponent implements OnDestroy {
       return;
     }
 
-    this.salaries = this.source.salaries;
-    if (this.salaries == null || this.salaries.length == 0) {
+    this.chartData = this.source.gradesMinMaxChartData;
+    if (this.chartData == null) {
       return;
     }
 
     this.chartDataLocal = new GradesMinMaxSalariesChartObject(
       this.canvasId,
-      this.salaries,
+      this.chartData,
     );
 
     var chartEl = document.getElementById(this.canvasId);

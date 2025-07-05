@@ -60,6 +60,9 @@ export class StubSalariesChart extends SalariesChart {
         salariesSkillsChartData: null,
         workIndustriesChartData: null,
         citiesDoughnutChartData: null,
+        gradesMinMaxChartData: null,
+        professionsDistributionChartData: null,
+        peopleByGenderChartData: null,
       },
       [],
     );

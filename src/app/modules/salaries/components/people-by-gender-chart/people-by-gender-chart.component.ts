@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Gender, GenderEnum } from "@models/enums/gender.enum";
-import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
-import { CompanyType } from "@models/salaries/company-type";
+import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { SalariesByGenderChart } from "@services/user-salaries.service";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
 
@@ -48,28 +47,22 @@ export class PeopleByGenderChartComponent implements OnInit {
     }
 
     this.currentSalary = this.chartData.currentUserSalary;
-    const salaries = this.chartData.salaries;
+    
+    const peopleByGenderData = this.chartData.peopleByGenderChartData;
+    if (peopleByGenderData != null) {
+      if (peopleByGenderData.localData.totalCount > 0) {
+        this.totalCountLocal = peopleByGenderData.localData.totalCount;
+        this.barsForLocal = this.prepareDataFromChartData(peopleByGenderData.localData.items, peopleByGenderData.localData.noGenderCount, peopleByGenderData.localData.noGenderPercentage);
+        this.salariesByGenderChartForLocal =
+          this.chartData.salariesByGenderChartForLocal;
+      }
 
-    const localSararies = salaries.filter(
-      (item) => item.company === CompanyType.Local,
-    );
-
-    const remoteSararies = salaries.filter(
-      (item) => item.company === CompanyType.Remote,
-    );
-
-    if (localSararies.length > 0) {
-      this.totalCountLocal = localSararies.length;
-      this.barsForLocal = this.prepareData(localSararies);
-      this.salariesByGenderChartForLocal =
-        this.chartData.salariesByGenderChartForLocal;
-    }
-
-    if (remoteSararies.length > 0) {
-      this.totalCountRemote = remoteSararies.length;
-      this.barsForRemote = this.prepareData(remoteSararies);
-      this.salariesByGenderChartForRemote =
-        this.chartData.salariesByGenderChartForRemote;
+      if (peopleByGenderData.remoteData.totalCount > 0) {
+        this.totalCountRemote = peopleByGenderData.remoteData.totalCount;
+        this.barsForRemote = this.prepareDataFromChartData(peopleByGenderData.remoteData.items, peopleByGenderData.remoteData.noGenderCount, peopleByGenderData.remoteData.noGenderPercentage);
+        this.salariesByGenderChartForRemote =
+          this.chartData.salariesByGenderChartForRemote;
+      }
     }
   }
 
@@ -77,50 +70,42 @@ export class PeopleByGenderChartComponent implements OnInit {
     this.editSalaryActionClick.emit();
   }
 
-  private prepareData(salaries: Array<UserSalary>): Array<TableRow> {
-    const salariesGroupedByGender: Array<{
-      gender: Gender | null;
-      salaries: Array<UserSalary>;
-    }> = [];
-
-    salaries.forEach((item) => {
-      const existingGroup = salariesGroupedByGender.find(
-        (x) => x.gender == item.gender,
-      );
-
-      if (existingGroup != null) {
-        existingGroup.salaries.push(item);
-      } else {
-        salariesGroupedByGender.push({ gender: item.gender, salaries: [item] });
-      }
-    });
-
+  private prepareDataFromChartData(
+    genderItems: Array<{ gender: Gender; count: number; percentage: number }>,
+    noGenderCount: number,
+    noGenderPercentage: number
+  ): Array<TableRow> {
     const result: Array<TableRow> = [];
-    salariesGroupedByGender
-      .filter((item) => item.gender != null)
-      .sort((x, y) => x.gender! - y.gender!)
+    
+    // Add items with known gender
+    genderItems
+      .filter((item) => item.gender != null && item.gender !== Gender.Undefined)
+      .sort((x, y) => x.gender - y.gender)
       .forEach((item) => {
         result.push({
-          value: item.salaries.length,
-          part: (item.salaries.length / salaries.length) * 100,
-          totalCount: salaries.length,
-          label: GenderEnum.label(item.gender!),
+          value: item.count,
+          part: item.percentage,
+          totalCount: item.count, // This will be updated by parent component
+          label: GenderEnum.label(item.gender),
         });
       });
 
-    const noGradeData = salariesGroupedByGender.find(
-      (item) => item.gender === Gender.Undefined || item.gender == null,
-    );
-
-    if (noGradeData != null) {
+    // Add "no gender" data if exists
+    if (noGenderCount > 0) {
       result.push({
-        value: noGradeData.salaries.length,
-        part: (noGradeData.salaries.length / salaries.length) * 100,
-        totalCount: salaries.length,
+        value: noGenderCount,
+        part: noGenderPercentage,
+        totalCount: noGenderCount, // This will be updated by parent component
         label: "Пол не указан",
       });
     }
 
     return result;
+  }
+
+  private prepareData_Legacy(salaries: Array<any>): Array<TableRow> {
+    // This method is kept for reference but should not be used anymore
+    // All data processing should be done on the backend
+    return [];
   }
 }

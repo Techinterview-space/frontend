@@ -87,6 +87,10 @@ export interface SalariesChartResponse {
   workIndustriesChartData: WorkIndustriesChartData | null;
   citiesDoughnutChartData: CitiesDoughnutChartData | null;
 
+  gradesMinMaxChartData: GradesMinMaxChartData | null;
+  professionsDistributionChartData: ProfessionsDistributionChartData | null;
+  peopleByGenderChartData: PeopleByGenderChartData | null;
+
   currencies: CurrencyData[];
 }
 
@@ -202,6 +206,54 @@ export interface CitiesDoughnutChartData {
     count: number;
   }>;
   noDataCount: number;
+}
+
+export interface GradesMinMaxChartData {
+  localData: Array<GradeBoxPlotData>;
+  remoteData: Array<GradeBoxPlotData>;
+}
+
+export interface GradeBoxPlotData {
+  grade: DeveloperGrade;
+  min: number;
+  q1: number;
+  median: number;
+  q3: number;
+  max: number;
+  mean: number;
+  items: Array<number>;
+}
+
+export interface ProfessionsDistributionChartData {
+  localData: ProfessionDistributionData;
+  remoteData: ProfessionDistributionData;
+}
+
+export interface ProfessionDistributionData {
+  items: Array<{
+    profession: LabelEntityDto;
+    count: number;
+    percentage: number;
+  }>;
+  otherCount: number;
+  otherPercentage: number;
+  totalCount: number;
+}
+
+export interface PeopleByGenderChartData {
+  localData: GenderDistributionData;
+  remoteData: GenderDistributionData;
+}
+
+export interface GenderDistributionData {
+  items: Array<{
+    gender: Gender;
+    count: number;
+    percentage: number;
+  }>;
+  noGenderCount: number;
+  noGenderPercentage: number;
+  totalCount: number;
 }
 
 export enum SalariesAdminOrderingType {

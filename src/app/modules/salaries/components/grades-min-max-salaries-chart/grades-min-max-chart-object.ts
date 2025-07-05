@@ -1,10 +1,8 @@
 import { Chart } from "chart.js/auto";
 import { RandomRgbColor } from "../random-rgb-color";
-import { UserSalary } from "@models/salaries/salary.model";
 import { DeveloperGrade } from "@models/enums";
-import { CompanyType } from "@models/salaries/company-type";
 import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";
-import { PercentileCollection } from "@shared/value-objects/percentile-collection";
+import { GradesMinMaxChartData, GradeBoxPlotData } from "@services/user-salaries.service";
 
 export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
   static readonly grades: Array<{ grade: DeveloperGrade; label: string }> = [
@@ -29,33 +27,15 @@ export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
 
   private readonly datasets: Array<ChartDataset> = [];
 
-  constructor(canvasId: string, salaries: Array<UserSalary>) {
+  constructor(canvasId: string, chartData: GradesMinMaxChartData) {
     const datasets: Array<ChartDataset> = [];
 
-    new RandomRgbColor().toString(1);
-
-    const salariesLocal: Array<UserSalary> = [];
-    const salariesRemote: Array<UserSalary> = [];
-
-    salaries.forEach((x) => {
-      if (x.grade == null) {
-        return;
-      }
-
-      if (x.company == CompanyType.Remote) {
-        salariesRemote.push(x);
-        return;
-      }
-
-      salariesLocal.push(x);
-    });
-
-    if (salariesLocal.length > 0) {
-      datasets.push(new ChartDataset(salariesLocal, "Казахстанская компания"));
+    if (chartData.localData.length > 0) {
+      datasets.push(new ChartDataset(chartData.localData, "Казахстанская компания"));
     }
 
-    if (salariesRemote.length > 0) {
-      datasets.push(new ChartDataset(salariesRemote, "Иностранная компания"));
+    if (chartData.remoteData.length > 0) {
+      datasets.push(new ChartDataset(chartData.remoteData, "Иностранная компания"));
     }
 
     super(canvasId, {
@@ -94,7 +74,7 @@ class ChartDataset {
   readonly itemBackgroundColor = "#000";
 
   constructor(
-    salariesSource: Array<UserSalary>,
+    gradeData: Array<GradeBoxPlotData>,
     readonly label: string,
   ) {
     const color = new RandomRgbColor();
@@ -102,11 +82,8 @@ class ChartDataset {
     this.backgroundColor = color.toString(0.7);
 
     this.data = GradesMinMaxSalariesChartObject.grades.map((g) => {
-      const salaries = salariesSource
-        .filter((s) => s.grade == g.grade)
-        .sort((a, b) => a.value - b.value);
-
-      return new ChartDatasetItem(salaries);
+      const gradeBoxPlot = gradeData.find(data => data.grade === g.grade);
+      return new ChartDatasetItem(gradeBoxPlot);
     });
   }
 }
@@ -120,9 +97,8 @@ class ChartDatasetItem {
   readonly items: Array<number>;
   readonly mean: number;
 
-  constructor(salaries: Array<UserSalary>) {
-    const itemsForChart = new PercentileCollection(salaries).getValues();
-    if (itemsForChart.length === 0) {
+  constructor(gradeBoxPlot: GradeBoxPlotData | undefined) {
+    if (gradeBoxPlot == null) {
       this.min = 0;
       this.max = 0;
       this.median = 0;
@@ -133,14 +109,12 @@ class ChartDatasetItem {
       return;
     }
 
-    this.min = itemsForChart[0].value;
-    this.max = itemsForChart[itemsForChart.length - 1].value;
-    this.median = itemsForChart[Math.floor(itemsForChart.length / 2)].value;
-    this.q1 = itemsForChart[Math.floor(itemsForChart.length / 4)].value;
-    this.q3 = itemsForChart[Math.floor((itemsForChart.length * 3) / 4)].value;
-    this.mean =
-      itemsForChart.reduce((a, b) => a + b.value, 0) / itemsForChart.length;
-
-    this.items = itemsForChart.map((s) => s.value);
+    this.min = gradeBoxPlot.min;
+    this.max = gradeBoxPlot.max;
+    this.median = gradeBoxPlot.median;
+    this.q1 = gradeBoxPlot.q1;
+    this.q3 = gradeBoxPlot.q3;
+    this.mean = gradeBoxPlot.mean;
+    this.items = gradeBoxPlot.items;
   }
 }
