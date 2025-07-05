@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
-import { SalariesSkillsChartJsObject } from "./salaries-skills-chart-js-object";
+import { UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { SalariesSkillsChartDataObject } from "./salaries-skills-chart-data-object";
+import { SalariesSkillsChartData } from "@services/user-salaries.service";
 import { LabelEntityDto } from "@services/label-entity.model";
 
 class TableRow {
@@ -25,18 +26,15 @@ class TableRow {
 })
 export class SalariesSkillsChartComponent implements OnInit {
   @Input()
-  skills: Array<LabelEntityDto> = [];
+  chartData: SalariesSkillsChartData | null = null;
 
   @Input()
   currentSalary: UserSalaryAdminDto | null = null;
 
-  @Input()
-  salaries: Array<UserSalary> | null = null;
-
   @Output()
   editSalaryActionClick = new EventEmitter<void>();
 
-  chartDataLocal: SalariesSkillsChartJsObject | null = null;
+  chartDataLocal: SalariesSkillsChartDataObject | null = null;
   showNoDataArea = false;
   tableRows: Array<TableRow> | null = null;
   totalCount = 0;
@@ -46,27 +44,19 @@ export class SalariesSkillsChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (
-      this.salaries == null ||
-      this.salaries.length === 0 ||
-      this.skills.length === 0
-    ) {
+    if (this.chartData == null || this.chartData.items.length === 0) {
       return;
     }
 
-    const uniqueSkills = SalariesSkillsChartJsObject.prepareUniqueSkills(
-      this.salaries,
-      this.skills,
+    const totalDataCount = this.chartData.items.reduce(
+      (sum, item) => sum + item.count,
+      0,
     );
-    const salariesWithSkill = this.salaries.filter((x) => x.skillId != null);
-    this.tableRows = uniqueSkills
-      .map((skill) => {
-        const value = salariesWithSkill.filter(
-          (x) => x.skillId === skill.id,
-        ).length;
+    this.totalCount = totalDataCount;
 
-        this.totalCount += value;
-        return new TableRow(skill, value, salariesWithSkill.length ?? 0);
+    this.tableRows = this.chartData.items
+      .map((item) => {
+        return new TableRow(item.skill, item.count, totalDataCount);
       })
       .sort((a, b) => b.part - a.part);
   }
@@ -84,18 +74,13 @@ export class SalariesSkillsChartComponent implements OnInit {
   }
 
   private initChart(): void {
-    if (
-      this.salaries == null ||
-      this.salaries.length === 0 ||
-      this.skills.length === 0
-    ) {
+    if (this.chartData == null || this.chartData.items.length === 0) {
       return;
     }
 
-    this.chartDataLocal = new SalariesSkillsChartJsObject(
+    this.chartDataLocal = new SalariesSkillsChartDataObject(
       this.canvasId,
-      this.salaries,
-      this.skills,
+      this.chartData,
     );
 
     var chartEl = document.getElementById(this.canvasId);

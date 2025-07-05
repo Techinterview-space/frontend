@@ -83,6 +83,10 @@ export interface SalariesChartResponse {
   salariesByGenderChartForLocal: SalariesByGenderChart | null;
   salariesByGenderChartForRemote: SalariesByGenderChart | null;
 
+  salariesSkillsChartData: SalariesSkillsChartData | null;
+  workIndustriesChartData: WorkIndustriesChartData | null;
+  citiesDoughnutChartData: CitiesDoughnutChartData | null;
+
   currencies: CurrencyData[];
 }
 
@@ -174,6 +178,30 @@ export interface SalariesAddingTrendChart {
     count: number;
     startedAt: Date;
   }>;
+}
+
+export interface SalariesSkillsChartData {
+  items: Array<{
+    skill: LabelEntityDto;
+    count: number;
+  }>;
+  noDataCount: number;
+}
+
+export interface WorkIndustriesChartData {
+  items: Array<{
+    industry: LabelEntityDto;
+    count: number;
+  }>;
+  noDataCount: number;
+}
+
+export interface CitiesDoughnutChartData {
+  items: Array<{
+    city: KazakhstanCity;
+    count: number;
+  }>;
+  noDataCount: number;
 }
 
 export enum SalariesAdminOrderingType {

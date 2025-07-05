@@ -1,13 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from "@angular/core";
-import { CitiesDoughnutChartObject } from "./cities-doughnut-chart-object";
-import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { CitiesDoughnutChartDataObject } from "./cities-doughnut-chart-data-object";
+import { UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { CitiesDoughnutChartData } from "@services/user-salaries.service";
 
 @Component({
   selector: "app-cities-doughnut-chart",
@@ -17,7 +11,7 @@ import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
 })
 export class CitiesDoughnutChartComponent {
   @Input()
-  salaries: Array<UserSalary> | null = null;
+  chartData: CitiesDoughnutChartData | null = null;
 
   @Input()
   currentSalary: UserSalaryAdminDto | null = null;
@@ -25,7 +19,7 @@ export class CitiesDoughnutChartComponent {
   @Output()
   editSalaryActionClick = new EventEmitter<void>();
 
-  chartDataLocal: CitiesDoughnutChartObject | null = null;
+  chartDataLocal: CitiesDoughnutChartDataObject | null = null;
   showNoDataArea = false;
 
   readonly canvasId = "canvas_" + Math.random().toString(36);
@@ -45,18 +39,13 @@ export class CitiesDoughnutChartComponent {
   }
 
   private initChart(): void {
-    if (this.salaries == null || this.salaries.length == 0) {
+    if (this.chartData == null || this.chartData.items.length == 0) {
       return;
     }
 
-    this.chartDataLocal = new CitiesDoughnutChartObject(
+    this.chartDataLocal = new CitiesDoughnutChartDataObject(
       this.canvasId,
-      this.salaries,
+      this.chartData,
     );
-
-    var chartEl = document.getElementById(this.canvasId);
-    if (chartEl != null && chartEl.parentElement != null) {
-      chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
-    }
   }
 }

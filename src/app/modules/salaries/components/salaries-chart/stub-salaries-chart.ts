@@ -57,6 +57,9 @@ export class StubSalariesChart extends SalariesChart {
         salariesByCityChartForRemote: null,
         salariesByGenderChartForLocal: null,
         salariesByGenderChartForRemote: null,
+        salariesSkillsChartData: null,
+        workIndustriesChartData: null,
+        citiesDoughnutChartData: null,
       },
       [],
     );

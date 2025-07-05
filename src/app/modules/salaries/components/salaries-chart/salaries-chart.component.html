@@ -371,21 +371,19 @@
         ></app-people-by-grades-chart>
       </div>
 
-      <div class="mt-10 mb-5" *ngIf="skills.length > 0">
+      <div class="mt-10 mb-5" *ngIf="salariesChart.salariesSkillsChartData">
         <app-salaries-skills-chart
-          [skills]="skills"
+          [chartData]="salariesChart.salariesSkillsChartData"
           [currentSalary]="salariesChart.currentUserSalary"
-          [salaries]="salariesChart.salaries"
           (editSalaryActionClick)="openEditSalaryAction()"
         >
         </app-salaries-skills-chart>
       </div>
 
-      <div class="mt-10 mb-5" *ngIf="industries.length > 0">
+      <div class="mt-10 mb-5" *ngIf="salariesChart.workIndustriesChartData">
         <app-work-industries-chart
-          [industries]="industries"
+          [chartData]="salariesChart.workIndustriesChartData"
           [currentSalary]="salariesChart.currentUserSalary"
-          [salaries]="salariesChart.salaries"
           (editSalaryActionClick)="openEditSalaryAction()"
         >
         </app-work-industries-chart>
@@ -417,8 +415,8 @@
 
       <div class="mt-5 mb-5">
         <app-cities-doughnut-chart
+          [chartData]="salariesChart.citiesDoughnutChartData"
           [currentSalary]="salariesChart.currentUserSalary"
-          [salaries]="salariesChart.salaries"
           (editSalaryActionClick)="openEditSalaryAction()"
         >
         </app-cities-doughnut-chart>
