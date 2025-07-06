@@ -2,6 +2,7 @@ export enum OpenAiPromptType {
   Undefined = 0,
   Company = 1,
   Chat = 2,
+  SalariesWeeklyUpdate = 3,
 }
 
 export class OpenAiPromptTypeHelper {
@@ -11,6 +12,8 @@ export class OpenAiPromptTypeHelper {
         return "Компания";
       case OpenAiPromptType.Chat:
         return "Чат";
+      case OpenAiPromptType.SalariesWeeklyUpdate:
+        return "Зарплаты (еженедельное обновление)";
       default:
         return "Неизвестный тип";
     }
