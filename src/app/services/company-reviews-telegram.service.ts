@@ -5,51 +5,48 @@ import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
 import {
-  SalariesStatSubscription,
+  CompanyReviewsStatSubscription,
   SubscriptionRegularityType,
 } from "@models/telegram";
 import { OpenAiAnalysis, OpenAiReport } from "@models/open-ai.model";
 
-export interface CreateTelegramSubscriptionBody
-  extends EditTelegramSubscriptionBody {
+export interface CreateCompanyReviewsSubscriptionBodyRequest {
   telegramChatId: number;
-}
-
-export interface EditTelegramSubscriptionBody {
   name: string;
-  professionIds: Array<number>;
-  preventNotificationIfNoDifference: boolean;
   regularity: SubscriptionRegularityType;
   useAiAnalysis: boolean;
 }
 
 @Injectable()
-export class TelegramSubscriptionsService {
+export class CompanyReviewsTelegramSubscriptionsService {
   private readonly apiUrl: string;
 
   constructor(private readonly api: ApiService) {
-    this.apiUrl = `/api/telegram-subscriptions`;
+    this.apiUrl = `/api/company-reviews-telegram-subscriptions`;
   }
 
   search(
     pageParams: PageParams = defaultPageParams,
-  ): Observable<PaginatedList<SalariesStatSubscription>> {
-    return this.api.get<PaginatedList<SalariesStatSubscription>>(
+  ): Observable<PaginatedList<CompanyReviewsStatSubscription>> {
+    return this.api.get<PaginatedList<CompanyReviewsStatSubscription>>(
       this.apiUrl + "?" + new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
   create(
-    body: CreateTelegramSubscriptionBody,
-  ): Observable<SalariesStatSubscription> {
-    return this.api.post<SalariesStatSubscription>(`${this.apiUrl}`, body);
+    body: CreateCompanyReviewsSubscriptionBodyRequest,
+  ): Observable<CompanyReviewsStatSubscription> {
+    return this.api.post<CompanyReviewsStatSubscription>(
+      `${this.apiUrl}`,
+      body,
+    );
   }
 
   update(
     id: string,
-    body: EditTelegramSubscriptionBody,
-  ): Observable<SalariesStatSubscription> {
-    return this.api.post<SalariesStatSubscription>(
+    body: CreateCompanyReviewsSubscriptionBodyRequest,
+  ): Observable<CompanyReviewsStatSubscription> {
+    return this.api.post<CompanyReviewsStatSubscription>(
       `${this.apiUrl}/${id}`,
       body,
     );

@@ -4,7 +4,7 @@ import { PaginatedList } from "@models/paginated-list";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import {
-  StatDataCacheChangeSubscription,
+  SalariesStatSubscription,
   SubscriptionRegularityType,
 } from "@models/telegram";
 import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
@@ -12,7 +12,7 @@ import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.s
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
-import { OpenAiDialogData } from "./open-ai-dialog-data";
+import { OpenAiDialogData } from "../open-ai-dialog-data";
 import { TelegramSubscriptionEditForm } from "./subscription-edit-form";
 
 @Component({
@@ -21,8 +21,8 @@ import { TelegramSubscriptionEditForm } from "./subscription-edit-form";
   standalone: false,
 })
 export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
-  items: Array<StatDataCacheChangeSubscription> | null = null;
-  source: PaginatedList<StatDataCacheChangeSubscription> | null = null;
+  items: Array<SalariesStatSubscription> | null = null;
+  source: PaginatedList<SalariesStatSubscription> | null = null;
   currentPage: number = 1;
 
   editForm: TelegramSubscriptionEditForm | null = null;
@@ -34,7 +34,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
     titleService: TitleService,
     private readonly alert: AlertService,
   ) {
-    titleService.setTitle("Использование бота");
+    titleService.setTitle("Подписки в Telegram (зарплаты)");
   }
 
   ngOnInit(): void {
@@ -61,7 +61,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       });
   }
 
-  activate(item: StatDataCacheChangeSubscription): void {
+  activate(item: SalariesStatSubscription): void {
     this.service
       .activate(item.id)
       .pipe(untilDestroyed(this))
@@ -70,7 +70,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       });
   }
 
-  deactivate(item: StatDataCacheChangeSubscription): void {
+  deactivate(item: SalariesStatSubscription): void {
     this.service
       .deactivate(item.id)
       .pipe(untilDestroyed(this))
@@ -79,7 +79,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       });
   }
 
-  delete(item: StatDataCacheChangeSubscription): void {
+  delete(item: SalariesStatSubscription): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
         "Удалить подписку",
@@ -139,7 +139,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       });
   }
 
-  getOpenAiAnalysis(item: StatDataCacheChangeSubscription): void {
+  getOpenAiAnalysis(item: SalariesStatSubscription): void {
     this.service
       .getOpenAiAnalysis(item.id)
       .pipe(untilDestroyed(this))
@@ -151,7 +151,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       });
   }
 
-  getOpenAiReport(item: StatDataCacheChangeSubscription): void {
+  getOpenAiReport(item: SalariesStatSubscription): void {
     this.service
       .getOpenAiReport(item.id)
       .pipe(untilDestroyed(this))
@@ -163,7 +163,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       });
   }
 
-  sendUpdates(item: StatDataCacheChangeSubscription): void {
+  sendUpdates(item: SalariesStatSubscription): void {
     this.service
       .sendUpdates(item.id)
       .pipe(untilDestroyed(this))
@@ -176,7 +176,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
     this.openAiDialogData = null;
   }
 
-  openEditDlg(item: StatDataCacheChangeSubscription): void {
+  openEditDlg(item: SalariesStatSubscription): void {
     this.editForm = new TelegramSubscriptionEditForm(item);
   }
 

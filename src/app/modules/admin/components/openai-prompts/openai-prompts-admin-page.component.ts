@@ -1,8 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import {
-  OpenAiPrompt,
-  OpenAiPromptTypeHelper,
-} from "@models/openai-prompt.model";
+import { OpenAiPrompt } from "@models/openai-prompt.model";
 import { OpenAiPromptsService } from "@services/openai-prompts.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";

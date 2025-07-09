@@ -89,16 +89,21 @@ export class AdminNavbarComponent {
         ],
       },
       {
-        title: "Зарплатный бот",
+        title: "Techinterview Bot",
         links: [
           {
-            title: "Подписчики бота",
+            title: "Админы бота",
             url: "/admin/telegram/user-settings",
             isExternal: false,
           },
           {
-            title: "Подписки на регулярный апдейт по зарплатам",
+            title: "Подписки на зарплаты",
             url: "/admin/telegram/stat-data-change-subscriptions",
+            isExternal: false,
+          },
+          {
+            title: "Подписки на отзывы",
+            url: "/admin/telegram/reviews-stat-subscriptions",
             isExternal: false,
           },
         ],

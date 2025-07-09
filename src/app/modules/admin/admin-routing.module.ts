@@ -11,7 +11,7 @@ import { WorkIndustriesPaginatedTableComponent } from "./components/label-entiti
 import { ProfessionsPaginatedTableComponent } from "./components/label-entities/professions-paginated-table/professions-paginated-table.component";
 import { TelegramUserSettingsComponent } from "./components/telegram/telegram-user-settings/telegram-user-settings.component";
 import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced-salaries-admin-page/sourced-salaries-admin-page.component";
-import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
+import { StatDataCacheRecordsComponent } from "./components/telegram/salaries-stat-subscriptions/stat-data-cache-records.component";
 import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
 import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
 import { CompaniesAdminPageComponent } from "./components/companies/companies-admin-page/companies-admin-page.component";
@@ -21,6 +21,7 @@ import { GitHubProfilesPageComponent } from "./components/github/github-profiles
 import { GitHubChatsPageComponent } from "./components/github/github-chats-page/github-chats-page.component";
 import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
 import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
+import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/reviews-stat-subscriptions/reviews-stat-subscriptions.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: "telegram/stat-data-change-subscriptions",
     component: StatDataCacheRecordsComponent,
+  },
+  {
+    path: "telegram/reviews-stat-subscriptions",
+    component: CompanyReviewsStatSubscriptionsComponent,
   },
 
   { path: "tools/background-jobs", component: BackgroundJobsComponent },

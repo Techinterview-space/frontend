@@ -34,12 +34,24 @@ export interface TelegramUserSettings {
   updatedAt: string;
 }
 
-export interface StatDataCacheChangeSubscription {
+export interface SalariesStatSubscription {
   id: string;
   name: string;
   telegramChatId: number;
   professionIds: Array<number>;
   preventNotificationIfNoDifference: boolean;
+  useAiAnalysis: boolean;
+  lastMessageSent: Date | null;
+  regularity: SubscriptionRegularityType;
+  deletedAt: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CompanyReviewsStatSubscription {
+  id: string;
+  name: string;
+  telegramChatId: number;
   useAiAnalysis: boolean;
   lastMessageSent: Date | null;
   regularity: SubscriptionRegularityType;

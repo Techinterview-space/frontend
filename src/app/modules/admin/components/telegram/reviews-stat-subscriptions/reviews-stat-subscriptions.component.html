@@ -18,8 +18,6 @@
             <tr class="small">
               <th>Название</th>
               <th>Chat</th>
-              <th>Специальности</th>
-              <th>No pushes</th>
               <th>AI анализ</th>
               <th>Регулярность</th>
               <th>Последнее сообщение</th>
@@ -33,14 +31,6 @@
             <tr class="small" *ngFor="let item of items; let i = index">
               <td>{{ item.name }}</td>
               <td>{{ item.telegramChatId }}</td>
-              <td>{{ item.professionIds }}</td>
-              <td>
-                <app-status-label
-                  [status]="item.preventNotificationIfNoDifference"
-                  [defaultSuccessTitle]="'Да'"
-                  [defaultFailTitle]="'Нет'"
-                ></app-status-label>
-              </td>
               <td>
                 <app-status-label
                   [status]="item.useAiAnalysis"
@@ -170,14 +160,6 @@
     </div>
 
     <div class="mb-3">
-      <label>Специальности (через запятую)</label>
-      <input type="text" class="form-control" formControlName="professionIds" />
-      <app-field-error
-        [field]="editForm.get('professionIds')"
-      ></app-field-error>
-    </div>
-
-    <div class="mb-3">
       <div>
         <label>Регулярность</label>
         <select class="form-control" formControlName="regularity">
@@ -200,21 +182,6 @@
       />
       <app-field-error
         [field]="editForm.get('useAiAnalysis')"
-      ></app-field-error>
-    </div>
-
-    <div class="mb-3">
-      <input
-        type="checkbox"
-        id="preventNotificationIfNoDifference"
-        class="form-check-input"
-        formControlName="preventNotificationIfNoDifference"
-      />
-      <label class="form-check-label" for="preventNotificationIfNoDifference">
-        Не отправлять сообщение, если нет изменений</label
-      >
-      <app-field-error
-        [field]="editForm.get('preventNotificationIfNoDifference')"
       ></app-field-error>
     </div>
 

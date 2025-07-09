@@ -18,7 +18,7 @@ import { WorkIndustriesPaginatedTableComponent } from "./components/label-entiti
 import { ProfessionsPaginatedTableComponent } from "./components/label-entities/professions-paginated-table/professions-paginated-table.component";
 import { TelegramUserSettingsComponent } from "./components/telegram/telegram-user-settings/telegram-user-settings.component";
 import { SourcedSalariesAdminPageComponent } from "./components/salaries/sourced-salaries-admin-page/sourced-salaries-admin-page.component";
-import { StatDataCacheRecordsComponent } from "./components/telegram/stat-data-change-subscriptions/stat-data-cache-records.component";
+import { StatDataCacheRecordsComponent } from "./components/telegram/salaries-stat-subscriptions/stat-data-cache-records.component";
 import { GenerateQrPageComponent } from "./components/generate-qr-code-page/generate-qr-page.component";
 import { CurrenciesPageComponent } from "./components/currencies-page/currencies-page.component";
 import { AdminDashboardService } from "./services/admin-dashboard.service";
@@ -31,11 +31,14 @@ import { GitHubProfilesPageComponent } from "./components/github/github-profiles
 import { GitHubChatsPageComponent } from "./components/github/github-chats-page/github-chats-page.component";
 import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
 import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
+import { CompanyReviewsTelegramSubscriptionsService } from "@services/company-reviews-telegram.service";
+import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/reviews-stat-subscriptions/reviews-stat-subscriptions.component";
 
 const adminServices = [
   AdminDashboardService,
   GitHubAdminService,
   OpenAiPromptsService,
+  CompanyReviewsTelegramSubscriptionsService,
 ];
 
 @NgModule({
@@ -64,6 +67,7 @@ const adminServices = [
     GitHubChatsPageComponent,
     GitHubJobsPageComponent,
     OpenAiPromptsAdminPageComponent,
+    CompanyReviewsStatSubscriptionsComponent,
   ],
   imports: [
     CommonModule,
