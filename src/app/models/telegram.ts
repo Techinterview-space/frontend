@@ -60,6 +60,18 @@ export interface CompanyReviewsStatSubscription {
   updatedAt: Date;
 }
 
+export interface JobPostingMessageSubscription {
+  id: string;
+  name: string;
+  telegramChatId: number;
+  useAiAnalysis: boolean;
+  lastMessageSent: Date | null;
+  regularity: SubscriptionRegularityType;
+  deletedAt: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface TelegramInlineReplyStats {
   usersStats: {
     username: string;

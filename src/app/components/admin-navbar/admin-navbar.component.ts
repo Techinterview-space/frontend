@@ -106,6 +106,11 @@ export class AdminNavbarComponent {
             url: "/admin/telegram/reviews-stat-subscriptions",
             isExternal: false,
           },
+          {
+            title: "Подписки на вакансии",
+            url: "/admin/telegram/job-posting-message-subscriptions",
+            isExternal: false,
+          },
         ],
       },
       {
