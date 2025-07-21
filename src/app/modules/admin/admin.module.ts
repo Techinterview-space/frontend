@@ -33,12 +33,17 @@ import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/gi
 import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
 import { CompanyReviewsTelegramSubscriptionsService } from "@services/company-reviews-telegram.service";
 import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/reviews-stat-subscriptions/reviews-stat-subscriptions.component";
+import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
+import { JobPostingMessageSubscriptionsService } from "@services/job-posting-message-subscriptions.service";
+import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
 
 const adminServices = [
   AdminDashboardService,
   GitHubAdminService,
   OpenAiPromptsService,
   CompanyReviewsTelegramSubscriptionsService,
+  JobPostingMessageSubscriptionsService,
+  TelegramSubscriptionsService,
 ];
 
 @NgModule({
@@ -68,6 +73,7 @@ const adminServices = [
     GitHubJobsPageComponent,
     OpenAiPromptsAdminPageComponent,
     CompanyReviewsStatSubscriptionsComponent,
+    JobPostingMessageSubscriptionsComponent,
   ],
   imports: [
     CommonModule,

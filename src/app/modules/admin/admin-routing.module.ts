@@ -22,6 +22,7 @@ import { GitHubChatsPageComponent } from "./components/github/github-chats-page/
 import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/github-jobs-page.component";
 import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
 import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/reviews-stat-subscriptions/reviews-stat-subscriptions.component";
+import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -50,6 +51,10 @@ const routes: Routes = [
   {
     path: "telegram/reviews-stat-subscriptions",
     component: CompanyReviewsStatSubscriptionsComponent,
+  },
+  {
+    path: "telegram/job-posting-message-subscriptions",
+    component: JobPostingMessageSubscriptionsComponent,
   },
 
   { path: "tools/background-jobs", component: BackgroundJobsComponent },

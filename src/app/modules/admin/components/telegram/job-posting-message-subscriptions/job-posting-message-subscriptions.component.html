@@ -1,0 +1,152 @@
+<app-page-header>Подписки на обновления вакансий</app-page-header>
+
+<div class="container my-5" *ngIf="items; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-2">
+        <button class="btn btn-sm btn-primary" (click)="create()">
+          Создать
+        </button>
+      </div>
+
+      <div
+        class="mb-3 table-responsive"
+        *ngIf="items && items.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
+          <thead class="small">
+            <tr class="small">
+              <th>Название</th>
+              <th>Специальности</th>
+              <th>Chat</th>
+              <th>Создано</th>
+              <th>Обновлено</th>
+              <th>Удалено</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="small" *ngFor="let item of items; let i = index">
+              <td>{{ item.name }}</td>
+              <td>
+                <span *ngFor="let speciality of item.professionIds">
+                  {{ speciality }},
+                </span>
+              </td>
+              <td>{{ item.telegramChatId }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Действия
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a
+                        *ngIf="item.deletedAt != null"
+                        class="dropdown-item text-success"
+                        (click)="activate(item)"
+                        >Активировать</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        *ngIf="item.deletedAt == null"
+                        class="dropdown-item text-warning"
+                        (click)="deactivate(item)"
+                        >Деактивировать</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item text-danger"
+                        (click)="delete(item)"
+                        >Удалить</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">Нет данных</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Новая подписка'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label>Название</label>
+      <input type="text" class="form-control" formControlName="name" />
+      <app-field-error [field]="editForm.get('name')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Чат/группа</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="telegramChatId"
+      />
+      <app-field-error
+        [field]="editForm.get('telegramChatId')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Специальности (через запятую)</label>
+      <input type="text" class="form-control" formControlName="professionIds" />
+      <app-field-error
+        [field]="editForm.get('professionIds')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+  </form>
+</app-dialog>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>
