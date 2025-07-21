@@ -6,7 +6,7 @@ import {
   mostUsedServices,
 } from "@shared/test-utils";
 import { StatDataCacheRecordsComponent } from "./stat-data-cache-records.component";
-import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
+import { CompanyReviewsTelegramSubscriptionsService } from "@services/company-reviews-telegram.service";
 
 describe("StatDataCacheRecordsComponent", () => {
   let component: StatDataCacheRecordsComponent;
@@ -19,7 +19,7 @@ describe("StatDataCacheRecordsComponent", () => {
       providers: [
         ...testUtilStubs,
         ...mostUsedServices,
-        TelegramSubscriptionsService,
+        CompanyReviewsTelegramSubscriptionsService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

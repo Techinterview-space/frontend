@@ -16,10 +16,9 @@ export class JobPostingMessageSubscriptionEditForm extends FormGroup {
         Validators.pattern(JobPostingMessageSubscriptionEditForm.digitsPattern),
         Validators.maxLength(100),
       ]),
-      regularity: new FormControl(item?.regularity ?? null, [
-        Validators.required,
+      professionIds: new FormControl(item?.professionIds?.join(",") ?? null, [
+        Validators.maxLength(500),
       ]),
-      useAiAnalysis: new FormControl(item?.useAiAnalysis ?? false, []),
     });
   }
 
@@ -37,14 +36,21 @@ export class JobPostingMessageSubscriptionEditForm extends FormGroup {
       return null;
     }
 
-    const telegramChatId = parseInt(this.value.telegramChatId as string, 10);
-    const regularity = parseInt(this.value.regularity as string, 10);
+    const telegramChatId = parseInt(this.value.telegramChatId as string);
+
+    const professionIdsAsString = this.value.professionIds as string;
+    let professionIds: Array<number> = [];
+    if (professionIdsAsString != null) {
+      professionIds = professionIdsAsString
+        .split(",")
+        .map((x) => parseInt(x, 10))
+        .filter((x) => !isNaN(x));
+    }
 
     return {
       name: this.value.name,
       telegramChatId: telegramChatId,
-      regularity: regularity,
-      useAiAnalysis: this.value.useAiAnalysis,
+      professionIds: professionIds
     };
   }
 }

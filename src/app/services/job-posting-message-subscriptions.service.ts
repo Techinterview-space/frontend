@@ -6,19 +6,12 @@ import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
 import {
   JobPostingMessageSubscription,
-  SubscriptionRegularityType,
 } from "@models/telegram";
-import { OpenAiAnalysis, OpenAiReport } from "@models/open-ai.model";
 
-export interface CreateJobPostingMessageSubscriptionBody
-  extends EditJobPostingMessageSubscriptionBody {
+export interface CreateJobPostingMessageSubscriptionBody {
   telegramChatId: number;
-}
-
-export interface EditJobPostingMessageSubscriptionBody {
   name: string;
-  useAiAnalysis: boolean;
-  regularity: SubscriptionRegularityType;
+  professionIds: Array<number>;
 }
 
 @Injectable()
@@ -43,39 +36,15 @@ export class JobPostingMessageSubscriptionsService {
     return this.api.post<JobPostingMessageSubscription>(`${this.apiUrl}`, body);
   }
 
-  update(
-    id: string,
-    body: EditJobPostingMessageSubscriptionBody,
-  ): Observable<JobPostingMessageSubscription> {
-    return this.api.post<JobPostingMessageSubscription>(
-      `${this.apiUrl}/${id}`,
-      body,
-    );
-  }
-
   activate(id: string): Observable<void> {
-    return this.api.put<void>(`${this.apiUrl}/${id}/activate`, {});
+    return this.api.post<void>(`${this.apiUrl}/${id}/activate`, {});
   }
 
   deactivate(id: string): Observable<void> {
-    return this.api.put<void>(`${this.apiUrl}/${id}/deactivate`, {});
+    return this.api.post<void>(`${this.apiUrl}/${id}/deactivate`, {});
   }
 
   delete(id: string): Observable<void> {
     return this.api.delete<void>(`${this.apiUrl}/${id}`, {});
-  }
-
-  getOpenAiAnalysis(id: string): Observable<OpenAiAnalysis> {
-    return this.api.get<OpenAiAnalysis>(
-      `${this.apiUrl}/${id}/open-ai-analysis`,
-    );
-  }
-
-  getOpenAiReport(id: string): Observable<OpenAiReport> {
-    return this.api.get<OpenAiReport>(`${this.apiUrl}/${id}/open-ai-report`);
-  }
-
-  sendUpdates(id: string): Observable<void> {
-    return this.api.post<void>(`${this.apiUrl}/${id}/send-updates`, {});
   }
 }

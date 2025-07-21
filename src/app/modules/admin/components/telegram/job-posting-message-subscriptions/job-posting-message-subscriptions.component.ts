@@ -20,7 +20,9 @@ import { JobPostingMessageSubscriptionEditForm } from "./subscription-edit-form"
   styleUrls: ["./job-posting-message-subscriptions.component.scss"],
   standalone: false,
 })
-export class JobPostingMessageSubscriptionsComponent implements OnInit, OnDestroy {
+export class JobPostingMessageSubscriptionsComponent
+  implements OnInit, OnDestroy
+{
   items: Array<JobPostingMessageSubscription> | null = null;
   source: PaginatedList<JobPostingMessageSubscription> | null = null;
   currentPage: number = 1;
@@ -34,7 +36,7 @@ export class JobPostingMessageSubscriptionsComponent implements OnInit, OnDestro
     titleService: TitleService,
     private readonly alert: AlertService,
   ) {
-    titleService.setTitle("Подписки в Telegram (вакансии)");
+    titleService.setTitle("Подписки в Telegram на вакансии (вакансии)");
   }
 
   ngOnInit(): void {
@@ -115,20 +117,6 @@ export class JobPostingMessageSubscriptionsComponent implements OnInit, OnDestro
       return;
     }
 
-    const itemId = this.editForm.getItemId();
-    if (this.editForm.hasItemToEdit() && itemId != null) {
-      this.service
-        .update(itemId, createRequest)
-        .pipe(untilDestroyed(this))
-        .subscribe(() => {
-          this.alert.success("Подписка была обновлена");
-          this.editForm = null;
-          this.ngOnInit();
-        });
-
-      return;
-    }
-
     this.service
       .create(createRequest)
       .pipe(untilDestroyed(this))
@@ -137,47 +125,6 @@ export class JobPostingMessageSubscriptionsComponent implements OnInit, OnDestro
         this.editForm = null;
         this.ngOnInit();
       });
-  }
-
-  getOpenAiAnalysis(item: JobPostingMessageSubscription): void {
-    this.service
-      .getOpenAiAnalysis(item.id)
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.openAiDialogData = new OpenAiDialogData(
-          "Open AI анализ",
-          JSON.stringify(x, null, 2),
-        );
-      });
-  }
-
-  getOpenAiReport(item: JobPostingMessageSubscription): void {
-    this.service
-      .getOpenAiReport(item.id)
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.openAiDialogData = new OpenAiDialogData(
-          "Open AI данные",
-          JSON.stringify(x, null, 2),
-        );
-      });
-  }
-
-  sendUpdates(item: JobPostingMessageSubscription): void {
-    this.service
-      .sendUpdates(item.id)
-      .pipe(untilDestroyed(this))
-      .subscribe(() => {
-        this.alert.success("Сообщение отправлено");
-      });
-  }
-
-  onOpenAiDlgClose(): void {
-    this.openAiDialogData = null;
-  }
-
-  openEditDlg(item: JobPostingMessageSubscription): void {
-    this.editForm = new JobPostingMessageSubscriptionEditForm(item);
   }
 
   getRegularityTitle(regularity: SubscriptionRegularityType): string {

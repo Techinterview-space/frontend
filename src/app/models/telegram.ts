@@ -64,9 +64,7 @@ export interface JobPostingMessageSubscription {
   id: string;
   name: string;
   telegramChatId: number;
-  useAiAnalysis: boolean;
-  lastMessageSent: Date | null;
-  regularity: SubscriptionRegularityType;
+  professionIds: Array<number>;
   deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;

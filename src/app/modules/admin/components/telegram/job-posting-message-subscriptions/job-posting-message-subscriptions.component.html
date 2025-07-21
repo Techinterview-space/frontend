@@ -17,10 +17,8 @@
           <thead class="small">
             <tr class="small">
               <th>Название</th>
+              <th>Специальности</th>
               <th>Chat</th>
-              <th>AI анализ</th>
-              <th>Регулярность</th>
-              <th>Последнее сообщение</th>
               <th>Создано</th>
               <th>Обновлено</th>
               <th>Удалено</th>
@@ -30,16 +28,12 @@
           <tbody>
             <tr class="small" *ngFor="let item of items; let i = index">
               <td>{{ item.name }}</td>
-              <td>{{ item.telegramChatId }}</td>
               <td>
-                <app-status-label
-                  [status]="item.useAiAnalysis"
-                  [defaultSuccessTitle]="'Да'"
-                  [defaultFailTitle]="'Нет'"
-                ></app-status-label>
+                <span *ngFor="let speciality of item.professionIds">
+                  {{ speciality }},
+                </span>
               </td>
-              <td>{{ getRegularityTitle(item.regularity) }}</td>
-              <td>{{ item.lastMessageSent | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.telegramChatId }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>
@@ -71,31 +65,10 @@
                       >
                     </li>
                     <li>
-                      <a class="dropdown-item" (click)="openEditDlg(item)"
-                        >Редактировать</a
-                      >
-                    </li>
-                    <li>
                       <a
                         class="dropdown-item text-danger"
-                        href="#"
                         (click)="delete(item)"
                         >Удалить</a
-                      >
-                    </li>
-                    <li>
-                      <a class="dropdown-item" (click)="getOpenAiAnalysis(item)"
-                        >Open AI анализ</a
-                      >
-                    </li>
-                    <li>
-                      <a class="dropdown-item" (click)="getOpenAiReport(item)"
-                        >Open AI данные</a
-                      >
-                    </li>
-                    <li>
-                      <a class="dropdown-item" (click)="sendUpdates(item)"
-                        >Отправить апдейт</a
                       >
                     </li>
                   </ul>
@@ -142,7 +115,7 @@
     (ngSubmit)="onEditFormSubmit()"
   >
     <div class="mb-3">
-      <label>Имя подписки</label>
+      <label>Название</label>
       <input type="text" class="form-control" formControlName="name" />
       <app-field-error [field]="editForm.get('name')"></app-field-error>
     </div>
@@ -160,28 +133,10 @@
     </div>
 
     <div class="mb-3">
-      <div>
-        <label>Регулярность</label>
-        <select class="form-control" formControlName="regularity">
-          <option value="1">Еженедельно</option>
-          <option value="2">Ежемесячно</option>
-        </select>
-      </div>
-      <div>
-        <app-field-error [field]="editForm.get('regularity')"></app-field-error>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="useAiAnalysis">Использовать AI анализ</label>
-      <input
-        type="checkbox"
-        id="useAiAnalysis"
-        class="form-check-input"
-        formControlName="useAiAnalysis"
-      />
+      <label>Специальности (через запятую)</label>
+      <input type="text" class="form-control" formControlName="professionIds" />
       <app-field-error
-        [field]="editForm.get('useAiAnalysis')"
+        [field]="editForm.get('professionIds')"
       ></app-field-error>
     </div>
 
@@ -195,14 +150,3 @@
   *ngIf="confirmDeletionMessage"
   [message]="confirmDeletionMessage"
 ></app-confirm-dialog>
-
-<app-dialog
-  [show]="!!openAiDialogData"
-  (closed)="onOpenAiDlgClose()"
-  [header]="openAiDialogData?.title ?? 'Open AI'"
-  [additionalCss]="'modal-lg'"
->
-  <pre class="open-api-json" *ngIf="openAiDialogData">{{
-    openAiDialogData.json
-  }}</pre>
-</app-dialog>
