@@ -50,7 +50,7 @@ export class JobPostingMessageSubscriptionEditForm extends FormGroup {
     return {
       name: this.value.name,
       telegramChatId: telegramChatId,
-      professionIds: professionIds
+      professionIds: professionIds,
     };
   }
 }

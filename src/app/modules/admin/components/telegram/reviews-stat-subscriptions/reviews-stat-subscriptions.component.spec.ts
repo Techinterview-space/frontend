@@ -7,8 +7,9 @@ import {
 } from "@shared/test-utils";
 import { CompanyReviewsStatSubscriptionsComponent } from "./reviews-stat-subscriptions.component";
 import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
+import { CompanyReviewsTelegramSubscriptionsService } from "@services/company-reviews-telegram.service";
 
-describe("StatDataCacheRecordsComponent", () => {
+describe("CompanyReviewsStatSubscriptionsComponent", () => {
   let component: CompanyReviewsStatSubscriptionsComponent;
   let fixture: ComponentFixture<CompanyReviewsStatSubscriptionsComponent>;
 
@@ -20,6 +21,7 @@ describe("StatDataCacheRecordsComponent", () => {
         ...testUtilStubs,
         ...mostUsedServices,
         TelegramSubscriptionsService,
+        CompanyReviewsTelegramSubscriptionsService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

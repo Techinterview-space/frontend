@@ -35,6 +35,7 @@ import { CompanyReviewsTelegramSubscriptionsService } from "@services/company-re
 import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/reviews-stat-subscriptions/reviews-stat-subscriptions.component";
 import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
 import { JobPostingMessageSubscriptionsService } from "@services/job-posting-message-subscriptions.service";
+import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
 
 const adminServices = [
   AdminDashboardService,
@@ -42,6 +43,7 @@ const adminServices = [
   OpenAiPromptsService,
   CompanyReviewsTelegramSubscriptionsService,
   JobPostingMessageSubscriptionsService,
+  TelegramSubscriptionsService,
 ];
 
 @NgModule({

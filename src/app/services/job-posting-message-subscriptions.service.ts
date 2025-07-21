@@ -4,9 +4,7 @@ import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
-import {
-  JobPostingMessageSubscription,
-} from "@models/telegram";
+import { JobPostingMessageSubscription } from "@models/telegram";
 
 export interface CreateJobPostingMessageSubscriptionBody {
   telegramChatId: number;

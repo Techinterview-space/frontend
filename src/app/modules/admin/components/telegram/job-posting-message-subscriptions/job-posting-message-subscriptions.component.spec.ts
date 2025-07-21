@@ -1,9 +1,13 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { JobPostingMessageSubscriptionsComponent } from "./job-posting-message-subscriptions.component";
-import { mostUsedImports, mostUsedServices, testUtilStubs } from "@shared/test-utils";
-import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
+import {
+  mostUsedImports,
+  mostUsedServices,
+  testUtilStubs,
+} from "@shared/test-utils";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { JobPostingMessageSubscriptionsService } from "@services/job-posting-message-subscriptions.service";
 
 describe("JobPostingMessageSubscriptionsComponent", () => {
   let component: JobPostingMessageSubscriptionsComponent;
@@ -16,7 +20,7 @@ describe("JobPostingMessageSubscriptionsComponent", () => {
       providers: [
         ...testUtilStubs,
         ...mostUsedServices,
-        TelegramSubscriptionsService,
+        JobPostingMessageSubscriptionsService,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
