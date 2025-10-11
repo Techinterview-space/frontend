@@ -1,58 +1,80 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { z } from "zod";
 import { ApiService } from "./api.service";
 import {
   Company,
   CompanyEmploymentType,
   CompanyReview,
+  CompanySchema,
 } from "@models/companies.model";
-import { PageParams } from "@models/page-params";
+import { PageParams, PageParamsSchema } from "@models/page-params";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { PaginatedList } from "@models/paginated-list";
 import { OpenAiChatResult } from "@models/open-ai.model";
 
-export interface CompaniesSearchParams extends PageParams {
-  searchQuery: string | null;
-  withRating: boolean;
-}
+export const CompaniesSearchParamsSchema = PageParamsSchema.extend({
+  searchQuery: z.string().nullable(),
+  withRating: z.boolean(),
+});
 
-export interface CompaniesSearchParamsForAdmin extends PageParams {
-  companyName: string | null;
-}
+export type CompaniesSearchParams = z.infer<
+  typeof CompaniesSearchParamsSchema
+>;
 
-export interface CompanyEditRequest {
-  name: string;
-  description: string;
-  links: string[];
-  logoUrl: string;
-}
+export const CompaniesSearchParamsForAdminSchema = PageParamsSchema.extend({
+  companyName: z.string().nullable(),
+});
 
-export interface CompanyUpdateRequest extends CompanyEditRequest {
-  slug: string;
-}
+export type CompaniesSearchParamsForAdmin = z.infer<
+  typeof CompaniesSearchParamsForAdminSchema
+>;
 
-export interface CompanyReviewCreateRequest {
-  cultureAndValues: number;
-  codeQuality: number;
-  workLifeBalance: number;
-  compensationAndBenefits: number;
-  careerOpportunities: number;
-  management: number;
-  pros: string;
-  cons: string;
-  iWorkHere: boolean;
-  userEmployment: CompanyEmploymentType;
-}
+export const CompanyEditRequestSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  links: z.array(z.string()),
+  logoUrl: z.string(),
+});
 
-export interface GetCompanyResponse {
-  company: Company;
-  userIsAllowedToLeaveReview: boolean;
-  userHasAnyReview: boolean;
-}
+export type CompanyEditRequest = z.infer<typeof CompanyEditRequestSchema>;
 
-export interface VoteResponse {
-  result: boolean;
-}
+export const CompanyUpdateRequestSchema = CompanyEditRequestSchema.extend({
+  slug: z.string(),
+});
+
+export type CompanyUpdateRequest = z.infer<typeof CompanyUpdateRequestSchema>;
+
+export const CompanyReviewCreateRequestSchema = z.object({
+  cultureAndValues: z.number(),
+  codeQuality: z.number(),
+  workLifeBalance: z.number(),
+  compensationAndBenefits: z.number(),
+  careerOpportunities: z.number(),
+  management: z.number(),
+  pros: z.string(),
+  cons: z.string(),
+  iWorkHere: z.boolean(),
+  userEmployment: z.nativeEnum(CompanyEmploymentType),
+});
+
+export type CompanyReviewCreateRequest = z.infer<
+  typeof CompanyReviewCreateRequestSchema
+>;
+
+export const GetCompanyResponseSchema = z.object({
+  company: CompanySchema,
+  userIsAllowedToLeaveReview: z.boolean(),
+  userHasAnyReview: z.boolean(),
+});
+
+export type GetCompanyResponse = z.infer<typeof GetCompanyResponseSchema>;
+
+export const VoteResponseSchema = z.object({
+  result: z.boolean(),
+});
+
+export type VoteResponse = z.infer<typeof VoteResponseSchema>;
 
 @Injectable()
 export class CompaniesService {

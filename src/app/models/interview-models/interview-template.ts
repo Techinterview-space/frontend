@@ -1,17 +1,22 @@
-import { Label } from "@models/user-label.model";
-import { ApplicationUser } from "..";
-import { InterviewTemplateSubject } from "./interview-template-subject";
+import { z } from "zod";
+import { LabelSchema } from "@models/user-label.model";
+import { ApplicationUserSchema } from "..";
+import {
+  InterviewTemplateSubjectSchema,
+} from "./interview-template-subject";
 
-export interface InterviewTemplate {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  title: string;
-  overallOpinion: string | null;
-  authorId: number;
-  author: ApplicationUser | null;
-  isPublic: boolean;
-  organizationId: string | null;
-  subjects: Array<InterviewTemplateSubject> | null;
-  labels: Array<Label>;
-}
+export const InterviewTemplateSchema = z.object({
+  id: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  title: z.string(),
+  overallOpinion: z.string().nullable(),
+  authorId: z.number(),
+  author: ApplicationUserSchema.nullable(),
+  isPublic: z.boolean(),
+  organizationId: z.string().nullable(),
+  subjects: z.array(InterviewTemplateSubjectSchema).nullable(),
+  labels: z.array(LabelSchema),
+});
+
+export type InterviewTemplate = z.infer<typeof InterviewTemplateSchema>;
