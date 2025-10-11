@@ -1,6 +1,14 @@
 import { z } from "zod";
 import { SelectItem } from "@shared/select-boxes/select-item";
 
+export enum CompanyEmploymentType {
+  Undefined = 0,
+  FullTime = 1,
+  PartTime = 2,
+  Internship = 3,
+  IndividualContractor = 4,
+}
+
 export const AiHtmlAnalysisSchema = z.object({
   test: z.string(),
   html: z.string(),
@@ -63,14 +71,6 @@ export const CompanySchema = z.object({
 });
 
 export type Company = z.infer<typeof CompanySchema>;
-
-export enum CompanyEmploymentType {
-  Undefined = 0,
-  FullTime = 1,
-  PartTime = 2,
-  Internship = 3,
-  IndividualContractor = 4,
-}
 
 export class CompanyEmploymentTypeEnum {
   static readonly employmentTypes: Array<CompanyEmploymentType> = [
