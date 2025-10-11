@@ -22,7 +22,7 @@ export const CompanyReviewSchema = z.object({
   pros: z.string(),
   cons: z.string(),
   iWorkHere: z.boolean(),
-  userEmployment: z.number(), // CompanyEmploymentType
+  userEmployment: z.nativeEnum(CompanyEmploymentType), // CompanyEmploymentType
   companyId: z.string(),
   companyName: z.string().nullable(),
   companySlug: z.string().nullable(),
