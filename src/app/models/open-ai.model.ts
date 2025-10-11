@@ -1,49 +1,73 @@
-export interface OpenAiBodyReportMetadata {
-  reportDate: string;
-  currency: string;
-  periodType: string;
-}
+import { z } from "zod";
 
-export interface OpenAiBodyReportRoleSalaryData {
-  average: number;
-  median: number;
-  min: number | null;
-  max: number | null;
-  count: number;
-}
+export const OpenAiBodyReportMetadataSchema = z.object({
+  reportDate: z.string(),
+  currency: z.string(),
+  periodType: z.string(),
+});
 
-export interface OpenAiBodyReportRoleHistoricalData {
-  date: string;
-  average: number;
-  percentChange: number;
-}
+export type OpenAiBodyReportMetadata = z.infer<
+  typeof OpenAiBodyReportMetadataSchema
+>;
 
-export interface OpenAiBodyReportRole {
-  roleName: string;
-  currentSalary: OpenAiBodyReportRoleSalaryData;
-  historicalData: Array<OpenAiBodyReportRoleHistoricalData>;
-}
+export const OpenAiBodyReportRoleSalaryDataSchema = z.object({
+  average: z.number(),
+  median: z.number(),
+  min: z.number().nullable(),
+  max: z.number().nullable(),
+  count: z.number(),
+});
 
-export interface OpenAiReport {
-  reportMetadata: OpenAiBodyReportMetadata;
-  roles: Array<OpenAiBodyReportRole>;
-}
+export type OpenAiBodyReportRoleSalaryData = z.infer<
+  typeof OpenAiBodyReportRoleSalaryDataSchema
+>;
 
-export interface OpenAiAnalysis {
-  analysis: string;
-  bearer: string;
-  report: OpenAiReport;
-}
+export const OpenAiBodyReportRoleHistoricalDataSchema = z.object({
+  date: z.string(),
+  average: z.number(),
+  percentChange: z.number(),
+});
 
-export interface OpenAiChatChoise {
-  message: {
-    role: string;
-    content: string;
-  };
-}
+export type OpenAiBodyReportRoleHistoricalData = z.infer<
+  typeof OpenAiBodyReportRoleHistoricalDataSchema
+>;
 
-export interface OpenAiChatResult {
-  isSuccess: boolean;
-  choises: Array<OpenAiChatChoise>;
-  model: string;
-}
+export const OpenAiBodyReportRoleSchema = z.object({
+  roleName: z.string(),
+  currentSalary: OpenAiBodyReportRoleSalaryDataSchema,
+  historicalData: z.array(OpenAiBodyReportRoleHistoricalDataSchema),
+});
+
+export type OpenAiBodyReportRole = z.infer<typeof OpenAiBodyReportRoleSchema>;
+
+export const OpenAiReportSchema = z.object({
+  reportMetadata: OpenAiBodyReportMetadataSchema,
+  roles: z.array(OpenAiBodyReportRoleSchema),
+});
+
+export type OpenAiReport = z.infer<typeof OpenAiReportSchema>;
+
+export const OpenAiAnalysisSchema = z.object({
+  analysis: z.string(),
+  bearer: z.string(),
+  report: OpenAiReportSchema,
+});
+
+export type OpenAiAnalysis = z.infer<typeof OpenAiAnalysisSchema>;
+
+export const OpenAiChatChoiseSchema = z.object({
+  message: z.object({
+    role: z.string(),
+    content: z.string(),
+  }),
+});
+
+export type OpenAiChatChoise = z.infer<typeof OpenAiChatChoiseSchema>;
+
+export const OpenAiChatResultSchema = z.object({
+  isSuccess: z.boolean(),
+  choises: z.array(OpenAiChatChoiseSchema),
+  model: z.string(),
+});
+
+export type OpenAiChatResult = z.infer<typeof OpenAiChatResultSchema>;

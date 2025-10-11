@@ -1,24 +1,32 @@
-export interface GitHubProfile {
-  username: string;
-  version: number;
-  requestsCount: number;
-  dataSyncedAt: Date;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { z } from "zod";
 
-export interface GitHubChat {
-  id: string;
-  chatId: number;
-  username: string;
-  isAdmin: boolean;
-  messagesCount: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export const GitHubProfileSchema = z.object({
+  username: z.string(),
+  version: z.number(),
+  requestsCount: z.number(),
+  dataSyncedAt: z.date(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
 
-export interface GitHubProcessingJob {
-  username: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type GitHubProfile = z.infer<typeof GitHubProfileSchema>;
+
+export const GitHubChatSchema = z.object({
+  id: z.string(),
+  chatId: z.number(),
+  username: z.string(),
+  isAdmin: z.boolean(),
+  messagesCount: z.number(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export type GitHubChat = z.infer<typeof GitHubChatSchema>;
+
+export const GitHubProcessingJobSchema = z.object({
+  username: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export type GitHubProcessingJob = z.infer<typeof GitHubProcessingJobSchema>;

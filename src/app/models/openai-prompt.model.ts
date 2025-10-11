@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export enum OpenAiPromptType {
   Undefined = 0,
   Company = 1,
@@ -42,20 +44,26 @@ export class AiEngineHelper {
   }
 }
 
-export interface OpenAiPrompt {
-  id: string;
-  type: OpenAiPromptType;
-  prompt: string;
-  model: string;
-  engine: AiEngine;
-  isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export const OpenAiPromptSchema = z.object({
+  id: z.string(),
+  type: z.nativeEnum(OpenAiPromptType),
+  prompt: z.string(),
+  model: z.string(),
+  engine: z.nativeEnum(AiEngine),
+  isActive: z.boolean(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
 
-export interface OpenAiPromptEditRequest {
-  type: OpenAiPromptType;
-  prompt: string;
-  model: string;
-  engine: AiEngine;
-}
+export type OpenAiPrompt = z.infer<typeof OpenAiPromptSchema>;
+
+export const OpenAiPromptEditRequestSchema = z.object({
+  type: z.nativeEnum(OpenAiPromptType),
+  prompt: z.string(),
+  model: z.string(),
+  engine: z.nativeEnum(AiEngine),
+});
+
+export type OpenAiPromptEditRequest = z.infer<
+  typeof OpenAiPromptEditRequestSchema
+>;
