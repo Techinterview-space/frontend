@@ -8,18 +8,21 @@ import {
 import { Observable, of } from "rxjs";
 import { Injector, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { z } from "zod";
 import { AuthService } from "../services/auth/auth.service";
 import { catchError, tap } from "rxjs/operators";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 
-interface BackendError {
-  Status: number;
-  ExceptionType: string;
-  InnerExceptionMessage: string | null;
-  Message: string;
-  RequestId: string;
-  StackTrace: string | null;
-}
+const BackendErrorSchema = z.object({
+  Status: z.number(),
+  ExceptionType: z.string(),
+  InnerExceptionMessage: z.string().nullable(),
+  Message: z.string(),
+  RequestId: z.string(),
+  StackTrace: z.string().nullable(),
+});
+
+type BackendError = z.infer<typeof BackendErrorSchema>;
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
