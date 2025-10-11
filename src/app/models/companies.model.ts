@@ -1,62 +1,5 @@
+import { z } from "zod";
 import { SelectItem } from "@shared/select-boxes/select-item";
-
-export interface AiHtmlAnalysis {
-  test: string;
-  html: string;
-  model: string;
-  createdAt: Date;
-}
-
-export interface Company {
-  id: string;
-  name: string;
-  description: string;
-  links: string[];
-  logoUrl: string;
-  rating: number;
-  reviewsCount: number;
-  viewsCount: number;
-  slug: string;
-  reviews: Array<CompanyReview>;
-  ratingHistory: Array<CompanyRatingHistory>;
-  userIsAllowedToAddReview: boolean;
-  aiAnalysis: AiHtmlAnalysis | null;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date | null;
-}
-
-export interface CompanyReview {
-  id: string;
-
-  cultureAndValues: number;
-  codeQuality: number | null;
-  workLifeBalance: number;
-  compensationAndBenefits: number;
-  careerOpportunities: number;
-  management: number;
-
-  totalRating: number;
-  pros: string;
-  cons: string;
-  iWorkHere: boolean;
-  userEmployment: CompanyEmploymentType;
-  companyId: string;
-  companyName: string | null;
-  companySlug: string | null;
-
-  likesCount: number;
-  dislikesCount: number;
-  likesRate: number | null;
-  createdAt: Date;
-  approvedAt: Date | null;
-  outdatedAt: Date | null;
-}
-
-export interface CompanyRatingHistory {
-  rating: number;
-  createdAt: Date;
-}
 
 export enum CompanyEmploymentType {
   Undefined = 0,
@@ -65,6 +8,69 @@ export enum CompanyEmploymentType {
   Internship = 3,
   IndividualContractor = 4,
 }
+
+export const AiHtmlAnalysisSchema = z.object({
+  test: z.string(),
+  html: z.string(),
+  model: z.string(),
+  createdAt: z.date(),
+});
+
+export type AiHtmlAnalysis = z.infer<typeof AiHtmlAnalysisSchema>;
+
+export const CompanyReviewSchema = z.object({
+  id: z.string(),
+  cultureAndValues: z.number(),
+  codeQuality: z.number().nullable(),
+  workLifeBalance: z.number(),
+  compensationAndBenefits: z.number(),
+  careerOpportunities: z.number(),
+  management: z.number(),
+  totalRating: z.number(),
+  pros: z.string(),
+  cons: z.string(),
+  iWorkHere: z.boolean(),
+  userEmployment: z.nativeEnum(CompanyEmploymentType), // CompanyEmploymentType
+  companyId: z.string(),
+  companyName: z.string().nullable(),
+  companySlug: z.string().nullable(),
+  likesCount: z.number(),
+  dislikesCount: z.number(),
+  likesRate: z.number().nullable(),
+  createdAt: z.date(),
+  approvedAt: z.date().nullable(),
+  outdatedAt: z.date().nullable(),
+});
+
+export type CompanyReview = z.infer<typeof CompanyReviewSchema>;
+
+export const CompanyRatingHistorySchema = z.object({
+  rating: z.number(),
+  createdAt: z.date(),
+});
+
+export type CompanyRatingHistory = z.infer<typeof CompanyRatingHistorySchema>;
+
+export const CompanySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  links: z.array(z.string()),
+  logoUrl: z.string(),
+  rating: z.number(),
+  reviewsCount: z.number(),
+  viewsCount: z.number(),
+  slug: z.string(),
+  reviews: z.array(CompanyReviewSchema),
+  ratingHistory: z.array(CompanyRatingHistorySchema),
+  userIsAllowedToAddReview: z.boolean(),
+  aiAnalysis: AiHtmlAnalysisSchema.nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  deletedAt: z.date().nullable(),
+});
+
+export type Company = z.infer<typeof CompanySchema>;
 
 export class CompanyEmploymentTypeEnum {
   static readonly employmentTypes: Array<CompanyEmploymentType> = [

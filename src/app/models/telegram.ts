@@ -1,14 +1,4 @@
-export interface TelegramBotUsage {
-  id: number;
-  usageCount: number;
-  chatId: number;
-  username: string;
-  usageType: TelegramBotUsageType;
-  usageTypeAsString: string;
-  receivedMessageText: string | null;
-  createdAt: string;
-  updatedAt: string;
-}
+import { z } from "zod";
 
 export enum TelegramBotUsageType {
   Undefined = 0,
@@ -24,60 +14,96 @@ export enum SubscriptionRegularityType {
   Monthly = 2,
 }
 
-export interface TelegramUserSettings {
-  id: string;
-  chatId: number;
-  userId: number;
-  username: string;
-  sendBotRegularStatsUpdates: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+export const TelegramBotUsageSchema = z.object({
+  id: z.number(),
+  usageCount: z.number(),
+  chatId: z.number(),
+  username: z.string(),
+  usageType: z.nativeEnum(TelegramBotUsageType),
+  usageTypeAsString: z.string(),
+  receivedMessageText: z.string().nullable(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
 
-export interface SalariesStatSubscription {
-  id: string;
-  name: string;
-  telegramChatId: number;
-  professionIds: Array<number>;
-  preventNotificationIfNoDifference: boolean;
-  useAiAnalysis: boolean;
-  lastMessageSent: Date | null;
-  regularity: SubscriptionRegularityType;
-  deletedAt: Date | null;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type TelegramBotUsage = z.infer<typeof TelegramBotUsageSchema>;
 
-export interface CompanyReviewsStatSubscription {
-  id: string;
-  name: string;
-  telegramChatId: number;
-  useAiAnalysis: boolean;
-  lastMessageSent: Date | null;
-  regularity: SubscriptionRegularityType;
-  deletedAt: Date | null;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export const TelegramUserSettingsSchema = z.object({
+  id: z.string(),
+  chatId: z.number(),
+  userId: z.number(),
+  username: z.string(),
+  sendBotRegularStatsUpdates: z.boolean(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
 
-export interface JobPostingMessageSubscription {
-  id: string;
-  name: string;
-  telegramChatId: number;
-  professionIds: Array<number>;
-  deletedAt: Date | null;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type TelegramUserSettings = z.infer<typeof TelegramUserSettingsSchema>;
 
-export interface TelegramInlineReplyStats {
-  usersStats: {
-    username: string;
-    count: number;
-  }[];
-  chatsStats: {
-    chatId: number;
-    chatName: string;
-    count: number;
-  }[];
-}
+export const SalariesStatSubscriptionSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  telegramChatId: z.number(),
+  professionIds: z.array(z.number()),
+  preventNotificationIfNoDifference: z.boolean(),
+  useAiAnalysis: z.boolean(),
+  lastMessageSent: z.date().nullable(),
+  regularity: z.nativeEnum(SubscriptionRegularityType),
+  deletedAt: z.date().nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export type SalariesStatSubscription = z.infer<
+  typeof SalariesStatSubscriptionSchema
+>;
+
+export const CompanyReviewsStatSubscriptionSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  telegramChatId: z.number(),
+  useAiAnalysis: z.boolean(),
+  lastMessageSent: z.date().nullable(),
+  regularity: z.nativeEnum(SubscriptionRegularityType),
+  deletedAt: z.date().nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export type CompanyReviewsStatSubscription = z.infer<
+  typeof CompanyReviewsStatSubscriptionSchema
+>;
+
+export const JobPostingMessageSubscriptionSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  telegramChatId: z.number(),
+  professionIds: z.array(z.number()),
+  deletedAt: z.date().nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export type JobPostingMessageSubscription = z.infer<
+  typeof JobPostingMessageSubscriptionSchema
+>;
+
+export const TelegramInlineReplyStatsSchema = z.object({
+  usersStats: z.array(
+    z.object({
+      username: z.string(),
+      count: z.number(),
+    }),
+  ),
+  chatsStats: z.array(
+    z.object({
+      chatId: z.number(),
+      chatName: z.string(),
+      count: z.number(),
+    }),
+  ),
+});
+
+export type TelegramInlineReplyStats = z.infer<
+  typeof TelegramInlineReplyStatsSchema
+>;

@@ -1,9 +1,15 @@
-export interface HealthReport {
-  status: string;
-  errors: Array<KeyValue>;
-}
+import { z } from "zod";
 
-export interface KeyValue {
-  key: string;
-  value: string;
-}
+export const KeyValueSchema = z.object({
+  key: z.string(),
+  value: z.string(),
+});
+
+export type KeyValue = z.infer<typeof KeyValueSchema>;
+
+export const HealthReportSchema = z.object({
+  status: z.string(),
+  errors: z.array(KeyValueSchema),
+});
+
+export type HealthReport = z.infer<typeof HealthReportSchema>;
