@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
+import { ViewportScroller } from "@angular/common";
 import { Company, CompanyReview } from "@models/companies.model";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
@@ -21,6 +22,8 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
 
   private readonly activateRoute: ActivatedRouteExtended;
+  // Keep reference to ActivatedRoute for fragment subscription (not available in ActivatedRouteExtended)
+  private readonly activatedRoute: ActivatedRoute;
   private previousPage: number | null = null;
   private previousSearchQuery: string | null = null;
   private previousWithRating: boolean | null = null;
@@ -34,8 +37,10 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
     private readonly alertService: AlertService,
+    private readonly viewportScroller: ViewportScroller,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
+    this.activatedRoute = activatedRoute;
     const queryParams = this.router.getCurrentNavigation()?.extras.state;
     if (queryParams) {
       this.previousPage = queryParams["page"] || null;
@@ -67,7 +72,23 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
               "company_reviews",
               this.company!.name,
             );
+
+            // Handle fragment scrolling after data is loaded
+            this.scrollToFragmentIfExists();
           });
+      });
+  }
+
+  private scrollToFragmentIfExists(): void {
+    this.activatedRoute.fragment
+      .pipe(untilDestroyed(this))
+      .subscribe((fragment: string | null) => {
+        if (fragment) {
+          // Delay to ensure DOM is fully rendered after async data load
+          setTimeout(() => {
+            this.viewportScroller.scrollToAnchor(fragment);
+          }, 100);
+        }
       });
   }
 
@@ -149,5 +170,35 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
 
   clickWhileDisabledForAnonymous(): void {
     this.alertService.warn("Необходимо авторизоваться, чтобы оценивать отзывы");
+  }
+
+  copyReviewLink(review: CompanyReview): void {
+    if (this.company == null) {
+      return;
+    }
+
+    const url = `${window.location.origin}/companies/${this.company.id}#review-${review.id}`;
+    
+    // Check if clipboard API is available
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          this.alertService.success("Ссылка скопирована в буфер обмена");
+          this.gtag.event(
+            "company_review_link_copied",
+            "company_reviews",
+            this.company?.name ?? "unknown",
+          );
+        })
+        .catch(() => {
+          this.alertService.error("Не удалось скопировать ссылку");
+        });
+    } else {
+      // Fallback for browsers without clipboard API support
+      this.alertService.warn(
+        "Автоматическое копирование не поддерживается. Используйте кнопку 'Поделиться' браузера",
+      );
+    }
   }
 }
