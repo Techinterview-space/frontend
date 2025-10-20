@@ -195,8 +195,10 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
           this.alertService.error("Не удалось скопировать ссылку");
         });
     } else {
-      // Fallback: Show URL in alert
-      this.alertService.warn(`Скопируйте ссылку: ${url}`);
+      // Fallback for browsers without clipboard API support
+      this.alertService.warn(
+        "Автоматическое копирование не поддерживается. Используйте кнопку 'Поделиться' браузера",
+      );
     }
   }
 }
