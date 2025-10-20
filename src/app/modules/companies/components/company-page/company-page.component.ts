@@ -22,6 +22,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
 
   private readonly activateRoute: ActivatedRouteExtended;
+  // Keep reference to ActivatedRoute for fragment subscription (not available in ActivatedRouteExtended)
   private readonly activatedRoute: ActivatedRoute;
   private previousPage: number | null = null;
   private previousSearchQuery: string | null = null;
@@ -177,18 +178,25 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
     }
 
     const url = `${window.location.origin}/companies/${this.company.id}#review-${review.id}`;
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        this.alertService.success("Ссылка скопирована в буфер обмена");
-        this.gtag.event(
-          "company_review_link_copied",
-          "company_reviews",
-          this.company!.name,
-        );
-      })
-      .catch(() => {
-        this.alertService.error("Не удалось скопировать ссылку");
-      });
+    
+    // Check if clipboard API is available
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          this.alertService.success("Ссылка скопирована в буфер обмена");
+          this.gtag.event(
+            "company_review_link_copied",
+            "company_reviews",
+            this.company?.name ?? "unknown",
+          );
+        })
+        .catch(() => {
+          this.alertService.error("Не удалось скопировать ссылку");
+        });
+    } else {
+      // Fallback: Show URL in alert
+      this.alertService.warn(`Скопируйте ссылку: ${url}`);
+    }
   }
 }
