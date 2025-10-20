@@ -97,7 +97,17 @@
       </div>
 
       <div class="d-inline-block align-items-end">
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end align-items-center">
+          <div class="me-2">
+            <button
+              type="button"
+              class="btn btn-link btn-sm text-muted p-0"
+              (click)="copyLinkClicked()"
+              title="Скопировать ссылку на отзыв"
+            >
+              <i class="bi bi-link-45deg"></i>
+            </button>
+          </div>
           <div>
             <app-vote-buttons
               [disabled]="!showVoteButtons"

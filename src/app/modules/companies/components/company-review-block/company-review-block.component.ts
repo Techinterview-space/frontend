@@ -23,6 +23,9 @@ export class CompanyReviewBlockComponent implements OnInit {
   @Output()
   clickWhileDisabledForAnonymous: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output()
+  copyLink: EventEmitter<void> = new EventEmitter<void>();
+
   pros: string | null = null;
   cons: string | null = null;
 
@@ -45,5 +48,9 @@ export class CompanyReviewBlockComponent implements OnInit {
 
   clickWhileDisabledForAnonymousClick(): void {
     this.clickWhileDisabledForAnonymous.emit();
+  }
+
+  copyLinkClicked(): void {
+    this.copyLink.emit();
   }
 }
