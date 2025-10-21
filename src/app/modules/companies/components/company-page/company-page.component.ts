@@ -173,12 +173,9 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   }
 
   copyReviewLink(review: CompanyReview): void {
-    if (this.company == null) {
-      return;
-    }
 
-    const url = `${window.location.origin}/companies/${this.company.id}#review-${review.id}`;
-    
+    const url = `${window.location.origin}/companies/${review.companyId}#review-${review.id}`;
+
     // Check if clipboard API is available
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard
@@ -188,7 +185,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
           this.gtag.event(
             "company_review_link_copied",
             "company_reviews",
-            this.company?.name ?? "unknown",
+            this.company?.name ?? review.companyId,
           );
         })
         .catch(() => {

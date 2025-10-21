@@ -125,4 +125,30 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
   clickWhileDisabledForAnonymous(): void {
     this.alertService.warn("Необходимо авторизоваться, чтобы оценивать отзывы");
   }
+
+  copyReviewLink(review: CompanyReview): void {
+
+    const url = `${window.location.origin}/companies/${review.companyId}#review-${review.id}`;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          this.alertService.success("Ссылка скопирована в буфер обмена");
+          this.gtag.event(
+            "company_review_link_copied",
+            "company_reviews",
+            review.companyId,
+          );
+        })
+        .catch(() => {
+          this.alertService.error("Не удалось скопировать ссылку");
+        });
+    } else {
+      // Fallback for browsers without clipboard API support
+      this.alertService.warn(
+        "Автоматическое копирование не поддерживается. Используйте кнопку 'Поделиться' браузера",
+      );
+    }
+  }
 }
