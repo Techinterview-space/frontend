@@ -1,3 +1,15 @@
-<div class="spinner-border spinner-border-lg" role="status">
+<div *ngIf="showPreloader" class="spinner-border spinner-border-lg" role="status">
   <span class="visually-hidden">Загрузка...</span>
 </div>
+
+<div [hidden]="showPreloader" class="d-flex justify-content-center align-items-center">
+  <img
+    class="rounded mx-auto d-block"
+    src="https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_dog.gif"
+    alt="Loading dog GIF"
+    (load)="showPreloader = false"
+    (error)="showPreloader = false"
+    title="Вертимся как можем и загружаем данные..."
+  />
+</div>
+

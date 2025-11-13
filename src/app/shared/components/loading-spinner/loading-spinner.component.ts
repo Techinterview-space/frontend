@@ -9,4 +9,6 @@ import { Component, Input } from "@angular/core";
 export class LoadingSpinnerComponent {
   @Input()
   style = "spinner-border-lg";
+
+  showPreloader = false;
 }
