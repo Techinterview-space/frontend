@@ -3,7 +3,7 @@ FROM node:23.8-alpine3.20 AS compile-image
 WORKDIR /app
 COPY . .
 RUN npm update
-RUN npm install -g @angular/cli@20.3.13
+RUN npm install -g @angular/cli@20.3.11
 RUN npm install
 RUN npm run build-prod
 
