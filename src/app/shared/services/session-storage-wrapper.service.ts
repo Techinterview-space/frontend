@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class SessionStorageWrapper {
-  getItem<T>(key: string): T {
+  getItem<T>(key: string): T | null {
     const content = localStorage.getItem(key);
     return content != null ? JSON.parse(content) : null;
   }
