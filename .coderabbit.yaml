@@ -1,0 +1,155 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+
+early_access: false
+
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_placeholder: "@coderabbitai summary"
+  auto_title_placeholder: "@coderabbitai"
+  review_status: true
+  collapse_walkthrough: false
+  poem: false
+  
+  path_instructions:
+    - path: "**/*.ts"
+      instructions: |
+        Review TypeScript code for:
+        - Proper typing and avoiding 'any' type
+        - Consistent use of interfaces and type aliases
+        - Null safety with strict null checks
+        - Proper error handling
+        - Code organization and single responsibility
+    
+    - path: "**/*.component.ts"
+      instructions: |
+        Review Angular components for:
+        - Proper use of lifecycle hooks (ngOnInit, ngOnDestroy, etc.)
+        - OnPush change detection strategy where applicable
+        - Proper subscription management (unsubscribe, takeUntilDestroyed, async pipe)
+        - Input/Output decorator usage and proper typing
+        - Avoiding logic in templates
+        - Component size and potential need for splitting
+    
+    - path: "**/*.service.ts"
+      instructions: |
+        Review Angular services for:
+        - Proper dependency injection with providedIn
+        - RxJS best practices (operators, error handling, memory leaks)
+        - HTTP error handling and retry strategies
+        - Caching strategies where appropriate
+        - Single responsibility principle
+    
+    - path: "**/*.directive.ts"
+      instructions: |
+        Review Angular directives for:
+        - Proper host binding and listeners
+        - Input validation
+        - Performance considerations
+    
+    - path: "**/*.pipe.ts"
+      instructions: |
+        Review Angular pipes for:
+        - Pure vs impure pipe usage
+        - Performance implications
+        - Null handling
+    
+    - path: "**/*.guard.ts"
+      instructions: |
+        Review route guards for:
+        - Proper authentication/authorization logic
+        - Async handling with observables
+        - Redirect behavior
+    
+    - path: "**/*.resolver.ts"
+      instructions: |
+        Review resolvers for:
+        - Proper error handling
+        - Loading state management
+        - Data prefetching efficiency
+    
+    - path: "**/*.interceptor.ts"
+      instructions: |
+        Review HTTP interceptors for:
+        - Proper request/response handling
+        - Error handling and retry logic
+        - Token refresh patterns
+        - Request cloning
+    
+    - path: "**/*.component.html"
+      instructions: |
+        Review Angular templates for:
+        - Proper use of structural directives (*ngIf, *ngFor, @if, @for)
+        - TrackBy functions for ngFor/for loops
+        - Avoiding complex expressions
+        - Accessibility (ARIA attributes, semantic HTML)
+        - i18n readiness
+    
+    - path: "**/*.component.scss"
+      instructions: |
+        Review component styles for:
+        - Proper use of :host and ::ng-deep (deprecated, suggest alternatives)
+        - CSS variable usage for theming
+        - Responsive design patterns
+        - BEM or consistent naming convention
+    
+    - path: "**/*.spec.ts"
+      instructions: |
+        Review test files for:
+        - Adequate test coverage
+        - Proper use of TestBed and component fixtures
+        - Mock services and HTTP testing
+        - Async testing with fakeAsync/waitForAsync
+        - Isolated unit tests vs integration tests
+    
+    - path: "**/environment*.ts"
+      instructions: |
+        Check for:
+        - No hardcoded secrets or API keys
+        - Proper environment-specific configuration
+    
+    - path: "**/app.routes.ts"
+      instructions: |
+        Review routing configuration for:
+        - Lazy loading implementation
+        - Route guard placement
+        - Proper path structure
+        - Wildcard route handling
+    
+    - path: "**/app.config.ts"
+      instructions: |
+        Review application configuration for:
+        - Proper provider configuration
+        - Feature imports
+        - Standalone component setup
+
+  path_filters:
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/.angular/**"
+    - "!**/coverage/**"
+    - "!**/*.min.js"
+    - "!**/*.min.css"
+    - "!**/package-lock.json"
+    - "!**/yarn.lock"
+    - "!**/pnpm-lock.yaml"
+
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - main
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  opt_out: false
+  learnings:
+    scope: "auto"
+  issues:
+    scope: "auto"
+  pull_requests:
+    scope: "auto"
