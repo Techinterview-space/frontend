@@ -73,7 +73,6 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
     if (!this.isAuthenticated) {
-      console.log("set url", this.router.url);
       this.cookieService.set("url", this.router.url);
 
       this.authService

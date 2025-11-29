@@ -75,6 +75,11 @@
           </select>
         </div>
 
+        <div class="col-md-3 mb-1" *ngIf="showSalariesSource">
+          <label class="text-sm">Статистика на дату</label>
+          <input type="date" class="form-control" formControlName="dateTo">
+        </div>
+
         <div class="col-md-4 mb-1 d-flex align-items-end">
           <button type="submit" class="btn btn-outline-dark">Применить</button>
           <button

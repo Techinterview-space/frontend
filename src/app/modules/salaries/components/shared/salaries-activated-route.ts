@@ -9,6 +9,7 @@ export class SalariesChartActivatedRoute {
   static readonly gradeRouteParamName = "grade";
   static readonly profsIncludeRouteParamName = "profsInclude";
   static readonly ciiesParamName = "cities";
+  static readonly dateToParamName = "dateTo";
 
   private readonly activatedRoute: ActivatedRouteExtended;
 
@@ -37,6 +38,13 @@ export class SalariesChartActivatedRoute {
       queryParams += `${queryParams.length > 1 ? "&" : ""}${citiesValue}`;
     }
 
+    if (data.dateTo != null) {
+      const dateToValue = `${
+        SalariesChartActivatedRoute.dateToParamName
+      }=${data.dateTo.toISOString()}`;
+      queryParams += `${queryParams.length > 1 ? "&" : ""}${dateToValue}`;
+    }
+
     return queryParams;
   }
 
@@ -46,6 +54,7 @@ export class SalariesChartActivatedRoute {
         SalariesChartActivatedRoute.gradeRouteParamName,
         SalariesChartActivatedRoute.profsIncludeRouteParamName,
         SalariesChartActivatedRoute.ciiesParamName,
+        SalariesChartActivatedRoute.dateToParamName,
       ])
       .pipe(
         map((queryParams) => {
@@ -88,7 +97,25 @@ export class SalariesChartActivatedRoute {
               .map((x) => Number(x) as KazakhstanCity);
           }
 
-          return new SalaryChartGlobalFiltersData(grade, profsInclude, cities);
+          let dateTo: Date | null = null;
+          const dateToValue =
+            queryParams.find(
+              (x) => x.key === SalariesChartActivatedRoute.dateToParamName,
+            )?.value ?? null;
+
+          if (dateToValue && dateToValue !== "") {
+            dateTo = new Date(dateToValue);
+          }
+
+          return new SalaryChartGlobalFiltersData(
+            grade,
+            profsInclude,
+            cities,
+            [],
+            [],
+            null,
+            null,
+            dateTo);
         }),
       );
   }

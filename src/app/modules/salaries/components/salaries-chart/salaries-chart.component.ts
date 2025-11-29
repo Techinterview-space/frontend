@@ -83,6 +83,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           this.filterData.grade != null ||
           this.filterData.profsInclude?.length > 0 ||
           this.filterData.cities?.length > 0;
+          this.filterData.dateTo != null;
 
         this.load(this.filterData);
       });
@@ -244,6 +245,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
       salarySourceTypes: data?.salarySourceTypes ?? [],
       quarterTo: data?.quarterTo ?? null,
       yearTo: data?.yearTo ?? null,
+      dateTo: data?.dateTo?.toISOString() ?? null,
     };
 
     this.service
