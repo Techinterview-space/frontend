@@ -13,6 +13,7 @@ export class SalaryChartGlobalFiltersData {
   salarySourceTypes: SalarySourceType[];
   quarterTo: number | null = null;
   yearTo: number | null = null;
+  dateTo: Date | null = null;
 
   constructor(
     grade: DeveloperGrade | null = null,
@@ -22,6 +23,7 @@ export class SalaryChartGlobalFiltersData {
     salarySourceTypes: SalarySourceType[] = [],
     quarterTo: number | null = null,
     yearTo: number | null = null,
+    dateTo: Date | null = null,
   ) {
     if (grade === DeveloperGrade.Unknown) {
       grade = null;
@@ -34,6 +36,7 @@ export class SalaryChartGlobalFiltersData {
     this.salarySourceTypes = salarySourceTypes;
     this.quarterTo = quarterTo;
     this.yearTo = yearTo;
+    this.dateTo = dateTo;
   }
 
   equals(other: SalaryChartGlobalFiltersData): boolean {
@@ -44,7 +47,8 @@ export class SalaryChartGlobalFiltersData {
       this.isEqualArrays(this.skills, other.skills) &&
       this.isEqualArrays(this.salarySourceTypes, other.salarySourceTypes) &&
       this.quarterTo === other.quarterTo &&
-      this.yearTo === other.yearTo
+      this.yearTo === other.yearTo &&
+      this.dateTo === other.dateTo
     );
   }
 
@@ -88,6 +92,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
       ),
       quarterTo: new FormControl(filterData?.quarterTo, []),
       yearTo: new FormControl(filterData?.yearTo, []),
+      dateTo: new FormControl(filterData?.dateTo?.toISOString().split("T")[0], []),
     });
   }
 
@@ -122,6 +127,9 @@ export class GlobalFiltersFormGroup extends FormGroup {
 
     const quarterTo = this.value.quarterTo ?? null;
     const yearTo = this.value.yearTo ?? null;
+    const dateTo = this.value.dateTo
+      ? new Date(this.value.dateTo as string)
+      : null;
 
     return new SalaryChartGlobalFiltersData(
       grade,
@@ -131,6 +139,7 @@ export class GlobalFiltersFormGroup extends FormGroup {
       salarySourceType != null ? [salarySourceType] : [],
       quarterTo,
       yearTo,
+      dateTo,
     );
   }
 }

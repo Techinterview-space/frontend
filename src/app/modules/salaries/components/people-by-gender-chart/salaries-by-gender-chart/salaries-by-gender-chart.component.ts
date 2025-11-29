@@ -19,7 +19,6 @@ export class SalariesByGenderChartComponent {
   constructor() {}
 
   ngAfterViewInit() {
-    console.log(this.source);
     this.initChart();
   }
 
