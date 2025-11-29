@@ -18,7 +18,51 @@
         <priority>1.00</priority>
     </url>
     <url>
+        <loc>https://techinterview.space/companies</loc>
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/recent-reviews</loc>
+        <priority>1.00</priority>
+    </url>
+    <url>
         <loc>https://techinterview.space/interviews/templates/public</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/kaspi-kz-ed1cf120</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/halyk-bank-0b0293e3</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/epam-kazakhstan-71637c08</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/globerce-capital-573c96e5</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/airba-fresh-25db7c57</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/bereke-bank-36feab73</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/kolesa-group-081c7566</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/freedom-bank-kazakhstan-0710e081</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://techinterview.space/companies/my-car-kz-8a844e02</loc>
         <priority>0.80</priority>
     </url>
     <url>
