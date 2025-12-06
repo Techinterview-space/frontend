@@ -3,9 +3,9 @@
 </div>
 
 <div [hidden]="showPreloader" class="d-flex justify-content-center align-items-center">
-  <img
+  <img *ngIf="loadingUrl"
     class="rounded mx-auto d-block"
-    src="https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_dog.gif"
+    [src]="loadingUrl"
     alt="Loading dog GIF"
     (load)="showPreloader = false"
     (error)="showPreloader = false"
