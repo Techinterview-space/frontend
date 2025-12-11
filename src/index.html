@@ -64,7 +64,7 @@
               </div>
               <div class="mt-3">Алматы, Казахстан</div>
               <div class="mt-3">
-                2025,
+                <span id="current-year"></span>,
                 <a
                   class="footer-link"
                   href="https://mgorbatyuk.dev"
@@ -151,5 +151,13 @@
         </div>
       </div>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var yearElement = document.getElementById('current-year');
+        if (yearElement) {
+          yearElement.textContent = new Date().getFullYear();
+        }
+      });
+    </script>
   </body>
 </html>
