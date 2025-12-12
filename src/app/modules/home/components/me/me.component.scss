@@ -1,3 +1,30 @@
+// Profile Container - Mobile First with Max Width
+.profile-container {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  // Tablet and up
+  @media (min-width: 768px) {
+    max-width: 900px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  // Desktop
+  @media (min-width: 992px) {
+    max-width: 1000px;
+  }
+
+  // Large Desktop
+  @media (min-width: 1200px) {
+    max-width: 1100px;
+  }
+}
+
 // Profile Header Styles
 .profile-header {
   display: flex;
@@ -33,16 +60,6 @@
   color: #212529;
 }
 
-.profile-roles {
-  margin-top: 0.5rem;
-
-  ::ng-deep .badge {
-    font-size: 0.75rem;
-    padding: 0.35em 0.65em;
-    font-weight: 500;
-  }
-}
-
 // Profile Cards
 .profile-card {
   border: none;
@@ -58,7 +75,7 @@
 }
 
 .profile-card-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #3a4b9a 0%, #9669c2 100%);
   color: white;
   font-weight: 600;
   font-size: 1.1rem;
@@ -80,6 +97,13 @@
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  // Role badges styling
+  ::ng-deep app-user-roles-label .badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+    font-weight: 400;
   }
 }
 
@@ -123,7 +147,6 @@
     th {
       font-weight: 600;
       color: #495057;
-      text-transform: uppercase;
       font-size: 0.85rem;
       letter-spacing: 0.5px;
       padding: 1rem 0.75rem;
@@ -174,7 +197,7 @@
 }
 
 // Responsive Design
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .profile-header {
     flex-direction: column;
     text-align: center;
@@ -182,7 +205,7 @@
   }
 
   .profile-name {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .profile-avatar {
@@ -191,17 +214,30 @@
   }
 
   .salaries-table {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 
     thead th,
     tbody td {
       padding: 0.5rem 0.25rem;
+      white-space: nowrap;
     }
   }
 
   .profile-card-header {
-    font-size: 1rem;
+    font-size: 0.95rem;
     padding: 0.875rem 1rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .info-label {
+    font-size: 0.9rem;
+  }
+
+  .info-value {
+    font-size: 0.95rem;
   }
 }
 
