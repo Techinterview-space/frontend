@@ -20,8 +20,24 @@
 }
 
 .feature-image {
+  // Mobile-first: 60% of viewport height on mobile
+  height: 60vh;
+  width: auto;
   max-width: 100%;
-  height: auto;
+  object-fit: contain;
+  object-position: center;
+
+  // Tablet and up: maintain 60vh but allow more width
+  @media (min-width: 768px) {
+    height: 60vh;
+    max-width: 80%;
+  }
+
+  // Desktop: can be slightly larger
+  @media (min-width: 992px) {
+    height: 60vh;
+    max-width: 70%;
+  }
 }
 
 .feature-subtitle {
@@ -79,10 +95,22 @@
 }
 
 .website-image {
-  max-width: 50%;
-  height: auto;
+  // Mobile-first: 60% of viewport height on mobile
+  height: 60vh;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
 
-  @media (max-width: 768px) {
-    max-width: 100%;
+  // Tablet and up: maintain 60vh but allow more width
+  @media (min-width: 768px) {
+    height: 60vh;
+    max-width: 80%;
+  }
+
+  // Desktop: can be slightly larger
+  @media (min-width: 992px) {
+    height: 60vh;
+    max-width: 70%;
   }
 }

@@ -6,3 +6,9 @@
 .chapter-title {
   margin-top: 5rem;
 }
+
+.non-authorized-block {
+  .alert {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
