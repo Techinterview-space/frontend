@@ -5,7 +5,6 @@ import {
 } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { NgxSpinnerModule } from "ngx-spinner";
 import { environment } from "src/environments/environment";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -37,7 +36,6 @@ const appModules: any[] = [AdminModule, InterviewsModule];
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    NgxSpinnerModule,
     MarkdownModule.forRoot(),
     AuthModule.forRoot({
       domain: environment.auth.domain,

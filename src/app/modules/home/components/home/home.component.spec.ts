@@ -7,7 +7,6 @@ import {
   testUtilStubs,
   mostUsedServices,
 } from "@shared/test-utils";
-import { NgxSpinnerService } from "ngx-spinner";
 import { SpinnerService } from "@shared/services/spinners/spinner-service";
 import { RouterTestingModule } from "@angular/router/testing";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
@@ -22,7 +21,6 @@ describe("HomeComponent", () => {
         { provide: AuthService, useClass: MockAuthService },
         ...testUtilStubs,
         ...mostUsedServices,
-        NgxSpinnerService,
         SpinnerService,
       ],
       declarations: [HomeComponent],

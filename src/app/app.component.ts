@@ -13,9 +13,6 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   title = "Techinterview.space";
 
-  timer = "timer";
-  transparent = "transparent";
-
   get showAdminNavbar(): boolean {
     return this.router.url.startsWith("/admin");
   }
