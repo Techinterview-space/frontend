@@ -2,9 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnDestroy,
-  OnInit,
-  Output,
+  Output, AfterViewInit,
 } from "@angular/core";
 import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
@@ -16,7 +14,7 @@ import { PeopleByCategoryBarChartObject } from "../people-by-category-bar-chart-
   styleUrl: "./people-by-experience-chart.component.scss",
   standalone: false,
 })
-export class PeopleByExperienceChartComponent {
+export class PeopleByExperienceChartComponent implements AfterViewInit {
   @Input()
   source: SalariesChart | null = null;
 
@@ -60,7 +58,7 @@ export class PeopleByExperienceChartComponent {
       this.source.developersByExperienceYearsChartData,
     );
 
-    var chartEl = document.getElementById(this.canvasId);
+    const chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
       chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }

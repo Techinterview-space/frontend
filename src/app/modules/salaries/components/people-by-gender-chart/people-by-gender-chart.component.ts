@@ -110,10 +110,4 @@ export class PeopleByGenderChartComponent implements OnInit {
 
     return result;
   }
-
-  private prepareData_Legacy(salaries: Array<any>): Array<TableRow> {
-    // This method is kept for reference but should not be used anymore
-    // All data processing should be done on the backend
-    return [];
-  }
 }

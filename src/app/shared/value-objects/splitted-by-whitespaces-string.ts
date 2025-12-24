@@ -7,7 +7,7 @@ export class SplittedByWhitespacesString {
       return;
     }
 
-    var match = source.match(/[A-Z][a-z]+|[0-9]+/g);
+    const match = source.match(/[A-Z][a-z]+|[0-9]+/g);
     if (match) {
       this.value = match.join(" ");
       return;

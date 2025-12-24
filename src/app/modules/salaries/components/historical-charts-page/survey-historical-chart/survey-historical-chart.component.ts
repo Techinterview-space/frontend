@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, AfterViewInit } from "@angular/core";
 import { SurveyHistoricalChartObject } from "./survey-historical-chart-object";
 import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
 
@@ -8,7 +8,7 @@ import { HistoricalSurveyChartResponse } from "@services/historical-charts.model
   styleUrls: ["./survey-historical-chart.component.scss"],
   standalone: false,
 })
-export class SurveyHistoricalChartComponent implements OnInit {
+export class SurveyHistoricalChartComponent implements OnInit, AfterViewInit {
   @Input()
   data: HistoricalSurveyChartResponse | null = null;
 
@@ -28,7 +28,7 @@ export class SurveyHistoricalChartComponent implements OnInit {
 
     this.chart = new SurveyHistoricalChartObject(this.canvasId, this.data);
 
-    var chartEl = document.getElementById(this.canvasId);
+    const chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
       chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }

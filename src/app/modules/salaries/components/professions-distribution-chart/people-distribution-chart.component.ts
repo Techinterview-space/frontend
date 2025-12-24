@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, AfterViewInit } from "@angular/core";
 import { PeopleDistributionChartObject } from "./people-distribution-chart-object";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
 import {
@@ -12,7 +12,7 @@ import {
   styleUrl: "./people-distribution-chart.component.scss",
   standalone: false,
 })
-export class PeopleDistributionChartComponent {
+export class PeopleDistributionChartComponent implements AfterViewInit {
   @Input()
   chart: SalariesChart | null = null;
 
@@ -70,7 +70,7 @@ export class PeopleDistributionChartComponent {
       title,
     );
 
-    var chartEl = document.getElementById(canvasId);
+    const chartEl = document.getElementById(canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
       chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }

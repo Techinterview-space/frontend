@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, AfterViewInit } from "@angular/core";
 import { SalariesChartJsObject } from "./salaries-chart-js-object";
 import { SalariesByMoneyBarChart } from "@services/user-salaries.service";
 import { SalariesPerProfession } from "../salaries-per-profession";
@@ -10,7 +10,7 @@ import { LabelEntityDto } from "@services/label-entity.model";
   styleUrl: "./salaries-by-grades-chart.component.scss",
   standalone: false,
 })
-export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
+export class SalariesByGradesChartComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input()
   chart: SalariesByMoneyBarChart | null = null;
 
@@ -42,7 +42,7 @@ export class SalariesByGradesChartComponent implements OnInit, OnDestroy {
 
     this.chartDataLocal = new SalariesChartJsObject(this.canvasId, this.chart);
 
-    var chartEl = document.getElementById(this.canvasId);
+    const chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
       chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }

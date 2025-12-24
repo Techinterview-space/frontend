@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, AfterViewInit } from "@angular/core";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
 import { SalariesByAgeOrExperienceChartObject } from "../salaries-by-age-or-experience-chart-object";
 import { SalariesByAgeOrExperienceChart } from "@services/user-salaries.service";
@@ -9,7 +9,7 @@ import { SalariesByAgeOrExperienceChart } from "@services/user-salaries.service"
   styleUrl: "./salaries-by-age-chart.component.scss",
   standalone: false,
 })
-export class SalariesByAgeChartComponent {
+export class SalariesByAgeChartComponent implements AfterViewInit {
   @Input()
   chart: SalariesChart | null = null;
 
@@ -59,7 +59,7 @@ export class SalariesByAgeChartComponent {
   ): SalariesByAgeOrExperienceChartObject {
     const chart = new SalariesByAgeOrExperienceChartObject(canvasId, data);
 
-    var chartEl = document.getElementById(canvasId);
+    const chartEl = document.getElementById(canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
       chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }

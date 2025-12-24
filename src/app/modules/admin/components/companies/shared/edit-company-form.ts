@@ -34,7 +34,7 @@ export class EditCompanyForm extends FormGroup {
       return null;
     }
 
-    var socialLink = this.value.socialLink;
+    let socialLink = this.value.socialLink;
 
     if (socialLink != null) {
       socialLink = socialLink.trim();
