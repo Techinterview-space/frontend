@@ -17,10 +17,6 @@ export const serverRoutes: ServerRoute[] = [
   // Home page - for SEO
   { path: "", renderMode: RenderMode.Server },
 
-  // Salaries pages - for SEO
-  { path: "salaries", renderMode: RenderMode.Client },
-  { path: "salaries/**", renderMode: RenderMode.Client },
-
   // ===== SPA Pages (client-side rendering) =====
   // Auth pages - no SSR needed, use browser APIs
   { path: "auth-callback", renderMode: RenderMode.Client },
@@ -30,6 +26,8 @@ export const serverRoutes: ServerRoute[] = [
   { path: "admin/**", renderMode: RenderMode.Client },
 
   // User pages - authenticated
+  { path: "salaries", renderMode: RenderMode.Client },
+  { path: "salaries/**", renderMode: RenderMode.Client },
   { path: "me", renderMode: RenderMode.Client },
   { path: "me/**", renderMode: RenderMode.Client },
   { path: "users/**", renderMode: RenderMode.Client },

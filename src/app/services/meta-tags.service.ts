@@ -92,7 +92,7 @@ export class MetaTagService {
     const result = `Отзывы о ${company.companyName}. ${ratingText}`;
     const reviewsText = this.pluralizeReviews(company.reviewsCount);
 
-    return reviewsText ? `${result}, ${ratingText}` : result;
+    return reviewsText ? `${result}, ${reviewsText}` : result;
   }
 
   private pluralizeReviews(count: number): string {
