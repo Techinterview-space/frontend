@@ -1,16 +1,27 @@
 FROM node:23.8-alpine3.20 AS compile-image
 
 WORKDIR /app
+COPY package*.json ./
+RUN npm ci
 COPY . .
-RUN npm update
-RUN npm install -g @angular/cli@20.3.11
-RUN npm install
 RUN npm run build-prod
 
-FROM nginx:1.27.4-alpine
+# Production image with Node.js for SSR
+FROM node:23.8-alpine3.20 AS production
 
-RUN rm -rf /usr/share/nginx/html/*
-RUN rm -rf /etc/nginx/conf.d/*
-COPY --from=compile-image /app/default.conf /etc/nginx/conf.d/
-COPY --from=compile-image  /app/dist/interviewer/browser /usr/share/nginx/html
-EXPOSE 80
+WORKDIR /app
+
+# Copy built application (both browser and server)
+COPY --from=compile-image /app/dist/interviewer ./dist/interviewer
+
+# Copy package files for production dependencies
+COPY --from=compile-image /app/package*.json ./
+
+# Install only production dependencies
+RUN npm ci --omit=dev
+
+# SSR server runs on port 4000
+EXPOSE 4000
+
+# Run the Angular SSR server
+CMD ["node", "dist/interviewer/server/server.mjs"]

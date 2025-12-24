@@ -11,6 +11,8 @@ services:
     image: {api}
     restart: always
     ports:
-      - 8080:80
+      - 8080:4000
+    environment:
+      - NODE_ENV=production
     networks:
       - interviewer-network
