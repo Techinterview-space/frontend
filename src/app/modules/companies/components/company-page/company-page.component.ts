@@ -5,12 +5,13 @@ import { ViewportScroller } from "@angular/common";
 import { Company, CompanyReview } from "@models/companies.model";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
+import { MetaTagService } from "@services/meta-tags.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
-import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CookieService } from "ngx-cookie-service";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
+import { CompanyResolverData } from "../../resolvers/company.resolver";
 
 @Component({
   templateUrl: "./company-page.component.html",
@@ -21,9 +22,6 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   company: Company | null = null;
   isAuthenticated = false;
 
-  private readonly activateRoute: ActivatedRouteExtended;
-  // Keep reference to ActivatedRoute for fragment subscription (not available in ActivatedRouteExtended)
-  private readonly activatedRoute: ActivatedRoute;
   private previousPage: number | null = null;
   private previousSearchQuery: string | null = null;
   private previousWithRating: boolean | null = null;
@@ -31,16 +29,15 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: CompaniesService,
     private readonly title: TitleService,
+    private readonly metaTagService: MetaTagService,
     private readonly router: Router,
-    activatedRoute: ActivatedRoute,
+    private readonly activatedRoute: ActivatedRoute,
     private readonly authService: AuthService,
     private readonly cookieService: CookieService,
     private readonly gtag: GoogleAnalyticsService,
     private readonly alertService: AlertService,
     private readonly viewportScroller: ViewportScroller,
   ) {
-    this.activateRoute = new ActivatedRouteExtended(activatedRoute);
-    this.activatedRoute = activatedRoute;
     const queryParams = this.router.getCurrentNavigation()?.extras.state;
     if (queryParams) {
       this.previousPage = queryParams["page"] || null;
@@ -51,32 +48,37 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
-    this.activateRoute
-      .getParam("id")
+
+    // Get resolved data (fetched before component loads for SSR meta tags)
+    this.activatedRoute.data
       .pipe(untilDestroyed(this))
-      .subscribe((id) => {
-        this.service
-          .byId(id!)
-          .pipe(untilDestroyed(this))
-          .subscribe((i) => {
-            this.company = i.company;
-            this.company!.description = this.company!.description?.replace(
-              /\n/g,
-              "<br />",
-            );
-
-            this.title.setTitle(`Отзывы о ${this.company!.name}`);
-
-            this.gtag.event(
-              "company_review_company_page_viewed",
-              "company_reviews",
-              this.company!.name,
-            );
-
-            // Handle fragment scrolling after data is loaded
-            this.scrollToFragmentIfExists();
-          });
+      .subscribe((data: { companyData?: CompanyResolverData }) => {
+        if (data.companyData?.company) {
+          this.initializeCompany(data.companyData.company);
+        }
       });
+  }
+
+  private initializeCompany(company: Company): void {
+    this.company = company;
+    this.company.description = this.company.description?.replace(/\n/g, "<br />");
+
+    // Set dynamic meta tags for SSR/social sharing (also sets title)
+    this.metaTagService.setCompanyMetaTags({
+      companyName: this.company.name,
+      rating: this.company.rating,
+      reviewsCount: this.company.reviewsCount,
+      slug: this.company.slug,
+    });
+
+    this.gtag.event(
+      "company_review_company_page_viewed",
+      "company_reviews",
+      this.company.name,
+    );
+
+    // Handle fragment scrolling after data is loaded
+    this.scrollToFragmentIfExists();
   }
 
   private scrollToFragmentIfExists(): void {
@@ -128,6 +130,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.title.resetTitle();
+    this.metaTagService.returnDefaultMetaTags();
   }
 
   likeClicked(review: CompanyReview): void {
