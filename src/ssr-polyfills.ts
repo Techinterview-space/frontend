@@ -4,36 +4,40 @@
  */
 
 const mockLocation = {
-  origin: 'http://localhost:4000',
-  href: 'http://localhost:4000',
-  protocol: 'https:',
-  host: 'localhost',
-  hostname: 'localhost',
-  port: '',
-  pathname: '/',
-  search: '',
-  hash: '',
+  origin: "http://localhost:4000",
+  href: "http://localhost:4000",
+  protocol: "https:",
+  host: "localhost",
+  hostname: "localhost",
+  port: "",
+  pathname: "/",
+  search: "",
+  hash: "",
   assign: () => {},
   replace: () => {},
   reload: () => {},
 };
 
 const mockNavigator = {
-  userAgent: 'node',
-  language: 'en',
-  languages: ['en'],
+  userAgent: "node",
+  language: "en",
+  languages: ["en"],
   onLine: true,
   cookieEnabled: true,
 };
 
 const mockDocument = {
-  createElement: () => ({ style: {}, setAttribute: () => {}, appendChild: () => {} }),
+  createElement: () => ({
+    style: {},
+    setAttribute: () => {},
+    appendChild: () => {},
+  }),
   querySelector: () => null,
   querySelectorAll: () => [],
   getElementById: () => null,
   body: { appendChild: () => {}, removeChild: () => {} },
   head: { appendChild: () => {}, removeChild: () => {} },
-  cookie: '',
+  cookie: "",
   addEventListener: () => {},
   removeEventListener: () => {},
 };
@@ -58,7 +62,8 @@ const mockWindow = {
   dispatchEvent: () => true,
   crypto: {
     getRandomValues: (arr: Uint8Array) => {
-      for (let i = 0; i < arr.length; i++) arr[i] = Math.floor(Math.random() * 256);
+      for (let i = 0; i < arr.length; i++)
+        arr[i] = Math.floor(Math.random() * 256);
       return arr;
     },
     subtle: {},
@@ -70,7 +75,7 @@ const mockWindow = {
 };
 
 // Set globals for SSR
-if (typeof globalThis.window === 'undefined') {
+if (typeof globalThis.window === "undefined") {
   const defineGlobal = (name: string, value: any) => {
     try {
       Object.defineProperty(globalThis, name, {
@@ -83,14 +88,14 @@ if (typeof globalThis.window === 'undefined') {
     }
   };
 
-  defineGlobal('window', mockWindow);
-  defineGlobal('location', mockLocation);
-  defineGlobal('document', mockDocument);
-  defineGlobal('localStorage', mockStorage);
-  defineGlobal('sessionStorage', mockStorage);
+  defineGlobal("window", mockWindow);
+  defineGlobal("location", mockLocation);
+  defineGlobal("document", mockDocument);
+  defineGlobal("localStorage", mockStorage);
+  defineGlobal("sessionStorage", mockStorage);
 
   try {
-    Object.defineProperty(globalThis, 'navigator', {
+    Object.defineProperty(globalThis, "navigator", {
       value: mockNavigator,
       writable: true,
       configurable: true,
@@ -101,4 +106,3 @@ if (typeof globalThis.window === 'undefined') {
 }
 
 export {};
-

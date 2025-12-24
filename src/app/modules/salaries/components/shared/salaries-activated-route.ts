@@ -115,7 +115,8 @@ export class SalariesChartActivatedRoute {
             [],
             null,
             null,
-            dateTo);
+            dateTo,
+          );
         }),
       );
   }

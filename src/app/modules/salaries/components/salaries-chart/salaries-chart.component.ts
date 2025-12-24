@@ -83,7 +83,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
           this.filterData.grade != null ||
           this.filterData.profsInclude?.length > 0 ||
           this.filterData.cities?.length > 0;
-          this.filterData.dateTo != null;
+        this.filterData.dateTo != null;
 
         this.load(this.filterData);
       });

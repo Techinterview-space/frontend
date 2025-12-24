@@ -1,9 +1,17 @@
-<div *ngIf="showPreloader" class="spinner-border spinner-border-lg" role="status">
+<div
+  *ngIf="showPreloader"
+  class="spinner-border spinner-border-lg"
+  role="status"
+>
   <span class="visually-hidden">Загрузка...</span>
 </div>
 
-<div [hidden]="showPreloader" class="d-flex justify-content-center align-items-center">
-  <img *ngIf="loadingUrl"
+<div
+  [hidden]="showPreloader"
+  class="d-flex justify-content-center align-items-center"
+>
+  <img
+    *ngIf="loadingUrl"
     class="rounded mx-auto d-block"
     [src]="loadingUrl"
     alt="Loading dog GIF"
@@ -12,4 +20,3 @@
     title="Вертимся как можем и загружаем данные..."
   />
 </div>
-

@@ -10,10 +10,12 @@ export class LoadingSpinnerComponent implements OnInit {
   @Input()
   style = "spinner-border-lg";
 
-  static LoadingCatUrl = "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_cat.gif";
-  static LoadingDogUrl = "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_dog.gif";
+  static LoadingCatUrl =
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_cat.gif";
+  static LoadingDogUrl =
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_dog.gif";
 
-  loadingUrl = '';
+  loadingUrl = "";
   showPreloader = false;
 
   ngOnInit(): void {

@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, SimpleChanges, OnChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  SimpleChanges,
+  OnChanges,
+} from "@angular/core";
 
 @Component({
   selector: "app-form-progress-bar",

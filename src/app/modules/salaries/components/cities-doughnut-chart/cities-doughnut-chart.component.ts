@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  AfterViewInit,
+} from "@angular/core";
 import { CitiesDoughnutChartDataObject } from "./cities-doughnut-chart-data-object";
 import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { CitiesDoughnutChartData } from "@services/user-salaries.service";

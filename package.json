@@ -15,7 +15,7 @@
     "pretty": "pretty-quick",
     "pretty-all": "prettier --write \"src/**/*.ts\" \"src/**/*.html\" \"src/**/*.scss\" \"src/**/*.json\" \"e2e/**/*.ts\" \"tools/**/*.ts\" \"*.json\"",
     "bundle:analyze": "ng build --stats-json && webpack-bundle-analyzer dist/interviewer/stats.json",
-    "serve:ssr:interviewer": "node dist/interviewer/server/server.mjs"
+    "serve:ssr:interviewer": "npm run build && node dist/interviewer/server/server.mjs"
   },
   "private": true,
   "dependencies": {

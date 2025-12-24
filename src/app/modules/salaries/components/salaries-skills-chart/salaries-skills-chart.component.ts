@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  AfterViewInit,
+} from "@angular/core";
 import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { SalariesSkillsChartDataObject } from "./salaries-skills-chart-data-object";
 import { SalariesSkillsChartData } from "@services/user-salaries.service";

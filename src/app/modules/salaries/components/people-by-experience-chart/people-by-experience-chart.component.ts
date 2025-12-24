@@ -2,7 +2,8 @@ import {
   Component,
   EventEmitter,
   Input,
-  Output, AfterViewInit,
+  Output,
+  AfterViewInit,
 } from "@angular/core";
 import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { SalariesChart } from "../salaries-chart/salaries-chart";

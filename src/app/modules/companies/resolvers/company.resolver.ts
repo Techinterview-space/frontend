@@ -26,4 +26,3 @@ export const companyResolver: ResolveFn<CompanyResolverData> = (route) => {
     catchError(() => of({ company: null })),
   );
 };
-

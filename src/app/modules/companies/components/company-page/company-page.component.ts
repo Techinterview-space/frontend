@@ -61,7 +61,10 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
 
   private initializeCompany(company: Company): void {
     this.company = company;
-    this.company.description = this.company.description?.replace(/\n/g, "<br />");
+    this.company.description = this.company.description?.replace(
+      /\n/g,
+      "<br />",
+    );
 
     // Set dynamic meta tags for SSR/social sharing (also sets title)
     this.metaTagService.setCompanyMetaTags({
@@ -176,7 +179,6 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   }
 
   copyReviewLink(review: CompanyReview): void {
-
     const url = `${window.location.origin}/companies/${review.companyId}#review-${review.id}`;
 
     // Check if clipboard API is available

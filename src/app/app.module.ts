@@ -4,7 +4,12 @@ import {
   withInterceptorsFromDi,
 } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { BrowserModule, provideClientHydration, withEventReplay, withHttpTransferCacheOptions } from "@angular/platform-browser";
+import {
+  BrowserModule,
+  provideClientHydration,
+  withEventReplay,
+  withHttpTransferCacheOptions,
+} from "@angular/platform-browser";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { environment } from "src/environments/environment";
 

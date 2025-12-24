@@ -18,9 +18,7 @@ export const CompaniesSearchParamsSchema = PageParamsSchema.extend({
   withRating: z.boolean(),
 });
 
-export type CompaniesSearchParams = z.infer<
-  typeof CompaniesSearchParamsSchema
->;
+export type CompaniesSearchParams = z.infer<typeof CompaniesSearchParamsSchema>;
 
 export const CompaniesSearchParamsForAdminSchema = PageParamsSchema.extend({
   companyName: z.string().nullable(),

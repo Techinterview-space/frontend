@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { provideServerRendering, withRoutes } from '@angular/ssr';
-import { AppComponent } from './app.component';
-import { AppModule } from './app.module';
-import { serverRoutes } from './app.routes.server';
-import { AuthService } from '@auth0/auth0-angular';
-import { Auth0ServerMockService } from '@shared/services/auth/auth0-server.mock';
+import { NgModule } from "@angular/core";
+import { provideServerRendering, withRoutes } from "@angular/ssr";
+import { AppComponent } from "./app.component";
+import { AppModule } from "./app.module";
+import { serverRoutes } from "./app.routes.server";
+import { AuthService } from "@auth0/auth0-angular";
+import { Auth0ServerMockService } from "@shared/services/auth/auth0-server.mock";
 
 @NgModule({
   imports: [AppModule],

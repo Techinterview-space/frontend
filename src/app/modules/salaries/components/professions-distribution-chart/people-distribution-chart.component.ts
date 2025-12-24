@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  AfterViewInit,
+} from "@angular/core";
 import { PeopleDistributionChartObject } from "./people-distribution-chart-object";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
 import {
