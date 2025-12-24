@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build-prod
 
 # Production image with Node.js for SSR
-FROM node:23.8-alpine3.20 AS production
+FROM node:24-alpine3.22 AS production
 
 WORKDIR /app
 
