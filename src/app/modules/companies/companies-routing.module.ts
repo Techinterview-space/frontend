@@ -5,6 +5,7 @@ import { CompanyPageComponent } from "./components/company-page/company-page.com
 import { AddCompanyReviewPageComponent } from "./components/add-review-page/add-review-page.component";
 import { AuthGuard } from "@shared/guards/auth.guard";
 import { RecentReviewsPageComponent } from "./components/recent-reviews/recent-reviews-page.component";
+import { companyResolver } from "./resolvers/company.resolver";
 
 const routes: Routes = [
   { path: "", component: CompaniesPageComponent },
@@ -12,7 +13,11 @@ const routes: Routes = [
     path: "recent-reviews",
     component: RecentReviewsPageComponent,
   },
-  { path: ":id", component: CompanyPageComponent },
+  {
+    path: ":id",
+    component: CompanyPageComponent,
+    resolve: { companyData: companyResolver },
+  },
   {
     path: ":id/add-review",
     component: AddCompanyReviewPageComponent,

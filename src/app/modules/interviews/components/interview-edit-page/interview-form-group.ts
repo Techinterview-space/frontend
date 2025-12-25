@@ -179,7 +179,7 @@ export class InterviewFormGroup extends FormGroup {
   }
 
   updateRequest(selectedLabels: Array<Label>): InterviewUpdateRequest | null {
-    var createRequest = this.createRequest(selectedLabels);
+    const createRequest = this.createRequest(selectedLabels);
 
     if (createRequest == null) {
       return null;

@@ -48,7 +48,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-
 .profile-info {
   flex: 1;
 }
@@ -64,7 +63,9 @@
 .profile-card {
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
   border-radius: 12px;
   overflow: hidden;
 

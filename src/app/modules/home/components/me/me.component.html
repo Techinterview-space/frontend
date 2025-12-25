@@ -45,14 +45,16 @@
               </span>
             </div>
           </div>
-          <div class="info-item" *ngIf="user && user.roles != null && user.roles.length > 0">
+          <div
+            class="info-item"
+            *ngIf="user && user.roles != null && user.roles.length > 0"
+          >
             <div class="info-label">
               <i class="bi bi-person-badge me-2"></i>
               <span>Роли</span>
             </div>
             <div class="info-value">
-              <app-user-roles-label
-                [userRoles]="user.roles">
+              <app-user-roles-label [userRoles]="user.roles">
               </app-user-roles-label>
             </div>
           </div>
@@ -135,7 +137,10 @@
             <div class="info-description">
               <div class="alert alert-light mt-3 mb-0">
                 <p class="mb-2">
-                  <strong><i class="bi bi-info-circle me-2"></i>Когда мы отправляем email:</strong>
+                  <strong
+                    ><i class="bi bi-info-circle me-2"></i>Когда мы отправляем
+                    email:</strong
+                  >
                 </p>
                 <ul class="mb-2">
                   <li>Аппрув/реджект оставленного отзыва на компанию</li>
@@ -143,10 +148,12 @@
                 </ul>
                 <p class="mb-0">
                   <i class="bi bi-shield-check me-1"></i>
-                  <strong>Важно:</strong> Никаких рекламных email сервис никогда не отправит.
+                  <strong>Важно:</strong> Никаких рекламных email сервис никогда
+                  не отправит.
                 </p>
                 <p class="mb-0 mt-2">
-                  Если вы хотите отписаться от всех email, то можете сделать это в следующем пришедшем письме.
+                  Если вы хотите отписаться от всех email, то можете сделать это
+                  в следующем пришедшем письме.
                 </p>
               </div>
             </div>
@@ -163,13 +170,21 @@
           <span>Отправленные анкеты</span>
         </div>
         <div class="card-body">
-          <div class="d-flex justify-content-end mb-3" *ngIf="mySalaries != null && mySalaries.length > 0">
+          <div
+            class="d-flex justify-content-end mb-3"
+            *ngIf="mySalaries != null && mySalaries.length > 0"
+          >
             <button
               type="button"
               class="btn btn-outline-secondary btn-sm"
               (click)="toggleBlurTable()"
             >
-              <i class="bi" [class.bi-eye]="blurTable" [class.bi-eye-slash]="!blurTable" class="me-1"></i>
+              <i
+                class="bi"
+                [class.bi-eye]="blurTable"
+                [class.bi-eye-slash]="!blurTable"
+                class="me-1"
+              ></i>
               {{ blurTable ? "Показать" : "Скрыть" }} зарплаты
             </button>
           </div>
@@ -177,7 +192,10 @@
             class="table-responsive"
             *ngIf="mySalaries != null && mySalaries.length > 0"
           >
-            <table class="table table-hover salaries-table" [class.blur]="blurTable">
+            <table
+              class="table table-hover salaries-table"
+              [class.blur]="blurTable"
+            >
               <thead>
                 <tr>
                   <th>Зарплата</th>

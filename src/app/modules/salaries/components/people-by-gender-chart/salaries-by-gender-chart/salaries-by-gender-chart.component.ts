@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, AfterViewInit } from "@angular/core";
 import { SalariesByGenderChart } from "@services/user-salaries.service";
 import { SalariesByGenderChartObject } from "./salaries-by-gender-chart-object";
 
@@ -8,7 +8,7 @@ import { SalariesByGenderChartObject } from "./salaries-by-gender-chart-object";
   styleUrl: "./salaries-by-gender-chart.component.scss",
   standalone: false,
 })
-export class SalariesByGenderChartComponent {
+export class SalariesByGenderChartComponent implements AfterViewInit {
   @Input()
   source: SalariesByGenderChart | null = null;
 
@@ -36,7 +36,7 @@ export class SalariesByGenderChartComponent {
   ): SalariesByGenderChartObject {
     const chart = new SalariesByGenderChartObject(canvasId, data);
 
-    var chartEl = document.getElementById(canvasId);
+    const chartEl = document.getElementById(canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
       chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }

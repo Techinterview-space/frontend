@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  SimpleChanges,
+  OnChanges,
+} from "@angular/core";
 
 @Component({
   selector: "app-form-progress-bar",
@@ -6,7 +12,7 @@ import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
   styleUrl: "./form-progress-bar.component.scss",
   standalone: false,
 })
-export class FormProgressBarComponent implements OnInit {
+export class FormProgressBarComponent implements OnInit, OnChanges {
   @Input()
   value: number | null = null;
 

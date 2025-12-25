@@ -1,8 +1,6 @@
 import { Subject, of, Observable } from "rxjs";
 import { IAuthService } from "../services/auth/auth.service";
 import { ApplicationUserExtended } from "@models/extended";
-import { IdToken } from "@auth0/auth0-angular";
-import { ApplicationUser } from "@models/application-user";
 import { TestApplicationUser } from "./models";
 import { UserRole } from "@models/enums";
 import { CheckTotpResponse } from "@services/authorization.service";

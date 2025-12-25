@@ -127,7 +127,6 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
   }
 
   copyReviewLink(review: CompanyReview): void {
-
     const url = `${window.location.origin}/companies/${review.companyId}#review-${review.id}`;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {

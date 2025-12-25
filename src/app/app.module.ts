@@ -4,7 +4,12 @@ import {
   withInterceptorsFromDi,
 } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import {
+  BrowserModule,
+  provideClientHydration,
+  withEventReplay,
+  withHttpTransferCacheOptions,
+} from "@angular/platform-browser";
 import { environment } from "src/environments/environment";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -57,6 +62,12 @@ const appModules: any[] = [AdminModule, InterviewsModule];
     },
     ...applicationServices,
     provideHttpClient(withInterceptorsFromDi()),
+    provideClientHydration(
+      withEventReplay(),
+      withHttpTransferCacheOptions({
+        includePostRequests: false,
+      }),
+    ),
   ],
 })
 export class AppModule {}

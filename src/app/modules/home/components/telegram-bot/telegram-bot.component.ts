@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ViewportScroller } from "@angular/common";
 import { TitleService } from "@services/title.service";
+import { MetaTagService } from "@services/meta-tags.service";
 
 @Component({
   selector: "app-telegram-bot",
@@ -16,8 +17,13 @@ export class TelegramBotABoutComponent implements OnInit, OnDestroy {
     private readonly titleService: TitleService,
     private readonly route: ActivatedRoute,
     private readonly viewportScroller: ViewportScroller,
+    private readonly metaTagService: MetaTagService,
   ) {
     this.titleService.setTitle("О ботах в Telegram");
+    this.metaTagService.setPageMetaTags(
+      "О ботах в Telegram",
+      "О ботах в Telegram. Как использовать ботов для получения информации о зарплатах в IT и других областях в чате Telegram.",
+      "/about-telegram-bot");
   }
 
   ngOnInit(): void {
@@ -42,5 +48,6 @@ export class TelegramBotABoutComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.titleService.resetTitle();
+    this.metaTagService.returnDefaultMetaTags();
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
+import { MetaTagService } from "@services/meta-tags.service";
 
 interface IContributor {
   link: string;
@@ -11,7 +12,21 @@ interface IContributor {
   styleUrls: ["./about-us.component.scss"],
   standalone: false,
 })
-export class AboutUsComponent {
+export class AboutUsComponent implements OnDestroy {
+
+  constructor(private readonly metaTagService: MetaTagService) {
+    this.metaTagService.setPageMetaTags(
+      "О проекте Techinterview.space",
+      "История и миссия проекта Techinterview.space. Контрибьюторы, стикеры, контакты.",
+      "/about-us",
+      null,
+      false);
+  }
+
+  ngOnDestroy(): void {
+    this.metaTagService.returnDefaultMetaTags();
+  }
+
   contributors: IContributor[] = [
     {
       link: "https://github.com/nrglv",

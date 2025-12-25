@@ -28,12 +28,12 @@ export class OpenAiPromptForm extends FormGroup {
       return null;
     }
 
-    var typeAsNumber = Number(this.value.type);
+    const typeAsNumber = Number(this.value.type);
     if (isNaN(typeAsNumber)) {
       return null;
     }
 
-    var engineAsNumber = Number(this.value.engine);
+    const engineAsNumber = Number(this.value.engine);
     if (isNaN(engineAsNumber)) {
       return null;
     }
