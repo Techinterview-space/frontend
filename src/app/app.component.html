@@ -9,23 +9,19 @@
       <app-wednesday-frog></app-wednesday-frog>
     </div>
   </main>
-  <ngx-spinner
-    [name]="timer"
+  <app-spinner
+    name="timer"
     bdOpacity="0.3"
     bdColor="rgba(51,51,51,0.91)"
-    size="medium"
     color="#fff"
-    type="timer"
     [fullScreen]="true"
-  ></ngx-spinner>
+  ></app-spinner>
 
-  <ngx-spinner
-    [name]="transparent"
+  <app-spinner
+    name="transparent"
     bdOpacity="0"
     bdColor="rgba(51,51,51,0)"
-    size="large"
     color="rgba(255,255,255,0)"
-    type="timer"
     [fullScreen]="true"
-  ></ngx-spinner>
+  ></app-spinner>
 </div>

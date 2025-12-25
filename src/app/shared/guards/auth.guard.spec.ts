@@ -4,7 +4,6 @@ import { OidcUserManager } from "../services/auth/oidc-user-manager.service";
 import { AuthorizationService } from "../../services";
 import { AuthService } from "../services/auth/auth.service";
 import { AuthGuard } from "./auth.guard";
-import { NgxSpinnerService } from "ngx-spinner";
 import { SpinnerService } from "@shared/services/spinners/spinner-service";
 import { testUtilStubs, mostUsedServices } from "@shared/test-utils";
 import { CookieService } from "ngx-cookie-service";
@@ -23,7 +22,6 @@ describe("AuthGuard", () => {
         ...mostUsedServices,
         OidcUserManager,
         AuthorizationService,
-        NgxSpinnerService,
         SpinnerService,
         CookieService,
       ],

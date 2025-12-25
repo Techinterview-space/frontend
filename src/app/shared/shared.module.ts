@@ -44,6 +44,7 @@ import { FormProgressBarComponent } from "./components/add-salary-progress-bar/f
 import { TimeAgoComponent } from "./components/time-ago/time-ago.component";
 import { VoteButtonsComponent } from "./components/vote-buttons/vote-buttons.component";
 import { ItemsPerDayChartComponent } from "./components/items-per-day-chart/items-per-day-chart.component";
+import { AppSpinnerComponent } from "./components/app-spinner/app-spinner.component";
 
 const componentsToDeclareAndExport = [
   AlertComponent,
@@ -83,6 +84,7 @@ const componentsToDeclareAndExport = [
   TimeAgoComponent,
   VoteButtonsComponent,
   ItemsPerDayChartComponent,
+  AppSpinnerComponent,
 ];
 
 @NgModule({

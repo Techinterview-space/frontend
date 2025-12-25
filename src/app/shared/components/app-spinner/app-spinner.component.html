@@ -1,0 +1,13 @@
+<div
+  *ngIf="isVisible"
+  class="spinner-overlay"
+  [style.background-color]="bdColor"
+  [style.opacity]="bdOpacity"
+>
+  <div class="spinner-container">
+    <div class="spinner" [style.color]="color">
+      <div class="spinner-circle"></div>
+    </div>
+  </div>
+</div>
+

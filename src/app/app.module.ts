@@ -10,7 +10,6 @@ import {
   withEventReplay,
   withHttpTransferCacheOptions,
 } from "@angular/platform-browser";
-import { NgxSpinnerModule } from "ngx-spinner";
 import { environment } from "src/environments/environment";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -42,7 +41,6 @@ const appModules: any[] = [AdminModule, InterviewsModule];
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    NgxSpinnerModule,
     MarkdownModule.forRoot(),
     AuthModule.forRoot({
       domain: environment.auth.domain,
