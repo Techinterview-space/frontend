@@ -1,9 +1,7 @@
 import { z } from "zod";
 import { LabelSchema } from "@models/user-label.model";
 import { ApplicationUserSchema } from "..";
-import {
-  InterviewTemplateSubjectSchema,
-} from "./interview-template-subject";
+import { InterviewTemplateSubjectSchema } from "./interview-template-subject";
 
 export const InterviewTemplateSchema = z.object({
   id: z.string(),

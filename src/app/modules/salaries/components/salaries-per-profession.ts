@@ -34,10 +34,10 @@ export class SalariesPerProfession {
       }
     }
 
-    var uniqueProfessionsForLocal = [
+    const uniqueProfessionsForLocal = [
       ...new Set(localSalaries.map((x) => x.professionId)),
     ];
-    var uniqueProfessionsForRemote = [
+    const uniqueProfessionsForRemote = [
       ...new Set(remoteSalaries.map((x) => x.professionId)),
     ];
 

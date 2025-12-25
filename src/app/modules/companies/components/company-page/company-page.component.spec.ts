@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ViewportScroller } from "@angular/common";
-import { InterviewsService } from "@services/interviews.service";
 import {
   mostUsedImports,
   testUtilStubs,
@@ -11,6 +10,7 @@ import {
 import { CompanyPageComponent } from "./company-page.component";
 import { CompaniesService } from "@services/companies.service";
 import { Router } from "@angular/router";
+import { MetaTagService } from "@services/meta-tags.service";
 
 class RouterMock {
   getCurrentNavigation() {
@@ -36,6 +36,7 @@ describe("CompanyPageComponent", () => {
         ...testUtilStubs,
         ...mostUsedServices,
         CompaniesService,
+        MetaTagService,
         { provide: Router, useClass: RouterMock },
         { provide: ViewportScroller, useValue: viewportScrollerSpy },
       ],

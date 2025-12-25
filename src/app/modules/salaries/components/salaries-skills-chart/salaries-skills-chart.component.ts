@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  AfterViewInit,
+} from "@angular/core";
 import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { SalariesSkillsChartDataObject } from "./salaries-skills-chart-data-object";
 import { SalariesSkillsChartData } from "@services/user-salaries.service";
@@ -24,7 +31,7 @@ class TableRow {
   styleUrl: "./salaries-skills-chart.component.scss",
   standalone: false,
 })
-export class SalariesSkillsChartComponent implements OnInit {
+export class SalariesSkillsChartComponent implements OnInit, AfterViewInit {
   @Input()
   chartData: SalariesSkillsChartData | null = null;
 
@@ -83,7 +90,7 @@ export class SalariesSkillsChartComponent implements OnInit {
       this.chartData,
     );
 
-    var chartEl = document.getElementById(this.canvasId);
+    const chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
       chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }

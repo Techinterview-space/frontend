@@ -99,7 +99,11 @@
 
   <div class="card" *ngIf="company.reviews.length > 0; else nothingToShow">
     <div class="card-body mobile-px-5 mobile-py-5">
-      <div *ngFor="let review of company.reviews" class="mb-5" [id]="'review-' + review.id">
+      <div
+        *ngFor="let review of company.reviews"
+        class="mb-5"
+        [id]="'review-' + review.id"
+      >
         <div class="mb-2">
           <app-company-review-block
             [review]="review"

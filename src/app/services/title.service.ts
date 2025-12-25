@@ -11,6 +11,7 @@ export class TitleService {
   setTitle(title: string): void {
     Assertion.stringNotNullOrEmpty(title, "title");
 
+    title = title.replace(" - Techinterview.space", "");
     this.titleService.setTitle(title + " - Techinterview.space");
   }
 

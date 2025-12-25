@@ -92,7 +92,10 @@ export class GlobalFiltersFormGroup extends FormGroup {
       ),
       quarterTo: new FormControl(filterData?.quarterTo, []),
       yearTo: new FormControl(filterData?.yearTo, []),
-      dateTo: new FormControl(filterData?.dateTo?.toISOString().split("T")[0], []),
+      dateTo: new FormControl(
+        filterData?.dateTo?.toISOString().split("T")[0],
+        [],
+      ),
     });
   }
 

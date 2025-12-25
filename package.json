@@ -14,7 +14,8 @@
     "lint": "ng lint",
     "pretty": "pretty-quick",
     "pretty-all": "prettier --write \"src/**/*.ts\" \"src/**/*.html\" \"src/**/*.scss\" \"src/**/*.json\" \"e2e/**/*.ts\" \"tools/**/*.ts\" \"*.json\"",
-    "bundle:analyze": "ng build --stats-json && webpack-bundle-analyzer dist/interviewer/stats.json"
+    "bundle:analyze": "ng build --stats-json && webpack-bundle-analyzer dist/interviewer/stats.json",
+    "serve:ssr:interviewer": "npm run build && node dist/interviewer/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +26,9 @@
     "@angular/forms": "~20.3.13",
     "@angular/platform-browser": "~20.3.13",
     "@angular/platform-browser-dynamic": "~20.3.13",
+    "@angular/platform-server": "~20.3.13",
     "@angular/router": "~20.3.13",
+    "@angular/ssr": "^20.3.13",
     "@auth0/auth0-angular": "^2.2.2",
     "@ng-select/ng-select": "^20.0.1",
     "@popperjs/core": "^2.11.8",
@@ -34,6 +37,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.7",
+    "express": "^5.1.0",
     "husky": "^7.0.4",
     "karma-spec-reporter": "^0.0.36",
     "marked": "^16.0.0",
@@ -46,7 +50,8 @@
     "puppeteer": "^24.2.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.8.1",
-    "zod": "^4.1.12"
+    "zod": "^4.1.12",
+    "zone.js": "^0.16.0"
   },
   "devDependencies": {
     "@angular-eslint/builder": "20.7.0",
@@ -57,8 +62,9 @@
     "@angular/build": "^20.3.11",
     "@angular/cli": "~20.3.11",
     "@angular/compiler-cli": "~20.3.13",
+    "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.4",
-    "@types/node": "^20.10.5",
+    "@types/node": "^20.17.19",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
     "@typescript-eslint/utils": "^8.47.0",

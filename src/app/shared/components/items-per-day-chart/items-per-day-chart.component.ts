@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, AfterViewInit, OnDestroy } from "@angular/core";
 import { ItemsPerDayChartData } from "@shared/value-objects/items-per-day-chart-data";
 import { ItemsPerDayChart } from "./items-per-day-chart";
 
@@ -8,7 +8,7 @@ import { ItemsPerDayChart } from "./items-per-day-chart";
   styleUrl: "./items-per-day-chart.component.scss",
   standalone: false,
 })
-export class ItemsPerDayChartComponent {
+export class ItemsPerDayChartComponent implements AfterViewInit, OnDestroy {
   @Input()
   title: string | null = null;
 
@@ -41,7 +41,7 @@ export class ItemsPerDayChartComponent {
       this.source,
     );
 
-    var chartEl = document.getElementById(this.canvasId);
+    const chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {
       chartEl.style.height = chartEl?.parentElement.style.height ?? "100%";
     }

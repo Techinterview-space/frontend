@@ -1,7 +1,6 @@
 import { Observable, of } from "rxjs";
 import { convertToParamMap } from "@angular/router";
 import { Injectable } from "@angular/core";
-import { subscribeOn } from "rxjs/operators";
 
 @Injectable()
 export class ActivatedRouteMock {
@@ -22,4 +21,6 @@ export class ActivatedRouteMock {
       page: 1,
     }),
   );
+  public data = of({});
+  public fragment = of(null);
 }
