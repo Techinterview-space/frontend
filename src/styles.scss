@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 /* Importing Bootstrap SCSS file. */
+@use "sass:color";
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "_colors";
@@ -44,7 +45,7 @@ body {
   text-decoration: none;
 
   &:hover {
-    color: darken($color: $bg-petrel-light, $amount: 20%) !important;
+    color: color.adjust($bg-petrel-light, $lightness: -20%) !important;
     text-decoration: underline;
   }
 }
@@ -54,7 +55,7 @@ body {
   text-decoration: none;
 
   &:hover {
-    color: darken($color: $bg-petrel-dark, $amount: 20%) !important;
+    color: color.adjust($bg-petrel-dark, $lightness: -20%) !important;
     text-decoration: underline;
   }
 }
@@ -87,35 +88,35 @@ ul.no-bullets {
   }
 
   &:hover {
-    color: darken($color: $color-dark, $amount: 20%);
+    color: color.adjust($color-dark, $lightness: -20%);
     text-decoration: underline;
   }
 
   &.btn-link-danger {
     color: $color-danger;
     &:hover {
-      color: darken($color: $color-danger, $amount: 20%);
+      color: color.adjust($color-danger, $lightness: -20%);
     }
   }
 
   &.btn-link-warning {
     color: $color-warning;
     &:hover {
-      color: darken($color: $color-warning, $amount: 20%);
+      color: color.adjust($color-warning, $lightness: -20%);
     }
   }
 
   &.btn-link-success {
     color: $color-success;
     &:hover {
-      color: darken($color: $color-success, $amount: 20%);
+      color: color.adjust($color-success, $lightness: -20%);
     }
   }
 
   &.btn-link-info {
     color: $color-info;
     &:hover {
-      color: darken($color: $color-info, $amount: 20%);
+      color: color.adjust($color-info, $lightness: -20%);
       font-weight: 600;
     }
   }

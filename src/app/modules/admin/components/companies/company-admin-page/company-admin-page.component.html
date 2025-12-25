@@ -43,7 +43,7 @@
             </li>
             <li>
               <a
-                routerLink="/companies/{{ company.slug ?? company.id }}"
+                routerLink="/companies/{{ company.slug || company.id }}"
                 class="dropdown-item"
                 >Публичная страница</a
               >
@@ -87,7 +87,7 @@
       <div class="row mb-3">
         <div class="col-md-3">Кол-во отзывов</div>
         <div class="col-md-9">
-          {{ company.reviews?.length ?? company.reviewsCount }}
+          {{ company.reviews.length || company.reviewsCount }}
         </div>
       </div>
 
@@ -159,8 +159,8 @@
             <tr *ngFor="let item of company.reviews; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ item.totalRating | number: "1.2-2" }}</td>
-              <td>{{ item.pros?.length ?? "-" }}</td>
-              <td>{{ item.cons?.length ?? "-" }}</td>
+              <td>{{ item.pros.length || "-" }}</td>
+              <td>{{ item.cons.length || "-" }}</td>
               <td>
                 {{
                   item.approvedAt
@@ -255,19 +255,19 @@
             </tr>
             <tr>
               <td>Work/life баланс</td>
-              <td>{{ reviewToShow.workLifeBalance ?? "-" }}</td>
+              <td>{{ reviewToShow.workLifeBalance }}</td>
             </tr>
             <tr>
               <td>Зарплата и бонусы</td>
-              <td>{{ reviewToShow.compensationAndBenefits ?? "-" }}</td>
+              <td>{{ reviewToShow.compensationAndBenefits }}</td>
             </tr>
             <tr>
               <td>Карьера</td>
-              <td>{{ reviewToShow.careerOpportunities ?? "-" }}</td>
+              <td>{{ reviewToShow.careerOpportunities }}</td>
             </tr>
             <tr>
               <td>Управление</td>
-              <td>{{ reviewToShow.management ?? "-" }}</td>
+              <td>{{ reviewToShow.management }}</td>
             </tr>
           </tbody>
         </table>

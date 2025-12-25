@@ -1,4 +1,4 @@
-@import "../../../_colors";
+@use "../../../_colors" as colors;
 
 .navbar-brand:hover {
   text-decoration: underline;
@@ -6,7 +6,7 @@
 
 .nav-link {
   &:hover {
-    color: $bg-petrel-dark;
+    color: colors.$bg-petrel-dark;
     background-color: #ffffff;
     border-radius: 5px;
     filter: brightness(95%);

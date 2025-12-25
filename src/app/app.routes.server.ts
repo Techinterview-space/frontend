@@ -13,6 +13,7 @@ export const serverRoutes: ServerRoute[] = [
   // Company pages - need meta tags for social sharing
   { path: "companies", renderMode: RenderMode.Server },
   { path: "companies/:id", renderMode: RenderMode.Server },
+  { path: "companies/recent-reviews", renderMode: RenderMode.Server },
 
   { path: "about-us", renderMode: RenderMode.Server },
   { path: "about-telegram-bot", renderMode: RenderMode.Server },

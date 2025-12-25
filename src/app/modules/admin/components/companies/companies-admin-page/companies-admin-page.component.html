@@ -74,7 +74,7 @@
                 >
               </td>
               <td>{{ item.rating | number: "1.2-2" }}</td>
-              <td>{{ item.reviews?.length ?? item.reviewsCount }}</td>
+              <td>{{ item.reviews.length || item.reviewsCount }}</td>
               <td>{{ item.viewsCount }}</td>
               <td>{{ item.slug }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>

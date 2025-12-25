@@ -63,9 +63,9 @@
           *ngFor="let item of companies; let i = index"
           class="mb-3 cursor-pointer company-list-item d-block text-decoration-none"
           (click)="
-            navigateToCompany(item.slug ?? item.id); $event.preventDefault()
+            navigateToCompany(item.slug || item.id); $event.preventDefault()
           "
-          [routerLink]="['/companies', item.slug ?? item.id]"
+          [routerLink]="['/companies', item.slug || item.id]"
           role="button"
         >
           <div class="h5">{{ item.name }}</div>

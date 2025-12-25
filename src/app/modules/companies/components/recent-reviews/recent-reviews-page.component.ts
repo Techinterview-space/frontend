@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { CompanyReview } from "@models/companies.model";
 import { PaginatedList } from "@models/paginated-list";
 import { CompaniesService } from "@services/companies.service";
+import { MetaTagService } from "@services/meta-tags.service";
 import { TitleService } from "@services/title.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { AuthService } from "@shared/services/auth/auth.service";
@@ -30,8 +31,14 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
     private readonly gtag: GoogleAnalyticsService,
     private readonly alertService: AlertService,
     private readonly authService: AuthService,
+    private readonly metaTagService: MetaTagService,
   ) {
     this.title.setTitle("Отзывы к IT компаниям");
+    this.metaTagService.setPageMetaTags(
+      "Отзывы об IT компаниях",
+      "Отзывы об IT компаниях в Казахстане",
+      "/companies/recent-reviews",
+      "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png");
   }
 
   ngOnInit(): void {

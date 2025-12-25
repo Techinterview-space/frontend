@@ -24,8 +24,8 @@
             <tr *ngFor="let item of reviews; let i = index">
               <td>{{ i + 1 }}</td>
               <td>{{ item.totalRating | number: "1.2-2" }}</td>
-              <td>{{ item.pros?.length ?? "-" }}</td>
-              <td>{{ item.cons?.length ?? "-" }}</td>
+              <td>{{ item.pros.length || "-" }}</td>
+              <td>{{ item.cons.length || "-" }}</td>
               <td>
                 <a routerLink="/admin/companies/{{ item.companyId }}">{{
                   item.companyName ?? "-"
@@ -94,21 +94,21 @@
     <div class="mb-2">
       <span class="text-muted">Среднее: </span>
       <span class="fw-bold ms-2">{{
-        reviewToShow?.totalRating | number: "1.2-2"
+        reviewToShow.totalRating | number: "1.2-2"
       }}</span>
     </div>
 
     <div class="mb-2">
       <div class="fw-bold text-success">Плюсы</div>
       <div class="">
-        {{ reviewToShow?.pros }}
+        {{ reviewToShow.pros }}
       </div>
     </div>
 
     <div class="mb-2">
       <div class="fw-bold text-danger">Минусы</div>
       <div class="">
-        {{ reviewToShow?.cons }}
+        {{ reviewToShow.cons }}
       </div>
     </div>
 
@@ -132,19 +132,19 @@
             </tr>
             <tr>
               <td>Work/life баланс</td>
-              <td>{{ reviewToShow.workLifeBalance ?? "-" }}</td>
+              <td>{{ reviewToShow.workLifeBalance }}</td>
             </tr>
             <tr>
               <td>Зарплата и бонусы</td>
-              <td>{{ reviewToShow.compensationAndBenefits ?? "-" }}</td>
+              <td>{{ reviewToShow.compensationAndBenefits }}</td>
             </tr>
             <tr>
               <td>Карьера</td>
-              <td>{{ reviewToShow.careerOpportunities ?? "-" }}</td>
+              <td>{{ reviewToShow.careerOpportunities }}</td>
             </tr>
             <tr>
               <td>Управление</td>
-              <td>{{ reviewToShow.management ?? "-" }}</td>
+              <td>{{ reviewToShow.management }}</td>
             </tr>
           </tbody>
         </table>

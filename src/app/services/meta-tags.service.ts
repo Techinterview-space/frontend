@@ -14,27 +14,13 @@ export interface CompanyMetaTags {
   providedIn: "root",
 })
 export class MetaTagService {
+
+  public static readonly DEFAULT_IMAGE_URL = "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png";
+
   constructor(
     private readonly title: TitleService,
     private readonly meta: Meta,
   ) {}
-
-  updateChartMetaTags(title: string, description: string, url: string): void {
-    this.title.setTitle(title);
-    url = url.startsWith("/") ? url : `/${url}`;
-
-    this.removeTags();
-    this.meta.addTags([
-      { property: "og:title", content: title },
-      { name: "twitter:title", content: title },
-
-      { name: "description", content: description },
-      { property: "og:description", content: description },
-      { name: "twitter:description", content: description },
-
-      { property: "og:url", content: environment.baseUrl + url },
-    ]);
-  }
 
   /**
    * Updates meta tags for a company page.
@@ -73,13 +59,17 @@ export class MetaTagService {
 
     this.meta.addTags([
       { name: "googlebot", content: description },
-      { property: "og:title", content: title },
-      { name: "twitter:title", content: title },
-
       { name: "description", content: description },
-      { property: "og:description", content: description },
-      { name: "twitter:description", content: description },
 
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: MetaTagService.DEFAULT_IMAGE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:url", content: environment.baseUrl },
+
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: MetaTagService.DEFAULT_IMAGE_URL },
       { property: "og:url", content: environment.baseUrl },
     ]);
   }
