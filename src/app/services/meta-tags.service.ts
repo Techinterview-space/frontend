@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Meta } from "@angular/platform-browser";
+import { Meta, MetaDefinition } from "@angular/platform-browser";
 import { environment } from "@environments/environment";
 import { TitleService } from "@services/title.service";
 
@@ -63,6 +63,7 @@ export class MetaTagService {
   }
 
   returnDefaultMetaTags(): void {
+    this.title.resetTitle();
     this.removeTags();
     this.meta.removeTag('name="googlebot"');
 
@@ -118,6 +119,51 @@ export class MetaTagService {
     return `отзывов: ${count}`;
   }
 
+  /**
+   * Sets meta tags for a static page with title, description, URL and optional image.
+   */
+  setPageMetaTags(
+    title: string,
+    description: string,
+    url: string,
+    imageUrl?: string | null,
+    addTitlePostfix: boolean = true): void {
+    const fullUrl = url.startsWith("/") ? environment.baseUrl + url : url;
+
+    if (addTitlePostfix) {
+      title = this.adjustTitle(title);
+    }
+
+    this.title.setTitle(title);
+    this.removeTags();
+    this.meta.removeTag('name="googlebot"');
+
+    const tags: Array<MetaDefinition> = [
+      { name: "googlebot", content: description },
+      { property: "og:title", content: title },
+      { name: "twitter:title", content: title },
+
+      { name: "description", content: description },
+      { property: "og:description", content: description },
+      { name: "twitter:description", content: description },
+
+      { property: "og:url", content: fullUrl },
+    ];
+
+    if (imageUrl) {
+      tags.push({ property: "og:image", content: imageUrl });
+      tags.push({ name: "twitter:image", content: imageUrl });
+      tags.push({ name: "twitter:card", content: "summary_large_image" });
+    }
+
+    this.meta.addTags(tags);
+  }
+
+  private adjustTitle(title: string): string {
+    title = title.replace(" - Techinterview.space", "");
+    return title + " - Techinterview.space";
+  }
+
   private removeTags(): void {
     this.meta.removeTag('name="description"');
     this.meta.removeTag('property="og:title"');
@@ -125,5 +171,8 @@ export class MetaTagService {
     this.meta.removeTag('property="og:description"');
     this.meta.removeTag('name="twitter:description"');
     this.meta.removeTag('property="og:url"');
+    this.meta.removeTag('property="og:image"');
+    this.meta.removeTag('name="twitter:image"');
+    this.meta.removeTag('name="twitter:card"');
   }
 }

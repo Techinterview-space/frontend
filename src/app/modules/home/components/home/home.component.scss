@@ -20,23 +20,24 @@
 }
 
 .feature-image {
-  // Mobile-first: 60% of viewport height on mobile
-  height: 60vh;
-  width: auto;
+  // Mobile-first: constrain both dimensions proportionally
+  max-height: 500px;
   max-width: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   object-position: center;
 
-  // Tablet and up: maintain 60vh but allow more width
+  // Tablet and up
   @media (min-width: 768px) {
-    height: 60vh;
-    max-width: 80%;
+    max-height: 350px;
+    max-width: 100%;
   }
 
-  // Desktop: can be slightly larger
+  // Desktop
   @media (min-width: 992px) {
-    height: 60vh;
-    max-width: 70%;
+    max-height: 400px;
+    max-width: 100%;
   }
 }
 

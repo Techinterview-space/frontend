@@ -5,6 +5,7 @@ import { defaultPageParams, PageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
+import { MetaTagService } from "@services/meta-tags.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { CompanyListItem } from "./company-list-item";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
@@ -36,11 +37,17 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: CompaniesService,
     private readonly title: TitleService,
+    private readonly metaTagService: MetaTagService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly gtag: GoogleAnalyticsService,
   ) {
-    this.title.setTitle("Отзывы к IT компаниям");
+
+    this.metaTagService.setPageMetaTags(
+      "Отзывы об IT компаниях",
+      "Отзывы об IT компаниях в Казахстане",
+      "/companies",
+      "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png");
   }
 
   ngOnInit(): void {
@@ -166,6 +173,7 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.metaTagService.returnDefaultMetaTags();
     this.title.resetTitle();
   }
 
