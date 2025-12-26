@@ -3,3 +3,24 @@
   max-height: 500px;
   overflow-y: auto;
 }
+
+// Ensure ng-select dropdown is visible inside modal
+:host ::ng-deep {
+  .modal-body {
+    overflow: visible;
+  }
+
+  .modal-content {
+    overflow: visible;
+  }
+}
+
+// Ensure action dropdown is visible outside table container
+.table-responsive {
+  overflow: visible;
+
+  .dropdown-menu {
+    position: absolute;
+    z-index: 1050;
+  }
+}

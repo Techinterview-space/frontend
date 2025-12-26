@@ -33,7 +33,17 @@
             <tr class="small" *ngFor="let item of items; let i = index">
               <td>{{ item.name }}</td>
               <td>{{ item.telegramChatId }}</td>
-              <td>{{ item.professionIds }}</td>
+              <td>
+                <a
+                  *ngIf="item.professionIds && item.professionIds.length > 0"
+                  href="#"
+                  class="text-primary"
+                  (click)="openProfessionsModal(item.professionIds); $event.preventDefault()"
+                >
+                  {{ item.professionIds.length }} специальност{{ item.professionIds.length === 1 ? 'ь' : (item.professionIds.length < 5 ? 'и' : 'ей') }}
+                </a>
+                <span *ngIf="!item.professionIds || item.professionIds.length === 0">-</span>
+              </td>
               <td>
                 <app-status-label
                   [status]="item.preventNotificationIfNoDifference"
@@ -89,7 +99,7 @@
                       <a
                         class="dropdown-item text-danger"
                         href="#"
-                        (click)="delete(item)"
+                        (click)="delete(item); $event.preventDefault()"
                         >Удалить</a
                       >
                     </li>
@@ -143,7 +153,7 @@
 <app-dialog
   [show]="!!editForm"
   (closed)="onEditModalDlgClose()"
-  [header]="'Новая подписка'"
+  [header]="editForm?.hasItemToEdit() ? 'Редактирование подписки' : 'Новая подписка'"
 >
   <form
     class="mb-5"
@@ -170,8 +180,19 @@
     </div>
 
     <div class="mb-3">
-      <label>Специальности (через запятую)</label>
-      <input type="text" class="form-control" formControlName="professionIds" />
+      <label>Специальности</label>
+      <ng-select
+        [items]="professionsAsOptions"
+        [hideSelected]="true"
+        [selectOnTab]="true"
+        bindLabel="label"
+        bindValue="item"
+        placeholder="Выберите специальности"
+        formControlName="professionIds"
+        [multiple]="true"
+        [clearable]="true"
+      >
+      </ng-select>
       <app-field-error
         [field]="editForm.get('professionIds')"
       ></app-field-error>
@@ -238,4 +259,20 @@
   <pre class="open-api-json" *ngIf="openAiDialogData">{{
     openAiDialogData.json
   }}</pre>
+</app-dialog>
+
+<app-dialog
+  [show]="!!selectedProfessionsForModal"
+  (closed)="closeProfessionsModal()"
+  [header]="'Специальности'"
+>
+  <ul class="list-group" *ngIf="selectedProfessionsForModal">
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center"
+      *ngFor="let profession of selectedProfessionsForModal"
+    >
+      <span>{{ profession.title }}</span>
+      <span class="badge bg-secondary">ID: {{ profession.id }}</span>
+    </li>
+  </ul>
 </app-dialog>

@@ -16,9 +16,7 @@ export class TelegramSubscriptionEditForm extends FormGroup {
         Validators.pattern(TelegramSubscriptionEditForm.digitsPattern),
         Validators.maxLength(100),
       ]),
-      professionIds: new FormControl(item?.professionIds?.join(",") ?? null, [
-        Validators.maxLength(500),
-      ]),
+      professionIds: new FormControl(item?.professionIds ?? [], []),
       preventNotificationIfNoDifference: new FormControl(
         item?.preventNotificationIfNoDifference ?? false,
         [],
@@ -44,23 +42,14 @@ export class TelegramSubscriptionEditForm extends FormGroup {
       return null;
     }
 
-    const professionIdsAsString = this.value.professionIds as string;
-
-    let professionIds: Array<number> = [];
-    if (professionIdsAsString != null) {
-      professionIds = professionIdsAsString
-        .split(",")
-        .map((x) => parseInt(x, 10))
-        .filter((x) => !isNaN(x));
-    }
-
+    const professionIds = this.value.professionIds as Array<number>;
     const telegramChatId = parseInt(this.value.telegramChatId as string, 10);
     const regularity = parseInt(this.value.regularity as string, 10);
 
     return {
       name: this.value.name,
       telegramChatId: telegramChatId,
-      professionIds: professionIds,
+      professionIds: professionIds ?? [],
       regularity: regularity,
       useAiAnalysis: this.value.useAiAnalysis,
       preventNotificationIfNoDifference:

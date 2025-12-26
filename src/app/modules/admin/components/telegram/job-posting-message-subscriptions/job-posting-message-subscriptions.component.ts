@@ -14,6 +14,9 @@ import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { OpenAiDialogData } from "../open-ai-dialog-data";
 import { JobPostingMessageSubscriptionEditForm } from "./subscription-edit-form";
+import { ProfessionsService } from "@services/professions.service";
+import { LabelEntityDto } from "@services/label-entity.model";
+import { SelectItem } from "@shared/select-boxes/select-item";
 
 @Component({
   templateUrl: "./job-posting-message-subscriptions.component.html",
@@ -31,8 +34,14 @@ export class JobPostingMessageSubscriptionsComponent
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
   openAiDialogData: OpenAiDialogData | null = null;
 
+  professions: Array<LabelEntityDto> = [];
+  professionsAsOptions: Array<SelectItem<number>> = [];
+
+  selectedProfessionsForModal: Array<LabelEntityDto> | null = null;
+
   constructor(
     private readonly service: JobPostingMessageSubscriptionsService,
+    private readonly professionsService: ProfessionsService,
     titleService: TitleService,
     private readonly alert: AlertService,
   ) {
@@ -43,7 +52,26 @@ export class JobPostingMessageSubscriptionsComponent
     this.items = null;
     this.source = null;
 
+    this.loadProfessions();
     this.loadData(this.currentPage);
+  }
+
+  loadProfessions(): void {
+    if (this.professions.length > 0) {
+      return;
+    }
+
+    this.professionsService
+      .allForSelectBoxes()
+      .pipe(untilDestroyed(this))
+      .subscribe((x) => {
+        this.professions = x;
+        this.professionsAsOptions = x.map((p) => ({
+          value: p.id.toString(),
+          item: p.id,
+          label: p.title,
+        }));
+      });
   }
 
   loadData(pageToRequest: number): void {
@@ -123,12 +151,39 @@ export class JobPostingMessageSubscriptionsComponent
       .subscribe(() => {
         this.alert.success("Подписка была создана");
         this.editForm = null;
-        this.ngOnInit();
+        this.loadData(this.currentPage);
       });
   }
 
   getRegularityTitle(regularity: SubscriptionRegularityType): string {
     return SubscriptionRegularityType[regularity];
+  }
+
+  getProfessionNames(professionIds: number[] | null): string {
+    if (!professionIds || professionIds.length === 0) {
+      return "-";
+    }
+
+    return professionIds
+      .map((id) => {
+        const profession = this.professions.find((p) => p.id === id);
+        return profession?.title ?? id.toString();
+      })
+      .join(", ");
+  }
+
+  openProfessionsModal(professionIds: number[] | null): void {
+    if (!professionIds || professionIds.length === 0) {
+      return;
+    }
+
+    this.selectedProfessionsForModal = professionIds
+      .map((id) => this.professions.find((p) => p.id === id))
+      .filter((p): p is LabelEntityDto => p != null);
+  }
+
+  closeProfessionsModal(): void {
+    this.selectedProfessionsForModal = null;
   }
 
   ngOnDestroy(): void {

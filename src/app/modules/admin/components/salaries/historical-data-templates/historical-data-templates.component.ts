@@ -31,6 +31,8 @@ export class HistoricalDataTemplatesComponent implements OnInit, OnDestroy {
   professions: Array<LabelEntityDto> = [];
   professionsAsOptions: Array<SelectItem<number>> = [];
 
+  selectedProfessionsForModal: Array<LabelEntityDto> | null = null;
+
   constructor(
     private readonly service: SalariesHistoricalDataTemplatesService,
     private readonly professionsService: ProfessionsService,
@@ -158,6 +160,20 @@ export class HistoricalDataTemplatesComponent implements OnInit, OnDestroy {
         return profession?.title ?? id.toString();
       })
       .join(", ");
+  }
+
+  openProfessionsModal(professionIds: number[] | null): void {
+    if (!professionIds || professionIds.length === 0) {
+      return;
+    }
+
+    this.selectedProfessionsForModal = professionIds
+      .map((id) => this.professions.find((p) => p.id === id))
+      .filter((p): p is LabelEntityDto => p != null);
+  }
+
+  closeProfessionsModal(): void {
+    this.selectedProfessionsForModal = null;
   }
 
   ngOnDestroy(): void {

@@ -27,10 +27,20 @@
           <tbody>
             <tr class="small" *ngFor="let item of items; let i = index">
               <td>
-                <span class="text-muted small">{{ item.id }}</span>
+                <span class="text-muted small" [title]="item.id">...{{ item.id.split('-').pop() }}</span>
               </td>
               <td>{{ item.name }}</td>
-              <td>{{ getProfessionNames(item.professionIds) }}</td>
+              <td>
+                <a
+                  *ngIf="item.professionIds && item.professionIds.length > 0"
+                  href="#"
+                  class="text-primary"
+                  (click)="openProfessionsModal(item.professionIds); $event.preventDefault()"
+                >
+                  {{ item.professionIds.length }} специальност{{ item.professionIds.length === 1 ? 'ь' : (item.professionIds.length < 5 ? 'и' : 'ей') }}
+                </a>
+                <span *ngIf="!item.professionIds || item.professionIds.length === 0">-</span>
+              </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
@@ -135,3 +145,19 @@
   *ngIf="confirmDeletionMessage"
   [message]="confirmDeletionMessage"
 ></app-confirm-dialog>
+
+<app-dialog
+  [show]="!!selectedProfessionsForModal"
+  (closed)="closeProfessionsModal()"
+  [header]="'Специальности'"
+>
+  <ul class="list-group" *ngIf="selectedProfessionsForModal">
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center"
+      *ngFor="let profession of selectedProfessionsForModal"
+    >
+      <span>{{ profession.title }}</span>
+      <span class="badge bg-secondary">ID: {{ profession.id }}</span>
+    </li>
+  </ul>
+</app-dialog>
