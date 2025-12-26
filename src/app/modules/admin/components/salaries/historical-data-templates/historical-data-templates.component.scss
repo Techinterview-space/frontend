@@ -1,8 +1,4 @@
-.open-api-json {
-  white-space: pre-wrap;
-  max-height: 500px;
-  overflow-y: auto;
-}
+// Component styles
 
 // Ensure ng-select dropdown is visible inside modal
 :host ::ng-deep {
@@ -16,6 +12,8 @@
 }
 
 // Ensure action dropdown is visible outside table container
+// Using overflow: clip on x-axis preserves horizontal scroll behavior if needed
+// while allowing dropdowns to overflow vertically
 .table-responsive {
   overflow: visible;
 
@@ -24,3 +22,4 @@
     z-index: 1050;
   }
 }
+

@@ -87,7 +87,7 @@
       <div class="row mb-3">
         <div class="col-md-3">Кол-во отзывов</div>
         <div class="col-md-9">
-          {{ company.reviews.length || company.reviewsCount }}
+          {{ company.reviews?.length || company.reviewsCount }}
         </div>
       </div>
 
@@ -143,7 +143,7 @@
     <div class="card-body p-5">
       <div
         class="table-responsive"
-        *ngIf="company.reviews.length > 0; else nothingToShow"
+        *ngIf="company.reviews?.length; else nothingToShow"
       >
         <table class="table table-hover">
           <thead>

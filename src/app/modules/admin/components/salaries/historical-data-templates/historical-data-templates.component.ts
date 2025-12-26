@@ -4,33 +4,29 @@ import { PaginatedList } from "@models/paginated-list";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import {
-  SalariesStatSubscription,
-  SubscriptionRegularityType,
-} from "@models/telegram";
-import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
-
+  SalariesHistoricalDataRecordTemplateDto,
+  SalariesHistoricalDataTemplatesService,
+} from "@services/salaries-historical-data-templates.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
-import { OpenAiDialogData } from "../open-ai-dialog-data";
-import { TelegramSubscriptionEditForm } from "./subscription-edit-form";
+import { HistoricalDataTemplateEditForm } from "./historical-data-template-edit-form";
 import { ProfessionsService } from "@services/professions.service";
 import { LabelEntityDto } from "@services/label-entity.model";
 import { SelectItem } from "@shared/select-boxes/select-item";
 
 @Component({
-  templateUrl: "./stat-data-cache-records.component.html",
-  styleUrls: ["./stat-data-cache-records.component.scss"],
+  templateUrl: "./historical-data-templates.component.html",
+  styleUrls: ["./historical-data-templates.component.scss"],
   standalone: false,
 })
-export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
-  items: Array<SalariesStatSubscription> | null = null;
-  source: PaginatedList<SalariesStatSubscription> | null = null;
+export class HistoricalDataTemplatesComponent implements OnInit, OnDestroy {
+  items: Array<SalariesHistoricalDataRecordTemplateDto> | null = null;
+  source: PaginatedList<SalariesHistoricalDataRecordTemplateDto> | null = null;
   currentPage: number = 1;
 
-  editForm: TelegramSubscriptionEditForm | null = null;
+  editForm: HistoricalDataTemplateEditForm | null = null;
   confirmDeletionMessage: DialogMessage<ConfirmMsg> | null = null;
-  openAiDialogData: OpenAiDialogData | null = null;
 
   professions: Array<LabelEntityDto> = [];
   professionsAsOptions: Array<SelectItem<number>> = [];
@@ -38,12 +34,12 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
   selectedProfessionsForModal: Array<LabelEntityDto> | null = null;
 
   constructor(
-    private readonly service: TelegramSubscriptionsService,
+    private readonly service: SalariesHistoricalDataTemplatesService,
     private readonly professionsService: ProfessionsService,
     titleService: TitleService,
     private readonly alert: AlertService,
   ) {
-    titleService.setTitle("Подписки в Telegram (зарплаты)");
+    titleService.setTitle("Шаблоны исторических данных");
   }
 
   ngOnInit(): void {
@@ -89,35 +85,17 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       });
   }
 
-  activate(item: SalariesStatSubscription): void {
-    this.service
-      .activate(item.id)
-      .pipe(untilDestroyed(this))
-      .subscribe(() => {
-        this.loadData(this.currentPage);
-      });
-  }
-
-  deactivate(item: SalariesStatSubscription): void {
-    this.service
-      .deactivate(item.id)
-      .pipe(untilDestroyed(this))
-      .subscribe(() => {
-        this.loadData(this.currentPage);
-      });
-  }
-
-  delete(item: SalariesStatSubscription): void {
+  delete(item: SalariesHistoricalDataRecordTemplateDto): void {
     this.confirmDeletionMessage = new DialogMessage(
       new ConfirmMsg(
-        "Удалить подписку",
-        "Вы уверены, что хотите удалить подписку?",
+        "Удалить шаблон",
+        `Вы уверены, что хотите удалить шаблон "${item.name}"?`,
         () => {
           this.service
             .delete(item.id)
             .pipe(untilDestroyed(this))
             .subscribe(() => {
-              this.alert.success("Подписка удалена");
+              this.alert.success("Шаблон удален");
               this.loadData(this.currentPage);
             });
         },
@@ -126,7 +104,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
   }
 
   create(): void {
-    this.editForm = new TelegramSubscriptionEditForm(null);
+    this.editForm = new HistoricalDataTemplateEditForm(null);
   }
 
   onEditModalDlgClose(): void {
@@ -149,7 +127,7 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
         .update(itemId, createRequest)
         .pipe(untilDestroyed(this))
         .subscribe(() => {
-          this.alert.success("Подписка была обновлена");
+          this.alert.success("Шаблон обновлен");
           this.editForm = null;
           this.loadData(this.currentPage);
         });
@@ -161,55 +139,14 @@ export class StatDataCacheRecordsComponent implements OnInit, OnDestroy {
       .create(createRequest)
       .pipe(untilDestroyed(this))
       .subscribe(() => {
-        this.alert.success("Подписка была создана");
+        this.alert.success("Шаблон создан");
         this.editForm = null;
         this.loadData(this.currentPage);
       });
   }
 
-  getOpenAiAnalysis(item: SalariesStatSubscription): void {
-    this.service
-      .getOpenAiAnalysis(item.id)
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.openAiDialogData = new OpenAiDialogData(
-          "Open AI анализ",
-          JSON.stringify(x, null, 2),
-        );
-      });
-  }
-
-  getOpenAiReport(item: SalariesStatSubscription): void {
-    this.service
-      .getOpenAiReport(item.id)
-      .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.openAiDialogData = new OpenAiDialogData(
-          "Open AI данные",
-          JSON.stringify(x, null, 2),
-        );
-      });
-  }
-
-  sendUpdates(item: SalariesStatSubscription): void {
-    this.service
-      .sendUpdates(item.id)
-      .pipe(untilDestroyed(this))
-      .subscribe(() => {
-        this.alert.success("Сообщение отправлено");
-      });
-  }
-
-  onOpenAiDlgClose(): void {
-    this.openAiDialogData = null;
-  }
-
-  openEditDlg(item: SalariesStatSubscription): void {
-    this.editForm = new TelegramSubscriptionEditForm(item);
-  }
-
-  getRegularityTitle(regularity: SubscriptionRegularityType): string {
-    return SubscriptionRegularityType[regularity];
+  openEditDlg(item: SalariesHistoricalDataRecordTemplateDto): void {
+    this.editForm = new HistoricalDataTemplateEditForm(item);
   }
 
   getProfessionNames(professionIds: number[] | null): string {

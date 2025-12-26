@@ -1,7 +1,7 @@
-<div class="mb-3">
-  <span class="h4">Общие данные</span>
+<div class="mb-3" *ngIf="template?.name">
+  <span class="h4">{{ template?.name }}</span>
 </div>
 
-<div id="canvas-historical-chart-container">
-  <canvas id="canvas-historical-chart">{{ chart }}</canvas>
+<div class="canvas-container">
+  <canvas [id]="canvasId">{{ chart }}</canvas>
 </div>

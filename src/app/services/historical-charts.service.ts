@@ -2,47 +2,43 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
-import { DeveloperGrade } from "@models/enums";
-import { KazakhstanCity } from "@models/salaries/kazakhstan-city";
 import { HistoricalSurveyChartResponse } from "./historical-charts.models";
 
-export interface SalariesCountWeekByWeekChartItem {
-  totalCount: number;
-  localMedian: number;
-  localAverage: number;
-  remoteMedian: number;
-  remoteAverage: number;
+export interface MedianLocalSalaryByGrade {
+  Undefined?: number;
+  Trainee?: number;
+  Junior?: number;
+  Middle?: number;
+  Senior?: number;
+  Lead?: number;
 }
 
-export interface SalariesCountWeekByWeekChartGradeItem
-  extends SalariesCountWeekByWeekChartItem {
-  grade: DeveloperGrade;
+export interface HistoricalDataPoint {
+  date: Date;
+  medianLocalSalary: number;
+  averageLocalSalary: number;
+  minLocalSalary: number | null;
+  maxLocalSalary: number | null;
+  totalSalaryCount: number;
+  medianLocalSalaryByGrade: MedianLocalSalaryByGrade | null;
 }
 
-export interface SalariesCountWeekByWeekChart {
-  weekEnds: Array<Date>;
-  totalCountItems: Array<SalariesCountWeekByWeekChartItem>;
-  gradeItems: Array<SalariesCountWeekByWeekChartGradeItem>;
-  hasGradeItems: boolean;
+export interface HistoricalDataByTemplate {
+  templateId: string;
+  name: string | null;
+  professionIds: number[] | null;
+  dataPoints: HistoricalDataPoint[] | null;
 }
 
 export interface GetSalariesHistoricalChartResponse {
+  templates: HistoricalDataByTemplate[] | null;
   from: Date;
   to: Date;
-  chartFrom: Date;
-  chartTo: Date;
-
-  hasAuthentication: boolean;
-  shouldAddOwnSalary: boolean;
-
-  salariesCountWeekByWeekChart: SalariesCountWeekByWeekChart | null;
 }
 
 export interface SalariesChartFilterData {
-  grade: DeveloperGrade | null;
-  profsInclude: Array<number> | null;
-  cities: Array<KazakhstanCity> | null;
-  skills: Array<number> | null;
+  from?: Date | null;
+  to?: Date | null;
 }
 
 @Injectable()
@@ -54,18 +50,26 @@ export class HistoricalChartsService {
   }
 
   salariesChart(
-    params: SalariesChartFilterData,
+    params?: SalariesChartFilterData,
   ): Observable<GetSalariesHistoricalChartResponse> {
-    return this.api.get<GetSalariesHistoricalChartResponse>(
-      this.apiUrl + "salaries?" + new ConvertObjectToHttpParams(params).get(),
-    );
+    const queryString = params
+      ? new ConvertObjectToHttpParams(params).get()
+      : "";
+    const url = queryString
+      ? this.apiUrl + "salaries?" + queryString
+      : this.apiUrl + "salaries";
+    return this.api.get<GetSalariesHistoricalChartResponse>(url);
   }
 
   surveyChart(
     params: SalariesChartFilterData,
   ): Observable<HistoricalSurveyChartResponse> {
-    return this.api.get<HistoricalSurveyChartResponse>(
-      this.apiUrl + "survey?" + new ConvertObjectToHttpParams(params).get(),
-    );
+    const queryString = params
+      ? new ConvertObjectToHttpParams(params).get()
+      : "";
+    const url = queryString
+      ? this.apiUrl + "survey?" + queryString
+      : this.apiUrl + "survey";
+    return this.api.get<HistoricalSurveyChartResponse>(url);
   }
 }

@@ -1,4 +1,4 @@
-import { SalariesCountWeekByWeekChart } from "@services/historical-charts.service";
+import { HistoricalDataByTemplate } from "@services/historical-charts.service";
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
 import { RandomRgbColor } from "../../random-rgb-color";
 
@@ -15,36 +15,21 @@ interface ChartDatasetType {
 export class HistoricalSalariesChartObject extends Chart {
   private readonly datasets: Array<ChartDatasetType> = [];
 
-  constructor(canvasId: string, chartData: SalariesCountWeekByWeekChart) {
-    // По датасету на медиану и среднюю
+  constructor(canvasId: string, template: HistoricalDataByTemplate) {
+    const dataPoints = template.dataPoints ?? [];
+
     const datasets: Array<ChartDatasetType> = [
       new DatasetItem(
-        "Медиана, КЗ",
-        chartData.totalCountItems.map((x) => x.localMedian),
+        "Медиана",
+        dataPoints.map((x) => x.medianLocalSalary),
         2,
         new RandomRgbColor(),
         true as PointStyle,
         "y",
       ),
       new DatasetItem(
-        "Средняя, КЗ",
-        chartData.totalCountItems.map((x) => x.localAverage),
-        2,
-        new RandomRgbColor(),
-        true as PointStyle,
-        "y",
-      ),
-      new DatasetItem(
-        "Медиана, удаленка",
-        chartData.totalCountItems.map((x) => x.remoteMedian),
-        2,
-        new RandomRgbColor(),
-        true as PointStyle,
-        "y",
-      ),
-      new DatasetItem(
-        "Средняя, удаленка",
-        chartData.totalCountItems.map((x) => x.remoteAverage),
+        "Средняя",
+        dataPoints.map((x) => x.averageLocalSalary),
         2,
         new RandomRgbColor(),
         true as PointStyle,
@@ -52,7 +37,7 @@ export class HistoricalSalariesChartObject extends Chart {
       ),
       new DatasetItem(
         "Количество анкет",
-        chartData.totalCountItems.map((x) => x.totalCount),
+        dataPoints.map((x) => x.totalSalaryCount),
         4,
         new RandomRgbColor(),
         "circle",
@@ -60,10 +45,47 @@ export class HistoricalSalariesChartObject extends Chart {
       ),
     ];
 
+    // Add grade-based median datasets if available
+    const firstPointWithGrades = dataPoints.find(
+      (x) => x.medianLocalSalaryByGrade != null,
+    );
+    if (firstPointWithGrades?.medianLocalSalaryByGrade) {
+      const grades = Object.keys(
+        firstPointWithGrades.medianLocalSalaryByGrade,
+      ) as Array<keyof typeof firstPointWithGrades.medianLocalSalaryByGrade>;
+
+      for (const grade of grades) {
+        if (grade === "Undefined") continue;
+
+        const gradeData = dataPoints.map(
+          (x) => x.medianLocalSalaryByGrade?.[grade] ?? 0,
+        );
+
+        // Only add if there's actual data
+        if (gradeData.some((v) => v > 0)) {
+          datasets.push(
+            new DatasetItem(
+              `Медиана ${grade}`,
+              gradeData,
+              1,
+              new RandomRgbColor(),
+              "rect" as PointStyle,
+              "y",
+            ),
+          );
+        }
+      }
+    }
+
+    const labels = dataPoints.map((x) => {
+      const date = new Date(x.date);
+      return date.toISOString().slice(0, 10);
+    });
+
     super(canvasId, {
       type: "line" as ChartType,
       data: {
-        labels: chartData.weekEnds.map((x) => x.toISOString().slice(0, 10)),
+        labels: labels,
         datasets: datasets,
       },
       options: {

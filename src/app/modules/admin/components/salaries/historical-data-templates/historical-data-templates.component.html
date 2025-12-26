@@ -1,4 +1,4 @@
-<app-page-header>Подписки на обновления зарплат</app-page-header>
+<app-page-header>Шаблоны исторических данных</app-page-header>
 
 <div class="container my-5" *ngIf="items; else dataLoading">
   <div class="card">
@@ -16,23 +16,20 @@
         <table class="table table-hover table-sm">
           <thead class="small">
             <tr class="small">
+              <th>ID</th>
               <th>Название</th>
-              <th>Chat</th>
               <th>Специальности</th>
-              <th>No pushes</th>
-              <th>AI анализ</th>
-              <th>Регулярность</th>
-              <th>Последнее сообщение</th>
               <th>Создано</th>
               <th>Обновлено</th>
-              <th>Удалено</th>
               <th>Действия</th>
             </tr>
           </thead>
           <tbody>
             <tr class="small" *ngFor="let item of items; let i = index">
+              <td>
+                <span class="text-muted small" [title]="item.id">...{{ item.id.split('-').pop() }}</span>
+              </td>
               <td>{{ item.name }}</td>
-              <td>{{ item.telegramChatId }}</td>
               <td>
                 <a
                   *ngIf="item.professionIds && item.professionIds.length > 0"
@@ -44,52 +41,19 @@
                 </a>
                 <span *ngIf="!item.professionIds || item.professionIds.length === 0">-</span>
               </td>
-              <td>
-                <app-status-label
-                  [status]="item.preventNotificationIfNoDifference"
-                  [defaultSuccessTitle]="'Да'"
-                  [defaultFailTitle]="'Нет'"
-                ></app-status-label>
-              </td>
-              <td>
-                <app-status-label
-                  [status]="item.useAiAnalysis"
-                  [defaultSuccessTitle]="'Да'"
-                  [defaultFailTitle]="'Нет'"
-                ></app-status-label>
-              </td>
-              <td>{{ getRegularityTitle(item.regularity) }}</td>
-              <td>{{ item.lastMessageSent | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
-              <td>{{ item.deletedAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
                 <div class="btn-group" role="group">
                   <button
                     type="button"
-                    class="btn btn-outline-dark dropdown-toggle"
+                    class="btn btn-outline-dark dropdown-toggle btn-sm"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
                     Действия
                   </button>
                   <ul class="dropdown-menu">
-                    <li>
-                      <a
-                        *ngIf="item.deletedAt != null"
-                        class="dropdown-item text-success"
-                        (click)="activate(item)"
-                        >Активировать</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        *ngIf="item.deletedAt == null"
-                        class="dropdown-item text-warning"
-                        (click)="deactivate(item)"
-                        >Деактивировать</a
-                      >
-                    </li>
                     <li>
                       <a class="dropdown-item" (click)="openEditDlg(item)"
                         >Редактировать</a
@@ -103,21 +67,6 @@
                         >Удалить</a
                       >
                     </li>
-                    <li>
-                      <a class="dropdown-item" (click)="getOpenAiAnalysis(item)"
-                        >Open AI анализ</a
-                      >
-                    </li>
-                    <li>
-                      <a class="dropdown-item" (click)="getOpenAiReport(item)"
-                        >Open AI данные</a
-                      >
-                    </li>
-                    <li>
-                      <a class="dropdown-item" (click)="sendUpdates(item)"
-                        >Отправить апдейт</a
-                      >
-                    </li>
                   </ul>
                 </div>
               </td>
@@ -126,7 +75,7 @@
         </table>
       </div>
 
-      <div class="" *ngIf="source && source.results.length > 0">
+      <div class="" *ngIf="source && source.results && source.results.length > 0">
         <app-pagination-buttons
           [source]="source"
           (pageChange)="loadData($event)"
@@ -153,7 +102,7 @@
 <app-dialog
   [show]="!!editForm"
   (closed)="onEditModalDlgClose()"
-  [header]="editForm?.hasItemToEdit() ? 'Редактирование подписки' : 'Новая подписка'"
+  [header]="editForm?.hasItemToEdit() ? 'Редактирование шаблона' : 'Новый шаблон'"
 >
   <form
     class="mb-5"
@@ -162,21 +111,9 @@
     (ngSubmit)="onEditFormSubmit()"
   >
     <div class="mb-3">
-      <label>Имя подписки</label>
+      <label>Название шаблона</label>
       <input type="text" class="form-control" formControlName="name" />
       <app-field-error [field]="editForm.get('name')"></app-field-error>
-    </div>
-
-    <div class="mb-3">
-      <label>Чат/группа</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="telegramChatId"
-      />
-      <app-field-error
-        [field]="editForm.get('telegramChatId')"
-      ></app-field-error>
     </div>
 
     <div class="mb-3">
@@ -199,47 +136,6 @@
     </div>
 
     <div class="mb-3">
-      <div>
-        <label>Регулярность</label>
-        <select class="form-control" formControlName="regularity">
-          <option value="1">Еженедельно</option>
-          <option value="2">Ежемесячно</option>
-        </select>
-      </div>
-      <div>
-        <app-field-error [field]="editForm.get('regularity')"></app-field-error>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="useAiAnalysis">Использовать AI анализ</label>
-      <input
-        type="checkbox"
-        id="useAiAnalysis"
-        class="form-check-input"
-        formControlName="useAiAnalysis"
-      />
-      <app-field-error
-        [field]="editForm.get('useAiAnalysis')"
-      ></app-field-error>
-    </div>
-
-    <div class="mb-3">
-      <input
-        type="checkbox"
-        id="preventNotificationIfNoDifference"
-        class="form-check-input"
-        formControlName="preventNotificationIfNoDifference"
-      />
-      <label class="form-check-label" for="preventNotificationIfNoDifference">
-        Не отправлять сообщение, если нет изменений</label
-      >
-      <app-field-error
-        [field]="editForm.get('preventNotificationIfNoDifference')"
-      ></app-field-error>
-    </div>
-
-    <div class="mb-3">
       <button class="btn btn-primary" type="submit">Сохранить</button>
     </div>
   </form>
@@ -249,17 +145,6 @@
   *ngIf="confirmDeletionMessage"
   [message]="confirmDeletionMessage"
 ></app-confirm-dialog>
-
-<app-dialog
-  [show]="!!openAiDialogData"
-  (closed)="onOpenAiDlgClose()"
-  [header]="openAiDialogData?.title ?? 'Open AI'"
-  [additionalCss]="'modal-lg'"
->
-  <pre class="open-api-json" *ngIf="openAiDialogData">{{
-    openAiDialogData.json
-  }}</pre>
-</app-dialog>
 
 <app-dialog
   [show]="!!selectedProfessionsForModal"
