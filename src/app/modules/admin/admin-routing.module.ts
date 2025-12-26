@@ -23,6 +23,7 @@ import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/gi
 import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
 import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/reviews-stat-subscriptions/reviews-stat-subscriptions.component";
 import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
+import { HistoricalDataTemplatesComponent } from "./components/salaries/historical-data-templates/historical-data-templates.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -73,6 +74,10 @@ const routes: Routes = [
   { path: "github/processing-jobs", component: GitHubJobsPageComponent },
 
   { path: "openai-prompts", component: OpenAiPromptsAdminPageComponent },
+  {
+    path: "salaries/historical-data-templates",
+    component: HistoricalDataTemplatesComponent,
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,137 @@
+<app-page-header>Шаблоны исторических данных</app-page-header>
+
+<div class="container my-5" *ngIf="items; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-2">
+        <button class="btn btn-sm btn-primary" (click)="create()">
+          Создать
+        </button>
+      </div>
+
+      <div
+        class="mb-3 table-responsive"
+        *ngIf="items && items.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
+          <thead class="small">
+            <tr class="small">
+              <th>ID</th>
+              <th>Название</th>
+              <th>Специальности</th>
+              <th>Создано</th>
+              <th>Обновлено</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="small" *ngFor="let item of items; let i = index">
+              <td>
+                <span class="text-muted small">{{ item.id }}</span>
+              </td>
+              <td>{{ item.name }}</td>
+              <td>{{ getProfessionNames(item.professionIds) }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark dropdown-toggle btn-sm"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Действия
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" (click)="openEditDlg(item)"
+                        >Редактировать</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item text-danger"
+                        href="#"
+                        (click)="delete(item); $event.preventDefault()"
+                        >Удалить</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="" *ngIf="source && source.results && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">Нет данных</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="editForm?.hasItemToEdit() ? 'Редактирование шаблона' : 'Новый шаблон'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label>Название шаблона</label>
+      <input type="text" class="form-control" formControlName="name" />
+      <app-field-error [field]="editForm.get('name')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Специальности</label>
+      <ng-select
+        [items]="professionsAsOptions"
+        [hideSelected]="true"
+        [selectOnTab]="true"
+        bindLabel="label"
+        bindValue="item"
+        placeholder="Выберите специальности"
+        formControlName="professionIds"
+        [multiple]="true"
+        [clearable]="true"
+      >
+      </ng-select>
+      <app-field-error
+        [field]="editForm.get('professionIds')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+  </form>
+</app-dialog>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

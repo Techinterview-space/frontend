@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { AdminRoutingModule } from "./admin-routing.module";
 import { SharedModule } from "@shared/shared.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgSelectModule } from "@ng-select/ng-select";
 import { BackgroundJobsComponent } from "./components/background-jobs/background-jobs.component";
 import { HealthCheckTableComponent } from "./components/health-check-table/health-check-table.component";
 import { JobsTableComponent } from "./components/jobs-table/jobs-table.component";
@@ -36,6 +37,8 @@ import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/
 import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
 import { JobPostingMessageSubscriptionsService } from "@services/job-posting-message-subscriptions.service";
 import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
+import { HistoricalDataTemplatesComponent } from "./components/salaries/historical-data-templates/historical-data-templates.component";
+import { SalariesHistoricalDataTemplatesService } from "@services/salaries-historical-data-templates.service";
 
 const adminServices = [
   AdminDashboardService,
@@ -44,6 +47,7 @@ const adminServices = [
   CompanyReviewsTelegramSubscriptionsService,
   JobPostingMessageSubscriptionsService,
   TelegramSubscriptionsService,
+  SalariesHistoricalDataTemplatesService,
 ];
 
 @NgModule({
@@ -74,6 +78,7 @@ const adminServices = [
     OpenAiPromptsAdminPageComponent,
     CompanyReviewsStatSubscriptionsComponent,
     JobPostingMessageSubscriptionsComponent,
+    HistoricalDataTemplatesComponent,
   ],
   imports: [
     CommonModule,
@@ -81,6 +86,7 @@ const adminServices = [
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
   providers: adminServices,
   exports: [],

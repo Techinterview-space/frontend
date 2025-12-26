@@ -71,6 +71,11 @@ export class AdminNavbarComponent {
             url: "/admin/salaries/imported-salaries",
             isExternal: false,
           },
+          {
+            title: "График исторических данных",
+            url: "/admin/salaries/historical-data-templates",
+            isExternal: false,
+          },
         ],
       },
       {

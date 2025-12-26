@@ -1,0 +1,25 @@
+// Component styles
+
+// Ensure ng-select dropdown is visible inside modal
+:host ::ng-deep {
+  .modal-body {
+    overflow: visible;
+  }
+
+  .modal-content {
+    overflow: visible;
+  }
+}
+
+// Ensure action dropdown is visible outside table container
+// Using overflow: clip on x-axis preserves horizontal scroll behavior if needed
+// while allowing dropdowns to overflow vertically
+.table-responsive {
+  overflow: visible;
+
+  .dropdown-menu {
+    position: absolute;
+    z-index: 1050;
+  }
+}
+
