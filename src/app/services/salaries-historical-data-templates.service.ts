@@ -61,5 +61,9 @@ export class SalariesHistoricalDataTemplatesService {
   delete(id: string): Observable<void> {
     return this.api.delete<void>(`${this.apiUrl}/${id}`, {});
   }
+
+  deleteAllRecords(id: string): Observable<void> {
+    return this.api.delete<void>(`${this.apiUrl}/${id}/records`, {});
+  }
 }
 

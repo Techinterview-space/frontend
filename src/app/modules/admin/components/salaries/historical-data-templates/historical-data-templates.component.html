@@ -61,10 +61,19 @@
                     </li>
                     <li>
                       <a
+                        class="dropdown-item text-warning"
+                        href="#"
+                        (click)="deleteAllRecords(item); $event.preventDefault()"
+                        >Удалить все записи</a
+                      >
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a
                         class="dropdown-item text-danger"
                         href="#"
                         (click)="delete(item); $event.preventDefault()"
-                        >Удалить</a
+                        >Удалить шаблон</a
                       >
                     </li>
                   </ul>

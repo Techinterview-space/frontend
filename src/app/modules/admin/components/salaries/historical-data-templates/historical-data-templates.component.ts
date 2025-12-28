@@ -103,6 +103,24 @@ export class HistoricalDataTemplatesComponent implements OnInit, OnDestroy {
     );
   }
 
+  deleteAllRecords(item: SalariesHistoricalDataRecordTemplateDto): void {
+    this.confirmDeletionMessage = new DialogMessage(
+      new ConfirmMsg(
+        "Удалить все записи",
+        `Вы уверены, что хотите удалить все записи шаблона "${item.name}"? Сам шаблон останется.`,
+        () => {
+          this.service
+            .deleteAllRecords(item.id)
+            .pipe(untilDestroyed(this))
+            .subscribe(() => {
+              this.alert.success("Все записи шаблона удалены");
+              this.loadData(this.currentPage);
+            });
+        },
+      ),
+    );
+  }
+
   create(): void {
     this.editForm = new HistoricalDataTemplateEditForm(null);
   }
