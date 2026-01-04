@@ -9,7 +9,7 @@ import { CurrencyType } from "./admin-tools.service";
 export interface CurrencyRecord {
   id: string;
   currencyDate: string;
-  currencies: any; // JSON object with currency data
+  currencies: Record<string, number>; // JSON object with currency data (e.g., { "USD": 450.5, "EUR": 490.25 })
   createdAt: string;
   updatedAt: string;
 }
@@ -29,6 +29,12 @@ export interface WeeklyCurrencyChartData {
   weekStartDate: string;
   weekEndDate: string;
   averageCurrencies: CurrencyItemDto[];
+}
+
+export interface CurrencyChartResponse {
+  weeklyData: WeeklyCurrencyChartData[];
+  fromDate: string;
+  toDate: string;
 }
 
 @Injectable({
@@ -57,8 +63,8 @@ export class CurrenciesCollectionService {
     return this.api.delete<void>(this.apiUrl + id);
   }
 
-  getChartData(): Observable<WeeklyCurrencyChartData[]> {
-    return this.api.get<WeeklyCurrencyChartData[]>(this.apiUrl + "chart");
+  getChartData(): Observable<CurrencyChartResponse> {
+    return this.api.get<CurrencyChartResponse>(this.apiUrl + "chart");
   }
 }
 

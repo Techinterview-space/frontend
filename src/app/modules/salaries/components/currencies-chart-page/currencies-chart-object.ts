@@ -1,8 +1,5 @@
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
-import {
-  CurrencyItemDto,
-  WeeklyCurrencyChartData,
-} from "@services/currencies-collection.service";
+import { WeeklyCurrencyChartData } from "@services/currencies-collection.service";
 import { CurrencyType } from "@services/admin-tools.service";
 import { RgbColor } from "../rgb-color";
 
@@ -45,9 +42,12 @@ export class CurrenciesChartObject extends Chart {
   private readonly datasets: Array<ChartDatasetType> = [];
 
   constructor(canvasId: string, chartData: WeeklyCurrencyChartData[]) {
+    // Ensure chartData is an array
+    const safeChartData = Array.isArray(chartData) ? chartData : [];
+
     // Get all unique currencies from the data
     const allCurrencies = new Set<CurrencyType>();
-    chartData.forEach((week) => {
+    safeChartData.forEach((week) => {
       week.averageCurrencies?.forEach((c) => {
         if (c.currency !== CurrencyType.KZT) {
           allCurrencies.add(c.currency);
@@ -56,7 +56,7 @@ export class CurrenciesChartObject extends Chart {
     });
 
     // Create labels from week dates
-    const labels = chartData.map((week) => {
+    const labels = safeChartData.map((week) => {
       const startDate = new Date(week.weekStartDate);
       return startDate.toISOString().slice(0, 10);
     });
@@ -64,7 +64,7 @@ export class CurrenciesChartObject extends Chart {
     // Create datasets for each currency
     const datasets: Array<ChartDatasetType> = [];
     allCurrencies.forEach((currency) => {
-      const data = chartData.map((week) => {
+      const data = safeChartData.map((week) => {
         const currencyItem = week.averageCurrencies?.find(
           (c) => c.currency === currency,
         );

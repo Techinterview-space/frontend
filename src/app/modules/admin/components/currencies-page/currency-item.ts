@@ -17,7 +17,7 @@ export class CurrencyItem implements CurrencyRecord {
 
   readonly id: string;
   readonly currencyDate: string;
-  readonly currencies: any;
+  readonly currencies: Record<string, number>;
   readonly createdAt: string;
   readonly updatedAt: string;
 

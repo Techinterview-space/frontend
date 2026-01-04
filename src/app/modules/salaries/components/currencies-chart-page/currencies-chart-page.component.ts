@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TitleService } from "@services/title.service";
 import {
   CurrenciesCollectionService,
+  CurrencyChartResponse,
   WeeklyCurrencyChartData,
 } from "@services/currencies-collection.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
@@ -13,9 +14,7 @@ import { CurrenciesChartObject } from "./currencies-chart-object";
   styleUrls: ["./currencies-chart-page.component.scss"],
   standalone: false,
 })
-export class CurrenciesChartPageComponent
-  implements OnInit, OnDestroy, AfterViewInit
-{
+export class CurrenciesChartPageComponent implements OnInit, OnDestroy {
   chartData: WeeklyCurrencyChartData[] | null = null;
   chart: CurrenciesChartObject | null = null;
   readonly canvasId = "currencies_chart_" + Math.random().toString(36);
@@ -33,10 +32,6 @@ export class CurrenciesChartPageComponent
     this.loadChartData();
   }
 
-  ngAfterViewInit(): void {
-    // Chart will be initialized after data is loaded
-  }
-
   ngOnDestroy(): void {
     this.titleService.resetTitle();
     this.chart?.destroy();
@@ -50,9 +45,11 @@ export class CurrenciesChartPageComponent
       .getChartData()
       .pipe(untilDestroyed(this))
       .subscribe({
-        next: (data) => {
-          this.chartData = data;
+        next: (response: CurrencyChartResponse) => {
+          // API returns { weeklyData: [...], fromDate, toDate }
+          this.chartData = response.weeklyData ?? [];
           this.isLoading = false;
+
           // Initialize chart after data is loaded and view is ready
           setTimeout(() => this.initChart(), 0);
         },
