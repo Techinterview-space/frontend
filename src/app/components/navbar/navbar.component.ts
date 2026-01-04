@@ -141,6 +141,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
             url: "/salaries/historical-data",
             show: hasCurrentUser,
           },
+          {
+            title: "Курсы валют",
+            url: "/salaries/currencies-chart",
+            show: hasCurrentUser,
+          },
         ],
       },
     ];

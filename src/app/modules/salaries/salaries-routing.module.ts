@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { SalariesChartComponent } from "./components/salaries-chart/salaries-chart.component";
 import { HistoricalChartsPageComponent } from "./components/historical-charts-page/historical-charts-page.component";
 import { AddSalaryComponent } from "./components/add-salary/add-salary.component";
+import { CurrenciesChartPageComponent } from "./components/currencies-chart-page/currencies-chart-page.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: "historical-data",
     component: HistoricalChartsPageComponent,
+  },
+  {
+    path: "currencies-chart",
+    component: CurrenciesChartPageComponent,
   },
 ];
 

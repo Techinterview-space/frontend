@@ -1,26 +1,146 @@
 <app-page-header>Курсы валюты</app-page-header>
 
-<div class="container my-5">
+<div class="container my-5" *ngIf="currencies; else dataLoading">
   <div class="card">
-    <div class="card-body">
-      <div>
-        <table class="table table-sm table-hover">
+    <div class="card-body p-4">
+      <div class="mb-3">
+        <button class="btn btn-sm btn-primary" (click)="create()">
+          Создать запись
+        </button>
+      </div>
+
+      <div
+        class="table-responsive mb-3"
+        *ngIf="currencies.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
           <thead>
-            <tr>
-              <th>Валюта</th>
-              <th>Курс</th>
-              <th>Дата</th>
+            <tr class="small">
+              <th>Дата публикации</th>
+              <th>Валюты (JSON)</th>
+              <th>Создано</th>
+              <th>Обновлено</th>
+              <th>Действия</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of currencies" class="small">
-              <td>{{ item.currencyString }}</td>
-              <td>{{ item.value }} kzt</td>
-              <td>{{ item.pubDate | date: "yyyy-MM-dd" }}</td>
+              <td>{{ item.currencyDate | date: "yyyy-MM-dd" }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn-link-sm text-start"
+                  (click)="showCurrenciesDetails(item)"
+                  title="Нажмите для просмотра деталей"
+                >
+                  <code>{{ item.currenciesShort }}</code>
+                </button>
+              </td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn-link-sm btn-link-danger"
+                  (click)="openDeleteDialog(item)"
+                >
+                  Удалить
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <div class="mt-4" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
     </div>
   </div>
 </div>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>
+
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Создать запись курса валюты'"
+>
+  <form
+    class="mb-3"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label class="form-label">Валюта</label>
+      <select class="form-select" formControlName="currency">
+        <option *ngFor="let option of currencyOptions" [ngValue]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <app-field-error [field]="editForm.get('currency')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Курс (в KZT)</label>
+      <input
+        type="number"
+        step="0.0001"
+        class="form-control"
+        formControlName="value"
+        placeholder="Например: 450.5"
+      />
+      <app-field-error [field]="editForm.get('value')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Дата публикации</label>
+      <input type="date" class="form-control" formControlName="pubDate" />
+      <app-field-error [field]="editForm.get('pubDate')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+  </form>
+</app-dialog>
+
+<!-- Modal for viewing currencies JSON -->
+<app-dialog
+  [show]="!!selectedCurrencyItem"
+  (closed)="closeCurrenciesDetails()"
+  [header]="'Данные о курсах валют'"
+  additionalCss="modal-lg"
+>
+  <div *ngIf="selectedCurrencyItem">
+    <div class="mb-3">
+      <strong>Дата:</strong>
+      {{ selectedCurrencyItem.currencyDate | date: "yyyy-MM-dd" }}
+    </div>
+    <div class="mb-3">
+      <strong>Данные валют (JSON):</strong>
+      <pre class="bg-light p-3 rounded mt-2 currencies-json">{{
+        selectedCurrencyItem.currencies | json
+      }}</pre>
+    </div>
+  </div>
+</app-dialog>
+
+<ng-template #dataLoading>
+  <div class="container py-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="text-center p-3 text-muted">
+    Нет записей о курсах валют. Создайте первую запись!
+  </div>
+</ng-template>
