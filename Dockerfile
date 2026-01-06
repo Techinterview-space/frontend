@@ -18,7 +18,7 @@ COPY --from=compile-image /app/dist/interviewer ./dist/interviewer
 COPY --from=compile-image /app/package*.json ./
 
 # Install only production dependencies
-RUN npm ci --omit=dev --legacy-peer-deps
+RUN npm ci --omit=dev
 
 # SSR server runs on port 4000
 EXPOSE 4000
