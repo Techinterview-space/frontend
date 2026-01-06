@@ -75,7 +75,14 @@ export class CurrenciesChartObject extends Chart {
       const label = CURRENCY_LABELS[currency] ?? CurrencyType[currency];
 
       datasets.push(
-        new DatasetItem(label, data, 2, color, "circle" as PointStyle),
+        new DatasetItem(
+          label,
+          data,
+          2,
+          color,
+          "circle" as PointStyle,
+          currency !== CurrencyType.USD && currency !== CurrencyType.EUR,
+        ),
       );
     });
 
@@ -146,6 +153,7 @@ class DatasetItem implements ChartDatasetType {
     readonly borderWidth: number,
     readonly color: RgbColor,
     readonly pointStyle: PointStyle,
+    readonly hidden: boolean = false,
   ) {
     this.borderColor = color.toString(1);
     this.backgroundColor = color.toString(0.5);
@@ -154,4 +162,3 @@ class DatasetItem implements ChartDatasetType {
   readonly borderColor: string;
   readonly backgroundColor: string;
 }
-

@@ -2,7 +2,7 @@ FROM node:23.8-alpine3.20 AS compile-image
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --legacy-peer-deps
+RUN npm ci
 COPY . .
 RUN npm run build-prod
 
