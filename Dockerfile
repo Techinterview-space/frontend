@@ -1,4 +1,4 @@
-FROM node:23.8-alpine3.20 AS compile-image
+FROM node:24-alpine3.22 AS compile-image
 
 WORKDIR /app
 COPY package*.json ./
