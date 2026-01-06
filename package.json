@@ -37,6 +37,8 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.7",
+    "cytoscape": "3.33.1",
+    "d3-selection": "3.0.0",
     "express": "^5.1.0",
     "husky": "^7.0.4",
     "karma-spec-reporter": "^0.0.36",
