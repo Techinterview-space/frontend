@@ -344,8 +344,8 @@ Using the migrated pages as reference, migrate remaining pages:
 - [ ] Build succeeds with both Bootstrap and Tailwind (YOU: run `ng serve`)
 
 ### Phase 2
-- [ ] Class mapping reference created
-- [ ] Breakpoint differences documented
+- [x] Class mapping reference created (see `docs/BOOTSTRAP_TO_TAILWIND_REFERENCE.md`)
+- [x] Breakpoint differences documented
 
 ### Phase 3
 - [ ] `submit-button` migrated
