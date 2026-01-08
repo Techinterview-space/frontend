@@ -348,21 +348,21 @@ Using the migrated pages as reference, migrate remaining pages:
 - [x] Breakpoint differences documented
 
 ### Phase 3
-- [ ] `submit-button` migrated
-- [ ] `loading-button` migrated
-- [ ] `alert` migrated
-- [ ] `dialog` migrated
-- [ ] `confirm-dialog` migrated
-- [ ] `app-spinner` migrated
-- [ ] `pagination-buttons` migrated
-- [ ] `field-error` migrated
+- [x] `submit-button` migrated
+- [x] `loading-button` migrated
+- [x] `alert` migrated
+- [x] `dialog` migrated
+- [x] `confirm-dialog` migrated
+- [x] `app-spinner` migrated
+- [x] `pagination-buttons` migrated
+- [x] `field-error` migrated
 - [ ] Remaining shared components migrated (YOUR TASK)
 
 ### Phase 4
-- [ ] `navbar` migrated with Angular-native toggle
-- [ ] Dropdowns working without Bootstrap JS
-- [ ] Mobile responsive
-- [ ] `admin-navbar` migrated (YOUR TASK)
+- [x] `navbar` migrated with Angular-native toggle
+- [x] Dropdowns working without Bootstrap JS
+- [x] Mobile responsive
+- [x] `admin-navbar` migrated
 
 ### Phase 5
 - [ ] `home.component.html` migrated

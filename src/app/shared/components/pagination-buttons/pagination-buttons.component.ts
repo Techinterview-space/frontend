@@ -125,6 +125,6 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
 
     const current =
       this.currentPage || (this.source ? this.source.currentPage : 1);
-    return this.source && current === page ? "active" : "";
+    return this.source && current === page ? "bg-blue-600 text-white hover:bg-blue-700" : "";
   }
 }

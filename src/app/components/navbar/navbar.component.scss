@@ -5,14 +5,10 @@
 }
 
 .nav-link {
-  &:hover {
-    color: colors.$bg-petrel-dark;
-    background-color: #ffffff;
-    border-radius: 5px;
-    filter: brightness(95%);
-  }
-}
+  color: colors.$text-gray-600;
+  text-decoration: none;
 
-.logo-image {
-  width: 28px;
+  &:hover {
+    color: colors.$text-gray-900;
+  }
 }

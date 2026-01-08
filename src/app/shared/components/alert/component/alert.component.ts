@@ -42,13 +42,13 @@ export class AlertComponent implements OnInit, OnDestroy {
     // return css class based on alert type
     switch (alert.type) {
       case AlertType.Success:
-        return "alert-success";
+        return "bg-green-50 border-green-400 text-green-800";
       case AlertType.Error:
-        return "alert-danger";
+        return "bg-red-50 border-red-400 text-red-800";
       case AlertType.Info:
-        return "alert-info";
+        return "bg-cyan-50 border-cyan-400 text-cyan-800";
       case AlertType.Warning:
-        return "alert-warning";
+        return "bg-amber-50 border-amber-400 text-amber-800";
     }
   }
 

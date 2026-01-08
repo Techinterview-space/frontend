@@ -1,100 +1,302 @@
-<nav
-  class="navbar navbar-expand-md navbar-light bg-white border-bottom border-2"
->
-  <div class="container">
-    <a class="navbar-brand" routerLink="/"
-      ><img
-        class="me-1 img-fluid logo-image"
-        src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cat_logo.png"
-      />
-      <span>Techinterview.space</span></a
-    >
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div
-      class="collapse navbar-collapse justify-content-end"
-      id="navbarSupportedContent"
-    >
-      <ul class="navbar-nav mb-2 mb-md-0">
-        <li class="nav-item dropdown" *ngFor="let dropdown of dropdowns">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+<nav class="bg-white shadow">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 justify-between">
+      <!-- Left section: Logo -->
+      <div class="flex flex-shrink-0 items-center">
+        <a routerLink="/" class="!no-underline flex items-center">
+          <img
+            class="h-8 w-auto"
+            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cat_logo.png"
+            alt="Techinterview"
+          />
+          <span class="ml-2 text-xl font-semibold text-gray-900"
+            >Techinterview.space</span
+          >
+        </a>
+      </div>
+
+      <!-- Desktop navigation (positioned between logo and login) -->
+      <div class="hidden md:flex md:items-center md:space-x-2">
+        <!-- Navigation dropdowns -->
+        <div
+          class="relative dropdown-container"
+          *ngFor="let dropdown of dropdowns; let i = index"
+        >
+          <button
             *ngIf="dropdown.show"
+            (click)="toggleDropdown(i)"
+            class="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-900"
           >
             {{ dropdown.title }}
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li *ngFor="let link of dropdown.links">
-              <a
-                class="dropdown-item"
-                routerLink="{{ link.url }}"
-                *ngIf="link.show"
-                >{{ link.title }}</a
-              >
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item ms-3" *ngIf="!loginName; else loggedIn">
-          <a
-            class="btn btn-primary {{
-              !loginButtonAvailable ? 'disabled' : ''
-            }}"
-            aria-current="page"
-            (click)="login()"
-            [attr.disabled]="!loginButtonAvailable"
-            >Войти</a
-          >
-        </li>
-        <ng-template #loggedIn>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+            <svg
+              class="ml-2 h-4 w-4 text-gray-400"
+              viewBox="0 0 20 20"
+              fill="currentColor"
             >
-              {{ loginName }}
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            *ngIf="isDropdownOpen(i)"
+            class="absolute left-0 z-10 mt-2 w-56 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          >
+            <div class="py-1">
+              <a
+                *ngFor="let link of dropdown.links"
+                [routerLink]="link.url"
+                (click)="closeDropdowns()"
+                class="!no-underline block px-4 py-2 text-sm !text-gray-600 hover:!bg-gray-200 hover:!text-gray-900"
+                [class.hidden]="!link.show"
+              >
+                {{ link.title }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right section: User menu / Login -->
+      <div class="hidden md:flex md:items-center md:space-x-4">
+        <!-- Login button -->
+        <button
+          *ngIf="!loginName"
+          (click)="login()"
+          [disabled]="!loginButtonAvailable"
+          class="inline-flex items-center rounded-full bg-blue-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Войти
+        </button>
+
+        <!-- User menu dropdown -->
+        <div *ngIf="loginName" class="relative ml-3 dropdown-container">
+          <button
+            (click)="toggleDropdown(-1)"
+            class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            <span class="sr-only">Open user menu</span>
+            <div class="flex items-center">
+              <div
+                class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200"
+              >
+                <svg
+                  class="h-5 w-5 text-gray-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <span class="ml-3 text-sm font-medium text-gray-700">{{
+                loginName
+              }}</span>
+              <svg
+                class="ml-2 h-5 w-5 text-gray-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
+
+          <!-- User dropdown menu -->
+          <div
+            *ngIf="isDropdownOpen(-1)"
+            class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          >
+            <a
+              routerLink="/me"
+              (click)="closeDropdowns()"
+              class="!no-underline block px-4 py-2 text-sm !text-gray-600 hover:!bg-gray-200 hover:!text-gray-900"
+            >
+              Мой профиль
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="/me">Мой профиль</a></li>
-              <li>
-                <a class="dropdown-item" routerLink="users/me/labels"
-                  >Мои теги</a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a
-                  class="dropdown-item"
-                  routerLink="/admin"
-                  *appHasRole="'admin'"
-                  >Админка</a
-                >
-              </li>
-              <li class="cursor-pointer">
-                <a class="dropdown-item" (click)="logout()">Выйти</a>
-              </li>
-            </ul>
-          </li>
-        </ng-template>
-      </ul>
+            <a
+              routerLink="users/me/labels"
+              (click)="closeDropdowns()"
+              class="!no-underline block px-4 py-2 text-sm !text-gray-600 hover:!bg-gray-200 hover:!text-gray-900"
+            >
+              Мои теги
+            </a>
+            <a
+              *appHasRole="'admin'"
+              routerLink="/admin"
+              (click)="closeDropdowns()"
+              class="!no-underline block px-4 py-2 text-sm !text-gray-600 hover:!bg-gray-200 hover:!text-gray-900"
+            >
+              Админка
+            </a>
+            <button
+              (click)="logout(); closeDropdowns()"
+              class="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900"
+            >
+              Выйти
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="-mr-2 flex items-center md:hidden">
+        <button
+          (click)="toggleMobileMenu()"
+          class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            *ngIf="!mobileMenuOpen"
+            class="block h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <svg
+            *ngIf="mobileMenuOpen"
+            class="block h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div *ngIf="mobileMenuOpen" class="md:hidden">
+    <div class="space-y-1 pb-3 pt-2">
+      <!-- Mobile navigation dropdowns -->
+      <div
+        class="dropdown-container"
+        *ngFor="let dropdown of visibleDropdowns; let i = index"
+      >
+        <button
+          (click)="toggleDropdown(i)"
+          class="flex w-full items-center justify-between border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+        >
+          <span>{{ dropdown.title }}</span>
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fill-rule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+
+        <!-- Mobile dropdown items -->
+        <div *ngIf="isDropdownOpen(i)" class="bg-gray-100 pl-8 space-y-1">
+          <a
+            *ngFor="let link of dropdown.links"
+            [routerLink]="link.url"
+            (click)="toggleMobileMenu(); closeDropdowns()"
+            class="!no-underline block py-2 pr-4 text-sm !text-gray-600 hover:!bg-gray-200 hover:!text-gray-900"
+            [class.hidden]="!link.show"
+          >
+            {{ link.title }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile user section -->
+    <div class="border-t border-gray-200 pb-3 pt-4">
+      <!-- Mobile login button -->
+      <div *ngIf="!loginName" class="px-4">
+        <button
+          (click)="login(); toggleMobileMenu()"
+          [disabled]="!loginButtonAvailable"
+          class="w-full rounded-full bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 disabled:opacity-50"
+        >
+          Войти
+        </button>
+      </div>
+
+      <!-- Mobile user menu -->
+      <div *ngIf="loginName">
+        <div class="flex items-center px-4">
+          <div class="flex-shrink-0">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200"
+            >
+              <svg
+                class="h-6 w-6 text-gray-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="ml-3">
+            <div class="text-base font-medium text-gray-800">
+              {{ loginName }}
+            </div>
+          </div>
+        </div>
+        <div class="mt-3 space-y-1">
+          <a
+            routerLink="/me"
+            (click)="toggleMobileMenu(); closeDropdowns()"
+            class="!no-underline block px-4 py-2 text-base font-medium !text-gray-500 hover:!bg-gray-200 hover:!text-gray-900"
+          >
+            Мой профиль
+          </a>
+          <a
+            routerLink="users/me/labels"
+            (click)="toggleMobileMenu(); closeDropdowns()"
+            class="!no-underline block px-4 py-2 text-base font-medium !text-gray-500 hover:!bg-gray-200 hover:!text-gray-900"
+          >
+            Мои теги
+          </a>
+          <a
+            *appHasRole="'admin'"
+            routerLink="/admin"
+            (click)="toggleMobileMenu(); closeDropdowns()"
+            class="!no-underline block px-4 py-2 text-base font-medium !text-gray-500 hover:!bg-gray-200 hover:!text-gray-900"
+          >
+            Админка
+          </a>
+          <button
+            (click)="logout(); toggleMobileMenu(); closeDropdowns()"
+            class="block w-full text-left px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-900"
+          >
+            Выйти
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

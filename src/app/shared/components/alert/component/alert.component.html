@@ -1,19 +1,22 @@
-<div class="fixed-bottom w-100">
+<div class="fixed bottom-0 left-0 right-0 w-full z-50">
   <div class="alert-wrapper">
     <div
       *ngFor="let alert of alerts"
-      class="alert {{ cssClass(alert) }} alert-dismissible fade show"
+      class="p-4 rounded-lg border-l-4 {{ cssClass(alert) }} relative transition-opacity duration-300"
       role="alert"
       (click)="clearTimeout()"
     >
-      <div class="container">
+      <div class="container mx-auto px-4 flex items-center justify-between">
         <span>{{ alert.message }}</span>
         <button
           type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
+          class="ml-4 text-gray-400 hover:text-gray-600 focus:outline-none"
           aria-label="Close"
-        ></button>
+        >
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </div>

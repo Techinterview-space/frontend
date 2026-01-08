@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, HostListener, ElementRef } from "@angular/core";
 import { UserRole } from "@models/enums";
 import { ApplicationUserExtended } from "@models/extended";
-import { HealthCheckService } from "@shared/health-check/health-check.service";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { SpinnerService } from "@shared/services/spinners/spinner-service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
@@ -27,6 +26,8 @@ interface NavbarDropdown {
 export class NavbarComponent implements OnInit, OnDestroy {
   loginButtonAvailable = false;
   healthCheckError = false;
+  mobileMenuOpen = false;
+  openDropdownIndex: number | null = null;
 
   dropdowns: NavbarDropdown[] = [];
 
@@ -34,11 +35,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return this.currentUser?.fullName ?? null;
   }
 
+  get visibleDropdowns(): NavbarDropdown[] {
+    return this.dropdowns.filter((dropdown) => dropdown.show);
+  }
+
   private currentUser: ApplicationUserExtended | null = null;
 
   constructor(
     private readonly authService: AuthService,
     private readonly spinner: SpinnerService,
+    private readonly elementRef: ElementRef,
   ) {}
 
   ngOnInit(): void {
@@ -161,5 +167,36 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logout(): void {
     this.spinner.showTimer();
     this.authService.signout();
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  toggleDropdown(index: number): void {
+    this.openDropdownIndex = this.openDropdownIndex === index ? null : index;
+  }
+
+  closeDropdowns(): void {
+    this.openDropdownIndex = null;
+  }
+
+  isDropdownOpen(index: number): boolean {
+    return this.openDropdownIndex === index;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const clickedInsideComponent = this.elementRef.nativeElement.contains(target);
+    const clickedInsideDropdown = target.closest('.dropdown-container');
+
+    // Close dropdown if:
+    // 1. Click was outside this component entirely, OR
+    // 2. Click was inside this component but outside any dropdown-container
+    if (this.openDropdownIndex !== null &&
+        (!clickedInsideComponent || (clickedInsideComponent && !clickedInsideDropdown))) {
+      this.closeDropdowns();
+    }
   }
 }

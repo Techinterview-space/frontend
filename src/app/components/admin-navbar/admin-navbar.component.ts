@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, HostListener, ElementRef } from "@angular/core";
 
 interface NavbarLink {
   title: string;
@@ -20,8 +20,10 @@ interface NavbarDropdown {
 export class AdminNavbarComponent {
   readonly showSearchForm = false;
   readonly dropdowns: NavbarDropdown[];
+  mobileMenuOpen = false;
+  openDropdownIndex: number | null = null;
 
-  constructor() {
+  constructor(private readonly elementRef: ElementRef) {
     this.dropdowns = [
       {
         title: "Данные",
@@ -184,5 +186,36 @@ export class AdminNavbarComponent {
         ],
       },
     ];
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  toggleDropdown(index: number): void {
+    this.openDropdownIndex = this.openDropdownIndex === index ? null : index;
+  }
+
+  closeDropdowns(): void {
+    this.openDropdownIndex = null;
+  }
+
+  isDropdownOpen(index: number): boolean {
+    return this.openDropdownIndex === index;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const clickedInsideComponent = this.elementRef.nativeElement.contains(target);
+    const clickedInsideDropdown = target.closest('.dropdown-container');
+
+    // Close dropdown if:
+    // 1. Click was outside this component entirely, OR
+    // 2. Click was inside this component but outside any dropdown-container
+    if (this.openDropdownIndex !== null &&
+        (!clickedInsideComponent || (clickedInsideComponent && !clickedInsideDropdown))) {
+      this.closeDropdowns();
+    }
   }
 }

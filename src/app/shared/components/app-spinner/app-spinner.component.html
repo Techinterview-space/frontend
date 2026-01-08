@@ -1,12 +1,12 @@
 <div
   *ngIf="isVisible"
-  class="spinner-overlay"
+  class="fixed top-0 left-0 w-full h-full z-[9999] flex justify-center items-center"
   [style.background-color]="bdColor"
   [style.opacity]="bdOpacity"
 >
-  <div class="spinner-container">
-    <div class="spinner" [style.color]="color">
-      <div class="spinner-circle"></div>
+  <div class="flex justify-center items-center">
+    <div class="relative w-[60px] h-[60px]" [style.color]="color">
+      <div class="w-full h-full border-4 border-white/20 border-t-current rounded-full animate-spin"></div>
     </div>
   </div>
 </div>
