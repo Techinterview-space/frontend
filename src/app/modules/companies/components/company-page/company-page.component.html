@@ -1,13 +1,13 @@
 <app-page-header>{{ company?.name }}</app-page-header>
 
-<div class="container my-5" *ngIf="company; else dataLoading">
-  <div class="card mb-5">
-    <div class="card-body mobile-px-5 mobile-py-5">
+<div class="container mx-auto my-5" *ngIf="company; else dataLoading">
+  <div class="bg-white rounded-lg shadow mb-5">
+    <div class="p-6 mobile-px-5 mobile-py-5">
       <div class="mb-3">
         <div class="h2 mb-2">
           <div class="" *ngIf="company.reviewsCount > 0">
             <span>{{ company.rating | number: "1.2-2" }}</span>
-            <div class="ms-2 d-inline-block">
+            <div class="ml-2 inline-block">
               <app-star-rating-readonly
                 [source]="company.rating"
               ></app-star-rating-readonly>
@@ -16,15 +16,15 @@
           <span class="" *ngIf="company.reviewsCount === 0">Нет оценок</span>
         </div>
 
-        <div class="small text-muted mb-1 d-flex justify-content-between">
-          <div class="d-inline-block">
-            <span class="me-2">Отзывов:</span>
+        <div class="text-sm text-gray-500 mb-1 flex justify-between">
+          <div class="inline-block">
+            <span class="mr-2">Отзывов:</span>
             <span class="">{{ company.reviewsCount }}</span>
           </div>
 
-          <div class="d-inline-block" title="Просмотров">
+          <div class="inline-block" title="Просмотров">
             <i class="bi bi-eye-fill"></i>
-            <span class="ms-2">{{ company.viewsCount }}</span>
+            <span class="ml-2">{{ company.viewsCount }}</span>
           </div>
         </div>
       </div>
@@ -42,26 +42,26 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-between">
+      <div class="flex justify-between">
         <button
           type="button"
-          class="btn btn-outline-dark small"
+          class="border border-gray-800 text-gray-800 text-sm px-4 py-2 rounded hover:bg-gray-100"
           (click)="goBackToList()"
         >
-          <span class="small"
-            ><i class="bi bi-arrow-left me-1"></i>К списку компаний</span
+          <span class="text-sm"
+            ><i class="bi bi-arrow-left mr-1"></i>К списку компаний</span
           >
         </button>
         <button
           type="button"
           *ngIf="company.reviewsCount > 0"
           (click)="leaveReview()"
-          class="btn btn-outline-primary"
+          class="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50"
         >
           <i class="bi bi-pencil-fill"></i> Оставить отзыв
         </button>
       </div>
-      <div class="text-muted mt-2 fst-italic">
+      <div class="text-gray-500 mt-2 italic">
         <div>
           Отзывы полностью анонимны. Вы можете смело оставить отзыв и открыть
           страницу компании при начальстве и коллегах, и система никаким образом
@@ -81,9 +81,9 @@
   </div>
 
   <div class="mb-5" *ngIf="company.aiAnalysis">
-    <div class="alert alert-info p-5">
+    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 text-blue-800 p-5">
       <div [innerHTML]="company.aiAnalysis.html"></div>
-      <div class="fst-italic text-info">
+      <div class="italic text-blue-600">
         <div>
           Сформировано
           {{ company.aiAnalysis.createdAt | date: "yyyy-MM-dd HH:mm" }}
@@ -97,8 +97,11 @@
 
   <div class="h3 mt-5">Отзывы</div>
 
-  <div class="card" *ngIf="company.reviews.length > 0; else nothingToShow">
-    <div class="card-body mobile-px-5 mobile-py-5">
+  <div
+    class="bg-white rounded-lg shadow"
+    *ngIf="company.reviews.length > 0; else nothingToShow"
+  >
+    <div class="p-6 mobile-px-5 mobile-py-5">
       <div
         *ngFor="let review of company.reviews"
         class="mb-5"
@@ -122,16 +125,16 @@
 </div>
 
 <ng-template #dataLoading>
-  <div class="container mt-5">
+  <div class="container mx-auto mt-5">
     <app-data-loader [title]="''">
       <div class="mt-3 pb-5">
-        <div class="text-muted h2 d-flex justify-content-center">
+        <div class="text-gray-500 h2 flex justify-center">
           Загружаем компанию
         </div>
-        <div class="mt-3 d-flex justify-content-center">
+        <div class="mt-3 flex justify-center">
           <img
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
-            class="img-fluid mobile-w-30"
+            class="max-w-full h-auto mobile-w-30"
             alt="logo"
             title="Кот Магеллан, который любит оставлять отзывы о компаниях"
           />
@@ -142,24 +145,24 @@
 </ng-template>
 
 <ng-template #nothingToShow>
-  <div class="card">
-    <div class="card-body p-5">
+  <div class="bg-white rounded-lg shadow">
+    <div class="p-6">
       <div class="text-center mt-3">Еще нет отзывов.</div>
 
       <div class="text-center mt-3">
         <button
           type="button"
           (click)="leaveReview()"
-          class="btn btn-outline-primary"
+          class="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50"
         >
           <i class="bi bi-pencil-fill"></i> Оставить первый отзыв
         </button>
       </div>
 
-      <div class="mt-2 mb-1 d-flex justify-content-center">
+      <div class="mt-2 mb-1 flex justify-center">
         <img
           src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cat_reviewing_transparent_1000.png"
-          class="img-fluid mobile-w-30"
+          class="max-w-full h-auto mobile-w-30"
           alt="logo"
           title="Кот Магеллан, который любит оставлять отзывы о компаниях"
         />

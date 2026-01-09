@@ -1,33 +1,39 @@
 <app-page-header>{{ user?.firstName }} {{ user?.lastName }}</app-page-header>
 
-<div class="container mt-5 mb-5" *ngIf="user; else dataLoading">
-  <div class="row" *ngIf="user">
-    <div class="col-sm-3">
-      <div class="card card-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="small text-muted">Email</div>
+<div class="container mx-auto mt-5 mb-5" *ngIf="user; else dataLoading">
+  <div class="flex flex-wrap" *ngIf="user">
+    <div class="w-full sm:w-1/4">
+      <div class="bg-white rounded-lg shadow p-6">
+        <ul class="divide-y divide-gray-200">
+          <li class="px-4 py-3 border-0">
+            <div class="text-sm text-gray-500">Email</div>
             <div class="small">
               {{ user.email ?? "-" }}
             </div>
           </li>
 
-          <li class="list-group-item" *ngIf="!user.emailConfirmed">
-            <div class="small text-muted">Email подтвержден</div>
+          <li class="px-4 py-3 border-0" *ngIf="!user.emailConfirmed">
+            <div class="text-sm text-gray-500">Email подтвержден</div>
             <div class="">
-              <span class="badge bg-warning text-dark">Not confirmed</span>
+              <span
+                class="inline-block bg-yellow-500 text-gray-900 text-xs px-2 py-1 rounded"
+                >Not confirmed</span
+              >
             </div>
           </li>
 
-          <li class="list-group-item" *ngIf="user.deletedAt">
-            <div class="small text-muted">Статус</div>
+          <li class="px-4 py-3 border-0" *ngIf="user.deletedAt">
+            <div class="text-sm text-gray-500">Статус</div>
             <div class="">
-              <span class="badge bg-danger text-light">Удален</span>
+              <span
+                class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded"
+                >Удален</span
+              >
             </div>
           </li>
 
-          <li class="list-group-item">
-            <div class="small text-muted">Роли</div>
+          <li class="px-4 py-3 border-0">
+            <div class="text-sm text-gray-500">Роли</div>
             <div>
               <app-user-roles-label
                 [userRoles]="user.roles"
@@ -38,16 +44,16 @@
       </div>
     </div>
 
-    <div class="col-sm-9">
-      <div class="card card-body">
-        <div class="text-muted">Пока работаем над этим.</div>
+    <div class="w-full sm:w-3/4">
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="text-gray-500">Пока работаем над этим.</div>
       </div>
     </div>
   </div>
 </div>
 
 <ng-template #dataLoading>
-  <div class="container mt-5">
+  <div class="container mx-auto mt-5">
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>

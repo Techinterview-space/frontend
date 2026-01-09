@@ -115,3 +115,59 @@
     max-width: 70%;
   }
 }
+
+// Custom button classes
+.btn-huge {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+}
+
+.btn-purple {
+  background-color: #7759e7;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: #412ebd;
+    color: white;
+  }
+}
+
+.btn-outline-success {
+  border: 2px solid #198754;
+  color: #198754;
+  background-color: transparent;
+
+  &:hover {
+    background-color: #d1e7dd;
+    color: #198754;
+  }
+}
+
+.btn-outline-primary {
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+  background-color: transparent;
+
+  &:hover {
+    background-color: #cfe2ff;
+    color: #0d6efd;
+  }
+}
+
+.btn-outline-dark {
+  border: 2px solid #212529;
+  color: #212529;
+  background-color: transparent;
+
+  &:hover {
+    background-color: #e9ecef;
+    color: #212529;
+  }
+
+  &.btn-lg {
+    font-size: 1.125rem;
+    padding: 0.75rem 1.5rem;
+  }
+}

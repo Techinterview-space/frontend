@@ -1,12 +1,10 @@
-<div class="">
-  <div class="container">
+<div>
+  <div class="container mx-auto px-4">
     <div *ngIf="loaded; else notLoaded">
       <div *ngIf="showUwu; else noUwu" class="pt-5">
-        <div
-          class="d-flex flex-column justify-content-center align-items-center"
-        >
+        <div class="flex flex-col items-center justify-center">
           <div class="mb-3 uwu-image" *ngIf="uwuImageLink">
-            <img src="{{ uwuImageLink }}" alt="UwU" class="img-fluid" />
+            <img src="{{ uwuImageLink }}" alt="UwU" class="max-w-full h-auto" />
           </div>
           <div class="display-1 uwu-title">Зарплаты в IT</div>
         </div>
@@ -17,9 +15,9 @@
 
 <div class="mt-5">
   <div class="feature bg-white">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap">
+        <div class="w-full sm:w-1/2">
           <div class="feature-title">Зарплаты в IT</div>
           <div class="mt-3 feature-subtitle">
             Здесь мы собираем и анализируем данные по зарплатам в IT в
@@ -41,10 +39,10 @@
           </div>
         </div>
         <div
-          class="col-sm-6 d-flex align-items-center justify-content-center align-items-sm-end justify-content-sm-end"
+          class="w-full sm:w-1/2 flex items-center justify-center sm:items-end sm:justify-end"
         >
           <img
-            class="img-fluid feature-image"
+            class="max-w-full h-auto feature-image"
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_transparent_1000.png"
             alt="Main"
           />
@@ -54,9 +52,9 @@
   </div>
 
   <div class="feature">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap">
+        <div class="w-full sm:w-1/2">
           <div class="feature-title">Отзывы к компаниям в IT</div>
           <div class="mt-3 feature-subtitle">
             Поработал в компании и тебе повезло очуться в команде дружелюбных
@@ -72,10 +70,10 @@
         </div>
 
         <div
-          class="col-sm-6 d-flex align-items-center justify-content-center align-items-sm-end justify-content-sm-end"
+          class="w-full sm:w-1/2 flex items-center justify-center sm:items-end sm:justify-end"
         >
           <img
-            class="img-fluid feature-image"
+            class="max-w-full h-auto feature-image"
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
             alt="Main"
           />
@@ -85,9 +83,9 @@
   </div>
 
   <div class="feature bg-white">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap">
+        <div class="w-full sm:w-1/2">
           <div class="feature-title">Заметки к техническим интервью</div>
           <div class="mt-3 feature-subtitle">
             Если ты проводишь технические собеседования и хочешь создать шаблон
@@ -102,10 +100,10 @@
         </div>
 
         <div
-          class="col-sm-6 d-flex align-items-center justify-content-center align-items-sm-end justify-content-sm-end"
+          class="w-full sm:w-1/2 flex items-center justify-center sm:items-end sm:justify-end"
         >
           <img
-            class="img-fluid feature-image"
+            class="max-w-full h-auto feature-image"
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_interview_transparent_1000.png"
             alt="Main"
           />
@@ -115,7 +113,7 @@
   </div>
 
   <div class="feature">
-    <div class="container">
+    <div class="container mx-auto px-4">
       <div class="feature-title">
         Наш проект &mdash; некоммерческий и в свободном доступе.
       </div>
@@ -131,20 +129,20 @@
       <div class="mb-5 mt-3">
         <a
           href="https://github.com/orgs/Techinterview-space/repositories"
-          class="me-3 mb-2 btn btn-lg btn-outline-dark"
+          class="mr-3 mb-2 btn btn-lg btn-outline-dark"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <i class="bi bi-github me-2"></i>Исходный код</a
+          <i class="bi bi-github mr-2"></i>Исходный код</a
         >
 
         <a
           href="https://boosty.to/ake111aa"
           rel="noopener noreferrer"
-          class="me-3 mb-2 btn btn-lg btn-outline-dark"
+          class="mr-3 mb-2 btn btn-lg btn-outline-dark"
           target="_blank"
         >
-          <i class="bi bi-cash-coin me-2"></i>Поддержать на Boosty</a
+          <i class="bi bi-cash-coin mr-2"></i>Поддержать на Boosty</a
         >
       </div>
     </div>
@@ -160,7 +158,7 @@
       </div>
     </div>
 
-    <div class="pt-1 d-flex justify-content-center">
+    <div class="pt-1 flex justify-center">
       <img
         src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_transparent_1000.png"
         alt="Interviewer"

@@ -1,13 +1,15 @@
 <app-page-header>Мои теги</app-page-header>
 
-<div class="container py-3" *ngIf="labels; else dataLoading">
-  <div class="card">
-    <div class="card-body">
+<div class="container mx-auto py-3" *ngIf="labels; else dataLoading">
+  <div class="bg-white rounded-lg shadow">
+    <div class="p-6">
       <div
-        class="table-responsive mb-3"
+        class="overflow-x-auto mb-3"
         *ngIf="labels.length > 0; else nothingToShow"
       >
-        <table class="table table-hover table-sm">
+        <table
+          class="min-w-full divide-y divide-gray-200 text-sm hover:bg-gray-100 odd:bg-white even:bg-gray-50"
+        >
           <thead>
             <th></th>
             <th>Название</th>
@@ -25,13 +27,13 @@
                   >{{ item.hexColor }}</span
                 >
               </td>
-              <td class="small">
+              <td class="text-sm">
                 <button type="button" class="btn-link-sm" (click)="edit(item)">
                   Редактировать
                 </button>
                 <button
                   type="button"
-                  class="ms-3 btn-link-sm btn-link-danger"
+                  class="ml-3 btn-link-sm btn-link-danger"
                   (click)="delete(item)"
                 >
                   Удалить
@@ -63,28 +65,43 @@
   >
     <div class="mb-3">
       <label>Название</label>
-      <input type="text" class="form-control" formControlName="title" />
+      <input
+        type="text"
+        class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        formControlName="title"
+      />
       <app-field-error [field]="editForm.get('title')"></app-field-error>
     </div>
 
     <div class="mb-3">
       <label>Цвет</label>
-      <input type="color" class="form-control" formControlName="hexColor" />
+      <input
+        type="color"
+        class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        formControlName="hexColor"
+      />
       <app-field-error [field]="editForm.get('hexColor')"></app-field-error>
     </div>
 
     <div class="mb-3">
-      <button class="btn btn-primary" type="submit">Сохранить</button>
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        type="submit"
+      >
+        Сохранить
+      </button>
     </div>
   </form>
 </app-dialog>
 
 <ng-template #dataLoading>
-  <div class="container py-5">
+  <div class="container mx-auto py-5">
     <app-data-loader></app-data-loader>
   </div>
 </ng-template>
 
 <ng-template #nothingToShow>
-  <div class="text-center text-muted p-3">Вы еще не создали ни одного тега</div>
+  <div class="text-center text-gray-500 p-3">
+    Вы еще не создали ни одного тега
+  </div>
 </ng-template>

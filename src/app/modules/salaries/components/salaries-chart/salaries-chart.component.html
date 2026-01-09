@@ -1,7 +1,12 @@
 <app-page-header>Зарплаты в IT в Казахстане</app-page-header>
 
-<div *ngIf="showDataStub" class="container mt-5 mb-3 non-authorized-block">
-  <div class="alert alert-warning mobile-px-5 mobile-py-3">
+<div
+  *ngIf="showDataStub"
+  class="container mx-auto mt-5 mb-3 non-authorized-block"
+>
+  <div
+    class="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-yellow-800 mobile-px-5 mobile-py-3"
+  >
     <div class="h2">Внимание!</div>
     <div class="mt-2" *ngIf="!hasPredefinedFilter">
       Вы видите <strong>обобщенные данные</strong> для всех специальностей, форм
@@ -10,7 +15,7 @@
       Для получения более точной статистики и возможности применять фильтры вам
       нужно
       <button
-        class="btn-link-sm fst-italic font-weight-normal px-1"
+        class="btn-link-sm italic font-normal px-1"
         (click)="openAddSalaryAction()"
       >
         {{ isAuthenticated ? "оставить анкету" : "авторизоваться на сайте" }}
