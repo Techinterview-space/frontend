@@ -212,6 +212,7 @@ input.ng-touched.ng-valid {
   border: 1px solid var(--warm-border-color);
   border-radius: $radius-lg;
   box-shadow: $shadow-xl;
+  color: var(--warm-text-primary);
 }
 
 .modal-header {
@@ -674,6 +675,16 @@ ul.no-bullets {
 
 .text-secondary {
   color: var(--warm-text-secondary) !important;
+}
+
+/* Bootstrap background utility overrides for dark mode */
+.bg-light {
+  background-color: var(--warm-bg-accent) !important;
+  color: var(--warm-text-primary) !important;
+}
+
+.bg-white {
+  background-color: var(--warm-card-bg) !important;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────────
