@@ -1,0 +1,70 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// BACKGROUND JOBS COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.jobs-container {
+  padding: 1.5rem 0;
+}
+
+.jobs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    margin: 0;
+  }
+}
+
+.jobs-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  overflow: hidden;
+}
+
+.job-item {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--warm-border-color);
+  transition: background-color 0.15s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: var(--warm-bg-accent);
+  }
+
+  .job-name {
+    font-weight: 600;
+    color: var(--warm-text-heading);
+    margin-bottom: 0.25rem;
+  }
+
+  .job-info {
+    font-size: 0.875rem;
+    color: var(--warm-text-muted);
+  }
+}
+
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+  color: var(--warm-text-muted);
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+}

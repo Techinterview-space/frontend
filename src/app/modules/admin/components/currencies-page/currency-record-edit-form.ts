@@ -6,7 +6,10 @@ export class CurrencyRecordEditForm extends FormGroup {
   constructor() {
     super({
       currency: new FormControl(CurrencyType.USD, [Validators.required]),
-      value: new FormControl(null, [Validators.required, Validators.min(0.0001)]),
+      value: new FormControl(null, [
+        Validators.required,
+        Validators.min(0.0001),
+      ]),
       pubDate: new FormControl(new Date().toISOString().split("T")[0], [
         Validators.required,
       ]),

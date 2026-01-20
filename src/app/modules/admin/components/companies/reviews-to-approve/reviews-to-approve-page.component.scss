@@ -1,0 +1,95 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// REVIEWS TO APPROVE PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.reviews-to-approve {
+  padding: 1.5rem 0;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+  }
+
+  .badge {
+    background-color: var(--warm-accent-primary);
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: 0.75rem;
+  }
+}
+
+.review-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--warm-shadow-lg);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+
+    .company-name {
+      font-family: var(--warm-font-heading);
+      font-weight: 600;
+      color: var(--warm-text-heading);
+      font-size: 1.125rem;
+    }
+
+    .review-date {
+      color: var(--warm-text-muted);
+      font-size: 0.875rem;
+    }
+  }
+
+  .review-content {
+    color: var(--warm-text-primary);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .review-actions {
+    display: flex;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--warm-border-color);
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--warm-text-muted);
+
+  i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  h3 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-secondary);
+    margin-bottom: 0.5rem;
+  }
+}

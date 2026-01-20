@@ -1,18 +1,169 @@
-@use "../../../_colors" as colors;
+// ═══════════════════════════════════════════════════════════════════════════════
+// NAVBAR COMPONENT STYLES
+// Warm & Friendly Theme
+// Component-specific styles only (global navbar styles in styles.scss)
+// ═══════════════════════════════════════════════════════════════════════════════
 
-.navbar-brand:hover {
-  text-decoration: underline;
+:host {
+  display: block;
 }
 
+// Navbar container - component-specific padding
+.navbar {
+  padding: 0.75rem 0;
+}
+
+// Logo image
+.logo-image {
+  width: 28px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.login-btn {
+  text-decoration: none;
+}
+
+// Nav link styling
 .nav-link {
+  text-decoration: none;
+
   &:hover {
-    color: colors.$bg-petrel-dark;
-    background-color: #ffffff;
-    border-radius: 5px;
-    filter: brightness(95%);
+    text-decoration: none;
+  }
+
+  &.dropdown-toggle::after {
+    margin-left: 0.35em;
   }
 }
 
-.logo-image {
-  width: 28px;
+// Dropdown menu - component-specific overrides
+.dropdown-menu {
+  border-radius: 10px;
+  box-shadow:
+    0 4px 8px var(--warm-shadow-color),
+    0 8px 16px var(--warm-shadow-color),
+    0 16px 32px var(--warm-shadow-color-medium);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.dropdown-item {
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: var(--warm-accent-primary);
+    color: white;
+  }
+}
+
+.dropdown-divider {
+  margin: 0.5rem 0;
+}
+
+// Theme toggle button
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--warm-bg-accent);
+  border: 1px solid var(--warm-border-color);
+  color: var(--warm-text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background-color: var(--warm-accent-primary);
+    border-color: var(--warm-accent-primary);
+    color: white;
+    transform: scale(1.05);
+
+    i {
+      transform: rotate(15deg);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--warm-input-focus-ring);
+    outline: none;
+  }
+}
+
+// Mobile navbar toggler
+.navbar-toggler {
+  padding: 0.5rem 0.75rem;
+}
+
+.navbar-toggler-icon {
+  background-image: none;
+  position: relative;
+  width: 1.25em;
+  height: 1.25em;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--warm-text-primary);
+    border-radius: 1px;
+    transition: background-color 0.2s ease;
+  }
+
+  &::before {
+    top: 0.25em;
+    box-shadow: 0 0.4em 0 var(--warm-text-primary);
+  }
+
+  &::after {
+    bottom: 0.25em;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
+
+  .nav-item {
+    margin: 0.25rem 0;
+  }
+
+  .theme-toggle-btn {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .dropdown-menu {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    padding-left: 1rem;
+  }
+
+  .dropdown-item {
+    padding: 0.5rem 0.75rem;
+  }
 }

@@ -23,7 +23,8 @@ export class TelegramBotABoutComponent implements OnInit, OnDestroy {
     this.metaTagService.setPageMetaTags(
       "О ботах в Telegram",
       "О ботах в Telegram. Как использовать ботов для получения информации о зарплатах в IT и других областях в чате Telegram.",
-      "/about-telegram-bot");
+      "/about-telegram-bot",
+    );
   }
 
   ngOnInit(): void {

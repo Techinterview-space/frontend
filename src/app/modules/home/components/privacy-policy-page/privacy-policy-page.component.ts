@@ -10,7 +10,8 @@ export class PrivacyPolicyPageComponent implements OnDestroy {
     this.metaTagService.setPageMetaTags(
       "Пользовательское соглашение",
       "Пользовательское соглашение для пользователей сайта Techinterview.space.",
-      "/agreements/privacy-policy");
+      "/agreements/privacy-policy",
+    );
   }
 
   ngOnDestroy(): void {

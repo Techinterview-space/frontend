@@ -1,6 +1,9 @@
 import { Component, OnDestroy } from "@angular/core";
 import { TitleService } from "@services/title.service";
-import { AdminEmailService, SendCustomEmailRequest } from "@services/admin-email.service";
+import {
+  AdminEmailService,
+  SendCustomEmailRequest,
+} from "@services/admin-email.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
@@ -50,7 +53,9 @@ export class SendEmailPageComponent implements OnDestroy {
         },
         error: (err) => {
           this.isSending = false;
-          this.alertService.error("Failed to send email: " + (err.message || "Unknown error"));
+          this.alertService.error(
+            "Failed to send email: " + (err.message || "Unknown error"),
+          );
         },
       });
   }

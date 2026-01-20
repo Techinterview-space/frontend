@@ -14,8 +14,7 @@ export interface UpdateTelegramUserSettingsBody {
   sendBotRegularStatsUpdates: boolean;
 }
 
-export interface CreateTelegramUserSettingsBody
-  extends UpdateTelegramUserSettingsBody {
+export interface CreateTelegramUserSettingsBody extends UpdateTelegramUserSettingsBody {
   chatId: number;
   userId: number;
   username: string;

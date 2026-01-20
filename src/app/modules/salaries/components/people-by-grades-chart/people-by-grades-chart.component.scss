@@ -1,8 +1,26 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// PEOPLE BY GRADES CHART COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .progress-bar {
   min-height: 30px;
+  background-color: var(--warm-accent-primary);
+  transition: width 0.3s ease;
 }
 
 .progress {
   min-height: 30px;
   cursor: pointer;
+  background-color: var(--warm-bg-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 2px 8px var(--warm-shadow-color);
+  }
 }

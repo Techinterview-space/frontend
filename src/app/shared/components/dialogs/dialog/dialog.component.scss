@@ -1,5 +1,2 @@
-.modal {
-  background-color: rgba(0, 0, 0, 0.6);
-  -webkit-animation: fadein 0.2s;
-  animation: fadein 0.2s;
-}
+// Dialog component - uses global .modal styles from styles.scss
+// No component-specific overrides needed

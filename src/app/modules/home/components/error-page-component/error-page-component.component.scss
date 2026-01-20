@@ -1,8 +1,124 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// ERROR PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.error-container {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
 .error-title {
+  font-family: "Lora", Georgia, serif;
   font-size: 5rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--warm-accent-primary);
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.error-subtitle {
+  font-family: "Lora", Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--warm-text-heading);
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  font-size: 1.1rem;
+  color: var(--warm-text-secondary);
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
 }
 
 .img-fluid {
   max-width: 350px;
+  border-radius: 16px;
+  filter: drop-shadow(0 8px 24px var(--warm-shadow-color-medium));
+  margin-bottom: 2rem;
+}
+
+// Action buttons
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-error-primary {
+  background-color: var(--warm-accent-primary);
+  border-color: var(--warm-accent-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--warm-accent-primary-hover);
+    border-color: var(--warm-accent-primary-hover);
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 8px var(--warm-shadow-color),
+      0 8px 16px var(--warm-shadow-color);
+  }
+}
+
+.btn-error-outline {
+  background-color: transparent;
+  border: 2px solid var(--warm-border-strong);
+  color: var(--warm-text-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--warm-bg-accent);
+    border-color: var(--warm-accent-primary);
+    color: var(--warm-accent-primary);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .error-title {
+    font-size: 3.5rem;
+  }
+
+  .error-subtitle {
+    font-size: 1.35rem;
+  }
+
+  .error-message {
+    font-size: 1rem;
+  }
+
+  .img-fluid {
+    max-width: 250px;
+  }
+
+  .error-actions {
+    flex-direction: column;
+    align-items: center;
+
+    .btn-error-primary,
+    .btn-error-outline {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
 }

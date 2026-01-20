@@ -27,7 +27,9 @@
           <tbody>
             <tr class="small" *ngFor="let item of items; let i = index">
               <td>
-                <span class="text-muted small" [title]="item.id">...{{ item.id.split('-').pop() }}</span>
+                <span class="text-muted small" [title]="item.id"
+                  >...{{ item.id.split("-").pop() }}</span
+                >
               </td>
               <td>{{ item.name }}</td>
               <td>
@@ -35,11 +37,23 @@
                   *ngIf="item.professionIds && item.professionIds.length > 0"
                   href="#"
                   class="text-primary"
-                  (click)="openProfessionsModal(item.professionIds); $event.preventDefault()"
+                  (click)="
+                    openProfessionsModal(item.professionIds);
+                    $event.preventDefault()
+                  "
                 >
-                  {{ item.professionIds.length }} специальност{{ item.professionIds.length === 1 ? 'ь' : (item.professionIds.length < 5 ? 'и' : 'ей') }}
+                  {{ item.professionIds.length }} специальност{{
+                    item.professionIds.length === 1
+                      ? "ь"
+                      : item.professionIds.length < 5
+                        ? "и"
+                        : "ей"
+                  }}
                 </a>
-                <span *ngIf="!item.professionIds || item.professionIds.length === 0">-</span>
+                <span
+                  *ngIf="!item.professionIds || item.professionIds.length === 0"
+                  >-</span
+                >
               </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
@@ -63,7 +77,9 @@
                       <a
                         class="dropdown-item text-warning"
                         href="#"
-                        (click)="deleteAllRecords(item); $event.preventDefault()"
+                        (click)="
+                          deleteAllRecords(item); $event.preventDefault()
+                        "
                         >Удалить все записи</a
                       >
                     </li>
@@ -84,7 +100,10 @@
         </table>
       </div>
 
-      <div class="" *ngIf="source && source.results && source.results.length > 0">
+      <div
+        class=""
+        *ngIf="source && source.results && source.results.length > 0"
+      >
         <app-pagination-buttons
           [source]="source"
           (pageChange)="loadData($event)"
@@ -111,7 +130,9 @@
 <app-dialog
   [show]="!!editForm"
   (closed)="onEditModalDlgClose()"
-  [header]="editForm?.hasItemToEdit() ? 'Редактирование шаблона' : 'Новый шаблон'"
+  [header]="
+    editForm?.hasItemToEdit() ? 'Редактирование шаблона' : 'Новый шаблон'
+  "
 >
   <form
     class="mb-5"

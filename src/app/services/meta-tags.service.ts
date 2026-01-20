@@ -14,8 +14,8 @@ export interface CompanyMetaTags {
   providedIn: "root",
 })
 export class MetaTagService {
-
-  public static readonly DEFAULT_IMAGE_URL = "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png";
+  public static readonly DEFAULT_IMAGE_URL =
+    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png";
 
   constructor(
     private readonly title: TitleService,
@@ -117,7 +117,8 @@ export class MetaTagService {
     description: string,
     url: string,
     imageUrl?: string | null,
-    addTitlePostfix: boolean = true): void {
+    addTitlePostfix: boolean = true,
+  ): void {
     const fullUrl = url.startsWith("/") ? environment.baseUrl + url : url;
 
     if (addTitlePostfix) {

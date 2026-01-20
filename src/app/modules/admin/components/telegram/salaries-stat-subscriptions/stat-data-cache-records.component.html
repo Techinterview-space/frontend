@@ -38,11 +38,23 @@
                   *ngIf="item.professionIds && item.professionIds.length > 0"
                   href="#"
                   class="text-primary"
-                  (click)="openProfessionsModal(item.professionIds); $event.preventDefault()"
+                  (click)="
+                    openProfessionsModal(item.professionIds);
+                    $event.preventDefault()
+                  "
                 >
-                  {{ item.professionIds.length }} специальност{{ item.professionIds.length === 1 ? 'ь' : (item.professionIds.length < 5 ? 'и' : 'ей') }}
+                  {{ item.professionIds.length }} специальност{{
+                    item.professionIds.length === 1
+                      ? "ь"
+                      : item.professionIds.length < 5
+                        ? "и"
+                        : "ей"
+                  }}
                 </a>
-                <span *ngIf="!item.professionIds || item.professionIds.length === 0">-</span>
+                <span
+                  *ngIf="!item.professionIds || item.professionIds.length === 0"
+                  >-</span
+                >
               </td>
               <td>
                 <app-status-label
@@ -153,7 +165,9 @@
 <app-dialog
   [show]="!!editForm"
   (closed)="onEditModalDlgClose()"
-  [header]="editForm?.hasItemToEdit() ? 'Редактирование подписки' : 'Новая подписка'"
+  [header]="
+    editForm?.hasItemToEdit() ? 'Редактирование подписки' : 'Новая подписка'
+  "
 >
   <form
     class="mb-5"

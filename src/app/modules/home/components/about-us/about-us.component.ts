@@ -13,14 +13,14 @@ interface IContributor {
   standalone: false,
 })
 export class AboutUsComponent implements OnDestroy {
-
   constructor(private readonly metaTagService: MetaTagService) {
     this.metaTagService.setPageMetaTags(
       "О проекте Techinterview.space",
       "История и миссия проекта Techinterview.space. Контрибьюторы, стикеры, контакты.",
       "/about-us",
       null,
-      false);
+      false,
+    );
   }
 
   ngOnDestroy(): void {

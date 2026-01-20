@@ -1,6 +1,25 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// ADD SALARY COMPONENT STYLES
+// Warm & Friendly Theme - Salary Survey Form
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// NG-SELECT OVERRIDES
+// ─────────────────────────────────────────────────────────────────────────────────
+
 .ng-select .ng-select-container {
   min-height: 46px;
   height: 46px;
+  background-color: var(--warm-input-bg);
+  border-color: var(--warm-input-border);
+  border-radius: 10px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ng-select.ng-select-single .ng-select-container {
@@ -8,10 +27,89 @@
   height: 46px;
 }
 
-.input-container {
-  margin-top: 2rem;
+.ng-select.ng-select-focused .ng-select-container {
+  border-color: var(--warm-input-focus-border);
+  box-shadow: 0 0 0 3px var(--warm-input-focus-ring);
 }
 
+.ng-select .ng-dropdown-panel {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-border-color);
+  border-radius: 10px;
+  box-shadow:
+    0 4px 8px var(--warm-shadow-color),
+    0 8px 16px var(--warm-shadow-color);
+}
+
+.ng-select .ng-option {
+  color: var(--warm-text-primary);
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &.ng-option-marked {
+    background-color: var(--warm-bg-accent);
+  }
+
+  &.ng-option-selected {
+    background-color: var(--warm-accent-primary);
+    color: white;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// FORM CONTAINER
+// ─────────────────────────────────────────────────────────────────────────────────
+
 .form-container {
-  padding: 3rem 10rem;
+  padding: 2rem 3rem;
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-card-border);
+  border-radius: 16px;
+  box-shadow:
+    0 2px 4px var(--warm-shadow-color),
+    0 4px 8px var(--warm-shadow-color);
+
+  @media (min-width: 992px) {
+    padding: 3rem 6rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// INPUT CONTAINERS
+// ─────────────────────────────────────────────────────────────────────────────────
+
+.input-container {
+  margin-top: 1.5rem;
+}
+
+.input-label {
+  font-weight: 600;
+  color: var(--warm-text-secondary);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.input-hint {
+  font-size: 0.85rem;
+  color: var(--warm-text-muted);
+  margin-top: 0.25rem;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// RESPONSIVE
+// ─────────────────────────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .input-container {
+    margin-top: 1.25rem;
+  }
 }

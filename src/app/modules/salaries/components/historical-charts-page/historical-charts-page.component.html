@@ -3,14 +3,18 @@
 <div class="container my-5" *ngIf="data; else dataLoading">
   <div class="mb-4" *ngIf="data.from && data.to">
     <span class="text-muted">
-      Период: {{ data.from | date:'dd.MM.yyyy' }} - {{ data.to | date:'dd.MM.yyyy' }}
+      Период: {{ data.from | date: "dd.MM.yyyy" }} -
+      {{ data.to | date: "dd.MM.yyyy" }}
     </span>
   </div>
 
   <div *ngIf="data.templates && data.templates.length > 0; else noData">
-    <div class="card card-body mobile-px-5 mobile-py-5 mb-4" *ngFor="let template of data.templates">
+    <div
+      class="card card-body mobile-px-5 mobile-py-5 mb-4"
+      *ngFor="let template of data.templates"
+    >
       <div class="display-6 mb-4">
-        {{ template.name || 'Общие данные' }}
+        {{ template.name || "Общие данные" }}
       </div>
 
       <div class="mb-5">

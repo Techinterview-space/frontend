@@ -1,3 +1,60 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// SALARY CHART GLOBAL FILTERS COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .text-sm {
   font-size: 0.875rem;
+}
+
+.filter-container {
+  background-color: var(--warm-bg-secondary);
+  border: 1px solid var(--warm-border-color);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--warm-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.filter-btn {
+  background-color: var(--warm-bg-elevated);
+  border: 1px solid var(--warm-border-color);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--warm-text-primary);
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--warm-bg-accent);
+    border-color: var(--warm-accent-primary);
+  }
+
+  &.active {
+    background-color: var(--warm-accent-primary);
+    border-color: var(--warm-accent-primary);
+    color: white;
+  }
+}
+
+.filter-reset {
+  color: var(--warm-accent-primary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--warm-accent-primary-hover);
+    text-decoration: underline;
+  }
 }

@@ -1,3 +1,12 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// PEOPLE BY EXPERIENCE CHART COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 canvas {
   min-height: 250px;
 
@@ -12,6 +21,9 @@ canvas {
   height: 100%;
   min-height: 250px;
   max-height: 500px;
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  padding: 1rem;
 
   @media (max-width: 768px) {
     min-height: 200px;
@@ -20,9 +32,13 @@ canvas {
 }
 
 .list-group-item {
-  font-size: smaller;
+  font-size: 0.9rem;
+  background-color: var(--warm-card-bg);
+  border-color: var(--warm-border-color);
+  color: var(--warm-text-primary);
 }
 
 .form-check-label {
   cursor: pointer;
+  color: var(--warm-text-primary);
 }

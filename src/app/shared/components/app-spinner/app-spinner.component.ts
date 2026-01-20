@@ -30,4 +30,3 @@ export class AppSpinnerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 }
-

@@ -1,9 +1,16 @@
-.lead {
-  font-size: 2.2rem;
+// ═══════════════════════════════════════════════════════════════════════════════
+// INTERVIEWS HOME COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
 }
 
-.display-1 {
-  font-weight: 400;
+.lead {
+  font-size: 2.2rem;
+  color: var(--warm-text-heading);
+  font-family: var(--warm-font-heading);
 }
 
 .feature-title {
@@ -11,6 +18,8 @@
   font-size: 2.1rem;
   font-weight: 600;
   line-height: 1.2;
+  color: var(--warm-text-heading);
+  font-family: var(--warm-font-heading);
 }
 
 .feature {
@@ -22,15 +31,114 @@
   max-width: 100%;
   height: auto;
   border-radius: 15px;
-  border: rgb(216, 216, 216) 1px solid;
-  box-shadow: 0 0.5rem 1rem #00000026;
+  border: 1px solid var(--warm-border-color);
+  box-shadow: var(--warm-shadow-lg);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--warm-shadow-xl);
+  }
 }
 
 .feature-subtitle {
   font-size: 1.2rem;
-  color: #6c757d;
+  color: var(--warm-text-secondary);
+  line-height: 1.6;
 }
 
 .bg-white {
-  background-color: #fff;
+  background-color: var(--warm-card-bg);
+}
+
+// Hero section
+.hero-section {
+  padding: 4rem 0;
+  background: linear-gradient(
+    135deg,
+    var(--warm-bg-primary) 0%,
+    var(--warm-bg-accent) 100%
+  );
+
+  .hero-title {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    font-weight: 700;
+  }
+
+  .hero-description {
+    color: var(--warm-text-secondary);
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+}
+
+// Feature cards
+.feature-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--warm-shadow-lg);
+  }
+
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: var(--warm-bg-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+    i {
+      font-size: 1.75rem;
+      color: var(--warm-accent-primary);
+    }
+  }
+
+  h3 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: var(--warm-text-secondary);
+    line-height: 1.6;
+  }
+}
+
+// CTA section
+.cta-section {
+  background-color: var(--warm-bg-accent);
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+  margin: 3rem 0;
+
+  h2 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--warm-text-secondary);
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

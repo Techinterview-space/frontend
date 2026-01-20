@@ -66,4 +66,3 @@ export class SalariesHistoricalDataTemplatesService {
     return this.api.delete<void>(`${this.apiUrl}/${id}/records`, {});
   }
 }
-

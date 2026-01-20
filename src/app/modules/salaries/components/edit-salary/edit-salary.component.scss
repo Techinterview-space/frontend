@@ -1,3 +1,33 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// EDIT SALARY COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .salary-value-wrapper {
   cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: var(--warm-bg-accent);
+  border: 1px solid var(--warm-border-color);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--warm-accent-primary);
+    border-color: var(--warm-accent-primary);
+    color: white;
+  }
+}
+
+.edit-form {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow:
+    0 2px 4px var(--warm-shadow-color),
+    0 4px 8px var(--warm-shadow-color);
 }

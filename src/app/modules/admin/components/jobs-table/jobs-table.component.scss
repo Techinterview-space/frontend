@@ -1,3 +1,76 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// JOBS TABLE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .clickable tr {
   cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--warm-bg-accent);
+  }
+}
+
+.table {
+  background-color: var(--warm-card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+
+  thead {
+    background-color: var(--warm-bg-tertiary);
+
+    th {
+      color: var(--warm-text-heading);
+      font-weight: 600;
+      border-bottom: 2px solid var(--warm-border-color);
+      padding: 1rem;
+    }
+  }
+
+  tbody {
+    td {
+      color: var(--warm-text-primary);
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--warm-border-color);
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+.job-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  &.status-running {
+    background-color: rgba(129, 178, 154, 0.15);
+    color: var(--warm-success);
+  }
+
+  &.status-failed {
+    background-color: rgba(217, 85, 80, 0.15);
+    color: var(--warm-danger);
+  }
+
+  &.status-pending {
+    background-color: rgba(242, 204, 143, 0.2);
+    color: var(--warm-warning);
+  }
+
+  &.status-completed {
+    background-color: rgba(129, 178, 154, 0.15);
+    color: var(--warm-success);
+  }
 }

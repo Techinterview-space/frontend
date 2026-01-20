@@ -1,3 +1,54 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// HEALTH CHECK TABLE COMPONENT STYLES
+// Warm & Friendly Theme
+// Component-specific styles only (global styles in styles.scss)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .clickable tr {
   cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--warm-bg-accent);
+  }
+}
+
+.health-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  overflow: hidden;
+}
+
+.table {
+  margin-bottom: 0;
+
+  thead {
+    background-color: var(--warm-bg-tertiary);
+
+    th {
+      color: var(--warm-text-heading);
+      font-weight: 600;
+      border-bottom: 2px solid var(--warm-border-color);
+      padding: 1rem;
+    }
+  }
+
+  tbody {
+    td {
+      color: var(--warm-text-primary);
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--warm-border-color);
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
 }

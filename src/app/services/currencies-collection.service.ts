@@ -67,4 +67,3 @@ export class CurrenciesCollectionService {
     return this.api.get<CurrencyChartResponse>(this.apiUrl + "chart");
   }
 }
-

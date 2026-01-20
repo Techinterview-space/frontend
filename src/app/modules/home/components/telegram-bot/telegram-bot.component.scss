@@ -1,3 +1,56 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// TELEGRAM BOT COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .clickable {
   cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--warm-accent-primary);
+  }
+}
+
+// Card styling
+.card {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-card-border);
+  border-radius: 16px;
+  box-shadow:
+    0 2px 4px var(--warm-shadow-color),
+    0 4px 8px var(--warm-shadow-color);
+}
+
+// Telegram-specific styling
+.telegram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--warm-accent-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--warm-accent-primary-hover);
+    text-decoration: underline;
+  }
+
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+// Bot info box
+.bot-info {
+  background-color: var(--warm-bg-accent);
+  border: 1px solid var(--warm-border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
 }

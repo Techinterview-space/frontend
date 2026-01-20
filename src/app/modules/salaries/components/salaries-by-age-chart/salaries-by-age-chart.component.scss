@@ -1,3 +1,12 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// SALARIES BY AGE CHART COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 canvas {
   min-height: 250px;
 }
@@ -8,8 +17,14 @@ canvas {
   height: 100%;
   min-height: 250px;
   max-height: 500px;
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  padding: 1rem;
 }
 
 .list-group-item {
-  font-size: smaller;
+  font-size: 0.9rem;
+  background-color: var(--warm-card-bg);
+  border-color: var(--warm-border-color);
+  color: var(--warm-text-primary);
 }

@@ -1,14 +1,47 @@
-.blur {
-  -webkit-filter: blur(6px); /* Chrome, Safari, Opera */
-  filter: blur(6px);
+// ═══════════════════════════════════════════════════════════════════════════════
+// SALARIES CHART COMPONENT STYLES
+// Warm & Friendly Theme
+// Component-specific styles only (global styles in styles.scss)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
 }
 
-.chapter-title {
-  margin-top: 5rem;
-}
+// ─────────────────────────────────────────────────────────────────────────────────
+// NON-AUTHORIZED BLOCK
+// ─────────────────────────────────────────────────────────────────────────────────
 
 .non-authorized-block {
   .alert {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: var(--warm-card-bg);
+    border: 1px solid var(--warm-accent-primary);
+    border-left: 4px solid var(--warm-accent-primary);
+    border-radius: 12px;
+    box-shadow:
+      0 4px 8px var(--warm-shadow-color),
+      0 8px 16px var(--warm-shadow-color);
+    color: var(--warm-text-primary);
+    padding: 1.5rem;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// RESPONSIVE
+// ─────────────────────────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .chapter-title {
+    margin-top: 3rem;
+    font-size: 1.5rem;
+  }
+
+  .chart-card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .stats-value {
+    font-size: 1.5rem;
   }
 }

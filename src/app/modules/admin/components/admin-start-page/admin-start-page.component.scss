@@ -1,0 +1,97 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// ADMIN START PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.admin-dashboard {
+  padding: 2rem 0;
+}
+
+.admin-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    font-weight: 600;
+  }
+}
+
+.admin-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--warm-shadow-md);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  border: 1px solid var(--warm-border-color);
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--warm-shadow-lg);
+  }
+
+  h3,
+  h4,
+  h5 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--warm-text-secondary);
+  }
+}
+
+.admin-link {
+  color: var(--warm-accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--warm-accent-primary-hover);
+    text-decoration: underline;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: var(--warm-bg-tertiary);
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-align: center;
+  border: 1px solid var(--warm-border-color);
+
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--warm-accent-primary);
+    font-family: var(--warm-font-heading);
+  }
+
+  .stat-label {
+    color: var(--warm-text-muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

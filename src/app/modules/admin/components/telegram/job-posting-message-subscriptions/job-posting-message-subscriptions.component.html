@@ -33,11 +33,23 @@
                   *ngIf="item.professionIds && item.professionIds.length > 0"
                   href="#"
                   class="text-primary"
-                  (click)="openProfessionsModal(item.professionIds); $event.preventDefault()"
+                  (click)="
+                    openProfessionsModal(item.professionIds);
+                    $event.preventDefault()
+                  "
                 >
-                  {{ item.professionIds.length }} специальност{{ item.professionIds.length === 1 ? 'ь' : (item.professionIds.length < 5 ? 'и' : 'ей') }}
+                  {{ item.professionIds.length }} специальност{{
+                    item.professionIds.length === 1
+                      ? "ь"
+                      : item.professionIds.length < 5
+                        ? "и"
+                        : "ей"
+                  }}
                 </a>
-                <span *ngIf="!item.professionIds || item.professionIds.length === 0">-</span>
+                <span
+                  *ngIf="!item.professionIds || item.professionIds.length === 0"
+                  >-</span
+                >
               </td>
               <td>{{ item.telegramChatId }}</td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>

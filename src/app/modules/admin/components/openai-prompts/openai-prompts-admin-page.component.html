@@ -18,7 +18,6 @@
             <tr class="small">
               <th>Тип</th>
               <th>Промпт</th>
-              <th>Модель</th>
               <th>Движок</th>
               <th>Активен</th>
               <th>Создан</th>
@@ -30,11 +29,10 @@
             <tr *ngFor="let item of prompts" class="small">
               <td>{{ item.type }}</td>
               <td>
-                <div class="text-truncate" style="max-width: 300px">
+                <div class="text-truncate" style="max-width: 210px">
                   {{ item.prompt }}
                 </div>
               </td>
-              <td>{{ item.model }}</td>
               <td>{{ item.engine }}</td>
               <td>{{ item.isActive ? "Да" : "Нет" }}</td>
               <td>

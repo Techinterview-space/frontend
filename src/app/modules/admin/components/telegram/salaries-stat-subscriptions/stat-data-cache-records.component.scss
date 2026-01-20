@@ -1,15 +1,33 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// STAT DATA CACHE RECORDS COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .open-api-json {
-  background-color: #202020;
+  background-color: var(--warm-code-bg, #2a2523);
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 8px;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: #ededed;
+  color: var(--warm-code-text, #e8e4e1);
+  font-family: var(--warm-font-mono);
+  overflow-x: auto;
 }
 
 .dropdown-item {
   cursor: pointer;
   font-weight: 500;
+  color: var(--warm-text-primary);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--warm-bg-accent);
+    color: var(--warm-accent-primary);
+  }
 }
 
 // Ensure ng-select dropdown is visible inside modal
@@ -21,6 +39,43 @@
   .modal-content {
     overflow: visible;
   }
+
+  .ng-select {
+    .ng-select-container {
+      background-color: var(--warm-bg-tertiary);
+      border-color: var(--warm-border-color);
+      border-radius: 8px;
+
+      &:hover {
+        border-color: var(--warm-accent-primary);
+      }
+    }
+
+    &.ng-select-focused .ng-select-container {
+      border-color: var(--warm-accent-primary);
+      box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.15);
+    }
+
+    .ng-dropdown-panel {
+      background-color: var(--warm-card-bg);
+      border: 1px solid var(--warm-border-color);
+      border-radius: 8px;
+      box-shadow: var(--warm-shadow-lg);
+    }
+
+    .ng-option {
+      color: var(--warm-text-primary);
+
+      &.ng-option-marked {
+        background-color: var(--warm-bg-accent);
+      }
+
+      &.ng-option-selected {
+        background-color: var(--warm-accent-primary);
+        color: white;
+      }
+    }
+  }
 }
 
 // Ensure action dropdown is visible outside table container
@@ -30,5 +85,53 @@
   .dropdown-menu {
     position: absolute;
     z-index: 1050;
+    background-color: var(--warm-card-bg);
+    border: 1px solid var(--warm-border-color);
+    border-radius: 8px;
+    box-shadow: var(--warm-shadow-lg);
+  }
+}
+
+.subscriptions-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  overflow: hidden;
+}
+
+.table {
+  margin-bottom: 0;
+
+  thead {
+    background-color: var(--warm-bg-tertiary);
+
+    th {
+      color: var(--warm-text-heading);
+      font-weight: 600;
+      border-bottom: 2px solid var(--warm-border-color);
+      padding: 1rem;
+    }
+  }
+
+  tbody {
+    td {
+      color: var(--warm-text-primary);
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--warm-border-color);
+      vertical-align: middle;
+    }
+
+    tr {
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: var(--warm-bg-accent);
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
   }
 }

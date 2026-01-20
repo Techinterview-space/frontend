@@ -19,8 +19,7 @@ export interface InterviewTemplateCreateRequest {
   labels: Array<Label>;
 }
 
-export interface InterviewTemplateUpdateRequest
-  extends InterviewTemplateCreateRequest {
+export interface InterviewTemplateUpdateRequest extends InterviewTemplateCreateRequest {
   id: string;
 }
 
