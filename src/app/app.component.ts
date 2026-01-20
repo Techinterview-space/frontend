@@ -14,9 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.router.url.startsWith("/admin");
   }
 
-  constructor(
-    private readonly router: Router,
-  ) {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {}
 

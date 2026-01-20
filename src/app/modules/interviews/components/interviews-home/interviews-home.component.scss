@@ -33,7 +33,9 @@
   border-radius: 15px;
   border: 1px solid var(--warm-border-color);
   box-shadow: var(--warm-shadow-lg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-4px);
@@ -54,7 +56,11 @@
 // Hero section
 .hero-section {
   padding: 4rem 0;
-  background: linear-gradient(135deg, var(--warm-bg-primary) 0%, var(--warm-bg-accent) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--warm-bg-primary) 0%,
+    var(--warm-bg-accent) 100%
+  );
 
   .hero-title {
     font-family: var(--warm-font-heading);
@@ -76,7 +82,9 @@
   padding: 2rem;
   box-shadow: var(--warm-shadow-md);
   border: 1px solid var(--warm-border-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   height: 100%;
 
   &:hover {

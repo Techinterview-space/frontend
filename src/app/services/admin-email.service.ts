@@ -21,7 +21,12 @@ export class AdminEmailService {
 
   constructor(private readonly api: ApiService) {}
 
-  sendEmail(request: SendCustomEmailRequest): Observable<SendCustomEmailResponse> {
-    return this.api.post<SendCustomEmailResponse>(this.apiUrl + "send", request);
+  sendEmail(
+    request: SendCustomEmailRequest,
+  ): Observable<SendCustomEmailResponse> {
+    return this.api.post<SendCustomEmailResponse>(
+      this.apiUrl + "send",
+      request,
+    );
   }
 }

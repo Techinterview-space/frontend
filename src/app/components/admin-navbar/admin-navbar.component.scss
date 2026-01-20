@@ -10,7 +10,7 @@
 
 .navbar-brand {
   color: var(--warm-text-heading);
-  font-family: 'Lora', Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-weight: 600;
 
   &:hover {
@@ -64,7 +64,7 @@
 
     &::before,
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       right: 0;

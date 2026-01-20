@@ -35,7 +35,11 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(circle, var(--warm-text-primary) 1px, transparent 1px);
+  background-image: radial-gradient(
+    circle,
+    var(--warm-text-primary) 1px,
+    transparent 1px
+  );
   background-size: 20px 20px;
   opacity: 0.15;
   pointer-events: none;
@@ -72,7 +76,7 @@ h6,
 .display-4,
 .display-5,
 .display-6 {
-  font-family: 'Lora', Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--warm-text-heading);
@@ -113,7 +117,9 @@ a {
 .footer-link {
   color: var(--warm-footer-text) !important;
   text-decoration: none;
-  transition: color $transition-fast, opacity $transition-fast;
+  transition:
+    color $transition-fast,
+    opacity $transition-fast;
 
   &:hover {
     color: var(--warm-accent-primary) !important;
@@ -178,7 +184,9 @@ input.ng-touched.ng-valid {
   border-color: var(--warm-input-border);
   color: var(--warm-text-primary);
   border-radius: $radius-md;
-  transition: border-color $transition-fast, box-shadow $transition-fast;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
 
   &:focus {
     background-color: var(--warm-input-bg);
@@ -255,7 +263,10 @@ input.ng-touched.ng-valid {
   color: white;
   border-radius: $radius-md;
   font-weight: 600;
-  transition: background-color $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+  transition:
+    background-color $transition-fast,
+    transform $transition-fast,
+    box-shadow $transition-fast;
 
   &:hover:not(:disabled) {
     background-color: var(--warm-accent-primary-hover);
@@ -424,7 +435,9 @@ ul.no-bullets {
   border-radius: $radius-lg;
   box-shadow: $shadow-sm;
   color: var(--warm-text-primary);
-  transition: box-shadow $transition-normal, transform $transition-normal;
+  transition:
+    box-shadow $transition-normal,
+    transform $transition-normal;
 
   &:hover {
     box-shadow: $shadow-md;
@@ -448,17 +461,17 @@ ul.no-bullets {
 .table {
   color: var(--warm-text-primary);
 
-  > :not(caption)>*>* {
+  > :not(caption) > * > * {
     background-color: transparent;
     border-bottom-color: var(--warm-table-border);
     color: var(--warm-text-primary);
   }
 
-  >tbody>tr:nth-of-type(odd)>* {
+  > tbody > tr:nth-of-type(odd) > * {
     background-color: var(--warm-table-stripe);
   }
 
-  >tbody>tr:hover>* {
+  > tbody > tr:hover > * {
     background-color: var(--warm-table-hover);
   }
 
@@ -617,7 +630,9 @@ ul.no-bullets {
    ───────────────────────────────────────────────────────────────────────────────── */
 
 .increasable-on-hover {
-  transition: transform $transition-normal, box-shadow $transition-normal;
+  transition:
+    transform $transition-normal,
+    box-shadow $transition-normal;
   cursor: pointer;
 
   &:hover {
@@ -628,7 +643,9 @@ ul.no-bullets {
 
 /* Subtle lift effect for cards and interactive elements */
 .hover-lift {
-  transition: transform $transition-normal, box-shadow $transition-normal;
+  transition:
+    transform $transition-normal,
+    box-shadow $transition-normal;
 
   &:hover {
     transform: translateY(-4px);
@@ -786,7 +803,9 @@ hr {
   .nav-link {
     color: var(--warm-text-secondary);
     border-radius: $radius-md $radius-md 0 0;
-    transition: color $transition-fast, background-color $transition-fast;
+    transition:
+      color $transition-fast,
+      background-color $transition-fast;
 
     &:hover {
       color: var(--warm-accent-primary);
@@ -796,7 +815,8 @@ hr {
     &.active {
       color: var(--warm-accent-primary);
       background-color: var(--warm-bg-primary);
-      border-color: var(--warm-border-color) var(--warm-border-color) var(--warm-bg-primary);
+      border-color: var(--warm-border-color) var(--warm-border-color)
+        var(--warm-bg-primary);
     }
   }
 }
@@ -872,7 +892,7 @@ hr {
       color: var(--warm-text-muted);
     }
 
-    +.breadcrumb-item::before {
+    + .breadcrumb-item::before {
       color: var(--warm-text-muted);
     }
   }
@@ -938,12 +958,18 @@ hr {
 }
 
 .stats-card {
-  background: linear-gradient(135deg, var(--warm-bg-elevated) 0%, var(--warm-bg-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--warm-bg-elevated) 0%,
+    var(--warm-bg-secondary) 100%
+  );
   border: 1px solid var(--warm-card-border);
   border-radius: $radius-md;
   padding: 1.25rem;
   text-align: center;
-  transition: transform $transition-fast, box-shadow $transition-fast;
+  transition:
+    transform $transition-fast,
+    box-shadow $transition-fast;
 
   &:hover {
     transform: translateY(-2px);
@@ -1043,8 +1069,13 @@ hr {
 .navbar {
   background-color: var(--warm-navbar-bg);
   border-color: var(--warm-navbar-border) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
-  transition: background-color $transition-slow, border-color $transition-slow, box-shadow $transition-slow;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.04);
+  transition:
+    background-color $transition-slow,
+    border-color $transition-slow,
+    box-shadow $transition-slow;
 }
 
 .navbar-brand {
@@ -1066,7 +1097,9 @@ hr {
   font-weight: 500;
   padding: 0.5rem 0.75rem;
   border-radius: $radius-sm;
-  transition: color $transition-fast, background-color $transition-fast;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast;
 
   &:hover {
     color: var(--warm-accent-primary);
@@ -1228,18 +1261,30 @@ hr {
 }
 
 .ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover,
-.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+.ng-select
+  .ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-marked {
   background-color: var(--warm-bg-accent) !important;
   color: var(--warm-text-primary) !important;
 }
 
-.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
-.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+.ng-select
+  .ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected,
+.ng-select
+  .ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-selected.ng-option-marked {
   background-color: var(--warm-accent-primary) !important;
   color: white !important;
 }
 
-.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled {
+.ng-select
+  .ng-dropdown-panel
+  .ng-dropdown-panel-items
+  .ng-option.ng-option-disabled {
   color: var(--warm-text-muted) !important;
 }
 
@@ -1248,16 +1293,27 @@ hr {
   color: var(--warm-text-muted) !important;
 }
 
-.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+.ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value {
   background-color: var(--warm-bg-accent) !important;
   color: var(--warm-text-primary) !important;
 }
 
-.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon {
+.ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value
+  .ng-value-icon {
   color: var(--warm-text-muted) !important;
 }
 
-.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+.ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value
+  .ng-value-icon:hover {
   background-color: var(--warm-accent-primary) !important;
   color: white !important;
 }

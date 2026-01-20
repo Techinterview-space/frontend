@@ -12,7 +12,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--warm-bg-primary) 0%, var(--warm-bg-accent) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--warm-bg-primary) 0%,
+    var(--warm-bg-accent) 100%
+  );
   padding: 2rem;
 }
 

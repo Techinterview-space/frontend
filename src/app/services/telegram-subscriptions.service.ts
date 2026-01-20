@@ -10,8 +10,7 @@ import {
 } from "@models/telegram";
 import { OpenAiAnalysis, OpenAiReport } from "@models/open-ai.model";
 
-export interface CreateTelegramSubscriptionBody
-  extends EditTelegramSubscriptionBody {
+export interface CreateTelegramSubscriptionBody extends EditTelegramSubscriptionBody {
   telegramChatId: number;
 }
 

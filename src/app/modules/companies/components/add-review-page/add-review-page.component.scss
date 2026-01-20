@@ -124,7 +124,9 @@
     margin-bottom: 0.5rem;
   }
 
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     width: 100%;
     background-color: var(--warm-bg-tertiary);
     border: 1px solid var(--warm-border-color);
@@ -132,7 +134,9 @@
     padding: 0.75rem 1rem;
     color: var(--warm-text-primary);
     font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
 
     &:focus {
       border-color: var(--warm-accent-primary);
@@ -159,7 +163,9 @@
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--warm-border-color);
-    transition: color 0.15s ease, transform 0.15s ease;
+    transition:
+      color 0.15s ease,
+      transform 0.15s ease;
 
     &:hover {
       transform: scale(1.1);

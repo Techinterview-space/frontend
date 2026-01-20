@@ -38,7 +38,8 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
       "Отзывы об IT компаниях",
       "Отзывы об IT компаниях в Казахстане",
       "/companies/recent-reviews",
-      "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png");
+      "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png",
+    );
   }
 
   ngOnInit(): void {

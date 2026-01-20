@@ -27,7 +27,9 @@
   box-shadow:
     0 2px 4px var(--warm-shadow-color),
     0 4px 8px var(--warm-shadow-color);
-  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  transition:
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
 
   &:hover {
     box-shadow:
@@ -43,14 +45,14 @@
 
 // Headings
 .h1 {
-  font-family: 'Lora', Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   color: var(--warm-text-heading);
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
 .h3 {
-  font-family: 'Lora', Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   color: var(--warm-text-heading);
   font-weight: 600;
 }
@@ -87,7 +89,9 @@ ul {
   box-shadow:
     0 4px 8px var(--warm-shadow-color),
     0 8px 16px var(--warm-shadow-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 // Interactive image hover

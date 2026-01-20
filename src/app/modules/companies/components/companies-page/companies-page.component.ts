@@ -42,12 +42,12 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly gtag: GoogleAnalyticsService,
   ) {
-
     this.metaTagService.setPageMetaTags(
       "Отзывы об IT компаниях",
       "Отзывы об IT компаниях в Казахстане",
       "/companies",
-      "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png");
+      "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png",
+    );
   }
 
   ngOnInit(): void {

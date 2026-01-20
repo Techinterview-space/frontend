@@ -6,17 +6,32 @@
       <div class="mb-3">
         <div class="row">
           <div class="col-md-6 mb-1">
-            <input type="text" placeholder="Поиск по названию компании. Минимум {{
+            <input
+              type="text"
+              placeholder="Поиск по названию компании. Минимум {{
                 MIN_SEARCH_QUERY_LENGTH
-              }} символа" class="form-control" id="searchQuery" [(ngModel)]="searchQuery"
-              (keyup)="onKeyupEvent($event)" />
+              }} символа"
+              class="form-control"
+              id="searchQuery"
+              [(ngModel)]="searchQuery"
+              (keyup)="onKeyupEvent($event)"
+            />
           </div>
           <div class="col-md-6 mb-1">
-            <button type="button" class="btn btn-outline-primary" [disabled]="!searchButtonShouldBeEnabled"
-              [class.disabled]="!searchButtonShouldBeEnabled" (click)="search()">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              [disabled]="!searchButtonShouldBeEnabled"
+              [class.disabled]="!searchButtonShouldBeEnabled"
+              (click)="search()"
+            >
               Найти
             </button>
-            <button type="button" class="btn btn-outline-dark ms-2" (click)="clearSearch()">
+            <button
+              type="button"
+              class="btn btn-outline-dark ms-2"
+              (click)="clearSearch()"
+            >
               Сбросить
             </button>
             <button class="btn btn-primary ms-2" (click)="create()">
@@ -26,7 +41,10 @@
         </div>
       </div>
 
-      <div class="table-responsive" *ngIf="companies.length > 0; else nothingToShow">
+      <div
+        class="table-responsive"
+        *ngIf="companies.length > 0; else nothingToShow"
+      >
         <table class="table table-hover table-sm">
           <thead>
             <tr class="small">
@@ -46,7 +64,11 @@
             <tr *ngFor="let item of companies; let i = index" class="small">
               <td>{{ i + 1 }}</td>
               <td>
-                <a routerLink="/admin/companies/{{ item.id }}" class="btn-link-sm">{{ item.name }}</a>
+                <a
+                  routerLink="/admin/companies/{{ item.id }}"
+                  class="btn-link-sm"
+                  >{{ item.name }}</a
+                >
               </td>
               <td>{{ item.rating | number: "1.2-2" }}</td>
               <td>{{ item.reviews?.length || item.reviewsCount }}</td>
@@ -58,7 +80,11 @@
                 {{ item.aiAnalysis?.createdAt | date: "yyyy-MM-dd HH:mm" }}
               </td>
               <td>
-                <button type="button" class="btn-link-sm" (click)="showAiAnalysis(item)">
+                <button
+                  type="button"
+                  class="btn-link-sm"
+                  (click)="showAiAnalysis(item)"
+                >
                   AI Анализ
                 </button>
               </td>
@@ -68,7 +94,10 @@
       </div>
 
       <div class="mt-5" *ngIf="source && source.results.length > 0">
-        <app-pagination-buttons [source]="source" (pageChange)="loadData($event)"></app-pagination-buttons>
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
       </div>
     </div>
   </div>
@@ -86,11 +115,23 @@
   </div>
 </ng-template>
 
-<app-confirm-dialog *ngIf="confirmDeletionMessage" [message]="confirmDeletionMessage"></app-confirm-dialog>
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>
 
-<app-dialog [additionalCss]="'modal-lg'" [show]="!!editForm" (closed)="onEditModalDlgClose()"
-  [header]="'Редактировать компанию'">
-  <form class="mb-5" *ngIf="!!editForm" [formGroup]="editForm" (ngSubmit)="onEditFormSubmit()">
+<app-dialog
+  [additionalCss]="'modal-lg'"
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="'Редактировать компанию'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
     <div class="mb-3">
       <label>Название</label>
       <input type="text" class="form-control" formControlName="name" />
@@ -121,8 +162,12 @@
   </form>
 </app-dialog>
 
-<app-dialog [additionalCss]="'modal-lg'" [show]="!!aiAnalysisData" (closed)="onAiAnalysisModalClose()"
-  [header]="'AI Анализ компании'">
+<app-dialog
+  [additionalCss]="'modal-lg'"
+  [show]="!!aiAnalysisData"
+  (closed)="onAiAnalysisModalClose()"
+  [header]="'AI Анализ компании'"
+>
   <div *ngIf="aiAnalysisData">
     <div class="p-2">
       <textarea #aiAnalysisInput class="form-control" rows="30" readonly>{{
@@ -130,10 +175,16 @@
       }}</textarea>
     </div>
     <div class="p-1 d-flex justify-content-between">
-      <button class="btn btn-outline-secondary" (click)="onAiAnalysisModalClose()">
+      <button
+        class="btn btn-outline-secondary"
+        (click)="onAiAnalysisModalClose()"
+      >
         Закрыть
       </button>
-      <button class="btn btn-outline-dark" (click)="copyAiAnalysis(aiAnalysisInput)">
+      <button
+        class="btn btn-outline-dark"
+        (click)="copyAiAnalysis(aiAnalysisInput)"
+      >
         <i class="{{ copyBtnIcon }}"></i> {{ copyBtnTitle }}
       </button>
     </div>

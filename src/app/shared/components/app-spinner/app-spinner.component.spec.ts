@@ -12,7 +12,9 @@ describe("AppSpinnerComponent", () => {
   beforeEach(async () => {
     visibilitySubject = new BehaviorSubject<boolean>(false);
     spinnerService = jasmine.createSpyObj("SpinnerService", ["getVisibility$"]);
-    spinnerService.getVisibility$.and.returnValue(visibilitySubject.asObservable());
+    spinnerService.getVisibility$.and.returnValue(
+      visibilitySubject.asObservable(),
+    );
 
     await TestBed.configureTestingModule({
       declarations: [AppSpinnerComponent],
@@ -40,4 +42,3 @@ describe("AppSpinnerComponent", () => {
     expect(component.isVisible).toBe(false);
   });
 });
-

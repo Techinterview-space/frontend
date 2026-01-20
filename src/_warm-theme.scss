@@ -31,12 +31,12 @@
   --warm-text-inverse: #f5f5f5;
 
   // Accent colors - Warm, friendly palette
-  --warm-accent-primary: #e07a5f;      // Terracotta
+  --warm-accent-primary: #e07a5f; // Terracotta
   --warm-accent-primary-hover: #c96a52;
-  --warm-accent-secondary: #81b29a;    // Sage
+  --warm-accent-secondary: #81b29a; // Sage
   --warm-accent-secondary-hover: #6fa089;
-  --warm-accent-tertiary: #f2cc8f;     // Gold
-  --warm-accent-soft: #f4a261;         // Orange
+  --warm-accent-tertiary: #f2cc8f; // Gold
+  --warm-accent-soft: #f4a261; // Orange
 
   // Semantic colors
   --warm-danger: #d95550;
@@ -50,7 +50,7 @@
 
   // Borders & Dividers
   --warm-border-color: rgba(61, 45, 35, 0.12);
-  --warm-border-strong: rgba(61, 45, 35, 0.20);
+  --warm-border-strong: rgba(61, 45, 35, 0.2);
   --warm-border-focus: rgba(224, 122, 95, 0.5);
   --warm-divider: rgba(61, 45, 35, 0.08);
 
@@ -61,7 +61,7 @@
 
   // Component-specific
   --warm-input-bg: #ffffff;
-  --warm-input-border: rgba(61, 45, 35, 0.20);
+  --warm-input-border: rgba(61, 45, 35, 0.2);
   --warm-input-focus-border: #e07a5f;
   --warm-input-focus-ring: rgba(224, 122, 95, 0.25);
 
@@ -96,7 +96,7 @@
   // Table
   --warm-table-stripe: rgba(61, 45, 35, 0.03);
   --warm-table-hover: rgba(61, 45, 35, 0.06);
-  --warm-table-border: rgba(61, 45, 35, 0.10);
+  --warm-table-border: rgba(61, 45, 35, 0.1);
 
   // Scrollbar
   --warm-scrollbar-track: #fef7f0;
@@ -104,7 +104,9 @@
   --warm-scrollbar-thumb-hover: rgba(61, 45, 35, 0.35);
 
   // Transitions
-  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
+  --theme-transition:
+    background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -307,9 +309,14 @@
 // ─────────────────────────────────────────────────────────────────────────────────
 
 // Typography
-$font-heading: 'Lora', Georgia, serif;
-$font-body: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-$font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+$font-heading: "Lora", Georgia, serif;
+$font-body:
+  "Nunito",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
+$font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
 
 // Border radius
 $radius-sm: 6px;
@@ -319,16 +326,16 @@ $radius-xl: 24px;
 $radius-full: 9999px;
 
 // Spacing scale
-$space-1: 0.25rem;  // 4px
-$space-2: 0.5rem;   // 8px
-$space-3: 0.75rem;  // 12px
-$space-4: 1rem;     // 16px
-$space-5: 1.5rem;   // 24px
-$space-6: 2rem;     // 32px
-$space-7: 2.5rem;   // 40px
-$space-8: 3rem;     // 48px
-$space-9: 4rem;     // 64px
-$space-10: 5rem;    // 80px
+$space-1: 0.25rem; // 4px
+$space-2: 0.5rem; // 8px
+$space-3: 0.75rem; // 12px
+$space-4: 1rem; // 16px
+$space-5: 1.5rem; // 24px
+$space-6: 2rem; // 32px
+$space-7: 2.5rem; // 40px
+$space-8: 3rem; // 48px
+$space-9: 4rem; // 64px
+$space-10: 5rem; // 80px
 
 // Transitions
 $transition-fast: 0.15s ease;

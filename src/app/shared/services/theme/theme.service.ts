@@ -1,20 +1,27 @@
-import { Injectable, signal, computed, effect, PLATFORM_ID, Inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import {
+  Injectable,
+  signal,
+  computed,
+  effect,
+  PLATFORM_ID,
+  Inject,
+} from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 
 /**
  * Theme options for the application
  */
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = "light" | "dark" | "system";
 
 /**
  * The actual resolved theme (what's displayed)
  */
-export type ResolvedTheme = 'light' | 'dark';
+export type ResolvedTheme = "light" | "dark";
 
 /**
  * Local storage key for persisting theme preference
  */
-const THEME_STORAGE_KEY = 'theme';
+const THEME_STORAGE_KEY = "theme";
 
 /**
  * ThemeService manages the application's light/dark mode theming.
@@ -43,7 +50,7 @@ const THEME_STORAGE_KEY = 'theme';
  * ```
  */
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ThemeService {
   private readonly isBrowser: boolean;
@@ -51,7 +58,7 @@ export class ThemeService {
   /**
    * The user's theme preference (light, dark, or system)
    */
-  private readonly _theme = signal<Theme>('system');
+  private readonly _theme = signal<Theme>("system");
 
   /**
    * Whether the system prefers dark mode
@@ -68,8 +75,8 @@ export class ThemeService {
    */
   readonly resolvedTheme = computed<ResolvedTheme>(() => {
     const theme = this._theme();
-    if (theme === 'system') {
-      return this._systemPrefersDark() ? 'dark' : 'light';
+    if (theme === "system") {
+      return this._systemPrefersDark() ? "dark" : "light";
     }
     return theme;
   });
@@ -77,17 +84,17 @@ export class ThemeService {
   /**
    * Whether dark mode is currently active
    */
-  readonly isDarkMode = computed(() => this.resolvedTheme() === 'dark');
+  readonly isDarkMode = computed(() => this.resolvedTheme() === "dark");
 
   /**
    * Whether light mode is currently active
    */
-  readonly isLightMode = computed(() => this.resolvedTheme() === 'light');
+  readonly isLightMode = computed(() => this.resolvedTheme() === "light");
 
   /**
    * Whether the theme is set to follow system preference
    */
-  readonly isSystemTheme = computed(() => this._theme() === 'system');
+  readonly isSystemTheme = computed(() => this._theme() === "system");
 
   /**
    * Media query for detecting system dark mode preference
@@ -115,7 +122,7 @@ export class ThemeService {
    * Sets up detection and listening for system color scheme preference
    */
   private initSystemPreferenceDetection(): void {
-    this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    this.mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     this._systemPrefersDark.set(this.mediaQuery.matches);
 
     // Listen for system preference changes
@@ -125,7 +132,7 @@ export class ThemeService {
 
     // Modern browsers
     if (this.mediaQuery.addEventListener) {
-      this.mediaQuery.addEventListener('change', handler);
+      this.mediaQuery.addEventListener("change", handler);
     } else {
       // Fallback for older browsers
       this.mediaQuery.addListener(handler);
@@ -138,11 +145,11 @@ export class ThemeService {
   private loadSavedTheme(): void {
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
 
-    if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
+    if (savedTheme && ["light", "dark", "system"].includes(savedTheme)) {
       this._theme.set(savedTheme);
     } else {
       // Default to system preference
-      this._theme.set('system');
+      this._theme.set("system");
     }
   }
 
@@ -155,10 +162,10 @@ export class ThemeService {
     const root = document.documentElement;
 
     // Remove existing theme attribute if setting to light (default)
-    if (theme === 'light' && this._theme() === 'system') {
-      root.removeAttribute('data-theme');
+    if (theme === "light" && this._theme() === "system") {
+      root.removeAttribute("data-theme");
     } else {
-      root.setAttribute('data-theme', theme);
+      root.setAttribute("data-theme", theme);
     }
 
     // Update meta theme-color for mobile browsers
@@ -169,9 +176,14 @@ export class ThemeService {
    * Updates the meta theme-color tag for mobile browser chrome
    */
   private updateMetaThemeColor(theme: ResolvedTheme): void {
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]:not([media])');
+    const metaThemeColor = document.querySelector(
+      'meta[name="theme-color"]:not([media])',
+    );
     if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', theme === 'dark' ? '#1a1816' : '#fffbf7');
+      metaThemeColor.setAttribute(
+        "content",
+        theme === "dark" ? "#1a1816" : "#fffbf7",
+      );
     }
   }
 
@@ -184,7 +196,7 @@ export class ThemeService {
 
     if (this.isBrowser) {
       // Persist to localStorage
-      if (theme === 'system') {
+      if (theme === "system") {
         localStorage.removeItem(THEME_STORAGE_KEY);
       } else {
         localStorage.setItem(THEME_STORAGE_KEY, theme);
@@ -198,7 +210,7 @@ export class ThemeService {
    */
   toggleTheme(): void {
     const currentResolved = this.resolvedTheme();
-    const newTheme: Theme = currentResolved === 'dark' ? 'light' : 'dark';
+    const newTheme: Theme = currentResolved === "dark" ? "light" : "dark";
     this.setTheme(newTheme);
   }
 
@@ -207,7 +219,7 @@ export class ThemeService {
    */
   cycleTheme(): void {
     const current = this._theme();
-    const cycle: Theme[] = ['light', 'dark', 'system'];
+    const cycle: Theme[] = ["light", "dark", "system"];
     const currentIndex = cycle.indexOf(current);
     const nextIndex = (currentIndex + 1) % cycle.length;
     this.setTheme(cycle[nextIndex]);
@@ -217,7 +229,7 @@ export class ThemeService {
    * Resets theme to follow system preference
    */
   resetToSystem(): void {
-    this.setTheme('system');
+    this.setTheme("system");
   }
 
   /**
@@ -226,14 +238,14 @@ export class ThemeService {
   getThemeIcon(): string {
     const theme = this._theme();
     switch (theme) {
-      case 'light':
-        return 'bi-sun-fill';
-      case 'dark':
-        return 'bi-moon-fill';
-      case 'system':
-        return 'bi-circle-half';
+      case "light":
+        return "bi-sun-fill";
+      case "dark":
+        return "bi-moon-fill";
+      case "system":
+        return "bi-circle-half";
       default:
-        return 'bi-circle-half';
+        return "bi-circle-half";
     }
   }
 
@@ -243,14 +255,14 @@ export class ThemeService {
   getThemeLabel(): string {
     const theme = this._theme();
     switch (theme) {
-      case 'light':
-        return 'Светлая тема';
-      case 'dark':
-        return 'Тёмная тема';
-      case 'system':
-        return 'Системная тема';
+      case "light":
+        return "Светлая тема";
+      case "dark":
+        return "Тёмная тема";
+      case "system":
+        return "Системная тема";
       default:
-        return 'Переключить тему';
+        return "Переключить тему";
     }
   }
 
@@ -259,6 +271,6 @@ export class ThemeService {
    */
   getNextThemeLabel(): string {
     const currentResolved = this.resolvedTheme();
-    return currentResolved === 'dark' ? 'Светлая тема' : 'Тёмная тема';
+    return currentResolved === "dark" ? "Светлая тема" : "Тёмная тема";
   }
 }

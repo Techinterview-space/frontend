@@ -8,7 +8,9 @@ import { HistoricalSalariesChartObject } from "./historical-salaries-chart-objec
   styleUrls: ["./historical-salaries-chart.component.scss"],
   standalone: false,
 })
-export class HistoricalSalariesChartComponent implements AfterViewInit, OnDestroy {
+export class HistoricalSalariesChartComponent
+  implements AfterViewInit, OnDestroy
+{
   @Input()
   template: HistoricalDataByTemplate | null = null;
 
@@ -28,7 +30,10 @@ export class HistoricalSalariesChartComponent implements AfterViewInit, OnDestro
       return;
     }
 
-    this.chart = new HistoricalSalariesChartObject(this.canvasId, this.template);
+    this.chart = new HistoricalSalariesChartObject(
+      this.canvasId,
+      this.template,
+    );
 
     const chartEl = document.getElementById(this.canvasId);
     if (chartEl != null && chartEl.parentElement != null) {

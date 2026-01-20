@@ -15,7 +15,10 @@
           (click)="refresh()"
           [disabled]="isLoading"
         >
-          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+          <span
+            *ngIf="isLoading"
+            class="spinner-border spinner-border-sm me-1"
+          ></span>
           Обновить
         </button>
       </div>
@@ -32,7 +35,9 @@
 
       <!-- No data state -->
       <div
-        *ngIf="!isLoading && !errorMessage && chartData && chartData.length === 0"
+        *ngIf="
+          !isLoading && !errorMessage && chartData && chartData.length === 0
+        "
         class="text-center py-5"
       >
         <div class="text-muted mb-3">

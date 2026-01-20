@@ -58,7 +58,9 @@
   object-position: center;
   border: 3px solid var(--warm-accent-primary);
   box-shadow: 0 4px 12px var(--warm-shadow-color-medium);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
@@ -71,7 +73,7 @@
 }
 
 .profile-name {
-  font-family: 'Lora', Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-size: 2rem;
   font-weight: 600;
   margin: 0;
@@ -99,7 +101,7 @@
   background-color: var(--warm-bg-secondary);
   border-bottom: 1px solid var(--warm-border-color);
   color: var(--warm-text-heading);
-  font-family: 'Lora', Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-weight: 600;
   font-size: 1.15rem;
   padding: 1rem 1.5rem;
@@ -177,7 +179,7 @@
     border-bottom: 2px solid var(--warm-border-color);
 
     th {
-      font-family: 'Lora', Georgia, serif;
+      font-family: "Lora", Georgia, serif;
       font-weight: 600;
       color: var(--warm-text-heading);
       font-size: 0.85rem;
@@ -246,7 +248,7 @@
   padding: 0.4em 0.7em;
   font-weight: 500;
   border-radius: 8px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 0.8rem;
 
   &.bg-success {
@@ -273,7 +275,9 @@
   border-left: 4px solid var(--warm-accent-primary);
   color: var(--warm-text-primary);
 
-  p, ul, li {
+  p,
+  ul,
+  li {
     color: var(--warm-text-primary);
   }
 
