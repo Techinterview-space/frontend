@@ -83,26 +83,4 @@
       </div>
     </div>
   </div>
-
-  <div class="card mt-4">
-    <div class="card-header">
-      <h6 class="mb-0">Quick HTML Templates</h6>
-    </div>
-    <div class="card-body">
-      <button
-        type="button"
-        class="btn btn-outline-secondary btn-sm me-2"
-        (click)="emailRequest.htmlBody = '<html><body><h1>Test Email</h1><p>This is a simple test email sent via Resend integration.</p></body></html>'"
-      >
-        Simple Test
-      </button>
-      <button
-        type="button"
-        class="btn btn-outline-secondary btn-sm"
-        (click)="emailRequest.htmlBody = '<html><body style=\"font-family: Arial, sans-serif; padding: 20px;\"><h1 style=\"color: #333;\">Welcome!</h1><p style=\"color: #666;\">This is a styled test email.</p><hr><p style=\"font-size: 12px; color: #999;\">Sent via Resend</p></body></html>'"
-      >
-        Styled Template
-      </button>
-    </div>
-  </div>
 </div>

@@ -167,6 +167,11 @@ export class AdminNavbarComponent {
             isExternal: false,
           },
           {
+            title: "Отправка email",
+            url: "/admin/tools/send-email",
+            isExternal: false,
+          },
+          {
             title: "Курсы валют",
             url: "/admin/tools/currencies",
             isExternal: false,
