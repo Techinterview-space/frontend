@@ -66,7 +66,12 @@ h6,
   color: var(--warm-footer-text);
 }
 
-.display-1 {
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
   font-family: 'Lora', Georgia, serif;
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -417,6 +422,7 @@ ul.no-bullets {
   border: 1px solid var(--warm-card-border);
   border-radius: $radius-lg;
   box-shadow: $shadow-sm;
+  color: var(--warm-text-primary);
   transition: box-shadow $transition-normal, transform $transition-normal;
 
   &:hover {
@@ -655,6 +661,19 @@ ul.no-bullets {
 
 .text-accent-secondary {
   color: var(--warm-accent-secondary);
+}
+
+/* Bootstrap text utility overrides for dark mode */
+.text-muted {
+  color: var(--warm-text-muted) !important;
+}
+
+.text-dark {
+  color: var(--warm-text-primary) !important;
+}
+
+.text-secondary {
+  color: var(--warm-text-secondary) !important;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────────
@@ -1141,6 +1160,95 @@ hr {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
+   NG-SELECT THEME OVERRIDES
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+.ng-select .ng-select-container {
+  background-color: var(--warm-input-bg) !important;
+  border-color: var(--warm-input-border) !important;
+  color: var(--warm-text-primary) !important;
+}
+
+.ng-select.ng-select-focused .ng-select-container {
+  border-color: var(--warm-input-focus-border) !important;
+  box-shadow: 0 0 0 3px var(--warm-input-focus-ring) !important;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-value {
+  color: var(--warm-text-primary) !important;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color: var(--warm-text-muted) !important;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-input > input {
+  color: var(--warm-text-primary) !important;
+}
+
+.ng-select .ng-arrow-wrapper .ng-arrow {
+  border-color: var(--warm-text-muted) transparent transparent !important;
+}
+
+.ng-select .ng-clear-wrapper {
+  color: var(--warm-text-muted) !important;
+}
+
+.ng-select .ng-dropdown-panel {
+  background-color: var(--warm-card-bg) !important;
+  border: 1px solid var(--warm-border-color) !important;
+  box-shadow:
+    0 4px 8px var(--warm-shadow-color),
+    0 8px 16px var(--warm-shadow-color) !important;
+}
+
+.ng-select .ng-dropdown-panel .ng-dropdown-header {
+  background-color: var(--warm-bg-secondary) !important;
+  border-bottom: 1px solid var(--warm-border-color) !important;
+  color: var(--warm-text-primary) !important;
+}
+
+.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  background-color: var(--warm-card-bg) !important;
+  color: var(--warm-text-primary) !important;
+}
+
+.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover,
+.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: var(--warm-bg-accent) !important;
+  color: var(--warm-text-primary) !important;
+}
+
+.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-color: var(--warm-accent-primary) !important;
+  color: white !important;
+}
+
+.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled {
+  color: var(--warm-text-muted) !important;
+}
+
+.ng-select.ng-select-disabled .ng-select-container {
+  background-color: var(--warm-bg-accent) !important;
+  color: var(--warm-text-muted) !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background-color: var(--warm-bg-accent) !important;
+  color: var(--warm-text-primary) !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon {
+  color: var(--warm-text-muted) !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+  background-color: var(--warm-accent-primary) !important;
+  color: white !important;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────────
