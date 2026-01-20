@@ -10,37 +10,21 @@
           <div class="row">
             <div class="col-md-4 mb-3">
               <label for="email" class="form-label">Email</label>
-              <input
-                type="text"
-                class="form-control"
-                id="email"
-                formControlName="email"
-                placeholder="Поиск по email"
-              />
+              <input type="text" class="form-control" id="email" formControlName="email" placeholder="Поиск по email" />
             </div>
             <div class="col-md-4 mb-3">
-              <label for="unsubscribeMeFromAll" class="form-label"
-                >Отписка от всех емейлов</label
-              >
-              <select
-                class="form-select"
-                id="unsubscribeMeFromAll"
-                formControlName="unsubscribeMeFromAll"
-              >
+              <label for="unsubscribeMeFromAll" class="form-label">Отписка от всех емейлов</label>
+              <select class="form-select" id="unsubscribeMeFromAll" formControlName="unsubscribeMeFromAll">
                 <option [value]="null">Все</option>
                 <option [value]="true">Да</option>
                 <option [value]="false">Нет</option>
               </select>
             </div>
             <div class="col-md-4 mb-3 d-flex align-items-end">
-              <button type="submit" class="btn btn-outline-dark me-2">
+              <button type="submit" class="btn btn-outline-primary me-2">
                 Применить
               </button>
-              <button
-                type="button"
-                class="btn btn-outline-secondary"
-                (click)="resetFilters()"
-              >
+              <button type="button" class="btn btn-outline-dark" (click)="resetFilters()">
                 Сброс
               </button>
             </div>
@@ -48,10 +32,7 @@
         </form>
       </div>
 
-      <div
-        class="table-responsive mb-3"
-        *ngIf="users.length > 0; else nothingToShow"
-      >
+      <div class="table-responsive mb-3" *ngIf="users.length > 0; else nothingToShow">
         <table class="table table-hover table-sm">
           <thead>
             <tr class="small">
@@ -69,39 +50,22 @@
             <tr *ngFor="let item of users; let i = index" class="small">
               <td>{{ item.id }}</td>
               <td>
-                <app-user-link
-                  [css]="'link-as-text'"
-                  [user]="item"
-                ></app-user-link>
+                <app-user-link [css]="'link-as-text'" [user]="item"></app-user-link>
               </td>
               <td>{{ item.email }}</td>
               <td>
-                <app-user-roles-label
-                  [userRoles]="item.roles"
-                ></app-user-roles-label>
+                <app-user-roles-label [userRoles]="item.roles"></app-user-roles-label>
               </td>
               <td>
                 <app-status-label [status]="item.isActive"></app-status-label>
               </td>
               <td>
-                <span
-                  *ngIf="item.unsubscribeMeFromAll"
-                  class="badge bg-warning text-dark"
-                  >Да</span
-                >
-                <span
-                  *ngIf="!item.unsubscribeMeFromAll"
-                  class="badge bg-success"
-                  >Нет</span
-                >
+                <span *ngIf="item.unsubscribeMeFromAll" class="badge bg-warning text-dark">Да</span>
+                <span *ngIf="!item.unsubscribeMeFromAll" class="badge bg-success">Нет</span>
               </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
-                <button
-                  type="button"
-                  class="btn-link-sm"
-                  (click)="openUserRolesForm(item)"
-                >
+                <button type="button" class="btn-link-sm" (click)="openUserRolesForm(item)">
                   Изменить роль
                 </button>
               </td>
@@ -111,10 +75,7 @@
       </div>
 
       <div class="" *ngIf="source && source.results.length > 0">
-        <app-pagination-buttons
-          [source]="source"
-          (pageChange)="loadData($event)"
-        ></app-pagination-buttons>
+        <app-pagination-buttons [source]="source" (pageChange)="loadData($event)"></app-pagination-buttons>
       </div>
     </div>
   </div>
@@ -134,18 +95,9 @@
   </div>
 </ng-template>
 
-<app-dialog
-  [show]="!!userRolesForm"
-  (closed)="onEditModalDlgClose()"
-  [header]="'Редактировать пользователя'"
->
+<app-dialog [show]="!!userRolesForm" (closed)="onEditModalDlgClose()" [header]="'Редактировать пользователя'">
   <div>
-    <form
-      class="mb-5"
-      *ngIf="!!userRolesForm"
-      [formGroup]="userRolesForm"
-      (ngSubmit)="onFormSubmit()"
-    >
+    <form class="mb-5" *ngIf="!!userRolesForm" [formGroup]="userRolesForm" (ngSubmit)="onFormSubmit()">
       <div class="mb-3">
         <label>Роли</label>
         <select multiple class="form-control" formControlName="roles">

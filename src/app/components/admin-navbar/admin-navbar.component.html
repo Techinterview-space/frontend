@@ -1,5 +1,5 @@
 <nav
-  class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-3"
+  class="navbar navbar-expand-lg admin-navbar"
 >
   <div class="container">
     <a class="navbar-brand" routerLink="/admin/">Админка</a>
@@ -35,6 +35,7 @@
                 href="{{ link.url }}"
                 target="_blank"
                 >{{ link.title }}
+                <i class="bi bi-box-arrow-up-right ms-1 small"></i>
               </a>
               <a
                 *ngIf="!link.isExternal"

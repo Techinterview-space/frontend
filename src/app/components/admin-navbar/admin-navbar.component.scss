@@ -2,18 +2,84 @@
 // ADMIN NAVBAR COMPONENT STYLES
 // ═══════════════════════════════════════════════════════════════════════════════
 
+.admin-navbar {
+  background-color: var(--warm-navbar-bg);
+  border-bottom: 1px solid var(--warm-navbar-border);
+  padding: 0.75rem 0;
+}
+
+.navbar-brand {
+  color: var(--warm-text-heading);
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+
+  &:hover {
+    color: var(--warm-accent-primary);
+  }
+}
+
 .nav-link {
+  color: var(--warm-text-primary);
   text-decoration: none;
 
   &:hover {
+    color: var(--warm-accent-primary);
     text-decoration: none;
   }
 }
 
+.dropdown-menu {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-border-color);
+  border-radius: 10px;
+  box-shadow:
+    0 4px 8px var(--warm-shadow-color),
+    0 8px 16px var(--warm-shadow-color);
+}
+
 .dropdown-item {
+  color: var(--warm-text-primary);
   text-decoration: none;
 
   &:hover {
+    background-color: var(--warm-bg-accent);
+    color: var(--warm-text-primary);
     text-decoration: none;
+  }
+
+  &:active {
+    background-color: var(--warm-accent-primary);
+    color: white;
+  }
+}
+
+.navbar-toggler {
+  border-color: var(--warm-border-color);
+
+  .navbar-toggler-icon {
+    background-image: none;
+    position: relative;
+    width: 1.25em;
+    height: 1.25em;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--warm-text-primary);
+      border-radius: 1px;
+    }
+
+    &::before {
+      top: 0.25em;
+      box-shadow: 0 0.4em 0 var(--warm-text-primary);
+    }
+
+    &::after {
+      bottom: 0.25em;
+    }
   }
 }
