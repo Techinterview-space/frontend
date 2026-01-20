@@ -1,4 +1,43 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// UNSUBSCRIBE ME COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .subtitle {
+  font-family: 'Nunito', sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
+  color: var(--warm-text-secondary);
+}
+
+// Card styling
+.card {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-card-border);
+  border-radius: 16px;
+  box-shadow:
+    0 2px 4px var(--warm-shadow-color),
+    0 4px 8px var(--warm-shadow-color);
+}
+
+// Unsubscribe confirmation
+.unsubscribe-message {
+  background-color: var(--warm-success-bg);
+  border: 1px solid var(--warm-success);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: var(--warm-text-primary);
+}
+
+// Warning message
+.unsubscribe-warning {
+  background-color: var(--warm-warning-bg);
+  border: 1px solid var(--warm-warning);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: var(--warm-text-primary);
 }

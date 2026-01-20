@@ -1,8 +1,176 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// ABOUT US COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+// Link styling
 .link-without-underline {
   text-decoration: none;
-  color: inherit;
+  color: var(--warm-accent-primary);
+  transition: color 0.2s ease;
 
   &:hover {
     text-decoration: underline;
+    color: var(--warm-accent-primary-hover);
+  }
+}
+
+// Card styling overrides
+.card {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-card-border);
+  border-radius: 16px;
+  box-shadow:
+    0 2px 4px var(--warm-shadow-color),
+    0 4px 8px var(--warm-shadow-color);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    box-shadow:
+      0 4px 8px var(--warm-shadow-color),
+      0 8px 16px var(--warm-shadow-color),
+      0 16px 32px var(--warm-shadow-color-medium);
+  }
+}
+
+.card-body {
+  color: var(--warm-text-primary);
+}
+
+// Headings
+.h1 {
+  font-family: 'Lora', Georgia, serif;
+  color: var(--warm-text-heading);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.h3 {
+  font-family: 'Lora', Georgia, serif;
+  color: var(--warm-text-heading);
+  font-weight: 600;
+}
+
+.h5 {
+  font-weight: 600;
+  color: var(--warm-accent-primary);
+}
+
+// Text styling
+.text-muted {
+  color: var(--warm-text-muted) !important;
+}
+
+.text-reset {
+  color: var(--warm-accent-primary) !important;
+}
+
+// List styling
+ul {
+  padding-left: 1.5rem;
+  margin-top: 0.75rem;
+
+  li {
+    margin-bottom: 0.5rem;
+    color: var(--warm-text-secondary);
+    line-height: 1.7;
+  }
+}
+
+// Images
+.img-fluid.rounded {
+  border-radius: 12px;
+  box-shadow:
+    0 4px 8px var(--warm-shadow-color),
+    0 8px 16px var(--warm-shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+// Interactive image hover
+.increasable-on-hover {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.03);
+
+    .img-fluid.rounded {
+      box-shadow:
+        0 8px 16px var(--warm-shadow-color),
+        0 16px 32px var(--warm-shadow-color-medium);
+    }
+  }
+}
+
+// Sticker images
+.row-cols-4 {
+  .col {
+    .img-fluid.rounded {
+      background-color: var(--warm-bg-secondary);
+      border: 1px solid var(--warm-card-border);
+    }
+  }
+}
+
+// Horizontal rule
+hr {
+  border-color: var(--warm-divider);
+  opacity: 1;
+  margin: 2rem 0;
+}
+
+// Icon styling
+.bi {
+  color: var(--warm-accent-primary);
+}
+
+// Contact info section
+.bi-geo,
+.bi-github,
+.bi-telegram,
+.bi-envelope {
+  color: var(--warm-accent-secondary);
+  font-size: 1.1rem;
+}
+
+// Italic text for quotes/references
+.fst-italic {
+  color: var(--warm-accent-primary);
+}
+
+// Bold text
+.fw-bold {
+  color: var(--warm-text-heading);
+}
+
+// Small text
+.small {
+  font-size: 0.875rem;
+  color: var(--warm-text-muted);
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .card-body {
+    padding: 1.5rem !important;
+  }
+
+  .h1 {
+    font-size: 1.75rem;
+  }
+
+  .h3 {
+    font-size: 1.35rem;
+  }
+
+  .row-cols-4 {
+    .col {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
   }
 }
