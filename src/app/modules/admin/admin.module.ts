@@ -39,6 +39,8 @@ import { JobPostingMessageSubscriptionsService } from "@services/job-posting-mes
 import { TelegramSubscriptionsService } from "@services/telegram-subscriptions.service";
 import { HistoricalDataTemplatesComponent } from "./components/salaries/historical-data-templates/historical-data-templates.component";
 import { SalariesHistoricalDataTemplatesService } from "@services/salaries-historical-data-templates.service";
+import { AdminEmailService } from "@services/admin-email.service";
+import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
 
 const adminServices = [
   AdminDashboardService,
@@ -48,6 +50,7 @@ const adminServices = [
   JobPostingMessageSubscriptionsService,
   TelegramSubscriptionsService,
   SalariesHistoricalDataTemplatesService,
+  AdminEmailService,
 ];
 
 @NgModule({
@@ -79,6 +82,7 @@ const adminServices = [
     CompanyReviewsStatSubscriptionsComponent,
     JobPostingMessageSubscriptionsComponent,
     HistoricalDataTemplatesComponent,
+    SendEmailPageComponent,
   ],
   imports: [
     CommonModule,

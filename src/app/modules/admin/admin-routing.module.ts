@@ -24,6 +24,7 @@ import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/ope
 import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/reviews-stat-subscriptions/reviews-stat-subscriptions.component";
 import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
 import { HistoricalDataTemplatesComponent } from "./components/salaries/historical-data-templates/historical-data-templates.component";
+import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path: "tools/background-jobs", component: BackgroundJobsComponent },
   { path: "tools/currencies", component: CurrenciesPageComponent },
   { path: "tools/generate-qr", component: GenerateQrPageComponent },
+  { path: "tools/send-email", component: SendEmailPageComponent },
 
   { path: "companies", component: CompaniesAdminPageComponent },
   {
