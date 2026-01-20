@@ -1,0 +1,99 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// COMPANIES ADMIN PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.companies-admin {
+  padding: 1.5rem 0;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+  }
+}
+
+.companies-table-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  overflow: hidden;
+}
+
+.table {
+  margin-bottom: 0;
+
+  thead {
+    background-color: var(--warm-bg-tertiary);
+
+    th {
+      color: var(--warm-text-heading);
+      font-weight: 600;
+      border-bottom: 2px solid var(--warm-border-color);
+      padding: 1rem;
+    }
+  }
+
+  tbody {
+    td {
+      color: var(--warm-text-primary);
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--warm-border-color);
+      vertical-align: middle;
+    }
+
+    tr {
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: var(--warm-bg-accent);
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+.company-link {
+  color: var(--warm-accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    color: var(--warm-accent-primary-hover);
+    text-decoration: underline;
+  }
+}
+
+.search-box {
+  margin-bottom: 1rem;
+
+  input {
+    background-color: var(--warm-bg-tertiary);
+    border: 1px solid var(--warm-border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--warm-text-primary);
+
+    &:focus {
+      border-color: var(--warm-accent-primary);
+      box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.15);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--warm-text-muted);
+    }
+  }
+}
+

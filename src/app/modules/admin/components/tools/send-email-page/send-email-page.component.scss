@@ -1,1 +1,101 @@
-// Styles for send-email-page component
+// ═══════════════════════════════════════════════════════════════════════════════
+// SEND EMAIL PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.email-page {
+  padding: 1.5rem 0;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+  }
+}
+
+.email-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  padding: 2rem;
+  max-width: 700px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    color: var(--warm-text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    background-color: var(--warm-bg-tertiary);
+    border: 1px solid var(--warm-border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--warm-text-primary);
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      border-color: var(--warm-accent-primary);
+      box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.15);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--warm-text-muted);
+    }
+  }
+
+  textarea {
+    min-height: 200px;
+    resize: vertical;
+  }
+}
+
+.form-hint {
+  font-size: 0.875rem;
+  color: var(--warm-text-muted);
+  margin-top: 0.375rem;
+}
+
+.email-preview {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--warm-bg-tertiary);
+  border-radius: 10px;
+  border: 1px solid var(--warm-border-color);
+
+  h4 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    margin-bottom: 1rem;
+  }
+
+  .preview-content {
+    background-color: var(--warm-card-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--warm-border-color);
+  }
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}

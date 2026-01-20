@@ -1,12 +1,97 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// CURRENCIES PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.currencies-page {
+  padding: 1.5rem 0;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+  }
+}
+
+.currencies-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  padding: 1.5rem;
+}
+
 .currencies-json {
   max-height: 400px;
   overflow-y: auto;
   font-size: 0.85rem;
   white-space: pre-wrap;
   word-break: break-all;
+  background-color: var(--warm-code-bg, #2a2523);
+  color: var(--warm-code-text, #e8e4e1);
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: var(--warm-font-mono);
 }
 
 code {
   font-size: 0.8rem;
+  background-color: var(--warm-bg-tertiary);
+  color: var(--warm-accent-primary);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-family: var(--warm-font-mono);
 }
 
+.table {
+  margin-bottom: 0;
+
+  thead {
+    background-color: var(--warm-bg-tertiary);
+
+    th {
+      color: var(--warm-text-heading);
+      font-weight: 600;
+      border-bottom: 2px solid var(--warm-border-color);
+      padding: 1rem;
+    }
+  }
+
+  tbody {
+    td {
+      color: var(--warm-text-primary);
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--warm-border-color);
+      vertical-align: middle;
+    }
+
+    tr {
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: var(--warm-bg-accent);
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+.currency-code {
+  font-family: var(--warm-font-mono);
+  font-weight: 600;
+  color: var(--warm-accent-primary);
+}
+
+.currency-rate {
+  font-family: var(--warm-font-mono);
+}

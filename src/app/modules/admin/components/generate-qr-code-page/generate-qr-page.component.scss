@@ -1,0 +1,79 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// GENERATE QR CODE PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.qr-page {
+  padding: 1.5rem 0;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+  }
+}
+
+.qr-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  padding: 2rem;
+  max-width: 500px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    color: var(--warm-text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    background-color: var(--warm-bg-tertiary);
+    border: 1px solid var(--warm-border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--warm-text-primary);
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      border-color: var(--warm-accent-primary);
+      box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.15);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--warm-text-muted);
+    }
+  }
+}
+
+.qr-preview {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--warm-bg-tertiary);
+  border-radius: 10px;
+  text-align: center;
+
+  img, canvas {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+}
+
+.download-btn {
+  margin-top: 1rem;
+}

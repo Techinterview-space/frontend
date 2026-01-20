@@ -1,4 +1,32 @@
-// Component styles
+// ═══════════════════════════════════════════════════════════════════════════════
+// HISTORICAL DATA TEMPLATES COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.templates-page {
+  padding: 1.5rem 0;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+  }
+}
+
+.templates-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+  overflow: hidden;
+}
 
 // Ensure ng-select dropdown is visible inside modal
 :host ::ng-deep {
@@ -9,17 +37,91 @@
   .modal-content {
     overflow: visible;
   }
+
+  .ng-select {
+    .ng-select-container {
+      background-color: var(--warm-bg-tertiary);
+      border-color: var(--warm-border-color);
+      border-radius: 8px;
+
+      &:hover {
+        border-color: var(--warm-accent-primary);
+      }
+    }
+
+    &.ng-select-focused .ng-select-container {
+      border-color: var(--warm-accent-primary);
+      box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.15);
+    }
+
+    .ng-dropdown-panel {
+      background-color: var(--warm-card-bg);
+      border: 1px solid var(--warm-border-color);
+      border-radius: 8px;
+      box-shadow: var(--warm-shadow-lg);
+    }
+
+    .ng-option {
+      color: var(--warm-text-primary);
+
+      &.ng-option-marked {
+        background-color: var(--warm-bg-accent);
+      }
+
+      &.ng-option-selected {
+        background-color: var(--warm-accent-primary);
+        color: white;
+      }
+    }
+  }
 }
 
 // Ensure action dropdown is visible outside table container
-// Using overflow: clip on x-axis preserves horizontal scroll behavior if needed
-// while allowing dropdowns to overflow vertically
 .table-responsive {
   overflow: visible;
 
   .dropdown-menu {
     position: absolute;
     z-index: 1050;
+    background-color: var(--warm-card-bg);
+    border: 1px solid var(--warm-border-color);
+    border-radius: 8px;
+    box-shadow: var(--warm-shadow-lg);
   }
 }
 
+.table {
+  margin-bottom: 0;
+
+  thead {
+    background-color: var(--warm-bg-tertiary);
+
+    th {
+      color: var(--warm-text-heading);
+      font-weight: 600;
+      border-bottom: 2px solid var(--warm-border-color);
+      padding: 1rem;
+    }
+  }
+
+  tbody {
+    td {
+      color: var(--warm-text-primary);
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--warm-border-color);
+      vertical-align: middle;
+    }
+
+    tr {
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: var(--warm-bg-accent);
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}
