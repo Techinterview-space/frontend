@@ -1,18 +1,214 @@
-@use "../../../_colors" as colors;
+// ═══════════════════════════════════════════════════════════════════════════════
+// NAVBAR COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
 
-.navbar-brand:hover {
-  text-decoration: underline;
+// Navbar container
+:host {
+  display: block;
 }
 
-.nav-link {
+.navbar {
+  background-color: var(--warm-navbar-bg);
+  border-color: var(--warm-navbar-border) !important;
+  padding: 0.75rem 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+// Brand styling
+.navbar-brand {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  color: var(--warm-text-heading);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+
   &:hover {
-    color: colors.$bg-petrel-dark;
-    background-color: #ffffff;
-    border-radius: 5px;
-    filter: brightness(95%);
+    color: var(--warm-accent-primary);
+    text-decoration: none;
+  }
+
+  span {
+    transition: color 0.2s ease;
   }
 }
 
+// Logo image
 .logo-image {
   width: 28px;
+  height: auto;
+  border-radius: 4px;
+}
+
+// Nav links
+.nav-link {
+  color: var(--warm-text-secondary);
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    color: var(--warm-accent-primary);
+    background-color: var(--warm-bg-accent);
+  }
+
+  &.dropdown-toggle::after {
+    margin-left: 0.35em;
+  }
+}
+
+// Dropdown menu
+.dropdown-menu {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-border-color);
+  border-radius: 10px;
+  box-shadow:
+    0 4px 8px var(--warm-shadow-color),
+    0 8px 16px var(--warm-shadow-color),
+    0 16px 32px var(--warm-shadow-color-medium);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.dropdown-item {
+  color: var(--warm-text-primary);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  &:hover,
+  &:focus {
+    background-color: var(--warm-bg-accent);
+    color: var(--warm-text-primary);
+  }
+
+  &:active {
+    background-color: var(--warm-accent-primary);
+    color: white;
+  }
+}
+
+.dropdown-divider {
+  border-color: var(--warm-divider);
+  margin: 0.5rem 0;
+}
+
+// Theme toggle button
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--warm-bg-accent);
+  border: 1px solid var(--warm-border-color);
+  color: var(--warm-text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background-color: var(--warm-accent-primary);
+    border-color: var(--warm-accent-primary);
+    color: white;
+    transform: scale(1.05);
+
+    i {
+      transform: rotate(15deg);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--warm-input-focus-ring);
+    outline: none;
+  }
+}
+
+// Mobile navbar toggler
+.navbar-toggler {
+  border-color: var(--warm-border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--warm-bg-accent);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--warm-input-focus-ring);
+  }
+}
+
+.navbar-toggler-icon {
+  // Custom toggler icon using CSS for better theme support
+  background-image: none;
+  position: relative;
+  width: 1.25em;
+  height: 1.25em;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--warm-text-primary);
+    border-radius: 1px;
+    transition: background-color 0.2s ease;
+  }
+
+  &::before {
+    top: 0.25em;
+    box-shadow: 0 0.4em 0 var(--warm-text-primary);
+  }
+
+  &::after {
+    bottom: 0.25em;
+  }
+}
+
+// Cursor utility
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
+
+  .nav-item {
+    margin: 0.25rem 0;
+  }
+
+  .theme-toggle-btn {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .dropdown-menu {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    padding-left: 1rem;
+  }
+
+  .dropdown-item {
+    padding: 0.5rem 0.75rem;
+  }
 }

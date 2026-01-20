@@ -1,11 +1,12 @@
 <nav
-  class="navbar navbar-expand-md navbar-light bg-white border-bottom border-2"
+  class="navbar navbar-expand-md border-bottom"
 >
   <div class="container">
     <a class="navbar-brand" routerLink="/"
       ><img
-        class="me-1 img-fluid logo-image"
+        class="me-1 img-fluid logo-image no-dim"
         src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/cat_logo.png"
+        alt="Techinterview.space logo"
       />
       <span>Techinterview.space</span></a
     >
@@ -24,7 +25,7 @@
       class="collapse navbar-collapse justify-content-end"
       id="navbarSupportedContent"
     >
-      <ul class="navbar-nav mb-2 mb-md-0">
+      <ul class="navbar-nav mb-2 mb-md-0 align-items-center">
         <li class="nav-item dropdown" *ngFor="let dropdown of dropdowns">
           <a
             class="nav-link dropdown-toggle"
@@ -49,7 +50,26 @@
           </ul>
         </li>
 
-        <li class="nav-item ms-3" *ngIf="!loginName; else loggedIn">
+        <!-- Theme Toggle Button -->
+        <li class="nav-item ms-2">
+          <button
+            class="btn theme-toggle-btn"
+            type="button"
+            (click)="toggleTheme()"
+            [attr.aria-label]="themeService.getThemeLabel()"
+            [attr.title]="themeService.getNextThemeLabel()"
+          >
+            <i
+              class="bi"
+              [ngClass]="{
+                'bi-sun-fill': themeService.isDarkMode(),
+                'bi-moon-fill': !themeService.isDarkMode()
+              }"
+            ></i>
+          </button>
+        </li>
+
+        <li class="nav-item ms-2" *ngIf="!loginName; else loggedIn">
           <a
             class="btn btn-primary {{
               !loginButtonAvailable ? 'disabled' : ''
@@ -72,7 +92,7 @@
             >
               {{ loginName }}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" routerLink="/me">Мой профиль</a></li>
               <li>
                 <a class="dropdown-item" routerLink="users/me/labels"

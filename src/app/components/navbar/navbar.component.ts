@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UserRole } from "@models/enums";
 import { ApplicationUserExtended } from "@models/extended";
-import { HealthCheckService } from "@shared/health-check/health-check.service";
 import { AuthService } from "@shared/services/auth/auth.service";
+import { ThemeService } from "@shared/services/theme/theme.service";
 import { SpinnerService } from "@shared/services/spinners/spinner-service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private readonly authService: AuthService,
     private readonly spinner: SpinnerService,
+    public readonly themeService: ThemeService,
   ) {}
 
   ngOnInit(): void {
@@ -161,5 +162,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logout(): void {
     this.spinner.showTimer();
     this.authService.signout();
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 }
