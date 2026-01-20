@@ -1,0 +1,108 @@
+<app-page-header>Send Test Email</app-page-header>
+
+<div class="container my-5">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Test Resend Integration</h5>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="fromEmail" class="form-label">From <span class="text-danger">*</span></label>
+        <input
+          type="email"
+          id="fromEmail"
+          [(ngModel)]="emailRequest.from"
+          class="form-control"
+          placeholder="sender@yourdomain.com"
+          required
+        />
+        <small class="text-muted">Must be a verified domain in Resend</small>
+      </div>
+
+      <div class="mb-3">
+        <label for="toEmail" class="form-label">To <span class="text-danger">*</span></label>
+        <input
+          type="email"
+          id="toEmail"
+          [(ngModel)]="emailRequest.to"
+          class="form-control"
+          placeholder="recipient@example.com"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="ccEmail" class="form-label">CC</label>
+        <input
+          type="email"
+          id="ccEmail"
+          [(ngModel)]="emailRequest.cc"
+          class="form-control"
+          placeholder="cc@example.com (optional)"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="subject" class="form-label">Subject <span class="text-danger">*</span></label>
+        <input
+          type="text"
+          id="subject"
+          [(ngModel)]="emailRequest.subject"
+          class="form-control"
+          placeholder="Email subject"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="htmlBody" class="form-label">HTML Body <span class="text-danger">*</span></label>
+        <textarea
+          id="htmlBody"
+          [(ngModel)]="emailRequest.htmlBody"
+          class="form-control"
+          rows="10"
+          placeholder="<html><body><h1>Hello!</h1><p>This is a test email.</p></body></html>"
+          required
+        ></textarea>
+        <small class="text-muted">Enter HTML content for the email body</small>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="sendEmail()"
+          [disabled]="isSending || !isFormValid()"
+        >
+          <span *ngIf="isSending">
+            <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+            Sending...
+          </span>
+          <span *ngIf="!isSending">Send Email</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-header">
+      <h6 class="mb-0">Quick HTML Templates</h6>
+    </div>
+    <div class="card-body">
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm me-2"
+        (click)="emailRequest.htmlBody = '<html><body><h1>Test Email</h1><p>This is a simple test email sent via Resend integration.</p></body></html>'"
+      >
+        Simple Test
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm"
+        (click)="emailRequest.htmlBody = '<html><body style=\"font-family: Arial, sans-serif; padding: 20px;\"><h1 style=\"color: #333;\">Welcome!</h1><p style=\"color: #666;\">This is a styled test email.</p><hr><p style=\"font-size: 12px; color: #999;\">Sent via Resend</p></body></html>'"
+      >
+        Styled Template
+      </button>
+    </div>
+  </div>
+</div>
