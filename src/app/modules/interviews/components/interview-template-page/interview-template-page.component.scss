@@ -1,0 +1,148 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// INTERVIEW TEMPLATE PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.template-page {
+  padding: 1.5rem 0;
+}
+
+.template-header {
+  background-color: var(--warm-card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--warm-shadow-md);
+  border: 1px solid var(--warm-border-color);
+
+  .template-title {
+    font-family: var(--warm-font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--warm-text-heading);
+    margin-bottom: 0.5rem;
+  }
+
+  .template-description {
+    color: var(--warm-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .template-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    color: var(--warm-text-muted);
+    font-size: 0.875rem;
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      i {
+        color: var(--warm-accent-secondary);
+      }
+    }
+  }
+}
+
+.template-content {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--warm-shadow-sm);
+  border: 1px solid var(--warm-border-color);
+}
+
+.questions-list {
+  .question-item {
+    background-color: var(--warm-bg-tertiary);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--warm-accent-primary);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .question-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--warm-accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .question-text {
+      font-weight: 500;
+      color: var(--warm-text-heading);
+      margin-bottom: 0.5rem;
+    }
+
+    .question-hint {
+      color: var(--warm-text-muted);
+      font-size: 0.875rem;
+      font-style: italic;
+    }
+  }
+}
+
+.template-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.template-stats {
+  background-color: var(--warm-bg-accent);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--warm-border-color);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: var(--warm-card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        color: var(--warm-accent-primary);
+      }
+    }
+
+    .stat-content {
+      .stat-value {
+        font-weight: 700;
+        color: var(--warm-text-heading);
+        font-size: 1.25rem;
+      }
+
+      .stat-label {
+        color: var(--warm-text-muted);
+        font-size: 0.8125rem;
+      }
+    }
+  }
+}

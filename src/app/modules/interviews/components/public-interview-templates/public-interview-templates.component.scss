@@ -1,0 +1,192 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// PUBLIC INTERVIEW TEMPLATES COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.public-templates-page {
+  padding: 1.5rem 0;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-description {
+    color: var(--warm-text-secondary);
+  }
+}
+
+.search-section {
+  margin-bottom: 2rem;
+
+  .search-input {
+    background-color: var(--warm-card-bg);
+    border: 1px solid var(--warm-border-color);
+    border-radius: 10px;
+    padding: 0.875rem 1.25rem;
+    font-size: 1rem;
+    color: var(--warm-text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      border-color: var(--warm-accent-primary);
+      box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.15);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--warm-text-muted);
+    }
+  }
+}
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.template-card {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--warm-border-color);
+  box-shadow: var(--warm-shadow-sm);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--warm-shadow-lg);
+    border-color: var(--warm-accent-primary);
+  }
+
+  .template-header {
+    margin-bottom: 1rem;
+
+    .template-title {
+      font-family: var(--warm-font-heading);
+      font-weight: 600;
+      color: var(--warm-text-heading);
+      font-size: 1.125rem;
+      margin-bottom: 0.375rem;
+    }
+
+    .template-author {
+      color: var(--warm-text-muted);
+      font-size: 0.8125rem;
+
+      a {
+        color: var(--warm-accent-primary);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .template-description {
+    color: var(--warm-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .template-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--warm-border-color);
+
+    .template-stats {
+      display: flex;
+      gap: 1rem;
+      color: var(--warm-text-muted);
+      font-size: 0.8125rem;
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+
+        i {
+          color: var(--warm-accent-secondary);
+        }
+      }
+    }
+
+    .use-btn {
+      padding: 0.375rem 0.875rem;
+      font-size: 0.8125rem;
+    }
+  }
+}
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  .category-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--warm-border-color);
+    background-color: var(--warm-card-bg);
+    color: var(--warm-text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--warm-accent-primary);
+      color: var(--warm-accent-primary);
+    }
+
+    &.active {
+      background-color: var(--warm-accent-primary);
+      border-color: var(--warm-accent-primary);
+      color: white;
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--warm-text-muted);
+
+  i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  h3 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-secondary);
+    margin-bottom: 0.5rem;
+  }
+}
+
+.pagination-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
