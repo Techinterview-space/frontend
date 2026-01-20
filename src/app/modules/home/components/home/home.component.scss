@@ -76,7 +76,6 @@
 
 .feature {
   padding: 4rem 0;
-  background-color: var(--warm-bg-secondary);
   transition: background-color 0.3s ease;
 
   &.bg-white {
@@ -96,8 +95,8 @@
 
 .feature-subtitle {
   font-family: 'Nunito', sans-serif;
-  font-size: 1.15rem;
-  line-height: 1.7;
+  font-size: 1.25rem;
+  line-height: 1.5;
   color: var(--warm-text-secondary);
   margin-bottom: 0.75rem;
 }
@@ -290,6 +289,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -298,4 +298,14 @@
 
 .animate-fade-in {
   animation: fadeInUp 0.6s ease-out;
+}
+
+// Scale images on hover
+.website-image,
+.feature-image {
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }

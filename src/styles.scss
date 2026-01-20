@@ -28,9 +28,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, var(--warm-text-primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* Headings */
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-family: $font-heading;
   color: var(--warm-text-heading);
   font-weight: 600;
@@ -284,6 +308,7 @@ input.ng-touched.ng-valid {
 
   &:disabled {
     color: var(--warm-text-muted);
+
     &:hover {
       text-decoration: none;
     }
@@ -296,6 +321,7 @@ input.ng-touched.ng-valid {
 
   &.btn-link-danger {
     color: var(--warm-danger);
+
     &:hover {
       color: color.adjust(#d95550, $lightness: -10%);
     }
@@ -303,6 +329,7 @@ input.ng-touched.ng-valid {
 
   &.btn-link-warning {
     color: var(--warm-warning);
+
     &:hover {
       color: color.adjust(#e9a820, $lightness: -10%);
     }
@@ -310,6 +337,7 @@ input.ng-touched.ng-valid {
 
   &.btn-link-success {
     color: var(--warm-success);
+
     &:hover {
       color: color.adjust(#81b29a, $lightness: -10%);
     }
@@ -317,6 +345,7 @@ input.ng-touched.ng-valid {
 
   &.btn-link-info {
     color: var(--warm-info);
+
     &:hover {
       color: color.adjust(#6fa8c7, $lightness: -10%);
       font-weight: 600;
@@ -367,17 +396,17 @@ ul.no-bullets {
 .table {
   color: var(--warm-text-primary);
 
-  > :not(caption) > * > * {
+  > :not(caption)>*>* {
     background-color: transparent;
     border-bottom-color: var(--warm-table-border);
     color: var(--warm-text-primary);
   }
 
-  > tbody > tr:nth-of-type(odd) > * {
+  >tbody>tr:nth-of-type(odd)>* {
     background-color: var(--warm-table-stripe);
   }
 
-  > tbody > tr:hover > * {
+  >tbody>tr:hover>* {
     background-color: var(--warm-table-hover);
   }
 
@@ -768,7 +797,7 @@ hr {
       color: var(--warm-text-muted);
     }
 
-    + .breadcrumb-item::before {
+    +.breadcrumb-item::before {
       color: var(--warm-text-muted);
     }
   }
@@ -797,6 +826,7 @@ hr {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -807,6 +837,7 @@ hr {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
