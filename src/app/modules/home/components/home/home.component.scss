@@ -84,6 +84,14 @@
   font-weight: 700;
   line-height: 1.125;
   color: var(--warm-text-heading);
+
+  &.feature-title-large {
+    font-size: 2.8rem;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
 }
 
 .feature-subtitle {
@@ -118,13 +126,21 @@
 // BUTTONS - Home page specific overrides
 // ─────────────────────────────────────────────────────────────────────────────────
 
+.btn-huge,
+.btn-outline-dark {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .btn-huge {
   padding: 0.9rem 2rem;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 10px;
   transition: all 0.2s ease;
-  text-decoration: none;
 
   &:hover {
     transform: translateY(-2px);

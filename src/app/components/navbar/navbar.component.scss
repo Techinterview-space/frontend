@@ -20,8 +20,18 @@
   border-radius: 4px;
 }
 
-// Nav link dropdown toggle adjustment
+.login-btn {
+  text-decoration: none;
+}
+
+// Nav link styling
 .nav-link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
   &.dropdown-toggle::after {
     margin-left: 0.35em;
   }
@@ -41,6 +51,11 @@
 .dropdown-item {
   border-radius: 6px;
   padding: 0.5rem 1rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 
   &:active {
     background-color: var(--warm-accent-primary);

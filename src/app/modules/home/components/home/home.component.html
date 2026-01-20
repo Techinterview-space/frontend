@@ -2,9 +2,7 @@
   <div class="container">
     <div *ngIf="loaded; else notLoaded">
       <div *ngIf="showUwu; else noUwu" class="pt-5">
-        <div
-          class="d-flex flex-column justify-content-center align-items-center"
-        >
+        <div class="d-flex flex-column justify-content-center align-items-center">
           <div class="mb-3 uwu-image" *ngIf="uwuImageLink">
             <img src="{{ uwuImageLink }}" alt="UwU" class="img-fluid" />
           </div>
@@ -19,8 +17,8 @@
   <div class="feature bg-white">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6">
-          <div class="feature-title">Зарплаты в IT</div>
+        <div class="col-md-7">
+          <div class="feature-title feature-title-large">Зарплаты в IT</div>
           <div class="mt-3 feature-subtitle">
             Здесь мы собираем и анализируем данные по зарплатам в IT в
             Казахстане.
@@ -35,19 +33,14 @@
             &mdash; посмотри в собранной статистике.
           </div>
           <div class="mt-5">
-            <a routerLink="/salaries" class="btn btn-huge btn-purple"
-              >Перейти к зарплатам</a
-            >
+            <a routerLink="/salaries" class="btn btn-huge btn-purple">Перейти к зарплатам</a>
           </div>
         </div>
         <div
-          class="col-sm-6 d-flex align-items-center justify-content-center align-items-sm-end justify-content-sm-end"
-        >
-          <img
-            class="img-fluid feature-image"
+          class="col-md-5 d-flex align-items-center justify-content-center align-items-md-end justify-content-md-end">
+          <img class="img-fluid feature-image"
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_transparent_1000.png"
-            alt="Main"
-          />
+            alt="Main" />
         </div>
       </div>
     </div>
@@ -56,8 +49,8 @@
   <div class="feature">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6">
-          <div class="feature-title">Отзывы к компаниям в IT</div>
+        <div class="col-md-7">
+          <div class="feature-title feature-title-large">Отзывы к компаниям в IT</div>
           <div class="mt-3 feature-subtitle">
             Поработал в компании и тебе повезло очуться в команде дружелюбных
             профессионалов? Поделись этим с другими, чтобы и они знали, куда
@@ -65,20 +58,14 @@
             оффер? Тебе сюда.
           </div>
           <div class="mt-5">
-            <a routerLink="/companies" class="btn btn-huge btn-outline-success"
-              >Перейти к списку компаний</a
-            >
+            <a routerLink="/companies" class="btn btn-huge btn-outline-success">Перейти к списку компаний</a>
           </div>
         </div>
 
         <div
-          class="col-sm-6 d-flex align-items-center justify-content-center align-items-sm-end justify-content-sm-end"
-        >
-          <img
-            class="img-fluid feature-image"
-            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
-            alt="Main"
-          />
+          class="col-md-5 d-flex align-items-center justify-content-center align-items-md-end justify-content-md-end">
+          <img class="img-fluid feature-image"
+            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png" alt="Main" />
         </div>
       </div>
     </div>
@@ -87,28 +74,23 @@
   <div class="feature bg-white">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6">
-          <div class="feature-title">Заметки к техническим интервью</div>
+        <div class="col-md-7">
+          <div class="feature-title feature-title-large">Заметки к техническим интервью</div>
           <div class="mt-3 feature-subtitle">
             Если ты проводишь технические собеседования и хочешь создать шаблон
             и сохранять фидбеки, чтобы потом делиться ими с коллегами &mdash;
             тебе сюда.
           </div>
           <div class="mt-5">
-            <a routerLink="/interviews" class="btn btn-huge btn-outline-primary"
-              >Перейти к заметкам</a
-            >
+            <a routerLink="/interviews" class="btn btn-huge btn-outline-primary">Перейти к заметкам</a>
           </div>
         </div>
 
         <div
-          class="col-sm-6 d-flex align-items-center justify-content-center align-items-sm-end justify-content-sm-end"
-        >
-          <img
-            class="img-fluid feature-image"
+          class="col-md-5 d-flex align-items-center justify-content-center align-items-md-end justify-content-md-end">
+          <img class="img-fluid feature-image"
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_interview_transparent_1000.png"
-            alt="Main"
-          />
+            alt="Main" />
         </div>
       </div>
     </div>
@@ -129,23 +111,13 @@
         ниже. Мы благодарны любой помощи.
       </div>
       <div class="mb-5 mt-3">
-        <a
-          href="https://github.com/orgs/Techinterview-space/repositories"
-          class="me-3 mb-2 btn btn-lg btn-outline-dark"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <i class="bi bi-github me-2"></i>Исходный код</a
-        >
+        <a href="https://github.com/orgs/Techinterview-space/repositories" class="me-3 mb-2 btn btn-lg btn-outline-dark"
+          rel="noopener noreferrer" target="_blank">
+          <i class="bi bi-github me-2"></i>Исходный код</a>
 
-        <a
-          href="https://boosty.to/ake111aa"
-          rel="noopener noreferrer"
-          class="me-3 mb-2 btn btn-lg btn-outline-dark"
-          target="_blank"
-        >
-          <i class="bi bi-cash-coin me-2"></i>Поддержать на Boosty</a
-        >
+        <a href="https://boosty.to/ake111aa" rel="noopener noreferrer" class="me-3 mb-2 btn btn-lg btn-outline-dark"
+          target="_blank">
+          <i class="bi bi-cash-coin me-2"></i>Поддержать на Boosty</a>
       </div>
     </div>
   </div>
@@ -161,11 +133,8 @@
     </div>
 
     <div class="pt-1 d-flex justify-content-center">
-      <img
-        src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_transparent_1000.png"
-        alt="Interviewer"
-        class="website-image"
-      />
+      <img src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_transparent_1000.png"
+        alt="Interviewer" class="website-image" />
     </div>
   </div>
 </ng-template>

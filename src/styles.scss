@@ -251,7 +251,7 @@ input.ng-touched.ng-valid {
   font-weight: 600;
   transition: background-color $transition-fast, transform $transition-fast, box-shadow $transition-fast;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--warm-accent-primary-hover);
     border-color: var(--warm-accent-primary-hover);
     color: white;
@@ -266,6 +266,15 @@ input.ng-touched.ng-valid {
   &:focus {
     box-shadow: 0 0 0 3px var(--warm-input-focus-ring);
   }
+
+  &:disabled,
+  &.disabled {
+    background-color: var(--warm-accent-primary);
+    border-color: var(--warm-accent-primary);
+    color: white;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 /* Secondary button - Sage accent */
@@ -276,10 +285,19 @@ input.ng-touched.ng-valid {
   border-radius: $radius-md;
   font-weight: 600;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--warm-accent-secondary-hover);
     border-color: var(--warm-accent-secondary-hover);
     color: white;
+  }
+
+  &:disabled,
+  &.disabled {
+    background-color: var(--warm-accent-secondary);
+    border-color: var(--warm-accent-secondary);
+    color: white;
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
@@ -289,10 +307,18 @@ input.ng-touched.ng-valid {
   border-color: var(--warm-accent-primary);
   border-radius: $radius-md;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--warm-accent-primary);
     border-color: var(--warm-accent-primary);
     color: white;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: var(--warm-accent-primary);
+    border-color: var(--warm-accent-primary);
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
@@ -301,10 +327,18 @@ input.ng-touched.ng-valid {
   border-color: var(--warm-accent-secondary);
   border-radius: $radius-md;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--warm-accent-secondary);
     border-color: var(--warm-accent-secondary);
     color: white;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: var(--warm-accent-secondary);
+    border-color: var(--warm-accent-secondary);
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
