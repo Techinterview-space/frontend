@@ -87,9 +87,9 @@
   font-family: 'Lora', Georgia, serif;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
-  font-size: 2.1rem;
-  font-weight: 600;
-  line-height: 1.25;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.125;
   color: var(--warm-text-heading);
 }
 
@@ -132,6 +132,7 @@
   font-weight: 600;
   border-radius: 10px;
   transition: all 0.2s ease;
+  text-decoration: none;
 
   &:hover {
     transform: translateY(-2px);

@@ -1,198 +1,155 @@
 <!doctype html>
 <html lang="ru" class="h-100 no-transitions">
-  <head>
-    <meta charset="utf-8" />
-    <title>Techinterview.space</title>
-    <base href="/" />
-    <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <meta
-      name="description"
-      content="Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим"
-    />
-    <meta
-      name="googlebot"
-      content="Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим"
-    />
-    <meta
-      name="keywords"
-      content="salaries, statistic, technical interview, interview, coding"
-    />
-    <meta name="copyright" content="Maxim Gorbatyuk" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#fffbf7" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1a1816" media="(prefers-color-scheme: dark)" />
 
-    <meta property="og:title" content="techinterview.space" />
-    <meta
-      property="og:description"
-      content="Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://techinterview.space" />
-    <meta
-      property="og:image"
-      content="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png"
-    />
-    <meta property="og:site_name" content="techinterview.space" />
+<head>
+  <meta charset="utf-8" />
+  <title>Techinterview.space</title>
+  <base href="/" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <meta name="description"
+    content="Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим" />
+  <meta name="googlebot"
+    content="Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим" />
+  <meta name="keywords" content="salaries, statistic, technical interview, interview, coding" />
+  <meta name="copyright" content="Maxim Gorbatyuk" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#fffbf7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a1816" media="(prefers-color-scheme: dark)" />
 
-    <meta
-      name="twitter:card"
-      content="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png"
-    />
-    <meta
-      name="twitter:image"
-      content="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png"
-    />
-    <meta name="twitter:title" content="techinterview.space" />
-    <meta
-      name="twitter:description"
-      content="Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим"
-    />
-    <meta name="twitter:site" content="@techinterview" />
-    <meta name="twitter:creator" content="@maximgorbatyuk" />
+  <meta property="og:title" content="techinterview.space" />
+  <meta property="og:description"
+    content="Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://techinterview.space" />
+  <meta property="og:image"
+    content="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png" />
+  <meta property="og:site_name" content="techinterview.space" />
 
-    <!-- Google Fonts: Lora (headings) + Nunito (body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+  <meta name="twitter:card"
+    content="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png" />
+  <meta name="twitter:image"
+    content="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_500.png" />
+  <meta name="twitter:title" content="techinterview.space" />
+  <meta name="twitter:description"
+    content="Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим" />
+  <meta name="twitter:site" content="@techinterview" />
+  <meta name="twitter:creator" content="@maximgorbatyuk" />
 
-    <!-- Theme initialization script - runs before body to prevent flash -->
-    <script>
-      (function() {
-        // Check for saved theme preference or system preference
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  <!-- Google Fonts: Lora (headings) + Nunito (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-        // Apply theme to root element
-        if (savedTheme === 'dark' || (savedTheme === null && systemPrefersDark)) {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        } else if (savedTheme === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
-        }
-        // If no saved theme and system is light, don't set attribute (default light)
+  <!-- Theme initialization script - runs before body to prevent flash -->
+  <script>
+    (function () {
+      // Check for saved theme preference or system preference
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Remove no-transitions class after page load to enable smooth transitions
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            document.documentElement.classList.remove('no-transitions');
-          }, 100);
-        });
-      })();
-    </script>
-  </head>
-  <body class="d-flex flex-column h-100">
-    <app-root></app-root>
+      // Apply theme to root element
+      if (savedTheme === 'dark' || (savedTheme === null && systemPrefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+      // If no saved theme and system is light, don't set attribute (default light)
 
-    <div class="footer mt-auto d-block">
-      <div class="py-5 footer-wrapper">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 mobile-mb-3">
-              <div class="h4">
-                <a class="footer-link" href="/">Techinterview.space</a>
-              </div>
-              <div class="mt-3">Алматы, Казахстан</div>
-              <div class="mt-3">
-                <span id="current-year"></span>,
-                <a
-                  class="footer-link"
-                  href="https://mgorbatyuk.dev"
-                  target="_blank"
-                  >© maximgorbatyuk</a
-                >
-              </div>
+      // Remove no-transitions class after page load to enable smooth transitions
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          document.documentElement.classList.remove('no-transitions');
+        }, 100);
+      });
+    })();
+  </script>
+</head>
+
+<body class="d-flex flex-column h-100">
+  <app-root></app-root>
+
+  <div class="footer mt-auto d-block">
+    <div class="py-5 footer-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mobile-mb-3">
+            <div class="h4">
+              <a class="footer-link" href="/">Techinterview.space</a>
             </div>
-
-            <div class="col-lg-4 mobile-mb-3">
-              <div class="h4">Наши проекты</div>
-              <ul class="mt-3 no-bullets">
-                <li>
-                  <a
-                    class="footer-link"
-                    href="https://t.me/techinterview_salaries_bot"
-                    target="_blank"
-                    title="Бот для получения зарплатных данных"
-                    rel="noopener noreferrer"
-                  >
-                    <i class="bi bi-chevron-right"></i
-                    ><span class="ms-2"
-                      >TG бот &#64;techinterview_salaries_bot</span
-                    >
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="footer-link"
-                    href="https://t.me/github_profile_bot"
-                    target="_blank"
-                    title="Бот для получения статистики по профилю Github"
-                    rel="noopener noreferrer"
-                  >
-                    <i class="bi bi-chevron-right"></i
-                    ><span class="ms-2">TG бот &#64;github_profile_bot</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="footer-link"
-                    href="https://maximgorbatyuk.notion.site/e7e9dbadcbf54030b3b92105d96cd98d?utm_source=techinterview.space"
-                    target="_blank"
-                    title="База знаний по ИП в Казахстане"
-                    rel="noopener noreferrer"
-                  >
-                    <i class="bi bi-chevron-right"></i
-                    ><span class="ms-2">База знаний по ИП в Казахстане</span>
-                  </a>
-                </li>
-              </ul>
+            <div class="mt-3">Алматы, Казахстан</div>
+            <div class="mt-3">
+              <span id="current-year"></span>,
+              <a class="footer-link" href="https://mgorbatyuk.dev" target="_blank">© maximgorbatyuk</a>
             </div>
+          </div>
 
-            <div class="col-lg-4">
-              <div class="h4">Ссылки</div>
-              <ul class="mt-3 no-bullets">
-                <li>
-                  <a class="footer-link" href="/about-us">
-                    <i class="bi bi-chevron-right"></i
-                    ><span class="ms-2">О нас</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="footer-link" href="/about-telegram-bot">
-                    <i class="bi bi-chevron-right"></i
-                    ><span class="ms-2">О ботах в Telegram</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="footer-link" href="/agreements/privacy-policy">
-                    <i class="bi bi-chevron-right"></i
-                    ><span class="ms-2">Пользовательское соглашение</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="footer-link" href="/?uwu=true">
-                    <i class="bi bi-chevron-right"></i
-                    ><span class="ms-2">UwU?</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+          <div class="col-lg-4 mobile-mb-3">
+            <div class="h4 footer-link-header">Наши проекты</div>
+            <ul class="mt-3 no-bullets">
+              <li>
+                <a class="footer-link" href="https://t.me/techinterview_salaries_bot" target="_blank"
+                  title="Бот для получения зарплатных данных" rel="noopener noreferrer">
+                  <i class="bi bi-chevron-right"></i><span class="ms-2">TG бот &#64;techinterview_salaries_bot</span>
+                </a>
+              </li>
+              <li>
+                <a class="footer-link" href="https://t.me/github_profile_bot" target="_blank"
+                  title="Бот для получения статистики по профилю Github" rel="noopener noreferrer">
+                  <i class="bi bi-chevron-right"></i><span class="ms-2">TG бот &#64;github_profile_bot</span>
+                </a>
+              </li>
+              <li>
+                <a class="footer-link"
+                  href="https://maximgorbatyuk.notion.site/e7e9dbadcbf54030b3b92105d96cd98d?utm_source=techinterview.space"
+                  target="_blank" title="База знаний по ИП в Казахстане" rel="noopener noreferrer">
+                  <i class="bi bi-chevron-right"></i><span class="ms-2">База знаний по ИП в Казахстане</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="h4 footer-link-header">Ссылки</div>
+            <ul class="mt-3 no-bullets">
+              <li>
+                <a class="footer-link" href="/about-us">
+                  <i class="bi bi-chevron-right"></i><span class="ms-2">О нас</span>
+                </a>
+              </li>
+              <li>
+                <a class="footer-link" href="/about-telegram-bot">
+                  <i class="bi bi-chevron-right"></i><span class="ms-2">О ботах в Telegram</span>
+                </a>
+              </li>
+              <li>
+                <a class="footer-link" href="/agreements/privacy-policy">
+                  <i class="bi bi-chevron-right"></i><span class="ms-2">Пользовательское соглашение</span>
+                </a>
+              </li>
+              <li>
+                <a class="footer-link" href="/?uwu=true">
+                  <i class="bi bi-chevron-right"></i><span class="ms-2">UwU?</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var yearElement = document.getElementById("current-year");
-        if (yearElement) {
-          yearElement.textContent = new Date().getFullYear();
-        }
-      });
-    </script>
-  </body>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var yearElement = document.getElementById("current-year");
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+    });
+  </script>
+</body>
+
 </html>
