@@ -830,8 +830,262 @@ hr {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────────
+   CHART & STATS COMPONENTS
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+.chart-card {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-card-border);
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: box-shadow $transition-normal;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.chart-title {
+  font-family: $font-heading;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--warm-text-heading);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  i {
+    color: var(--warm-accent-primary);
+  }
+}
+
+.chapter-title {
+  font-family: $font-heading;
+  font-weight: 600;
+  color: var(--warm-text-heading);
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--warm-accent-primary);
+  display: inline-block;
+}
+
+.stats-card {
+  background: linear-gradient(135deg, var(--warm-bg-elevated) 0%, var(--warm-bg-secondary) 100%);
+  border: 1px solid var(--warm-card-border);
+  border-radius: $radius-md;
+  padding: 1.25rem;
+  text-align: center;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.stats-value {
+  font-family: $font-heading;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--warm-accent-primary);
+  line-height: 1.2;
+}
+
+.stats-label {
+  font-size: 0.875rem;
+  color: var(--warm-text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
+   INFO & WARNING BOXES
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+.info-box {
+  background-color: var(--warm-info-bg);
+  border: 1px solid var(--warm-info);
+  border-radius: $radius-md;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--warm-text-primary);
+
+  i {
+    color: var(--warm-info);
+  }
+}
+
+.warning-box {
+  background-color: var(--warm-warning-bg);
+  border: 1px solid var(--warm-warning);
+  border-radius: $radius-md;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--warm-text-primary);
+
+  i {
+    color: var(--warm-warning);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
+   BLUR EFFECT
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+.blur {
+  -webkit-filter: blur(6px);
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
+   OUTLINE BUTTON VARIANTS
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+.btn-outline-success {
+  color: var(--warm-accent-secondary);
+  border-color: var(--warm-accent-secondary);
+  border-width: 2px;
+  border-radius: $radius-md;
+
+  &:hover {
+    background-color: var(--warm-accent-secondary);
+    border-color: var(--warm-accent-secondary);
+    color: white;
+  }
+}
+
+.btn-outline-dark {
+  color: var(--warm-text-primary);
+  border-color: var(--warm-border-strong);
+  border-width: 2px;
+  border-radius: $radius-md;
+
+  &:hover {
+    background-color: var(--warm-bg-inverse);
+    border-color: var(--warm-bg-inverse);
+    color: var(--warm-text-inverse);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
+   NAVBAR STYLES
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+.navbar {
+  background-color: var(--warm-navbar-bg);
+  border-color: var(--warm-navbar-border) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: background-color $transition-slow, border-color $transition-slow, box-shadow $transition-slow;
+}
+
+.navbar-brand {
+  font-family: $font-heading;
+  font-weight: 600;
+  color: var(--warm-text-heading);
+  display: flex;
+  align-items: center;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: var(--warm-accent-primary);
+    text-decoration: none;
+  }
+}
+
+.nav-link {
+  color: var(--warm-text-secondary);
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: $radius-sm;
+  transition: color $transition-fast, background-color $transition-fast;
+
+  &:hover {
+    color: var(--warm-accent-primary);
+    background-color: var(--warm-bg-accent);
+  }
+}
+
+.navbar-toggler {
+  border-color: var(--warm-border-color);
+  border-radius: $radius-sm;
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: var(--warm-bg-accent);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--warm-input-focus-ring);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
+   STATUS BADGES
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+.health-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: $radius-full;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  &.status-healthy {
+    background-color: rgba(129, 178, 154, 0.15);
+    color: var(--warm-success);
+  }
+
+  &.status-unhealthy {
+    background-color: rgba(217, 85, 80, 0.15);
+    color: var(--warm-danger);
+  }
+
+  &.status-degraded {
+    background-color: rgba(242, 204, 143, 0.2);
+    color: var(--warm-warning);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
+   CURSOR UTILITIES
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
    ANIMATION KEYFRAMES
    ───────────────────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
 
 @keyframes fadein {
   from {

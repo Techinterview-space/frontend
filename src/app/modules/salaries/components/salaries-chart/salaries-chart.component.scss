@@ -1,36 +1,11 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 // SALARIES CHART COMPONENT STYLES
 // Warm & Friendly Theme
+// Component-specific styles only (global styles in styles.scss)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 :host {
   display: block;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────────
-// BLUR EFFECT (for non-authorized users)
-// ─────────────────────────────────────────────────────────────────────────────────
-
-.blur {
-  -webkit-filter: blur(6px);
-  filter: blur(6px);
-  pointer-events: none;
-  user-select: none;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────────
-// CHAPTER/SECTION TITLES
-// ─────────────────────────────────────────────────────────────────────────────────
-
-.chapter-title {
-  font-family: 'Lora', Georgia, serif;
-  font-weight: 600;
-  color: var(--warm-text-heading);
-  margin-top: 4rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--warm-accent-primary);
-  display: inline-block;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────────
@@ -54,112 +29,6 @@
       0 8px 16px var(--warm-shadow-color);
     color: var(--warm-text-primary);
     padding: 1.5rem;
-  }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────────
-// CHART CARDS
-// ─────────────────────────────────────────────────────────────────────────────────
-
-.chart-card {
-  background-color: var(--warm-card-bg);
-  border: 1px solid var(--warm-card-border);
-  border-radius: 16px;
-  box-shadow:
-    0 2px 4px var(--warm-shadow-color),
-    0 4px 8px var(--warm-shadow-color);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  transition: box-shadow 0.3s ease;
-
-  &:hover {
-    box-shadow:
-      0 4px 8px var(--warm-shadow-color),
-      0 8px 16px var(--warm-shadow-color),
-      0 16px 32px var(--warm-shadow-color-medium);
-  }
-}
-
-.chart-title {
-  font-family: 'Lora', Georgia, serif;
-  font-weight: 600;
-  font-size: 1.25rem;
-  color: var(--warm-text-heading);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  i {
-    color: var(--warm-accent-primary);
-  }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────────
-// STATS CARDS
-// ─────────────────────────────────────────────────────────────────────────────────
-
-.stats-card {
-  background: linear-gradient(
-    135deg,
-    var(--warm-bg-elevated) 0%,
-    var(--warm-bg-secondary) 100%
-  );
-  border: 1px solid var(--warm-card-border);
-  border-radius: 12px;
-  padding: 1.25rem;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 4px 8px var(--warm-shadow-color),
-      0 8px 16px var(--warm-shadow-color);
-  }
-}
-
-.stats-value {
-  font-family: 'Lora', Georgia, serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--warm-accent-primary);
-  line-height: 1.2;
-}
-
-.stats-label {
-  font-size: 0.875rem;
-  color: var(--warm-text-secondary);
-  margin-top: 0.25rem;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────────
-// INFO BOXES
-// ─────────────────────────────────────────────────────────────────────────────────
-
-.info-box {
-  background-color: var(--warm-info-bg);
-  border: 1px solid var(--warm-info);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1rem;
-  color: var(--warm-text-primary);
-
-  i {
-    color: var(--warm-info);
-  }
-}
-
-.warning-box {
-  background-color: var(--warm-warning-bg);
-  border: 1px solid var(--warm-warning);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1rem;
-  color: var(--warm-text-primary);
-
-  i {
-    color: var(--warm-warning);
   }
 }
 

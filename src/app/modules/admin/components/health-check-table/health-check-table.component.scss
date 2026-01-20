@@ -1,6 +1,7 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 // HEALTH CHECK TABLE COMPONENT STYLES
 // Warm & Friendly Theme
+// Component-specific styles only (global styles in styles.scss)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 :host {
@@ -51,36 +52,3 @@
     }
   }
 }
-
-.health-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-
-  &.status-healthy {
-    background-color: rgba(129, 178, 154, 0.15);
-    color: var(--warm-success);
-  }
-
-  &.status-unhealthy {
-    background-color: rgba(217, 85, 80, 0.15);
-    color: var(--warm-danger);
-  }
-
-  &.status-degraded {
-    background-color: rgba(242, 204, 143, 0.2);
-    color: var(--warm-warning);
-  }
-
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: currentColor;
-  }
-}
-

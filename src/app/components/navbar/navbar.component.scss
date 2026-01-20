@@ -1,38 +1,16 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 // NAVBAR COMPONENT STYLES
 // Warm & Friendly Theme
+// Component-specific styles only (global navbar styles in styles.scss)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-// Navbar container
 :host {
   display: block;
 }
 
+// Navbar container - component-specific padding
 .navbar {
-  background-color: var(--warm-navbar-bg);
-  border-color: var(--warm-navbar-border) !important;
   padding: 0.75rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-// Brand styling
-.navbar-brand {
-  font-family: 'Lora', Georgia, serif;
-  font-weight: 600;
-  color: var(--warm-text-heading);
-  display: flex;
-  align-items: center;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: var(--warm-accent-primary);
-    text-decoration: none;
-  }
-
-  span {
-    transition: color 0.2s ease;
-  }
 }
 
 // Logo image
@@ -42,28 +20,15 @@
   border-radius: 4px;
 }
 
-// Nav links
+// Nav link dropdown toggle adjustment
 .nav-link {
-  color: var(--warm-text-secondary);
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  transition: color 0.2s ease, background-color 0.2s ease;
-
-  &:hover {
-    color: var(--warm-accent-primary);
-    background-color: var(--warm-bg-accent);
-  }
-
   &.dropdown-toggle::after {
     margin-left: 0.35em;
   }
 }
 
-// Dropdown menu
+// Dropdown menu - component-specific overrides
 .dropdown-menu {
-  background-color: var(--warm-card-bg);
-  border: 1px solid var(--warm-border-color);
   border-radius: 10px;
   box-shadow:
     0 4px 8px var(--warm-shadow-color),
@@ -74,16 +39,8 @@
 }
 
 .dropdown-item {
-  color: var(--warm-text-primary);
   border-radius: 6px;
   padding: 0.5rem 1rem;
-  transition: background-color 0.15s ease, color 0.15s ease;
-
-  &:hover,
-  &:focus {
-    background-color: var(--warm-bg-accent);
-    color: var(--warm-text-primary);
-  }
 
   &:active {
     background-color: var(--warm-accent-primary);
@@ -92,7 +49,6 @@
 }
 
 .dropdown-divider {
-  border-color: var(--warm-divider);
   margin: 0.5rem 0;
 }
 
@@ -139,22 +95,10 @@
 
 // Mobile navbar toggler
 .navbar-toggler {
-  border-color: var(--warm-border-color);
   padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: var(--warm-bg-accent);
-  }
-
-  &:focus {
-    box-shadow: 0 0 0 3px var(--warm-input-focus-ring);
-  }
 }
 
 .navbar-toggler-icon {
-  // Custom toggler icon using CSS for better theme support
   background-image: none;
   position: relative;
   width: 1.25em;
@@ -180,11 +124,6 @@
   &::after {
     bottom: 0.25em;
   }
-}
-
-// Cursor utility
-.cursor-pointer {
-  cursor: pointer;
 }
 
 // Responsive adjustments
