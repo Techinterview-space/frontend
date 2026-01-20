@@ -1,26 +1,196 @@
-.usefullness-rate {
-  cursor: pointer;
-  transition: color 0.3s ease;
-  font-size: 12px;
-  font-weight: 600;
-  font-style: italic;
+// ═══════════════════════════════════════════════════════════════════════════════
+// COMPANY REVIEW BLOCK COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.review-block {
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--warm-border-color);
+  box-shadow: var(--warm-shadow-sm);
+  transition: box-shadow 0.2s ease;
 
   &:hover {
-    color: #000000;
+    box-shadow: var(--warm-shadow-md);
+  }
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+
+  .reviewer-info {
+    .reviewer-position {
+      font-weight: 500;
+      color: var(--warm-text-heading);
+      margin-bottom: 0.25rem;
+    }
+
+    .review-date {
+      color: var(--warm-text-muted);
+      font-size: 0.8125rem;
+    }
+  }
+
+  .review-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+
+    .stars {
+      color: var(--warm-accent-tertiary);
+    }
+
+    .rating-value {
+      font-weight: 600;
+      color: var(--warm-accent-primary);
+      font-size: 0.9375rem;
+    }
+  }
+}
+
+.review-content {
+  color: var(--warm-text-primary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+
+  .review-section {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-label {
+      font-weight: 600;
+      color: var(--warm-text-heading);
+      font-size: 0.875rem;
+      margin-bottom: 0.375rem;
+    }
+
+    .section-content {
+      color: var(--warm-text-secondary);
+    }
+  }
+}
+
+.review-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--warm-border-color);
+}
+
+.usefullness-rate {
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--warm-text-muted);
+
+  &:hover {
+    color: var(--warm-accent-primary);
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  &.positive {
+    color: var(--warm-success);
+  }
+
+  &.negative {
+    color: var(--warm-danger);
   }
 }
 
 .i-work-here {
-  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   font-style: italic;
+  color: var(--warm-accent-secondary);
   cursor: pointer;
+  transition: color 0.2s ease;
 
   &:hover {
-    color: #000000;
+    color: var(--warm-text-heading);
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  i {
+    font-size: 0.875rem;
+  }
+}
+
+.review-actions {
+  display: flex;
+  gap: 0.75rem;
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    color: var(--warm-text-muted);
+    background-color: transparent;
+    border: 1px solid var(--warm-border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: var(--warm-bg-accent);
+      color: var(--warm-text-primary);
+      border-color: var(--warm-accent-primary);
+    }
+
+    &.active {
+      background-color: var(--warm-accent-primary);
+      color: white;
+      border-color: var(--warm-accent-primary);
+    }
+  }
+}
+
+.review-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: var(--warm-bg-accent);
+    color: var(--warm-text-secondary);
+
+    &.positive {
+      background-color: rgba(129, 178, 154, 0.15);
+      color: var(--warm-success);
+    }
+
+    &.negative {
+      background-color: rgba(217, 85, 80, 0.15);
+      color: var(--warm-danger);
+    }
   }
 }
