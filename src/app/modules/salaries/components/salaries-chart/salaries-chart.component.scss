@@ -13,12 +13,6 @@
 // ─────────────────────────────────────────────────────────────────────────────────
 
 .non-authorized-block {
-  position: relative;
-  padding: 2rem;
-  background-color: var(--warm-bg-secondary);
-  border-radius: 16px;
-  margin: 2rem 0;
-
   .alert {
     background-color: var(--warm-card-bg);
     border: 1px solid var(--warm-accent-primary);
