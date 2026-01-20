@@ -80,6 +80,23 @@ Follow `.eslintrc.js`:
 - Directive selectors: `appCamelCase`
 - Unused variables: prefix with `_`
 
+## Design System
+
+**IMPORTANT:** When developing UI components, blocks, or pages, follow the design guidelines in `/docs/DESIGN_GUIDELINE.md`.
+
+Key requirements:
+- **Always use CSS variables** for colors (e.g., `var(--warm-bg-primary)`, `var(--warm-text-primary)`)
+- **Never hardcode colors** - all colors must come from the warm theme system
+- **Use SCSS variables** for spacing (`$space-*`), border-radius (`$radius-*`), and shadows (`$shadow-*`)
+- **Use theme fonts**: Lora for headings, Nunito for body text, JetBrains Mono for code
+- **Support dark mode** - components must work in both light and dark modes
+- **Follow component SCSS structure** with section dividers and `:host { display: block; }`
+
+Reference files:
+- `src/_warm-theme.scss` - All CSS custom properties and SCSS variables
+- `src/styles.scss` - Global styles and utility classes
+- `docs/DESIGN_GUIDELINE.md` - Complete design system documentation
+
 ## Testing
 
 Jasmine/Karma with ChromiumNoSandbox (Puppeteer). Test files colocated with components (`*.spec.ts`).

@@ -42,6 +42,30 @@ docker run -p 8080:4000 techinterview-frontend
 
 Opens at `http://localhost:8080`
 
+## Design System
+
+This project uses the **Warm & Friendly** design theme - a carefully crafted visual system optimized for readability and comfort during extended reading sessions.
+
+### Key Features
+
+- **Warm color palette**: Paper-like backgrounds (`#fffbf7`) with terracotta (`#e07a5f`) and sage (`#81b29a`) accents
+- **Dark mode support**: Full light/dark theme switching with system preference detection
+- **Typography**: Lora (serif) for headings, Nunito (sans-serif) for body text
+- **Soft shadows**: Warm-tinted layered shadows for natural depth
+- **Accessibility**: WCAG AA compliant color contrasts
+
+### Theme Colors
+
+| Color | Hex | Usage |
+|-------|-----|-------|
+| Terracotta | `#e07a5f` | Primary accent, buttons, links |
+| Sage | `#81b29a` | Secondary accent, success states |
+| Gold | `#f2cc8f` | Highlights, warnings |
+| Orange | `#f4a261` | CTAs, attention elements |
+
+For complete design documentation, see [DESIGN_GUIDELINE.md](docs/DESIGN_GUIDELINE.md).
+
 ## Documentation
 
+- [Design Guideline](docs/DESIGN_GUIDELINE.md) - Complete design system documentation (colors, typography, components)
 - [SSR & Deployment Guide](docs/SSR_DEPLOYMENT.md) - Detailed SSR implementation and deployment documentation
