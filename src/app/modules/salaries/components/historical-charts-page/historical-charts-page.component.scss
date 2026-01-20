@@ -1,3 +1,12 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// HISTORICAL CHARTS PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 #canvas-historical-chart {
   min-height: 400px;
 }
@@ -7,4 +16,25 @@
   width: 100%;
   height: 100%;
   min-height: 400px;
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.historical-section {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow:
+    0 2px 4px var(--warm-shadow-color),
+    0 4px 8px var(--warm-shadow-color);
+}
+
+.historical-title {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  color: var(--warm-text-heading);
+  margin-bottom: 1rem;
 }

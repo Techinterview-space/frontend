@@ -1,10 +1,56 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// CURRENCIES CHART PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .chart-container {
   position: relative;
   height: 450px;
   width: 100%;
+  background-color: var(--warm-card-bg);
+  border-radius: 12px;
+  padding: 1rem;
 }
 
 canvas {
   width: 100% !important;
   height: 100% !important;
+}
+
+.currency-card {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow:
+    0 2px 4px var(--warm-shadow-color),
+    0 4px 8px var(--warm-shadow-color);
+}
+
+.currency-title {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  color: var(--warm-text-heading);
+}
+
+.currency-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--warm-accent-primary);
+}
+
+.currency-change {
+  font-size: 0.875rem;
+
+  &.positive {
+    color: var(--warm-success);
+  }
+
+  &.negative {
+    color: var(--warm-danger);
+  }
 }
