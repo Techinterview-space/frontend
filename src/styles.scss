@@ -60,6 +60,11 @@ a {
    FOOTER STYLES
    ───────────────────────────────────────────────────────────────────────────────── */
 
+/* Sticky footer layout - footer stays at bottom */
+.footer {
+  flex-shrink: 0;
+}
+
 .footer-wrapper {
   background-color: var(--warm-footer-bg);
   color: var(--warm-footer-text);
