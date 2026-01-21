@@ -26,15 +26,23 @@
 
 // Nav link styling
 .nav-link {
+  color: var(--warm-text-secondary);
   text-decoration: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    color: var(--warm-accent-primary);
     text-decoration: none;
   }
 
   &.dropdown-toggle::after {
     margin-left: 0.35em;
   }
+}
+
+// Dropdown toggle when open
+.dropdown.show > .nav-link.dropdown-toggle {
+  color: var(--warm-accent-primary);
 }
 
 // Dropdown menu - component-specific overrides
@@ -132,12 +140,12 @@
   }
 
   &::before {
-    top: 0.25em;
-    box-shadow: 0 0.4em 0 var(--warm-text-primary);
+    top: 0.18em;
+    box-shadow: 0 0.375em 0 var(--warm-text-primary);
   }
 
   &::after {
-    bottom: 0.25em;
+    bottom: 0.18em;
   }
 }
 

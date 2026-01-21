@@ -7,46 +7,45 @@
   display: block;
 }
 
-.error-container {
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 1rem;
-  text-align: center;
+.error-page-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
 .error-title {
   font-family: "Lora", Georgia, serif;
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 600;
   color: var(--warm-accent-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   line-height: 1;
+  text-align: center;
 }
 
-.error-subtitle {
-  font-family: "Lora", Georgia, serif;
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: var(--warm-text-heading);
-  margin-bottom: 1rem;
+.error-card {
+  padding: 2rem;
+  text-align: center;
 }
 
-.error-message {
-  font-size: 1.1rem;
-  color: var(--warm-text-secondary);
-  max-width: 500px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
+.error-content {
+  margin-bottom: 2rem;
 }
 
-.img-fluid {
-  max-width: 350px;
+.error-image-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.error-image {
+  max-width: 280px;
   border-radius: 16px;
   filter: drop-shadow(0 8px 24px var(--warm-shadow-color-medium));
-  margin-bottom: 2rem;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 // Action buttons
@@ -95,20 +94,20 @@
 
 // Responsive
 @media (max-width: 768px) {
+  .error-page-container {
+    padding: 1.5rem 1rem;
+  }
+
   .error-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
 
-  .error-subtitle {
-    font-size: 1.35rem;
+  .error-card {
+    padding: 1.5rem;
   }
 
-  .error-message {
-    font-size: 1rem;
-  }
-
-  .img-fluid {
-    max-width: 250px;
+  .error-image {
+    max-width: 220px;
   }
 
   .error-actions {

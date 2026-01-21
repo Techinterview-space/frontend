@@ -1107,6 +1107,10 @@ hr {
   }
 }
 
+.dropdown.show > .nav-link {
+  color: var(--warm-accent-primary);
+}
+
 .navbar-toggler {
   border-color: var(--warm-border-color);
   border-radius: $radius-sm;
