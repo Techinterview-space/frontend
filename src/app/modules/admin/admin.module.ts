@@ -41,6 +41,7 @@ import { HistoricalDataTemplatesComponent } from "./components/salaries/historic
 import { SalariesHistoricalDataTemplatesService } from "@services/salaries-historical-data-templates.service";
 import { AdminEmailService } from "@services/admin-email.service";
 import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
+import { DesignSystemComponent } from "./components/design-system/design-system.component";
 
 const adminServices = [
   AdminDashboardService,
@@ -83,6 +84,7 @@ const adminServices = [
     JobPostingMessageSubscriptionsComponent,
     HistoricalDataTemplatesComponent,
     SendEmailPageComponent,
+    DesignSystemComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,610 @@
+<div class="container py-4">
+  <h1 class="mb-4">Design System</h1>
+  <p class="text-warm-secondary mb-5">
+    Справочник всех компонентов UI, используемых на сайте techinterview.space
+  </p>
+
+  <!-- Colors Section -->
+  <section class="design-section">
+    <h2>Цвета</h2>
+
+    <h5 class="mt-4">Фоновые цвета</h5>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="color-preview bg-warm-primary"></div>
+        <code>--warm-bg-primary</code>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview bg-warm-secondary"></div>
+        <code>--warm-bg-secondary</code>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview bg-warm-tertiary"></div>
+        <code>--warm-bg-tertiary</code>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview bg-warm-accent"></div>
+        <code>--warm-bg-accent</code>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview bg-warm-elevated"></div>
+        <code>--warm-bg-elevated</code>
+      </div>
+    </div>
+
+    <h5 class="mt-4">Акцентные цвета</h5>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div
+          class="color-preview"
+          style="background-color: var(--warm-accent-primary)"
+        ></div>
+        <code>--warm-accent-primary</code>
+        <span class="color-label">Terracotta</span>
+      </div>
+      <div class="color-swatch">
+        <div
+          class="color-preview"
+          style="background-color: var(--warm-accent-secondary)"
+        ></div>
+        <code>--warm-accent-secondary</code>
+        <span class="color-label">Sage</span>
+      </div>
+      <div class="color-swatch">
+        <div
+          class="color-preview"
+          style="background-color: var(--warm-accent-tertiary)"
+        ></div>
+        <code>--warm-accent-tertiary</code>
+        <span class="color-label">Gold</span>
+      </div>
+      <div class="color-swatch">
+        <div
+          class="color-preview"
+          style="background-color: var(--warm-accent-soft)"
+        ></div>
+        <code>--warm-accent-soft</code>
+        <span class="color-label">Orange</span>
+      </div>
+    </div>
+
+    <h5 class="mt-4">Семантические цвета</h5>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div
+          class="color-preview"
+          style="background-color: var(--warm-danger)"
+        ></div>
+        <code>--warm-danger</code>
+      </div>
+      <div class="color-swatch">
+        <div
+          class="color-preview"
+          style="background-color: var(--warm-warning)"
+        ></div>
+        <code>--warm-warning</code>
+      </div>
+      <div class="color-swatch">
+        <div
+          class="color-preview"
+          style="background-color: var(--warm-success)"
+        ></div>
+        <code>--warm-success</code>
+      </div>
+      <div class="color-swatch">
+        <div
+          class="color-preview"
+          style="background-color: var(--warm-info)"
+        ></div>
+        <code>--warm-info</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography Section -->
+  <section class="design-section">
+    <h2>Типографика</h2>
+
+    <h5 class="mt-4">Заголовки (Lora)</h5>
+    <div class="card card-body">
+      <h1>Heading 1 - Главный заголовок</h1>
+      <h2>Heading 2 - Заголовок раздела</h2>
+      <h3>Heading 3 - Подзаголовок</h3>
+      <h4>Heading 4 - Заголовок блока</h4>
+      <h5>Heading 5 - Малый заголовок</h5>
+      <h6>Heading 6 - Мини-заголовок</h6>
+    </div>
+
+    <h5 class="mt-4">Display заголовки</h5>
+    <div class="card card-body">
+      <p class="display-1">Display 1</p>
+      <p class="display-2">Display 2</p>
+      <p class="display-3">Display 3</p>
+      <p class="display-4">Display 4</p>
+      <p class="display-5">Display 5</p>
+      <p class="display-6">Display 6</p>
+    </div>
+
+    <h5 class="mt-4">Текст (Nunito)</h5>
+    <div class="card card-body">
+      <p>
+        Обычный параграф текста. Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+      </p>
+      <p class="lead">
+        Lead текст - более крупный и выделенный параграф для важной информации.
+      </p>
+      <p><small>Small текст - для примечаний и мелких деталей.</small></p>
+      <p><strong>Bold текст</strong> и <em>italic текст</em></p>
+    </div>
+
+    <h5 class="mt-4">Цвета текста</h5>
+    <div class="card card-body">
+      <p class="text-warm-primary">text-warm-primary - Основной текст</p>
+      <p class="text-warm-secondary">text-warm-secondary - Вторичный текст</p>
+      <p class="text-warm-muted">text-warm-muted - Приглушённый текст</p>
+      <p class="text-warm-heading">text-warm-heading - Заголовки</p>
+      <p class="text-accent-primary">
+        text-accent-primary - Акцентный (Terracotta)
+      </p>
+      <p class="text-accent-secondary">
+        text-accent-secondary - Акцентный (Sage)
+      </p>
+    </div>
+  </section>
+
+  <!-- Buttons Section -->
+  <section class="design-section">
+    <h2>Кнопки</h2>
+
+    <h5 class="mt-4">Основные кнопки</h5>
+    <div class="button-row">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-success">Success</button>
+      <button class="btn btn-danger">Danger</button>
+      <button class="btn btn-warning">Warning</button>
+      <button class="btn btn-info">Info</button>
+    </div>
+
+    <h5 class="mt-4">Outline кнопки</h5>
+    <div class="button-row">
+      <button class="btn btn-outline-primary">Outline Primary</button>
+      <button class="btn btn-outline-secondary">Outline Secondary</button>
+      <button class="btn btn-outline-success">Outline Success</button>
+      <button class="btn btn-outline-danger">Outline Danger</button>
+      <button class="btn btn-outline-dark">Outline Dark</button>
+    </div>
+
+    <h5 class="mt-4">Размеры кнопок</h5>
+    <div class="button-row">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-primary">Default</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+      <button class="btn btn-primary btn-huge">Huge</button>
+    </div>
+
+    <h5 class="mt-4">Состояния кнопок</h5>
+    <div class="button-row">
+      <button class="btn btn-primary">Normal</button>
+      <button class="btn btn-primary disabled" disabled>Disabled</button>
+      <button class="btn btn-primary" disabled>
+        <span class="spinner-border spinner-border-sm me-2"></span>
+        Loading
+      </button>
+    </div>
+
+    <h5 class="mt-4">Link-style кнопки</h5>
+    <div class="button-row">
+      <button class="btn btn-link-sm">Link Default</button>
+      <button class="btn btn-link-sm btn-link-danger">Link Danger</button>
+      <button class="btn btn-link-sm btn-link-warning">Link Warning</button>
+      <button class="btn btn-link-sm btn-link-success">Link Success</button>
+      <button class="btn btn-link-sm btn-link-info">Link Info</button>
+    </div>
+  </section>
+
+  <!-- Alerts Section -->
+  <section class="design-section">
+    <h2>Alerts</h2>
+
+    <div class="alert alert-danger">
+      <strong>Danger!</strong> Это alert-danger для ошибок и критических
+      сообщений.
+    </div>
+    <div class="alert alert-warning">
+      <strong>Warning!</strong> Это alert-warning для предупреждений.
+    </div>
+    <div class="alert alert-success">
+      <strong>Success!</strong> Это alert-success для успешных действий.
+    </div>
+    <div class="alert alert-info">
+      <strong>Info!</strong> Это alert-info для информационных сообщений.
+    </div>
+  </section>
+
+  <!-- Badges Section -->
+  <section class="design-section">
+    <h2>Badges</h2>
+
+    <div class="badge-row">
+      <span class="badge bg-primary">Primary</span>
+      <span class="badge bg-secondary">Secondary</span>
+      <span class="badge bg-success">Success</span>
+      <span class="badge bg-danger">Danger</span>
+      <span class="badge bg-warning">Warning</span>
+      <span class="badge bg-info">Info</span>
+      <span class="badge bg-light text-dark">Light</span>
+      <span class="badge bg-dark">Dark</span>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="design-section">
+    <h2>Cards</h2>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Простая карточка</h5>
+            <p class="card-text">Базовая карточка с телом.</p>
+            <button class="btn btn-primary btn-sm">Действие</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Карточка с header</h5>
+            <p class="card-text">Карточка с заголовком сверху.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Карточка с footer</h5>
+            <p class="card-text">Карточка с подвалом.</p>
+          </div>
+          <div class="card-footer">Footer content</div>
+        </div>
+      </div>
+    </div>
+
+    <h5 class="mt-4">Интерактивные эффекты</h5>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="card hover-lift">
+          <div class="card-body">
+            <h5 class="card-title">hover-lift</h5>
+            <p class="card-text">Поднимается при наведении.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card increasable-on-hover">
+          <div class="card-body">
+            <h5 class="card-title">increasable-on-hover</h5>
+            <p class="card-text">Увеличивается при наведении.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Forms Section -->
+  <section class="design-section">
+    <h2>Формы</h2>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-body">
+          <div class="mb-3">
+            <label class="form-label">Text Input</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Введите текст"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email Input</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="email@example.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="Пароль" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Disabled Input</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Disabled"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card card-body">
+          <div class="mb-3">
+            <label class="form-label">Select</label>
+            <select class="form-select">
+              <option selected>Выберите опцию</option>
+              <option value="1">Опция 1</option>
+              <option value="2">Опция 2</option>
+              <option value="3">Опция 3</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Textarea</label>
+            <textarea
+              class="form-control"
+              rows="3"
+              placeholder="Введите текст..."
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="check1" />
+              <label class="form-check-label" for="check1"
+                >Checkbox опция</label
+              >
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="radio"
+                id="radio1"
+              />
+              <label class="form-check-label" for="radio1">Radio опция 1</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="radio"
+                id="radio2"
+              />
+              <label class="form-check-label" for="radio2">Radio опция 2</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tables Section -->
+  <section class="design-section">
+    <h2>Таблицы</h2>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Роль</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Иван Иванов</td>
+            <td>ivan@example.com</td>
+            <td><span class="badge bg-primary">Admin</span></td>
+            <td><span class="badge bg-success">Active</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Петр Петров</td>
+            <td>petr@example.com</td>
+            <td><span class="badge bg-secondary">User</span></td>
+            <td><span class="badge bg-success">Active</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Анна Сидорова</td>
+            <td>anna@example.com</td>
+            <td><span class="badge bg-secondary">User</span></td>
+            <td><span class="badge bg-danger">Inactive</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Spinners Section -->
+  <section class="design-section">
+    <h2>Spinners</h2>
+
+    <div class="spinner-row">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-border text-secondary" role="status"></div>
+      <div class="spinner-border text-success" role="status"></div>
+      <div class="spinner-border text-danger" role="status"></div>
+      <div class="spinner-border text-warning" role="status"></div>
+      <div class="spinner-border text-info" role="status"></div>
+    </div>
+
+    <div class="spinner-row mt-3">
+      <div class="spinner-grow text-primary" role="status"></div>
+      <div class="spinner-grow text-secondary" role="status"></div>
+      <div class="spinner-grow text-success" role="status"></div>
+      <div class="spinner-grow text-danger" role="status"></div>
+    </div>
+  </section>
+
+  <!-- Icons Section -->
+  <section class="design-section">
+    <h2>Иконки (Bootstrap Icons)</h2>
+
+    <div class="icons-grid">
+      <div class="icon-item">
+        <i class="bi bi-house-fill"></i>
+        <span>bi-house-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-person-fill"></i>
+        <span>bi-person-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-gear-fill"></i>
+        <span>bi-gear-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-search"></i>
+        <span>bi-search</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-bell-fill"></i>
+        <span>bi-bell-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-envelope-fill"></i>
+        <span>bi-envelope-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>bi-check-circle-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-x-circle-fill"></i>
+        <span>bi-x-circle-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span>bi-exclamation-triangle-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-info-circle-fill"></i>
+        <span>bi-info-circle-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-trash-fill"></i>
+        <span>bi-trash-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-pencil-fill"></i>
+        <span>bi-pencil-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>bi-plus-circle-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-arrow-right"></i>
+        <span>bi-arrow-right</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-box-arrow-up-right"></i>
+        <span>bi-box-arrow-up-right</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-sun-fill"></i>
+        <span>bi-sun-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-moon-fill"></i>
+        <span>bi-moon-fill</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-github"></i>
+        <span>bi-github</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-telegram"></i>
+        <span>bi-telegram</span>
+      </div>
+      <div class="icon-item">
+        <i class="bi bi-linkedin"></i>
+        <span>bi-linkedin</span>
+      </div>
+    </div>
+
+    <p class="mt-3 text-warm-muted">
+      Полный список иконок:
+      <a href="https://icons.getbootstrap.com/" target="_blank"
+        >icons.getbootstrap.com</a
+      >
+    </p>
+  </section>
+
+  <!-- Code Section -->
+  <section class="design-section">
+    <h2>Код</h2>
+
+    <h5 class="mt-4">Inline code</h5>
+    <p>
+      Используйте тег <code>&lt;code&gt;</code> для инлайн-кода, например:
+      <code>npm install</code>
+    </p>
+
+    <h5 class="mt-4">Code block</h5>
+    <pre><code>{{ codeExample }}</code></pre>
+  </section>
+
+  <!-- Spacing Section -->
+  <section class="design-section">
+    <h2>Spacing</h2>
+
+    <div class="card card-body">
+      <p class="mb-0">SCSS переменные для отступов:</p>
+      <ul class="mt-2">
+        <li><code>$space-1</code> = 0.25rem (4px)</li>
+        <li><code>$space-2</code> = 0.5rem (8px)</li>
+        <li><code>$space-3</code> = 0.75rem (12px)</li>
+        <li><code>$space-4</code> = 1rem (16px)</li>
+        <li><code>$space-5</code> = 1.5rem (24px)</li>
+        <li><code>$space-6</code> = 2rem (32px)</li>
+        <li><code>$space-7</code> = 2.5rem (40px)</li>
+        <li><code>$space-8</code> = 3rem (48px)</li>
+        <li><code>$space-9</code> = 4rem (64px)</li>
+        <li><code>$space-10</code> = 5rem (80px)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Border Radius Section -->
+  <section class="design-section">
+    <h2>Border Radius</h2>
+
+    <div class="radius-grid">
+      <div class="radius-item">
+        <div class="radius-preview" style="border-radius: 6px"></div>
+        <code>$radius-sm (6px)</code>
+      </div>
+      <div class="radius-item">
+        <div class="radius-preview" style="border-radius: 10px"></div>
+        <code>$radius-md (10px)</code>
+      </div>
+      <div class="radius-item">
+        <div class="radius-preview" style="border-radius: 16px"></div>
+        <code>$radius-lg (16px)</code>
+      </div>
+      <div class="radius-item">
+        <div class="radius-preview" style="border-radius: 24px"></div>
+        <code>$radius-xl (24px)</code>
+      </div>
+      <div class="radius-item">
+        <div class="radius-preview" style="border-radius: 9999px"></div>
+        <code>$radius-full</code>
+      </div>
+    </div>
+  </section>
+</div>

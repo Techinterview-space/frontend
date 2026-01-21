@@ -182,6 +182,11 @@ export class AdminNavbarComponent {
             isExternal: false,
           },
           {
+            title: "Design System",
+            url: "/admin/design-system",
+            isExternal: false,
+          },
+          {
             title: "Kibana",
             url: "https://kibana.techinterview.space",
             isExternal: true,

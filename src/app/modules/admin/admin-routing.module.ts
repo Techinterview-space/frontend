@@ -25,6 +25,7 @@ import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/
 import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
 import { HistoricalDataTemplatesComponent } from "./components/salaries/historical-data-templates/historical-data-templates.component";
 import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
+import { DesignSystemComponent } from "./components/design-system/design-system.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -80,6 +81,8 @@ const routes: Routes = [
     path: "salaries/historical-data-templates",
     component: HistoricalDataTemplatesComponent,
   },
+
+  { path: "design-system", component: DesignSystemComponent },
 ];
 
 @NgModule({
