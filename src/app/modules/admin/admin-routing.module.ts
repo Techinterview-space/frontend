@@ -26,6 +26,9 @@ import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/j
 import { HistoricalDataTemplatesComponent } from "./components/salaries/historical-data-templates/historical-data-templates.component";
 import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
 import { DesignSystemComponent } from "./components/design-system/design-system.component";
+import { M2mClientsListComponent } from "./components/m2m-clients/m2m-clients-list.component";
+import { M2mClientCreateComponent } from "./components/m2m-clients/m2m-client-create.component";
+import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-detail.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -83,6 +86,11 @@ const routes: Routes = [
   },
 
   { path: "design-system", component: DesignSystemComponent },
+
+  // M2M Clients
+  { path: "m2m-clients", component: M2mClientsListComponent },
+  { path: "m2m-clients/new", component: M2mClientCreateComponent },
+  { path: "m2m-clients/:id", component: M2mClientDetailComponent },
 ];
 
 @NgModule({

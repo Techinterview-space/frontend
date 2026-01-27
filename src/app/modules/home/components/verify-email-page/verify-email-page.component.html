@@ -1,0 +1,79 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Email Verification</h1>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Verifying...</span>
+      </div>
+      <p>Verifying your email address...</p>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="successMessage && !canResend" class="success-message">
+      <i class="bi bi-check-circle-fill"></i>
+      <div>
+        <p>{{ successMessage }}</p>
+      </div>
+    </div>
+
+    <!-- Error Message with Resend Option -->
+    <div *ngIf="errorMessage" class="error-message">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+      <div>
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
+
+    <!-- Resend Form -->
+    <div *ngIf="canResend && !successMessage" class="resend-section">
+      <p class="resend-info">
+        Enter your email address to receive a new verification link.
+      </p>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Enter your email address"
+          [disabled]="isResending"
+          autocomplete="email"
+        />
+      </div>
+
+      <button
+        type="button"
+        class="btn-submit"
+        (click)="resendVerification()"
+        [disabled]="isResending || !isEmailValid()"
+      >
+        <span *ngIf="!isResending">Resend Verification Email</span>
+        <span *ngIf="isResending" class="spinner-wrapper">
+          <span class="spinner-border spinner-border-sm" role="status"></span>
+          Sending...
+        </span>
+      </button>
+    </div>
+
+    <!-- Success after resend -->
+    <div *ngIf="successMessage && canResend" class="success-message">
+      <i class="bi bi-envelope-check-fill"></i>
+      <div>
+        <p>{{ successMessage }}</p>
+      </div>
+    </div>
+
+    <div class="auth-footer">
+      <p>
+        <a routerLink="/login" class="auth-link">Back to Sign In</a>
+      </p>
+    </div>
+  </div>
+</div>

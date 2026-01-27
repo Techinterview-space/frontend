@@ -42,6 +42,10 @@ import { SalariesHistoricalDataTemplatesService } from "@services/salaries-histo
 import { AdminEmailService } from "@services/admin-email.service";
 import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
 import { DesignSystemComponent } from "./components/design-system/design-system.component";
+import { M2mClientsListComponent } from "./components/m2m-clients/m2m-clients-list.component";
+import { M2mClientCreateComponent } from "./components/m2m-clients/m2m-client-create.component";
+import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-detail.component";
+import { M2mClientsService } from "./services/m2m-clients.service";
 
 const adminServices = [
   AdminDashboardService,
@@ -52,6 +56,7 @@ const adminServices = [
   TelegramSubscriptionsService,
   SalariesHistoricalDataTemplatesService,
   AdminEmailService,
+  M2mClientsService,
 ];
 
 @NgModule({
@@ -85,6 +90,9 @@ const adminServices = [
     HistoricalDataTemplatesComponent,
     SendEmailPageComponent,
     DesignSystemComponent,
+    M2mClientsListComponent,
+    M2mClientCreateComponent,
+    M2mClientDetailComponent,
   ],
   imports: [
     CommonModule,

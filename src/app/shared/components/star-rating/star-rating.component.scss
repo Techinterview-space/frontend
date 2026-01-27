@@ -1,3 +1,12 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// STAR RATING COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .star-rating {
   display: flex;
   gap: 5px;
@@ -6,6 +15,10 @@
 .star {
   font-size: 36px;
   cursor: pointer !important;
-  color: gold;
-  transition: color 0.3s;
+  color: var(--warm-accent-tertiary);
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--warm-accent-soft);
+  }
 }

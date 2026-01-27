@@ -10,6 +10,7 @@ import {
   UserAdminService,
   UserSearchParams,
 } from "@services/user-admin.service";
+import { AlertService } from "@shared/components/alert/services/alert.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { UserRolesEditForm } from "./user-roles-edit-form";
 
@@ -34,10 +35,13 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
     private readonly service: UserAdminService,
     private readonly titleService: TitleService,
     private readonly fb: FormBuilder,
+    private readonly alertService: AlertService,
   ) {
     this.filterForm = this.fb.group({
       email: [""],
       unsubscribeMeFromAll: [null],
+      isLockedOut: [null],
+      emailConfirmed: [null],
     });
   }
 
@@ -57,6 +61,8 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
       page,
       email: formValue.email || null,
       unsubscribeMeFromAll: formValue.unsubscribeMeFromAll,
+      isLockedOut: formValue.isLockedOut,
+      emailConfirmed: formValue.emailConfirmed,
     };
 
     this.service
@@ -65,6 +71,73 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
       .subscribe((users) => {
         this.users = users.results.map((x) => new ApplicationUserExtended(x));
         this.source = users;
+      });
+  }
+
+  unlockUser(user: ApplicationUser): void {
+    this.service
+      .unlockUser(user.id)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: () => {
+          this.alertService.success("Пользователь разблокирован");
+          this.loadData();
+        },
+        error: (err) => {
+          this.alertService.error(
+            err.error?.message || "Не удалось разблокировать пользователя",
+          );
+        },
+      });
+  }
+
+  resetFailedAttempts(user: ApplicationUser): void {
+    this.service
+      .resetFailedAttempts(user.id)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: () => {
+          this.alertService.success("Счетчик неудачных попыток сброшен");
+          this.loadData();
+        },
+        error: (err) => {
+          this.alertService.error(
+            err.error?.message || "Не удалось сбросить счетчик",
+          );
+        },
+      });
+  }
+
+  forceVerifyEmail(user: ApplicationUser): void {
+    this.service
+      .forceVerifyEmail(user.id)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: () => {
+          this.alertService.success("Email подтвержден");
+          this.loadData();
+        },
+        error: (err) => {
+          this.alertService.error(
+            err.error?.message || "Не удалось подтвердить email",
+          );
+        },
+      });
+  }
+
+  resendVerification(user: ApplicationUser): void {
+    this.service
+      .resendVerification(user.id)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: () => {
+          this.alertService.success("Письмо с подтверждением отправлено");
+        },
+        error: (err) => {
+          this.alertService.error(
+            err.error?.message || "Не удалось отправить письмо",
+          );
+        },
       });
   }
 
@@ -105,6 +178,8 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
     this.filterForm.reset({
       email: "",
       unsubscribeMeFromAll: null,
+      isLockedOut: null,
+      emailConfirmed: null,
     });
     this.loadData(1);
   }

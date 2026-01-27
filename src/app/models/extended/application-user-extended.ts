@@ -1,4 +1,4 @@
-import { ApplicationUser } from "@models/application-user";
+import { ApplicationUser, AuthProvider } from "@models/application-user";
 import Assertion from "@shared/validation/assertion";
 import { UserRole } from "@models/enums";
 
@@ -64,6 +64,27 @@ export class ApplicationUserExtended implements ApplicationUser {
 
   get isMfaEnabled(): boolean {
     return this.instance.isMfaEnabled;
+  }
+
+  // Security-related getters
+  get authProvider(): AuthProvider | undefined {
+    return this.instance.authProvider;
+  }
+
+  get failedLoginAttempts(): number | undefined {
+    return this.instance.failedLoginAttempts;
+  }
+
+  get lockedUntil(): Date | null | undefined {
+    return this.instance.lockedUntil;
+  }
+
+  get isLockedOut(): boolean | undefined {
+    return this.instance.isLockedOut;
+  }
+
+  get hasPendingEmailVerification(): boolean | undefined {
+    return this.instance.hasPendingEmailVerification;
   }
 
   constructor(public readonly instance: ApplicationUser) {

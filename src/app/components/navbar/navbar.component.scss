@@ -67,7 +67,7 @@
 
   &:active {
     background-color: var(--warm-accent-primary);
-    color: white;
+    color: var(--warm-btn-contrast-text);
   }
 }
 
@@ -98,7 +98,7 @@
   &:hover {
     background-color: var(--warm-accent-primary);
     border-color: var(--warm-accent-primary);
-    color: white;
+    color: var(--warm-btn-contrast-text);
     transform: scale(1.05);
 
     i {

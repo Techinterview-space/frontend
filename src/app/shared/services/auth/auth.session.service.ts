@@ -1,8 +1,12 @@
 import { SessionStorageWrapper } from "../session-storage-wrapper.service";
-import { IdToken, User } from "@auth0/auth0-angular";
 import Assertion from "@shared/validation/assertion";
 import { Injectable } from "@angular/core";
 import { ApplicationUser } from "@models/application-user";
+
+export interface AuthInfo {
+  accessToken: string;
+  expiresAt: number;
+}
 
 @Injectable()
 export class AuthSessionService {
@@ -14,26 +18,35 @@ export class AuthSessionService {
 
   constructor(private readonly session: SessionStorageWrapper) {}
 
-  set auth(user: IdToken | null) {
-    Assertion.notNull(user, "user");
-    this.session.setItem(this.authorizationStorageSessionKey, user);
-    this.session.setItem(this.authorizationTimestampSessionKey, Date.now());
+  set auth(authInfo: AuthInfo | null) {
+    if (authInfo) {
+      Assertion.notNull(authInfo, "authInfo");
+      this.session.setItem(this.authorizationStorageSessionKey, authInfo);
+      this.session.setItem(this.authorizationTimestampSessionKey, Date.now());
+    } else {
+      this.session.removeItem(this.authorizationStorageSessionKey);
+      this.session.removeItem(this.authorizationTimestampSessionKey);
+    }
   }
 
-  get auth(): IdToken | null {
-    const user = this.session.getItem<IdToken>(
+  get auth(): AuthInfo | null {
+    const authInfo = this.session.getItem<AuthInfo>(
       this.authorizationStorageSessionKey,
     );
-    if (user == null || this.sessionExpired) {
+    if (authInfo == null || this.sessionExpired) {
       return null;
     }
 
-    return user ?? null;
+    return authInfo ?? null;
   }
 
   set applicationUser(user: ApplicationUser | null) {
-    Assertion.notNull(user, "user");
-    this.session.setItem(this.applicationUserStorageSessionKey, user);
+    if (user) {
+      Assertion.notNull(user, "user");
+      this.session.setItem(this.applicationUserStorageSessionKey, user);
+    } else {
+      this.session.removeItem(this.applicationUserStorageSessionKey);
+    }
   }
 
   get applicationUser(): ApplicationUser | null {

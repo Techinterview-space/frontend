@@ -1,7 +1,20 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// STAR RATING READONLY COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
 .star-container {
   font-size: 1.2rem;
 }
 
 .star-full {
-  color: gold;
+  color: var(--warm-accent-tertiary);
+}
+
+.star-empty {
+  color: var(--warm-text-muted);
 }
