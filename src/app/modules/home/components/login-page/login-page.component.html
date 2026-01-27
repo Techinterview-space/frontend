@@ -6,12 +6,22 @@
     </div>
 
     <div class="oauth-section">
-      <button type="button" class="oauth-btn oauth-btn-google" (click)="loginWithGoogle()" [disabled]="isLoading">
+      <button
+        type="button"
+        class="oauth-btn oauth-btn-google"
+        (click)="loginWithGoogle()"
+        [disabled]="isLoading"
+      >
         <i class="bi bi-google"></i>
         <span>Войти через Google</span>
       </button>
 
-      <button type="button" class="oauth-btn oauth-btn-github" (click)="loginWithGitHub()" [disabled]="isLoading">
+      <button
+        type="button"
+        class="oauth-btn oauth-btn-github"
+        (click)="loginWithGitHub()"
+        [disabled]="isLoading"
+      >
         <i class="bi bi-github"></i>
         <span>Войти через GitHub</span>
       </button>
@@ -24,17 +34,41 @@
     <form (ngSubmit)="login()" class="auth-form">
       <div class="form-group">
         <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email"
-          placeholder="Введите ваш email" [disabled]="isLoading" autocomplete="email" />
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Введите ваш email"
+          [disabled]="isLoading"
+          autocomplete="email"
+        />
       </div>
 
       <div class="form-group">
         <label for="password" class="form-label">Пароль</label>
         <div class="password-input-wrapper">
-          <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control" [(ngModel)]="password"
-            name="password" placeholder="Введите ваш пароль" [disabled]="isLoading" autocomplete="current-password" />
-          <button type="button" class="password-toggle" (click)="togglePasswordVisibility()" tabindex="-1">
-            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            class="form-control"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Введите ваш пароль"
+            [disabled]="isLoading"
+            autocomplete="current-password"
+          />
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePasswordVisibility()"
+            tabindex="-1"
+          >
+            <i
+              class="bi"
+              [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+            ></i>
           </button>
         </div>
       </div>
@@ -43,7 +77,11 @@
         <a routerLink="/forgot-password" class="forgot-link">Забыли пароль?</a>
       </div>
 
-      <button type="submit" class="btn-submit" [disabled]="isLoading || !isFormValid()">
+      <button
+        type="submit"
+        class="btn-submit"
+        [disabled]="isLoading || !isFormValid()"
+      >
         <span *ngIf="!isLoading">Войти</span>
         <span *ngIf="isLoading" class="spinner-wrapper">
           <span class="spinner-border spinner-border-sm" role="status"></span>

@@ -58,7 +58,7 @@ const appModules: any[] = [AdminModule, InterviewsModule];
       withEventReplay(),
       withHttpTransferCacheOptions({
         includePostRequests: false,
-      })
+      }),
     ),
   ],
 })

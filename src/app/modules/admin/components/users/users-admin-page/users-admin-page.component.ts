@@ -84,7 +84,9 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
           this.loadData();
         },
         error: (err) => {
-          this.alertService.error(err.error?.message || "Не удалось разблокировать пользователя");
+          this.alertService.error(
+            err.error?.message || "Не удалось разблокировать пользователя",
+          );
         },
       });
   }
@@ -99,7 +101,9 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
           this.loadData();
         },
         error: (err) => {
-          this.alertService.error(err.error?.message || "Не удалось сбросить счетчик");
+          this.alertService.error(
+            err.error?.message || "Не удалось сбросить счетчик",
+          );
         },
       });
   }
@@ -114,7 +118,9 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
           this.loadData();
         },
         error: (err) => {
-          this.alertService.error(err.error?.message || "Не удалось подтвердить email");
+          this.alertService.error(
+            err.error?.message || "Не удалось подтвердить email",
+          );
         },
       });
   }
@@ -128,7 +134,9 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
           this.alertService.success("Письмо с подтверждением отправлено");
         },
         error: (err) => {
-          this.alertService.error(err.error?.message || "Не удалось отправить письмо");
+          this.alertService.error(
+            err.error?.message || "Не удалось отправить письмо",
+          );
         },
       });
   }

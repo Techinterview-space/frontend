@@ -2,7 +2,9 @@
   <div class="auth-card">
     <div class="auth-header">
       <h1 class="auth-title">Создайте аккаунт</h1>
-      <p class="auth-subtitle">чтобы стать частью сообщества Techinterview.space</p>
+      <p class="auth-subtitle">
+        чтобы стать частью сообщества Techinterview.space
+      </p>
     </div>
 
     <!-- Success Message -->
@@ -16,12 +18,22 @@
 
     <ng-container *ngIf="!successMessage">
       <div class="oauth-section">
-        <button type="button" class="oauth-btn oauth-btn-google" (click)="loginWithGoogle()" [disabled]="isLoading">
+        <button
+          type="button"
+          class="oauth-btn oauth-btn-google"
+          (click)="loginWithGoogle()"
+          [disabled]="isLoading"
+        >
           <i class="bi bi-google"></i>
           <span>Зарегистрироваться через Google</span>
         </button>
 
-        <button type="button" class="oauth-btn oauth-btn-github" (click)="loginWithGitHub()" [disabled]="isLoading">
+        <button
+          type="button"
+          class="oauth-btn oauth-btn-github"
+          (click)="loginWithGitHub()"
+          [disabled]="isLoading"
+        >
           <i class="bi bi-github"></i>
           <span>Зарегистрироваться через GitHub</span>
         </button>
@@ -35,66 +47,143 @@
         <div class="form-row">
           <div class="form-group">
             <label for="firstName" class="form-label">Имя</label>
-            <input type="text" id="firstName" class="form-control" [(ngModel)]="firstName" name="firstName"
-              placeholder="Выше имя" [disabled]="isLoading" autocomplete="given-name" />
+            <input
+              type="text"
+              id="firstName"
+              class="form-control"
+              [(ngModel)]="firstName"
+              name="firstName"
+              placeholder="Выше имя"
+              [disabled]="isLoading"
+              autocomplete="given-name"
+            />
           </div>
 
           <div class="form-group">
             <label for="lastName" class="form-label">Фамилия</label>
-            <input type="text" id="lastName" class="form-control" [(ngModel)]="lastName" name="lastName"
-              placeholder="Ваша файмилия" [disabled]="isLoading" autocomplete="family-name" />
+            <input
+              type="text"
+              id="lastName"
+              class="form-control"
+              [(ngModel)]="lastName"
+              name="lastName"
+              placeholder="Ваша файмилия"
+              [disabled]="isLoading"
+              autocomplete="family-name"
+            />
           </div>
         </div>
 
         <div class="form-group">
           <label for="email" class="form-label">Email</label>
-          <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email"
-            placeholder="Enter your email" [disabled]="isLoading" autocomplete="email" />
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Enter your email"
+            [disabled]="isLoading"
+            autocomplete="email"
+          />
         </div>
 
         <div class="form-group">
           <label for="password" class="form-label">Пароль</label>
           <div class="password-input-wrapper">
-            <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control" [(ngModel)]="password"
-              name="password" placeholder="Создайте пароль" [disabled]="isLoading" autocomplete="new-password" />
-            <button type="button" class="password-toggle" (click)="togglePasswordVisibility()" tabindex="-1">
-              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              class="form-control"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Создайте пароль"
+              [disabled]="isLoading"
+              autocomplete="new-password"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePasswordVisibility()"
+              tabindex="-1"
+            >
+              <i
+                class="bi"
+                [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+              ></i>
             </button>
           </div>
           <div class="password-strength" *ngIf="password.length > 0">
             <div class="strength-bar" [ngClass]="getPasswordStrength()"></div>
-            <span class="strength-label">{{ getPasswordStrength() | titlecase }}</span>
+            <span class="strength-label">{{
+              getPasswordStrength() | titlecase
+            }}</span>
           </div>
           <small class="form-hint">
-            Должен быть не менее 8 символов, содержать заглавную, строчную буквы и цифру
+            Должен быть не менее 8 символов, содержать заглавную, строчную буквы
+            и цифру
           </small>
         </div>
 
         <div class="form-group">
-          <label for="confirmPassword" class="form-label">Пдтвердить пароль</label>
+          <label for="confirmPassword" class="form-label"
+            >Пдтвердить пароль</label
+          >
           <div class="password-input-wrapper">
-            <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" class="form-control"
-              [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Подтвердите ваш пароль"
-              [disabled]="isLoading" autocomplete="new-password" />
-            <button type="button" class="password-toggle" (click)="toggleConfirmPasswordVisibility()" tabindex="-1">
-              <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            <input
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              id="confirmPassword"
+              class="form-control"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              placeholder="Подтвердите ваш пароль"
+              [disabled]="isLoading"
+              autocomplete="new-password"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="toggleConfirmPasswordVisibility()"
+              tabindex="-1"
+            >
+              <i
+                class="bi"
+                [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"
+              ></i>
             </button>
           </div>
-          <small class="form-error" *ngIf="confirmPassword && password !== confirmPassword">
+          <small
+            class="form-error"
+            *ngIf="confirmPassword && password !== confirmPassword"
+          >
             Passwords do not match
           </small>
         </div>
 
         <div class="form-group checkbox-group">
           <label class="checkbox-label">
-            <input type="checkbox" [(ngModel)]="acceptTerms" name="acceptTerms" [disabled]="isLoading" />
+            <input
+              type="checkbox"
+              [(ngModel)]="acceptTerms"
+              name="acceptTerms"
+              [disabled]="isLoading"
+            />
             <span class="checkmark"></span>
             I agree to the
-            <a routerLink="/agreements/privacy-policy" target="_blank" class="auth-link">Terms and Privacy Policy</a>
+            <a
+              routerLink="/agreements/privacy-policy"
+              target="_blank"
+              class="auth-link"
+              >Terms and Privacy Policy</a
+            >
           </label>
         </div>
 
-        <button type="submit" class="btn-submit" [disabled]="isLoading || !isFormValid() || !acceptTerms">
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="isLoading || !isFormValid() || !acceptTerms"
+        >
           <span *ngIf="!isLoading">Создать аккаунт</span>
           <span *ngIf="isLoading" class="spinner-wrapper">
             <span class="spinner-border spinner-border-sm" role="status"></span>

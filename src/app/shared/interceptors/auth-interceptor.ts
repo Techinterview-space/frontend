@@ -34,12 +34,12 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private readonly injector: Injector,
     private readonly router: Router,
-    private readonly alertService: AlertService
+    private readonly alertService: AlertService,
   ) {}
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     if (this.authService == null) {
       const authService = this.injector.get(AuthService);
@@ -61,7 +61,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (!(error instanceof HttpErrorResponse && error.status === 401)) {
             this.processHttpErrors(error);
           }
-        }
+        },
       ),
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 && !this.isAuthEndpoint(req.url)) {
@@ -74,7 +74,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
         return throwError(() => error);
-      })
+      }),
     );
   }
 
@@ -88,7 +88,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private handle401Error(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
@@ -113,7 +113,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.authService!.signout();
           this.router.navigate(["/"]);
           return throwError(() => err);
-        })
+        }),
       );
     }
 
@@ -123,7 +123,7 @@ export class AuthInterceptor implements HttpInterceptor {
       take(1),
       switchMap((token) => {
         return next.handle(this.addBearerTokenToHeader(req, token!));
-      })
+      }),
     );
   }
 
@@ -153,9 +153,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     const headersStatus = error.headers.get("status");
-    return (
-      headersStatus != null && Number(headersStatus) === notAuthStatusCode
-    );
+    return headersStatus != null && Number(headersStatus) === notAuthStatusCode;
   }
 
   private processHttpErrorResponse(error: HttpErrorResponse): boolean {
@@ -198,7 +196,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private addBearerTokenToHeader(
     req: HttpRequest<any>,
-    token?: string
+    token?: string,
   ): HttpRequest<any> {
     const authToken = token || this.authService!.getAuthorizationHeaderValue();
     if (authToken) {

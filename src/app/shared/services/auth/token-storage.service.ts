@@ -21,7 +21,11 @@ export class TokenStorageService {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  setTokens(accessToken: string, refreshToken: string, expiresIn: number): void {
+  setTokens(
+    accessToken: string,
+    refreshToken: string,
+    expiresIn: number,
+  ): void {
     if (!this.isBrowser) {
       return;
     }

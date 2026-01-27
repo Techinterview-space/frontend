@@ -50,7 +50,7 @@ export class AuthService implements IAuthService {
     private readonly authorizationService: AuthorizationService,
     private readonly authApiService: AuthApiService,
     private readonly router: Router,
-    @Inject(PLATFORM_ID) platformId: Object
+    @Inject(PLATFORM_ID) platformId: Object,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -78,7 +78,7 @@ export class AuthService implements IAuthService {
       catchError(() => {
         this.clearSession();
         return of(null);
-      })
+      }),
     );
   }
 
@@ -106,18 +106,21 @@ export class AuthService implements IAuthService {
           this.router.navigate(["/login"]);
         }
         return of(undefined);
-      })
+      }),
     );
   }
 
   /**
    * Login with email and password
    */
-  loginWithEmail(email: string, password: string): Observable<AuthTokenResponse> {
+  loginWithEmail(
+    email: string,
+    password: string,
+  ): Observable<AuthTokenResponse> {
     return this.authApiService.login({ email, password }).pipe(
       tap((response) => {
         this.handleAuthResponse(response);
-      })
+      }),
     );
   }
 
@@ -159,7 +162,7 @@ export class AuthService implements IAuthService {
     const returnUrl = window.location.pathname;
     sessionStorage.setItem("auth_return_url", returnUrl);
     window.location.href = this.authApiService.getGoogleAuthUrl(
-      `${window.location.origin}/auth-callback`
+      `${window.location.origin}/auth-callback`,
     );
   }
 
@@ -173,7 +176,7 @@ export class AuthService implements IAuthService {
     const returnUrl = window.location.pathname;
     sessionStorage.setItem("auth_return_url", returnUrl);
     window.location.href = this.authApiService.getGitHubAuthUrl(
-      `${window.location.origin}/auth-callback`
+      `${window.location.origin}/auth-callback`,
     );
   }
 
@@ -183,7 +186,7 @@ export class AuthService implements IAuthService {
   handleOAuthCallback(
     accessToken: string,
     refreshToken: string,
-    expiresIn: number
+    expiresIn: number,
   ): Observable<ApplicationUserExtended | null> {
     this.tokenStorage.setTokens(accessToken, refreshToken, expiresIn);
     this.authInfo = {
@@ -226,7 +229,7 @@ export class AuthService implements IAuthService {
       catchError((error) => {
         this.clearSession();
         throw error;
-      })
+      }),
     );
   }
 
@@ -234,7 +237,7 @@ export class AuthService implements IAuthService {
     this.tokenStorage.setTokens(
       response.access_token,
       response.refresh_token,
-      response.expires_in
+      response.expires_in,
     );
     this.authInfo = {
       accessToken: response.access_token,
@@ -313,7 +316,7 @@ export class AuthService implements IAuthService {
       if (this.tokenStorage.getRefreshToken()) {
         return this.refreshToken().pipe(
           map(() => true),
-          catchError(() => of(false))
+          catchError(() => of(false)),
         );
       }
       return of(false);
@@ -322,7 +325,7 @@ export class AuthService implements IAuthService {
     if (this.tokenStorage.isTokenExpiringSoon()) {
       return this.refreshToken().pipe(
         map(() => true),
-        catchError(() => of(true)) // Still valid, just couldn't refresh
+        catchError(() => of(true)), // Still valid, just couldn't refresh
       );
     }
 

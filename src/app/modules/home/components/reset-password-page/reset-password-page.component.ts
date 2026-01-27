@@ -26,7 +26,7 @@ export class ResetPasswordPageComponent implements OnInit, OnDestroy {
     private readonly alertService: AlertService,
     private readonly authService: AuthService,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
   ) {
     this.titleService.setTitle("Reset Password");
   }
@@ -34,7 +34,8 @@ export class ResetPasswordPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParams["token"];
     if (!this.token) {
-      this.errorMessage = "Invalid reset link. Please request a new password reset.";
+      this.errorMessage =
+        "Invalid reset link. Please request a new password reset.";
     }
   }
 
@@ -70,7 +71,9 @@ export class ResetPasswordPageComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           this.isLoading = false;
-          this.errorMessage = err.error?.message || "Failed to reset password. The link may have expired.";
+          this.errorMessage =
+            err.error?.message ||
+            "Failed to reset password. The link may have expired.";
         },
       });
   }
@@ -105,7 +108,9 @@ export class ResetPasswordPageComponent implements OnInit, OnDestroy {
     const hasUpper = /[A-Z]/.test(this.newPassword);
     const hasDigit = /\d/.test(this.newPassword);
     const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(this.newPassword);
-    const score = [hasLower, hasUpper, hasDigit, hasSpecial].filter(Boolean).length;
+    const score = [hasLower, hasUpper, hasDigit, hasSpecial].filter(
+      Boolean,
+    ).length;
     if (score >= 4 && this.newPassword.length >= 12) return "strong";
     if (score >= 3) return "medium";
     return "weak";

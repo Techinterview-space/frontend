@@ -27,7 +27,7 @@ export class VerifyEmailPageComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
   ) {
     this.titleService.setTitle("Verify Email");
   }
@@ -46,20 +46,25 @@ export class VerifyEmailPageComponent implements OnInit, OnDestroy {
   private verifyEmail(token: string): void {
     this.http
       .get<{ success: boolean; message: string }>(
-        `${environment.resourceApiURI}/api/auth/verify-email/${token}`
+        `${environment.resourceApiURI}/api/auth/verify-email/${token}`,
       )
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => {
           this.isLoading = false;
-          this.successMessage = "Email verified successfully! Redirecting to sign in...";
+          this.successMessage =
+            "Email verified successfully! Redirecting to sign in...";
           setTimeout(() => {
-            this.router.navigate(["/login"], { queryParams: { verified: "true" } });
+            this.router.navigate(["/login"], {
+              queryParams: { verified: "true" },
+            });
           }, 2000);
         },
         error: (err) => {
           this.isLoading = false;
-          this.errorMessage = err.error?.message || "Verification failed. The link may have expired.";
+          this.errorMessage =
+            err.error?.message ||
+            "Verification failed. The link may have expired.";
           this.canResend = true;
         },
       });
@@ -79,19 +84,26 @@ export class VerifyEmailPageComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.isResending = false;
-          this.alertService.success(response.message || "Verification email sent!");
+          this.alertService.success(
+            response.message || "Verification email sent!",
+          );
           this.errorMessage = null;
-          this.successMessage = "A new verification email has been sent. Please check your inbox.";
+          this.successMessage =
+            "A new verification email has been sent. Please check your inbox.";
         },
         error: (err) => {
           this.isResending = false;
-          this.alertService.error(err.error?.message || "Failed to resend verification email.");
+          this.alertService.error(
+            err.error?.message || "Failed to resend verification email.",
+          );
         },
       });
   }
 
   isEmailValid(): boolean {
-    return this.email.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
+    return (
+      this.email.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
+    );
   }
 
   ngOnDestroy(): void {

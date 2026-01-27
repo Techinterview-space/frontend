@@ -18,7 +18,7 @@ export class M2mClientsListComponent implements OnInit, OnDestroy {
   constructor(
     private readonly m2mClientsService: M2mClientsService,
     private readonly alertService: AlertService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +61,7 @@ export class M2mClientsListComponent implements OnInit, OnDestroy {
       next: () => {
         client.isActive = !client.isActive;
         this.alertService.success(
-          `Client ${client.isActive ? "activated" : "deactivated"}`
+          `Client ${client.isActive ? "activated" : "deactivated"}`,
         );
       },
       error: (err) =>
@@ -72,7 +72,7 @@ export class M2mClientsListComponent implements OnInit, OnDestroy {
   deleteClient(client: M2mClientModel): void {
     if (
       !confirm(
-        `Delete M2M client "${client.name}"? This action cannot be undone.`
+        `Delete M2M client "${client.name}"? This action cannot be undone.`,
       )
     ) {
       return;

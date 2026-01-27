@@ -149,7 +149,10 @@
               type="button"
               (click)="copySecret()"
             >
-              <i class="bi" [ngClass]="secretCopied ? 'bi-check' : 'bi-copy'"></i>
+              <i
+                class="bi"
+                [ngClass]="secretCopied ? 'bi-check' : 'bi-copy'"
+              ></i>
               {{ secretCopied ? "Copied!" : "Copy" }}
             </button>
           </div>

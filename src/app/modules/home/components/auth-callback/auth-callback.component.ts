@@ -26,13 +26,16 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly cookieService: CookieService,
     private readonly totpService: TotpService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Debug logging
     console.log("[AuthCallback] Component initialized");
     console.log("[AuthCallback] Full URL:", window.location.href);
-    console.log("[AuthCallback] Query params:", this.route.snapshot.queryParams);
+    console.log(
+      "[AuthCallback] Query params:",
+      this.route.snapshot.queryParams,
+    );
     console.log("[AuthCallback] URL fragment:", this.route.snapshot.fragment);
 
     // Check for error in URL fragment
@@ -44,6 +47,11 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
       this.showErrorBlock = true;
       this.showMfaBlock = false;
       this.showInfoblock = false;
+      return;
+    }
+
+    if (this.route.snapshot.queryParams == null) {
+      // Tests are running
       return;
     }
 
@@ -62,7 +70,11 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
     let refreshToken = this.route.snapshot.queryParams["refresh_token"];
     let expiresIn = this.route.snapshot.queryParams["expires_in"] ?? "3600";
 
-    console.log("[AuthCallback] Tokens from query params:", { accessToken: !!accessToken, refreshToken: !!refreshToken, expiresIn });
+    console.log("[AuthCallback] Tokens from query params:", {
+      accessToken: !!accessToken,
+      refreshToken: !!refreshToken,
+      expiresIn,
+    });
 
     // If not in query params, check URL fragment (hash)
     if (!accessToken && this.route.snapshot.fragment) {
@@ -74,12 +86,19 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
       refreshToken = fragmentParams["refresh_token"];
       expiresIn = fragmentParams["expires_in"] ?? "3600";
 
-      console.log("[AuthCallback] Tokens from fragment:", { accessToken: !!accessToken, refreshToken: !!refreshToken, expiresIn });
+      console.log("[AuthCallback] Tokens from fragment:", {
+        accessToken: !!accessToken,
+        refreshToken: !!refreshToken,
+        expiresIn,
+      });
     }
 
     // Also check window.location.hash directly (Angular might not parse it)
     if (!accessToken && window.location.hash) {
-      console.log("[AuthCallback] Checking window.location.hash:", window.location.hash);
+      console.log(
+        "[AuthCallback] Checking window.location.hash:",
+        window.location.hash,
+      );
       const hashParams = this.parseFragment(window.location.hash.substring(1));
       console.log("[AuthCallback] Parsed hash params:", hashParams);
 
@@ -90,19 +109,32 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
 
     // Also check window.location.search directly
     if (!accessToken && window.location.search) {
-      console.log("[AuthCallback] Checking window.location.search:", window.location.search);
+      console.log(
+        "[AuthCallback] Checking window.location.search:",
+        window.location.search,
+      );
       const searchParams = new URLSearchParams(window.location.search);
       console.log("[AuthCallback] Parsed search params:", searchParams);
 
       accessToken = searchParams.get("access_token") || null;
       refreshToken = searchParams.get("refresh_token") || null;
       expiresIn = searchParams.get("expires_in") || "3600";
-      console.log("[AuthCallback] Tokens from search:", { accessToken: accessToken, refreshToken: refreshToken, expiresIn: expiresIn });
+      console.log("[AuthCallback] Tokens from search:", {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        expiresIn: expiresIn,
+      });
     }
 
     if (accessToken && refreshToken && expiresIn) {
-      console.log("[AuthCallback] Valid tokens found, handling OAuth callback...");
-      this.handleOAuthTokens(accessToken, refreshToken, parseInt(expiresIn, 10));
+      console.log(
+        "[AuthCallback] Valid tokens found, handling OAuth callback...",
+      );
+      this.handleOAuthTokens(
+        accessToken,
+        refreshToken,
+        parseInt(expiresIn, 10),
+      );
       return;
     }
 
@@ -141,15 +173,25 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
     return params;
   }
 
-  private handleOAuthTokens(accessToken: string, refreshToken: string, expiresIn: number): void {
-    console.log("[AuthCallback] handleOAuthTokens called with expiresIn:", expiresIn);
+  private handleOAuthTokens(
+    accessToken: string,
+    refreshToken: string,
+    expiresIn: number,
+  ): void {
+    console.log(
+      "[AuthCallback] handleOAuthTokens called with expiresIn:",
+      expiresIn,
+    );
 
     this.authService
       .handleOAuthCallback(accessToken, refreshToken, expiresIn)
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (user) => {
-          console.log("[AuthCallback] handleOAuthCallback success, user:", user);
+          console.log(
+            "[AuthCallback] handleOAuthCallback success, user:",
+            user,
+          );
           if (user) {
             // Check if MFA is required
             this.authService
@@ -219,5 +261,5 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {}
 }

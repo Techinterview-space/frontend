@@ -50,7 +50,8 @@
       <div class="token-info-section">
         <p class="token-expiry">
           <i class="bi bi-clock"></i>
-          Token expires in <strong>{{ generatedToken.expiresIn }}</strong> seconds
+          Token expires in
+          <strong>{{ generatedToken.expiresIn }}</strong> seconds
         </p>
         <div class="token-scopes-section">
           <small class="text-muted">Scopes:</small>
@@ -78,7 +79,10 @@
           type="button"
           (click)="copyToken()"
         >
-          <i class="bi" [ngClass]="tokenCopied ? 'bi-check-lg' : 'bi-clipboard'"></i>
+          <i
+            class="bi"
+            [ngClass]="tokenCopied ? 'bi-check-lg' : 'bi-clipboard'"
+          ></i>
           {{ tokenCopied ? "Copied!" : "Copy Token" }}
         </button>
       </div>
@@ -153,14 +157,14 @@
 
           <dt>Created</dt>
           <dd>
-            {{ client.createdAt | date : "medium" }} by
+            {{ client.createdAt | date: "medium" }} by
             {{ client.createdByUserEmail }}
           </dd>
 
           <dt>Last Used</dt>
           <dd>
             <span *ngIf="client.lastUsedAt">
-              {{ client.lastUsedAt | date : "medium" }}
+              {{ client.lastUsedAt | date: "medium" }}
               <span *ngIf="client.lastUsedIpAddress" class="text-muted">
                 from {{ client.lastUsedIpAddress }}
               </span>
@@ -202,7 +206,11 @@
         class="btn btn-primary"
         (click)="generateToken()"
         [disabled]="!client.isActive"
-        [title]="client.isActive ? 'Generate a bearer token for testing' : 'Client must be active to generate token'"
+        [title]="
+          client.isActive
+            ? 'Generate a bearer token for testing'
+            : 'Client must be active to generate token'
+        "
       >
         <i class="bi bi-key"></i> Get Bearer Token
       </button>
@@ -228,7 +236,9 @@
     <div class="card-header">API Usage Example</div>
     <div class="card-body">
       <h6>1. Request Access Token</h6>
-      <pre class="code-block"><code>curl -X POST &#123;API_URL&#125;/api/auth/m2m/token \
+      <pre
+        class="code-block"
+      ><code>curl -X POST &#123;API_URL&#125;/api/auth/m2m/token \
   -H "Content-Type: application/json" \
   -d '&#123;
     "client_id": "{{ client.clientId }}",
@@ -236,7 +246,9 @@
   &#125;'</code></pre>
 
       <h6 class="mt-4">2. Use Token in API Requests</h6>
-      <pre class="code-block"><code>curl -X GET &#123;API_URL&#125;/api/salaries \
+      <pre
+        class="code-block"
+      ><code>curl -X GET &#123;API_URL&#125;/api/salaries \
   -H "Authorization: Bearer &#123;ACCESS_TOKEN&#125;"</code></pre>
     </div>
   </div>

@@ -15,7 +15,9 @@
   <div *ngIf="!isLoading && clients.length === 0" class="empty-state">
     <i class="bi bi-key"></i>
     <p>No M2M clients configured.</p>
-    <p class="text-muted">Create one to enable API access for external tools.</p>
+    <p class="text-muted">
+      Create one to enable API access for external tools.
+    </p>
   </div>
 
   <div class="table-responsive" *ngIf="!isLoading && clients.length > 0">
@@ -75,11 +77,11 @@
           </td>
           <td>
             <span *ngIf="client.lastUsedAt">{{
-              client.lastUsedAt | date : "short"
+              client.lastUsedAt | date: "short"
             }}</span>
             <span *ngIf="!client.lastUsedAt" class="text-muted">Never</span>
           </td>
-          <td>{{ client.createdAt | date : "mediumDate" }}</td>
+          <td>{{ client.createdAt | date: "mediumDate" }}</td>
           <td>
             <div class="btn-group btn-group-sm">
               <button
@@ -92,7 +94,9 @@
               <button
                 class="btn"
                 [ngClass]="
-                  client.isActive ? 'btn-outline-warning' : 'btn-outline-success'
+                  client.isActive
+                    ? 'btn-outline-warning'
+                    : 'btn-outline-success'
                 "
                 (click)="toggleStatus(client)"
                 [title]="client.isActive ? 'Deactivate' : 'Activate'"

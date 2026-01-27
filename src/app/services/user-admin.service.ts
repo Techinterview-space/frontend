@@ -48,27 +48,30 @@ export class UserAdminService {
   }
 
   unlockUser(userId: number): Observable<{ message: string }> {
-    return this.api.post<{ message: string }>(`${this.apiUrl}${userId}/unlock`, {});
+    return this.api.post<{ message: string }>(
+      `${this.apiUrl}${userId}/unlock`,
+      {},
+    );
   }
 
   resetFailedAttempts(userId: number): Observable<{ message: string }> {
     return this.api.post<{ message: string }>(
       `${this.apiUrl}${userId}/reset-failed-attempts`,
-      {}
+      {},
     );
   }
 
   resendVerification(userId: number): Observable<{ message: string }> {
     return this.api.post<{ message: string }>(
       `${this.apiUrl}${userId}/resend-verification`,
-      {}
+      {},
     );
   }
 
   forceVerifyEmail(userId: number): Observable<{ message: string }> {
     return this.api.post<{ message: string }>(
       `${this.apiUrl}${userId}/force-verify-email`,
-      {}
+      {},
     );
   }
 }

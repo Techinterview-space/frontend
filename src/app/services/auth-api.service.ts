@@ -83,7 +83,9 @@ export class AuthApiService {
    */
   getGoogleAuthUrl(returnUrl?: string): string {
     const baseUrl = this.api.getBaseUrl();
-    const params = returnUrl ? `?returnUrl=${encodeURIComponent(returnUrl)}` : "";
+    const params = returnUrl
+      ? `?returnUrl=${encodeURIComponent(returnUrl)}`
+      : "";
     return `${baseUrl}/api/auth/google${params}`;
   }
 
@@ -93,7 +95,9 @@ export class AuthApiService {
    */
   getGitHubAuthUrl(returnUrl?: string): string {
     const baseUrl = this.api.getBaseUrl();
-    const params = returnUrl ? `?returnUrl=${encodeURIComponent(returnUrl)}` : "";
+    const params = returnUrl
+      ? `?returnUrl=${encodeURIComponent(returnUrl)}`
+      : "";
     return `${baseUrl}/api/auth/github${params}`;
   }
 

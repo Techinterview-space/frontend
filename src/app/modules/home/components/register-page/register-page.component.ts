@@ -28,7 +28,7 @@ export class RegisterPageComponent implements OnDestroy {
     private readonly titleService: TitleService,
     private readonly alertService: AlertService,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {
     this.titleService.setTitle("Create Account");
   }
@@ -119,7 +119,9 @@ export class RegisterPageComponent implements OnDestroy {
     const hasUpper = /[A-Z]/.test(this.password);
     const hasDigit = /\d/.test(this.password);
     const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(this.password);
-    const score = [hasLower, hasUpper, hasDigit, hasSpecial].filter(Boolean).length;
+    const score = [hasLower, hasUpper, hasDigit, hasSpecial].filter(
+      Boolean,
+    ).length;
     if (score >= 4 && this.password.length >= 12) return "strong";
     if (score >= 3) return "medium";
     return "weak";

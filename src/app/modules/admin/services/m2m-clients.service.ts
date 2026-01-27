@@ -30,7 +30,10 @@ export class M2mClientsService {
     return this.http.post<M2mClientCreateResponse>(this.baseUrl, request);
   }
 
-  update(id: number, request: M2mClientUpdateRequest): Observable<M2mClientModel> {
+  update(
+    id: number,
+    request: M2mClientUpdateRequest,
+  ): Observable<M2mClientModel> {
     return this.http.put<M2mClientModel>(`${this.baseUrl}/${id}`, request);
   }
 
@@ -43,28 +46,28 @@ export class M2mClientsService {
   regenerateSecret(id: number): Observable<{ clientSecret: string }> {
     return this.http.post<{ clientSecret: string }>(
       `${this.baseUrl}/${id}/regenerate-secret`,
-      {}
+      {},
     );
   }
 
   generateToken(id: number): Observable<M2mTokenResponse> {
     return this.http.post<M2mTokenResponse>(
       `${this.baseUrl}/${id}/generate-token`,
-      {}
+      {},
     );
   }
 
   activate(id: number): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
       `${this.baseUrl}/${id}/activate`,
-      {}
+      {},
     );
   }
 
   deactivate(id: number): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
       `${this.baseUrl}/${id}/deactivate`,
-      {}
+      {},
     );
   }
 

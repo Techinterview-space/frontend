@@ -1,7 +1,11 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { M2mClientModel, M2M_SCOPES, M2mTokenResponse } from "@models/m2m-client.model";
+import {
+  M2mClientModel,
+  M2M_SCOPES,
+  M2mTokenResponse,
+} from "@models/m2m-client.model";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { M2mClientsService } from "../../services/m2m-clients.service";
@@ -29,7 +33,7 @@ export class M2mClientDetailComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly fb: FormBuilder,
     private readonly m2mClientsService: M2mClientsService,
-    private readonly alertService: AlertService
+    private readonly alertService: AlertService,
   ) {
     this.editForm = this.fb.group({
       name: ["", [Validators.required, Validators.maxLength(200)]],
@@ -113,7 +117,9 @@ export class M2mClientDetailComponent implements OnInit, OnDestroy {
           this.alertService.success("Scopes updated");
         },
         error: (err) =>
-          this.alertService.error(err.error?.message || "Failed to update scopes"),
+          this.alertService.error(
+            err.error?.message || "Failed to update scopes",
+          ),
       });
   }
 
@@ -124,7 +130,7 @@ export class M2mClientDetailComponent implements OnInit, OnDestroy {
 
     if (
       !confirm(
-        "Regenerate client secret? The old secret will stop working immediately."
+        "Regenerate client secret? The old secret will stop working immediately.",
       )
     ) {
       return;
@@ -140,7 +146,7 @@ export class M2mClientDetailComponent implements OnInit, OnDestroy {
         },
         error: (err) =>
           this.alertService.error(
-            err.error?.message || "Failed to regenerate secret"
+            err.error?.message || "Failed to regenerate secret",
           ),
       });
   }
@@ -172,7 +178,7 @@ export class M2mClientDetailComponent implements OnInit, OnDestroy {
         },
         error: (err) =>
           this.alertService.error(
-            err.error?.message || "Failed to generate token"
+            err.error?.message || "Failed to generate token",
           ),
       });
   }
@@ -204,7 +210,7 @@ export class M2mClientDetailComponent implements OnInit, OnDestroy {
       next: () => {
         this.client!.isActive = !this.client!.isActive;
         this.alertService.success(
-          `Client ${this.client!.isActive ? "activated" : "deactivated"}`
+          `Client ${this.client!.isActive ? "activated" : "deactivated"}`,
         );
       },
       error: (err) =>

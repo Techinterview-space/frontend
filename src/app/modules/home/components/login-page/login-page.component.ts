@@ -23,7 +23,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private readonly alertService: AlertService,
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
   ) {
     this.titleService.setTitle("Sign In");
   }
@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       if (params["verified"] === "true") {
         this.verifiedMessage = true;
         this.alertService.success(
-          "Email verified successfully. You can now log in."
+          "Email verified successfully. You can now log in.",
         );
       }
     });
@@ -73,7 +73,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         error: (err) => {
           this.isLoading = false;
           const message =
-            err.error?.message || "Login failed. Please check your credentials.";
+            err.error?.message ||
+            "Login failed. Please check your credentials.";
           this.alertService.error(message);
         },
       });

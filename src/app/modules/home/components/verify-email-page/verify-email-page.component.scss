@@ -2,7 +2,9 @@
 // VERIFY EMAIL PAGE STYLES
 // ═══════════════════════════════════════════════════════════════════════════════
 
-:host { display: block; }
+:host {
+  display: block;
+}
 
 .auth-container {
   min-height: 100vh;
@@ -10,7 +12,11 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem 1rem;
-  background: linear-gradient(135deg, var(--warm-bg-primary) 0%, var(--warm-bg-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--warm-bg-primary) 0%,
+    var(--warm-bg-secondary) 100%
+  );
 }
 
 .auth-card {
@@ -64,8 +70,14 @@
   border-radius: 12px;
   margin-bottom: 1.25rem;
 
-  i { font-size: 1.5rem; color: var(--warm-danger); }
-  p { margin: 0; color: var(--warm-text-primary); }
+  i {
+    font-size: 1.5rem;
+    color: var(--warm-danger);
+  }
+  p {
+    margin: 0;
+    color: var(--warm-text-primary);
+  }
 }
 
 .success-message {
@@ -77,11 +89,19 @@
   border: 1px solid var(--warm-success);
   border-radius: 12px;
 
-  i { font-size: 1.5rem; color: var(--warm-success); }
-  p { margin: 0; color: var(--warm-text-primary); }
+  i {
+    font-size: 1.5rem;
+    color: var(--warm-success);
+  }
+  p {
+    margin: 0;
+    color: var(--warm-text-primary);
+  }
 }
 
-.resend-section { margin-top: 1rem; }
+.resend-section {
+  margin-top: 1rem;
+}
 
 .resend-info {
   color: var(--warm-text-secondary);
@@ -112,9 +132,18 @@
   background-color: var(--warm-bg-primary);
   color: var(--warm-text-primary);
 
-  &::placeholder { color: var(--warm-text-muted); }
-  &:focus { outline: none; border-color: var(--warm-accent-primary); box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.15); }
-  &:disabled { background-color: var(--warm-bg-secondary); cursor: not-allowed; }
+  &::placeholder {
+    color: var(--warm-text-muted);
+  }
+  &:focus {
+    outline: none;
+    border-color: var(--warm-accent-primary);
+    box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.15);
+  }
+  &:disabled {
+    background-color: var(--warm-bg-secondary);
+    cursor: not-allowed;
+  }
 }
 
 .btn-submit {
@@ -128,8 +157,14 @@
   border-radius: 8px;
   cursor: pointer;
 
-  &:hover:not(:disabled) { background-color: var(--warm-accent-soft); transform: translateY(-1px); }
-  &:disabled { opacity: 0.6; cursor: not-allowed; }
+  &:hover:not(:disabled) {
+    background-color: var(--warm-accent-soft);
+    transform: translateY(-1px);
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
 .spinner-wrapper {
@@ -144,12 +179,18 @@
   margin-top: 1.5rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--warm-border-light);
-  p { color: var(--warm-text-secondary); font-size: 0.9rem; margin: 0; }
+  p {
+    color: var(--warm-text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+  }
 }
 
 .auth-link {
   color: var(--warm-accent-primary);
   text-decoration: none;
   font-weight: 500;
-  &:hover { text-decoration: underline; }
+  &:hover {
+    text-decoration: underline;
+  }
 }

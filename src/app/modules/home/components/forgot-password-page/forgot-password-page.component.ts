@@ -18,7 +18,7 @@ export class ForgotPasswordPageComponent implements OnDestroy {
   constructor(
     private readonly titleService: TitleService,
     private readonly alertService: AlertService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) {
     this.titleService.setTitle("Forgot Password");
   }
@@ -38,18 +38,23 @@ export class ForgotPasswordPageComponent implements OnDestroy {
       .subscribe({
         next: (response) => {
           this.isLoading = false;
-          this.successMessage = response.message || "If an account exists with this email, you will receive a password reset link.";
+          this.successMessage =
+            response.message ||
+            "If an account exists with this email, you will receive a password reset link.";
         },
         error: (err) => {
           this.isLoading = false;
           // Don't reveal if email exists or not for security
-          this.successMessage = "If an account exists with this email, you will receive a password reset link.";
+          this.successMessage =
+            "If an account exists with this email, you will receive a password reset link.";
         },
       });
   }
 
   isEmailValid(): boolean {
-    return this.email.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
+    return (
+      this.email.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
+    );
   }
 
   ngOnDestroy(): void {

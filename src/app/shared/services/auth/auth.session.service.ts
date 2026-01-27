@@ -31,7 +31,7 @@ export class AuthSessionService {
 
   get auth(): AuthInfo | null {
     const authInfo = this.session.getItem<AuthInfo>(
-      this.authorizationStorageSessionKey
+      this.authorizationStorageSessionKey,
     );
     if (authInfo == null || this.sessionExpired) {
       return null;
@@ -55,7 +55,7 @@ export class AuthSessionService {
 
   get timestamp(): Date | null {
     const timestamp = this.session.getItem<number>(
-      this.authorizationTimestampSessionKey
+      this.authorizationTimestampSessionKey,
     );
     if (timestamp != null) {
       return new Date(timestamp);

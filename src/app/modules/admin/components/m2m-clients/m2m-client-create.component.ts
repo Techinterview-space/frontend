@@ -1,10 +1,7 @@
 import { Component, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import {
-  M2mClientCreateResponse,
-  M2M_SCOPES,
-} from "@models/m2m-client.model";
+import { M2mClientCreateResponse, M2M_SCOPES } from "@models/m2m-client.model";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { M2mClientsService } from "../../services/m2m-clients.service";
@@ -26,7 +23,7 @@ export class M2mClientCreateComponent implements OnDestroy {
     private readonly fb: FormBuilder,
     private readonly m2mClientsService: M2mClientsService,
     private readonly alertService: AlertService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {
     this.form = this.fb.group({
       name: ["", [Validators.required, Validators.maxLength(200)]],
@@ -46,7 +43,9 @@ export class M2mClientCreateComponent implements OnDestroy {
     if (checked) {
       this.form.get("scopes")!.setValue([...currentScopes, scope]);
     } else {
-      this.form.get("scopes")!.setValue(currentScopes.filter((s) => s !== scope));
+      this.form
+        .get("scopes")!
+        .setValue(currentScopes.filter((s) => s !== scope));
     }
   }
 
@@ -72,7 +71,9 @@ export class M2mClientCreateComponent implements OnDestroy {
         },
         error: (err) => {
           this.isLoading = false;
-          this.alertService.error(err.error?.message || "Failed to create client");
+          this.alertService.error(
+            err.error?.message || "Failed to create client",
+          );
         },
       });
   }

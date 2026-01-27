@@ -12,7 +12,11 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem 1rem;
-  background: linear-gradient(135deg, var(--warm-bg-primary) 0%, var(--warm-bg-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--warm-bg-primary) 0%,
+    var(--warm-bg-secondary) 100%
+  );
 }
 
 .auth-card {
@@ -96,7 +100,8 @@
   gap: 0.75rem;
   margin-bottom: 1.25rem;
 
-  &::before, &::after {
+  &::before,
+  &::after {
     content: "";
     flex: 1;
     height: 1px;
@@ -135,7 +140,9 @@
   border-radius: 8px;
   background-color: var(--warm-bg-primary);
   color: var(--warm-text-primary);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 
   &::placeholder {
     color: var(--warm-text-muted);

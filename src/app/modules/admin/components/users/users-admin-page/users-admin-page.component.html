@@ -45,7 +45,9 @@
               </select>
             </div>
             <div class="col-md-2 mb-3">
-              <label for="emailConfirmed" class="form-label">Email подтвержден</label>
+              <label for="emailConfirmed" class="form-label"
+                >Email подтвержден</label
+              >
               <select
                 class="form-select"
                 id="emailConfirmed"
@@ -108,9 +110,7 @@
                 ></app-user-roles-label>
               </td>
               <td>
-                <span
-                  *ngIf="item.emailConfirmed"
-                  class="badge bg-success"
+                <span *ngIf="item.emailConfirmed" class="badge bg-success"
                   >Да</span
                 >
                 <span
@@ -123,23 +123,27 @@
                 <span
                   *ngIf="item.isLockedOut"
                   class="badge bg-danger"
-                  title="Заблокирован до: {{ item.lockedUntil | date: 'yyyy-MM-dd HH:mm' }}"
+                  title="Заблокирован до: {{
+                    item.lockedUntil | date: 'yyyy-MM-dd HH:mm'
+                  }}"
                   >Да</span
                 >
-                <span
-                  *ngIf="!item.isLockedOut"
-                  class="badge bg-success"
+                <span *ngIf="!item.isLockedOut" class="badge bg-success"
                   >Нет</span
                 >
               </td>
               <td>
                 <span
-                  *ngIf="item.failedLoginAttempts && item.failedLoginAttempts > 0"
+                  *ngIf="
+                    item.failedLoginAttempts && item.failedLoginAttempts > 0
+                  "
                   class="badge bg-warning text-dark"
                   >{{ item.failedLoginAttempts }}</span
                 >
                 <span
-                  *ngIf="!item.failedLoginAttempts || item.failedLoginAttempts === 0"
+                  *ngIf="
+                    !item.failedLoginAttempts || item.failedLoginAttempts === 0
+                  "
                   class="badge bg-secondary"
                   >0</span
                 >
@@ -180,7 +184,9 @@
                     <i class="bi bi-unlock"></i>
                   </button>
                   <button
-                    *ngIf="item.failedLoginAttempts && item.failedLoginAttempts > 0"
+                    *ngIf="
+                      item.failedLoginAttempts && item.failedLoginAttempts > 0
+                    "
                     type="button"
                     class="btn btn-outline-warning btn-sm"
                     (click)="resetFailedAttempts(item)"
