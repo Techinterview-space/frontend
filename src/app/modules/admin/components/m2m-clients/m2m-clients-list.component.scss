@@ -1,0 +1,116 @@
+:host {
+  display: block;
+}
+
+.m2m-clients-page {
+  padding: 1.5rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    margin: 0;
+    color: var(--warm-text-heading);
+  }
+}
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--warm-text-secondary);
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
+}
+
+.table {
+  background-color: var(--warm-bg-elevated);
+  border-radius: 8px;
+  overflow: hidden;
+
+  th {
+    background-color: var(--warm-bg-secondary);
+    color: var(--warm-text-primary);
+    font-weight: 600;
+    border-bottom: 1px solid var(--warm-border-default);
+  }
+
+  td {
+    vertical-align: middle;
+    border-bottom: 1px solid var(--warm-border-light);
+  }
+}
+
+.inactive-row {
+  opacity: 0.6;
+  background-color: var(--warm-bg-secondary);
+}
+
+.client-name {
+  font-weight: 600;
+  color: var(--warm-accent-primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.client-description {
+  font-size: 0.85rem;
+  color: var(--warm-text-muted);
+  margin-top: 0.25rem;
+}
+
+.client-id {
+  font-size: 0.85rem;
+  background-color: var(--warm-bg-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.badge-scope {
+  background-color: var(--warm-accent-secondary);
+  color: var(--warm-btn-contrast-text);
+  margin-right: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.badge-more {
+  background-color: var(--warm-bg-tertiary);
+  color: var(--warm-text-secondary);
+  font-size: 0.75rem;
+}
+
+.badge-success {
+  background-color: var(--warm-success);
+  color: var(--warm-btn-contrast-text);
+}
+
+.badge-danger {
+  background-color: var(--warm-danger);
+  color: var(--warm-btn-contrast-text);
+}
+
+.btn-group {
+  .btn {
+    padding: 0.25rem 0.5rem;
+  }
+}

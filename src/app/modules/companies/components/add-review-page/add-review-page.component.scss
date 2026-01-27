@@ -74,7 +74,7 @@
       .step-number {
         background-color: var(--warm-accent-primary);
         border-color: var(--warm-accent-primary);
-        color: white;
+        color: var(--warm-btn-contrast-text);
       }
     }
 
@@ -84,7 +84,7 @@
       .step-number {
         background-color: var(--warm-success);
         border-color: var(--warm-success);
-        color: white;
+        color: var(--warm-btn-contrast-text);
       }
     }
   }

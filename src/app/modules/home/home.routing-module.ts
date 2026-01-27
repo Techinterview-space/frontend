@@ -12,6 +12,11 @@ import { AboutUsComponent } from "./components/about-us/about-us.component";
 import { LogoutCallbackComponent } from "./components/logout-callback/logout-callback.component";
 import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bot.component";
 import { UnsibscribeMeComponent } from "./components/unsubscribe-me/unsubscribe-me.component";
+import { LoginPageComponent } from "./components/login-page/login-page.component";
+import { RegisterPageComponent } from "./components/register-page/register-page.component";
+import { ForgotPasswordPageComponent } from "./components/forgot-password-page/forgot-password-page.component";
+import { ResetPasswordPageComponent } from "./components/reset-password-page/reset-password-page.component";
+import { VerifyEmailPageComponent } from "./components/verify-email-page/verify-email-page.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -26,6 +31,12 @@ const routes: Routes = [
   { path: "agreements/privacy-policy", component: PrivacyPolicyPageComponent },
   { path: "about-telegram-bot", component: TelegramBotABoutComponent },
   { path: "unsubscribe", component: UnsibscribeMeComponent },
+  // Authentication routes
+  { path: "login", component: LoginPageComponent },
+  { path: "register", component: RegisterPageComponent },
+  { path: "forgot-password", component: ForgotPasswordPageComponent },
+  { path: "reset-password", component: ResetPasswordPageComponent },
+  { path: "verify-email", component: VerifyEmailPageComponent },
 ];
 
 @NgModule({

@@ -5,12 +5,12 @@ import {
   HttpEvent,
   HttpErrorResponse,
 } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError, BehaviorSubject } from "rxjs";
 import { Injector, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { z } from "zod";
 import { AuthService } from "../services/auth/auth.service";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, tap, switchMap, filter, take } from "rxjs/operators";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 
 const BackendErrorSchema = z.object({
@@ -27,16 +27,19 @@ type BackendError = z.infer<typeof BackendErrorSchema>;
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private authService: AuthService | null = null;
+  private isRefreshing = false;
+  private refreshTokenSubject: BehaviorSubject<string | null> =
+    new BehaviorSubject<string | null>(null);
 
   constructor(
     private readonly injector: Injector,
     private readonly router: Router,
-    private readonly alertService: AlertService,
+    private readonly alertService: AlertService
   ) {}
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler,
+    next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (this.authService == null) {
       const authService = this.injector.get(AuthService);
@@ -53,15 +56,74 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => this.processHttpEvent(event),
-        (error: any) => this.processHttpErrors(error),
-      ),
-      // @ts-ignore
-      catchError((err) => {
-        if (err instanceof HttpErrorResponse && err.status === 0) {
-          this.router.navigateByUrl("server-unavailable");
-          return of(err as any);
+        (error: any) => {
+          // Only process non-401 errors here
+          if (!(error instanceof HttpErrorResponse && error.status === 401)) {
+            this.processHttpErrors(error);
+          }
         }
-      }),
+      ),
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401 && !this.isAuthEndpoint(req.url)) {
+          return this.handle401Error(req, next);
+        }
+
+        if (error.status === 0) {
+          this.router.navigateByUrl("server-unavailable");
+          return of(error as any);
+        }
+
+        return throwError(() => error);
+      })
+    );
+  }
+
+  private isAuthEndpoint(url: string): boolean {
+    return (
+      url.includes("/api/auth/refresh") ||
+      url.includes("/api/auth/login") ||
+      url.includes("/api/auth/logout")
+    );
+  }
+
+  private handle401Error(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    if (!this.isRefreshing) {
+      this.isRefreshing = true;
+      this.refreshTokenSubject.next(null);
+
+      return this.authService!.refreshToken().pipe(
+        switchMap((token: string) => {
+          this.isRefreshing = false;
+          this.refreshTokenSubject.next(token);
+
+          if (token) {
+            return next.handle(this.addBearerTokenToHeader(req, token));
+          }
+
+          // No token received, logout
+          this.authService!.signout();
+          this.router.navigate(["/"]);
+          return throwError(() => new Error("Session expired"));
+        }),
+        catchError((err) => {
+          this.isRefreshing = false;
+          this.authService!.signout();
+          this.router.navigate(["/"]);
+          return throwError(() => err);
+        })
+      );
+    }
+
+    // If refresh is already in progress, wait for it to complete
+    return this.refreshTokenSubject.pipe(
+      filter((token) => token !== null),
+      take(1),
+      switchMap((token) => {
+        return next.handle(this.addBearerTokenToHeader(req, token!));
+      })
     );
   }
 
@@ -91,14 +153,14 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     const headersStatus = error.headers.get("status");
-    return headersStatus != null && Number(headersStatus) === notAuthStatusCode;
+    return (
+      headersStatus != null && Number(headersStatus) === notAuthStatusCode
+    );
   }
 
   private processHttpErrorResponse(error: HttpErrorResponse): boolean {
-    // unauthorized
+    // 401 errors are handled by handle401Error
     if (this.checkIsNotAuthorizeError(error)) {
-      this.authService!.signout();
-      this.router.navigate(["/"]);
       return true;
     }
 
@@ -113,7 +175,7 @@ export class AuthInterceptor implements HttpInterceptor {
       if (error.error != null) {
         const backendError = error.error as BackendError;
 
-        if (backendError != null) {
+        if (backendError != null && backendError.Message) {
           this.alertService.error(backendError.Message);
           return true;
         }
@@ -134,10 +196,14 @@ export class AuthInterceptor implements HttpInterceptor {
     // do nothing
   }
 
-  private addBearerTokenToHeader(req: HttpRequest<any>): HttpRequest<any> {
-    const token = this.authService!.getAuthorizationHeaderValue();
-    if (token != null) {
-      req = req.clone({ setHeaders: { Authorization: token } });
+  private addBearerTokenToHeader(
+    req: HttpRequest<any>,
+    token?: string
+  ): HttpRequest<any> {
+    const authToken = token || this.authService!.getAuthorizationHeaderValue();
+    if (authToken) {
+      const headerValue = token ? `Bearer ${token}` : authToken;
+      req = req.clone({ setHeaders: { Authorization: headerValue } });
     }
 
     return req;

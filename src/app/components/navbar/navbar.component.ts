@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { UserRole } from "@models/enums";
 import { ApplicationUserExtended } from "@models/extended";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { ThemeService } from "@shared/services/theme/theme.service";
-import { SpinnerService } from "@shared/services/spinners/spinner-service";
-import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 interface NavbarLink {
   title: string;
@@ -38,7 +37,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly spinner: SpinnerService,
+    private readonly router: Router,
     public readonly themeService: ThemeService,
   ) {}
 
@@ -155,13 +154,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {}
 
   login(): void {
-    this.spinner.showTimer();
-    this.authService.login().pipe(untilDestroyed(this)).subscribe();
+    this.router.navigate(["/login"]);
   }
 
   logout(): void {
-    this.spinner.showTimer();
     this.authService.signout();
+    this.router.navigate(["/"]);
   }
 
   toggleTheme(): void {

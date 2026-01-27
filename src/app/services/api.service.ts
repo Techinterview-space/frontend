@@ -29,6 +29,10 @@ export class ApiService {
     this.apiUrl = environment.resourceApiURI;
   }
 
+  getBaseUrl(): string {
+    return this.apiUrl;
+  }
+
   get<T>(url: string, options?: HttpOptions): Observable<T> {
     return this.http.get<T>(this.apiUrl + url, options);
   }

@@ -1,0 +1,249 @@
+<div class="m2m-client-detail-page" *ngIf="client">
+  <div class="page-header">
+    <div class="header-title">
+      <h2>{{ client.name }}</h2>
+      <span
+        class="badge"
+        [ngClass]="client.isActive ? 'badge-success' : 'badge-danger'"
+      >
+        {{ client.isActive ? "Active" : "Inactive" }}
+      </span>
+    </div>
+    <a routerLink="/admin/m2m-clients" class="btn btn-outline-secondary">
+      <i class="bi bi-arrow-left"></i> Back to List
+    </a>
+  </div>
+
+  <!-- New Secret Alert -->
+  <div class="secret-alert" *ngIf="newSecret">
+    <div class="secret-alert-content">
+      <div class="secret-alert-header">
+        <i class="bi bi-exclamation-triangle"></i>
+        <strong>New Client Secret Generated</strong>
+      </div>
+      <p>Copy this secret now. It will not be shown again!</p>
+      <div class="secret-input-group">
+        <input
+          type="text"
+          class="form-control secret-input"
+          [value]="newSecret"
+          readonly
+        />
+        <button class="btn btn-warning" type="button" (click)="copySecret()">
+          {{ secretCopied ? "Copied!" : "Copy" }}
+        </button>
+      </div>
+    </div>
+    <button class="btn btn-sm btn-outline-secondary" (click)="dismissSecret()">
+      Dismiss
+    </button>
+  </div>
+
+  <!-- Generated Token Modal -->
+  <app-dialog
+    [show]="showTokenModal"
+    header="Bearer Token Generated"
+    (closed)="closeTokenModal()"
+    additionalCss="token-modal"
+  >
+    <div class="token-modal-content" *ngIf="generatedToken">
+      <div class="token-info-section">
+        <p class="token-expiry">
+          <i class="bi bi-clock"></i>
+          Token expires in <strong>{{ generatedToken.expiresIn }}</strong> seconds
+        </p>
+        <div class="token-scopes-section">
+          <small class="text-muted">Scopes:</small>
+          <div class="token-scopes">
+            <span
+              *ngFor="let scope of generatedToken.scopes"
+              class="badge badge-scope"
+              >{{ scope }}</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="token-copy-section">
+        <label class="form-label">Access Token</label>
+        <div class="token-input-group">
+          <textarea
+            class="form-control token-textarea"
+            [value]="generatedToken.accessToken"
+            readonly
+            rows="4"
+          ></textarea>
+        </div>
+        <button
+          class="btn btn-primary copy-token-btn"
+          type="button"
+          (click)="copyToken()"
+        >
+          <i class="bi" [ngClass]="tokenCopied ? 'bi-check-lg' : 'bi-clipboard'"></i>
+          {{ tokenCopied ? "Copied!" : "Copy Token" }}
+        </button>
+      </div>
+    </div>
+  </app-dialog>
+
+  <div class="cards-grid">
+    <!-- Basic Info Card -->
+    <div class="card">
+      <div class="card-header">
+        <span>Client Information</span>
+        <button class="btn btn-sm btn-link" (click)="toggleEdit()">
+          {{ isEditing ? "Cancel" : "Edit" }}
+        </button>
+      </div>
+      <div class="card-body">
+        <form
+          *ngIf="isEditing"
+          [formGroup]="editForm"
+          (ngSubmit)="saveChanges()"
+        >
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" formControlName="name" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea
+              formControlName="description"
+              class="form-control"
+              rows="2"
+            ></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group half">
+              <label class="form-label">Rate Limit/min</label>
+              <input
+                type="number"
+                formControlName="rateLimitPerMinute"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group half">
+              <label class="form-label">Rate Limit/day</label>
+              <input
+                type="number"
+                formControlName="rateLimitPerDay"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+
+        <dl *ngIf="!isEditing" class="info-list">
+          <dt>Name</dt>
+          <dd>{{ client.name }}</dd>
+
+          <dt>Description</dt>
+          <dd>{{ client.description || "No description" }}</dd>
+
+          <dt>Client ID</dt>
+          <dd>
+            <code>{{ client.clientId }}</code>
+          </dd>
+
+          <dt>Rate Limits</dt>
+          <dd>
+            {{ client.rateLimitPerMinute || "Unlimited" }}/min,
+            {{ client.rateLimitPerDay || "Unlimited" }}/day
+          </dd>
+
+          <dt>Created</dt>
+          <dd>
+            {{ client.createdAt | date : "medium" }} by
+            {{ client.createdByUserEmail }}
+          </dd>
+
+          <dt>Last Used</dt>
+          <dd>
+            <span *ngIf="client.lastUsedAt">
+              {{ client.lastUsedAt | date : "medium" }}
+              <span *ngIf="client.lastUsedIpAddress" class="text-muted">
+                from {{ client.lastUsedIpAddress }}
+              </span>
+            </span>
+            <span *ngIf="!client.lastUsedAt" class="text-muted">Never</span>
+          </dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Scopes Card -->
+    <div class="card">
+      <div class="card-header">Permissions (Scopes)</div>
+      <div class="card-body">
+        <div *ngFor="let scope of availableScopes" class="scope-toggle">
+          <div class="form-check form-switch">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [id]="'scope-' + scope.value"
+              [checked]="client.scopes.includes(scope.value)"
+              (change)="toggleScope(scope.value)"
+            />
+            <label class="form-check-label" [for]="'scope-' + scope.value">
+              <strong>{{ scope.label }}</strong>
+              <span class="scope-description">{{ scope.description }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions Card -->
+  <div class="card actions-card">
+    <div class="card-header">Actions</div>
+    <div class="card-body">
+      <button
+        class="btn btn-primary"
+        (click)="generateToken()"
+        [disabled]="!client.isActive"
+        [title]="client.isActive ? 'Generate a bearer token for testing' : 'Client must be active to generate token'"
+      >
+        <i class="bi bi-key"></i> Get Bearer Token
+      </button>
+      <button class="btn btn-warning" (click)="regenerateSecret()">
+        <i class="bi bi-arrow-repeat"></i> Regenerate Secret
+      </button>
+      <button
+        class="btn"
+        [ngClass]="client.isActive ? 'btn-outline-warning' : 'btn-success'"
+        (click)="toggleStatus()"
+      >
+        <i class="bi" [ngClass]="client.isActive ? 'bi-pause' : 'bi-play'"></i>
+        {{ client.isActive ? "Deactivate" : "Activate" }}
+      </button>
+      <button class="btn btn-danger" (click)="deleteClient()">
+        <i class="bi bi-trash"></i> Delete Client
+      </button>
+    </div>
+  </div>
+
+  <!-- Usage Example Card -->
+  <div class="card">
+    <div class="card-header">API Usage Example</div>
+    <div class="card-body">
+      <h6>1. Request Access Token</h6>
+      <pre class="code-block"><code>curl -X POST &#123;API_URL&#125;/api/auth/m2m/token \
+  -H "Content-Type: application/json" \
+  -d '&#123;
+    "client_id": "{{ client.clientId }}",
+    "client_secret": "YOUR_CLIENT_SECRET"
+  &#125;'</code></pre>
+
+      <h6 class="mt-4">2. Use Token in API Requests</h6>
+      <pre class="code-block"><code>curl -X GET &#123;API_URL&#125;/api/salaries \
+  -H "Authorization: Bearer &#123;ACCESS_TOKEN&#125;"</code></pre>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="loading-state">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>

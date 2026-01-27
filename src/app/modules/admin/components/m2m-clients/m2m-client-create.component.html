@@ -1,0 +1,179 @@
+<div class="m2m-client-create-page">
+  <div class="page-header">
+    <h2>Create M2M Client</h2>
+    <a routerLink="/admin/m2m-clients" class="btn btn-outline-secondary">
+      <i class="bi bi-arrow-left"></i> Back to List
+    </a>
+  </div>
+
+  <!-- Creation Form -->
+  <div class="card" *ngIf="!createdClient">
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name" class="form-label">Name *</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="form-control"
+            placeholder="e.g., Salary Analytics Dashboard"
+          />
+          <div
+            *ngIf="form.get('name')?.touched && form.get('name')?.errors"
+            class="form-error"
+          >
+            Name is required (max 200 characters)
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            class="form-control"
+            rows="2"
+            placeholder="What will this client be used for?"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Scopes *</label>
+          <div class="scopes-info">
+            Select the permissions this client should have. Use minimal
+            permissions for security.
+          </div>
+          <div class="scopes-grid">
+            <div *ngFor="let scope of availableScopes" class="scope-item">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  [id]="'scope-' + scope.value"
+                  [checked]="isScopeSelected(scope.value)"
+                  (change)="onScopeToggle(scope.value, $event)"
+                />
+                <label class="form-check-label" [for]="'scope-' + scope.value">
+                  <strong>{{ scope.label }}</strong>
+                  <span class="scope-description">{{ scope.description }}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="form.get('scopes')?.touched && form.get('scopes')?.errors"
+            class="form-error"
+          >
+            At least one scope is required
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="rateLimitPerMinute" class="form-label"
+              >Rate Limit (per minute)</label
+            >
+            <input
+              type="number"
+              id="rateLimitPerMinute"
+              formControlName="rateLimitPerMinute"
+              class="form-control"
+              placeholder="e.g., 60"
+            />
+            <small class="form-hint">Leave empty for no limit</small>
+          </div>
+          <div class="form-group half">
+            <label for="rateLimitPerDay" class="form-label"
+              >Rate Limit (per day)</label
+            >
+            <input
+              type="number"
+              id="rateLimitPerDay"
+              formControlName="rateLimitPerDay"
+              class="form-control"
+              placeholder="e.g., 10000"
+            />
+            <small class="form-hint">Leave empty for no limit</small>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Create Client</span>
+            <span *ngIf="isLoading">
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+              ></span>
+              Creating...
+            </span>
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="goToList()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success: Show Credentials -->
+  <div class="card success-card" *ngIf="createdClient">
+    <div class="card-header">
+      <i class="bi bi-check-circle"></i> Client Created Successfully
+    </div>
+    <div class="card-body">
+      <div class="secret-warning">
+        <i class="bi bi-exclamation-triangle"></i>
+        <strong>Important:</strong> Copy the client secret now. It will not be
+        shown again!
+      </div>
+
+      <dl class="credentials-list">
+        <dt>Client ID</dt>
+        <dd>
+          <code>{{ createdClient.clientId }}</code>
+        </dd>
+
+        <dt>Client Secret</dt>
+        <dd>
+          <div class="secret-input-group">
+            <input
+              type="text"
+              class="form-control secret-input"
+              [value]="createdClient.clientSecret"
+              readonly
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="copySecret()"
+            >
+              <i class="bi" [ngClass]="secretCopied ? 'bi-check' : 'bi-copy'"></i>
+              {{ secretCopied ? "Copied!" : "Copy" }}
+            </button>
+          </div>
+        </dd>
+
+        <dt>Scopes</dt>
+        <dd>
+          <span
+            *ngFor="let scope of createdClient.scopes"
+            class="badge badge-scope"
+          >
+            {{ scope }}
+          </span>
+        </dd>
+      </dl>
+
+      <div class="success-actions">
+        <button class="btn btn-primary" (click)="goToClient()">
+          View Client Details
+        </button>
+        <button class="btn btn-secondary" (click)="goToList()">
+          Back to List
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

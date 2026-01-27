@@ -1,6 +1,12 @@
 import { z } from "zod";
 import { UserRole } from "./enums";
 
+export enum AuthProvider {
+  Email = "Email",
+  Google = "Google",
+  GitHub = "GitHub",
+}
+
 export const ApplicationUserSchema = z.object({
   id: z.number(),
   email: z.string().nullable(),
@@ -16,6 +22,12 @@ export const ApplicationUserSchema = z.object({
   deletedAt: z.date().nullable(),
   createdAt: z.date(),
   updatedAt: z.date(),
+  // Security-related fields
+  authProvider: z.nativeEnum(AuthProvider).optional(),
+  failedLoginAttempts: z.number().optional(),
+  lockedUntil: z.date().nullable().optional(),
+  isLockedOut: z.boolean().optional(),
+  hasPendingEmailVerification: z.boolean().optional(),
 });
 
 export type ApplicationUser = z.infer<typeof ApplicationUserSchema>;

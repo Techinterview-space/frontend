@@ -1,6 +1,5 @@
 import { TestBed } from "@angular/core/testing";
 import { Router, RouterModule } from "@angular/router";
-import { OidcUserManager } from "../services/auth/oidc-user-manager.service";
 import { AuthorizationService } from "../../services";
 import { AuthService } from "../services/auth/auth.service";
 import { AuthGuard } from "./auth.guard";
@@ -20,7 +19,6 @@ describe("AuthGuard", () => {
         AuthGuard,
         ...testUtilStubs,
         ...mostUsedServices,
-        OidcUserManager,
         AuthorizationService,
         SpinnerService,
         CookieService,
@@ -35,7 +33,7 @@ describe("AuthGuard", () => {
     const guard = new AuthGuard(
       TestBed.inject(Router),
       authServiceMock,
-      cookieServiceMock,
+      cookieServiceMock
     );
     expect(guard.canActivate(null, null)).toEqual(true);
   });
@@ -46,7 +44,7 @@ describe("AuthGuard", () => {
     const guard = new AuthGuard(
       TestBed.inject(Router),
       authServiceMock,
-      cookieServiceMock,
+      cookieServiceMock
     );
     expect(guard.canActivate(null, null)).toEqual(false);
   });

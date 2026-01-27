@@ -24,7 +24,6 @@ import { InterviewsModule } from "@modules/interviews/interviews.module";
 import { MarkdownModule } from "ngx-markdown";
 import { AdminNavbarComponent } from "@components/admin-navbar/admin-navbar.component";
 import { NavbarComponent } from "@components/navbar/navbar.component";
-import { AuthModule } from "@auth0/auth0-angular";
 import { MaintenanceComponent } from "@components/maintenance/maintenance.component";
 
 const appModules: any[] = [AdminModule, InterviewsModule];
@@ -42,13 +41,6 @@ const appModules: any[] = [AdminModule, InterviewsModule];
     AppRoutingModule,
     SharedModule,
     MarkdownModule.forRoot(),
-    AuthModule.forRoot({
-      domain: environment.auth.domain,
-      clientId: environment.auth.client_id,
-      authorizationParams: {
-        redirect_uri: environment.auth.redirect_uri,
-      },
-    }),
     ...appModules,
     ...environment.googleAnalytics.imports,
   ],
@@ -66,7 +58,7 @@ const appModules: any[] = [AdminModule, InterviewsModule];
       withEventReplay(),
       withHttpTransferCacheOptions({
         includePostRequests: false,
-      }),
+      })
     ),
   ],
 })

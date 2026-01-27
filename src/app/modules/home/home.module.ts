@@ -16,6 +16,11 @@ import { TelegramBotABoutComponent } from "./components/telegram-bot/telegram-bo
 import { FormsModule } from "@angular/forms";
 import { UnsibscribeMeComponent } from "./components/unsubscribe-me/unsubscribe-me.component";
 import { ErrorPageComponent } from "./components/error-page-component/error-page-component.component";
+import { LoginPageComponent } from "./components/login-page/login-page.component";
+import { RegisterPageComponent } from "./components/register-page/register-page.component";
+import { ForgotPasswordPageComponent } from "./components/forgot-password-page/forgot-password-page.component";
+import { ResetPasswordPageComponent } from "./components/reset-password-page/reset-password-page.component";
+import { VerifyEmailPageComponent } from "./components/verify-email-page/verify-email-page.component";
 
 @NgModule({
   declarations: [
@@ -32,6 +37,11 @@ import { ErrorPageComponent } from "./components/error-page-component/error-page
     TelegramBotABoutComponent,
     UnsibscribeMeComponent,
     ErrorPageComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
+    ForgotPasswordPageComponent,
+    ResetPasswordPageComponent,
+    VerifyEmailPageComponent,
   ],
   exports: [ErrorPageComponent],
   imports: [CommonModule, SharedModule, HomeRoutingModule, FormsModule],

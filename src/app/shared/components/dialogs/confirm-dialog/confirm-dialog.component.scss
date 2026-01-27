@@ -1,5 +1,19 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// CONFIRM DIALOG COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
 .modal {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--warm-modal-overlay);
   -webkit-animation: fadein 0.2s;
   animation: fadein 0.2s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

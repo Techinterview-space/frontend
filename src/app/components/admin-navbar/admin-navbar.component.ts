@@ -187,6 +187,11 @@ export class AdminNavbarComponent {
             isExternal: false,
           },
           {
+            title: "M2M Clients",
+            url: "/admin/m2m-clients",
+            isExternal: false,
+          },
+          {
             title: "Kibana",
             url: "https://kibana.techinterview.space",
             isExternal: true,

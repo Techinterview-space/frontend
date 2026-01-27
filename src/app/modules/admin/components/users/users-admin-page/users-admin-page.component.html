@@ -8,7 +8,7 @@
         <h5>Фильтры</h5>
         <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
           <div class="row">
-            <div class="col-md-4 mb-3">
+            <div class="col-md-3 mb-3">
               <label for="email" class="form-label">Email</label>
               <input
                 type="text"
@@ -18,9 +18,9 @@
                 placeholder="Поиск по email"
               />
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="unsubscribeMeFromAll" class="form-label"
-                >Отписка от всех емейлов</label
+                >Отписка</label
               >
               <select
                 class="form-select"
@@ -32,7 +32,31 @@
                 <option [value]="false">Нет</option>
               </select>
             </div>
-            <div class="col-md-4 mb-3 d-flex align-items-end">
+            <div class="col-md-2 mb-3">
+              <label for="isLockedOut" class="form-label">Заблокирован</label>
+              <select
+                class="form-select"
+                id="isLockedOut"
+                formControlName="isLockedOut"
+              >
+                <option [value]="null">Все</option>
+                <option [value]="true">Да</option>
+                <option [value]="false">Нет</option>
+              </select>
+            </div>
+            <div class="col-md-2 mb-3">
+              <label for="emailConfirmed" class="form-label">Email подтвержден</label>
+              <select
+                class="form-select"
+                id="emailConfirmed"
+                formControlName="emailConfirmed"
+              >
+                <option [value]="null">Все</option>
+                <option [value]="true">Да</option>
+                <option [value]="false">Нет</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3 d-flex align-items-end">
               <button type="submit" class="btn btn-outline-primary me-2">
                 Применить
               </button>
@@ -59,10 +83,13 @@
               <th>Имя</th>
               <th>Email</th>
               <th>Роли</th>
+              <th>Email подтвержден</th>
+              <th>Заблокирован</th>
+              <th>Попытки</th>
               <th>Активный</th>
               <th>Отписка</th>
               <th>Зарегистрирован</th>
-              <th></th>
+              <th>Действия</th>
             </tr>
           </thead>
           <tbody>
@@ -81,6 +108,43 @@
                 ></app-user-roles-label>
               </td>
               <td>
+                <span
+                  *ngIf="item.emailConfirmed"
+                  class="badge bg-success"
+                  >Да</span
+                >
+                <span
+                  *ngIf="!item.emailConfirmed"
+                  class="badge bg-warning text-dark"
+                  >Нет</span
+                >
+              </td>
+              <td>
+                <span
+                  *ngIf="item.isLockedOut"
+                  class="badge bg-danger"
+                  title="Заблокирован до: {{ item.lockedUntil | date: 'yyyy-MM-dd HH:mm' }}"
+                  >Да</span
+                >
+                <span
+                  *ngIf="!item.isLockedOut"
+                  class="badge bg-success"
+                  >Нет</span
+                >
+              </td>
+              <td>
+                <span
+                  *ngIf="item.failedLoginAttempts && item.failedLoginAttempts > 0"
+                  class="badge bg-warning text-dark"
+                  >{{ item.failedLoginAttempts }}</span
+                >
+                <span
+                  *ngIf="!item.failedLoginAttempts || item.failedLoginAttempts === 0"
+                  class="badge bg-secondary"
+                  >0</span
+                >
+              </td>
+              <td>
                 <app-status-label [status]="item.isActive"></app-status-label>
               </td>
               <td>
@@ -97,13 +161,52 @@
               </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
-                <button
-                  type="button"
-                  class="btn-link-sm"
-                  (click)="openUserRolesForm(item)"
-                >
-                  Изменить роль
-                </button>
+                <div class="btn-group btn-group-sm" role="group">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-sm"
+                    (click)="openUserRolesForm(item)"
+                    title="Изменить роль"
+                  >
+                    <i class="bi bi-person-gear"></i>
+                  </button>
+                  <button
+                    *ngIf="item.isLockedOut"
+                    type="button"
+                    class="btn btn-outline-success btn-sm"
+                    (click)="unlockUser(item)"
+                    title="Разблокировать"
+                  >
+                    <i class="bi bi-unlock"></i>
+                  </button>
+                  <button
+                    *ngIf="item.failedLoginAttempts && item.failedLoginAttempts > 0"
+                    type="button"
+                    class="btn btn-outline-warning btn-sm"
+                    (click)="resetFailedAttempts(item)"
+                    title="Сбросить попытки"
+                  >
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                  </button>
+                  <button
+                    *ngIf="!item.emailConfirmed"
+                    type="button"
+                    class="btn btn-outline-info btn-sm"
+                    (click)="resendVerification(item)"
+                    title="Отправить письмо"
+                  >
+                    <i class="bi bi-envelope"></i>
+                  </button>
+                  <button
+                    *ngIf="!item.emailConfirmed"
+                    type="button"
+                    class="btn btn-outline-success btn-sm"
+                    (click)="forceVerifyEmail(item)"
+                    title="Подтвердить email"
+                  >
+                    <i class="bi bi-check-circle"></i>
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>

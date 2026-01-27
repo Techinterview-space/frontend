@@ -10,6 +10,8 @@ import { ApiService } from "./api.service";
 export interface UserSearchParams extends PageParams {
   email: string | null;
   unsubscribeMeFromAll: boolean | null;
+  isLockedOut?: boolean | null;
+  emailConfirmed?: boolean | null;
 }
 
 export interface UpdateUserRolesRequest {
@@ -43,5 +45,30 @@ export class UserAdminService {
 
   updateRoles(request: UpdateUserRolesRequest): Observable<void> {
     return this.api.put<void>(this.apiUrl + "roles", request);
+  }
+
+  unlockUser(userId: number): Observable<{ message: string }> {
+    return this.api.post<{ message: string }>(`${this.apiUrl}${userId}/unlock`, {});
+  }
+
+  resetFailedAttempts(userId: number): Observable<{ message: string }> {
+    return this.api.post<{ message: string }>(
+      `${this.apiUrl}${userId}/reset-failed-attempts`,
+      {}
+    );
+  }
+
+  resendVerification(userId: number): Observable<{ message: string }> {
+    return this.api.post<{ message: string }>(
+      `${this.apiUrl}${userId}/resend-verification`,
+      {}
+    );
+  }
+
+  forceVerifyEmail(userId: number): Observable<{ message: string }> {
+    return this.api.post<{ message: string }>(
+      `${this.apiUrl}${userId}/force-verify-email`,
+      {}
+    );
   }
 }
