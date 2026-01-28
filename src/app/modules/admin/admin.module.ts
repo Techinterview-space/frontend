@@ -41,7 +41,6 @@ import { HistoricalDataTemplatesComponent } from "./components/salaries/historic
 import { SalariesHistoricalDataTemplatesService } from "@services/salaries-historical-data-templates.service";
 import { AdminEmailService } from "@services/admin-email.service";
 import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
-import { DesignSystemComponent } from "./components/design-system/design-system.component";
 import { M2mClientsListComponent } from "./components/m2m-clients/m2m-clients-list.component";
 import { M2mClientCreateComponent } from "./components/m2m-clients/m2m-client-create.component";
 import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-detail.component";
@@ -89,7 +88,6 @@ const adminServices = [
     JobPostingMessageSubscriptionsComponent,
     HistoricalDataTemplatesComponent,
     SendEmailPageComponent,
-    DesignSystemComponent,
     M2mClientsListComponent,
     M2mClientCreateComponent,
     M2mClientDetailComponent,

@@ -182,11 +182,6 @@ export class AdminNavbarComponent {
             isExternal: false,
           },
           {
-            title: "Design System",
-            url: "/admin/design-system",
-            isExternal: false,
-          },
-          {
             title: "M2M Clients",
             url: "/admin/m2m-clients",
             isExternal: false,

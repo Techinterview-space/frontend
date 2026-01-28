@@ -25,7 +25,6 @@ import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/
 import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
 import { HistoricalDataTemplatesComponent } from "./components/salaries/historical-data-templates/historical-data-templates.component";
 import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
-import { DesignSystemComponent } from "./components/design-system/design-system.component";
 import { M2mClientsListComponent } from "./components/m2m-clients/m2m-clients-list.component";
 import { M2mClientCreateComponent } from "./components/m2m-clients/m2m-client-create.component";
 import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-detail.component";
@@ -84,8 +83,6 @@ const routes: Routes = [
     path: "salaries/historical-data-templates",
     component: HistoricalDataTemplatesComponent,
   },
-
-  { path: "design-system", component: DesignSystemComponent },
 
   // M2M Clients
   { path: "m2m-clients", component: M2mClientsListComponent },

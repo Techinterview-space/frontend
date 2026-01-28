@@ -17,6 +17,7 @@ import { RegisterPageComponent } from "./components/register-page/register-page.
 import { ForgotPasswordPageComponent } from "./components/forgot-password-page/forgot-password-page.component";
 import { ResetPasswordPageComponent } from "./components/reset-password-page/reset-password-page.component";
 import { VerifyEmailPageComponent } from "./components/verify-email-page/verify-email-page.component";
+import { DesignSystemComponent } from "./components/design-system/design-system.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: "about-us", component: AboutUsComponent },
   { path: "agreements/privacy-policy", component: PrivacyPolicyPageComponent },
   { path: "about-telegram-bot", component: TelegramBotABoutComponent },
+  { path: "design-system", component: DesignSystemComponent },
   { path: "unsubscribe", component: UnsibscribeMeComponent },
   // Authentication routes
   { path: "login", component: LoginPageComponent },

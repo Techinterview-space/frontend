@@ -294,24 +294,24 @@ input.ng-touched.ng-valid {
   }
 }
 
-/* Secondary button - Sage accent */
+/* Secondary button - Dark */
 .btn-secondary {
-  background-color: var(--warm-accent-secondary);
-  border-color: var(--warm-accent-secondary);
+  background-color: var(--warm-secondary);
+  border-color: var(--warm-secondary);
   color: white;
   border-radius: $radius-md;
   font-weight: 600;
 
   &:hover:not(:disabled) {
-    background-color: var(--warm-accent-secondary-hover);
-    border-color: var(--warm-accent-secondary-hover);
+    background-color: var(--warm-secondary-hover);
+    border-color: var(--warm-secondary-hover);
     color: white;
   }
 
   &:disabled,
   &.disabled {
-    background-color: var(--warm-accent-secondary);
-    border-color: var(--warm-accent-secondary);
+    background-color: var(--warm-secondary);
+    border-color: var(--warm-secondary);
     color: white;
     opacity: 0.5;
     cursor: not-allowed;
@@ -340,20 +340,20 @@ input.ng-touched.ng-valid {
 }
 
 .btn-outline-secondary {
-  color: var(--warm-accent-secondary);
-  border-color: var(--warm-accent-secondary);
+  color: var(--warm-secondary);
+  border-color: var(--warm-secondary);
   border-radius: $radius-md;
 
   &:hover:not(:disabled) {
-    background-color: var(--warm-accent-secondary);
-    border-color: var(--warm-accent-secondary);
+    background-color: var(--warm-secondary);
+    border-color: var(--warm-secondary);
     color: white;
   }
 
   &:disabled,
   &.disabled {
-    color: var(--warm-accent-secondary);
-    border-color: var(--warm-accent-secondary);
+    color: var(--warm-secondary);
+    border-color: var(--warm-secondary);
     opacity: 0.5;
     cursor: not-allowed;
   }

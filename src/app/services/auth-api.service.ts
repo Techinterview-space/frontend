@@ -36,7 +36,7 @@ export interface ResetPasswordRequest {
   providedIn: "root",
 })
 export class AuthApiService {
-  constructor(private readonly api: ApiService) { }
+  constructor(private readonly api: ApiService) {}
 
   register(request: RegisterRequest): Observable<AuthResult> {
     return this.api.post<AuthResult>("/api/auth/register", request);
