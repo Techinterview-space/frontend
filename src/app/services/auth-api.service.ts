@@ -36,7 +36,7 @@ export interface ResetPasswordRequest {
   providedIn: "root",
 })
 export class AuthApiService {
-  constructor(private readonly api: ApiService) {}
+  constructor(private readonly api: ApiService) { }
 
   register(request: RegisterRequest): Observable<AuthResult> {
     return this.api.post<AuthResult>("/api/auth/register", request);
@@ -84,7 +84,7 @@ export class AuthApiService {
   getGoogleAuthUrl(returnUrl?: string): string {
     const baseUrl = this.api.getBaseUrl();
     const params = returnUrl
-      ? `?returnUrl=${encodeURIComponent(returnUrl)}`
+      ? `?frontendReturnUrl=${encodeURIComponent(returnUrl)}`
       : "";
     return `${baseUrl}/api/auth/google${params}`;
   }
@@ -96,7 +96,7 @@ export class AuthApiService {
   getGitHubAuthUrl(returnUrl?: string): string {
     const baseUrl = this.api.getBaseUrl();
     const params = returnUrl
-      ? `?returnUrl=${encodeURIComponent(returnUrl)}`
+      ? `?frontendReturnUrl=${encodeURIComponent(returnUrl)}`
       : "";
     return `${baseUrl}/api/auth/github${params}`;
   }

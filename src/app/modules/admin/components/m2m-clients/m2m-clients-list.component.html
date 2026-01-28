@@ -1,122 +1,132 @@
 <div class="m2m-clients-page">
-  <div class="page-header">
-    <h2>M2M API Clients</h2>
-    <button class="btn btn-primary" (click)="createClient()">
-      <i class="bi bi-plus-lg"></i> New Client
-    </button>
-  </div>
-
-  <div *ngIf="isLoading" class="loading-state">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
+  <div class="container">
+    <div class="page-header">
+      <h2>M2M API Clients</h2>
+      <button class="btn btn-primary" (click)="createClient()">
+        <i class="bi bi-plus-lg"></i> New Client
+      </button>
     </div>
-  </div>
 
-  <div *ngIf="!isLoading && clients.length === 0" class="empty-state">
-    <i class="bi bi-key"></i>
-    <p>No M2M clients configured.</p>
-    <p class="text-muted">
-      Create one to enable API access for external tools.
-    </p>
-  </div>
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
 
-  <div class="table-responsive" *ngIf="!isLoading && clients.length > 0">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Client ID</th>
-          <th>Scopes</th>
-          <th>Status</th>
-          <th>Last Used</th>
-          <th>Created</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let client of clients"
-          [class.inactive-row]="!client.isActive"
-        >
-          <td>
-            <a
-              [routerLink]="['/admin/m2m-clients', client.id]"
-              class="client-name"
-            >
-              {{ client.name }}
-            </a>
-            <div class="client-description" *ngIf="client.description">
-              {{
-                client.description.length > 50
-                  ? client.description.slice(0, 50) + "..."
-                  : client.description
-              }}
-            </div>
-          </td>
-          <td>
-            <code class="client-id">{{ client.clientId.slice(0, 12) }}...</code>
-          </td>
-          <td>
-            <span
-              *ngFor="let scope of client.scopes.slice(0, 3)"
-              class="badge badge-scope"
-            >
-              {{ scope }}
-            </span>
-            <span *ngIf="client.scopes.length > 3" class="badge badge-more">
-              +{{ client.scopes.length - 3 }} more
-            </span>
-          </td>
-          <td>
-            <span
-              class="badge"
-              [ngClass]="client.isActive ? 'badge-success' : 'badge-danger'"
-            >
-              {{ client.isActive ? "Active" : "Inactive" }}
-            </span>
-          </td>
-          <td>
-            <span *ngIf="client.lastUsedAt">{{
-              client.lastUsedAt | date: "short"
-            }}</span>
-            <span *ngIf="!client.lastUsedAt" class="text-muted">Never</span>
-          </td>
-          <td>{{ client.createdAt | date: "mediumDate" }}</td>
-          <td>
-            <div class="btn-group btn-group-sm">
-              <button
-                class="btn btn-outline-primary"
-                (click)="viewClient(client)"
-                title="View/Edit"
+    <div *ngIf="!isLoading && clients.length === 0" class="empty-state card">
+      <div class="card-body">
+        <i class="bi bi-key"></i>
+        <p>No M2M clients configured.</p>
+        <p class="text-muted">
+          Create one to enable API access for external tools.
+        </p>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="!isLoading && clients.length > 0">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Client ID</th>
+                <th>Scopes</th>
+                <th>Status</th>
+                <th>Last Used</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let client of clients"
+                [class.inactive-row]="!client.isActive"
               >
-                <i class="bi bi-pencil"></i>
-              </button>
-              <button
-                class="btn"
-                [ngClass]="
-                  client.isActive
-                    ? 'btn-outline-warning'
-                    : 'btn-outline-success'
-                "
-                (click)="toggleStatus(client)"
-                [title]="client.isActive ? 'Deactivate' : 'Activate'"
-              >
-                <i
-                  class="bi"
-                  [ngClass]="client.isActive ? 'bi-pause' : 'bi-play'"
-                ></i>
-              </button>
-              <button
-                class="btn btn-outline-danger"
-                (click)="deleteClient(client)"
-                title="Delete"
-              >
-                <i class="bi bi-trash"></i>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                <td>
+                  <a
+                    [routerLink]="['/admin/m2m-clients', client.id]"
+                    class="client-name"
+                  >
+                    {{ client.name }}
+                  </a>
+                  <div class="client-description" *ngIf="client.description">
+                    {{
+                      client.description.length > 50
+                        ? client.description.slice(0, 50) + "..."
+                        : client.description
+                    }}
+                  </div>
+                </td>
+                <td>
+                  <code class="client-id"
+                    >{{ client.clientId.slice(0, 12) }}...</code
+                  >
+                </td>
+                <td>
+                  <span
+                    *ngFor="let scope of client.scopes.slice(0, 3)"
+                    class="badge badge-scope"
+                  >
+                    {{ scope }}
+                  </span>
+                  <span *ngIf="client.scopes.length > 3" class="badge badge-more">
+                    +{{ client.scopes.length - 3 }} more
+                  </span>
+                </td>
+                <td>
+                  <span
+                    class="badge"
+                    [ngClass]="client.isActive ? 'badge-success' : 'badge-danger'"
+                  >
+                    {{ client.isActive ? "Active" : "Inactive" }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="client.lastUsedAt">{{
+                    client.lastUsedAt | date: "short"
+                  }}</span>
+                  <span *ngIf="!client.lastUsedAt" class="text-muted">Never</span>
+                </td>
+                <td>{{ client.createdAt | date: "mediumDate" }}</td>
+                <td>
+                  <div class="btn-group btn-group-sm">
+                    <button
+                      class="btn btn-outline-primary"
+                      (click)="viewClient(client)"
+                      title="View/Edit"
+                    >
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button
+                      class="btn"
+                      [ngClass]="
+                        client.isActive
+                          ? 'btn-outline-warning'
+                          : 'btn-outline-success'
+                      "
+                      (click)="toggleStatus(client)"
+                      [title]="client.isActive ? 'Deactivate' : 'Activate'"
+                    >
+                      <i
+                        class="bi"
+                        [ngClass]="client.isActive ? 'bi-pause' : 'bi-play'"
+                      ></i>
+                    </button>
+                    <button
+                      class="btn btn-outline-danger"
+                      (click)="deleteClient(client)"
+                      title="Delete"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

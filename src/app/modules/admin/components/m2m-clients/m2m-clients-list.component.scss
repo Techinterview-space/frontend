@@ -3,7 +3,7 @@
 }
 
 .m2m-clients-page {
-  padding: 1.5rem;
+  padding: 1.5rem 0;
 }
 
 .page-header {
@@ -26,8 +26,11 @@
 
 .empty-state {
   text-align: center;
-  padding: 3rem;
   color: var(--warm-text-secondary);
+
+  .card-body {
+    padding: 3rem;
+  }
 
   i {
     font-size: 3rem;
@@ -40,10 +43,14 @@
   }
 }
 
-.table {
-  background-color: var(--warm-bg-elevated);
+.card {
+  border: 1px solid var(--warm-border-light);
   border-radius: 8px;
   overflow: hidden;
+}
+
+.table {
+  background-color: var(--warm-bg-elevated);
 
   th {
     background-color: var(--warm-bg-secondary);
@@ -55,6 +62,10 @@
   td {
     vertical-align: middle;
     border-bottom: 1px solid var(--warm-border-light);
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
   }
 }
 
