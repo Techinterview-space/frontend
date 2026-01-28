@@ -27,6 +27,10 @@
     font-size: 2.5rem;
     letter-spacing: 0em;
   }
+
+  @media (max-width: 480px) {
+    font-size: 1.75rem;
+  }
 }
 
 .website-subtitle {
@@ -42,13 +46,14 @@
 }
 
 .website-image {
-  height: 60vh;
-  width: auto;
+  width: 100%;
+  height: auto;
   max-width: 100%;
   object-fit: contain;
   object-position: center;
 
   @media (min-width: 768px) {
+    width: auto;
     height: 60vh;
     max-width: 80%;
   }
