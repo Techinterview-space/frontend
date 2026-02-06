@@ -36,4 +36,4 @@ Disallow: /salaries
 Allow: /companies
 Allow: /
 
-Sitemap: https://techinterview.space/api/sitemap.xml
+Sitemap: https://api.techinterview.space/api/sitemap.xml
