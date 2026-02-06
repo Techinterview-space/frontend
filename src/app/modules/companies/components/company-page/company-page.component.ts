@@ -97,6 +97,12 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
       );
     }
 
+    this.jsonLdService.setBreadcrumbList([
+      { name: "Home", url: "https://techinterview.space" },
+      { name: "Companies", url: "https://techinterview.space/companies" },
+      { name: this.company.name },
+    ]);
+
     this.gtag.event(
       "company_review_company_page_viewed",
       "company_reviews",

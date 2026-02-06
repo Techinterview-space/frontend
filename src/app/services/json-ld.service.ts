@@ -120,6 +120,31 @@ export class JsonLdService {
     this.setJsonLd(reviewSchemas, "reviews");
   }
 
+  setBreadcrumbList(
+    items: Array<{ name: string; url?: string }>,
+  ): void {
+    const itemListElement = items.map((item, index) => {
+      const element: Record<string, unknown> = {
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+      };
+      if (item.url) {
+        element["item"] = item.url;
+      }
+      return element;
+    });
+
+    this.setJsonLd(
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement,
+      },
+      "breadcrumb",
+    );
+  }
+
   removeAll(): void {
     const scripts = this.document.head.querySelectorAll(
       `script[${JsonLdService.ATTR_ID}]`,

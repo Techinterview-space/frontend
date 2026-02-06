@@ -1,2 +1,39 @@
 User-agent: *
 Disallow: /admin
+Disallow: /me
+Disallow: /auth-callback
+Disallow: /logout-callback
+Allow: /salaries/overview
+Disallow: /salaries
+
+User-agent: GPTBot
+Allow: /salaries/overview
+Disallow: /salaries
+Allow: /companies
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /salaries/overview
+Disallow: /salaries
+Allow: /companies
+Allow: /
+
+User-agent: Google-Extended
+Allow: /salaries/overview
+Disallow: /salaries
+Allow: /companies
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /salaries/overview
+Disallow: /salaries
+Allow: /companies
+Allow: /
+
+User-agent: Bytespider
+Allow: /salaries/overview
+Disallow: /salaries
+Allow: /companies
+Allow: /
+
+Sitemap: https://techinterview.space/api/sitemap.xml

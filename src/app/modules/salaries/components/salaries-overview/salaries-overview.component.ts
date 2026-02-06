@@ -50,6 +50,12 @@ export class SalariesOverviewComponent implements OnInit, OnDestroy {
       "https://techinterview.space/salaries/overview",
       new Date().toISOString().split("T")[0],
     );
+
+    this.jsonLdService.setBreadcrumbList([
+      { name: "Home", url: "https://techinterview.space" },
+      { name: "Salaries", url: "https://techinterview.space/salaries" },
+      { name: "Overview" },
+    ]);
   }
 
   ngOnInit(): void {

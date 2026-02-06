@@ -69,3 +69,4 @@ For complete design documentation, see [DESIGN_GUIDELINE.md](docs/DESIGN_GUIDELI
 
 - [Design Guideline](docs/DESIGN_GUIDELINE.md) - Complete design system documentation (colors, typography, components)
 - [SSR & Deployment Guide](docs/SSR_DEPLOYMENT.md) - Detailed SSR implementation and deployment documentation
+- [SEO & GEO](docs/geo.md) - Generative Engine Optimization: JSON-LD structured data, meta tags, canonical URLs, dynamic sitemap, and AI bot discoverability
