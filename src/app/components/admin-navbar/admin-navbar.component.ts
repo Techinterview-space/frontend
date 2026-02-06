@@ -54,7 +54,7 @@ export class AdminNavbarComponent {
         ],
       },
       {
-        title: "Анкеты зарплат",
+        title: "Зарплаты",
         links: [
           {
             title: "Анкеты в статистике",
@@ -74,6 +74,11 @@ export class AdminNavbarComponent {
           {
             title: "График исторических данных",
             url: "/admin/salaries/historical-data-templates",
+            isExternal: false,
+          },
+          {
+            title: "Страница зарплат для ботов",
+            url: "/salaries/overview",
             isExternal: false,
           },
         ],

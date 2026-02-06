@@ -35,6 +35,7 @@ import { UsefulnessRatingComponent } from "./components/salaries-chart/usefulnes
 import { ThankYouForFeedbackComponent } from "./components/salaries-chart/thank-you-for-feedback/thank-you-for-feedback.component";
 import { SurveyHistoricalChartComponent } from "./components/historical-charts-page/survey-historical-chart/survey-historical-chart.component";
 import { CurrenciesChartPageComponent } from "./components/currencies-chart-page/currencies-chart-page.component";
+import { SalariesOverviewComponent } from "./components/salaries-overview/salaries-overview.component";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { CurrenciesChartPageComponent } from "./components/currencies-chart-page
     ThankYouForFeedbackComponent,
     SurveyHistoricalChartComponent,
     CurrenciesChartPageComponent,
+    SalariesOverviewComponent,
   ],
   imports: [
     CommonModule,

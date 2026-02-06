@@ -1,0 +1,101 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// SALARIES OVERVIEW STYLES
+// Lightweight bot-friendly page for GEO
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// HEADER
+// ─────────────────────────────────────────────────────────────────────────────────
+
+.overview-header {
+  h1 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+  }
+
+  .overview-subtitle {
+    color: var(--warm-text-secondary);
+    font-size: 1.1rem;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// TABLES
+// ─────────────────────────────────────────────────────────────────────────────────
+
+.overview-table {
+  background-color: var(--warm-card-bg);
+  border: 1px solid var(--warm-border-color);
+  border-radius: 8px;
+  overflow: hidden;
+
+  thead th {
+    background-color: var(--warm-bg-accent);
+    color: var(--warm-text-heading);
+    font-family: var(--warm-font-heading);
+    font-weight: 600;
+    border-bottom: 2px solid var(--warm-border-strong);
+  }
+
+  tbody td {
+    color: var(--warm-text-primary);
+    border-bottom: 1px solid var(--warm-divider);
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────────
+
+section {
+  h2 {
+    font-family: var(--warm-font-heading);
+    color: var(--warm-text-heading);
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+
+  figcaption {
+    color: var(--warm-text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+
+    a {
+      color: var(--warm-accent-primary);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────────
+// CTA
+// ─────────────────────────────────────────────────────────────────────────────────
+
+.cta-section {
+  padding: 1.5rem;
+  background-color: var(--warm-bg-accent);
+  border-radius: 8px;
+  border: 1px solid var(--warm-border-color);
+
+  a {
+    color: var(--warm-accent-primary);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -70,14 +70,19 @@
                   >
                     {{ scope }}
                   </span>
-                  <span *ngIf="client.scopes.length > 3" class="badge badge-more">
+                  <span
+                    *ngIf="client.scopes.length > 3"
+                    class="badge badge-more"
+                  >
                     +{{ client.scopes.length - 3 }} more
                   </span>
                 </td>
                 <td>
                   <span
                     class="badge"
-                    [ngClass]="client.isActive ? 'badge-success' : 'badge-danger'"
+                    [ngClass]="
+                      client.isActive ? 'badge-success' : 'badge-danger'
+                    "
                   >
                     {{ client.isActive ? "Active" : "Inactive" }}
                   </span>
@@ -86,7 +91,9 @@
                   <span *ngIf="client.lastUsedAt">{{
                     client.lastUsedAt | date: "short"
                   }}</span>
-                  <span *ngIf="!client.lastUsedAt" class="text-muted">Never</span>
+                  <span *ngIf="!client.lastUsedAt" class="text-muted"
+                    >Never</span
+                  >
                 </td>
                 <td>{{ client.createdAt | date: "mediumDate" }}</td>
                 <td>

@@ -1,4 +1,5 @@
-import { Injectable } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { Inject, Injectable } from "@angular/core";
 import { Meta, MetaDefinition } from "@angular/platform-browser";
 import { environment } from "@environments/environment";
 import { TitleService } from "@services/title.service";
@@ -20,6 +21,7 @@ export class MetaTagService {
   constructor(
     private readonly title: TitleService,
     private readonly meta: Meta,
+    @Inject(DOCUMENT) private readonly document: Document,
   ) {}
 
   /**
@@ -46,6 +48,8 @@ export class MetaTagService {
 
       { property: "og:url", content: environment.baseUrl + pageUrl },
     ]);
+
+    this.setCanonicalUrl(environment.baseUrl + pageUrl);
   }
 
   returnDefaultMetaTags(): void {
@@ -72,6 +76,8 @@ export class MetaTagService {
       { property: "og:image", content: MetaTagService.DEFAULT_IMAGE_URL },
       { property: "og:url", content: environment.baseUrl },
     ]);
+
+    this.setCanonicalUrl(environment.baseUrl);
   }
 
   private buildCompanyDescription(company: CompanyMetaTags): string {
@@ -148,11 +154,27 @@ export class MetaTagService {
     }
 
     this.meta.addTags(tags);
+    this.setCanonicalUrl(fullUrl);
   }
 
   private adjustTitle(title: string): string {
     title = title.replace(" - Techinterview.space", "");
     return title + " - Techinterview.space";
+  }
+
+  private setCanonicalUrl(url: string): void {
+    this.removeCanonicalUrl();
+    const link = this.document.createElement("link");
+    link.setAttribute("rel", "canonical");
+    link.setAttribute("href", url);
+    this.document.head.appendChild(link);
+  }
+
+  private removeCanonicalUrl(): void {
+    const existing = this.document.head.querySelector('link[rel="canonical"]');
+    if (existing) {
+      existing.remove();
+    }
   }
 
   private removeTags(): void {

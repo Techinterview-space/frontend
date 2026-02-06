@@ -4,11 +4,16 @@ import { SalariesChartComponent } from "./components/salaries-chart/salaries-cha
 import { HistoricalChartsPageComponent } from "./components/historical-charts-page/historical-charts-page.component";
 import { AddSalaryComponent } from "./components/add-salary/add-salary.component";
 import { CurrenciesChartPageComponent } from "./components/currencies-chart-page/currencies-chart-page.component";
+import { SalariesOverviewComponent } from "./components/salaries-overview/salaries-overview.component";
 
 const routes: Routes = [
   {
     path: "",
     component: SalariesChartComponent,
+  },
+  {
+    path: "overview",
+    component: SalariesOverviewComponent,
   },
   {
     path: "add-new",

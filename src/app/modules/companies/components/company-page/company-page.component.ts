@@ -5,6 +5,7 @@ import { ViewportScroller } from "@angular/common";
 import { Company, CompanyReview } from "@models/companies.model";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
+import { JsonLdService } from "@services/json-ld.service";
 import { MetaTagService } from "@services/meta-tags.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { AuthService } from "@shared/services/auth/auth.service";
@@ -30,6 +31,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
     private readonly service: CompaniesService,
     private readonly title: TitleService,
     private readonly metaTagService: MetaTagService,
+    private readonly jsonLdService: JsonLdService,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly authService: AuthService,
@@ -73,6 +75,27 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
       reviewsCount: this.company.reviewsCount,
       slug: this.company.slug,
     });
+
+    // JSON-LD structured data for GEO
+    const companyUrl = `https://techinterview.space/companies/${this.company.slug}`;
+    if (this.company.reviewsCount > 0) {
+      this.jsonLdService.setEmployerAggregateRating(
+        this.company.name,
+        companyUrl,
+        this.company.rating,
+        this.company.reviewsCount,
+      );
+    }
+
+    if (this.company.reviews?.length > 0) {
+      this.jsonLdService.setReviews(
+        this.company.name,
+        this.company.reviews.map((r) => ({
+          rating: r.totalRating,
+          datePublished: new Date(r.createdAt).toISOString().split("T")[0],
+        })),
+      );
+    }
 
     this.gtag.event(
       "company_review_company_page_viewed",
@@ -134,6 +157,7 @@ export class CompanyPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.title.resetTitle();
     this.metaTagService.returnDefaultMetaTags();
+    this.jsonLdService.removeAll();
   }
 
   likeClicked(review: CompanyReview): void {

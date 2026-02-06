@@ -167,6 +167,7 @@ export interface SalariesChartFilterData {
   salarySourceTypes: SalarySourceType[];
   quarterTo: number | null;
   yearTo: number | null;
+  allowReadonly?: boolean;
 }
 
 export interface SalariesAddingTrendChartParams {

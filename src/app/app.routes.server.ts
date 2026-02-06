@@ -21,6 +21,8 @@ export const serverRoutes: ServerRoute[] = [
   { path: "about-telegram-bot", renderMode: RenderMode.Server },
   { path: "design-system", renderMode: RenderMode.Server },
 
+  { path: "salaries/overview", renderMode: RenderMode.Server },
+
   // Home page - for SEO
   { path: "", renderMode: RenderMode.Server },
 

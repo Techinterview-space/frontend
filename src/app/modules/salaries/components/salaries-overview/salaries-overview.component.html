@@ -1,0 +1,476 @@
+<article class="container my-5" *ngIf="data; else loading">
+  <div class="card mb-5">
+    <div class="card-body">
+      <header class="overview-header mb-5">
+        <h1>IT Salaries in Kazakhstan</h1>
+        <div class="overview-subtitle">
+          <p>
+            Date: <strong>{{ currentDate }}</strong>
+          </p>
+          <p>
+            Salary statistics for date <strong>{{ currentDate }}</strong> for IT
+            professionals in Kazakhstan, collected via anonymous surveys.
+          </p>
+          <p>
+            The page is useful for SEO and GEO targeting. If you need
+            interactive charts and filters, please visit
+            <a href="/salaries">Salaries</a> page.
+          </p>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <section class="mb-5">
+    <div class="card">
+      <div class="card-body">
+        <h2>Summary</h2>
+        <p>
+          Total salary records in statistics:
+          <strong>{{ data.totalCountInStats }}</strong
+          >.
+        </p>
+        <figure>
+          <table class="table overview-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Average (KZT)</th>
+                <th>Median (KZT)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Local companies</td>
+                <td>{{ formatMoney(data.averageSalary) }}</td>
+                <td>{{ formatMoney(data.medianSalary) }}</td>
+              </tr>
+              <tr *ngIf="data.averageRemoteSalary">
+                <td>Remote / Foreign companies</td>
+                <td>{{ formatMoney(data.averageRemoteSalary) }}</td>
+                <td>{{ formatMoney(data.medianRemoteSalary) }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <figcaption>
+            Source:
+            <cite
+              ><a href="https://techinterview.space/salaries"
+                >Techinterview.space</a
+              ></cite
+            >
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Salaries by Grade (Local) -->
+  <section class="mb-5" *ngIf="localGrades.length > 0">
+    <div class="card">
+      <div class="card-body">
+        <h2>Salaries by Developer Grade (Local Companies)</h2>
+        <figure>
+          <table class="table overview-table">
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Records</th>
+                <th>Average (KZT)</th>
+                <th>Median (KZT)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of localGrades">
+                <td>{{ gradeLabel(item.grade) }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ formatMoney(item.averageSalary) }}</td>
+                <td>{{ formatMoney(item.medianSalary) }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <figcaption>
+            Source:
+            <cite
+              ><a href="https://techinterview.space/salaries"
+                >Techinterview.space</a
+              ></cite
+            >
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Salaries by Grade (Remote) -->
+  <section class="mb-5" *ngIf="remoteGrades.length > 0">
+    <div class="card">
+      <div class="card-body">
+        <h2>Salaries by Developer Grade (Remote / Foreign Companies)</h2>
+        <figure>
+          <table class="table overview-table">
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Records</th>
+                <th>Average (KZT)</th>
+                <th>Median (KZT)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of remoteGrades">
+                <td>{{ gradeLabel(item.grade) }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ formatMoney(item.averageSalary) }}</td>
+                <td>{{ formatMoney(item.medianSalary) }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <figcaption>
+            Source:
+            <cite
+              ><a href="https://techinterview.space/salaries/"
+                >Techinterview.space</a
+              ></cite
+            >
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grade Distribution (Min/Max) -->
+  <section class="mb-5" *ngIf="localBoxPlot.length > 0">
+    <div class="card">
+      <div class="card-body">
+        <h2>Salary Distribution by Grade (Local Companies)</h2>
+        <figure>
+          <table class="table overview-table">
+            <thead>
+              <tr>
+                <th>Grade</th>
+                <th>Min (KZT)</th>
+                <th>Q1 (KZT)</th>
+                <th>Median (KZT)</th>
+                <th>Mean (KZT)</th>
+                <th>Q3 (KZT)</th>
+                <th>Max (KZT)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of localBoxPlot">
+                <td>{{ gradeLabel(item.grade) }}</td>
+                <td>{{ formatMoney(item.min) }}</td>
+                <td>{{ formatMoney(item.q1) }}</td>
+                <td>{{ formatMoney(item.median) }}</td>
+                <td>{{ formatMoney(item.mean) }}</td>
+                <td>{{ formatMoney(item.q3) }}</td>
+                <td>{{ formatMoney(item.max) }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <figcaption>
+            Source:
+            <cite
+              ><a href="https://techinterview.space/salaries"
+                >Techinterview.space</a
+              ></cite
+            >
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Salaries by City -->
+  <ng-container *ngIf="cityChartLocal as cityChart">
+    <section class="mb-5">
+      <div class="card">
+        <div class="card-body">
+          <h2>Salaries by City (Local Companies)</h2>
+          <figure>
+            <table class="table overview-table">
+              <thead>
+                <tr>
+                  <th>City</th>
+                  <th>Records</th>
+                  <th>Average (KZT)</th>
+                  <th>Median (KZT)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let label of cityChart.labels; let i = index">
+                  <td>{{ label }}</td>
+                  <td>{{ cityChart.itemsCount[i] }}</td>
+                  <td>{{ formatMoney(cityChart.averageSalaries[i]) }}</td>
+                  <td>{{ formatMoney(cityChart.medianSalaries[i]) }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <figcaption>
+              Source:
+              <cite
+                ><a href="https://techinterview.space/salaries"
+                  >Techinterview.space</a
+                ></cite
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- Salaries by Experience -->
+  <ng-container *ngIf="experienceChartLocal as expChart">
+    <section class="mb-5">
+      <div class="card">
+        <div class="card-body">
+          <h2>Salaries by Experience (Local Companies)</h2>
+          <figure>
+            <table class="table overview-table">
+              <thead>
+                <tr>
+                  <th>Experience (years)</th>
+                  <th>Records</th>
+                  <th>Average (KZT)</th>
+                  <th>Median (KZT)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let label of expChart.labels; let i = index">
+                  <td>{{ label.start }}&ndash;{{ label.end }}</td>
+                  <td>{{ expChart.itemsCount[i] }}</td>
+                  <td>{{ formatMoney(expChart.averageSalaries[i]) }}</td>
+                  <td>{{ formatMoney(expChart.medianSalaries[i]) }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <figcaption>
+              Source:
+              <cite
+                ><a href="https://techinterview.space/salaries"
+                  >Techinterview.space</a
+                ></cite
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- Salaries by Age -->
+  <ng-container *ngIf="ageChartLocal as ageChart">
+    <section class="mb-5">
+      <div class="card">
+        <div class="card-body">
+          <h2>Salaries by Age (Local Companies)</h2>
+          <figure>
+            <table class="table overview-table">
+              <thead>
+                <tr>
+                  <th>Age</th>
+                  <th>Records</th>
+                  <th>Average (KZT)</th>
+                  <th>Median (KZT)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let label of ageChart.labels; let i = index">
+                  <td>{{ label.start }}&ndash;{{ label.end }}</td>
+                  <td>{{ ageChart.itemsCount[i] }}</td>
+                  <td>{{ formatMoney(ageChart.averageSalaries[i]) }}</td>
+                  <td>{{ formatMoney(ageChart.medianSalaries[i]) }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <figcaption>
+              Source:
+              <cite
+                ><a href="https://techinterview.space/salaries"
+                  >Techinterview.space</a
+                ></cite
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- Professions Distribution -->
+  <ng-container *ngIf="professionsLocal as profs">
+    <section class="mb-5" *ngIf="profs.items.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <h2>Profession Distribution (Local Companies)</h2>
+          <figure>
+            <table class="table overview-table">
+              <thead>
+                <tr>
+                  <th>Profession</th>
+                  <th>Records</th>
+                  <th>Share (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of profs.items">
+                  <td>{{ item.profession.title }}</td>
+                  <td>{{ item.count }}</td>
+                  <td>{{ item.percentage | number: "1.1-1" }}</td>
+                </tr>
+                <tr *ngIf="profs.otherCount > 0">
+                  <td>Other</td>
+                  <td>{{ profs.otherCount }}</td>
+                  <td>{{ profs.otherPercentage | number: "1.1-1" }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <figcaption>
+              Source:
+              <cite
+                ><a href="https://techinterview.space/salaries"
+                  >Techinterview.space</a
+                ></cite
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- Skills -->
+  <ng-container *ngIf="skillsData as skills">
+    <section class="mb-5" *ngIf="skills.items.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <h2>Top Skills</h2>
+          <figure>
+            <table class="table overview-table">
+              <thead>
+                <tr>
+                  <th>Skill</th>
+                  <th>Records</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of skills.items">
+                  <td>{{ item.skill.title }}</td>
+                  <td>{{ item.count }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <figcaption>
+              Source:
+              <cite
+                ><a href="https://techinterview.space/salaries"
+                  >Techinterview.space</a
+                ></cite
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- Work Industries -->
+  <ng-container *ngIf="industriesData as industries">
+    <section class="mb-5" *ngIf="industries.items.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <h2>Work Industries</h2>
+          <figure>
+            <table class="table overview-table">
+              <thead>
+                <tr>
+                  <th>Industry</th>
+                  <th>Records</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of industries.items">
+                  <td>{{ item.industry.title }}</td>
+                  <td>{{ item.count }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <figcaption>
+              Source:
+              <cite
+                ><a href="https://techinterview.space/salaries"
+                  >Techinterview.space</a
+                ></cite
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- Gender Distribution -->
+  <ng-container *ngIf="genderLocal as gender">
+    <section class="mb-5" *ngIf="gender.items.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <h2>Gender Distribution (Local Companies)</h2>
+          <figure>
+            <table class="table overview-table">
+              <thead>
+                <tr>
+                  <th>Gender</th>
+                  <th>Records</th>
+                  <th>Share (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of gender.items">
+                  <td>{{ genderLabel(item.gender) }}</td>
+                  <td>{{ item.count }}</td>
+                  <td>{{ item.percentage | number: "1.1-1" }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <figcaption>
+              Source:
+              <cite
+                ><a href="https://techinterview.space/salaries"
+                  >Techinterview.space</a
+                ></cite
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- CTA -->
+  <section class="cta-section mt-5">
+    <div class="card">
+      <div class="card-body">
+        <p>
+          For interactive charts, filters, and detailed analysis,
+          <a routerLink="/salaries">visit the full salary dashboard</a> (login
+          required).
+        </p>
+      </div>
+    </div>
+  </section>
+</article>
+
+<ng-template #loading>
+  <div class="container mt-5">
+    <app-data-loader [title]="''">
+      <div class="mt-3 pb-5">
+        <div class="text-muted h2 d-flex justify-content-center">
+          Loading salary data...
+        </div>
+      </div>
+    </app-data-loader>
+  </div>
+</ng-template>
