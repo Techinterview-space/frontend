@@ -118,7 +118,6 @@ Reusable components, directives, and pipes are declared/exported in `src/app/sha
 
 ## Dependencies
 
-- Auth: Auth0 (`@auth0/auth0-angular`)
 - UI: Bootstrap 5, Bootstrap Icons
 - Charts: Chart.js, `@sgratzl/chartjs-chart-boxplot`
 - Markdown: `ngx-markdown` with Prism.js syntax highlighting
