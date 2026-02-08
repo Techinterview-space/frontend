@@ -91,8 +91,20 @@ export class MetaTagService {
 
     const reviewsText = this.pluralizeReviews(company.reviewsCount);
     const reviewsPart = reviewsText ? `, ${reviewsText}` : "";
+    const suffix = ". Читайте реальные отзывы сотрудников и делитесь своим опытом";
 
-    return `Отзывы о компании ${company.companyName} на Techinterview.space. ${ratingText}${reviewsPart}. Читайте реальные отзывы сотрудников и делитесь своим опытом`;
+    const full = `Отзывы о компании ${company.companyName} на Techinterview.space. ${ratingText}${reviewsPart}${suffix}`;
+
+    if (full.length <= 160) {
+      return full;
+    }
+
+    const short = `Отзывы о ${company.companyName}. ${ratingText}${reviewsPart}${suffix}`;
+    if (short.length <= 160) {
+      return short;
+    }
+
+    return short.substring(0, 157) + "...";
   }
 
   private pluralizeReviews(count: number): string {

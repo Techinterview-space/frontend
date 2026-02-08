@@ -64,6 +64,7 @@ app.use(
  * Handle all other requests by rendering the Angular application.
  */
 app.use((req, res, next) => {
+  res.setHeader("Cache-Control", "public, max-age=300, s-maxage=3600");
   angularApp
     .handle(req)
     .then((response) =>

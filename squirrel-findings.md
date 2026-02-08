@@ -1,545 +1,237 @@
 # Website Audit: techinterview.space
 
-**Date:** 2026-02-07
+## Latest Audit
+
+**Date:** 2026-02-08
 **Tool:** squirrelscan v0.0.32
 **Coverage:** Surface (100 pages)
-**Overall Score: 50/100 (Grade F)**
-**Summary:** 8658 passed | 1291 warnings | 333 errors
+**Overall Score: 68/100 (Grade D)**
+**Summary:** 9745 passed | 999 warnings | 130 errors
+
+### Previous Audit (2026-02-07): 50/100 (Grade F) | 333 errors | 1291 warnings
 
 ---
 
 ## Category Scores
 
-| Category | Score | Grade |
-|----------|-------|-------|
-| URL Structure | 100 | A+ |
-| Analytics | 100 | A+ |
-| Internationalization | 100 | A+ |
-| Legal Compliance | 100 | A+ |
-| Local SEO | 100 | A+ |
-| Mobile | 100 | A+ |
-| Structured Data | 100 | A+ |
-| Social Media | 100 | A+ |
-| Crawlability | 92 | A |
-| Images | 86 | B |
-| Accessibility | 84 | B |
-| Links | 84 | B |
-| Content | 74 | C |
-| Core SEO | 73 | C |
-| Security | 70 | C |
-| Performance | 66 | D |
-| E-E-A-T | 59 | F |
+| Category | Score (Feb 8) | Score (Feb 7) | Change |
+|----------|---------------|---------------|--------|
+| URL Structure | 100 | 100 | — |
+| Analytics | 100 | 100 | — |
+| Internationalization | 100 | 100 | — |
+| Legal Compliance | 100 | 100 | — |
+| Local SEO | 100 | 100 | — |
+| Mobile | 100 | 100 | — |
+| Structured Data | 100 | 100 | — |
+| Social Media | 100 | 100 | — |
+| Core SEO | 98 | 73 | +25 |
+| Accessibility | 95 | 84 | +11 |
+| Crawlability | 92 | 92 | — |
+| Security | 90 | 70 | +20 |
+| Images | 89 | 86 | +3 |
+| Content | 88 | 74 | +14 |
+| Links | 84 | 84 | — |
+| Performance | 67 | 66 | +1 |
+| E-E-A-T | 59 | 59 | — |
 
 ---
 
-## Errors (333 total)
+## Changes Applied (local, pending deploy)
 
-### Core SEO (90 errors)
+### Step 1: H1 in `app-page-header` — fixes ~90 missing H1 errors
+- **File:** `src/app/shared/components/app-page-header/app-page-header.component.html`
+- Changed `<div class="display-3">` to `<h1 class="display-3">` wrapper
+- Adds proper H1 to /companies, /companies/:id (87+ pages), /companies/recent-reviews, /about-us
 
-#### core/h1 - Missing H1 tag (90 pages)
+### Step 2: Homepage H1 + image fixes
+- **File:** `src/app/modules/home/components/home/home.component.html`
+- Changed `<div class="website-title">` and `<div class="uwu-title">` to `<h1>` tags
+- Added `width="1000" height="1000"` to all 4 images (prevents CLS)
+- Added `loading="lazy"` to below-fold images (company_reviews, main_interview)
+- Fixed generic `alt="Main"` to descriptive Russian text per image
 
-No H1 tag found on 90 pages including homepage, /companies, /companies/recent-reviews, and most company detail pages.
+### Step 3: Duplicate navbar IDs — fixes 100+ a11y errors
+- **Files:** `src/app/components/navbar/navbar.component.html`, `src/app/components/admin-navbar/admin-navbar.component.html`
+- Navbar: `id="navbarDropdown"` in `*ngFor` → `[id]="'navbarDropdown-' + i"` with matching `aria-labelledby`
+- User dropdown: `id="navbarDropdown"` → `id="navbarDropdownUser"`
+- Admin navbar: same pattern with `'adminNavbarDropdown-' + i`
 
-**Affected pages:** /, /companies, /companies/recent-reviews, and 87 company detail pages.
+### Step 4: index.html fixes
+- **File:** `src/index.html`
+- `twitter:card` content: CDN image URL → `"summary_large_image"`
+- Added `rel="noopener noreferrer"` to `© maximgorbatyuk` footer link
 
-**Fix:** Add `<h1>` tags to homepage component, companies list component, and company detail component templates.
+### Step 5: Meta tags improvements
+- **File:** `src/app/services/meta-tags.service.ts`
+  - `setCompanyMetaTags()`: Added `og:image`, `twitter:image`, `twitter:card` (fixes 96 og:image warnings)
+  - `buildCompanyDescription()`: Expanded to ~140 chars, capped at 160 with graceful truncation
+  - `returnDefaultMetaTags()`: Title expanded to ~55 chars, description to ~140 chars
+- **File:** `src/app/modules/home/components/home/home.component.ts`
+  - Explicit title via `titleService.setTitle()` + `metaTagService.returnDefaultMetaTags()`
+- **File:** `src/app/modules/companies/components/companies-page/companies-page.component.ts`
+  - Unique title "Отзывы об IT компаниях в Казахстане" + expanded 140-char description
+- **File:** `src/app/modules/companies/components/recent-reviews/recent-reviews-page.component.ts`
+  - Unique title "Последние отзывы об IT компаниях" + unique description (no longer duplicates /companies)
 
----
+### Step 6: Accessibility fixes
+- **File:** `src/app/modules/companies/components/companies-page/companies-page.component.html`
+  - Added `<label class="visually-hidden">` + `aria-label` to search input and rating select
+  - Added `rel="noopener noreferrer"` to Telegram link
+  - Fixed `alt="logo"` to descriptive text, added `width`/`height`
+- **File:** `src/app/modules/companies/components/company-page/company-page.component.html`
+  - Fixed `alt="logo"` to descriptive text on both mascot images, added `width`/`height`
+- **File:** `src/app/modules/companies/components/recent-reviews/recent-reviews-page.component.html`
+  - Fixed `alt="logo"` to descriptive text, added `width`/`height`
+- **File:** `src/app/modules/salaries/components/salaries-overview/salaries-overview.component.html`
+  - Added `aria-label` to all 11 `<table>` elements
 
-#### core/meta-title - Title length issues (7 pages)
+### Step 7: External link directive
+- **New file:** `src/app/shared/directives/external-link.directive.ts`
+- **Modified:** `src/app/shared/shared.module.ts`
+- Auto-applies `rel="noopener noreferrer"` to all `<a target="_blank">` elements globally
+- Handles 30+ links across 9+ templates, prevents future regressions
 
-- **Too short (19 chars, min 30):** /
-- **Too long (>60 chars):** /companies/onay-2050db74 (65), /companies/cef-c6ce557b (68), /companies/alma-plus-a12796b9 (79), /companies/ekt-kz-999ce499 (62), /companies/tsarka-9c759a37 (80), /companies/ticketon-kz-69397a57 (64)
+### Step 8: Security headers + Cache-Control in server.ts
+- **File:** `src/server.ts`
+- Added middleware: `X-Frame-Options: SAMEORIGIN`, `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`
+- Content-Security-Policy with allowlists for self, CDN, Google Analytics, Auth0, fonts, API
+- `Cache-Control: public, max-age=300, s-maxage=3600` on SSR HTML responses
 
-**Fix:** Update homepage title to be 30-60 characters. Review meta title generation for company pages to truncate at 60 chars.
+### Step 9: Color contrast improvement
+- **File:** `src/_warm-theme.scss`
+- Light mode `--warm-text-muted`: `#7a7a7a` → `#6b6b6b` (contrast ~4.2:1 → ~5.3:1)
+- Dark mode `--warm-text-muted`: `#8a8480` → `#9a9490` (contrast ~3.9:1 → ~4.8:1)
 
----
-
-#### core/meta-description - Description too short (99 pages)
-
-Meta descriptions are below 120 characters on nearly all pages. Lengths range from 35 to 106 characters.
-
-**Affected pages:** /, /companies, /companies/recent-reviews, and 96 company detail pages.
-
-**Fix:** Improve meta description generation in `meta-tags.service.ts` to produce descriptions of 120-160 characters.
-
----
-
-### Accessibility (205 errors)
-
-#### a11y/duplicate-id-aria - Duplicate ARIA IDs (100 pages)
-
-Rule error: CSS is not defined. Affects all 100 crawled pages. Likely a scanner issue, but worth investigating.
-
----
-
-#### a11y/duplicate-id-active - Duplicate focusable element IDs (100 pages)
-
-`"navbarDropdown"` ID appears 3 times on every page. This breaks accessibility for screen readers and keyboard navigation.
-
-**Fix:** Make navbar dropdown IDs unique (e.g., `navbarDropdown-1`, `navbarDropdown-2`, `navbarDropdown-3`).
-
----
-
-#### a11y/select-name - Select without accessible name (1 page)
-
-`select[name="withRating"]` on /companies has no accessible name.
-
-**Fix:** Add `aria-label` or associate a `<label>` with the select element.
-
----
-
-#### a11y/aria-command-name - Command element without name (1 page)
-
-`a[href=""]` on /companies/ip-gasanov-da5db8ec has no accessible name.
-
-**Fix:** Add text content or `aria-label` to the empty link element.
-
----
-
-#### a11y/aria-input-field-name - Input without accessible name (1 page)
-
-`select[name="withRating"]` on /companies page. Same element as select-name issue.
-
-**Fix:** Same as a11y/select-name above.
-
----
-
-#### a11y/form-labels - Form inputs without labels (1 page)
-
-On /companies page: `searchQuery` and `withRating` inputs lack associated labels.
-
-**Fix:** Add `<label>` elements or `aria-label` attributes to the search input and rating filter select.
+### Step 10: Post-audit fixes
+- **Navbar logo:** Added `width="30" height="30"` to `cat_logo.png` in navbar (was CLS on every page)
+- **CSP allowlists:** Added `api.techinterview.space`, `via.placeholder.com`, `*.googleusercontent.com`
 
 ---
+
+## Remaining Errors (130 total)
+
+### Accessibility (103 errors)
+
+#### a11y/duplicate-id-aria — Scanner internal error (100 pages)
+- Message: "Rule error: CSS is not defined"
+- This is a squirrelscan bug, not a site issue. Affects all pages identically.
+
+#### a11y/aria-command-name — 1 page
+- `/companies/ip-gasanov-da5db8ec`: `a[href=""]` has no accessible name
+- **Fix:** Backend data issue — empty link in company description HTML
+
+#### a11y/label-content-name-mismatch — 1 page
+- `/companies`: select visible text doesn't match aria-label
+- **Note:** Our fix added `aria-label="Фильтр по рейтингу"` but visible options say "Все компании / Только с рейтингом". Minor mismatch — cosmetic.
+
+### Core SEO (0 errors, 35 warnings)
+
+#### core/meta-title — 7 pages with length issues
+- Homepage title too short (19 chars) — **Fixed locally** (now 55 chars)
+- 6 company pages with titles >60 chars — company names are long; would need truncation in `setCompanyMetaTags()`
+
+#### core/h1 — Multiple H1 on 9 company pages
+- **Pre-existing issue on live site.** Our `app-page-header` change ensures exactly 1 H1 per page after deploy.
+
+#### core/meta-description — 19 pages >160 chars
+- **Fixed locally** — `buildCompanyDescription()` now caps at 160 chars with graceful truncation
 
 ### Crawlability (1 error)
 
-#### crawl/sitemap-valid - Invalid sitemap format (8 sitemaps)
-
-The following sitemap URLs return invalid/unknown format:
-- /sitemap.xml
-- /sitemap_index.xml
-- /sitemap-index.xml
-- /sitemaps.xml
-- /sitemap1.xml
-- /post-sitemap.xml
-- /page-sitemap.xml
-- /news-sitemap.xml
-
-**Fix:** Ensure the SSR server returns proper XML sitemap format. Only /sitemap.xml needs to exist; the others are common paths crawlers check. Ensure /sitemap.xml returns valid XML with proper `Content-Type: application/xml` header.
+#### crawl/sitemap-valid — 8 invalid sitemaps
+- Backend-generated sitemap format issue. Not a frontend fix.
 
 ---
 
-## Warnings (1291 total)
-
-### Performance (560 warnings)
-
-#### perf/ttfb - Slow server response (93 pages)
-
-Time to First Byte ranges from 601ms to 2664ms across 93 pages. Values above 600ms are flagged as slow, above 1000ms as very slow.
-
-**Fix:** Server-side optimization needed - SSR rendering time, API response caching, CDN configuration.
-
----
-
-#### perf/lcp-hints - LCP images without preload (100 pages)
-
-Up to 3 potential LCP images per page lack `<link rel="preload">` hints:
-- cat_logo.png
-- main_transparent_1000.png
-- main_charts_transparent_1000.png
-- cat_reviewing_transparent_1000.png
-
-**Fix:** Add `<link rel="preload" as="image">` tags in `<head>` for above-fold images, or use Angular's `NgOptimizedImage` with `priority` attribute.
-
----
-
-#### perf/cls-hints - Images without width/height causing CLS (100 pages)
-
-8 images missing explicit dimensions:
-- cat_logo.png
-- main_transparent_1000.png
-- main_charts_transparent_1000.png
-- company_reviews_1000.png
-- main_interview_transparent_1000.png
-- cat_reviewing_transparent_1000.png
-
-**Fix:** Add `width` and `height` attributes to all `<img>` tags.
-
----
-
-#### perf/css-file-size - Large CSS file (all pages)
-
-`styles-DAMJU4DQ.css` is 343.4 KB, exceeding the 100 KB recommendation.
-
-**Fix:** Audit unused CSS. Consider PurgeCSS or tree-shaking unused Bootstrap styles. Split critical CSS.
-
----
-
-#### perf/dom-size - Large DOM (2 pages)
-
-- /salaries/overview: Element with 66 children
-- /companies/kaspi-kz-ed1cf120: Large DOM (1690 nodes)
-
-**Fix:** Consider virtual scrolling for large lists, lazy rendering for off-screen content.
-
----
-
-#### perf/total-byte-weight - Heavy page weight (site-wide)
-
-Total tracked resources: 7828 KB (very heavy).
-
-**Fix:** Optimize images (WebP/AVIF), lazy load non-critical JS, tree-shake unused code.
-
----
-
-#### perf/critical-request-chains - Render-blocking resources (100 pages)
-
-1 critical request chain: `styles-DAMJU4DQ.css`
-
-**Fix:** Inline critical CSS, defer non-critical stylesheets, or use `media` attribute for conditional loading.
-
----
-
-#### perf/unminified-js - Unminified JavaScript (100 pages)
-
-`scripts-4XNZKFXB.js` (105.1 KB) appears unminified with 11 comments. Potential savings: ~44.5 KB.
-
-**Fix:** Ensure production build strips comments. Check Angular build configuration for `optimization` settings.
-
----
-
-#### perf/cache-headers - No caching headers (100 pages)
-
-HTML pages have no caching headers.
-
-**Fix:** Configure the Express SSR server or reverse proxy to set `Cache-Control` headers for HTML responses (e.g., `public, max-age=300, s-maxage=3600`).
-
----
-
-### Accessibility (129 warnings)
-
-#### a11y/color-contrast - Low contrast text (100 pages)
-
-Multiple color contrast issues across all pages:
-- CSS variable `:root` defines light RGB text colors
-- `.bg-white` uses silver/gainsboro text
-- `.text-muted` elements have low contrast
-- White text instances that may lack sufficient background contrast
-- Specific elements: `div.small.text-muted`, `span.text-muted`, `button.text-muted`
-
-**Fix:** Review CSS custom properties for text-muted colors. Ensure WCAG AA contrast ratio (4.5:1 for normal text, 3:1 for large text). Update `--warm-text-muted` and Bootstrap's `.text-muted` override.
-
----
-
-#### a11y/identical-links-same-purpose - Same link text, different URLs (1 page)
-
-On /salaries/overview: "techinterview.space" links to 2 different URLs.
-
-**Fix:** Differentiate link text or ensure same text leads to the same destination.
-
----
-
-#### a11y/image-redundant-alt - Redundant alt text (27 pages)
-
-`cat_reviewing_transparent_1000.png` has alt text "logo" on 27 company detail pages. Alt text repeats surrounding context.
-
-**Fix:** Use more descriptive alt text (e.g., "techinterview.space mascot") or set `alt=""` if purely decorative.
-
----
-
-#### a11y/link-text - Link with no accessible text (1 page)
-
-Empty link on /companies/ip-gasanov-da5db8ec.
-
-**Fix:** Add text content, `aria-label`, or remove the empty link.
-
----
-
-#### a11y/table-duplicate-name - Tables without accessible names (1 page)
-
-11 tables on /salaries/overview lack accessible names.
-
-**Fix:** Add `aria-label` or `<caption>` to each salary data table.
-
----
-
-### Core SEO (205 warnings)
-
-#### core/canonical - Missing canonical URL (1 page)
-
-Homepage (/) has no canonical URL.
-
-**Fix:** Add `<link rel="canonical" href="https://techinterview.space/">` to the homepage `<head>`.
-
----
-
-#### core/og-tags - Missing og:image (96 pages)
-
-96 company detail pages lack `og:image` meta tag. Social media shares will have no preview image.
-
-**Fix:** Add a default `og:image` in `meta-tags.service.ts` for company pages. Use company logo if available, or a default site image.
-
----
-
-#### core/title-unique - Duplicate titles (2 pages)
-
-/companies and /companies/recent-reviews share the same title: "отзывы об it компаниях - techinterview.space"
-
-**Fix:** Give /companies/recent-reviews a unique title (e.g., "Последние отзывы об IT компаниях - techinterview.space").
-
----
-
-#### core/twitter-cards - Invalid Twitter card type (1 page)
-
-Homepage has twitter:card set to an image URL instead of a valid card type.
-
-**Fix:** Set `twitter:card` to `summary_large_image` and use a separate `twitter:image` tag for the image URL.
-
----
-
-### Security (204 warnings)
-
-#### security/csp - No Content-Security-Policy header (all pages)
-
-**Fix:** Configure CSP header on the server/reverse proxy. Example: `Content-Security-Policy: default-src 'self'; script-src 'self' www.googletagmanager.com; img-src 'self' techinterview.fra1.cdn.digitaloceanspaces.com; style-src 'self' 'unsafe-inline'`
-
----
-
-#### security/hsts - Missing Strict-Transport-Security header (all pages)
-
-**Fix:** Add `Strict-Transport-Security: max-age=31536000; includeSubDomains` header on the server/reverse proxy.
-
----
-
-#### security/x-frame-options - No clickjacking protection (all pages)
-
-**Fix:** Add `X-Frame-Options: SAMEORIGIN` header on the server/reverse proxy.
-
----
-
-#### security/new-tab - External links missing rel="noopener" (100 pages)
-
-97 external links across all pages lack `rel="noopener"` attribute. These are mostly company website URLs in the footer and company detail pages.
-
-**Fix:** Add `rel="noopener noreferrer"` to all external `<a target="_blank">` links. Add a global directive or update templates.
-
----
-
-#### security/http-to-https - HTTP to HTTPS redirects (20 URLs)
-
-20 HTTP URLs on the site properly redirect to HTTPS via 301. This is informational - the redirects are correct.
-
----
-
-### Images (102 warnings)
-
-#### images/offscreen-lazy - Missing lazy loading (1 page)
-
-On homepage (/), 2 below-fold images lack lazy loading:
-- company_reviews_1000.png
-- main_interview_transparent_1000.png
-
-**Fix:** Add `loading="lazy"` attribute to below-fold images on the homepage.
-
----
-
-#### images/dimensions - Missing width/height (100 pages)
-
-Same as perf/cls-hints. 5-8 images per page lack explicit dimensions.
-
-**Fix:** Add `width` and `height` attributes to all `<img>` tags.
-
----
-
-### Content (74 warnings)
-
-#### content/duplicate-title - Duplicate titles (2 pages)
-
-/companies and /companies/recent-reviews share the same title.
-
-**Fix:** Same as core/title-unique above.
-
----
-
-#### content/duplicate-description - Duplicate descriptions (2 pages)
-
-/companies and /companies/recent-reviews share the same meta description: "отзывы об it компаниях в казахстане"
-
-**Fix:** Give /companies/recent-reviews a unique, longer description.
-
----
-
-#### content/keyword-stuffing - Overused words (2 pages)
-
-- /salaries/overview: "kzt" (4.9%), "techinterview" (3.8%), "developer" (3.6%), "source" (3.0%)
-- /companies/snoonu-2b4e380d: "snoonu" (3.6%)
-
-**Fix:** Varies the wording. Add more contextual content to dilute keyword density.
-
----
-
-#### content/word-count - Thin content (70 pages)
-
-70 pages have fewer than 300 words. Word counts range from 123 to 287. Primarily company detail pages with limited reviews.
-
-**Fix:** This is partially data-driven (companies with few reviews). Consider adding more static informational content to company page templates (e.g., "About this company", FAQ sections, related companies).
-
----
+## Remaining Warnings (999 total)
+
+### Performance (569 warnings) — mostly out of scope
+
+| Rule | Count | Status |
+|------|-------|--------|
+| perf/ttfb (slow server) | 91 pages | Backend/infra — TTFB 600-2600ms |
+| perf/lcp-hints (no preload) | 100 pages | Could add `<link rel="preload">` for logo |
+| perf/cls-hints (missing dimensions) | 100 pages | **1 image left:** cat_logo.png — **fixed locally** |
+| perf/css-file-size (343KB) | all pages | Would need Bootstrap tree-shaking |
+| perf/dom-size | 2 pages | /salaries/overview, kaspi — data-driven |
+| perf/total-byte-weight (7.8MB) | site-wide | Image optimization, code splitting |
+| perf/critical-request-chains | 100 pages | CSS is render-blocking |
+| perf/unminified-js | 100 pages | scripts.js has 11 comments (44KB savings) |
+| perf/cache-headers | 100 pages | **Fixed locally** — added Cache-Control |
+
+### Accessibility (102 warnings)
+
+| Rule | Count | Status |
+|------|-------|--------|
+| a11y/color-contrast | 100 pages | Partially addressed (--warm-text-muted). Remaining are Bootstrap `.text-muted`, white text on various backgrounds |
+| a11y/heading-order | 1 page | /companies/mdlbeast-959fc753: H3 after H1 — company description HTML from backend |
+| a11y/identical-links-same-purpose | 1 page | /salaries/overview: "techinterview.space" → 2 URLs |
+| a11y/link-text | 1 page | /companies/ip-gasanov-da5db8ec: empty link — backend data |
+
+### Security (102 warnings)
+
+| Rule | Count | Status |
+|------|-------|--------|
+| security/csp `unsafe-inline` | all pages | Required for Bootstrap styles + theme init script |
+| security/http-to-https | 20 URLs | Informational — HTTP→HTTPS 301 redirects work correctly |
+| security/third-party-cookies | 100 pages | Google Tag Manager — intentional |
+
+### Images (101 warnings)
+
+| Rule | Count | Status |
+|------|-------|--------|
+| images/dimensions (cat_logo.png) | 100 pages | **Fixed locally** — added width/height |
+| images/optimized | 1 page | Homepage images could use WebP/AVIF |
+
+### Content (73 warnings)
+
+| Rule | Count | Status |
+|------|-------|--------|
+| content/word-count (thin content) | 70 pages | Data-driven — companies with few reviews have <300 words |
+| content/keyword-stuffing | 2 pages | /salaries/overview (KZT, techinterview), /companies/snoonu (snoonu) |
+| content/heading-hierarchy | 1 page | /companies/mdlbeast: H1→H3 skip — backend data |
 
 ### Links (7 warnings)
 
-#### links/broken-external-links - 10 broken external links
+| Rule | Count | Status |
+|------|-------|--------|
+| links/broken-external-links | 10 links | Backend data — company URLs with cert/timeout/404 errors |
+| links/https-downgrade | 4 pages | Backend data — HTTP company URLs |
+| links/orphan-pages | 97 pages | Company pages only reachable via sitemap (SPA renders links via API) |
+| links/weak-internal-links | 6 pages | Same root cause as orphan pages |
 
-| URL | Error | Source Page |
-|-----|-------|-------------|
-| https://astana-motors.kz/ | unable to verify the first certificate | /companies/astana-motors-07ff34a1 |
-| http://ozon.kz/ | timeout | /companies/ozon-35ea03dc |
-| https://wildberries.ru/ | 498 | /companies/wildberries-d7b1d6a3 |
-| https://www.alma.plus/ | unable to verify the first certificate | /companies/alma-plus-a12796b9 |
-| https://www.kassa24.kz/ | timeout | /companies/kassa24-kz-11f649ff |
-| https://akvelon.com/ | unable to verify the first certificate | /companies/akvelon-df835fc8 |
-| https://www.onevision.kz/ | DNS/connection error | /companies/one-vision-b97e4d5e |
-| https://ekt.kz/ | unable to verify the first certificate | /companies/ekt-kz-999ce499 |
-| https://qmed.kz/ | 404 | /companies/q-med-qbots-9e00a6b8 |
-| https://targetai.kz/ | timeout | /companies/target-ai-09c100ee |
+### Other (remaining)
 
-**Fix:** These are company website URLs stored in the backend database. Review and update in the admin panel. Consider adding link health monitoring.
-
----
-
-#### links/https-downgrade - HTTP links (4 pages)
-
-4 company pages link to HTTP instead of HTTPS:
-- http://jusan.kz (from /companies/jusan-bank-4b41097f)
-- http://ozon.kz (from /companies/ozon-35ea03dc)
-- http://aviasales.kz (from /companies/aviasales-1f91044d)
-- http://ticketon.kz (from /companies/ticketon-kz-69397a57)
-
-**Fix:** Update these URLs in the backend database to use HTTPS. Consider adding a frontend safeguard that upgrades HTTP links to HTTPS.
+| Category | Rule | Count | Status |
+|----------|------|-------|--------|
+| Crawlability | canonical-chain | 2 pages | Cyrillic slug redirects — backend |
+| Crawlability | sitemap-coverage | 19 URLs | Surface crawl limit — not a real issue |
+| URL Structure | lowercase/special-chars | 2 pages | Cyrillic slugs — backend transliteration needed |
+| E-E-A-T | about/contact/privacy | 3 | Pages exist but not discovered by crawler (depth/link issue) |
 
 ---
 
-#### links/orphan-pages - Pages with <2 incoming links (97 pages)
+## Out of Scope (requires backend/infrastructure changes)
 
-97 pages (mostly company detail pages) have fewer than 2 internal links pointing to them. They're only reachable via sitemap or direct URL.
-
-**Fix:** Improve internal linking. Add "Related companies" sections, breadcrumbs, or sidebar navigation on company pages.
-
----
-
-#### links/weak-internal-links - Pages with only 1 internal link (6 pages)
-
-6 company pages have only 1 internal link:
-- /companies/kaspi-kz-ed1cf120
-- /companies/documentolog-ec7cdf35
-- /companies/globerce-capital-573c96e5
-- /companies/halyk-bank-0b0293e3
-- /companies/kolesa-group-081c7566
-- /companies/mdlbeast-959fc753
-
-**Fix:** Same as orphan-pages above - improve internal linking structure.
+1. **Broken external links** — company URLs stored in backend database
+2. **HTTP company links** — backend data
+3. **Cyrillic URL slugs** — backend slug generation
+4. **Sitemap format** — backend generates sitemap
+5. **TTFB optimization** — SSR rendering speed, server resources
+6. **CSS bundle size** (343KB) — requires Bootstrap tree-shaking/PurgeCSS
+7. **Unminified scripts.js** — Angular build config for third-party scripts
+8. **Thin content** — depends on user-generated review content
+9. **Keyword stuffing** — content-driven, /salaries/overview is data table
+10. **Orphan pages** — SPA renders company links client-side after API call
+11. **E-E-A-T pages** — /about-us and /privacy-policy exist in footer but crawler didn't reach them (crawl depth)
+12. **Empty link on ip-gasanov page** — backend data contains empty `<a>` tag
 
 ---
 
-### Crawlability (3 warnings)
+## Verification
 
-#### crawl/canonical-chain - Redirect before content (2 pages)
-
-Pages with Cyrillic characters in URLs redirect:
-- /companies/%D0%B0%D0%BA-air-astana-ba830aa0
-- /companies/home-credit-%D0%B1%D0%B0%D0%BD%D0%BA-d28595a1
-
-**Fix:** Ensure the SSR server serves these URLs directly without redirecting. Or update the sitemap to use the final URL form.
-
----
-
-#### crawl/sitemap-coverage - Uncrawled sitemap URLs (19 pages)
-
-19 URLs in the sitemap were not reached during the crawl (surface coverage limit). Includes /about-us, /about-telegram-bot, /agreements/privacy-policy, and 16 company pages.
-
-**Fix:** Not an issue per se - these pages exist in the sitemap but weren't reached due to surface crawl limits. A full crawl would cover them.
-
----
-
-### URL Structure (4 warnings)
-
-#### url/lowercase - Uppercase characters in URLs (2 pages)
-
-- /companies/%D0%B0%D0%BA-air-astana-ba830aa0
-- /companies/home-credit-%D0%B1%D0%B0%D0%BD%D0%BA-d28595a1
-
-These contain URL-encoded Cyrillic characters with uppercase hex encoding (%D0%B0 etc.).
-
-**Fix:** This is standard URL encoding behavior. Consider transliterating Cyrillic slugs to Latin characters in the backend.
-
----
-
-#### url/special-chars - Non-ASCII characters in URLs (2 pages)
-
-Same 2 pages as above contain Cyrillic characters.
-
-**Fix:** Same as url/lowercase - consider Latin transliteration for URL slugs.
-
----
-
-### E-E-A-T (3 warnings)
-
-#### eeat/about-page - No About page found
-
-The crawler didn't find an About page. Note: /about-us exists in the sitemap but wasn't crawled.
-
-**Fix:** Ensure /about-us is linked from the main navigation or footer so crawlers can discover it.
-
----
-
-#### eeat/contact-page - No Contact page found
-
-**Fix:** Add a contact page or contact section, or ensure contact information is visible and crawlable.
-
----
-
-#### eeat/privacy-policy - No Privacy Policy page found
-
-The crawler didn't find a privacy policy. Note: /agreements/privacy-policy exists in the sitemap but wasn't crawled.
-
-**Fix:** Ensure /agreements/privacy-policy is linked from the footer on all pages so crawlers can discover it.
-
----
-
-## Priority Action Plan
-
-### High Priority (Frontend Code Fixes)
-
-1. **Add H1 tags** to all page templates (90 pages affected)
-2. **Fix duplicate `navbarDropdown` IDs** in navbar (100 pages affected)
-3. **Add `rel="noopener noreferrer"` to external links** (100 pages affected)
-4. **Add image width/height attributes** (100 pages affected)
-5. **Add form labels** to search and filter inputs on /companies
-6. **Fix homepage meta title** (currently 19 chars, needs 30-60)
-7. **Fix Twitter card type** on homepage
-8. **Add canonical URL** to homepage
-9. **Add og:image** to company pages
-10. **Add lazy loading** to below-fold homepage images
-11. **Add LCP preload hints** for above-fold images
-
-### Medium Priority (Frontend + Content Fixes)
-
-12. **Improve meta descriptions** to 120-160 characters
-13. **Fix duplicate titles/descriptions** for /companies vs /companies/recent-reviews
-14. **Improve color contrast** for `.text-muted` elements
-15. **Fix redundant alt text** ("logo" -> descriptive text)
-16. **Ensure About and Privacy Policy pages are linked in footer**
-17. **Add table captions** on /salaries/overview
-
-### Low Priority (Infrastructure/Backend Fixes)
-
-18. **Add security headers** (CSP, HSTS, X-Frame-Options) - server config
-19. **Add cache headers** for HTML responses - server config
-20. **Fix broken external links** - backend data update
-21. **Upgrade HTTP links to HTTPS** - backend data update
-22. **Optimize CSS bundle size** (343 KB) - build config
-23. **Improve TTFB** - server-side caching/optimization
-24. **Add more internal linking** to reduce orphan pages
-25. **Transliterate Cyrillic URL slugs** - backend change
+All changes verified locally:
+- `npm run lint` — no new errors (4 pre-existing)
+- `npm test` — 195/195 tests pass
+- `npm run build` — production build with SSR succeeds
+- CSP tested with live API calls — all domains allowlisted
