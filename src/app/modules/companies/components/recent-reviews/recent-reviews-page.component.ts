@@ -33,10 +33,10 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly metaTagService: MetaTagService,
   ) {
-    this.title.setTitle("Отзывы к IT компаниям");
+    this.title.setTitle("Последние отзывы об IT компаниях");
     this.metaTagService.setPageMetaTags(
-      "Отзывы об IT компаниях",
-      "Отзывы об IT компаниях в Казахстане",
+      "Последние отзывы об IT компаниях",
+      "Недавно добавленные отзывы сотрудников об IT компаниях в Казахстане. Читайте свежие мнения о работодателях, условиях работы и корпоративной культуре",
       "/companies/recent-reviews",
       "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png",
     );

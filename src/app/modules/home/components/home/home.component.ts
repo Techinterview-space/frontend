@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TitleService } from "@services/title.service";
+import { MetaTagService } from "@services/meta-tags.service";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
@@ -22,8 +23,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   uwuImageLink: string | null = null;
   loaded = false;
 
-  constructor(titleService: TitleService, activatedRoute: ActivatedRoute) {
-    titleService.resetTitle();
+  constructor(
+    titleService: TitleService,
+    activatedRoute: ActivatedRoute,
+    metaTagService: MetaTagService,
+  ) {
+    titleService.setTitle(
+      "Techinterview.space — зарплаты в IT и отзывы о компаниях",
+    );
+    metaTagService.returnDefaultMetaTags();
     this.activatedRoute = new ActivatedRouteExtended(activatedRoute);
   }
 

@@ -6,21 +6,25 @@
       <div class="company-list mb-3">
         <div class="row">
           <div class="col-md-6 mb-1">
+            <label for="searchQuery" class="visually-hidden">Поиск компании</label>
             <input
               type="text"
               placeholder="Поиск. Минимум {{ MIN_SEARCH_QUERY_LENGTH }} символа"
               class="form-control"
               id="searchQuery"
+              aria-label="Поиск компании"
               [(ngModel)]="searchQuery"
               (keyup)="onKeyupEvent($event)"
             />
           </div>
           <div class="col-md-3 mb-1">
             <div class="">
+              <label for="withRating" class="visually-hidden">Фильтр по рейтингу</label>
               <select
                 class="form-select"
                 id="withRating"
                 name="withRating"
+                aria-label="Фильтр по рейтингу"
                 (change)="onChangeWithRating($event)"
               >
                 <option selected value="false">Все компании</option>
@@ -49,7 +53,7 @@
         </div>
         <div class="small text-muted mt-2">
           Если нужной компании нет в списке, напишите в тг
-          <a class="tg-link" href="https://t.me/maximgorbatyuk" target="_blank"
+          <a class="tg-link" href="https://t.me/maximgorbatyuk" target="_blank" rel="noopener noreferrer"
             >&#64;maximgorbatyuk</a
           >, и она будет добавлена
         </div>
@@ -119,8 +123,10 @@
           <img
             src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
             class="img-fluid mobile-w-30"
-            alt="logo"
+            alt="Кот Магеллан — загрузка списка компаний"
             title="Кот Магеллан, который любит оставлять отзывы о компаниях"
+            width="1000"
+            height="1000"
           />
         </div>
       </div>

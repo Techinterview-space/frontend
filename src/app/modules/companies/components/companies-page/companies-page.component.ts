@@ -43,8 +43,8 @@ export class CompaniesPageComponent implements OnInit, OnDestroy {
     private readonly gtag: GoogleAnalyticsService,
   ) {
     this.metaTagService.setPageMetaTags(
-      "Отзывы об IT компаниях",
       "Отзывы об IT компаниях в Казахстане",
+      "Список IT компаний с рейтингами и отзывами сотрудников в Казахстане. Узнайте о корпоративной культуре, условиях работы и зарплатах из первых рук",
       "/companies",
       "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png",
     );

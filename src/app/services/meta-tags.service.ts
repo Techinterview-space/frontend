@@ -47,6 +47,9 @@ export class MetaTagService {
       { name: "twitter:description", content: description },
 
       { property: "og:url", content: environment.baseUrl + pageUrl },
+      { property: "og:image", content: MetaTagService.DEFAULT_IMAGE_URL },
+      { name: "twitter:image", content: MetaTagService.DEFAULT_IMAGE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
     ]);
 
     this.setCanonicalUrl(environment.baseUrl + pageUrl);
@@ -57,9 +60,9 @@ export class MetaTagService {
     this.removeTags();
     this.meta.removeTag('name="googlebot"');
 
-    const title = "Techinterview.space";
+    const title = "Techinterview.space — зарплаты в IT и отзывы о компаниях";
     const description =
-      "Зарплаты в IT и отзывы о компаниях в Казахстане. Цифры, графики, звездочки. Всё как все мы любим";
+      "Зарплаты в IT и отзывы о компаниях в Казахстане. Актуальная статистика, графики, рейтинги компаний. Анонимные опросы и честные отзывы сотрудников";
 
     this.meta.addTags([
       { name: "googlebot", content: description },
@@ -83,13 +86,13 @@ export class MetaTagService {
   private buildCompanyDescription(company: CompanyMetaTags): string {
     const ratingText =
       company.rating > 0
-        ? `Рейтинг: ${company.rating.toFixed(1)}`
+        ? `Рейтинг: ${company.rating.toFixed(1)} из 5`
         : "Пока нет отзывов, но вы можете оставить первый";
 
-    const result = `Отзывы о ${company.companyName}. ${ratingText}`;
     const reviewsText = this.pluralizeReviews(company.reviewsCount);
+    const reviewsPart = reviewsText ? `, ${reviewsText}` : "";
 
-    return reviewsText ? `${result}, ${reviewsText}` : result;
+    return `Отзывы о компании ${company.companyName} на Techinterview.space. ${ratingText}${reviewsPart}. Читайте реальные отзывы сотрудников и делитесь своим опытом`;
   }
 
   private pluralizeReviews(count: number): string {
