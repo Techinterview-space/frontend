@@ -69,6 +69,39 @@
   align-items: center;
 }
 
+// GIF grid
+.gif-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.gif-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.gif-preview {
+  padding: 1rem;
+  background-color: var(--warm-bg-accent);
+  border-radius: 10px;
+  border: 1px solid var(--warm-border-color);
+
+  img {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: contain;
+  }
+}
+
+.gif-label {
+  font-size: 0.75rem;
+  color: var(--warm-text-muted);
+}
+
 // Icons grid
 .icons-grid {
   display: grid;
