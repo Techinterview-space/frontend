@@ -11,7 +11,7 @@ import { ApplicationUserExtended } from "@models/extended";
 
 @Injectable()
 export class ActiveUserGuard implements CanActivate {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,

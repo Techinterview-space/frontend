@@ -191,10 +191,6 @@ Some libraries use browser APIs that don't exist on the server. These are mocked
 - `navigator`
 - `crypto`
 
-### Auth0 SSR Compatibility
-
-Auth0's SDK uses browser APIs. A mock service (`Auth0ServerMockService`) is provided for SSR:
-
 ```typescript
 // app.module.server.ts
 providers: [

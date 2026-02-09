@@ -91,7 +91,8 @@ export class MetaTagService {
 
     const reviewsText = this.pluralizeReviews(company.reviewsCount);
     const reviewsPart = reviewsText ? `, ${reviewsText}` : "";
-    const suffix = ". Читайте реальные отзывы сотрудников и делитесь своим опытом";
+    const suffix =
+      ". Читайте реальные отзывы сотрудников и делитесь своим опытом";
 
     const full = `Отзывы о компании ${company.companyName} на Techinterview.space. ${ratingText}${reviewsPart}${suffix}`;
 

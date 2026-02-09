@@ -33,6 +33,7 @@ export const CompanyEditRequestSchema = z.object({
   description: z.string(),
   links: z.array(z.string()),
   logoUrl: z.string(),
+  slug: z.string().optional(),
 });
 
 export type CompanyEditRequest = z.infer<typeof CompanyEditRequestSchema>;

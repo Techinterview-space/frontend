@@ -42,7 +42,7 @@ app.use((req, res, next) => {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
       "img-src 'self' data: https://techinterview.fra1.cdn.digitaloceanspaces.com https://via.placeholder.com https://*.googleusercontent.com https://www.google-analytics.com https://*.googletagmanager.com",
       "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
-      "connect-src 'self' https://api.techinterview.space https://*.auth0.com https://www.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com",
+      "connect-src 'self' https://api.techinterview.space https://www.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com",
       "frame-ancestors 'self'",
     ].join("; "),
   );

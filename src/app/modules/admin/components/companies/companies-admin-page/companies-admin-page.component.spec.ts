@@ -112,6 +112,49 @@ describe("CompaniesAdminPageComponent", () => {
     expect(component.aiAnalysisJsonContent).toBe("");
   });
 
+  it("should create form with slug field for new company", () => {
+    component.create();
+
+    expect(component.editForm).toBeTruthy();
+    expect(component.editForm!.get("slug")).toBeTruthy();
+    expect(component.editForm!.get("slug")!.value).toBeNull();
+  });
+
+  it("should create form with slug field for existing company", () => {
+    const mockCompany: Company = {
+      id: "1",
+      name: "Test Company",
+      slug: "test-slug",
+      description: "Description",
+      links: ["https://example.com"],
+      logoUrl: "",
+    } as Company;
+
+    component.edit(mockCompany);
+
+    expect(component.editForm).toBeTruthy();
+    expect(component.editForm!.get("slug")!.value).toBe("test-slug");
+  });
+
+  it("should submit create with slug when provided", () => {
+    const createSpy = spyOn(companiesService, "create").and.returnValue(
+      of(void 0),
+    );
+
+    component.create();
+    component.editForm!.patchValue({
+      name: "New Company",
+      description: "Desc",
+      slug: "custom-slug",
+    });
+
+    component.onEditFormSubmit();
+
+    expect(createSpy).toHaveBeenCalled();
+    const arg = createSpy.calls.first().args[0];
+    expect(arg.slug).toBe("custom-slug");
+  });
+
   it("should copy AI analysis content", () => {
     const mockInputElement = {
       select: jasmine.createSpy("select"),

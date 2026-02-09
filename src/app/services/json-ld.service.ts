@@ -120,9 +120,7 @@ export class JsonLdService {
     this.setJsonLd(reviewSchemas, "reviews");
   }
 
-  setBreadcrumbList(
-    items: Array<{ name: string; url?: string }>,
-  ): void {
+  setBreadcrumbList(items: Array<{ name: string; url?: string }>): void {
     const itemListElement = items.map((item, index) => {
       const element: Record<string, unknown> = {
         "@type": "ListItem",

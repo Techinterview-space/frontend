@@ -26,7 +26,10 @@
       id="navbarSupportedContent"
     >
       <ul class="navbar-nav mb-2 mb-md-0 align-items-center">
-        <li class="nav-item dropdown" *ngFor="let dropdown of dropdowns; let i = index">
+        <li
+          class="nav-item dropdown"
+          *ngFor="let dropdown of dropdowns; let i = index"
+        >
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -38,7 +41,10 @@
           >
             {{ dropdown.title }}
           </a>
-          <ul class="dropdown-menu" [attr.aria-labelledby]="'navbarDropdown-' + i">
+          <ul
+            class="dropdown-menu"
+            [attr.aria-labelledby]="'navbarDropdown-' + i"
+          >
             <li *ngFor="let link of dropdown.links">
               <a
                 class="dropdown-item"

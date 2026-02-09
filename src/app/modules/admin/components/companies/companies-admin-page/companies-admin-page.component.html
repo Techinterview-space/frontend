@@ -157,6 +157,12 @@
     </div>
 
     <div class="mb-3">
+      <label>Slug</label>
+      <input type="text" class="form-control" formControlName="slug" />
+      <app-field-error [field]="editForm.get('slug')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
       <button class="btn btn-primary" type="submit">Сохранить</button>
     </div>
   </form>

@@ -14,7 +14,10 @@
     </button>
     <div class="collapse navbar-collapse" id="adminNavbar">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown" *ngFor="let dropdown of dropdowns; let i = index">
+        <li
+          class="nav-item dropdown"
+          *ngFor="let dropdown of dropdowns; let i = index"
+        >
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -25,7 +28,10 @@
           >
             {{ dropdown.title }}
           </a>
-          <ul class="dropdown-menu" [attr.aria-labelledby]="'adminNavbarDropdown-' + i">
+          <ul
+            class="dropdown-menu"
+            [attr.aria-labelledby]="'adminNavbarDropdown-' + i"
+          >
             <li *ngFor="let link of dropdown.links">
               <a
                 *ngIf="link.isExternal"
