@@ -16,6 +16,34 @@
   }
 }
 
+// Linkable section headers
+.section-header {
+  margin-bottom: 1rem;
+}
+
+.header-link {
+  color: var(--warm-text-heading);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .link-icon {
+    opacity: 0;
+    font-size: 0.75em;
+    color: var(--warm-text-muted);
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    color: var(--warm-accent-primary);
+
+    .link-icon {
+      opacity: 1;
+    }
+  }
+}
+
 // Color swatches
 .color-grid {
   display: grid;
