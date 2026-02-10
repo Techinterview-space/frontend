@@ -58,7 +58,7 @@
 
 ### Step 4: index.html fixes
 - **File:** `src/index.html`
-- `twitter:card` content: CDN image URL → `"summary_large_image"`
+- `twitter:card` content: CDN image URL → `"summary"`
 - Added `rel="noopener noreferrer"` to `© maximgorbatyuk` footer link
 
 ### Step 5: Meta tags improvements

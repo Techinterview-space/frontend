@@ -22,7 +22,7 @@ export class MetaTagService {
     private readonly title: TitleService,
     private readonly meta: Meta,
     @Inject(DOCUMENT) private readonly document: Document,
-  ) {}
+  ) { }
 
   /**
    * Updates meta tags for a company page.
@@ -49,7 +49,7 @@ export class MetaTagService {
       { property: "og:url", content: environment.baseUrl + pageUrl },
       { property: "og:image", content: MetaTagService.DEFAULT_IMAGE_URL },
       { name: "twitter:image", content: MetaTagService.DEFAULT_IMAGE_URL },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:card", content: "summary" },
     ]);
 
     this.setCanonicalUrl(environment.baseUrl + pageUrl);
@@ -71,7 +71,7 @@ export class MetaTagService {
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
       { name: "twitter:image", content: MetaTagService.DEFAULT_IMAGE_URL },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:card", content: "summary" },
       { name: "twitter:url", content: environment.baseUrl },
 
       { property: "og:title", content: title },
@@ -166,7 +166,7 @@ export class MetaTagService {
     if (imageUrl) {
       tags.push({ property: "og:image", content: imageUrl });
       tags.push({ name: "twitter:image", content: imageUrl });
-      tags.push({ name: "twitter:card", content: "summary_large_image" });
+      tags.push({ name: "twitter:card", content: "summary" });
     }
 
     this.meta.addTags(tags);
