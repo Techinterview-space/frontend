@@ -69,6 +69,8 @@ export class PrismLoaderService {
     }
 
     const codeBlocks = container.querySelectorAll("pre code");
-    codeBlocks.forEach((block) => this.prism!.highlightElement(block));
+    codeBlocks.forEach((block) => {
+      this.prism!.highlightElement(block);
+    });
   }
 }
