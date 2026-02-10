@@ -38,23 +38,23 @@ export class SalariesOverviewComponent implements OnInit, OnDestroy {
     private readonly title: TitleService,
   ) {
     this.metaTagService.setPageMetaTags(
-      "IT Salaries in Kazakhstan",
-      "Salary statistics for IT professionals in Kazakhstan. Compare salaries by grade, profession, city, and company. Data collected via anonymous surveys.",
+      "Зарплаты в IT в Казахстане",
+      "Статистика зарплат IT-специалистов в Казахстане. Сравнивайте зарплаты по грейду, профессии, городу и компании. Данные собраны через анонимные анкеты.",
       "/salaries/overview",
       MetaTagService.DEFAULT_IMAGE_URL,
     );
 
     this.jsonLdService.setDatasetSchema(
-      "IT Salaries in Kazakhstan — Techinterview.space",
-      "Salary statistics for IT professionals in Kazakhstan, collected via anonymous surveys",
+      "Зарплаты в IT в Казахстане — Techinterview.space",
+      "Статистика зарплат IT-специалистов в Казахстане, собранная через анонимные анкеты",
       "https://techinterview.space/salaries/overview",
       new Date().toISOString().split("T")[0],
     );
 
     this.jsonLdService.setBreadcrumbList([
-      { name: "Home", url: "https://techinterview.space" },
-      { name: "Salaries", url: "https://techinterview.space/salaries" },
-      { name: "Overview" },
+      { name: "Главная", url: "https://techinterview.space" },
+      { name: "Зарплаты", url: "https://techinterview.space/salaries" },
+      { name: "Обзор" },
     ]);
   }
 
@@ -87,7 +87,22 @@ export class SalariesOverviewComponent implements OnInit, OnDestroy {
   }
 
   gradeLabel(grade: DeveloperGrade): string {
-    return DeveloperGradeEnum.getColorData(grade)?.label ?? "Unknown";
+    const label = DeveloperGradeEnum.getColorData(grade)?.label ?? "Не указан";
+
+    switch (label) {
+      case "Trainee":
+        return "Стажер";
+      case "Junior":
+        return "Джуниор";
+      case "Middle":
+        return "Мидл";
+      case "Senior":
+        return "Сеньор";
+      case "Lead":
+        return "Лид";
+      default:
+        return label;
+    }
   }
 
   genderLabel(gender: Gender): string {
