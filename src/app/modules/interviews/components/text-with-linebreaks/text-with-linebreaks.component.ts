@@ -41,7 +41,9 @@ export class TextWithLinebreaksComponent implements OnInit, OnChanges {
     }
 
     queueMicrotask(() => {
-      void this.prismLoader.loadAndHighlight(this.elementRef.nativeElement);
+      this.prismLoader
+        .loadAndHighlight(this.elementRef.nativeElement)
+        .catch(() => undefined);
     });
   }
 }

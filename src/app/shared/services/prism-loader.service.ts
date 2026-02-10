@@ -38,14 +38,21 @@ export class PrismLoaderService {
     }
 
     this.loadPromise = (async () => {
-      const prismModule = await import("prismjs");
+      try {
+        const prismModule = await import("prismjs");
 
-      await Promise.all([
-        import("prismjs/components/prism-csharp"),
-        import("prismjs/components/prism-css"),
-      ]);
+        await Promise.all([
+          import("prismjs/components/prism-csharp"),
+          import("prismjs/components/prism-css"),
+          import("prismjs/themes/prism-okaidia.css"),
+        ]);
 
-      this.prism = (prismModule.default ?? prismModule) as PrismApi;
+        this.prism = (prismModule.default ?? prismModule) as PrismApi;
+      } catch (error) {
+        this.prism = null;
+        this.loadPromise = null;
+        throw error;
+      }
     })();
 
     await this.loadPromise;

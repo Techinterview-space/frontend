@@ -19,6 +19,7 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
     "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_dog.gif";
 
   loadingUrl = "";
+  loadingAlt = "Loading animation";
   showPreloader = true;
   private delayTimerId: ReturnType<typeof setTimeout> | null = null;
 
@@ -28,10 +29,12 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
     const selectedGif = isOdd
       ? LoadingSpinnerComponent.LoadingCatUrl
       : LoadingSpinnerComponent.LoadingDogUrl;
+    const selectedAlt = isOdd ? "Loading cat GIF" : "Loading dog GIF";
 
     // Delay heavy GIF loading so fast responses avoid a multi-MB transfer.
     this.delayTimerId = setTimeout(() => {
       this.loadingUrl = selectedGif;
+      this.loadingAlt = selectedAlt;
     }, this.delayMs);
   }
 

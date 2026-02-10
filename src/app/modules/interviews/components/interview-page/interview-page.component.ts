@@ -124,7 +124,9 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
 
   private highlightCodeBlocks(): void {
     queueMicrotask(() => {
-      void this.prismLoader.loadAndHighlight(this.elementRef.nativeElement);
+      this.prismLoader
+        .loadAndHighlight(this.elementRef.nativeElement)
+        .catch(() => undefined);
     });
   }
 }

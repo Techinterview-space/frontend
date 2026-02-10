@@ -4,6 +4,7 @@ import { SpinnerService } from "@shared/services/spinners/spinner-service";
 import { SharedModule } from "@shared/shared.module";
 import { MockAuthService, testUtilStubs } from "@shared/test-utils";
 import { CookieService } from "ngx-cookie-service";
+import { of } from "rxjs";
 
 import { NavbarComponent } from "./navbar.component";
 import { RouterModule } from "@angular/router";
@@ -26,6 +27,9 @@ describe("NavbarComponent", () => {
   });
 
   beforeEach(() => {
+    const authService = TestBed.inject(AuthService);
+    spyOn(authService, "getCurrentUserFromStorage").and.returnValue(of(null));
+
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -40,10 +44,8 @@ describe("NavbarComponent", () => {
     const loginButton = fixture.nativeElement.querySelector("button.login-btn");
 
     expect(loginAnchor).toBeNull();
-
-    if (loginButton) {
-      expect(loginButton.tagName).toBe("BUTTON");
-      expect(loginButton.getAttribute("href")).toBeNull();
-    }
+    expect(loginButton).not.toBeNull();
+    expect(loginButton!.tagName).toBe("BUTTON");
+    expect(loginButton!.getAttribute("href")).toBeNull();
   });
 });

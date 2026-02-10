@@ -25,6 +25,7 @@ describe("LoadingSpinnerComponent", () => {
   });
 
   it("delays gif request until threshold", fakeAsync(() => {
+    component.ngOnDestroy();
     component.delayMs = 500;
     component.loadingUrl = "";
 
@@ -34,5 +35,7 @@ describe("LoadingSpinnerComponent", () => {
 
     tick(1);
     expect(component.loadingUrl).not.toBe("");
+
+    component.ngOnDestroy();
   }));
 });

@@ -18,6 +18,8 @@ export class DesignSystemComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    void this.prismLoader.loadAndHighlight(this.elementRef.nativeElement);
+    this.prismLoader
+      .loadAndHighlight(this.elementRef.nativeElement)
+      .catch(() => undefined);
   }
 }

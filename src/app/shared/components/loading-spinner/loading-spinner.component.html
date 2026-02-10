@@ -11,7 +11,7 @@
     *ngIf="loadingUrl"
     class="rounded mx-auto d-block loading-gif"
     [src]="loadingUrl"
-    alt="Loading dog GIF"
+    [alt]="loadingAlt"
     (load)="onGifLoaded()"
     (error)="onGifLoaded()"
     title="Вертимся как можем и загружаем данные..."
