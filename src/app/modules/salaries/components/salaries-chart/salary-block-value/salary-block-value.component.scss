@@ -1,4 +1,8 @@
 .cat-image {
+  width: 100%;
+  max-width: 338px;
+  aspect-ratio: 1297 / 1703;
+  object-fit: contain;
   transition: transform 0.3s ease;
 
   &:hover {

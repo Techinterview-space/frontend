@@ -45,10 +45,18 @@
         >
           <img
             class="img-fluid feature-image"
-            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_transparent_1000.png"
+            src="/assets/img/home/main_charts_transparent_800.png"
+            srcset="
+              /assets/img/home/main_charts_transparent_480.png 480w,
+              /assets/img/home/main_charts_transparent_800.png 800w,
+              https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_charts_transparent_1000.png 1000w
+            "
+            sizes="(max-width: 768px) 100vw, 40vw"
             alt="Графики и статистика зарплат в IT"
             width="1000"
             height="1000"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -80,11 +88,18 @@
         >
           <img
             class="img-fluid feature-image"
-            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
+            src="/assets/img/home/company_reviews_800.png"
+            srcset="
+              /assets/img/home/company_reviews_480.png 480w,
+              /assets/img/home/company_reviews_800.png 800w,
+              https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png 1000w
+            "
+            sizes="(max-width: 768px) 100vw, 40vw"
             alt="Отзывы о компаниях в IT"
             width="1000"
             height="1000"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -115,11 +130,18 @@
         >
           <img
             class="img-fluid feature-image"
-            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_interview_transparent_1000.png"
+            src="/assets/img/home/main_interview_transparent_800.png"
+            srcset="
+              /assets/img/home/main_interview_transparent_480.png 480w,
+              /assets/img/home/main_interview_transparent_800.png 800w,
+              https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_interview_transparent_1000.png 1000w
+            "
+            sizes="(max-width: 768px) 100vw, 40vw"
             alt="Заметки к техническим интервью"
             width="1000"
             height="1000"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -174,11 +196,20 @@
 
     <div class="pt-1 d-flex justify-content-center">
       <img
-        src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_transparent_1000.png"
+        src="/assets/img/home/main_transparent_800.png"
+        srcset="
+          /assets/img/home/main_transparent_480.png 480w,
+          /assets/img/home/main_transparent_800.png 800w,
+          https://techinterview.fra1.cdn.digitaloceanspaces.com/images/main_transparent_1000.png 1000w
+        "
+        sizes="(max-width: 768px) 100vw, 65vw"
         alt="Techinterview.space — зарплаты в IT, отзывы и заметки к интервью"
         class="website-image"
         width="1000"
         height="1000"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
       />
     </div>
   </div>

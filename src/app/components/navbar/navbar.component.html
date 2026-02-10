@@ -76,15 +76,16 @@
         </li>
 
         <li class="nav-item ms-2" *ngIf="!loginName; else loggedIn">
-          <a
+          <button
+            type="button"
             class="btn btn-primary login-btn {{
               !loginButtonAvailable ? 'disabled' : ''
             }}"
-            aria-current="page"
             (click)="login()"
-            [attr.disabled]="!loginButtonAvailable"
-            >Войти</a
+            [disabled]="!loginButtonAvailable"
           >
+            Войти
+          </button>
         </li>
         <ng-template #loggedIn>
           <li class="nav-item dropdown">

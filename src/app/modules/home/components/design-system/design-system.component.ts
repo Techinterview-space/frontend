@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, ElementRef } from "@angular/core";
+import { PrismLoaderService } from "@shared/services/prism-loader.service";
 
 @Component({
   selector: "app-design-system",
@@ -6,8 +7,17 @@ import { Component } from "@angular/core";
   styleUrls: ["./design-system.component.scss"],
   standalone: false,
 })
-export class DesignSystemComponent {
+export class DesignSystemComponent implements AfterViewInit {
   codeExample = `function greet(name: string): string {
   return \`Hello, \${name}!\`;
 }`;
+
+  constructor(
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly prismLoader: PrismLoaderService,
+  ) {}
+
+  ngAfterViewInit(): void {
+    void this.prismLoader.loadAndHighlight(this.elementRef.nativeElement);
+  }
 }

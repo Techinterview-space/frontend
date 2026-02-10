@@ -1,22 +1,19 @@
-<div
-  *ngIf="showPreloader"
-  class="spinner-border spinner-border-lg"
-  role="status"
->
-  <span class="visually-hidden">Загрузка...</span>
-</div>
+<div class="loading-frame">
+  <div
+    *ngIf="showPreloader"
+    class="spinner-border spinner-border-lg loading-spinner"
+    role="status"
+  >
+    <span class="visually-hidden">Загрузка...</span>
+  </div>
 
-<div
-  [hidden]="showPreloader"
-  class="d-flex justify-content-center align-items-center"
->
   <img
     *ngIf="loadingUrl"
-    class="rounded mx-auto d-block"
+    class="rounded mx-auto d-block loading-gif"
     [src]="loadingUrl"
     alt="Loading dog GIF"
-    (load)="showPreloader = false"
-    (error)="showPreloader = false"
+    (load)="onGifLoaded()"
+    (error)="onGifLoaded()"
     title="Вертимся как можем и загружаем данные..."
   />
 </div>

@@ -30,14 +30,10 @@
             "assets": ["src/favicon.ico", "src/assets", "src/robots.txt"],
             "styles": [
               "src/styles.scss",
-              "node_modules/prismjs/themes/prism-okaidia.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-csharp.min.js",
-              "node_modules/prismjs/components/prism-css.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
             "browser": "src/main.ts",
             "server": "src/main.server.ts",

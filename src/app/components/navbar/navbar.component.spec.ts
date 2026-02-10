@@ -34,4 +34,16 @@ describe("NavbarComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it("renders login as button for crawl-safe markup", () => {
+    const loginAnchor = fixture.nativeElement.querySelector("a.login-btn");
+    const loginButton = fixture.nativeElement.querySelector("button.login-btn");
+
+    expect(loginAnchor).toBeNull();
+
+    if (loginButton) {
+      expect(loginButton.tagName).toBe("BUTTON");
+      expect(loginButton.getAttribute("href")).toBeNull();
+    }
+  });
 });

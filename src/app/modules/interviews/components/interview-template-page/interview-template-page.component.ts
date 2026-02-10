@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserRole } from "@models/enums";
 import { InterviewTemplate } from "@models/interview-models";
@@ -9,6 +9,7 @@ import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { AuthService } from "@shared/services/auth/auth.service";
+import { PrismLoaderService } from "@shared/services/prism-loader.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
@@ -32,6 +33,8 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
     private readonly title: TitleService,
     private readonly alert: AlertService,
     private readonly router: Router,
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly prismLoader: PrismLoaderService,
     activatedRoute: ActivatedRoute,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
@@ -48,6 +51,7 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
           .subscribe((i) => {
             this.interviewTemplate = i;
             this.setTitle();
+            this.highlightCodeBlocks();
 
             this.auth
               .getCurrentUser()
@@ -87,5 +91,11 @@ export class InterviewTemplatePageComponent implements OnInit, OnDestroy {
   private setTitle(): void {
     this.pageTitle = this.interviewTemplate!.title;
     this.title.setTitle(this.pageTitle);
+  }
+
+  private highlightCodeBlocks(): void {
+    queueMicrotask(() => {
+      void this.prismLoader.loadAndHighlight(this.elementRef.nativeElement);
+    });
   }
 }
