@@ -1,5 +1,37 @@
 # Changelog
 
+## 2026-02-11 (Loader Follow-up)
+
+- Branch: `codex/loader-fix-lighthouse-followup`
+- Date: `2026-02-11`
+
+### Summary
+
+Follow-up fix for the new shared loader behavior and a production Lighthouse snapshot after the latest merged PR.
+
+### Maintainer Notes
+
+- Changed shared loading spinner defaults:
+  - `app-loading-spinner` now uses spinner-only mode by default.
+  - GIF loading is opt-in via `[showGif]="true"`.
+  - On GIF load failure, component now keeps spinner visible instead of hiding it.
+- Updated unit tests to cover:
+  - default non-GIF behavior
+  - delayed GIF behavior when enabled
+- Production Lighthouse snapshot (captured on `2026-02-11`):
+  - `/salaries` mobile: Performance `47`, Accessibility `100`, Best Practices `93`, SEO `93`
+  - `/salaries` desktop: Performance `99`, Accessibility `100`, Best Practices `100`, SEO `90`
+  - `/` mobile: Performance `60`, Accessibility `97`, Best Practices `93`, SEO `100`
+  - `/` desktop: Performance `74`, Accessibility `98`, Best Practices `93`, SEO `100`
+- Key perf observation:
+  - delayed loader GIF still shows ~4.25 MiB potential savings on `/salaries` mobile when enabled
+  - moving shared loaders to spinner-only by default avoids this regression for route loading states
+
+### Validation Performed
+
+- `npx ng test --no-watch --browsers ChromiumNoSandbox --include=src/app/shared/components/loading-spinner/loading-spinner.component.spec.ts`
+- `npm run build-prod`
+
 ## 2026-02-11
 
 - PR: [Techinterview-space/frontend#118](https://github.com/Techinterview-space/frontend/pull/118)
