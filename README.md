@@ -2,6 +2,14 @@
 
 Frontend part of the [Techinterview.space](https://techinterview.space)
 
+## Subdocs
+
+- [Changelog](CHANGELOG.md)
+- [License](LICENSE)
+- [Design Guideline](docs/DESIGN_GUIDELINE.md)
+- [SSR & Deployment Guide](docs/SSR_DEPLOYMENT.md)
+- [SEO & GEO](docs/geo.md)
+
 ## Tech stack
 
 - Angular 20
