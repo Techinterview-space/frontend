@@ -1,0 +1,50 @@
+<app-page-header>Опросы</app-page-header>
+
+<div class="container my-5" *ngIf="replies; else dataLoading">
+  <div class="card">
+    <div class="card-body p-4">
+      <div
+        class="table-responsive mb-3"
+        *ngIf="replies.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr class="small">
+              <th>Рейтинг</th>
+              <th>Email пользователя</th>
+              <th>ID пользователя</th>
+              <th>Дата создания</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of replies" class="small">
+              <td>{{ item.usefulnessRating }}</td>
+              <td>{{ item.createdByUserEmail || "—" }}</td>
+              <td>{{ item.createdByUserId || "—" }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container py-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="text-center p-3 text-muted">
+    Нет записей опросов.
+  </div>
+</ng-template>

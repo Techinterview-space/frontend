@@ -81,6 +81,11 @@ export class AdminNavbarComponent {
             url: "/salaries/overview",
             isExternal: false,
           },
+          {
+            title: "Опросы",
+            url: "/admin/surveys",
+            isExternal: false,
+          },
         ],
       },
       {

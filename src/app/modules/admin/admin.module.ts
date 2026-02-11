@@ -45,6 +45,8 @@ import { M2mClientsListComponent } from "./components/m2m-clients/m2m-clients-li
 import { M2mClientCreateComponent } from "./components/m2m-clients/m2m-client-create.component";
 import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-detail.component";
 import { M2mClientsService } from "./services/m2m-clients.service";
+import { SurveysAdminService } from "./services/surveys-admin.service";
+import { SurveyRepliesAdminPageComponent } from "./components/surveys/survey-replies-admin-page.component";
 
 const adminServices = [
   AdminDashboardService,
@@ -56,6 +58,7 @@ const adminServices = [
   SalariesHistoricalDataTemplatesService,
   AdminEmailService,
   M2mClientsService,
+  SurveysAdminService,
 ];
 
 @NgModule({
@@ -91,6 +94,7 @@ const adminServices = [
     M2mClientsListComponent,
     M2mClientCreateComponent,
     M2mClientDetailComponent,
+    SurveyRepliesAdminPageComponent,
   ],
   imports: [
     CommonModule,

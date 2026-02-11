@@ -28,6 +28,7 @@ import { SendEmailPageComponent } from "./components/tools/send-email-page/send-
 import { M2mClientsListComponent } from "./components/m2m-clients/m2m-clients-list.component";
 import { M2mClientCreateComponent } from "./components/m2m-clients/m2m-client-create.component";
 import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-detail.component";
+import { SurveyRepliesAdminPageComponent } from "./components/surveys/survey-replies-admin-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -83,6 +84,8 @@ const routes: Routes = [
     path: "salaries/historical-data-templates",
     component: HistoricalDataTemplatesComponent,
   },
+
+  { path: "surveys", component: SurveyRepliesAdminPageComponent },
 
   // M2M Clients
   { path: "m2m-clients", component: M2mClientsListComponent },
