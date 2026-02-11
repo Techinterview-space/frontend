@@ -2,6 +2,7 @@
 
 ## 2026-02-11 (Loader Follow-up)
 
+- PR: [Techinterview-space/frontend#119](https://github.com/Techinterview-space/frontend/pull/119)
 - Branch: `codex/loader-fix-lighthouse-followup`
 - Date: `2026-02-11`
 
