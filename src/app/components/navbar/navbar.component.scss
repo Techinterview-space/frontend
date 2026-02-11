@@ -16,12 +16,15 @@
 // Logo image
 .logo-image {
   width: 28px;
-  height: auto;
+  height: 28px;
+  object-fit: contain;
   border-radius: 4px;
 }
 
 .login-btn {
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 
 // Nav link styling

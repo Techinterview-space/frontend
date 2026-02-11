@@ -2,3 +2,22 @@
   width: 3rem;
   height: 3rem;
 }
+
+.loading-frame {
+  position: relative;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  position: absolute;
+}
+
+.loading-gif {
+  max-width: 220px;
+  max-height: 180px;
+  width: auto;
+  height: auto;
+}

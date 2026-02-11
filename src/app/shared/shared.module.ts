@@ -32,7 +32,6 @@ import { LabelComponent } from "./components/label/label.component";
 import { StatusLabelComponent } from "./components/status-label/status-label.component";
 import { UserLinkComponent } from "./components/user-link/user-link.component";
 import { RouterModule } from "@angular/router";
-import { MarkdownModule } from "ngx-markdown";
 import { ShareButtonComponent } from "./components/share-button/share-button.component";
 import { LabelsNgSelectComponent } from "./components/labels-ng-select/labels-ng-select.component";
 import { NgSelectModule } from "@ng-select/ng-select";
@@ -98,7 +97,6 @@ const componentsToDeclareAndExport = [
     ReactiveFormsModule,
     RouterModule,
     NgSelectModule,
-    MarkdownModule.forChild(),
   ],
   providers: [AuthGuard, AdminGuard, ActiveUserGuard],
 })

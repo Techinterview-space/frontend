@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Interview } from "@models/interview-models";
 import { InterviewsService } from "@services/interviews.service";
@@ -7,6 +7,7 @@ import { AlertService } from "@shared/components/alert/services/alert.service";
 import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
 import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
+import { PrismLoaderService } from "@shared/services/prism-loader.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { FileDownloadAnchor } from "@shared/value-objects/file-download-anchor";
 
@@ -32,6 +33,8 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
     private readonly title: TitleService,
     private readonly alert: AlertService,
     private readonly router: Router,
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly prismLoader: PrismLoaderService,
     activatedRoute: ActivatedRoute,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
@@ -48,6 +51,7 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
           .subscribe((i) => {
             this.interview = i;
             this.setTitle();
+            this.highlightCodeBlocks();
           });
       });
   }
@@ -90,6 +94,7 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
       .subscribe((m) => {
         this.interviewMarkdownContent = m.markdown;
         this.showMarkdownContentModal = true;
+        this.highlightCodeBlocks();
       });
   }
 
@@ -115,5 +120,13 @@ export class InterviewPageComponent implements OnInit, OnDestroy {
   private setTitle(): void {
     this.pageTitle = `Интервью для ${this.interview!.candidateName}`;
     this.title.setTitle(this.pageTitle);
+  }
+
+  private highlightCodeBlocks(): void {
+    queueMicrotask(() => {
+      this.prismLoader
+        .loadAndHighlight(this.elementRef.nativeElement)
+        .catch(() => undefined);
+    });
   }
 }

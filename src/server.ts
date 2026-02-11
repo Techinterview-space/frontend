@@ -4,8 +4,10 @@ import {
   isMainModule,
   writeResponseToNodeResponse,
 } from "@angular/ssr/node";
+import compression from "compression";
 import express from "express";
 import { join } from "node:path";
+import { redirectToCanonicalSitemap } from "./server/sitemap-redirect.util";
 
 const browserDistFolder = join(import.meta.dirname, "../browser");
 
@@ -47,6 +49,18 @@ app.use((req, res, next) => {
     ].join("; "),
   );
   next();
+});
+
+/**
+ * Compress textual responses (HTML/CSS/JS/JSON) to reduce transfer size.
+ */
+app.use(compression());
+
+/**
+ * Canonical sitemap endpoint for crawlers that request /sitemap.xml.
+ */
+app.get("/sitemap.xml", (_req, res) => {
+  redirectToCanonicalSitemap(res);
 });
 
 /**

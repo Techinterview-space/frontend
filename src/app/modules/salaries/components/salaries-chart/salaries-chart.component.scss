@@ -8,6 +8,12 @@
   display: block;
 }
 
+.route-loading-shell {
+  min-height: 70vh;
+  display: flex;
+  align-items: flex-start;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────────
 // NON-AUTHORIZED BLOCK
 // ─────────────────────────────────────────────────────────────────────────────────
@@ -31,6 +37,10 @@
 // ─────────────────────────────────────────────────────────────────────────────────
 
 @media (max-width: 768px) {
+  .route-loading-shell {
+    min-height: 62vh;
+  }
+
   .chapter-title {
     margin-top: 3rem;
     font-size: 1.5rem;

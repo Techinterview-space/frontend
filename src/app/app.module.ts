@@ -19,14 +19,9 @@ import { AuthInterceptor } from "@shared/interceptors/auth-interceptor";
 import { DateParserInterceptor } from "@shared/interceptors/date-parser-interceptor";
 import { SpinnerInterceptor } from "@shared/interceptors/spinner-interceptor";
 import { SharedModule } from "@shared/shared.module";
-import { AdminModule } from "@modules/admin/admin.module";
-import { InterviewsModule } from "@modules/interviews/interviews.module";
-import { MarkdownModule } from "ngx-markdown";
 import { AdminNavbarComponent } from "@components/admin-navbar/admin-navbar.component";
 import { NavbarComponent } from "@components/navbar/navbar.component";
 import { MaintenanceComponent } from "@components/maintenance/maintenance.component";
-
-const appModules: any[] = [AdminModule, InterviewsModule];
 
 @NgModule({
   declarations: [
@@ -40,8 +35,6 @@ const appModules: any[] = [AdminModule, InterviewsModule];
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    MarkdownModule.forRoot(),
-    ...appModules,
     ...environment.googleAnalytics.imports,
   ],
   providers: [

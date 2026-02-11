@@ -35,7 +35,7 @@ import { TextWithLinebreaksComponent } from "./components/text-with-linebreaks/t
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MarkdownModule.forChild(),
+    MarkdownModule.forRoot(),
     NgSelectModule,
   ],
 })
