@@ -11,6 +11,9 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
   style = "spinner-border-lg";
 
   @Input()
+  showGif = false;
+
+  @Input()
   delayMs = 750;
 
   static LoadingCatUrl =
@@ -24,6 +27,10 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
   private delayTimerId: ReturnType<typeof setTimeout> | null = null;
 
   ngOnInit(): void {
+    if (!this.showGif) {
+      return;
+    }
+
     const now = new Date();
     const isOdd = now.getHours() % 2 === 1;
     const selectedGif = isOdd
@@ -32,10 +39,11 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
     const selectedAlt = isOdd ? "Loading cat GIF" : "Loading dog GIF";
 
     // Delay heavy GIF loading so fast responses avoid a multi-MB transfer.
+    const delay = Math.max(0, this.delayMs);
     this.delayTimerId = setTimeout(() => {
       this.loadingUrl = selectedGif;
       this.loadingAlt = selectedAlt;
-    }, this.delayMs);
+    }, delay);
   }
 
   ngOnDestroy(): void {
@@ -47,5 +55,10 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
 
   onGifLoaded(): void {
     this.showPreloader = false;
+  }
+
+  onGifLoadFailed(): void {
+    this.loadingUrl = "";
+    this.showPreloader = true;
   }
 }

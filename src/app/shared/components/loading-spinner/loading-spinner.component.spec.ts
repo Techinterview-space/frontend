@@ -24,8 +24,21 @@ describe("LoadingSpinnerComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("delays gif request until threshold", fakeAsync(() => {
+  it("does not request gif by default", fakeAsync(() => {
     component.ngOnDestroy();
+    component.showGif = false;
+    component.loadingUrl = "";
+
+    component.ngOnInit();
+    tick(2000);
+    expect(component.loadingUrl).toBe("");
+
+    component.ngOnDestroy();
+  }));
+
+  it("delays gif request until threshold when enabled", fakeAsync(() => {
+    component.ngOnDestroy();
+    component.showGif = true;
     component.delayMs = 500;
     component.loadingUrl = "";
 
