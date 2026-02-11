@@ -1,4 +1,4 @@
-import { Observable, forkJoin } from "rxjs";
+import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "@environments/environment";
@@ -20,6 +20,6 @@ export class HealthCheckService {
   }
 
   appHealth(): Observable<boolean> {
-    return this.backend().pipe(map((x) => true));
+    return this.backend().pipe(map((_x) => true));
   }
 }

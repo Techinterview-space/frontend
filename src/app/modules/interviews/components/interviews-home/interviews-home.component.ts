@@ -109,8 +109,9 @@ export class InterviewsHomeComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(this.getRedirectUrl());
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // ignored
+    // Required for untilDestroyed
   }
 
   private getRedirectUrl(): string {

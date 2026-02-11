@@ -77,5 +77,8 @@ export class HasRoleDirective implements OnInit, OnDestroy {
     this.viewContainerRef.clear();
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 }

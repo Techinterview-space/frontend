@@ -29,7 +29,7 @@ export class DateParserInterceptor implements HttpInterceptor {
             this.tryConvertDates(body);
           }
         },
-        (err: any) => {
+        (_err: any) => {
           // do nothing
         },
       ),

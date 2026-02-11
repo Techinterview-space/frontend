@@ -97,7 +97,7 @@ export class InterviewTemplateEditPageComponent implements OnInit, OnDestroy {
     this.service
       .update(updateRequest)
       .pipe(untilDestroyed(this))
-      .subscribe((id) => {
+      .subscribe((_id) => {
         this.alert.success("Шаблон обновлен");
         this.router.navigate(["/interviews/templates/my"]);
       });

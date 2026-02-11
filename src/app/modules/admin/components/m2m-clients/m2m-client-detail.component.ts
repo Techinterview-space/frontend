@@ -48,7 +48,10 @@ export class M2mClientDetailComponent implements OnInit, OnDestroy {
     this.loadClient(id);
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 
   loadClient(id: number): void {
     this.isLoading = true;

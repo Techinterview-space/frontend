@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { FormGroup, AbstractControl, ValidationErrors } from "@angular/forms";
+import { Component, Input } from "@angular/core";
+import { AbstractControl, ValidationErrors } from "@angular/forms";
 
 @Component({
   selector: "app-field-error",
@@ -7,14 +7,12 @@ import { FormGroup, AbstractControl, ValidationErrors } from "@angular/forms";
   styleUrls: ["./field-error.component.scss"],
   standalone: false,
 })
-export class FieldErrorComponent implements OnInit {
+export class FieldErrorComponent {
   @Input() field: AbstractControl | null = null;
   @Input() max: string | number | null = null;
   @Input() min: string | number | null = null;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   get shouldShowError(): boolean {
     if (this.field == null) {

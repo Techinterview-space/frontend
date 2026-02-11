@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { defaultPageParams, PageParams } from "@models/page-params";
+import { PageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 import { Observable } from "rxjs";

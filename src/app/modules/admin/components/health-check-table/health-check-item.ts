@@ -31,11 +31,11 @@ export class HealthCheckItem {
     this.status = StatusMarker.Yellow;
 
     this.action().subscribe(
-      (r) => {
+      (_r) => {
         this.elapsed = Date.now() - start;
         this.status = StatusMarker.Green;
       },
-      (e) => {
+      (_e) => {
         this.elapsed = Date.now() - start;
         this.status = StatusMarker.Red;
       },

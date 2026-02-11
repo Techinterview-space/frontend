@@ -14,8 +14,8 @@ export class ActiveUserGuard implements CanActivate {
   constructor(private readonly authService: AuthService) { }
 
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
+    _route: ActivatedRouteSnapshot,
+    _state: RouterStateSnapshot,
   ): Observable<boolean> {
     return this.authService
       .getCurrentUser()

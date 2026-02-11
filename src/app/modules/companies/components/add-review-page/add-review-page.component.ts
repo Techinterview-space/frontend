@@ -95,7 +95,7 @@ export class AddCompanyReviewPageComponent implements OnInit, OnDestroy {
             true,
           );
         },
-        error: (error) => {
+        error: (_error) => {
           this.gtag.event(
             "company_review_submitted_error",
             "company_reviews",

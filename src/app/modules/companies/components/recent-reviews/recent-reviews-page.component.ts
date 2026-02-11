@@ -110,7 +110,7 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
     this.service
       .likeReview(review.companyId, review.id)
       .pipe(untilDestroyed(this))
-      .subscribe((x) => {
+      .subscribe((_x) => {
         this.alertService.success("Голос сохранен");
       });
   }
@@ -125,7 +125,7 @@ export class RecentReviewsPageComponent implements OnInit, OnDestroy {
     this.service
       .dislikeReview(review.companyId, review.id)
       .pipe(untilDestroyed(this))
-      .subscribe((x) => {
+      .subscribe((_x) => {
         this.alertService.success("Голос сохранен");
       });
   }

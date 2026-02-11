@@ -2,9 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { DeveloperGrade } from "@models/enums";
 import { SalariesByGrade } from "@services/user-salaries.service";
 import { SalariesChart } from "../salaries-chart";
-import { formatNumber } from "@angular/common";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
-import { CurrencyType } from "@services/admin-tools.service";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 interface Item extends SalariesByGrade {
@@ -81,5 +79,8 @@ export class SalariesByGradeBlockComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 }

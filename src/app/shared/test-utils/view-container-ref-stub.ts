@@ -29,11 +29,11 @@ export class ViewContainerRefStub extends ViewContainerRef {
     ngModuleRef?: NgModuleRef<any>,
   ): ComponentRef<C> | any;
   createComponent<C>(
-    componentFactory: any,
-    index?: any,
-    injector?: any,
-    projectableNodes?: any,
-    ngModuleRef?: any,
+    _componentFactory: any,
+    _index?: any,
+    _injector?: any,
+    _projectableNodes?: any,
+    _ngModuleRef?: any,
   ): ComponentRef<C> | ComponentRef<C> | any {
     return null;
   }
@@ -45,32 +45,32 @@ export class ViewContainerRefStub extends ViewContainerRef {
 
   clear(): void {}
 
-  get(index: number): ViewRef | any {
+  get(_index: number): ViewRef | any {
     return null;
   }
 
   createEmbeddedView<C>(
-    templateRef: TemplateRef<C>,
-    context?: C,
+    _templateRef: TemplateRef<C>,
+    _context?: C,
   ): EmbeddedViewRef<C> {
     return null as unknown as EmbeddedViewRef<C>;
   }
 
-  insert(viewRef: ViewRef, index?: number): ViewRef | any {
+  insert(_viewRef: ViewRef, _index?: number): ViewRef | any {
     return null;
   }
 
-  move(viewRef: ViewRef, currentIndex: number): ViewRef | any {
+  move(_viewRef: ViewRef, _currentIndex: number): ViewRef | any {
     return null;
   }
 
-  indexOf(viewRef: ViewRef): number {
+  indexOf(_viewRef: ViewRef): number {
     return -1;
   }
 
-  remove(index?: number): void {}
+  remove(_index?: number): void {}
 
-  detach(index?: number): ViewRef | any {
+  detach(_index?: number): ViewRef | any {
     return null;
   }
 }

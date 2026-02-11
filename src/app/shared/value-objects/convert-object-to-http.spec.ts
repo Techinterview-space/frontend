@@ -33,7 +33,7 @@ describe("ConvertObjectToHttpParams", () => {
     const target = new ConvertObjectToHttpParams(null);
     let errorWasThrown = false;
     try {
-      const result = target.get();
+      const _result = target.get();
     } catch (e) {
       errorWasThrown = true;
     }

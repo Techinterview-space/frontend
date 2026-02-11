@@ -78,8 +78,9 @@ export class SalariesAdminPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // ignored
+    // Required for untilDestroyed
   }
 
   deleteSalary(salary: SalaryAdminItem): void {

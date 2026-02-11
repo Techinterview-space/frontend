@@ -34,7 +34,10 @@ export class M2mClientCreateComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 
   onScopeToggle(scope: string, event: Event): void {
     const checked = (event.target as HTMLInputElement).checked;

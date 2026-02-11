@@ -1,4 +1,4 @@
-import { Subject, Observable, of, from, BehaviorSubject } from "rxjs";
+import { Subject, Observable, of, BehaviorSubject } from "rxjs";
 import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
 import { ApplicationUser } from "@models/application-user";

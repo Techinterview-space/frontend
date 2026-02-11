@@ -148,7 +148,7 @@ export class SalariesChartComponent implements OnInit, OnDestroy {
     this.gtag.event("salary_edit_modal_closed_without_editing", "salary_chart");
   }
 
-  onSalaryUpdated(salary: UserSalary): void {
+  onSalaryUpdated(_salary: UserSalary): void {
     this.openEditCurrentSalaryModal = false;
     this.gtag.event("salary_updated", "salary_chart");
     this.load();

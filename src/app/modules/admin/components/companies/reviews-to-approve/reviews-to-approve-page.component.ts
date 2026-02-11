@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Company, CompanyReview } from "@models/companies.model";
+import { CompanyReview } from "@models/companies.model";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";

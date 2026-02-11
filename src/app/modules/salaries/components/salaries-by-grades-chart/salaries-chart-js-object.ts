@@ -1,7 +1,6 @@
 import { SalariesByMoneyBarChart } from "@services/user-salaries.service";
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
 import { RandomRgbColor } from "../random-rgb-color";
-import { LabelEntityDto } from "@services/label-entity.model";
 
 interface ChartDatasetType {
   profession: number | null;

@@ -179,14 +179,14 @@
                   Посмотреть
                 </button>
                 <button
-                  *ngIf="item.approvedAt == null"
+                  *ngIf="item.approvedAt === null"
                   class="btn btn-link-sm text-success"
                   (click)="approveReview(item)"
                 >
                   Одобрить
                 </button>
                 <button
-                  *ngIf="item.approvedAt != null && item.outdatedAt == null"
+                  *ngIf="item.approvedAt !== null && item.outdatedAt === null"
                   class="btn btn-link-sm text-danger"
                   (click)="outdateReview(item)"
                 >
@@ -212,7 +212,7 @@
 </ng-template>
 
 <app-dialog
-  [show]="reviewToShow != null"
+  [show]="reviewToShow !== null"
   (closed)="onReviewModalDlgClose()"
   [header]="'Отзыв ' + reviewToShow?.id"
   [additionalCss]="'modal-lg'"

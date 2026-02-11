@@ -85,7 +85,7 @@
 ></app-confirm-dialog>
 
 <app-dialog
-  [show]="reviewToShow != null"
+  [show]="reviewToShow !== null"
   (closed)="onReviewModalDlgClose()"
   [header]="'Отзыв ' + reviewToShow?.id"
   [additionalCss]="'modal-lg'"

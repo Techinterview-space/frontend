@@ -1,7 +1,6 @@
-import { Component, Input, OnDestroy, AfterViewInit } from "@angular/core";
+import { Component, Input, AfterViewInit } from "@angular/core";
 import { GradesMinMaxSalariesChartObject } from "./grades-min-max-chart-object";
 import { SalariesChart } from "../salaries-chart/salaries-chart";
-import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { GradesMinMaxChartData } from "@services/user-salaries.service";
 
 @Component({
@@ -10,7 +9,7 @@ import { GradesMinMaxChartData } from "@services/user-salaries.service";
   styleUrl: "./grades-min-max-chart.component.scss",
   standalone: false,
 })
-export class GradesMinMaxChartComponent implements OnDestroy, AfterViewInit {
+export class GradesMinMaxChartComponent implements AfterViewInit {
   @Input()
   source: SalariesChart | null = null;
 
@@ -24,8 +23,6 @@ export class GradesMinMaxChartComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.initChart();
   }
-
-  ngOnDestroy(): void {}
 
   private initChart(): void {
     if (this.source == null) {

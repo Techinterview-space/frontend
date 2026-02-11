@@ -1,14 +1,10 @@
 import {
   Component,
   Input,
-  OnDestroy,
-  OnInit,
   AfterViewInit,
 } from "@angular/core";
 import { SalariesChartJsObject } from "./salaries-chart-js-object";
 import { SalariesByMoneyBarChart } from "@services/user-salaries.service";
-import { SalariesPerProfession } from "../salaries-per-profession";
-import { LabelEntityDto } from "@services/label-entity.model";
 
 @Component({
   selector: "app-salaries-by-grades-chart",
@@ -17,7 +13,7 @@ import { LabelEntityDto } from "@services/label-entity.model";
   standalone: false,
 })
 export class SalariesByGradesChartComponent
-  implements OnInit, OnDestroy, AfterViewInit
+  implements AfterViewInit
 {
   @Input()
   chart: SalariesByMoneyBarChart | null = null;
@@ -31,16 +27,8 @@ export class SalariesByGradesChartComponent
 
   constructor() {}
 
-  ngOnInit(): void {
-    // ignored
-  }
-
   ngAfterViewInit() {
     this.initChart();
-  }
-
-  ngOnDestroy(): void {
-    // ignored
   }
 
   private initChart(): void {

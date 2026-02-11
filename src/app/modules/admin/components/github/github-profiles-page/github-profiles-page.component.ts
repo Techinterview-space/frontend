@@ -60,8 +60,9 @@ export class GitHubProfilesPageComponent implements OnInit, OnDestroy {
     this.loadData(1);
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // ignored
+    // Required for untilDestroyed
   }
 
   deleteProfile(profile: GitHubProfile): void {

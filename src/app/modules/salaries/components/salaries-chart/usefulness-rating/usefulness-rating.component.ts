@@ -47,7 +47,10 @@ export class UsefulnessRatingComponent implements OnInit, OnDestroy {
       : UsefulnessRatingComponentMode.ShowRatingBlock;
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 
   ratingChanged(rating: number): void {
     this.service

@@ -42,7 +42,7 @@ export class ForgotPasswordPageComponent implements OnDestroy {
             response.message ||
             "If an account exists with this email, you will receive a password reset link.";
         },
-        error: (err) => {
+        error: (_err) => {
           this.isLoading = false;
           // Don't reveal if email exists or not for security
           this.successMessage =

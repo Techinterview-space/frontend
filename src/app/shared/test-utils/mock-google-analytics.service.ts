@@ -3,7 +3,7 @@ import { GoogleAnalyticsService } from "ngx-google-analytics";
 
 @Injectable()
 export class MockGoogleAnalyticsService extends GoogleAnalyticsService {
-  override gtag(...args: any[]): void {
+  override gtag(..._args: any[]): void {
     return;
   }
 }

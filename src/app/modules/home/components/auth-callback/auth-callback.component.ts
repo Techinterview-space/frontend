@@ -234,7 +234,7 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
         this.showInfoblock = true;
         this.totpCodeSent = true;
 
-        this.authService.getCurrentUserFromBackend().subscribe((user) => {
+        this.authService.getCurrentUserFromBackend().subscribe((_user) => {
           this.redirectToMainPageOrUrl();
         });
       }
@@ -261,5 +261,8 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 }

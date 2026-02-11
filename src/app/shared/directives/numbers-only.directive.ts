@@ -1,4 +1,4 @@
-import { ElementRef, HostListener, Directive, Input } from "@angular/core";
+import { ElementRef, HostListener, Directive } from "@angular/core";
 
 @Directive({
   selector: "[appOnlyNumber]",

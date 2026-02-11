@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, OnDestroy } from "@angular/core";
+import { Component, Input, AfterViewInit } from "@angular/core";
 import { ItemsPerDayChartData } from "@shared/value-objects/items-per-day-chart-data";
 import { ItemsPerDayChart } from "./items-per-day-chart";
 
@@ -8,7 +8,7 @@ import { ItemsPerDayChart } from "./items-per-day-chart";
   styleUrl: "./items-per-day-chart.component.scss",
   standalone: false,
 })
-export class ItemsPerDayChartComponent implements AfterViewInit, OnDestroy {
+export class ItemsPerDayChartComponent implements AfterViewInit {
   @Input()
   title: string | null = null;
 
@@ -27,8 +27,6 @@ export class ItemsPerDayChartComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.initChart();
   }
-
-  ngOnDestroy(): void {}
 
   private initChart(): void {
     if (this.source == null) {

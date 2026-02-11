@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { SalariesChart } from "../salaries-chart";
-import { formatNumber } from "@angular/common";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
@@ -32,7 +31,10 @@ export class SalaryBlockValueComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 
   private recalculcate(): void {
     if (this.source == null) {

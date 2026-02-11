@@ -27,7 +27,10 @@ export class AlertComponent implements OnInit, OnDestroy {
       .subscribe(() => (this.alerts = []));
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 
   removeAlert(alert: Alert): void {
     // remove specified alert from array

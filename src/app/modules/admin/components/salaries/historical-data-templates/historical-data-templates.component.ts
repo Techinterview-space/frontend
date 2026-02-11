@@ -194,7 +194,8 @@ export class HistoricalDataTemplatesComponent implements OnInit, OnDestroy {
     this.selectedProfessionsForModal = null;
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // ignored
+    // Required for untilDestroyed
   }
 }

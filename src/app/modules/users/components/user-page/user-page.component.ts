@@ -39,5 +39,8 @@ export class UserPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 }

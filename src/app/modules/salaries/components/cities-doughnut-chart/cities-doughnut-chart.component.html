@@ -32,7 +32,7 @@
     <div
       class="mb-3 fst-italic"
       *ngIf="
-        currentSalary != null && currentSalary.city == null;
+        currentSalary !== null && currentSalary.city === null;
         else hasCityInSalary
       "
     >

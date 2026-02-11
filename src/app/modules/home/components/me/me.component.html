@@ -47,7 +47,7 @@
           </div>
           <div
             class="info-item"
-            *ngIf="user && user.roles != null && user.roles.length > 0"
+            *ngIf="user && user.roles !== null && user.roles.length > 0"
           >
             <div class="info-label">
               <i class="bi bi-person-badge me-2"></i>
@@ -173,7 +173,7 @@
         <div class="card-body">
           <div
             class="d-flex justify-content-end mb-3"
-            *ngIf="mySalaries != null && mySalaries.length > 0"
+            *ngIf="mySalaries !== null && mySalaries.length > 0"
           >
             <button
               type="button"
@@ -191,7 +191,7 @@
           </div>
           <div
             class="table-responsive"
-            *ngIf="mySalaries != null && mySalaries.length > 0"
+            *ngIf="mySalaries !== null && mySalaries.length > 0"
           >
             <table
               class="table table-hover salaries-table"
@@ -235,7 +235,7 @@
           </div>
 
           <div
-            *ngIf="mySalaries != null && mySalaries.length === 0"
+            *ngIf="mySalaries !== null && mySalaries.length === 0"
             class="empty-state"
           >
             <div class="text-center py-5">

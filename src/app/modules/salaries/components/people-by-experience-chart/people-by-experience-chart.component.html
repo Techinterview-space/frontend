@@ -14,7 +14,7 @@
   <div
     class="mb-3 fst-italic"
     *ngIf="
-      currentSalary != null && currentSalary.age == null;
+      currentSalary !== null && currentSalary.age === null;
       else hasCityInSalary
     "
   >

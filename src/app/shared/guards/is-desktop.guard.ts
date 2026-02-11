@@ -14,8 +14,8 @@ import { CheckDeviceService } from "@shared/services/check-device/check-device.s
 export class IsDesktopGuard implements CanActivate {
   constructor(private readonly checkDevice: CheckDeviceService) {}
   canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
+    _next: ActivatedRouteSnapshot,
+    _state: RouterStateSnapshot,
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>

@@ -26,7 +26,7 @@
   <div
     class="fst-italic mb-2"
     *ngIf="
-      currentSalary != null && currentSalary.workIndustryId == null;
+      currentSalary !== null && currentSalary.workIndustryId === null;
       else hasSkillInSalary
     "
   >

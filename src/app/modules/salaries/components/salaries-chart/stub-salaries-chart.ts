@@ -1,6 +1,5 @@
 import { SalariesChart } from "./salaries-chart";
 import { SalariesChartResponse } from "@services/user-salaries.service";
-import { UserSalary } from "@models/salaries/salary.model";
 
 export class StubSalariesChart extends SalariesChart {
   private static readonly salaryLabels = [
@@ -34,7 +33,7 @@ export class StubSalariesChart extends SalariesChart {
         currentUserSalary: null,
         totalCountInStats: data?.totalCountInStats ?? 0,
         salariesByMoneyBarChart: {
-          items: StubSalariesChart.salaryLabels.map((x) =>
+          items: StubSalariesChart.salaryLabels.map((_x) =>
             StubSalariesChart.getRandomNumber(100, 25),
           ),
           labels: StubSalariesChart.salaryLabels,

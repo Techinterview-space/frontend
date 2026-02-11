@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit } from "@angular/core";
+import { Component, Input, AfterViewInit } from "@angular/core";
 import { SurveyHistoricalChartObject } from "./survey-historical-chart-object";
 import { HistoricalSurveyChartResponse } from "@services/historical-charts.models";
 
@@ -8,7 +8,7 @@ import { HistoricalSurveyChartResponse } from "@services/historical-charts.model
   styleUrls: ["./survey-historical-chart.component.scss"],
   standalone: false,
 })
-export class SurveyHistoricalChartComponent implements OnInit, AfterViewInit {
+export class SurveyHistoricalChartComponent implements AfterViewInit {
   @Input()
   data: HistoricalSurveyChartResponse | null = null;
 
@@ -18,8 +18,6 @@ export class SurveyHistoricalChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.initChart();
   }
-
-  ngOnInit(): void {}
 
   initChart(): void {
     if (this.data == null) {

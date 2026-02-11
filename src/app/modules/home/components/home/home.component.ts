@@ -49,8 +49,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // Do nothing
+    // Required for untilDestroyed
   }
 
   private getUwuLink(): string {

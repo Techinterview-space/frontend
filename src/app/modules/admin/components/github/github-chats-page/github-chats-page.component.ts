@@ -5,8 +5,6 @@ import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 import { GitHubAdminService } from "@services/github-admin.service";
 import { GitHubChat } from "@models/github";
-import { ConfirmMsg } from "@shared/components/dialogs/models/confirm-msg";
-import { DialogMessage } from "@shared/components/dialogs/models/dialog-message";
 
 @Component({
   templateUrl: "./github-chats-page.component.html",
@@ -58,7 +56,8 @@ export class GitHubChatsPageComponent implements OnInit, OnDestroy {
     this.loadData(1);
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // ignored
+    // Required for untilDestroyed
   }
 }

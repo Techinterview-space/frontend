@@ -1,4 +1,3 @@
-import { Chart } from "chart.js/auto";
 import { RandomRgbColor } from "../random-rgb-color";
 import { DeveloperGrade } from "@models/enums";
 import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";

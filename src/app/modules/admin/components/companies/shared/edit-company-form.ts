@@ -1,7 +1,6 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Company } from "@models/companies.model";
 import {
-  CompanyEditRequest,
   CompanyUpdateRequest,
 } from "@services/companies.service";
 

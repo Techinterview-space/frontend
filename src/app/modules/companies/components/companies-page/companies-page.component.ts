@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Company } from "@models/companies.model";
-import { defaultPageParams, PageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { CompaniesService } from "@services/companies.service";
 import { TitleService } from "@services/title.service";

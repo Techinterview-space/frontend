@@ -3,7 +3,6 @@ import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
 import {
   OpenAiPrompt,
-  OpenAiPromptType,
   OpenAiPromptEditRequest,
 } from "@models/openai-prompt.model";
 

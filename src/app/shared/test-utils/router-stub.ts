@@ -5,15 +5,15 @@ import { Observable } from "rxjs";
 @Injectable()
 export class RouterStub {
   readonly events: Observable<Event> = new Observable();
-  navigate(commands: any[], extras?: NavigationExtras): void {}
+  navigate(_commands: any[], _extras?: NavigationExtras): void {}
   navigateByUrl(
-    url: string | UrlTree,
-    extras?: NavigationExtras,
+    _url: string | UrlTree,
+    _extras?: NavigationExtras,
   ): Promise<boolean> {
     return Promise.resolve(true);
   }
-  createUrlTree(commands: any[], navigationExtras?: NavigationExtras): void {}
-  serializeUrl(url: UrlTree): string {
+  createUrlTree(_commands: any[], _navigationExtras?: NavigationExtras): void {}
+  serializeUrl(_url: UrlTree): string {
     return "";
   }
 }

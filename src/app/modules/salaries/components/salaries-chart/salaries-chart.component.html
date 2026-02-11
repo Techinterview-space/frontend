@@ -42,7 +42,7 @@
   </div>
 </div>
 
-<div class="container mb-5" *ngIf="salariesChart != null; else dataLoading">
+<div class="container mb-5" *ngIf="salariesChart !== null; else dataLoading">
   <div class="card">
     <div class="card-body mobile-px-5 mobile-py-5">
       <div class="mb-3" *ngIf="hasPredefinedFilter">
@@ -75,7 +75,7 @@
                 {{ currentUserSalary.quarter }} квартал
                 {{ currentUserSalary.year }} года.</span
               >
-              <span class="ms-1" *ngIf="currentUserSalary.city == null"
+              <span class="ms-1" *ngIf="currentUserSalary.city === null"
                 >Город проживания не указан.</span
               >
             </div>
@@ -125,7 +125,7 @@
       <div
         *ngIf="
           !showDataStub &&
-          currentUserSalary != null &&
+          currentUserSalary !== null &&
           currentUserSalary.shouldBeFilledUp
         "
         class="mb-5"
@@ -148,7 +148,7 @@
     </div>
   </div>
 
-  <div class="mt-5" *ngIf="currentUserSalary != null && showAddSalaryAlert">
+  <div class="mt-5" *ngIf="currentUserSalary !== null && showAddSalaryAlert">
     <div
       class="alert alert-warning alert-dismissible fade show p-5"
       role="alert"

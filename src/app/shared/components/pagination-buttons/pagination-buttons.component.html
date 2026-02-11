@@ -19,14 +19,14 @@
         class="page-item {{ activePageStyle(page) }}"
       >
         <button
-          *ngIf="page != null"
+          *ngIf="page !== null"
           type="button"
           class="page-link"
           (click)="pageClicked(page)"
         >
           {{ page }}
         </button>
-        <div class="page-link" *ngIf="page == null">...</div>
+        <div class="page-link" *ngIf="page === null">...</div>
       </li>
 
       <li class="page-item {{ disableNextButton ? 'disabled' : '' }}">

@@ -1,7 +1,5 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthService } from "./shared/services/auth/auth.service";
-import { untilDestroyed } from "./shared/subscriptions/until-destroyed";
 
 @Component({
   selector: "app-root",
@@ -9,14 +7,10 @@ import { untilDestroyed } from "./shared/subscriptions/until-destroyed";
   styleUrls: ["./app.component.scss"],
   standalone: false,
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
   get showAdminNavbar(): boolean {
     return this.router.url.startsWith("/admin");
   }
 
   constructor(private readonly router: Router) {}
-
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {}
 }

@@ -190,7 +190,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return false;
   }
 
-  private processHttpEvent(event: HttpEvent<any>): void {
+  private processHttpEvent(_event: HttpEvent<any>): void {
     // do nothing
   }
 

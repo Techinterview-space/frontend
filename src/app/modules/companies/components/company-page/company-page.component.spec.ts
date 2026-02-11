@@ -21,8 +21,8 @@ class RouterMock {
 describe("CompanyPageComponent", () => {
   let component: CompanyPageComponent;
   let fixture: ComponentFixture<CompanyPageComponent>;
-  let router: Router;
-  let mockViewportScroller: jasmine.SpyObj<ViewportScroller>;
+  let _router: Router;
+  let _mockViewportScroller: jasmine.SpyObj<ViewportScroller>;
 
   beforeEach(async () => {
     const viewportScrollerSpy = jasmine.createSpyObj("ViewportScroller", [

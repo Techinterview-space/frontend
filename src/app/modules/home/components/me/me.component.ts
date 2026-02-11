@@ -79,7 +79,10 @@ export class MeComponent implements OnInit, OnDestroy {
     this.reloadUser();
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 
   toggleBlurTable(): void {
     this.blurTable = !this.blurTable;

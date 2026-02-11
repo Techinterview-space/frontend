@@ -102,7 +102,7 @@ export class CompanyAdminPageComponent implements OnInit, OnDestroy {
     this.service
       .getOpenAiAnalysis(this.company.id)
       .pipe(untilDestroyed(this))
-      .subscribe((result) => {
+      .subscribe((_result) => {
         this.alertService.success("AI анализ был завершен");
         this.company = null;
         this.ngOnInit();

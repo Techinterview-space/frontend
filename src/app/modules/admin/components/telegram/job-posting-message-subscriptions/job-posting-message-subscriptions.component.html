@@ -68,7 +68,7 @@
                   <ul class="dropdown-menu">
                     <li>
                       <a
-                        *ngIf="item.deletedAt != null"
+                        *ngIf="item.deletedAt !== null"
                         class="dropdown-item text-success"
                         (click)="activate(item)"
                         >Активировать</a
@@ -76,7 +76,7 @@
                     </li>
                     <li>
                       <a
-                        *ngIf="item.deletedAt == null"
+                        *ngIf="item.deletedAt === null"
                         class="dropdown-item text-warning"
                         (click)="deactivate(item)"
                         >Деактивировать</a

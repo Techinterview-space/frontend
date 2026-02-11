@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Output } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { PaginatedList } from "@models/paginated-list";
 import { UserSalary } from "@models/salaries/salary.model";
 import { UserSalariesService } from "@services/user-salaries.service";
@@ -71,7 +71,8 @@ export class SalariesPaginatedTableComponent implements OnInit, OnDestroy {
       });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // ignored
+    // Required for untilDestroyed
   }
 }

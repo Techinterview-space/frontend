@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { InterviewTemplate } from "@models/interview-models";
-import { defaultPageParams } from "@models/page-params";
-import { PaginatedList } from "@models/paginated-list";
 import { InterviewTemplatesService } from "@services/interview-templates.service";
 import { TitleService } from "@services/title.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Label } from "@models/user-label.model";
 import { RandomHexColor } from "@shared/value-objects/random-hex-color";
 
@@ -8,7 +8,7 @@ import { RandomHexColor } from "@shared/value-objects/random-hex-color";
   styleUrls: ["./labels-ng-select.component.scss"],
   standalone: false,
 })
-export class LabelsNgSelectComponent implements OnInit {
+export class LabelsNgSelectComponent {
   @Input()
   selectedLabels: Array<Label> = [];
 
@@ -21,9 +21,7 @@ export class LabelsNgSelectComponent implements OnInit {
   @Input()
   placeholder = "Select tags";
 
-  ngOnInit(): void {}
-
-  onSelectChange(data: any): void {
+  onSelectChange(_data: any): void {
     this.selectedLabelsChange.emit(this.selectedLabels);
   }
 

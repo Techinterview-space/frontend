@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { UserRole } from "@models/enums";
 import { ApplicationUserExtended } from "@models/extended";
@@ -23,7 +23,7 @@ interface NavbarDropdown {
   styleUrls: ["./navbar.component.scss"],
   standalone: false,
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
   loginButtonAvailable = false;
   healthCheckError = false;
 
@@ -150,8 +150,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       },
     ];
   }
-
-  ngOnDestroy(): void {}
 
   login(): void {
     this.router.navigate(["/login"]);

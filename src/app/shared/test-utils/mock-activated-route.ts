@@ -1,4 +1,4 @@
-import { Observable, of } from "rxjs";
+import { of } from "rxjs";
 import { convertToParamMap } from "@angular/router";
 import { Injectable } from "@angular/core";
 

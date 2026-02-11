@@ -1,4 +1,3 @@
-import { formatNumber } from "@angular/common";
 import {
   DevelopersByCategoryChartData,
   PeopleByGradesChartData,
@@ -15,8 +14,7 @@ import {
   ProfessionsDistributionChartData,
   PeopleByGenderChartData,
 } from "@services/user-salaries.service";
-import { SalariesPerProfession } from "../salaries-per-profession";
-import { UserSalary, UserSalaryAdminDto } from "@models/salaries/salary.model";
+import { UserSalaryAdminDto } from "@models/salaries/salary.model";
 import { LabelEntityDto } from "@services/label-entity.model";
 import { CurrencyData, CurrencyType } from "@services/admin-tools.service";
 import { Subject } from "rxjs";

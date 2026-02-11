@@ -20,8 +20,8 @@ export abstract class RoleGuardBase implements CanActivate {
   protected abstract roleToCheck(): UserRole;
 
   canActivate(
-    route: ActivatedRouteSnapshot | null,
-    state: RouterStateSnapshot | null,
+    _route: ActivatedRouteSnapshot | null,
+    _state: RouterStateSnapshot | null,
   ): Observable<boolean> {
     return this.authService.getCurrentUser().pipe(
       map((user) => {

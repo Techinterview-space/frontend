@@ -1,7 +1,6 @@
 import {
   Component,
   EventEmitter,
-  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -21,7 +20,6 @@ import { LabelEntityDto } from "@services/label-entity.model";
 import { Router } from "@angular/router";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
 import { AuthService } from "@shared/services/auth/auth.service";
-import { pipe } from "rxjs";
 import { EditSalaryForm } from "./edit-salary-form";
 import { Gender, GenderEnum } from "@models/enums/gender.enum";
 import { CookieService } from "ngx-cookie-service";
@@ -78,7 +76,7 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
       this.authService
         .login()
         .pipe(untilDestroyed(this))
-        .subscribe((x) => {});
+        .subscribe((_x) => {});
 
       return;
     }
@@ -168,7 +166,8 @@ export class AddSalaryComponent implements OnInit, OnDestroy {
       });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // ignored
+    // Required for untilDestroyed
   }
 }

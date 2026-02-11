@@ -84,7 +84,7 @@ export class CitiesDoughnutChartObject extends Chart {
 
   private static prepareUniqueItems(
     salaries: UserSalary[],
-    cities: KazakhstanCity[],
+    _cities: KazakhstanCity[],
   ): CityWithCount[] {
     const uniqueItems: Array<CityWithCount> = [];
     salaries.forEach((x) => {

@@ -141,7 +141,10 @@ export class UsersAdminPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {}
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {
+    // Required for untilDestroyed
+  }
 
   openUserRolesForm(user: ApplicationUser): void {
     this.userRolesForm = new UserRolesEditForm(user);

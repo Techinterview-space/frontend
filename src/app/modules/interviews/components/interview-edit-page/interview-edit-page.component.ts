@@ -125,7 +125,7 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
       this.service
         .create(createRequest)
         .pipe(untilDestroyed(this))
-        .subscribe((id) => {
+        .subscribe((_id) => {
           this.alert.success("Interview was saved");
           this.router.navigate(["/interviews/my"]);
         });
@@ -141,7 +141,7 @@ export class InterviewEditPageComponent implements OnInit, OnDestroy {
     this.service
       .update(updateRequest)
       .pipe(untilDestroyed(this))
-      .subscribe((id) => {
+      .subscribe((_id) => {
         this.alert.success("Interview was updated");
         this.router.navigate(["/interviews/my"]);
       });

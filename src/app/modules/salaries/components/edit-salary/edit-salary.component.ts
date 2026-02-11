@@ -20,7 +20,6 @@ import {
 } from "@models/salaries/kazakhstan-city";
 import { LabelEntityDto } from "@services/label-entity.model";
 import { Gender, GenderEnum } from "@models/enums/gender.enum";
-import { formatNumber } from "@angular/common";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 @Component({
@@ -146,8 +145,9 @@ export class EditSalaryComponent implements OnInit, OnDestroy {
       : "* * * * *";
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy(): void {
-    // ignored
+    // Required for untilDestroyed
   }
 
   close(): void {

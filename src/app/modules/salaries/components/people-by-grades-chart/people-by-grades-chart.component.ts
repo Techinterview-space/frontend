@@ -79,7 +79,7 @@ export class PeopleByGradesChartComponent implements OnInit {
         (item) => item.grade != null && item.grade !== DeveloperGrade.Unknown,
       )
       .sort((a, b) => a.grade - b.grade)
-      .map((item, index) => {
+      .map((item, _index) => {
         const color = DeveloperGradeEnum.getColorData(item.grade);
         const width = (item.count / totalCount) * 100;
         const value = showPercents

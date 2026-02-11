@@ -1,6 +1,5 @@
 import { Component, Input } from "@angular/core";
 import { SalariesChart } from "../salaries-chart";
-import { formatNumber } from "@angular/common";
 import { FormatAsMoneyPipe } from "@shared/directives/format-as-money.pipe";
 
 @Component({
