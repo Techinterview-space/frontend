@@ -8,6 +8,7 @@ import { SurveyEditPageComponent } from "./components/survey-edit-page/survey-ed
 import { SurveyViewPageComponent } from "./components/survey-view-page/survey-view-page.component";
 import { SurveyResultsPageComponent } from "./components/survey-results-page/survey-results-page.component";
 import { MySurveysPageComponent } from "./components/my-surveys-page/my-surveys-page.component";
+import { PublicSurveysPageComponent } from "./components/public-surveys-page/public-surveys-page.component";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MySurveysPageComponent } from "./components/my-surveys-page/my-surveys-
     SurveyViewPageComponent,
     SurveyResultsPageComponent,
     MySurveysPageComponent,
+    PublicSurveysPageComponent,
   ],
   imports: [
     CommonModule,

@@ -44,6 +44,9 @@ export const serverRoutes: ServerRoute[] = [
   // Interview pages - authenticated
   { path: "interviews/**", renderMode: RenderMode.Client },
 
+  // Survey pages - public listing for SEO
+  { path: "surveys/public", renderMode: RenderMode.Server },
+
   // Survey pages - authenticated
   { path: "surveys/**", renderMode: RenderMode.Client },
 

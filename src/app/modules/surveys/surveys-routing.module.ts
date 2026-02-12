@@ -6,12 +6,17 @@ import { SurveyEditPageComponent } from "./components/survey-edit-page/survey-ed
 import { SurveyViewPageComponent } from "./components/survey-view-page/survey-view-page.component";
 import { SurveyResultsPageComponent } from "./components/survey-results-page/survey-results-page.component";
 import { MySurveysPageComponent } from "./components/my-surveys-page/my-surveys-page.component";
+import { PublicSurveysPageComponent } from "./components/public-surveys-page/public-surveys-page.component";
 
 const routes: Routes = [
   {
     path: "new",
     component: SurveyCreatePageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "public",
+    component: PublicSurveysPageComponent,
   },
   {
     path: "my-surveys",

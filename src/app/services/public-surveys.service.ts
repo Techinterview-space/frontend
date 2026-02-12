@@ -10,6 +10,8 @@ import {
   SubmitPublicSurveyResponseRequest,
   UpdatePublicSurveyRequest,
 } from "@models/public-survey.model";
+import { PageParams } from "@models/page-params";
+import { PaginatedList } from "@models/paginated-list";
 import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-to-http";
 
 @Injectable()
@@ -36,6 +38,14 @@ export class PublicSurveysService {
     const query = new ConvertObjectToHttpParams(params).get();
     return this.api.get<MySurveyListItem[]>(
       this.apiUrl + "my-surveys" + (query ? "?" + query : ""),
+    );
+  }
+
+  getAllPublic(
+    pageParams: PageParams,
+  ): Observable<PaginatedList<MySurveyListItem>> {
+    return this.api.get<PaginatedList<MySurveyListItem>>(
+      this.apiUrl + "all?" + new ConvertObjectToHttpParams(pageParams).get(),
     );
   }
 
