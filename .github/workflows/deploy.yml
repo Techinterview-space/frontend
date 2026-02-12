@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DO_TOKEN: ${{ secrets.DO_TOKEN }}
-    container:
-      image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
     steps:
       - uses: actions/checkout@v3
       - name: Docker build and push
