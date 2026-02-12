@@ -21,6 +21,7 @@ import { HistoricalChartsService } from "./historical-charts.service";
 import { TotpService } from "./totp.service";
 import { TelegramSubscriptionsService } from "./telegram-subscriptions.service";
 import { CompaniesService } from "./companies.service";
+import { PublicSurveysService } from "./public-surveys.service";
 import { JsonLdService } from "./json-ld.service";
 
 export * from "./authorization.service";
@@ -58,5 +59,6 @@ export const applicationServices = [
   HistoricalChartsService,
   TotpService,
   CompaniesService,
+  PublicSurveysService,
   JsonLdService,
 ];

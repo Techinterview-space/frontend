@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.option-indicator {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.list-group-item-action {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &.active {
+    z-index: 0;
+  }
+}

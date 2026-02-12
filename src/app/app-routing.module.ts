@@ -43,6 +43,13 @@ const appRoutes: Routes = [
         (m) => m.CompaniesModule,
       ),
   },
+  {
+    path: "surveys",
+    loadChildren: () =>
+      import("./modules/surveys/surveys.module").then(
+        (m) => m.SurveysModule,
+      ),
+  },
 
   // Fallback when no prior route is matched
   { path: "**", redirectTo: "not-found", pathMatch: "full" },

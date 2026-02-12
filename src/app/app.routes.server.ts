@@ -44,6 +44,9 @@ export const serverRoutes: ServerRoute[] = [
   // Interview pages - authenticated
   { path: "interviews/**", renderMode: RenderMode.Client },
 
+  // Survey pages - authenticated
+  { path: "surveys/**", renderMode: RenderMode.Client },
+
   // Default: all other pages as SPA
   { path: "**", renderMode: RenderMode.Client },
 ];

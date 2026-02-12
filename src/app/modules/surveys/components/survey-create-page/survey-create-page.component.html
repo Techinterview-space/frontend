@@ -1,0 +1,204 @@
+<app-page-header>
+  Создать опрос
+</app-page-header>
+
+<div class="container mt-5 mb-5" *ngIf="formGroup; else dataLoading">
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <!-- Left column: settings -->
+      <div class="col-12 col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Настройки</h5>
+
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                formControlName="title"
+                placeholder="Название опроса"
+              />
+              <label for="title">Название</label>
+              <app-field-error [field]="formGroup.get('title')"></app-field-error>
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="form-floating flex-grow-1">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="slug"
+                  formControlName="slug"
+                  placeholder="url-slug"
+                  aria-describedby="slug-help"
+                />
+                <label for="slug">URL-адрес (slug)</label>
+              </div>
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="generateSlug()"
+                title="Сгенерировать из названия"
+                aria-label="Сгенерировать URL из названия"
+              >
+                <i class="bi bi-magic" aria-hidden="true"></i>
+              </button>
+            </div>
+            <app-field-error [field]="formGroup.get('slug')"></app-field-error>
+            <div id="slug-help" class="text-muted small mb-3">
+              Только латинские буквы, цифры и дефисы
+            </div>
+
+            <div class="form-floating mb-3">
+              <textarea
+                class="form-control"
+                id="description"
+                formControlName="description"
+                placeholder="Описание"
+                style="height: 100px"
+              ></textarea>
+              <label for="description">Описание (необязательно)</label>
+              <app-field-error [field]="formGroup.get('description')"></app-field-error>
+            </div>
+
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="allowMultipleChoices"
+                formControlName="allowMultipleChoices"
+              />
+              <label class="form-check-label" for="allowMultipleChoices">
+                Разрешить выбрать несколько вариантов
+              </label>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <app-go-back-button></app-go-back-button>
+              <div>
+                <app-submit-button
+                  [css]="'btn btn-outline-primary me-2'"
+                  (btnSubmit)="saveAsDraft()"
+                >Черновик</app-submit-button>
+                <app-submit-button (btnSubmit)="saveAndPublish()">
+                  Опубликовать
+                </app-submit-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: question & options -->
+      <div class="col-12 col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="question"
+                formControlName="question"
+                placeholder="Текст вопроса"
+              />
+              <label for="question">Вопрос</label>
+              <app-field-error [field]="formGroup.get('question')"></app-field-error>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="h5 mb-0">Варианты ответов: {{ formGroup.optionsCount }}</span>
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm"
+                (click)="addOption()"
+                [disabled]="!formGroup.canAddOption"
+                title="Добавить вариант"
+              >
+                <i class="bi bi-plus-lg"></i> Добавить
+              </button>
+            </div>
+
+            <ul class="list-group list-group-flush" formArrayName="options">
+              <li
+                class="list-group-item option-item"
+                *ngFor="let option of formGroup.optionsFormArray.controls; let i = index"
+                [class.dragging]="dragIndex === i"
+                [class.drag-over]="dragOverIndex === i && dragIndex !== i"
+                draggable="true"
+                (dragstart)="onDragStart(i)"
+                (dragover)="onDragOver($event, i)"
+                (dragleave)="onDragLeave()"
+                (drop)="onDrop(i)"
+                (dragend)="onDragEnd()"
+              >
+                <div [formGroupName]="i">
+                  <div class="input-group">
+                    <span
+                      class="input-group-text drag-handle"
+                      title="Перетащите для изменения порядка"
+                      aria-hidden="true"
+                    >
+                      <i class="bi bi-grip-vertical"></i>
+                    </span>
+                    <span class="input-group-text">{{ i + 1 }}</span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="text"
+                      placeholder="Вариант ответа"
+                    />
+
+                    <button
+                      class="btn btn-outline-primary"
+                      type="button"
+                      (click)="moveUp(i)"
+                      title="Вверх"
+                      aria-label="Переместить вариант вверх"
+                      [disabled]="!formGroup.canBeMovedUp(i)"
+                    >
+                      <i class="bi bi-arrow-up" aria-hidden="true"></i>
+                    </button>
+
+                    <button
+                      class="btn btn-outline-primary"
+                      type="button"
+                      (click)="moveDown(i)"
+                      title="Вниз"
+                      aria-label="Переместить вариант вниз"
+                      [disabled]="!formGroup.canBeMovedDown(i)"
+                    >
+                      <i class="bi bi-arrow-down" aria-hidden="true"></i>
+                    </button>
+
+                    <button
+                      class="btn btn-outline-danger"
+                      type="button"
+                      (click)="removeOption(i)"
+                      title="Удалить вариант"
+                      aria-label="Удалить вариант"
+                      [disabled]="!formGroup.canRemoveOption"
+                    >
+                      <i class="bi bi-trash-fill" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <app-field-error [field]="formGroup.getOptionTextField(i)"></app-field-error>
+                </div>
+              </li>
+            </ul>
+
+            <div class="mt-3 text-muted small">
+              Минимум 2, максимум 10 вариантов
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container py-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>

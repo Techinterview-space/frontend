@@ -1,0 +1,91 @@
+<!-- Loading -->
+<div class="container py-5" *ngIf="loading">
+  <app-data-loader></app-data-loader>
+</div>
+
+<!-- Error -->
+<div class="container py-5" *ngIf="!loading && error">
+  <div class="text-center">
+    <h2>{{ error }}</h2>
+    <a routerLink="/" class="btn btn-primary mt-3">На главную</a>
+  </div>
+</div>
+
+<!-- Results -->
+<div *ngIf="!loading && !error && survey && results">
+  <app-page-header>
+    Результаты: {{ survey.title }}
+  </app-page-header>
+
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <!-- Header with share -->
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <span class="text-muted">
+              Всего ответов: <strong>{{ results.totalResponses }}</strong>
+            </span>
+          </div>
+          <div class="d-flex gap-2">
+            <button
+              class="btn btn-outline-primary btn-sm"
+              (click)="copyLink()"
+              [attr.aria-label]="linkCopied ? 'Ссылка скопирована' : 'Скопировать ссылку на опрос'"
+              [title]="linkCopied ? 'Скопировано!' : 'Скопировать ссылку на опрос'"
+            >
+              <i class="bi" [ngClass]="linkCopied ? 'bi-check-lg' : 'bi-share'" aria-hidden="true"></i>
+              {{ linkCopied ? 'Скопировано' : 'Поделиться' }}
+            </button>
+            <a
+              [routerLink]="['/surveys', survey.slug]"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-arrow-left" aria-hidden="true"></i> К опросу
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Results table -->
+          <div class="col-12 col-md-7 mb-4 mb-md-0">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title mb-3">{{ survey.question.text }}</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Вариант</th>
+                        <th class="text-end">Ответы</th>
+                        <th class="text-end">%</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let option of results.options">
+                        <td>{{ option.text }}</td>
+                        <td class="text-end">{{ option.responseCount }}</td>
+                        <td class="text-end">{{ option.percentage | number: '1.1-1' }}%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pie chart -->
+          <div class="col-12 col-md-5">
+            <div class="card">
+              <div class="card-body">
+                <div *ngIf="canvasId" class="chart-container">
+                  <canvas [attr.id]="canvasId">{{ results }}</canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+<!-- Loading state -->
+<div class="container py-5" *ngIf="loading">
+  <app-data-loader></app-data-loader>
+</div>
+
+<!-- Not found -->
+<div class="container py-5" *ngIf="!loading && notFound">
+  <div class="text-center">
+    <h2>Опрос не найден</h2>
+    <p class="text-muted">Возможно, он был удалён или ещё не опубликован.</p>
+    <a routerLink="/" class="btn btn-primary">На главную</a>
+  </div>
+</div>
+
+<!-- Survey loaded -->
+<div *ngIf="!loading && !notFound && survey">
+  <app-page-header>
+    {{ survey.title }}
+  </app-page-header>
+
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <!-- Status + author actions -->
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="badge" [ngClass]="statusBadgeClass">{{ statusLabel }}</span>
+              <a
+                *ngIf="survey.isAuthor && isDraft"
+                [routerLink]="['/surveys', survey.slug, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+              >
+                <i class="bi bi-pencil"></i> Редактировать
+              </a>
+            </div>
+
+            <!-- Description -->
+            <p *ngIf="survey.description" class="text-muted mb-4">
+              {{ survey.description }}
+            </p>
+
+            <!-- Question -->
+            <h5 class="mb-3">{{ survey.question.text }}</h5>
+
+            <!-- Closed survey message -->
+            <div *ngIf="isClosed" class="alert alert-warning" role="alert">
+              <i class="bi bi-stop-circle" aria-hidden="true"></i>
+              Этот опрос закрыт и больше не принимает ответы.
+            </div>
+
+            <!-- Draft notice for author -->
+            <div *ngIf="isDraft && survey.isAuthor" class="alert alert-info" role="alert">
+              <i class="bi bi-info-circle" aria-hidden="true"></i>
+              Опрос ещё не опубликован. Только вы видите этот черновик.
+            </div>
+
+            <div *ngIf="showAuthRequiredNotice" class="alert alert-info" role="alert">
+              <i class="bi bi-person-lock" aria-hidden="true"></i>
+              Чтобы ответить на опрос, нужно
+              <a routerLink="/login" class="alert-link">войти в аккаунт</a>.
+            </div>
+
+            <!-- Response form (Published + not responded) -->
+            <div *ngIf="showResponseForm">
+              <p class="text-muted small mb-3" *ngIf="allowMultipleChoices">
+                Можно выбрать несколько вариантов
+              </p>
+
+              <div class="list-group mb-4" role="group" aria-label="Варианты ответов">
+                <button
+                  *ngFor="let option of sortedOptions"
+                  type="button"
+                  class="list-group-item list-group-item-action d-flex align-items-center"
+                  [class.active]="isSelected(option.id)"
+                  [attr.aria-pressed]="isSelected(option.id)"
+                  (click)="toggleOption(option.id)"
+                >
+                  <span class="option-indicator me-3" aria-hidden="true">
+                    <i
+                      *ngIf="!allowMultipleChoices"
+                      class="bi"
+                      [ngClass]="isSelected(option.id) ? 'bi-record-circle' : 'bi-circle'"
+                    ></i>
+                    <i
+                      *ngIf="allowMultipleChoices"
+                      class="bi"
+                      [ngClass]="isSelected(option.id) ? 'bi-check-square-fill' : 'bi-square'"
+                    ></i>
+                  </span>
+                  {{ option.text }}
+                </button>
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <button
+                  class="btn btn-primary"
+                  [disabled]="!canSubmit"
+                  (click)="submit()"
+                >
+                  <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                  Отправить ответ
+                </button>
+              </div>
+            </div>
+
+            <!-- Already responded -->
+            <div *ngIf="hasUserResponded && !loading">
+              <div class="alert alert-success" role="alert">
+                <i class="bi bi-check-circle" aria-hidden="true"></i>
+                Вы уже ответили на этот опрос.
+              </div>
+              <a
+                [routerLink]="['/surveys', survey.slug, 'results']"
+                class="btn btn-outline-primary"
+              >
+                <i class="bi bi-bar-chart"></i> Смотреть результаты
+              </a>
+            </div>
+
+            <!-- Total responses -->
+            <div *ngIf="survey.question.totalResponses > 0" class="text-muted small mt-4">
+              Всего ответов: {{ survey.question.totalResponses }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
