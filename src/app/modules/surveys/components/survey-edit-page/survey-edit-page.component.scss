@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.drag-handle {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.option-item {
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+
+  &.dragging {
+    opacity: 0.4;
+  }
+
+  &.drag-over {
+    border-top: 2px solid var(--bs-primary);
+  }
+}

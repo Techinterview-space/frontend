@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly router: Router,
     public readonly themeService: ThemeService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.setupSubscribers();
@@ -107,6 +107,27 @@ export class NavbarComponent implements OnInit {
           {
             title: "Публичные шаблоны",
             url: "/interviews/templates/public",
+            show: true,
+          },
+        ],
+      },
+      {
+        title: "Опросы",
+        show: true,
+        links: [
+          {
+            title: "Создать опрос",
+            url: "/surveys/new",
+            show: hasCurrentUser,
+          },
+          {
+            title: "Мои опросы",
+            url: "/surveys/my-surveys",
+            show: hasCurrentUser,
+          },
+          {
+            title: "Публичные опросы",
+            url: "/surveys/public",
             show: true,
           },
         ],

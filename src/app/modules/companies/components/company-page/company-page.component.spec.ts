@@ -43,7 +43,7 @@ describe("CompanyPageComponent", () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    mockViewportScroller = TestBed.inject(
+    _mockViewportScroller = TestBed.inject(
       ViewportScroller,
     ) as jasmine.SpyObj<ViewportScroller>;
   });

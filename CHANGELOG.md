@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-02-12
+
+### Public Surveys Page
+- Added new page "Публичные опросы" at `/surveys/public` showing all published and closed surveys with pagination
+- Created `PublicSurveysPageComponent` with responsive card grid layout
+- Each survey card is a clickable link navigating to the survey page
+- Added `getAllPublic()` method to `PublicSurveysService` calling `GET /api/public-surveys/all`
+- Registered route `surveys/public` in `SurveysRoutingModule` (no auth required)
+- Added SSR support (`RenderMode.Server`) for `/surveys/public` in `app.routes.server.ts`
+
+### My Surveys Page
+- Wrapped filter toolbar and search field in a card on "Мои опросы" page
+- Moved survey item cards outside the toolbar card for cleaner visual separation
+
+### Survey Results Page
+- Added "Все публичные опросы" link at the bottom of the results page, navigating to `/surveys/public`
+
+---
+
 ## 2026-02-11
 
 - PR: [Techinterview-space/frontend#118](https://github.com/Techinterview-space/frontend/pull/118)

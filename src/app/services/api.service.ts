@@ -45,6 +45,10 @@ export class ApiService {
     return this.http.put<T>(this.apiUrl + url, body, options);
   }
 
+  patch<T>(url: string, body: any, options?: HttpOptions): Observable<T> {
+    return this.http.patch<T>(this.apiUrl + url, body, options);
+  }
+
   delete<T>(url: string, options?: HttpOptions): Observable<T> {
     return this.http.delete<T>(this.apiUrl + url, options);
   }
