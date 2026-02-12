@@ -3,68 +3,64 @@
 </app-page-header>
 
 <div class="container mt-5 mb-5" *ngIf="items; else dataLoading">
-  <div class="card">
-    <div class="card-body">
-      <!-- Empty state -->
-      <div *ngIf="items.length === 0" class="text-center py-5">
-        <p class="text-muted">Пока нет опубликованных опросов.</p>
-      </div>
+  <!-- Empty state -->
+  <div *ngIf="items.length === 0" class="text-center py-5">
+    <p class="text-muted">Пока нет опубликованных опросов.</p>
+  </div>
 
-      <!-- Survey list -->
-      <div *ngIf="items.length > 0" class="row">
-        <div
-          class="col-md-6 col-lg-4 mb-4"
-          *ngFor="let item of items"
-        >
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-              <div class="mb-2">
-                <span class="badge" [ngClass]="statusBadgeClass(item.status)">
-                  {{ statusLabel(item.status) }}
-                </span>
-              </div>
+  <!-- Survey list -->
+  <div *ngIf="items.length > 0" class="row">
+    <div
+      class="col-md-6 col-lg-4 mb-4"
+      *ngFor="let item of items"
+    >
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column">
+          <div class="mb-2">
+            <span class="badge" [ngClass]="statusBadgeClass(item.status)">
+              {{ statusLabel(item.status) }}
+            </span>
+          </div>
 
-              <h5 class="card-title mb-2">
-                <a
-                  [routerLink]="['/surveys', item.slug]"
-                  class="text-decoration-none"
-                >{{ item.title }}</a>
-              </h5>
+          <h5 class="card-title mb-2">
+            <a
+              [routerLink]="['/surveys', item.slug]"
+              class="text-decoration-none"
+            >{{ item.title }}</a>
+          </h5>
 
-              <div class="text-muted small mb-3">
-                <div>
-                  <i class="bi bi-chat-dots" aria-hidden="true"></i>
-                  Ответов: {{ item.totalResponses }}
-                </div>
-                <div *ngIf="item.publishedAt">
-                  <i class="bi bi-send" aria-hidden="true"></i>
-                  Опубликован: {{ item.publishedAt | date: 'dd.MM.yyyy' }}
-                </div>
-              </div>
-
-              <div class="mt-auto">
-                <a
-                  *ngIf="item.totalResponses > 0"
-                  [routerLink]="['/surveys', item.slug, 'results']"
-                  class="btn btn-outline-secondary btn-sm"
-                >
-                  <i class="bi bi-bar-chart" aria-hidden="true"></i> Результаты
-                </a>
-              </div>
+          <div class="text-muted small mb-3">
+            <div>
+              <i class="bi bi-chat-dots" aria-hidden="true"></i>
+              Ответов: {{ item.totalResponses }}
             </div>
+            <div *ngIf="item.publishedAt">
+              <i class="bi bi-send" aria-hidden="true"></i>
+              Опубликован: {{ item.publishedAt | date: 'dd.MM.yyyy' }}
+            </div>
+          </div>
+
+          <div class="mt-auto">
+            <a
+              *ngIf="item.totalResponses > 0"
+              [routerLink]="['/surveys', item.slug, 'results']"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              <i class="bi bi-bar-chart" aria-hidden="true"></i> Результаты
+            </a>
           </div>
         </div>
       </div>
-
-      <!-- Pagination -->
-      <div class="mt-3" *ngIf="source && source.results.length > 0">
-        <app-pagination-buttons
-          [source]="source"
-          [currentPage]="currentPage"
-          (pageChange)="loadData($event)"
-        ></app-pagination-buttons>
-      </div>
     </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="mt-3" *ngIf="source && source.results.length > 0">
+    <app-pagination-buttons
+      [source]="source"
+      [currentPage]="currentPage"
+      (pageChange)="loadData($event)"
+    ></app-pagination-buttons>
   </div>
 </div>
 
