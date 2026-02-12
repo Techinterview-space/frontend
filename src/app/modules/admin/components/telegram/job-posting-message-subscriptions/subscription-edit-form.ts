@@ -3,7 +3,7 @@ import { CreateJobPostingMessageSubscriptionBody } from "@services/job-posting-m
 import { JobPostingMessageSubscription } from "@models/telegram";
 
 export class JobPostingMessageSubscriptionEditForm extends FormGroup {
-  static readonly digitsPattern = "^[\-0-9]*$";
+  static readonly digitsPattern = "^[-0-9]*$";
 
   constructor(private readonly item: JobPostingMessageSubscription | null) {
     super({

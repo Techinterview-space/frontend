@@ -3,7 +3,7 @@ import { CreateTelegramSubscriptionBody } from "@services/telegram-subscriptions
 import { SalariesStatSubscription } from "@models/telegram";
 
 export class TelegramSubscriptionEditForm extends FormGroup {
-  static readonly digitsPattern = "^[\-0-9]*$";
+  static readonly digitsPattern = "^[-0-9]*$";
 
   constructor(private readonly item: SalariesStatSubscription | null) {
     super({

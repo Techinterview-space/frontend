@@ -1,6 +1,7 @@
 import { Directive, HostBinding } from "@angular/core";
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: "a[target=_blank]",
   standalone: false,
 })
