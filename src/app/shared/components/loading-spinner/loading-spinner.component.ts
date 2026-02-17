@@ -15,26 +15,16 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
 
   static LoadingCatUrl =
     "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_cat.gif";
-  static LoadingDogUrl =
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_dog.gif";
 
   loadingUrl = "";
-  loadingAlt = "Loading animation";
+  loadingAlt = "Loading cat GIF";
   showPreloader = true;
   private delayTimerId: ReturnType<typeof setTimeout> | null = null;
 
   ngOnInit(): void {
-    const now = new Date();
-    const isOdd = now.getHours() % 2 === 1;
-    const selectedGif = isOdd
-      ? LoadingSpinnerComponent.LoadingCatUrl
-      : LoadingSpinnerComponent.LoadingDogUrl;
-    const selectedAlt = isOdd ? "Loading cat GIF" : "Loading dog GIF";
-
     // Delay heavy GIF loading so fast responses avoid a multi-MB transfer.
     this.delayTimerId = setTimeout(() => {
-      this.loadingUrl = selectedGif;
-      this.loadingAlt = selectedAlt;
+      this.loadingUrl = LoadingSpinnerComponent.LoadingCatUrl;
     }, this.delayMs);
   }
 
