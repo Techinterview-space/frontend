@@ -3,7 +3,7 @@ import { InterviewTemplate } from "@models/interview-models";
 import { defaultPageParams } from "@models/page-params";
 import { PaginatedList } from "@models/paginated-list";
 import { InterviewTemplatesService } from "@services/interview-templates.service";
-import { TitleService } from "@services/title.service";
+import { MetaTagService } from "@services/meta-tags.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
@@ -16,11 +16,15 @@ export class PublicInterviewTemplatesComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: InterviewTemplatesService,
-    private readonly title: TitleService,
+    private readonly metaTagService: MetaTagService,
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle("Public interview templates");
+    this.metaTagService.setPageMetaTags(
+      "Публичные шаблоны интервью",
+      "Готовые шаблоны для проведения технических интервью. Используйте проверенные вопросы и структуры для собеседований на Techinterview.space",
+      "/interviews/templates/public",
+    );
     this.loadTemplates();
   }
 
@@ -32,6 +36,6 @@ export class PublicInterviewTemplatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.title.resetTitle();
+    this.metaTagService.returnDefaultMetaTags();
   }
 }

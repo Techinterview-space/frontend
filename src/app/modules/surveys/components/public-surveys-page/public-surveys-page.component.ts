@@ -7,7 +7,7 @@ import {
 } from "@models/public-survey.model";
 import { PaginatedList } from "@models/paginated-list";
 import { PublicSurveysService } from "@services/public-surveys.service";
-import { TitleService } from "@services/title.service";
+import { MetaTagService } from "@services/meta-tags.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
 
 @Component({
@@ -24,13 +24,17 @@ export class PublicSurveysPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: PublicSurveysService,
-    private readonly title: TitleService,
+    private readonly metaTagService: MetaTagService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle("Публичные опросы");
+    this.metaTagService.setPageMetaTags(
+      "Публичные опросы",
+      "Публичные опросы на Techinterview.space. Участвуйте в опросах IT-сообщества и делитесь своим мнением",
+      "/surveys/public",
+    );
 
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       if (this.skipNextQueryParamsUpdate) {
@@ -44,7 +48,7 @@ export class PublicSurveysPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.title.resetTitle();
+    this.metaTagService.returnDefaultMetaTags();
   }
 
   loadData(page: number, updateUrl = true): void {

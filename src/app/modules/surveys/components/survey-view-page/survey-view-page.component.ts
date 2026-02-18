@@ -5,8 +5,8 @@ import {
   PublicSurveyStatus,
   PublicSurveyStatusEnum,
 } from "@models/public-survey.model";
+import { MetaTagService } from "@services/meta-tags.service";
 import { PublicSurveysService } from "@services/public-surveys.service";
-import { TitleService } from "@services/title.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { AuthService } from "@shared/services/auth/auth.service";
@@ -30,7 +30,7 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly service: PublicSurveysService,
-    private readonly title: TitleService,
+    private readonly metaTagService: MetaTagService,
     private readonly router: Router,
     private readonly alertService: AlertService,
     private readonly authService: AuthService,
@@ -57,7 +57,7 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.title.resetTitle();
+    this.metaTagService.returnDefaultMetaTags();
   }
 
   get isPublished(): boolean {
@@ -180,7 +180,11 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (survey) => {
           this.survey = survey;
-          this.title.setTitle(survey.title);
+          this.metaTagService.setPageMetaTags(
+            survey.title,
+            survey.description || `Опрос «${survey.title}» на Techinterview.space. Примите участие и поделитесь своим мнением`,
+            `/surveys/${survey.slug}`,
+          );
           this.loading = false;
 
           if (this.hasUserResponded) {

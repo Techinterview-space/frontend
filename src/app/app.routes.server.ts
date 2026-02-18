@@ -41,11 +41,19 @@ export const serverRoutes: ServerRoute[] = [
   { path: "me/**", renderMode: RenderMode.Client },
   { path: "users/**", renderMode: RenderMode.Client },
 
+  // Interview pages - public templates for SEO
+  { path: "interviews/templates/public", renderMode: RenderMode.Server },
+
   // Interview pages - authenticated
   { path: "interviews/**", renderMode: RenderMode.Client },
 
   // Survey pages - public listing for SEO
   { path: "surveys/public", renderMode: RenderMode.Server },
+
+  // Survey pages - individual survey for SEO/social sharing
+  { path: "surveys/new", renderMode: RenderMode.Client },
+  { path: "surveys/my-surveys", renderMode: RenderMode.Client },
+  { path: "surveys/:slug", renderMode: RenderMode.Server },
 
   // Survey pages - authenticated
   { path: "surveys/**", renderMode: RenderMode.Client },
