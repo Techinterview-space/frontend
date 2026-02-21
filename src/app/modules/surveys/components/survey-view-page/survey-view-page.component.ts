@@ -11,6 +11,7 @@ import { AlertService } from "@shared/components/alert/services/alert.service";
 import { ActivatedRouteExtended } from "@shared/routes/activated-route-extended";
 import { AuthService } from "@shared/services/auth/auth.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   templateUrl: "./survey-view-page.component.html",
@@ -34,6 +35,7 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly alertService: AlertService,
     private readonly authService: AuthService,
+    private readonly cookieService: CookieService,
     activatedRoute: ActivatedRoute,
   ) {
     this.activateRoute = new ActivatedRouteExtended(activatedRoute);
@@ -186,6 +188,10 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
             `/surveys/${survey.slug}`,
           );
           this.loading = false;
+
+          if (this.showAuthRequiredNotice) {
+            this.cookieService.set("url", `/surveys/${survey.slug}`, Date.now(), "/");
+          }
 
           if (this.hasUserResponded) {
             this.router.navigate(["/surveys", survey.slug, "results"]);

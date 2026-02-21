@@ -59,6 +59,35 @@
               <i class="bi bi-person-lock" aria-hidden="true"></i>
               Чтобы ответить на опрос, нужно
               <a routerLink="/login" class="alert-link">войти в аккаунт</a>.
+              Авторизация необходима, чтобы в случае отправки ответов показать результаты опроса.
+            </div>
+
+            <!-- Preview for unauthenticated users -->
+            <div *ngIf="showAuthRequiredNotice">
+              <p class="text-muted small mb-3" *ngIf="allowMultipleChoices">
+                Можно выбрать несколько вариантов
+              </p>
+
+              <div class="list-group mb-4" role="group" aria-label="Варианты ответов">
+                <button
+                  *ngFor="let option of sortedOptions"
+                  type="button"
+                  class="list-group-item list-group-item-action d-flex align-items-center disabled"
+                  disabled
+                >
+                  <span class="option-indicator me-3" aria-hidden="true">
+                    <i
+                      *ngIf="!allowMultipleChoices"
+                      class="bi bi-circle"
+                    ></i>
+                    <i
+                      *ngIf="allowMultipleChoices"
+                      class="bi bi-square"
+                    ></i>
+                  </span>
+                  {{ option.text }}
+                </button>
+              </div>
             </div>
 
             <!-- Response form (Published + not responded) -->
