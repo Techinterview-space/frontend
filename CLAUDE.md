@@ -116,6 +116,23 @@ Reusable components, directives, and pipes are declared/exported in `src/app/sha
 - `src/environments/environment.prod.ts` - Production
 - `src/environments/environment.staging.ts` - Staging
 
+## Gotchas
+
+### `npm start` Hits the Live API
+The `development` config points `resourceApiURI` to `https://api.techinterview.space` (production). To develop against a local backend, use:
+```bash
+ng serve --configuration=local   # Uses https://localhost:5001
+```
+
+### NgModule-Based — No Standalone Components
+The app uses NgModule architecture. Do NOT generate standalone components. All new components must be declared in the appropriate feature module or `SharedModule`.
+
+### Custom `untilDestroyed(this)`
+This is a homegrown implementation (not `@ngneat/until-destroy`). Any component using it **must** have an `ngOnDestroy()` method (even if empty), or it throws at runtime.
+
+### SCSS Imports from `src/`
+`angular.json` sets `stylePreprocessorOptions.includePaths: ["src"]`. Components can import theme files directly: `@use 'warm-theme'` (no relative path needed).
+
 ## Dependencies
 
 - UI: Bootstrap 5, Bootstrap Icons

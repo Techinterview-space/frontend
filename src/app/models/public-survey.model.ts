@@ -43,6 +43,7 @@ export interface PublicSurveyOption {
 export interface PublicSurveyQuestion {
   id: string;
   text: string;
+  order: number;
   allowMultipleChoices: boolean;
   options: PublicSurveyOption[];
   hasUserResponded: boolean;
@@ -60,7 +61,7 @@ export interface PublicSurvey {
   publishedAt: Date | null;
   deletedAt: Date | null;
   isAuthor: boolean;
-  question: PublicSurveyQuestion;
+  questions: PublicSurveyQuestion[];
 }
 
 export interface MySurveyListItem {
@@ -82,18 +83,30 @@ export interface PublicSurveyOptionResult {
   percentage: number;
 }
 
+export interface PublicSurveyQuestionResult {
+  id: string;
+  text: string;
+  order: number;
+  options: PublicSurveyOptionResult[];
+}
+
 export interface PublicSurveyResults {
   totalResponses: number;
-  options: PublicSurveyOptionResult[];
+  questions: PublicSurveyQuestionResult[];
+}
+
+export interface CreatePublicSurveyQuestionRequest {
+  text: string;
+  order: number;
+  allowMultipleChoices: boolean;
+  options: string[];
 }
 
 export interface CreatePublicSurveyRequest {
   title: string;
   description?: string;
   slug: string;
-  question: string;
-  allowMultipleChoices: boolean;
-  options: string[];
+  questions: CreatePublicSurveyQuestionRequest[];
 }
 
 export interface UpdatePublicSurveyOptionRequest {
@@ -101,15 +114,25 @@ export interface UpdatePublicSurveyOptionRequest {
   order: number;
 }
 
+export interface UpdatePublicSurveyQuestionRequest {
+  text: string;
+  order: number;
+  allowMultipleChoices: boolean;
+  options: UpdatePublicSurveyOptionRequest[];
+}
+
 export interface UpdatePublicSurveyRequest {
   title?: string;
   description?: string;
   slug?: string;
-  question?: string;
-  allowMultipleChoices?: boolean;
-  options?: UpdatePublicSurveyOptionRequest[];
+  questions?: UpdatePublicSurveyQuestionRequest[];
+}
+
+export interface SubmitPublicSurveyAnswerRequest {
+  questionId: string;
+  optionIds: string[];
 }
 
 export interface SubmitPublicSurveyResponseRequest {
-  optionIds: string[];
+  answers: SubmitPublicSurveyAnswerRequest[];
 }

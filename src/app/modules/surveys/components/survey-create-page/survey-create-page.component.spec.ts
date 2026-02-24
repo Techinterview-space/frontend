@@ -36,8 +36,9 @@ describe("SurveyCreatePageComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should initialize form with 2 empty options", () => {
+  it("should initialize form with 1 question and 2 empty options", () => {
     expect(component.formGroup).toBeTruthy();
-    expect(component.formGroup!.optionsCount).toBe(2);
+    expect(component.formGroup!.questionsCount).toBe(1);
+    expect(component.formGroup!.getOptionsCount(0)).toBe(2);
   });
 });

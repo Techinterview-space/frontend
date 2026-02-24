@@ -26,11 +26,11 @@ export class SurveyResultsPageComponent
   error: string | null = null;
   linkCopied = false;
 
-  readonly canvasId = "pie_" + Math.random().toString(36).substring(2);
+  canvasIds: string[] = [];
 
   private slug: string | null = null;
-  private chart: SurveyResultsChart | null = null;
-  private chartPending = false;
+  private charts: SurveyResultsChart[] = [];
+  private chartsPending = false;
   private viewReady = false;
   private readonly activateRoute: ActivatedRouteExtended;
 
@@ -61,14 +61,18 @@ export class SurveyResultsPageComponent
 
   ngAfterViewInit(): void {
     this.viewReady = true;
-    if (this.chartPending) {
-      this.initChart();
+    if (this.chartsPending) {
+      this.initCharts();
     }
   }
 
   ngOnDestroy(): void {
     this.title.resetTitle();
-    this.chart?.destroy();
+    this.destroyCharts();
+  }
+
+  getCanvasId(index: number): string {
+    return this.canvasIds[index] ?? "";
   }
 
   copyLink(): void {
@@ -115,11 +119,14 @@ export class SurveyResultsPageComponent
       .subscribe({
         next: (results) => {
           this.results = results;
+          this.canvasIds = results.questions.map(
+            (_, i) => `pie_${i}_${Math.random().toString(36).substring(2)}`,
+          );
           this.loading = false;
-          this.chartPending = true;
+          this.chartsPending = true;
           if (this.viewReady) {
-            // Delay to ensure the canvas DOM element exists after *ngIf resolves
-            setTimeout(() => this.initChart());
+            // Delay to ensure the canvas DOM elements exist after *ngIf resolves
+            setTimeout(() => this.initCharts());
           }
         },
         error: (error: unknown) => {
@@ -146,13 +153,30 @@ export class SurveyResultsPageComponent
     }
   }
 
-  private initChart(): void {
-    if (this.results == null || this.results.options.length === 0) {
+  private initCharts(): void {
+    if (this.results == null) {
       return;
     }
 
-    this.chart?.destroy();
-    this.chart = new SurveyResultsChart(this.canvasId, this.results.options);
-    this.chartPending = false;
+    this.destroyCharts();
+
+    this.results.questions.forEach((question, index) => {
+      if (question.options.length === 0) {
+        return;
+      }
+
+      const canvasId = this.canvasIds[index];
+      if (canvasId) {
+        const chart = new SurveyResultsChart(canvasId, question.options);
+        this.charts.push(chart);
+      }
+    });
+
+    this.chartsPending = false;
+  }
+
+  private destroyCharts(): void {
+    this.charts.forEach((chart) => chart.destroy());
+    this.charts = [];
   }
 }

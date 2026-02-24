@@ -40,9 +40,6 @@
               {{ survey.description }}
             </p>
 
-            <!-- Question -->
-            <h5 class="mb-3">{{ survey.question.text }}</h5>
-
             <!-- Closed survey message -->
             <div *ngIf="isClosed" class="alert alert-warning" role="alert">
               <i class="bi bi-stop-circle" aria-hidden="true"></i>
@@ -64,61 +61,67 @@
 
             <!-- Preview for unauthenticated users -->
             <div *ngIf="showAuthRequiredNotice">
-              <p class="text-muted small mb-3" *ngIf="allowMultipleChoices">
-                Можно выбрать несколько вариантов
-              </p>
+              <div *ngFor="let question of survey.questions" class="mb-4">
+                <h5 class="mb-3">{{ question.text }}</h5>
+                <p class="text-muted small mb-3" *ngIf="question.allowMultipleChoices">
+                  Можно выбрать несколько вариантов
+                </p>
 
-              <div class="list-group mb-4" role="group" aria-label="Варианты ответов">
-                <button
-                  *ngFor="let option of sortedOptions"
-                  type="button"
-                  class="list-group-item list-group-item-action d-flex align-items-center disabled"
-                  disabled
-                >
-                  <span class="option-indicator me-3" aria-hidden="true">
-                    <i
-                      *ngIf="!allowMultipleChoices"
-                      class="bi bi-circle"
-                    ></i>
-                    <i
-                      *ngIf="allowMultipleChoices"
-                      class="bi bi-square"
-                    ></i>
-                  </span>
-                  {{ option.text }}
-                </button>
+                <div class="list-group" role="group" aria-label="Варианты ответов">
+                  <button
+                    *ngFor="let option of getSortedOptions(question)"
+                    type="button"
+                    class="list-group-item list-group-item-action d-flex align-items-center disabled"
+                    disabled
+                  >
+                    <span class="option-indicator me-3" aria-hidden="true">
+                      <i
+                        *ngIf="!question.allowMultipleChoices"
+                        class="bi bi-circle"
+                      ></i>
+                      <i
+                        *ngIf="question.allowMultipleChoices"
+                        class="bi bi-square"
+                      ></i>
+                    </span>
+                    {{ option.text }}
+                  </button>
+                </div>
               </div>
             </div>
 
             <!-- Response form (Published + not responded) -->
             <div *ngIf="showResponseForm">
-              <p class="text-muted small mb-3" *ngIf="allowMultipleChoices">
-                Можно выбрать несколько вариантов
-              </p>
+              <div *ngFor="let question of survey.questions" class="mb-4">
+                <h5 class="mb-3">{{ question.text }}</h5>
+                <p class="text-muted small mb-3" *ngIf="question.allowMultipleChoices">
+                  Можно выбрать несколько вариантов
+                </p>
 
-              <div class="list-group mb-4" role="group" aria-label="Варианты ответов">
-                <button
-                  *ngFor="let option of sortedOptions"
-                  type="button"
-                  class="list-group-item list-group-item-action d-flex align-items-center"
-                  [class.active]="isSelected(option.id)"
-                  [attr.aria-pressed]="isSelected(option.id)"
-                  (click)="toggleOption(option.id)"
-                >
-                  <span class="option-indicator me-3" aria-hidden="true">
-                    <i
-                      *ngIf="!allowMultipleChoices"
-                      class="bi"
-                      [ngClass]="isSelected(option.id) ? 'bi-record-circle' : 'bi-circle'"
-                    ></i>
-                    <i
-                      *ngIf="allowMultipleChoices"
-                      class="bi"
-                      [ngClass]="isSelected(option.id) ? 'bi-check-square-fill' : 'bi-square'"
-                    ></i>
-                  </span>
-                  {{ option.text }}
-                </button>
+                <div class="list-group" role="group" aria-label="Варианты ответов">
+                  <button
+                    *ngFor="let option of getSortedOptions(question)"
+                    type="button"
+                    class="list-group-item list-group-item-action d-flex align-items-center"
+                    [class.active]="isSelected(question.id, option.id)"
+                    [attr.aria-pressed]="isSelected(question.id, option.id)"
+                    (click)="toggleOption(question.id, option.id, question.allowMultipleChoices)"
+                  >
+                    <span class="option-indicator me-3" aria-hidden="true">
+                      <i
+                        *ngIf="!question.allowMultipleChoices"
+                        class="bi"
+                        [ngClass]="isSelected(question.id, option.id) ? 'bi-record-circle' : 'bi-circle'"
+                      ></i>
+                      <i
+                        *ngIf="question.allowMultipleChoices"
+                        class="bi"
+                        [ngClass]="isSelected(question.id, option.id) ? 'bi-check-square-fill' : 'bi-square'"
+                      ></i>
+                    </span>
+                    {{ option.text }}
+                  </button>
+                </div>
               </div>
 
               <div class="d-flex justify-content-end">
@@ -148,8 +151,8 @@
             </div>
 
             <!-- Total responses -->
-            <div *ngIf="survey.question.totalResponses > 0" class="text-muted small mt-4">
-              Всего ответов: {{ survey.question.totalResponses }}
+            <div *ngIf="totalResponses > 0" class="text-muted small mt-4">
+              Всего ответов: {{ totalResponses }}
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import {
   PublicSurvey,
+  PublicSurveyQuestion,
   PublicSurveyStatus,
   PublicSurveyStatusEnum,
 } from "@models/public-survey.model";
@@ -25,7 +26,7 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
   submitting = false;
   isAuthenticated = false;
 
-  selectedOptionIds: Set<string> = new Set();
+  selectedOptions: Map<string, Set<string>> = new Map();
 
   private readonly activateRoute: ActivatedRouteExtended;
 
@@ -75,21 +76,28 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
   }
 
   get hasUserResponded(): boolean {
-    return this.survey?.question?.hasUserResponded === true;
-  }
+    if (this.survey == null || this.survey.questions.length === 0) {
+      return false;
+    }
 
-  get allowMultipleChoices(): boolean {
-    return this.survey?.question?.allowMultipleChoices === true;
+    return this.survey.questions.every((q) => q.hasUserResponded);
   }
 
   get canSubmit(): boolean {
-    return (
-      this.isPublished &&
-      this.isAuthenticated &&
-      !this.hasUserResponded &&
-      this.selectedOptionIds.size > 0 &&
-      !this.submitting
-    );
+    if (
+      !this.isPublished ||
+      !this.isAuthenticated ||
+      this.hasUserResponded ||
+      this.submitting ||
+      this.survey == null
+    ) {
+      return false;
+    }
+
+    return this.survey.questions.every((q) => {
+      const selected = this.selectedOptions.get(q.id);
+      return selected != null && selected.size > 0;
+    });
   }
 
   get showResponseForm(): boolean {
@@ -125,29 +133,39 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  get sortedOptions() {
-    if (this.survey?.question?.options == null) {
+  get totalResponses(): number {
+    return this.survey?.questions[0]?.totalResponses ?? 0;
+  }
+
+  getSortedOptions(question: PublicSurveyQuestion) {
+    if (question.options == null) {
       return [];
     }
 
-    return [...this.survey.question.options].sort((a, b) => a.order - b.order);
+    return [...question.options].sort((a, b) => a.order - b.order);
   }
 
-  toggleOption(optionId: string): void {
-    if (this.allowMultipleChoices) {
-      if (this.selectedOptionIds.has(optionId)) {
-        this.selectedOptionIds.delete(optionId);
+  toggleOption(questionId: string, optionId: string, allowMultiple: boolean): void {
+    if (!this.selectedOptions.has(questionId)) {
+      this.selectedOptions.set(questionId, new Set());
+    }
+
+    const selected = this.selectedOptions.get(questionId)!;
+
+    if (allowMultiple) {
+      if (selected.has(optionId)) {
+        selected.delete(optionId);
       } else {
-        this.selectedOptionIds.add(optionId);
+        selected.add(optionId);
       }
     } else {
-      this.selectedOptionIds.clear();
-      this.selectedOptionIds.add(optionId);
+      selected.clear();
+      selected.add(optionId);
     }
   }
 
-  isSelected(optionId: string): boolean {
-    return this.selectedOptionIds.has(optionId);
+  isSelected(questionId: string, optionId: string): boolean {
+    return this.selectedOptions.get(questionId)?.has(optionId) === true;
   }
 
   submit(): void {
@@ -157,10 +175,13 @@ export class SurveyViewPageComponent implements OnInit, OnDestroy {
 
     this.submitting = true;
 
+    const answers = this.survey.questions.map((q) => ({
+      questionId: q.id,
+      optionIds: Array.from(this.selectedOptions.get(q.id) ?? []),
+    }));
+
     this.service
-      .submitResponse(this.survey.slug, {
-        optionIds: Array.from(this.selectedOptionIds),
-      })
+      .submitResponse(this.survey.slug, { answers })
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => {

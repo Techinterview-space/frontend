@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { switchMap } from "rxjs/operators";
 import { PublicSurveysService } from "@services/public-surveys.service";
 import { TitleService } from "@services/title.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
@@ -13,8 +14,6 @@ import { SurveyFormGroup } from "../survey-form-group";
 })
 export class SurveyCreatePageComponent implements OnInit, OnDestroy {
   formGroup: SurveyFormGroup | null = null;
-  dragIndex: number | null = null;
-  dragOverIndex: number | null = null;
 
   constructor(
     private readonly service: PublicSurveysService,
@@ -36,47 +35,36 @@ export class SurveyCreatePageComponent implements OnInit, OnDestroy {
     this.formGroup!.generateSlugFromTitle();
   }
 
-  addOption(): void {
-    this.formGroup!.addOption();
+  addQuestion(): void {
+    this.formGroup!.addQuestion();
   }
 
-  removeOption(index: number): void {
-    this.formGroup!.removeOption(index);
+  removeQuestion(questionIndex: number): void {
+    this.formGroup!.removeQuestion(questionIndex);
   }
 
-  moveUp(index: number): void {
-    this.formGroup!.moveUp(index);
+  moveQuestionUp(questionIndex: number): void {
+    this.formGroup!.moveQuestionUp(questionIndex);
   }
 
-  moveDown(index: number): void {
-    this.formGroup!.moveDown(index);
+  moveQuestionDown(questionIndex: number): void {
+    this.formGroup!.moveQuestionDown(questionIndex);
   }
 
-  onDragStart(index: number): void {
-    this.dragIndex = index;
+  addOption(questionIndex: number): void {
+    this.formGroup!.addOption(questionIndex);
   }
 
-  onDragOver(event: DragEvent, index: number): void {
-    event.preventDefault();
-    this.dragOverIndex = index;
+  removeOption(questionIndex: number, optionIndex: number): void {
+    this.formGroup!.removeOption(questionIndex, optionIndex);
   }
 
-  onDragLeave(): void {
-    this.dragOverIndex = null;
+  moveOptionUp(questionIndex: number, optionIndex: number): void {
+    this.formGroup!.moveOptionUp(questionIndex, optionIndex);
   }
 
-  onDrop(index: number): void {
-    if (this.dragIndex != null && this.dragIndex !== index) {
-      this.formGroup!.moveOption(this.dragIndex, index);
-    }
-
-    this.dragIndex = null;
-    this.dragOverIndex = null;
-  }
-
-  onDragEnd(): void {
-    this.dragIndex = null;
-    this.dragOverIndex = null;
+  moveOptionDown(questionIndex: number, optionIndex: number): void {
+    this.formGroup!.moveOptionDown(questionIndex, optionIndex);
   }
 
   saveAsDraft(): void {
@@ -105,29 +93,31 @@ export class SurveyCreatePageComponent implements OnInit, OnDestroy {
       return;
     }
 
+    let createdSlug: string | null = null;
+
     this.service
       .create(request)
-      .pipe(untilDestroyed(this))
+      .pipe(
+        switchMap((survey) => {
+          createdSlug = survey.slug;
+          return this.service.publish(survey.id);
+        }),
+        untilDestroyed(this),
+      )
       .subscribe({
-        next: (survey) => {
-          this.service
-            .publish(survey.id)
-            .pipe(untilDestroyed(this))
-            .subscribe({
-              next: (published) => {
-                this.alertService.success("Опрос опубликован");
-                this.router.navigate(["/surveys", published.slug]);
-              },
-              error: () => {
-                this.alertService.error(
-                  "Опрос создан, но не удалось опубликовать",
-                );
-                this.router.navigate(["/surveys", survey.slug, "edit"]);
-              },
-            });
+        next: (published) => {
+          this.alertService.success("Опрос опубликован");
+          this.router.navigate(["/surveys", published.slug]);
         },
         error: () => {
-          this.alertService.error("Не удалось создать опрос");
+          if (createdSlug != null) {
+            this.alertService.error(
+              "Опрос создан, но не удалось опубликовать",
+            );
+            this.router.navigate(["/surveys", createdSlug, "edit"]);
+          } else {
+            this.alertService.error("Не удалось создать опрос");
+          }
         },
       });
   }

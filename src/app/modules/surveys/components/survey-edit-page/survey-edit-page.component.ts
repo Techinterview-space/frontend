@@ -20,8 +20,6 @@ import { SurveyFormGroup } from "../survey-form-group";
 export class SurveyEditPageComponent implements OnInit, OnDestroy {
   formGroup: SurveyFormGroup | null = null;
   survey: PublicSurvey | null = null;
-  dragIndex: number | null = null;
-  dragOverIndex: number | null = null;
 
   private readonly activateRoute: ActivatedRouteExtended;
 
@@ -97,47 +95,36 @@ export class SurveyEditPageComponent implements OnInit, OnDestroy {
     this.formGroup!.generateSlugFromTitle();
   }
 
-  addOption(): void {
-    this.formGroup!.addOption();
+  addQuestion(): void {
+    this.formGroup!.addQuestion();
   }
 
-  removeOption(index: number): void {
-    this.formGroup!.removeOption(index);
+  removeQuestion(questionIndex: number): void {
+    this.formGroup!.removeQuestion(questionIndex);
   }
 
-  moveUp(index: number): void {
-    this.formGroup!.moveUp(index);
+  moveQuestionUp(questionIndex: number): void {
+    this.formGroup!.moveQuestionUp(questionIndex);
   }
 
-  moveDown(index: number): void {
-    this.formGroup!.moveDown(index);
+  moveQuestionDown(questionIndex: number): void {
+    this.formGroup!.moveQuestionDown(questionIndex);
   }
 
-  onDragStart(index: number): void {
-    this.dragIndex = index;
+  addOption(questionIndex: number): void {
+    this.formGroup!.addOption(questionIndex);
   }
 
-  onDragOver(event: DragEvent, index: number): void {
-    event.preventDefault();
-    this.dragOverIndex = index;
+  removeOption(questionIndex: number, optionIndex: number): void {
+    this.formGroup!.removeOption(questionIndex, optionIndex);
   }
 
-  onDragLeave(): void {
-    this.dragOverIndex = null;
+  moveOptionUp(questionIndex: number, optionIndex: number): void {
+    this.formGroup!.moveOptionUp(questionIndex, optionIndex);
   }
 
-  onDrop(index: number): void {
-    if (this.dragIndex != null && this.dragIndex !== index) {
-      this.formGroup!.moveOption(this.dragIndex, index);
-    }
-
-    this.dragIndex = null;
-    this.dragOverIndex = null;
-  }
-
-  onDragEnd(): void {
-    this.dragIndex = null;
-    this.dragOverIndex = null;
+  moveOptionDown(questionIndex: number, optionIndex: number): void {
+    this.formGroup!.moveOptionDown(questionIndex, optionIndex);
   }
 
   save(): void {

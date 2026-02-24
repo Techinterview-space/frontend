@@ -13,23 +13,27 @@ import {
 } from "@models/public-survey.model";
 
 export class SurveyFormGroup extends FormGroup {
+  private static readonly MAX_QUESTIONS = 30;
+  private static readonly MIN_OPTIONS = 2;
+  private static readonly MAX_OPTIONS = 10;
+
   private readonly surveyId: string | null;
   private readonly surveyStatus: PublicSurveyStatus;
 
-  get optionsFormArray(): FormArray {
-    return this.get("options") as FormArray;
+  get questionsFormArray(): FormArray {
+    return this.get("questions") as FormArray;
   }
 
-  get optionsCount(): number {
-    return this.optionsFormArray.controls.length;
+  get questionsCount(): number {
+    return this.questionsFormArray.controls.length;
   }
 
-  get canAddOption(): boolean {
-    return this.optionsCount < 10;
+  get canAddQuestion(): boolean {
+    return this.questionsCount < SurveyFormGroup.MAX_QUESTIONS;
   }
 
-  get canRemoveOption(): boolean {
-    return this.optionsCount > 2;
+  get canRemoveQuestion(): boolean {
+    return this.questionsCount > 1;
   }
 
   get isDraft(): boolean {
@@ -53,98 +57,146 @@ export class SurveyFormGroup extends FormGroup {
         Validators.maxLength(100),
         Validators.pattern(/^[a-z0-9]+(?:[-_][a-z0-9]+)*$/),
       ]),
-      question: new FormControl(survey?.question?.text ?? null, [
-        Validators.required,
-        Validators.maxLength(500),
-      ]),
-      allowMultipleChoices: new FormControl(
-        survey?.question?.allowMultipleChoices ?? false,
-      ),
-      options: new FormArray([] as FormGroup[]),
+      questions: new FormArray([] as FormGroup[]),
     });
 
     this.surveyId = survey?.id ?? null;
     this.surveyStatus = survey?.status ?? PublicSurveyStatus.Draft;
 
-    if (survey?.question?.options?.length) {
-      const sorted = [...survey.question.options].sort(
+    if (survey?.questions?.length) {
+      const sorted = [...survey.questions].sort(
         (a, b) => a.order - b.order,
       );
-      sorted.forEach((opt) => {
-        this.optionsFormArray.push(SurveyFormGroup.createOptionFormGroup(opt.text));
+      sorted.forEach((q) => {
+        const questionGroup = SurveyFormGroup.createQuestionFormGroup(
+          q.text,
+          q.allowMultipleChoices,
+        );
+        const optionsArray = questionGroup.get("options") as FormArray;
+
+        if (q.options?.length) {
+          const sortedOptions = [...q.options].sort(
+            (a, b) => a.order - b.order,
+          );
+          sortedOptions.forEach((opt) => {
+            optionsArray.push(
+              SurveyFormGroup.createOptionFormGroup(opt.text),
+            );
+          });
+        } else {
+          optionsArray.push(SurveyFormGroup.createOptionFormGroup(null));
+          optionsArray.push(SurveyFormGroup.createOptionFormGroup(null));
+        }
+
+        this.questionsFormArray.push(questionGroup);
       });
     } else {
-      this.optionsFormArray.push(SurveyFormGroup.createOptionFormGroup(null));
-      this.optionsFormArray.push(SurveyFormGroup.createOptionFormGroup(null));
+      this.addQuestion();
     }
 
     if (!isDraft) {
       this.get("title")!.disable();
       this.get("slug")!.disable();
-      this.get("question")!.disable();
-      this.get("allowMultipleChoices")!.disable();
-      this.optionsFormArray.controls.forEach((c) => c.disable());
+      this.questionsFormArray.disable();
     }
   }
 
-  addOption(): void {
-    if (!this.canAddOption) {
+  addQuestion(): void {
+    if (!this.canAddQuestion) {
       return;
     }
 
-    this.optionsFormArray.push(SurveyFormGroup.createOptionFormGroup(null));
+    const questionGroup = SurveyFormGroup.createQuestionFormGroup(null, false);
+    const optionsArray = questionGroup.get("options") as FormArray;
+    optionsArray.push(SurveyFormGroup.createOptionFormGroup(null));
+    optionsArray.push(SurveyFormGroup.createOptionFormGroup(null));
+    this.questionsFormArray.push(questionGroup);
   }
 
-  removeOption(index: number): void {
-    if (!this.canRemoveOption) {
+  removeQuestion(questionIndex: number): void {
+    if (!this.canRemoveQuestion) {
       return;
     }
 
-    this.optionsFormArray.removeAt(index);
+    this.questionsFormArray.removeAt(questionIndex);
   }
 
-  canBeMovedUp(index: number): boolean {
-    return index > 0;
-  }
-
-  canBeMovedDown(index: number): boolean {
-    return index < this.optionsCount - 1;
-  }
-
-  moveUp(index: number): void {
-    if (!this.canBeMovedUp(index)) {
+  moveQuestionUp(questionIndex: number): void {
+    if (questionIndex <= 0) {
       return;
     }
 
-    this.swapOptions(index, index - 1);
+    this.swapFormArrayItems(this.questionsFormArray, questionIndex, questionIndex - 1);
   }
 
-  moveDown(index: number): void {
-    if (!this.canBeMovedDown(index)) {
+  moveQuestionDown(questionIndex: number): void {
+    if (questionIndex >= this.questionsCount - 1) {
       return;
     }
 
-    this.swapOptions(index, index + 1);
+    this.swapFormArrayItems(this.questionsFormArray, questionIndex, questionIndex + 1);
   }
 
-  moveOption(fromIndex: number, toIndex: number): void {
-    if (
-      fromIndex === toIndex ||
-      fromIndex < 0 ||
-      toIndex < 0 ||
-      fromIndex >= this.optionsCount ||
-      toIndex >= this.optionsCount
-    ) {
+  getOptionsFormArray(questionIndex: number): FormArray {
+    return this.questionsFormArray.at(questionIndex).get("options") as FormArray;
+  }
+
+  getOptionsCount(questionIndex: number): number {
+    return this.getOptionsFormArray(questionIndex).controls.length;
+  }
+
+  canAddOption(questionIndex: number): boolean {
+    return this.getOptionsCount(questionIndex) < SurveyFormGroup.MAX_OPTIONS;
+  }
+
+  canRemoveOption(questionIndex: number): boolean {
+    return this.getOptionsCount(questionIndex) > SurveyFormGroup.MIN_OPTIONS;
+  }
+
+  addOption(questionIndex: number): void {
+    if (!this.canAddOption(questionIndex)) {
       return;
     }
 
-    const control = this.optionsFormArray.at(fromIndex);
-    this.optionsFormArray.removeAt(fromIndex);
-    this.optionsFormArray.insert(toIndex, control);
+    this.getOptionsFormArray(questionIndex).push(
+      SurveyFormGroup.createOptionFormGroup(null),
+    );
   }
 
-  getOptionTextField(index: number): AbstractControl {
-    return this.optionsFormArray.controls[index]?.get("text") as AbstractControl;
+  removeOption(questionIndex: number, optionIndex: number): void {
+    if (!this.canRemoveOption(questionIndex)) {
+      return;
+    }
+
+    this.getOptionsFormArray(questionIndex).removeAt(optionIndex);
+  }
+
+  moveOptionUp(questionIndex: number, optionIndex: number): void {
+    if (optionIndex <= 0) {
+      return;
+    }
+
+    const options = this.getOptionsFormArray(questionIndex);
+    this.swapFormArrayItems(options, optionIndex, optionIndex - 1);
+  }
+
+  moveOptionDown(questionIndex: number, optionIndex: number): void {
+    const options = this.getOptionsFormArray(questionIndex);
+    if (optionIndex >= options.length - 1) {
+      return;
+    }
+
+    this.swapFormArrayItems(options, optionIndex, optionIndex + 1);
+  }
+
+  getOptionTextField(questionIndex: number, optionIndex: number): AbstractControl {
+    return this.getOptionsFormArray(questionIndex)
+      .at(optionIndex)
+      .get("text") as AbstractControl;
+  }
+
+  getQuestionTextField(questionIndex: number): AbstractControl {
+    return this.questionsFormArray.at(questionIndex).get("text") as AbstractControl;
   }
 
   generateSlugFromTitle(): void {
@@ -170,17 +222,21 @@ export class SurveyFormGroup extends FormGroup {
       return null;
     }
 
-    const options = this.optionsFormArray.controls.map(
-      (c) => c.get("text")?.value as string,
-    );
+    const questions = this.questionsFormArray.controls.map((qCtrl, qi) => {
+      const optionsArray = qCtrl.get("options") as FormArray;
+      return {
+        text: qCtrl.get("text")?.value as string,
+        order: qi,
+        allowMultipleChoices: qCtrl.get("allowMultipleChoices")?.value as boolean,
+        options: optionsArray.controls.map((c) => c.get("text")?.value as string),
+      };
+    });
 
     return {
       title: this.get("title")?.value as string,
       description: (this.get("description")?.value as string) || undefined,
       slug: this.get("slug")?.value as string,
-      question: this.get("question")?.value as string,
-      allowMultipleChoices: this.get("allowMultipleChoices")?.value as boolean,
-      options,
+      questions,
     };
   }
 
@@ -199,27 +255,51 @@ export class SurveyFormGroup extends FormGroup {
       };
     }
 
-    const options = this.optionsFormArray.controls.map((c, i) => ({
-      text: c.get("text")?.value as string,
-      order: i,
-    }));
+    const questions = this.questionsFormArray.controls.map((qCtrl, qi) => {
+      const optionsArray = qCtrl.get("options") as FormArray;
+      return {
+        text: qCtrl.get("text")?.value as string,
+        order: qi,
+        allowMultipleChoices: qCtrl.get("allowMultipleChoices")?.value as boolean,
+        options: optionsArray.controls.map((c, oi) => ({
+          text: c.get("text")?.value as string,
+          order: oi,
+        })),
+      };
+    });
 
     return {
       title: this.get("title")?.value as string,
       description,
       slug: this.get("slug")?.value as string,
-      question: this.get("question")?.value as string,
-      allowMultipleChoices: this.get("allowMultipleChoices")?.value as boolean,
-      options,
+      questions,
     };
   }
 
-  private swapOptions(indexA: number, indexB: number): void {
-    const controlA = this.optionsFormArray.at(indexA);
-    const controlB = this.optionsFormArray.at(indexB);
+  private swapFormArrayItems(
+    array: FormArray,
+    indexA: number,
+    indexB: number,
+  ): void {
+    const controlA = array.at(indexA);
+    const controlB = array.at(indexB);
     const valueA = controlA.value;
     controlA.setValue(controlB.value);
     controlB.setValue(valueA);
+  }
+
+  private static createQuestionFormGroup(
+    text: string | null,
+    allowMultipleChoices: boolean,
+  ): FormGroup {
+    return new FormGroup({
+      text: new FormControl(text, [
+        Validators.required,
+        Validators.maxLength(500),
+      ]),
+      allowMultipleChoices: new FormControl(allowMultipleChoices),
+      options: new FormArray([] as FormGroup[]),
+    });
   }
 
   private static createOptionFormGroup(text: string | null): FormGroup {
