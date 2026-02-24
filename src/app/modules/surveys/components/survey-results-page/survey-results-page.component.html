@@ -40,40 +40,43 @@
           </div>
         </div>
 
-        <div class="row">
-          <!-- Results table -->
-          <div class="col-12 col-md-7 mb-4 mb-md-0">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mb-3">{{ survey.question.text }}</h5>
-                <div class="table-responsive">
-                  <table class="table table-hover mb-0">
-                    <thead>
-                      <tr>
-                        <th>Вариант</th>
-                        <th class="text-end">Ответы</th>
-                        <th class="text-end">%</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let option of results.options">
-                        <td>{{ option.text }}</td>
-                        <td class="text-end">{{ option.responseCount }}</td>
-                        <td class="text-end">{{ option.percentage | number: '1.1-1' }}%</td>
-                      </tr>
-                    </tbody>
-                  </table>
+        <!-- Per-question results -->
+        <div *ngFor="let question of results.questions; let i = index" class="mb-5">
+          <h5 class="mb-3">{{ question.text }}</h5>
+          <div class="row">
+            <!-- Results table -->
+            <div class="col-12 col-md-7 mb-4 mb-md-0">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                        <tr>
+                          <th>Вариант</th>
+                          <th class="text-end">Ответы</th>
+                          <th class="text-end">%</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let option of question.options">
+                          <td>{{ option.text }}</td>
+                          <td class="text-end">{{ option.responseCount }}</td>
+                          <td class="text-end">{{ option.percentage | number: '1.1-1' }}%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Pie chart -->
-          <div class="col-12 col-md-5">
-            <div class="card">
-              <div class="card-body">
-                <div *ngIf="canvasId" class="chart-container">
-                  <canvas [attr.id]="canvasId">{{ results }}</canvas>
+            <!-- Pie chart -->
+            <div class="col-12 col-md-5">
+              <div class="card">
+                <div class="card-body">
+                  <div class="chart-container">
+                    <canvas [attr.id]="getCanvasId(i)"></canvas>
+                  </div>
                 </div>
               </div>
             </div>
