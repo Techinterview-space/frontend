@@ -48,6 +48,21 @@
   margin: 0;
 }
 
+.auth-agreement {
+  color: var(--warm-text-muted);
+  font-size: 0.82rem;
+  margin: 0.75rem 0 0;
+
+  a {
+    color: var(--warm-accent-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .oauth-section {
   display: flex;
   flex-direction: column;

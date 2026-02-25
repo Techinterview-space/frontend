@@ -2,6 +2,15 @@
   Публичные опросы
 </app-page-header>
 
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      Хотите провести свой опрос? Создание опросов доступно после авторизации
+      <a routerLink="/surveys/new">по этой ссылке</a>.
+    </div>
+  </div>
+</div>
+
 <div class="container mt-5 mb-5" *ngIf="items; else dataLoading">
   <!-- Empty state -->
   <div *ngIf="items.length === 0" class="text-center py-5">

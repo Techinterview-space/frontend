@@ -495,19 +495,19 @@ ul.no-bullets {
 .alert-warning {
   background-color: var(--warm-warning-bg);
   border-color: var(--warm-warning);
-  color: color.adjust(#e9a820, $lightness: -20%);
+  color: var(--warm-warning-text);
 }
 
 .alert-success {
   background-color: var(--warm-success-bg);
   border-color: var(--warm-success);
-  color: color.adjust(#81b29a, $lightness: -20%);
+  color: var(--warm-success-text);
 }
 
 .alert-info {
   background-color: var(--warm-info-bg);
   border-color: var(--warm-info);
-  color: color.adjust(#6fa8c7, $lightness: -20%);
+  color: var(--warm-info-text);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────────
@@ -544,6 +544,28 @@ ul.no-bullets {
 
 .badge.bg-info {
   background-color: var(--warm-info) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    .badge.bg-primary,
+    .badge.bg-secondary,
+    .badge.bg-success,
+    .badge.bg-danger,
+    .badge.bg-info {
+      color: #1a1816 !important;
+    }
+  }
+}
+
+:root[data-theme="dark"] {
+  .badge.bg-primary,
+  .badge.bg-secondary,
+  .badge.bg-success,
+  .badge.bg-danger,
+  .badge.bg-info {
+    color: #1a1816 !important;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────────

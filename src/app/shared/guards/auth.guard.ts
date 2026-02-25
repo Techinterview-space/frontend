@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
       this.cookieService.set("url", state.url, Date.now(), "/");
     }
 
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/login");
     return false;
   }
 }
