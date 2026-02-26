@@ -107,6 +107,11 @@ export class AdminNavbarComponent {
         title: "Techinterview Bot",
         links: [
           {
+            title: "Настройки ботов",
+            url: "/admin/telegram/bot-configurations",
+            isExternal: false,
+          },
+          {
             title: "Админы бота",
             url: "/admin/telegram/user-settings",
             isExternal: false,

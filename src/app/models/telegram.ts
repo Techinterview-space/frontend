@@ -1,5 +1,51 @@
 import { z } from "zod";
 
+export enum TelegramBotType {
+  Undefined = 0,
+  Salaries = 1,
+  GithubProfile = 2,
+  ChannelStats = 3,
+}
+
+export const TelegramBotTypeLabel: Record<TelegramBotType, string> = {
+  [TelegramBotType.Undefined]: "Не определен",
+  [TelegramBotType.Salaries]: "Salaries",
+  [TelegramBotType.GithubProfile]: "Github Profile",
+  [TelegramBotType.ChannelStats]: "Channel Stats",
+};
+
+export const TelegramBotConfigurationSchema = z.object({
+  id: z.string(),
+  botType: z.nativeEnum(TelegramBotType),
+  botTypeAsString: z.string(),
+  displayName: z.string(),
+  botUsername: z.string().nullable(),
+  isEnabled: z.boolean(),
+  hasToken: z.boolean(),
+  maskedToken: z.string().nullable(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
+export type TelegramBotConfiguration = z.infer<
+  typeof TelegramBotConfigurationSchema
+>;
+
+export interface CreateTelegramBotConfigurationRequest {
+  botType: TelegramBotType;
+  displayName: string;
+  token: string;
+  isEnabled: boolean;
+  botUsername: string;
+}
+
+export interface UpdateTelegramBotConfigurationRequest {
+  displayName: string;
+  token: string;
+  isEnabled: boolean;
+  botUsername: string;
+}
+
 export enum TelegramBotUsageType {
   Undefined = 0,
   DirectMessage = 1,

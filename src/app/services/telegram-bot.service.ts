@@ -5,8 +5,11 @@ import { ConvertObjectToHttpParams } from "@shared/value-objects/convert-object-
 import { Observable } from "rxjs";
 import { ApiService } from "./api.service";
 import {
+  CreateTelegramBotConfigurationRequest,
+  TelegramBotConfiguration,
   TelegramBotUsage,
   TelegramUserSettings,
+  UpdateTelegramBotConfigurationRequest,
 } from "@models/telegram";
 
 export interface UpdateTelegramUserSettingsBody {
@@ -70,5 +73,36 @@ export class TelegramBotService {
 
   deleteUserSettings(id: string): Observable<void> {
     return this.api.delete<void>(this.apiUrl + "bot-user-settings/" + id);
+  }
+
+  getBotConfigurations(): Observable<TelegramBotConfiguration[]> {
+    return this.api.get<TelegramBotConfiguration[]>(
+      this.apiUrl + "configurations",
+    );
+  }
+
+  getBotConfiguration(id: string): Observable<TelegramBotConfiguration> {
+    return this.api.get<TelegramBotConfiguration>(
+      this.apiUrl + "configurations/" + id,
+    );
+  }
+
+  createBotConfiguration(
+    data: CreateTelegramBotConfigurationRequest,
+  ): Observable<TelegramBotConfiguration> {
+    return this.api.post<TelegramBotConfiguration>(
+      this.apiUrl + "configurations",
+      data,
+    );
+  }
+
+  updateBotConfiguration(
+    id: string,
+    data: UpdateTelegramBotConfigurationRequest,
+  ): Observable<TelegramBotConfiguration> {
+    return this.api.put<TelegramBotConfiguration>(
+      this.apiUrl + "configurations/" + id,
+      data,
+    );
   }
 }

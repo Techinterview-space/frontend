@@ -23,6 +23,7 @@ import { GitHubJobsPageComponent } from "./components/github/github-jobs-page/gi
 import { OpenAiPromptsAdminPageComponent } from "./components/openai-prompts/openai-prompts-admin-page.component";
 import { CompanyReviewsStatSubscriptionsComponent } from "./components/telegram/reviews-stat-subscriptions/reviews-stat-subscriptions.component";
 import { JobPostingMessageSubscriptionsComponent } from "./components/telegram/job-posting-message-subscriptions/job-posting-message-subscriptions.component";
+import { TelegramBotConfigurationsComponent } from "./components/telegram/telegram-bot-configurations/telegram-bot-configurations.component";
 import { HistoricalDataTemplatesComponent } from "./components/salaries/historical-data-templates/historical-data-templates.component";
 import { SendEmailPageComponent } from "./components/tools/send-email-page/send-email-page.component";
 import { M2mClientsListComponent } from "./components/m2m-clients/m2m-clients-list.component";
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: "telegram/job-posting-message-subscriptions",
     component: JobPostingMessageSubscriptionsComponent,
+  },
+  {
+    path: "telegram/bot-configurations",
+    component: TelegramBotConfigurationsComponent,
   },
 
   { path: "tools/background-jobs", component: BackgroundJobsComponent },
