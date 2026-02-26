@@ -34,7 +34,6 @@ export class TelegramBotConfigurationsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.items = null;
     this.loadData();
   }
 
@@ -43,8 +42,14 @@ export class TelegramBotConfigurationsComponent implements OnInit, OnDestroy {
     this.service
       .getBotConfigurations()
       .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.items = x;
+      .subscribe({
+        next: (x) => {
+          this.items = x;
+        },
+        error: () => {
+          this.items = [];
+          this.alert.error("Не удалось загрузить конфигурации ботов");
+        },
       });
   }
 
@@ -77,10 +82,15 @@ export class TelegramBotConfigurationsComponent implements OnInit, OnDestroy {
       this.service
         .updateBotConfiguration(this.itemToEdit.id, updateRequest)
         .pipe(untilDestroyed(this))
-        .subscribe(() => {
-          this.alert.success("Конфигурация бота обновлена");
-          this.editForm = null;
-          this.ngOnInit();
+        .subscribe({
+          next: () => {
+            this.alert.success("Конфигурация бота обновлена");
+            this.editForm = null;
+            this.loadData();
+          },
+          error: () => {
+            this.alert.error("Не удалось обновить конфигурацию");
+          },
         });
 
       return;
@@ -94,12 +104,17 @@ export class TelegramBotConfigurationsComponent implements OnInit, OnDestroy {
     this.service
       .createBotConfiguration(createRequest)
       .pipe(untilDestroyed(this))
-      .subscribe((x) => {
-        this.alert.success(
-          `Конфигурация бота "${x.displayName}" создана`,
-        );
-        this.editForm = null;
-        this.ngOnInit();
+      .subscribe({
+        next: (x) => {
+          this.alert.success(
+            `Конфигурация бота "${x.displayName}" создана`,
+          );
+          this.editForm = null;
+          this.loadData();
+        },
+        error: () => {
+          this.alert.error("Не удалось создать конфигурацию");
+        },
       });
   }
 

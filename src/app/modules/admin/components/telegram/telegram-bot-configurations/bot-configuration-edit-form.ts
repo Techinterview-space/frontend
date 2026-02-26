@@ -17,12 +17,12 @@ export class BotConfigurationEditForm extends FormGroup {
         { value: item?.botType ?? TelegramBotType.Undefined, disabled: isEdit },
         [Validators.required, Validators.min(1)],
       ),
-      displayName: new FormControl(item?.displayName, [
+      displayName: new FormControl(item?.displayName ?? "", [
         Validators.required,
         Validators.maxLength(200),
       ]),
-      botUsername: new FormControl(item?.botUsername, [
-        Validators.maxLength(200),
+      botUsername: new FormControl(item?.botUsername ?? "", [
+        Validators.maxLength(32),
       ]),
       isEnabled: new FormControl(item?.isEnabled ?? false, []),
       token: new FormControl(null, isEdit ? [] : [Validators.required]),
