@@ -48,6 +48,8 @@ import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-de
 import { M2mClientsService } from "./services/m2m-clients.service";
 import { SurveysAdminService } from "./services/surveys-admin.service";
 import { SurveyRepliesAdminPageComponent } from "./components/surveys/survey-replies-admin-page.component";
+import { ChannelStatsAdminPageComponent } from "./components/channel-stats/channel-stats-admin-page.component";
+import { ChannelStatsAdminService } from "@services/channel-stats-admin.service";
 
 const adminServices = [
   AdminDashboardService,
@@ -60,6 +62,7 @@ const adminServices = [
   AdminEmailService,
   M2mClientsService,
   SurveysAdminService,
+  ChannelStatsAdminService,
 ];
 
 @NgModule({
@@ -97,6 +100,7 @@ const adminServices = [
     M2mClientCreateComponent,
     M2mClientDetailComponent,
     SurveyRepliesAdminPageComponent,
+    ChannelStatsAdminPageComponent,
   ],
   imports: [
     CommonModule,

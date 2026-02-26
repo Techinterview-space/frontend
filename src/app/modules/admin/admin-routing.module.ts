@@ -30,6 +30,7 @@ import { M2mClientsListComponent } from "./components/m2m-clients/m2m-clients-li
 import { M2mClientCreateComponent } from "./components/m2m-clients/m2m-client-create.component";
 import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-detail.component";
 import { SurveyRepliesAdminPageComponent } from "./components/surveys/survey-replies-admin-page.component";
+import { ChannelStatsAdminPageComponent } from "./components/channel-stats/channel-stats-admin-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -91,6 +92,8 @@ const routes: Routes = [
   },
 
   { path: "surveys", component: SurveyRepliesAdminPageComponent },
+
+  { path: "channel-stats", component: ChannelStatsAdminPageComponent },
 
   // M2M Clients
   { path: "m2m-clients", component: M2mClientsListComponent },

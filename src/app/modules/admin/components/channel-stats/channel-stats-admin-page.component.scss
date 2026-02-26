@@ -1,0 +1,44 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// CHANNEL STATS ADMIN PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.table {
+  margin-bottom: 0;
+
+  thead {
+    background-color: var(--warm-bg-tertiary);
+
+    th {
+      color: var(--warm-text-heading);
+      font-weight: 600;
+      border-bottom: 2px solid var(--warm-border-color);
+      padding: 1rem;
+    }
+  }
+
+  tbody {
+    td {
+      color: var(--warm-text-primary);
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--warm-border-color);
+      vertical-align: middle;
+    }
+
+    tr {
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: var(--warm-bg-accent);
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}
