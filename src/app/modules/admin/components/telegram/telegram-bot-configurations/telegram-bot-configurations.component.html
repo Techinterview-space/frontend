@@ -1,0 +1,153 @@
+<app-page-header>Настройки ботов</app-page-header>
+
+<div class="container my-5" *ngIf="items; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <button class="btn btn-sm btn-primary" (click)="create()">
+          Создать
+        </button>
+      </div>
+
+      <div
+        class="table-responsive mb-3"
+        *ngIf="items && items.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
+          <thead class="small">
+            <th>Тип бота</th>
+            <th>Название</th>
+            <th>Username</th>
+            <th>Активен</th>
+            <th>Токен</th>
+            <th>Обновлено</th>
+            <th>Действия</th>
+          </thead>
+          <tbody>
+            <tr class="small" *ngFor="let item of items">
+              <td>{{ item.botTypeAsString }}</td>
+              <td>{{ item.displayName }}</td>
+              <td>{{ item.botUsername }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [class.bg-success]="item.isEnabled"
+                  [class.bg-secondary]="!item.isEnabled"
+                >
+                  {{ item.isEnabled ? "Да" : "Нет" }}
+                </span>
+              </td>
+              <td>
+                <span *ngIf="item.hasToken">{{ item.maskedToken }}</span>
+                <span *ngIf="!item.hasToken" class="text-muted">Не задан</span>
+              </td>
+              <td>{{ item.updatedAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn-link-sm"
+                  (click)="edit(item)"
+                >
+                  Редактировать
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nothingToShow>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center">Нет данных.</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<app-dialog
+  [show]="!!editForm"
+  (closed)="onEditModalDlgClose()"
+  [header]="editForm?.isEdit ? 'Редактировать конфигурацию' : 'Создать конфигурацию'"
+>
+  <form
+    class="mb-5"
+    *ngIf="!!editForm"
+    [formGroup]="editForm"
+    (ngSubmit)="onEditFormSubmit()"
+  >
+    <div class="mb-3">
+      <label>Тип бота</label>
+      <select class="form-select" formControlName="botType">
+        <option [ngValue]="0" disabled>Выберите тип бота</option>
+        <option *ngFor="let bt of botTypes" [ngValue]="bt.value">
+          {{ bt.label }}
+        </option>
+      </select>
+      <app-field-error [field]="editForm.get('botType')"></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Название</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="displayName"
+      />
+      <app-field-error
+        [field]="editForm.get('displayName')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Username бота</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="botUsername"
+        placeholder="my_bot"
+      />
+      <app-field-error
+        [field]="editForm.get('botUsername')"
+      ></app-field-error>
+    </div>
+
+    <div class="mb-3">
+      <label>Токен</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="token"
+        [placeholder]="editForm.isEdit ? 'Оставьте пустым, чтобы не менять' : 'Введите токен бота'"
+      />
+      <app-field-error [field]="editForm.get('token')"></app-field-error>
+      <small class="text-muted" *ngIf="editForm.isEdit && itemToEdit?.hasToken">
+        Текущий токен: {{ itemToEdit?.maskedToken }}
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <input
+        type="checkbox"
+        id="isEnabled"
+        class="form-check-input"
+        formControlName="isEnabled"
+      />
+      <label class="form-check-label" for="isEnabled">
+        Активен
+      </label>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+  </form>
+</app-dialog>
