@@ -131,6 +131,12 @@ The app uses NgModule architecture. Do NOT generate standalone components. All n
 ### Custom `untilDestroyed(this)`
 This is a homegrown implementation (not `@ngneat/until-destroy`). Any component using it **must** have an `ngOnDestroy()` method (even if empty), or it throws at runtime.
 
+### Dropdown Menus — Use `<button>`, Not `<a>`
+In Bootstrap 5 dropdown menus, use `<button type="button" class="dropdown-item">` instead of `<a class="dropdown-item" href="#">`. Buttons are natively keyboard-accessible and don't require `$event.preventDefault()`. Use `[disabled]` for disabling — it blocks clicks reliably, unlike `[class.disabled]` which only applies CSS.
+
+### Dialogs — Close on Load Error
+When an `<app-dialog>` loads data on open (e.g., via a service call in `openDialog()`), close the dialog in the `error` handler. Otherwise the user sees an empty modal body with no feedback.
+
 ### SCSS Imports from `src/`
 `angular.json` sets `stylePreprocessorOptions.includePaths: ["src"]`. Components can import theme files directly: `@use 'warm-theme'` (no relative path needed).
 
