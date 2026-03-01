@@ -11,6 +11,7 @@ Angular 20 frontend for [techinterview.space](https://techinterview.space) - a p
 ```bash
 npm install                          # Install dependencies
 npm start                            # Dev server at http://localhost:4200
+npm run start:local                  # Dev server against LOCAL backend (https://localhost:5001)
 npm run build                        # Production build with SSR
 npm run serve:ssr:interviewer        # Build + run SSR server at http://localhost:4000
 npm test                             # Run tests (uses ChromiumNoSandbox via Puppeteer)

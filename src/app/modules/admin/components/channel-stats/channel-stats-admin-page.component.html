@@ -57,13 +57,57 @@
               </td>
               <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
               <td>
-                <button
-                  class="btn btn-sm btn-outline-dark"
-                  (click)="edit(item)"
-                  title="Редактировать"
-                >
-                  <i class="bi bi-pencil"></i>
-                </button>
+                <div class="btn-group" role="group">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark dropdown-toggle btn-sm"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Действия
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <button
+                        type="button"
+                        class="dropdown-item"
+                        (click)="edit(item)"
+                      >
+                        Редактировать
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        class="dropdown-item"
+                        (click)="calculateStats(item)"
+                        [disabled]="calculatingChannelId === item.id"
+                      >
+                        {{ calculatingChannelId === item.id ? "Расчет..." : "Рассчитать статистику" }}
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        class="dropdown-item"
+                        (click)="openSendDialog(item)"
+                      >
+                        Отправить обновление
+                      </button>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <button
+                        type="button"
+                        class="dropdown-item"
+                        [ngClass]="item.isActive ? 'text-danger' : 'text-success'"
+                        (click)="toggleActive(item)"
+                      >
+                        {{ item.isActive ? "Отключить" : "Включить" }}
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -338,4 +382,55 @@
       </button>
     </div>
   </form>
+</app-dialog>
+
+<!-- Send Stats Run Modal -->
+<app-dialog
+  [show]="!!sendDialogChannel"
+  (closed)="closeSendDialog()"
+  [header]="'Отправить обновление — ' + (sendDialogChannel?.channelName ?? '')"
+>
+  <div *ngIf="sendDialogLoading" class="text-center py-3">
+    <app-data-loader></app-data-loader>
+  </div>
+
+  <div *ngIf="!sendDialogLoading && sendDialogRuns?.length === 0" class="text-center text-muted py-3">
+    Нет доступных расчетов для этого канала.
+  </div>
+
+  <div *ngIf="!sendDialogLoading && sendDialogRuns && sendDialogRuns.length > 0">
+    <div class="mb-3">
+      <label class="form-label" for="sendRunSelect">Выберите расчет</label>
+      <select
+        id="sendRunSelect"
+        class="form-select"
+        [(ngModel)]="sendDialogSelectedRunId"
+      >
+        <option
+          *ngFor="let run of sendDialogRuns"
+          [ngValue]="run.id"
+        >
+          {{ run.month | date: "MMMM yyyy" }} — {{ run.postsCountTotal }} постов ({{ run.calculatedAtUtc | date: "dd.MM.yyyy HH:mm" }})
+        </option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-secondary me-2"
+        (click)="closeSendDialog()"
+      >
+        Отмена
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="sendSelectedRun()"
+        [disabled]="sendInProgress || sendDialogSelectedRunId == null"
+      >
+        {{ sendInProgress ? "Отправка..." : "Отправить" }}
+      </button>
+    </div>
+  </div>
 </app-dialog>

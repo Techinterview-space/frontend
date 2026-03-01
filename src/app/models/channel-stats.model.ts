@@ -51,3 +51,8 @@ export interface RunMonthlyStatsError {
   channelName: string;
   errorMessage: string;
 }
+
+export interface SendStatsRunResponse {
+  success: boolean;
+  errorMessage: string | null;
+}

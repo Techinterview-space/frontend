@@ -6,6 +6,7 @@ import {
   MonitoredChannel,
   MonthlyStatsRunDto,
   RunMonthlyStatsResponse,
+  SendStatsRunResponse,
   UpdateMonitoredChannelRequest,
 } from "@models/channel-stats.model";
 
@@ -56,6 +57,34 @@ export class ChannelStatsAdminService {
           month: month.toString(),
         },
       },
+    );
+  }
+
+  calculateChannelStats(
+    channelId: number,
+  ): Observable<RunMonthlyStatsResponse> {
+    return this.api.post<RunMonthlyStatsResponse>(
+      this.apiUrl + "/channels/" + channelId + "/calculate",
+    );
+  }
+
+  getChannelRuns(
+    channelId: number,
+    take: number = 3,
+  ): Observable<Array<MonthlyStatsRunDto>> {
+    return this.api.get<Array<MonthlyStatsRunDto>>(
+      this.apiUrl + "/channels/" + channelId + "/runs",
+      {
+        params: {
+          take: take.toString(),
+        },
+      },
+    );
+  }
+
+  sendStatsRun(runId: number): Observable<SendStatsRunResponse> {
+    return this.api.post<SendStatsRunResponse>(
+      this.apiUrl + "/runs/" + runId + "/send",
     );
   }
 }

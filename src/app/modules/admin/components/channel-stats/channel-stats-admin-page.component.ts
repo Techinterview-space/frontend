@@ -1,5 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { MonitoredChannel, MonthlyStatsRunDto, RunMonthlyStatsResponse } from "@models/channel-stats.model";
+import {
+  MonitoredChannel,
+  MonthlyStatsRunDto,
+  RunMonthlyStatsResponse,
+  UpdateMonitoredChannelRequest,
+} from "@models/channel-stats.model";
 import { ChannelStatsAdminService } from "@services/channel-stats-admin.service";
 import { TitleService } from "@services/title.service";
 import { untilDestroyed } from "@shared/subscriptions/until-destroyed";
@@ -24,6 +29,13 @@ export class ChannelStatsAdminPageComponent implements OnInit, OnDestroy {
   resultsMonth: number;
   statsResults: Array<MonthlyStatsRunDto> | null = null;
   resultsLoading = false;
+
+  calculatingChannelId: number | null = null;
+  sendDialogChannel: MonitoredChannel | null = null;
+  sendDialogRuns: Array<MonthlyStatsRunDto> | null = null;
+  sendDialogSelectedRunId: number | null = null;
+  sendDialogLoading = false;
+  sendInProgress = false;
 
   constructor(
     private readonly service: ChannelStatsAdminService,
@@ -157,6 +169,114 @@ export class ChannelStatsAdminPageComponent implements OnInit, OnDestroy {
         error: () => {
           this.resultsLoading = false;
           this.alert.error("Ошибка при загрузке результатов");
+        },
+      });
+  }
+
+  calculateStats(item: MonitoredChannel): void {
+    if (this.calculatingChannelId != null) {
+      return;
+    }
+
+    this.calculatingChannelId = item.id;
+
+    this.service
+      .calculateChannelStats(item.id)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (response) => {
+          this.calculatingChannelId = null;
+          if (response.errors.length > 0) {
+            this.alert.warn("Расчет завершен с ошибками");
+          } else {
+            this.alert.success("Статистика рассчитана для " + item.channelName);
+          }
+        },
+        error: () => {
+          this.calculatingChannelId = null;
+          this.alert.error("Ошибка при расчете статистики");
+        },
+      });
+  }
+
+  toggleActive(item: MonitoredChannel): void {
+    const request: UpdateMonitoredChannelRequest = {
+      channelName: item.channelName,
+      discussionChatExternalId: item.discussionChatExternalId,
+      isActive: !item.isActive,
+    };
+
+    this.service
+      .updateChannel(item.id, request)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: () => {
+          this.alert.success(
+            item.isActive ? "Канал отключен" : "Канал включен",
+          );
+          this.loadChannels();
+        },
+        error: () => {
+          this.alert.error("Ошибка при обновлении канала");
+        },
+      });
+  }
+
+  openSendDialog(item: MonitoredChannel): void {
+    this.sendDialogChannel = item;
+    this.sendDialogRuns = null;
+    this.sendDialogSelectedRunId = null;
+    this.sendDialogLoading = true;
+
+    this.service
+      .getChannelRuns(item.id, 3)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (runs) => {
+          this.sendDialogRuns = runs;
+          this.sendDialogLoading = false;
+          if (runs.length > 0) {
+            this.sendDialogSelectedRunId = runs[0].id;
+          }
+        },
+        error: () => {
+          this.alert.error("Ошибка при загрузке расчетов");
+          this.closeSendDialog();
+        },
+      });
+  }
+
+  closeSendDialog(): void {
+    this.sendDialogChannel = null;
+    this.sendDialogRuns = null;
+    this.sendDialogSelectedRunId = null;
+    this.sendDialogLoading = false;
+    this.sendInProgress = false;
+  }
+
+  sendSelectedRun(): void {
+    if (this.sendDialogSelectedRunId == null) {
+      return;
+    }
+
+    this.sendInProgress = true;
+
+    this.service
+      .sendStatsRun(this.sendDialogSelectedRunId)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (response) => {
+          this.sendInProgress = false;
+          if (response.success) {
+            this.alert.success("Обновление отправлено в канал");
+            this.closeSendDialog();
+          } else {
+            this.alert.error(response.errorMessage ?? "Ошибка при отправке");
+          }
+        },
+        error: () => {
+          this.sendInProgress = false;
+          this.alert.error("Ошибка при отправке обновления");
         },
       });
   }
