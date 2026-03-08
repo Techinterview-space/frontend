@@ -11,6 +11,11 @@
       "sourceType": "github",
       "computedHash": "b46417ce22d25f6359c7b2356d88e033caa7b5c5c57255a1786b26f0d584abcf"
     },
+    "angular-directives": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "b8ce636215ec0792839fe57c3632b475957bed1ebc404e9a1c54222e0e506bfa"
+    },
     "angular-forms": {
       "source": "analogjs/angular-skills",
       "sourceType": "github",
