@@ -7,6 +7,8 @@ import {
 } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { AuthService } from "../services/auth/auth.service";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -17,19 +19,23 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(
-    route: ActivatedRouteSnapshot | null,
+    _route: ActivatedRouteSnapshot | null,
     state: RouterStateSnapshot | null,
-  ): boolean {
-    if (this.authService.isAuthenticated()) {
-      return true;
-    }
+  ): Observable<boolean> {
+    return this.authService.ensureValidToken().pipe(
+      map((valid) => {
+        if (valid) {
+          return true;
+        }
 
-    if (state !== null && state.url != null) {
-      // set expire date + 10 hours
-      this.cookieService.set("url", state.url, Date.now(), "/");
-    }
+        if (state !== null && state.url != null) {
+          // set expire date + 10 hours
+          this.cookieService.set("url", state.url, Date.now(), "/");
+        }
 
-    this.router.navigateByUrl("/login");
-    return false;
+        this.router.navigateByUrl("/login");
+        return false;
+      }),
+    );
   }
 }

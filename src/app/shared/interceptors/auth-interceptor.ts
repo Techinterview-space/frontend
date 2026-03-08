@@ -110,6 +110,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }),
         catchError((err) => {
           this.isRefreshing = false;
+          this.refreshTokenSubject.next("");
           this.authService!.signout();
           this.router.navigate(["/"]);
           return throwError(() => err);
@@ -122,6 +123,9 @@ export class AuthInterceptor implements HttpInterceptor {
       filter((token) => token !== null),
       take(1),
       switchMap((token) => {
+        if (!token) {
+          return throwError(() => new Error("Session expired"));
+        }
         return next.handle(this.addBearerTokenToHeader(req, token!));
       }),
     );

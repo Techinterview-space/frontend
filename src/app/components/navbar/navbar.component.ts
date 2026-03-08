@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { of } from "rxjs";
+import { switchMap } from "rxjs/operators";
 import { UserRole } from "@models/enums";
 import { ApplicationUserExtended } from "@models/extended";
 import { AuthService } from "@shared/services/auth/auth.service";
@@ -45,7 +47,14 @@ export class NavbarComponent implements OnInit {
     this.setupSubscribers();
     this.loginButtonAvailable = true;
 
-    this.authService.getCurrentUserFromStorage().subscribe((user) => {
+    this.authService.ensureValidToken().pipe(
+      switchMap((valid) => {
+        if (!valid) {
+          return of(null);
+        }
+        return this.authService.getCurrentUserFromStorage();
+      }),
+    ).subscribe((user) => {
       this.currentUser = user;
       this.renderNavbar();
     });

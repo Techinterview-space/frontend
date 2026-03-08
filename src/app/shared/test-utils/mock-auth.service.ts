@@ -51,6 +51,10 @@ export class MockAuthService implements IAuthService {
     return of();
   }
 
+  ensureValidToken(): Observable<boolean> {
+    return of(true);
+  }
+
   signout(): void {
     // do nothing
   }

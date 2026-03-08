@@ -1,4 +1,4 @@
-import { Subject, Observable, of, BehaviorSubject } from "rxjs";
+import { Subject, Observable, of } from "rxjs";
 import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
 import { ApplicationUser } from "@models/application-user";
@@ -6,7 +6,15 @@ import {
   AuthorizationService,
   CheckTotpResponse,
 } from "@services/authorization.service";
-import { map, switchMap, tap, catchError } from "rxjs/operators";
+import {
+  map,
+  switchMap,
+  tap,
+  catchError,
+  shareReplay,
+  finalize,
+} from "rxjs/operators";
+import { throwError } from "rxjs";
 import { ApplicationUserExtended } from "@models/extended";
 import { AuthSessionService, AuthInfo } from "./auth.session.service";
 import { TokenStorageService } from "./token-storage.service";
@@ -26,6 +34,7 @@ export interface IAuthService {
   completeAuthentication(): Observable<CheckTotpResponse>;
   getAuthorizationHeaderValue(): string | null;
   isAuthenticated(): boolean;
+  ensureValidToken(): Observable<boolean>;
   signout(): void;
 }
 
@@ -36,9 +45,7 @@ export class AuthService implements IAuthService {
   private authInfo: AuthInfo | null = null;
   private applicationUser: ApplicationUserExtended | null = null;
   private isBrowser: boolean;
-  private isRefreshing = false;
-  private refreshTokenSubject: BehaviorSubject<string | null> =
-    new BehaviorSubject<string | null>(null);
+  private refreshInFlight$: Observable<boolean> | null = null;
 
   public readonly loggedIn$: Subject<ApplicationUserExtended> = new Subject();
   public readonly loggedOutInvoked$: Subject<void> = new Subject();
@@ -56,17 +63,19 @@ export class AuthService implements IAuthService {
   }
 
   getCurrentUser(): Observable<ApplicationUserExtended | null> {
-    this.tryLoadUserFromSession();
-
-    if (this.authInfo == null && !this.tokenStorage.hasValidToken()) {
-      return of(null);
-    }
-
-    if (this.applicationUser != null) {
-      return of(this.applicationUser);
-    }
-
-    return this.getCurrentUserFromBackend();
+    return this.ensureValidToken().pipe(
+      switchMap((valid) => {
+        if (!valid) {
+          this.clearSession();
+          return of(null);
+        }
+        this.tryLoadUserFromSession();
+        if (this.applicationUser != null) {
+          return of(this.applicationUser);
+        }
+        return this.getCurrentUserFromBackend();
+      }),
+    );
   }
 
   getCurrentUserFromBackend(): Observable<ApplicationUserExtended | null> {
@@ -83,12 +92,11 @@ export class AuthService implements IAuthService {
   }
 
   getCurrentUserFromStorage(): Observable<ApplicationUserExtended | null> {
-    this.tryLoadUserFromSession();
-
-    if (this.authInfo == null && !this.tokenStorage.hasValidToken()) {
+    if (!this.tokenStorage.hasValidToken()) {
       return of(null);
     }
 
+    this.tryLoadUserFromSession();
     if (this.applicationUser != null) {
       return of(this.applicationUser);
     }
@@ -228,7 +236,7 @@ export class AuthService implements IAuthService {
       map((response) => response.access_token),
       catchError((error) => {
         this.clearSession();
-        throw error;
+        return throwError(() => error);
       }),
     );
   }
@@ -253,23 +261,15 @@ export class AuthService implements IAuthService {
   }
 
   getAuthorizationHeaderValue(): string | null {
-    if (this.isAuthenticated() && !this.isSessionExpired()) {
-      const token = this.tokenStorage.getAccessToken();
-      if (token) {
-        return `Bearer ${token}`;
-      }
+    if (this.tokenStorage.hasValidToken()) {
+      return `Bearer ${this.tokenStorage.getAccessToken()}`;
     }
 
     return null;
   }
 
-  isSessionExpired(): boolean {
-    return this.tokenStorage.isTokenExpired() || this.session.sessionExpired;
-  }
-
   isAuthenticated(): boolean {
-    this.tryLoadUserFromSession();
-    return this.tokenStorage.hasValidToken() || this.authInfo != null;
+    return this.tokenStorage.hasValidToken();
   }
 
   signout(): void {
@@ -309,26 +309,35 @@ export class AuthService implements IAuthService {
   }
 
   /**
-   * Check if token needs refresh and refresh if necessary
+   * Check if token needs refresh and refresh if necessary.
+   * Deduplicates concurrent refresh calls to prevent token rotation conflicts.
    */
   ensureValidToken(): Observable<boolean> {
     if (!this.tokenStorage.hasValidToken()) {
       if (this.tokenStorage.getRefreshToken()) {
-        return this.refreshToken().pipe(
-          map(() => true),
-          catchError(() => of(false)),
-        );
+        return this.getOrCreateRefresh(false);
       }
       return of(false);
     }
 
     if (this.tokenStorage.isTokenExpiringSoon()) {
-      return this.refreshToken().pipe(
-        map(() => true),
-        catchError(() => of(true)), // Still valid, just couldn't refresh
-      );
+      return this.getOrCreateRefresh(true);
     }
 
     return of(true);
+  }
+
+  private getOrCreateRefresh(stillValid: boolean): Observable<boolean> {
+    if (!this.refreshInFlight$) {
+      this.refreshInFlight$ = this.refreshToken().pipe(
+        map(() => true),
+        catchError(() => of(stillValid)),
+        finalize(() => {
+          this.refreshInFlight$ = null;
+        }),
+        shareReplay(1),
+      );
+    }
+    return this.refreshInFlight$;
   }
 }
