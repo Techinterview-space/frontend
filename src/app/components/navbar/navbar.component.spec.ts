@@ -32,8 +32,7 @@ describe("NavbarComponent", () => {
   describe("with valid token", () => {
     beforeEach(() => {
       const authService = TestBed.inject(AuthService);
-      spyOn(authService, "ensureValidToken").and.returnValue(of(true));
-      spyOn(authService, "getCurrentUserFromStorage").and.returnValue(of(null));
+      spyOn(authService, "getCurrentUser").and.returnValue(of(null));
 
       fixture = TestBed.createComponent(NavbarComponent);
       component = fixture.componentInstance;
@@ -59,40 +58,34 @@ describe("NavbarComponent", () => {
   describe("with expired token and no refresh", () => {
     it("should not show logged-in state from stale cache alone", () => {
       const authService = TestBed.inject(AuthService);
-      spyOn(authService, "ensureValidToken").and.returnValue(of(false));
-      spyOn(authService, "getCurrentUserFromStorage").and.returnValue(
-        of(
-          new ApplicationUserExtended(
-            new TestApplicationUser(UserRole.Interviewer),
-          ),
-        ),
-      );
+      spyOn(authService, "getCurrentUser").and.returnValue(of(null));
 
       fixture = TestBed.createComponent(NavbarComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
 
       expect(component.loginName).toBeNull();
-      expect(authService.getCurrentUserFromStorage).not.toHaveBeenCalled();
     });
   });
 
   describe("with successful token refresh", () => {
-    it("should show logged-in state after refresh succeeds", () => {
+    it("should show logged-in state after current user is hydrated", () => {
       const authService = TestBed.inject(AuthService);
       const testUser = new ApplicationUserExtended(
         new TestApplicationUser(UserRole.Interviewer),
       );
-      spyOn(authService, "ensureValidToken").and.returnValue(of(true));
       spyOn(authService, "getCurrentUserFromStorage").and.returnValue(
-        of(testUser),
+        of(null),
       );
+      spyOn(authService, "getCurrentUser").and.returnValue(of(testUser));
 
       fixture = TestBed.createComponent(NavbarComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
 
       expect(component.loginName).toBe(testUser.fullName);
+      expect(authService.getCurrentUser).toHaveBeenCalled();
+      expect(authService.getCurrentUserFromStorage).not.toHaveBeenCalled();
     });
   });
 });
