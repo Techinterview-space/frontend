@@ -8,18 +8,18 @@ import { Component } from "@angular/core";
 })
 export class WednesdayFrogComponent {
   readonly frogs = [
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_frog_gentelmen.jpeg",
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_todo.jpg",
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_2.jpg",
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_3.jpg",
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_4.jpg",
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/wednesday-frogs/wednesday_5.jpg",
+    "/img/images/wednesday-frogs/wednesday_frog_gentelmen.jpeg",
+    "/img/images/wednesday-frogs/wednesday_todo.jpg",
+    "/img/images/wednesday-frogs/wednesday_2.jpg",
+    "/img/images/wednesday-frogs/wednesday_3.jpg",
+    "/img/images/wednesday-frogs/wednesday_4.jpg",
+    "/img/images/wednesday-frogs/wednesday_5.jpg",
   ];
 
   readonly littleFrogLink =
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/frog_600.png";
+    "/img/images/frog_600.png";
   readonly bigFrogLink =
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/frog.png";
+    "/img/images/frog.png";
 
   readonly showFrog;
   frogToBeShown: string | null = null;

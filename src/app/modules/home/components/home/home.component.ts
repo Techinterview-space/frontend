@@ -15,9 +15,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly activatedRoute: ActivatedRouteExtended;
 
   readonly uwuLinkLight =
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/uwu_light_1000.png";
+    "/img/images/uwu_light_1000.png";
   readonly uwuLinkDark =
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/images/uwu_dark_1000.png";
+    "/img/images/uwu_dark_1000.png";
 
   showUwu = false;
   uwuImageLink: string | null = null;
