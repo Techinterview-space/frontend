@@ -1,21 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+import { NavigationEnd, Router } from "@angular/router";
+import { filter } from "rxjs/operators";
 import { UserRole } from "@models/enums";
 import { ApplicationUserExtended } from "@models/extended";
 import { AuthService } from "@shared/services/auth/auth.service";
-import { ThemeService } from "@shared/services/theme/theme.service";
-
-interface NavbarLink {
-  title: string;
-  url: string;
-  show: boolean;
-}
-
-interface NavbarDropdown {
-  title: string;
-  links: NavbarLink[];
-  show: boolean;
-}
+import { NavbarDropdown } from "@components/navbar-list/navbar-list.component";
 
 @Component({
   selector: "app-navbar",
@@ -24,8 +14,8 @@ interface NavbarDropdown {
   standalone: false,
 })
 export class NavbarComponent implements OnInit {
+  readonly isBrowser: boolean;
   loginButtonAvailable = false;
-  healthCheckError = false;
 
   dropdowns: NavbarDropdown[] = [];
 
@@ -38,8 +28,10 @@ export class NavbarComponent implements OnInit {
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
-    public readonly themeService: ThemeService,
-  ) { }
+    @Inject(PLATFORM_ID) platformId: object,
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
     this.setupSubscribers();
@@ -51,7 +43,21 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  private closeNavbarCollapse(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const collapse = document.getElementById("navbarSupportedContent");
+    if (collapse?.classList.contains("show")) {
+      collapse.classList.remove("show");
+    }
+  }
+
   private setupSubscribers(): void {
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe(() => this.closeNavbarCollapse());
     this.authService.loggedOutInvoked$.subscribe(() => {
       this.currentUser = null;
       this.renderNavbar();
@@ -181,7 +187,4 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(["/"]);
   }
 
-  toggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
 }

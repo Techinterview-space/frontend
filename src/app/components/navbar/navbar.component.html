@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-xl border-bottom">
+<nav *ngIf="isBrowser" class="navbar navbar-expand-xl border-bottom">
   <div class="container">
     <a class="navbar-brand" routerLink="/"
       ><img
@@ -25,108 +25,13 @@
       class="collapse navbar-collapse justify-content-end"
       id="navbarSupportedContent"
     >
-      <ul class="navbar-nav mb-2 mb-md-0 align-items-center">
-        <li
-          class="nav-item dropdown"
-          *ngFor="let dropdown of dropdowns; let i = index"
-        >
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            [id]="'navbarDropdown-' + i"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            *ngIf="dropdown.show"
-          >
-            {{ dropdown.title }}
-          </a>
-          <ul
-            class="dropdown-menu"
-            [attr.aria-labelledby]="'navbarDropdown-' + i"
-          >
-            <li *ngFor="let link of dropdown.links">
-              <a
-                class="dropdown-item"
-                routerLink="{{ link.url }}"
-                *ngIf="link.show"
-                >{{ link.title }}</a
-              >
-            </li>
-          </ul>
-        </li>
-
-        <!-- Theme Toggle Button -->
-        <li class="nav-item ms-2">
-          <button
-            class="btn theme-toggle-btn"
-            type="button"
-            (click)="toggleTheme()"
-            [attr.aria-label]="themeService.getThemeLabel()"
-            [attr.title]="themeService.getNextThemeLabel()"
-          >
-            <i
-              class="bi"
-              [ngClass]="{
-                'bi-sun-fill': themeService.isDarkMode(),
-                'bi-moon-fill': !themeService.isDarkMode(),
-              }"
-            ></i>
-          </button>
-        </li>
-
-        <li class="nav-item ms-2" *ngIf="!loginName; else loggedIn">
-          <button
-            type="button"
-            class="btn btn-primary login-btn {{
-              !loginButtonAvailable ? 'disabled' : ''
-            }}"
-            (click)="login()"
-            [disabled]="!loginButtonAvailable"
-          >
-            Войти
-          </button>
-        </li>
-        <ng-template #loggedIn>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownUser"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {{ loginName }}
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownUser"
-            >
-              <li><a class="dropdown-item" routerLink="/me">Мой профиль</a></li>
-              <li>
-                <a class="dropdown-item" routerLink="users/me/labels"
-                  >Мои теги</a
-                >
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a
-                  class="dropdown-item"
-                  routerLink="/admin"
-                  *appHasRole="'admin'"
-                  >Админка</a
-                >
-              </li>
-              <li class="cursor-pointer">
-                <a class="dropdown-item" (click)="logout()">Выйти</a>
-              </li>
-            </ul>
-          </li>
-        </ng-template>
-      </ul>
+      <app-navbar-actions
+        [loginName]="loginName"
+        [loginButtonAvailable]="loginButtonAvailable"
+        (loginClick)="login()"
+        (logoutClick)="logout()"
+      ></app-navbar-actions>
+      <app-navbar-list [dropdowns]="dropdowns"></app-navbar-list>
     </div>
   </div>
 </nav>

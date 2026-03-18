@@ -1,0 +1,30 @@
+<ul class="navbar-nav mb-2 mb-xl-0 align-items-center">
+    <li
+            class="nav-item dropdown"
+            *ngFor="let dropdown of (dropdowns || []); let i = index"
+    >
+        <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                [id]="'navbarDropdown-' + i"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                *ngIf="dropdown.show"
+        >
+            {{ dropdown.title }}
+        </a>
+        <ul
+                class="dropdown-menu"
+                [attr.aria-labelledby]="'navbarDropdown-' + i"
+        >
+            <li *ngFor="let link of (dropdown.links || [])">
+                <a
+                        class="dropdown-item"
+                        routerLink="{{ link.url }}"
+                        *ngIf="link.show"
+                >{{ link.title }}</a>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -1099,6 +1099,8 @@ hr {
    ───────────────────────────────────────────────────────────────────────────────── */
 
 .navbar {
+  top: 0;
+  position: sticky;
   background-color: var(--warm-navbar-bg);
   border-color: var(--warm-navbar-border) !important;
   box-shadow:
@@ -1121,6 +1123,16 @@ hr {
   &:hover {
     color: var(--warm-accent-primary);
     text-decoration: none;
+  }
+
+  span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    @media (max-width: 360px) {
+      max-width: 100px;
+      overflow: hidden;
+    }
   }
 }
 
