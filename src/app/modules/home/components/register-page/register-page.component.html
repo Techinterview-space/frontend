@@ -53,7 +53,7 @@
               class="form-control"
               [(ngModel)]="firstName"
               name="firstName"
-              placeholder="Выше имя"
+              placeholder="Ваше имя"
               [disabled]="isLoading"
               autocomplete="given-name"
             />
@@ -67,7 +67,7 @@
               class="form-control"
               [(ngModel)]="lastName"
               name="lastName"
-              placeholder="Ваша файмилия"
+              placeholder="Ваша фамилия"
               [disabled]="isLoading"
               autocomplete="family-name"
             />
@@ -82,7 +82,7 @@
             class="form-control"
             [(ngModel)]="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder="Введите email"
             [disabled]="isLoading"
             autocomplete="email"
           />
@@ -169,13 +169,16 @@
               [disabled]="isLoading"
             />
             <span class="checkmark"></span>
-            I agree to the
-            <a
-              routerLink="/agreements/privacy-policy"
-              target="_blank"
-              class="auth-link"
-              >Terms and Privacy Policy</a
-            >
+              <span>
+                  Я согласен с
+                  <a
+                          routerLink="/agreements/privacy-policy"
+                          target="_blank"
+                          class="auth-link"
+                  >
+                      пользовательским соглашением
+                  </a>
+              </span>
           </label>
         </div>
 
