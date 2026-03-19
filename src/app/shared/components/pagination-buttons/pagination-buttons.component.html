@@ -15,8 +15,17 @@
       </li>
 
       <li
+        *ngFor="let page of mobilePages"
+        class="page-item d-md-none {{ activePageStyle(page) }}"
+      >
+        <button type="button" class="page-link" (click)="pageClicked(page)">
+          {{ page }}
+        </button>
+      </li>
+
+      <li
         *ngFor="let page of pages"
-        class="page-item {{ activePageStyle(page) }}"
+        class="page-item d-none d-md-flex {{ activePageStyle(page) }}"
       >
         <button
           *ngIf="page !== null"

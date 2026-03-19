@@ -25,6 +25,7 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
   pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   pages: Array<number | null> = [];
+  mobilePages: Array<number | null> = [];
   lastPage: number | null = null;
 
   get disablePreviousButton(): boolean {
@@ -92,6 +93,16 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
         }
       } else {
         this.pages = allPages;
+      }
+
+      if (this.lastPage <= 3) {
+        this.mobilePages = allPages;
+      } else if (current === 1) {
+        this.mobilePages = [1, 2, 3];
+      } else if (current >= this.lastPage) {
+        this.mobilePages = [this.lastPage - 2, this.lastPage - 1, this.lastPage];
+      } else {
+        this.mobilePages = [current - 1, current, current + 1];
       }
     }
   }
