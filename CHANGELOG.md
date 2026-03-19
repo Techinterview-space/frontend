@@ -1,5 +1,52 @@
 # Changelog
 
+## 2026-03-19
+
+### Summary
+
+UI, performance, and layout fixes across the application — focused on mobile responsiveness, font loading, image optimization, and navbar refactoring.
+
+### Fonts
+
+- Replaced Google Fonts (Lora, Nunito) with self-hosted `@fontsource/lora` and `@fontsource/nunito` packages to fix production build failure caused by font inlining errors and eliminate external font dependency.
+- Removed Google Fonts `<link>` preconnect and stylesheet tags from `index.html`.
+
+### Image Optimization
+
+- Added `ipx` Express middleware at `/img` route for on-the-fly WebP conversion of images served from DigitalOcean Spaces CDN.
+- Replaced all hardcoded CDN image URLs in templates with `/img/` proxy paths. Preserved original CDN URLs only for `og:image` and `twitter:image` meta tags required for social sharing.
+- GIF images are excluded from WebP conversion.
+- Added `Cache-Control: public, max-age=86400, s-maxage=604800` headers on image responses.
+
+### Navbar
+
+- Decomposed `navbar.component.html` into two sub-components: `NavbarListComponent` (dropdown menus) and `NavbarActionsComponent` (theme toggle + login/logout).
+- Applied `position: sticky; top: 0` to navbar host element for sticky header behavior.
+- Added body scroll lock when burger menu is open via Bootstrap collapse events (`show.bs.collapse` / `hide.bs.collapse`).
+- Added automatic burger menu close on Angular router navigation.
+- On mobile (below xl breakpoint): `app-navbar-actions` is displayed first (above nav links) in a full-width row with `justify-content: space-between`.
+
+### Footer
+
+- Moved footer from static HTML in `index.html` into the Angular app as `FooterComponent` to fix sticky navbar losing visibility when scrolling into the footer area.
+- `app-root` is now a flex column container, ensuring the footer is always pushed to the bottom of the page.
+
+### Home Page
+
+- Removed hardcoded `mt-5` from the Wednesday frog component.
+- Last feature block bottom margin is removed when the Wednesday frog is visible, eliminating excess whitespace.
+
+### Pagination
+
+- On mobile (below md breakpoint), pagination shows at most 3 page buttons: previous, current, and next page. Full pagination is shown on desktop.
+
+### Misc
+
+- Fixed duplicate section titles on the Historical Data page.
+- Fixed currencies chart layout on narrow screens.
+
+---
+
 ## 2026-02-12
 
 ### Public Surveys Page
