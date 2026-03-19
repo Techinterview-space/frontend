@@ -15,22 +15,23 @@
       </li>
 
       <li
-        *ngFor="let page of mobilePages"
+        *ngFor="let page of mobilePages; trackBy: trackByPage"
         class="page-item d-md-none {{ activePageStyle(page) }}"
       >
-        <button type="button" class="page-link" (click)="pageClicked(page)">
+        <button type="button" class="page-link" [attr.aria-label]="'Page ' + page" (click)="pageClicked(page)">
           {{ page }}
         </button>
       </li>
 
       <li
-        *ngFor="let page of pages"
+        *ngFor="let page of pages; trackBy: trackByPage"
         class="page-item d-none d-md-flex {{ activePageStyle(page) }}"
       >
         <button
           *ngIf="page !== null"
           type="button"
           class="page-link"
+          [attr.aria-label]="'Page ' + page"
           (click)="pageClicked(page)"
         >
           {{ page }}

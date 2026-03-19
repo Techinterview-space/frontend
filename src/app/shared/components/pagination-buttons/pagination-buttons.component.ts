@@ -129,6 +129,10 @@ export class PaginationButtonsComponent implements OnInit, OnChanges {
     }
   }
 
+  trackByPage(_index: number, page: number | null): number | null {
+    return page;
+  }
+
   activePageStyle(page: number | null): string {
     if (page == null) {
       return "";

@@ -8,7 +8,7 @@ import compression from "compression";
 import express from "express";
 
 import { join } from "node:path";
-import { IpxMiddleware } from 'src/server/middleware/ipx'
+import { IpxMiddleware } from './server/middleware/ipx'
 import { redirectToCanonicalSitemap } from "./server/sitemap-redirect.util";
 
 const browserDistFolder = join(import.meta.dirname, "../browser");
