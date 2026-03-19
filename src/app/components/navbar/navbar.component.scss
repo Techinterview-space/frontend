@@ -159,6 +159,9 @@
 @media (max-width: 768px) {
   .navbar-collapse {
     padding-top: 1rem;
+    overflow-y: auto;
+    height: calc(100vh - 50px);
+    transition: none;
   }
 
   .nav-item {

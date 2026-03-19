@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
+import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
 import { NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
@@ -13,7 +13,7 @@ import { NavbarDropdown } from "@components/navbar-list/navbar-list.component";
   styleUrls: ["./navbar.component.scss"],
   standalone: false,
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
   readonly isBrowser: boolean;
   loginButtonAvailable = false;
 
@@ -31,6 +31,10 @@ export class NavbarComponent implements OnInit {
     @Inject(PLATFORM_ID) platformId: object,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  ngAfterViewInit(): void {
+    this.setupCollapseScrollLock();
   }
 
   ngOnInit(): void {
@@ -52,6 +56,25 @@ export class NavbarComponent implements OnInit {
     if (collapse?.classList.contains("show")) {
       collapse.classList.remove("show");
     }
+    this.setBodyScroll(true);
+  }
+
+  private setBodyScroll(enabled: boolean): void {
+    document.body.style.overflow = enabled ? "" : "hidden";
+  }
+
+  private setupCollapseScrollLock(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const collapse = document.getElementById("navbarSupportedContent");
+    if (!collapse) {
+      return;
+    }
+
+    collapse.addEventListener("show.bs.collapse", () => this.setBodyScroll(false));
+    collapse.addEventListener("hide.bs.collapse", () => this.setBodyScroll(true));
   }
 
   private setupSubscribers(): void {

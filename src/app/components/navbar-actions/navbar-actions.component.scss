@@ -28,6 +28,7 @@
 }
 
 .dropdown-menu {
+  display: none;
   border-radius: 10px;
   box-shadow:
     0 4px 8px var(--warm-shadow-color),
@@ -35,6 +36,10 @@
     0 16px 32px var(--warm-shadow-color-medium);
   padding: 0.5rem;
   margin-top: 0.5rem;
+
+  &.show {
+    display: block;
+  }
 }
 
 .dropdown-item {
@@ -104,8 +109,6 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: flex-end;
-    align-items: center !important;
     gap: 5px;
 
     li {

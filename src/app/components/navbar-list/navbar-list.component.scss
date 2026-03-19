@@ -56,6 +56,15 @@
   }
 }
 
+@media (max-width: 1199.98px) {
+  .nav-item {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+
+
 @media (max-width: 767.98px) {
   .nav-item {
     margin: 0.25rem 0;
@@ -70,5 +79,11 @@
 
   .dropdown-item {
     padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 528.98px) {
+  .nav-item {
+    max-width: 100%;
   }
 }
