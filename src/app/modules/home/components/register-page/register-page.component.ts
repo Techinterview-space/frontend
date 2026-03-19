@@ -113,8 +113,8 @@ export class RegisterPageComponent implements OnDestroy {
     return hasLower && hasUpper && hasDigit;
   }
 
-  getPasswordStrength(): "слабый" | "средний" | "сильный" {
-    if (this.password.length < 8) return "слабый";
+  getPasswordStrength(): "weak" | "medium" | "strong" {
+    if (this.password.length < 8) return "weak";
     const hasLower = /[a-z]/.test(this.password);
     const hasUpper = /[A-Z]/.test(this.password);
     const hasDigit = /\d/.test(this.password);
@@ -122,9 +122,9 @@ export class RegisterPageComponent implements OnDestroy {
     const score = [hasLower, hasUpper, hasDigit, hasSpecial].filter(
       Boolean,
     ).length;
-    if (score >= 4 && this.password.length >= 12) return "сильный";
-    if (score >= 3) return "средний";
-    return "слабый";
+    if (score >= 4 && this.password.length >= 12) return "strong";
+    if (score >= 3) return "medium";
+    return "weak";
   }
 
   ngOnDestroy(): void {
