@@ -24,6 +24,7 @@ import { NavbarActionsComponent } from "@components/navbar-actions/navbar-action
 import { NavbarComponent } from "@components/navbar/navbar.component";
 import { NavbarListComponent } from "@components/navbar-list/navbar-list.component";
 import { MaintenanceComponent } from "@components/maintenance/maintenance.component";
+import { FooterComponent } from "@components/footer/footer.component";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MaintenanceComponent } from "@components/maintenance/maintenance.compon
     NavbarActionsComponent,
     AdminNavbarComponent,
     MaintenanceComponent,
+    FooterComponent,
   ],
   bootstrap: [AppComponent],
   imports: [

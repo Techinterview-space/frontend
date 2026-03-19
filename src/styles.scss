@@ -1435,7 +1435,8 @@ hr {
   }
 }*/
 
-
-:root[data-theme="dark"] .navbar-brand:hover, .navbar-brand:focus {
-  --bs-navbar-brand-hover-color: #fff; // fix navbar color on dark mode
+:root[data-theme="dark"]  {
+  .navbar-brand:hover, .navbar-brand:focus {
+    --bs-navbar-brand-hover-color: #fff; // fix navbar color on dark mode
+  }
 }

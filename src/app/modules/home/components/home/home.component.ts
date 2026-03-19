@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   readonly uwuLinkDark =
     "/img/images/uwu_dark_1000.png";
 
+  readonly showFrog = new Date().getDay() === 3;
   showUwu = false;
   uwuImageLink: string | null = null;
   loaded = false;
