@@ -2,10 +2,10 @@
 
 <div class="container my-5" *ngIf="companies; else dataLoading">
   <div class="card">
-    <div class="card-body mobile-px-5 mobile-py-5">
+    <div class="card-body py-3">
       <div class="company-list mb-3">
         <div class="row">
-          <div class="col-md-6 mb-1">
+          <div class="col-12 col-md-6 mb-1">
             <label for="searchQuery" class="visually-hidden"
               >Поиск компании</label
             >
@@ -19,7 +19,7 @@
               (keyup)="onKeyupEvent($event)"
             />
           </div>
-          <div class="col-md-3 mb-1">
+          <div class="col-12 col-md-6 col-xl-3 mb-1">
             <div class="">
               <label for="withRating" class="visually-hidden"
                 >Фильтр по рейтингу</label
@@ -36,7 +36,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-3 mb-1">
+          <div class="col-12 col-xl-3 mb-1">
             <button
               type="button"
               class="btn btn-outline-primary"
@@ -129,7 +129,7 @@
         </div>
         <div class="mt-3 d-flex justify-content-center">
           <img
-            src="https://techinterview.fra1.cdn.digitaloceanspaces.com/images/company_reviews_1000.png"
+            src="/img/images/company_reviews_1000.png"
             class="img-fluid mobile-w-30"
             alt="Кот Магеллан — загрузка списка компаний"
             title="Кот Магеллан, который любит оставлять отзывы о компаниях"

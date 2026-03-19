@@ -4,7 +4,7 @@ export const environment = {
   isUnderMaintenance: false,
   type: "dev",
   baseUrl: "http://localhost:4200",
-  resourceApiURI: "https://api.techinterview.space",
+  resourceApiURI: "https://localhost:5001",
   name: "dev",
   auth: {
     redirectUri: "http://localhost:4200/auth-callback",

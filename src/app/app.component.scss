@@ -4,8 +4,10 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
   flex: 1 0 auto;
+  position: relative;
 }
 
 .app-container {

@@ -186,14 +186,17 @@
 }
 
 .password-toggle {
+  display: flex;
   position: absolute;
-  right: 12px;
-  top: 50%;
+  right: 27px;
+  top: calc(50% + 1px);
   transform: translateY(-50%);
   background: none;
   border: none;
   color: var(--warm-text-muted);
   cursor: pointer;
+  font-size: 20px;
+
   &:hover {
     color: var(--warm-text-primary);
   }
@@ -258,7 +261,7 @@
 .checkbox-label {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 0.2rem;
   cursor: pointer;
   font-size: 0.9rem;
   color: var(--warm-text-secondary);

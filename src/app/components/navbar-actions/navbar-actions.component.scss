@@ -1,0 +1,128 @@
+:host {
+  display: contents;
+}
+
+.login-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--warm-text-secondary);
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: var(--warm-accent-primary);
+    text-decoration: none;
+  }
+
+  &.dropdown-toggle::after {
+    margin-left: 0.35em;
+  }
+}
+
+.dropdown.show > .nav-link.dropdown-toggle {
+  color: var(--warm-accent-primary);
+}
+
+.dropdown-menu {
+  display: none;
+  border-radius: 10px;
+  box-shadow:
+    0 4px 8px var(--warm-shadow-color),
+    0 8px 16px var(--warm-shadow-color),
+    0 16px 32px var(--warm-shadow-color-medium);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+
+  &.show {
+    display: block;
+  }
+}
+
+.dropdown-item {
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: var(--warm-accent-primary);
+    color: var(--warm-btn-contrast-text);
+  }
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--warm-bg-accent);
+  border: 1px solid var(--warm-border-color);
+  color: var(--warm-text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background-color: var(--warm-accent-primary);
+    border-color: var(--warm-accent-primary);
+    color: var(--warm-btn-contrast-text);
+    transform: scale(1.05);
+
+    i {
+      transform: rotate(15deg);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--warm-input-focus-ring);
+    outline: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  ul {
+    order: 2;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  ul {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 5px;
+
+    li {
+      margin: 0 !important;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .nav-item {
+    margin: 0.25rem 0;
+  }
+
+  .theme-toggle-btn {
+    margin-left: 0;
+  }
+}

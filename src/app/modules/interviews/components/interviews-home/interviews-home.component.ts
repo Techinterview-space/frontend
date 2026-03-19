@@ -58,7 +58,7 @@ export class InterviewsHomeComponent implements OnInit, OnDestroy {
         subtitle:
           "Мы сохраним ваши заметки. Никто не сможет их посмотреть, кроме вас.",
         imageSrc:
-          "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/conduct_interview_main_page.gif",
+          "/img/gif/conduct_interview_main_page.gif",
         imageAlt: "Conduct the interview GIF",
         showPreloader: true,
       },
@@ -68,7 +68,7 @@ export class InterviewsHomeComponent implements OnInit, OnDestroy {
         subtitle:
           "Вы можете поделиться фидбеком как markdown-документом. А также экспортнуть и в PDF.",
         imageSrc:
-          "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/share_the_interview.gif",
+          "/img/gif/share_the_interview.gif",
         imageAlt: "Share the interview GIF",
         showPreloader: true,
       },
@@ -78,7 +78,7 @@ export class InterviewsHomeComponent implements OnInit, OnDestroy {
         subtitle:
           "Создайте шаблон для интервью с часто задаваемыми вопросами. А если вы хотите поделиться шаблоном, то можете сделать его публичным.",
         imageSrc:
-          "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/create_templates_main_page.gif",
+          "/img/gif/create_templates_main_page.gif",
         imageAlt: "Create interview templates GIF",
         showPreloader: true,
       },
@@ -88,7 +88,7 @@ export class InterviewsHomeComponent implements OnInit, OnDestroy {
         subtitle:
           "Вы сможете быстро перенести вопросы на интервью с ваших личных шаблонов и публичных тоже.",
         imageSrc:
-          "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/use_templates_for_your_interview.gif",
+          "/img/gif/use_templates_for_your_interview.gif",
         imageAlt: "Use templates for your interviews GIF",
         showPreloader: true,
       },

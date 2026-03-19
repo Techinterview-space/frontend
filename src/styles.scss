@@ -5,6 +5,16 @@
 
 /* Importing dependencies */
 @use "sass:color";
+@import "@fontsource/lora/400.css";
+@import "@fontsource/lora/500.css";
+@import "@fontsource/lora/600.css";
+@import "@fontsource/lora/700.css";
+@import "@fontsource/lora/400-italic.css";
+@import "@fontsource/nunito/300.css";
+@import "@fontsource/nunito/400.css";
+@import "@fontsource/nunito/500.css";
+@import "@fontsource/nunito/600.css";
+@import "@fontsource/nunito/700.css";
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "_colors";
@@ -1089,6 +1099,8 @@ hr {
    ───────────────────────────────────────────────────────────────────────────────── */
 
 .navbar {
+  top: 0;
+  position: sticky;
   background-color: var(--warm-navbar-bg);
   border-color: var(--warm-navbar-border) !important;
   box-shadow:
@@ -1111,6 +1123,16 @@ hr {
   &:hover {
     color: var(--warm-accent-primary);
     text-decoration: none;
+  }
+
+  span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    @media (max-width: 360px) {
+      max-width: 100px;
+      overflow: hidden;
+    }
   }
 }
 
@@ -1412,3 +1434,9 @@ hr {
     }
   }
 }*/
+
+:root[data-theme="dark"]  {
+  .navbar-brand:hover, .navbar-brand:focus {
+    --bs-navbar-brand-hover-color: #fff; // fix navbar color on dark mode
+  }
+}

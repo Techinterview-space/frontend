@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <app-admin-navbar *ngIf="showAdminNavbar"></app-admin-navbar>
 
-<div class="app-body d-flex flex-column h-100">
+<div class="app-body d-flex flex-column flex-grow-1">
   <main class="main flex-shrink-0">
     <div id="body-container">
       <router-outlet></router-outlet>
@@ -9,6 +9,8 @@
       <app-wednesday-frog></app-wednesday-frog>
     </div>
   </main>
+
+  <app-footer></app-footer>
   <app-spinner
     name="timer"
     bdOpacity="0.3"

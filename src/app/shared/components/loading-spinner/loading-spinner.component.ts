@@ -14,7 +14,7 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
   delayMs = 750;
 
   static LoadingCatUrl =
-    "https://techinterview.fra1.cdn.digitaloceanspaces.com/gif/loading_cat.gif";
+    "/img/gif/loading_cat.gif";
 
   loadingUrl = "";
   loadingAlt = "Loading cat GIF";

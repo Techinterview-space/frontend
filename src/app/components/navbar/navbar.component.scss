@@ -6,6 +6,9 @@
 
 :host {
   display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
 }
 
 // Navbar container - component-specific padding
@@ -156,6 +159,9 @@
 @media (max-width: 768px) {
   .navbar-collapse {
     padding-top: 1rem;
+    overflow-y: auto;
+    height: calc(100vh - 50px);
+    transition: none;
   }
 
   .nav-item {

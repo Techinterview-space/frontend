@@ -20,15 +20,21 @@ import { DateParserInterceptor } from "@shared/interceptors/date-parser-intercep
 import { SpinnerInterceptor } from "@shared/interceptors/spinner-interceptor";
 import { SharedModule } from "@shared/shared.module";
 import { AdminNavbarComponent } from "@components/admin-navbar/admin-navbar.component";
+import { NavbarActionsComponent } from "@components/navbar-actions/navbar-actions.component";
 import { NavbarComponent } from "@components/navbar/navbar.component";
+import { NavbarListComponent } from "@components/navbar-list/navbar-list.component";
 import { MaintenanceComponent } from "@components/maintenance/maintenance.component";
+import { FooterComponent } from "@components/footer/footer.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    NavbarListComponent,
+    NavbarActionsComponent,
     AdminNavbarComponent,
     MaintenanceComponent,
+    FooterComponent,
   ],
   bootstrap: [AppComponent],
   imports: [

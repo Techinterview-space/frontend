@@ -6,7 +6,9 @@ import {
 } from "@angular/ssr/node";
 import compression from "compression";
 import express from "express";
+
 import { join } from "node:path";
+import { IpxMiddleware } from './server/middleware/ipx'
 import { redirectToCanonicalSitemap } from "./server/sitemap-redirect.util";
 
 const browserDistFolder = join(import.meta.dirname, "../browser");
@@ -41,10 +43,10 @@ app.use((req, res, next) => {
     [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
+      "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
       "img-src 'self' data: https://techinterview.fra1.cdn.digitaloceanspaces.com https://via.placeholder.com https://*.googleusercontent.com https://www.google-analytics.com https://*.googletagmanager.com",
-      "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
-      "connect-src 'self' https://api.techinterview.space https://www.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com",
+      "font-src 'self' https://cdn.jsdelivr.net",
+      `connect-src 'self' https://api.techinterview.space https://www.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com${process.env["NODE_ENV"] !== "production" ? " https://localhost:5001" : ""}`,
       "frame-ancestors 'self'",
     ].join("; "),
   );
@@ -62,6 +64,12 @@ app.use(compression());
 app.get("/sitemap.xml", (_req, res) => {
   redirectToCanonicalSitemap(res);
 });
+
+/**
+ * Image proxy with on-the-fly WebP conversion via ipx.
+ * Browsers supporting WebP receive converted images; others get the original format.
+ */
+app.use("/img", IpxMiddleware);
 
 /**
  * Serve static files from /browser
