@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TitleService } from "@services/title.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
@@ -14,9 +15,13 @@ import { AuthService } from "@shared/services/auth/auth.service";
 export class LoginPageComponent implements OnInit, OnDestroy {
   email = "";
   password = "";
+  website = "";
   isLoading = false;
   showPassword = false;
   verifiedMessage = false;
+  private formLoadedAt = 0;
+
+  private readonly isBrowser: boolean;
 
   constructor(
     private readonly titleService: TitleService,
@@ -24,11 +29,17 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
+    @Inject(PLATFORM_ID) platformId: Object,
   ) {
     this.titleService.setTitle("Sign In");
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
+    if (this.isBrowser) {
+      this.formLoadedAt = Date.now();
+    }
+
     if (this.authService.isAuthenticated()) {
       this.router.navigate(["/me"]);
       return;
@@ -51,9 +62,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     }
 
     this.isLoading = true;
+    const elapsedSeconds = Math.floor((Date.now() - this.formLoadedAt) / 1000);
 
     this.authService
-      .loginWithEmail(this.email, this.password)
+      .loginWithEmail(this.email, this.password, this.website, elapsedSeconds)
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => {

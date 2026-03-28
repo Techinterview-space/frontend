@@ -77,6 +77,18 @@
         </div>
       </div>
 
+      <div class="form-field-extra" aria-hidden="true">
+        <label for="login-website">Website</label>
+        <input
+          type="text"
+          id="login-website"
+          [(ngModel)]="website"
+          name="website"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
+
       <div class="form-options">
         <a routerLink="/forgot-password" class="forgot-link">Забыли пароль?</a>
       </div>

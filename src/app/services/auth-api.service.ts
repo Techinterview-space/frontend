@@ -19,12 +19,16 @@ export interface RegisterRequest {
   password: string;
   firstName: string;
   lastName: string;
+  website?: string;
+  formDurationSeconds?: number;
 }
 
 export interface LoginRequest {
   email: string;
   password: string;
   deviceInfo?: string;
+  website?: string;
+  formDurationSeconds?: number;
 }
 
 export interface ResetPasswordRequest {

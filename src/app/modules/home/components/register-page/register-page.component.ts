@@ -1,4 +1,5 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 import { Router } from "@angular/router";
 import { TitleService } from "@services/title.service";
 import { AlertService } from "@shared/components/alert/services/alert.service";
@@ -12,25 +13,37 @@ import { AuthService } from "@shared/services/auth/auth.service";
   styleUrls: ["./register-page.component.scss"],
   standalone: false,
 })
-export class RegisterPageComponent implements OnDestroy {
+export class RegisterPageComponent implements OnInit, OnDestroy {
   email = "";
   password = "";
   confirmPassword = "";
   firstName = "";
   lastName = "";
+  website = "";
   acceptTerms = false;
   isLoading = false;
   showPassword = false;
   showConfirmPassword = false;
   successMessage: string | null = null;
+  private formLoadedAt = 0;
+
+  private readonly isBrowser: boolean;
 
   constructor(
     private readonly titleService: TitleService,
     private readonly alertService: AlertService,
     private readonly authService: AuthService,
     private readonly router: Router,
+    @Inject(PLATFORM_ID) platformId: Object,
   ) {
     this.titleService.setTitle("Create Account");
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  ngOnInit(): void {
+    if (this.isBrowser) {
+      this.formLoadedAt = Date.now();
+    }
   }
 
   register(): void {
@@ -56,6 +69,8 @@ export class RegisterPageComponent implements OnDestroy {
       password: this.password,
       firstName: this.firstName,
       lastName: this.lastName,
+      website: this.website,
+      formDurationSeconds: Math.floor((Date.now() - this.formLoadedAt) / 1000),
     };
 
     this.authService

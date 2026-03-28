@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-03-28
+
+### Added
+
+- Anti-bot protection for login and registration forms
+  - Honeypot hidden field — a `website` input hidden via `.form-field-extra` CSS class; bots auto-fill it, real users never see it
+  - Form timing analysis — records when the form loads and sends elapsed seconds to the backend on submit
+  - `.form-field-extra` global CSS class using off-screen positioning, `clip-path`, and `pointer-events: none`
+- SSR safety: `isPlatformBrowser` guard for `Date.now()` in both form components
+
+### Changed
+
+- `LoginRequest` interface — added optional `website` and `formDurationSeconds` fields
+- `RegisterRequest` interface — added optional `website` and `formDurationSeconds` fields
+- `AuthService.loginWithEmail()` — extended signature to pass honeypot and timing data
+- `LoginPageComponent` — injects `PLATFORM_ID`, records form load time, sends anti-bot fields
+- `RegisterPageComponent` — implements `OnInit`, injects `PLATFORM_ID`, records form load time, sends anti-bot fields
+
 ## 2026-02-12
 
 ### Public Surveys Page

@@ -124,8 +124,10 @@ export class AuthService implements IAuthService {
   loginWithEmail(
     email: string,
     password: string,
+    website?: string,
+    formDurationSeconds?: number,
   ): Observable<AuthTokenResponse> {
-    return this.authApiService.login({ email, password }).pipe(
+    return this.authApiService.login({ email, password, website, formDurationSeconds }).pipe(
       tap((response) => {
         this.handleAuthResponse(response);
       }),
