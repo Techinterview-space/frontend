@@ -2,13 +2,7 @@
 
 Frontend part of the [Techinterview.space](https://techinterview.space)
 
-## Subdocs
-
-- [Changelog](CHANGELOG.md)
-- [License](LICENSE)
-- [Design Guideline](docs/DESIGN_GUIDELINE.md)
-- [SSR & Deployment Guide](docs/SSR_DEPLOYMENT.md)
-- [SEO & GEO](docs/geo.md)
+See [Documentation](#documentation) below for the full doc index. Also: [Changelog](CHANGELOG.md), [License](LICENSE).
 
 ## Tech stack
 
@@ -75,6 +69,19 @@ For complete design documentation, see [DESIGN_GUIDELINE.md](docs/DESIGN_GUIDELI
 
 ## Documentation
 
-- [Design Guideline](docs/DESIGN_GUIDELINE.md) - Complete design system documentation (colors, typography, components)
-- [SSR & Deployment Guide](docs/SSR_DEPLOYMENT.md) - Detailed SSR implementation and deployment documentation
-- [SEO & GEO](docs/geo.md) - Generative Engine Optimization: JSON-LD structured data, meta tags, canonical URLs, dynamic sitemap, and AI bot discoverability
+Engineering docs (this prompt's set):
+
+- [AGENTS.md](AGENTS.md) - Critical context for AI assistants and contributors
+- [CLAUDE.md](CLAUDE.md) - Conventions, build commands, and AI-assistant guardrails
+- [docs/architecture.md](docs/architecture.md) - Module layout, SSR boundary, HTTP pipeline
+- [docs/domain.md](docs/domain.md) - Feature areas and domain workflows
+- [docs/authentication.md](docs/authentication.md) - JWT + refresh-token flow, OAuth, guards, interceptor
+- [docs/interactions.md](docs/interactions.md) - Backend API, OAuth providers, CDN, analytics
+- [docs/testing.md](docs/testing.md) - Karma + Jasmine setup, test utilities, CI gate
+- [docs/gotchas.md](docs/gotchas.md) - Non-obvious traps; check before debugging
+
+Topic guides:
+
+- [docs/DESIGN_GUIDELINE.md](docs/DESIGN_GUIDELINE.md) - Warm-theme design system: colors, typography, components
+- [docs/SSR_DEPLOYMENT.md](docs/SSR_DEPLOYMENT.md) - Hybrid SSR/SPA implementation and Docker deployment
+- [docs/geo.md](docs/geo.md) - Generative Engine Optimization: JSON-LD, meta tags, sitemap, AI-bot discoverability

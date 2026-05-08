@@ -191,12 +191,7 @@ Some libraries use browser APIs that don't exist on the server. These are mocked
 - `navigator`
 - `crypto`
 
-```typescript
-// app.module.server.ts
-providers: [
-  { provide: AuthService, useClass: Auth0ServerMockService },
-]
-```
+Application services that need to touch the same APIs guard at the call site with `isPlatformBrowser` instead of being swapped out for server-only mocks. For example, `TokenStorageService` returns `null` from every getter when not in a browser, and `AuthService` checks `PLATFORM_ID` before redirecting via `window.location`. The server-only module (`src/app/app.module.server.ts`) only adds `provideServerRendering(withRoutes(serverRoutes))` — it does not override `AuthService` or any other application service.
 
 ## Troubleshooting
 
@@ -219,8 +214,8 @@ This is expected with HTTP Transfer Cache. The server fetches data and transfers
 ### SSR server crashes on startup
 
 Check for:
-- Missing browser API mocks
-- Auth0 initialization issues (should only initialize in browser)
+- Missing browser API mocks (extend `src/ssr-polyfills.ts` if a dependency reaches for a global at module-evaluation time)
+- Application code reading `window` / `document` / `localStorage` outside of an `isPlatformBrowser` guard
 - Missing dependencies in production build
 
 ## Testing SSR Output
