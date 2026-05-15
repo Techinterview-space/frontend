@@ -194,7 +194,7 @@ Sitemap: https://techinterview.space/api/sitemap.xml
 - Blocks all `/salaries/*` pages (which require authentication) except `/salaries/overview` (the public bot-friendly page). The `Allow` rule is placed before `Disallow` and uses longest-match-wins semantics
 - Explicitly allows AI bot user agents (GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Bytespider) to crawl public content
 - Points crawlers to the dynamic sitemap for discovery
-- **Content-Signal directive** (https://contentsignals.org/) declares per-purpose AI usage preferences: `search=yes` (search indexing allowed), `ai-input=yes` (live grounding for AI assistants allowed), `ai-train=no` (model training disallowed). Updates go in the `User-agent: *` group; per-bot signals can override
+- **Content-Signal directive** (https://contentsignals.org/) declares per-purpose AI usage preferences: `search=yes` (search indexing allowed), `ai-input=yes` (live grounding for AI assistants allowed), `ai-train=no` (model training disallowed). The signal is repeated under each AI-crawler stanza (`GPTBot`, `ClaudeBot`, `Google-Extended`, `PerplexityBot`, `Bytespider`) as well as the global `User-agent: *` group, because some scanners only associate Content-Signal with the stanza it appears in
 
 ### 9. Agent-Discovery Endpoints
 
@@ -205,10 +205,25 @@ A set of `.well-known` resources is served by the Express SSR layer (`src/server
 | `/.well-known/api-catalog` | RFC 9727 | Linkset pointing at backend OpenAPI spec (`https://api.techinterview.space/swagger/v1/swagger.json`), Swagger UI, and `/health` |
 | `/.well-known/agent-skills/index.json` | Agent Skills Discovery RFC v0.2.0 | One `site-overview` skill (type `discovery`) with a sha256 hash for integrity |
 | `/.well-known/agent-skills/site-overview/SKILL.md` | (skill content) | Plain markdown describing public surfaces and attribution rules |
+| `/.well-known/oauth-authorization-server` | RFC 8414 | OAuth 2.0 authorization server metadata — issuer, token endpoint (`api.techinterview.space/api/auth/m2m/token`), and the client-credentials grant. Lives on the frontend because the JWT `iss` claim is the frontend origin |
 
 All payloads are static and live in `src/server/well-known.ts`. The skill markdown is hashed at module load — editing the markdown automatically updates the published sha256.
 
+The protected-resource counterpart (RFC 9728) lives on the backend at `https://api.techinterview.space/.well-known/oauth-protected-resource` because per-spec it must be served at the resource origin (`web-api/src/Web.Api/Features/WellKnown/WellKnownController.cs`).
+
 Every SSR response also carries a `Link` header (RFC 8288) advertising the two well-known JSON endpoints, so agents that don't scrape HTML still discover them from any request.
+
+### 11. WebMCP In-Browser Tools
+
+**File:** `src/app/services/web-mcp.service.ts`
+
+Wired via `AppComponent.ngOnInit()`. Calls `navigator.modelContext.provideContext({ tools: [...] })` on app boot when running in the browser and the API is available (feature-detected). Exposes three read-only tools that return canonical URLs:
+
+- `search-salaries-overview` — optional `profession` filter; returns the public `/salaries/overview` URL
+- `search-companies` — optional `query`; returns `/companies` with the query as `?q=…`
+- `fetch-site-overview` — returns the URL of the agent-skill markdown
+
+The service is SSR-safe (`isPlatformBrowser` guard) and a no-op when `navigator.modelContext` is not present (most environments today).
 
 ### 10. Markdown Content Negotiation
 

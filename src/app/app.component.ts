@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { WebMcpService } from "@services/web-mcp.service";
 
 @Component({
   selector: "app-root",
@@ -7,10 +8,17 @@ import { Router } from "@angular/router";
   styleUrls: ["./app.component.scss"],
   standalone: false,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   get showAdminNavbar(): boolean {
     return this.router.url.startsWith("/admin");
   }
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly webMcp: WebMcpService,
+  ) {}
+
+  ngOnInit(): void {
+    this.webMcp.register();
+  }
 }

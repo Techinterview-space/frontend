@@ -103,3 +103,29 @@ export const agentSkillsIndex = {
     },
   ],
 } as const;
+
+/**
+ * OAuth 2.0 Authorization Server Metadata (RFC 8414).
+ *
+ * The JWT `iss` claim is the frontend origin (configured via `OAuth:Jwt:Issuer`
+ * on the API), so this document must be served from the frontend per RFC 8414
+ * section 3 — even though the token endpoint itself lives on the backend.
+ *
+ * The site is not a general-purpose authorization server: the user-facing flow
+ * delegates to Google/GitHub (so there is no local `authorization_endpoint`)
+ * and tokens are HMAC-signed (so there is no public `jwks_uri`). Only the
+ * client-credentials grant is exposed for trusted M2M clients.
+ *
+ * Note: the M2M token endpoint accepts a non-standard `scopes` array in the
+ * request body instead of the RFC 6749 space-delimited `scope` parameter.
+ * Agents must consult the OpenAPI spec advertised via /.well-known/api-catalog
+ * for the exact request/response shape.
+ */
+export const oauthAuthorizationServerMetadata = {
+  issuer: FRONTEND_ORIGIN,
+  token_endpoint: `${API_ORIGIN}/api/auth/m2m/token`,
+  grant_types_supported: ["client_credentials"],
+  token_endpoint_auth_methods_supported: ["client_secret_post"],
+  response_types_supported: ["token"],
+  service_documentation: `${API_ORIGIN}/swagger`,
+} as const;

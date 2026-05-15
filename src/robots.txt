@@ -13,30 +13,35 @@ Disallow: /salaries
 
 # AI crawler allowlist rules
 User-agent: GPTBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: ClaudeBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: Google-Extended
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: PerplexityBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: Bytespider
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies

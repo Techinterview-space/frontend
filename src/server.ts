@@ -12,6 +12,7 @@ import { redirectToCanonicalSitemap } from "./server/sitemap-redirect.util";
 import {
   agentSkillsIndex,
   apiCatalog,
+  oauthAuthorizationServerMetadata,
   siteOverviewSkillMarkdown,
   siteOverviewSkillPath,
 } from "./server/well-known";
@@ -113,6 +114,12 @@ app.get(siteOverviewSkillPath, (_req, res) => {
   res.setHeader("Content-Type", "text/markdown; charset=utf-8");
   res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=86400");
   res.status(200).send(siteOverviewSkillMarkdown);
+});
+
+app.get("/.well-known/oauth-authorization-server", (_req, res) => {
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=86400");
+  res.status(200).send(JSON.stringify(oauthAuthorizationServerMetadata));
 });
 
 /**
