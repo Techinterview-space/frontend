@@ -164,8 +164,9 @@ Every data table on the salary overview page uses semantic HTML:
 **File:** `src/robots.txt`
 
 ```
+# AI content usage signals (https://contentsignals.org/)
 User-agent: *
-Content-Signal: search=yes, ai-input=yes, ai-train=no
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Disallow: /admin
 Disallow: /me
 Disallow: /auth-callback
@@ -174,20 +175,26 @@ Allow: /salaries/overview
 Disallow: /salaries
 
 User-agent: GPTBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: ClaudeBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 ...
 
-Sitemap: https://techinterview.space/api/sitemap.xml
+Sitemap: https://api.techinterview.space/api/sitemap.xml
 ```
+
+**Format notes that matter for agent-discovery scanners:**
+- `Content-Signal` is the very first directive after each `User-agent:` line — no comments in between. Several scanners (including isitagentready.com's parser) tokenize a User-agent group as the contiguous lines under it, and an interleaved comment can break the association.
+- Value order is `ai-train, search, ai-input` to match the reference format used by isitagentready.com and the IETF draft examples. Order is not semantically meaningful per the spec, but parser fragility makes it cheap insurance.
 
 **Why it helps:**
 - Blocks private/authenticated pages from being crawled (`/admin`, `/me`, `/auth-callback`, `/logout-callback`)

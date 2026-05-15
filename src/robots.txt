@@ -1,47 +1,44 @@
-User-agent: *
 # AI content usage signals (https://contentsignals.org/)
-Content-Signal: search=yes, ai-input=yes, ai-train=no
-# Private / auth-related routes
+User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Disallow: /admin
 Disallow: /me
 Disallow: /auth-callback
 Disallow: /logout-callback
-
-# Keep salaries dashboard blocked; public SEO landing is /salaries/overview
 Allow: /salaries/overview
 Disallow: /salaries
 
 # AI crawler allowlist rules
 User-agent: GPTBot
-Content-Signal: search=yes, ai-input=yes, ai-train=no
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: ClaudeBot
-Content-Signal: search=yes, ai-input=yes, ai-train=no
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: Google-Extended
-Content-Signal: search=yes, ai-input=yes, ai-train=no
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: PerplexityBot
-Content-Signal: search=yes, ai-input=yes, ai-train=no
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
 Allow: /
 
 User-agent: Bytespider
-Content-Signal: search=yes, ai-input=yes, ai-train=no
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /salaries/overview
 Disallow: /salaries
 Allow: /companies
