@@ -71,9 +71,14 @@ In production the Angular app is served from this Node process. It is also an ex
   - `X-Content-Type-Options: nosniff`
   - `Content-Security-Policy` — see below.
 - **`Content-Security-Policy`** allows: self for everything; inline scripts/styles (Angular hydration), Google Tag Manager, Google Analytics, Google Fonts, jsDelivr (icons), DigitalOcean Spaces CDN, Google user-content avatars, `data:` images, and `connect-src` to the production API. When adding a third-party script/style/host, update this header and verify the prod build still loads.
+- **`Link` header (RFC 8288)** — every response advertises `</.well-known/api-catalog>; rel="api-catalog"` and `</.well-known/agent-skills/index.json>; rel="agent-skills"` so AI agents can discover the API surface and skill index without scraping HTML. If you add a new agent-relevant well-known resource, add it here too.
 - **Compression** — `compression()` middleware on text responses.
 - **Static assets** — served from `dist/interviewer/browser` with `maxAge: '1y'` and no fallback index. Hashing in production builds (`outputHashing: 'all'`) makes long caching safe.
 - **`/sitemap.xml`** — redirected to the canonical sitemap by `redirectToCanonicalSitemap` (`src/server/sitemap-redirect.util.ts`).
+- **`/.well-known/api-catalog`** — RFC 9727 linkset pointing at the backend OpenAPI spec (`/swagger/v1/swagger.json`), Swagger UI (`/`), and `/health`. Content lives in `src/server/well-known.ts`. Served as `application/linkset+json` with a 1-day s-maxage.
+- **`/.well-known/agent-skills/index.json`** — Agent Skills Discovery RFC v0.2.0 index. Currently exposes one `site-overview` skill. The skill markdown is hashed at startup; bumping the markdown will change the `sha256` automatically.
+- **`/.well-known/agent-skills/site-overview/SKILL.md`** — plain markdown describing site surfaces, served as `text/markdown`.
+- **Markdown content negotiation** — when a client sends `Accept: text/markdown`, the SSR handler converts the rendered HTML to markdown via `turndown` and returns `Content-Type: text/markdown; charset=utf-8` with an `X-Markdown-Tokens` header (byte length, used as a coarse token proxy). Browsers without an explicit markdown accept still get HTML. The handler also sets `Vary: Accept` so caches keep the two representations separate.
 - **All other routes** — `Cache-Control: public, max-age=300, s-maxage=3600` and the Angular SSR engine.
 - **Port** — `process.env.PORT || 4000`.
 

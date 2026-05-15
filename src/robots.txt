@@ -1,4 +1,6 @@
 User-agent: *
+# AI content usage signals (https://contentsignals.org/)
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 # Private / auth-related routes
 Disallow: /admin
 Disallow: /me
