@@ -33,7 +33,7 @@ src/app/
 └── shared/         Reusable components, directives, guards, interceptors, value objects
 ```
 
-Feature modules under `src/app/modules/`: `admin`, `companies`, `home`, `interviews`, `salaries`, `surveys`, `users`. Each has its own `*.module.ts` and `*-routing.module.ts` and is lazy-loaded from `src/app/app-routing.module.ts`.
+Feature modules under `src/app/modules/`: `admin`, `companies`, `home`, `interviews`, `salaries`, `surveys`, `users`, `vacancies`. Each has its own `*.module.ts` and `*-routing.module.ts` and is lazy-loaded from `src/app/app-routing.module.ts`. `vacancies` imports `MarkdownModule.forRoot({ sanitize: SecurityContext.HTML })` to render user-authored descriptions safely; its routing declares the literal `new`/`my` paths before `:id` so they are not matched as a vacancy id.
 
 For what each feature does, see [domain.md](domain.md).
 

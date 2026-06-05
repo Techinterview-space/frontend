@@ -1,0 +1,15 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// VACANCY EDIT PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.vacancy-preview {
+  border: 1px dashed var(--warm-border-primary);
+  border-radius: 10px;
+  background-color: var(--warm-bg-secondary);
+  color: var(--warm-text-primary);
+}

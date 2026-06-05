@@ -1,0 +1,139 @@
+<app-page-header>{{ isEdit ? "Редактирование вакансии" : "Новая вакансия" }}</app-page-header>
+
+<div class="container my-5" *ngIf="!loading && form; else dataLoading">
+  <div class="card">
+    <div class="card-body mobile-px-5 mobile-py-5">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="mb-3">
+          <label class="form-label">Название</label>
+          <input type="text" class="form-control" formControlName="title" />
+          <app-field-error [field]="form.get('title')"></app-field-error>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Компания (необязательно)</label>
+          <ng-select
+            [items]="companies"
+            bindLabel="name"
+            bindValue="id"
+            [loading]="companiesLoading"
+            [typeahead]="companyInput$"
+            [minTermLength]="0"
+            typeToSearchText="Введите название компании"
+            placeholder="Выберите компанию"
+            formControlName="companyId"
+          >
+          </ng-select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Отображаемое название компании (необязательно)</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="companyName"
+            maxlength="200"
+          />
+          <div class="form-text">
+            Например «NDA». Если заполнено, показывается вместо названия
+            прикреплённой компании.
+          </div>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="hideAttachedCompany"
+            formControlName="hideAttachedCompany"
+          />
+          <label class="form-check-label" for="hideAttachedCompany">
+            Скрыть прикреплённую компанию
+          </label>
+        </div>
+
+        <div
+          class="mb-3 text-danger small"
+          *ngIf="form.touched && form.errors?.['companyRequired']"
+        >
+          Укажите компанию или её отображаемое название.
+        </div>
+        <div
+          class="mb-3 text-danger small"
+          *ngIf="form.touched && form.errors?.['hideWithoutCompany']"
+        >
+          Чтобы скрыть компанию, сначала прикрепите её.
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Контакт HR (необязательно)</label>
+          <input type="text" class="form-control" formControlName="hrContact" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Статус</label>
+          <select class="form-select" formControlName="status">
+            <option *ngFor="let s of editableStatuses" [ngValue]="s">
+              {{ statusEnum.label(s) }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Описание</label>
+          <textarea
+            class="form-control"
+            rows="12"
+            formControlName="description"
+          ></textarea>
+          <div class="form-text">Поддерживается Markdown.</div>
+        </div>
+
+        <div class="mb-4" *ngIf="form.value.description">
+          <div class="small text-muted mb-1">Предпросмотр:</div>
+          <div class="vacancy-preview p-3">
+            <markdown [data]="form.value.description"></markdown>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="saving"
+            >
+              {{ isEdit ? "Сохранить" : "Создать" }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-dark ms-2"
+              (click)="cancel()"
+            >
+              Отмена
+            </button>
+          </div>
+          <button
+            *ngIf="isEdit"
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="deleteVacancy()"
+          >
+            <i class="bi bi-trash"></i> Удалить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<app-confirm-dialog
+  *ngIf="confirmDeletionMessage"
+  [message]="confirmDeletionMessage"
+></app-confirm-dialog>

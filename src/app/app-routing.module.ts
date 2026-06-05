@@ -44,6 +44,13 @@ const appRoutes: Routes = [
       ),
   },
   {
+    path: "vacancies",
+    loadChildren: () =>
+      import("./modules/vacancies/vacancies.module").then(
+        (m) => m.VacanciesModule,
+      ),
+  },
+  {
     path: "surveys",
     loadChildren: () =>
       import("./modules/surveys/surveys.module").then(

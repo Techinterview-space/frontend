@@ -1,0 +1,139 @@
+<app-page-header>Вакансии в системе</app-page-header>
+
+<div class="container my-5" *ngIf="vacancies; else dataLoading">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <div class="row">
+          <div class="col-md-6 mb-1">
+            <input
+              type="text"
+              placeholder="Поиск по названию и описанию. Минимум {{
+                MIN_SEARCH_QUERY_LENGTH
+              }} символа"
+              class="form-control"
+              [(ngModel)]="searchQuery"
+              (keyup)="onKeyupEvent($event)"
+            />
+          </div>
+          <div class="col-md-3 mb-1">
+            <select
+              class="form-select"
+              [(ngModel)]="filter"
+              (change)="onFilterChange()"
+            >
+              <option value="all">Все</option>
+              <option value="draft">Черновики</option>
+              <option value="public">Опубликованные</option>
+              <option value="closed">Закрытые</option>
+              <option value="deleted">Удаленные</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-1">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="search()"
+            >
+              Найти
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-dark ms-2"
+              (click)="clearSearch()"
+            >
+              Сбросить
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="table-responsive"
+        *ngIf="vacancies.length > 0; else nothingToShow"
+      >
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr class="small">
+              <th>Название</th>
+              <th>Компания</th>
+              <th>Статус</th>
+              <th>Автор</th>
+              <th>Создана</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of vacancies" class="small">
+              <td>
+                <a [routerLink]="['/vacancies', item.id]" class="btn-link-sm">{{
+                  trimTitle(item.title)
+                }}</a>
+              </td>
+              <td>{{ item.companyName }}</td>
+              <td>
+                <span
+                  *ngIf="item.deletedAt == null; else deletedBadge"
+                  class="badge {{ statusEnum.badgeCss(item.status) }}"
+                  >{{ statusEnum.label(item.status) }}</span
+                >
+                <ng-template #deletedBadge>
+                  <span class="badge text-bg-danger">Удалена</span>
+                </ng-template>
+              </td>
+              <td>{{ item.authorId }}</td>
+              <td>{{ item.createdAt | date: "yyyy-MM-dd HH:mm" }}</td>
+              <td>
+                <ng-container *ngIf="item.deletedAt == null; else restoreAction">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm me-1"
+                    [disabled]="item.status === VacancyStatus.Draft"
+                    (click)="moveTo(item, VacancyStatus.Draft)"
+                  >
+                    В черновик
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm"
+                    [disabled]="item.status === VacancyStatus.Closed"
+                    (click)="moveTo(item, VacancyStatus.Closed)"
+                  >
+                    Закрыть
+                  </button>
+                </ng-container>
+                <ng-template #restoreAction>
+                  <button
+                    type="button"
+                    class="btn btn-outline-success btn-sm"
+                    (click)="restore(item)"
+                  >
+                    Восстановить
+                  </button>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-5" *ngIf="source && source.results.length > 0">
+        <app-pagination-buttons
+          [source]="source"
+          [currentPage]="currentPage"
+          (pageChange)="loadData($event)"
+        ></app-pagination-buttons>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataLoading>
+  <div class="container mt-5">
+    <app-data-loader></app-data-loader>
+  </div>
+</ng-template>
+
+<ng-template #nothingToShow>
+  <div class="text-center text-muted">Вакансии не найдены.</div>
+</ng-template>

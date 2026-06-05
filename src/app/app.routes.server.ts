@@ -15,6 +15,15 @@ export const serverRoutes: ServerRoute[] = [
   { path: "companies/:id", renderMode: RenderMode.Server },
   { path: "companies/recent-reviews", renderMode: RenderMode.Server },
 
+  // Vacancies - public list & detail server-rendered for SEO.
+  // Authenticated routes (new/my/edit) are client-only and must precede
+  // the ":id" server route so they are not matched as a vacancy id.
+  { path: "vacancies", renderMode: RenderMode.Server },
+  { path: "vacancies/new", renderMode: RenderMode.Client },
+  { path: "vacancies/my", renderMode: RenderMode.Client },
+  { path: "vacancies/:id/edit", renderMode: RenderMode.Client },
+  { path: "vacancies/:id", renderMode: RenderMode.Server },
+
   { path: "about-us", renderMode: RenderMode.Server },
   { path: "about-telegram-bot", renderMode: RenderMode.Server },
   { path: "agreements/privacy-policy", renderMode: RenderMode.Server },
