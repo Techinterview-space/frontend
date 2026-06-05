@@ -22,6 +22,7 @@ Not all pages need SSR. The application uses a hybrid approach:
 |-----------|-------------|--------|
 | Home (`/`) | Server | SEO |
 | Companies (`/companies`, `/companies/:id`) | Server | Meta tags for social sharing |
+| Vacancies (`/vacancies`, `/vacancies/:id`) | Server | Meta tags for social sharing (`new`/`my`/`:id/edit` are Client and must precede `:id`) |
 | Salaries (`/salaries/**`) | Client | Complex charts, better as SPA |
 | Auth pages (`/auth-callback`, `/logout-callback`) | Client | Uses browser APIs |
 | Admin pages (`/admin/**`) | Client | Authenticated, no SEO needed |

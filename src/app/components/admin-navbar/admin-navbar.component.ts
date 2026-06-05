@@ -101,6 +101,11 @@ export class AdminNavbarComponent {
             url: "/admin/companies/reviews-to-approve",
             isExternal: false,
           },
+          {
+            title: "Вакансии",
+            url: "/admin/vacancies",
+            isExternal: false,
+          },
         ],
       },
       {

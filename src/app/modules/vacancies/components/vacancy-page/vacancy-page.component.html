@@ -1,0 +1,85 @@
+<app-page-header>Вакансия</app-page-header>
+
+<div class="container my-5" *ngIf="vacancy; else notFoundOrLoading">
+  <div class="card">
+    <div class="card-body mobile-px-5 mobile-py-5">
+      <div
+        class="d-flex justify-content-between align-items-start flex-wrap mb-3"
+      >
+        <div>
+          <h1 class="h3 mb-2">{{ vacancy.title }}</h1>
+          <div class="text-muted">
+            <span class="me-2">Компания:</span>
+            <a
+              *ngIf="vacancy.companySlug; else companyPlain"
+              [routerLink]="['/companies', vacancy.companySlug]"
+              >{{ vacancy.companyName }}</a
+            >
+            <ng-template #companyPlain>
+              <span class="text-dark">{{ vacancy.companyName }}</span>
+            </ng-template>
+          </div>
+        </div>
+        <div class="text-end">
+          <span class="badge {{ statusEnum.badgeCss(vacancy.status) }}">{{
+            statusEnum.label(vacancy.status)
+          }}</span>
+          <div class="mt-2" *ngIf="canEdit">
+            <button class="btn btn-outline-primary btn-sm" (click)="edit()">
+              <i class="bi bi-pencil"></i> Редактировать
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="alert alert-warning"
+        *ngIf="vacancy.deletedAt != null"
+      >
+        Эта вакансия удалена и недоступна публично.
+      </div>
+
+      <div class="mb-3" *ngIf="vacancy.hrContact">
+        <span class="text-muted me-2">Контакт для связи:</span>
+        <span class="text-dark">{{ vacancy.hrContact }}</span>
+      </div>
+
+      <hr />
+
+      <div class="vacancy-description" *ngIf="vacancy.description">
+        <markdown [data]="vacancy.description"></markdown>
+      </div>
+
+      <div class="small text-muted mt-4">
+        Опубликовано: {{ vacancy.createdAt | date: "yyyy-MM-dd HH:mm" }}
+        <span class="ms-3"
+          >Обновлено: {{ vacancy.updatedAt | date: "yyyy-MM-dd HH:mm" }}</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <a routerLink="/vacancies"
+      ><i class="bi bi-arrow-left"></i> Все вакансии</a
+    >
+  </div>
+</div>
+
+<ng-template #notFoundOrLoading>
+  <div class="container mt-5" *ngIf="notFound; else loading">
+    <div class="card">
+      <div class="card-body text-center text-muted">
+        Вакансия не найдена или недоступна.
+        <div class="mt-3">
+          <a routerLink="/vacancies">Перейти к списку вакансий</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <div class="container mt-5">
+      <app-data-loader></app-data-loader>
+    </div>
+  </ng-template>
+</ng-template>

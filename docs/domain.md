@@ -29,6 +29,12 @@ Module: `src/app/modules/companies/`. Top-level service: `companies.service.ts`.
 
 Public pages (`/companies`, `/companies/:id`, `/companies/recent-reviews`) are server-rendered. `MetaTagService.setCompanyMetaTags()` writes per-company `og:*`, `twitter:*`, and canonical URL on each request.
 
+### Vacancies (`/vacancies`)
+
+Job vacancies published by authenticated users. A company link is optional: the form takes a company picker (`companyId`), a free-text display name (`companyName`, e.g. "NDA"), and a "hide attached company" toggle (`hideAttachedCompany`) — at least one of company/name is required, and hiding needs a linked company. The list/detail bind `companyName` (the backend's effective name: free text, else the linked company's name, suppressed when hidden); the edit form pre-fills from the raw `companyNameText`. Statuses: Draft / Public / Closed, plus soft delete.
+
+Module: `src/app/modules/vacancies/`. Service: `vacancies.service.ts`. Resolver in `vacancies/resolvers/` fetches the vacancy before route activation for SSR meta tags. Pages: public list (`/vacancies`) and detail (`/vacancies/:id`) are server-rendered; create (`/vacancies/new`), edit (`/vacancies/:id/edit`), and "My vacancies" (`/vacancies/my`) are authenticated SPA, guarded by `AuthGuard`. Descriptions are Markdown, rendered with `ngx-markdown` under `SecurityContext.HTML` sanitization (user-generated content). The detail page re-fetches client-side with auth when the anonymous SSR resolver returns nothing, so owners/admins can view their non-public vacancies. Ownership (only the creator edits) is enforced by the backend; the UI shows the edit affordance when `currentUser.id === vacancy.authorId`.
+
 ### Interviews (`/interviews`)
 
 Interview templates (question banks) and recorded interview sessions.
@@ -59,7 +65,7 @@ Internal console for moderation, content management, and integrations.
 
 Module: `src/app/modules/admin/`, gated by `AuthGuard` + `AdminGuard` at the root router. Areas inside admin:
 
-- Users, companies, company-review approval, surveys
+- Users, companies, company-review approval, vacancy moderation (`/admin/vacancies` — read-only fields; status move to Draft/Closed and restore), surveys
 - Salary admin, "not-in-stats" salaries, sourced/imported salaries, historical-data templates
 - Interview-template moderation
 - OpenAI prompt management

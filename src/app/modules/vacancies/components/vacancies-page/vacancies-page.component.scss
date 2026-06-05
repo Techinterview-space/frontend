@@ -1,0 +1,21 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// VACANCIES PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.vacancy-list-item {
+  padding: 1rem;
+  border: 1px solid var(--warm-border-primary);
+  border-radius: 10px;
+  background-color: var(--warm-bg-primary);
+  color: var(--warm-text-primary);
+  transition: background-color 0.15s ease-in-out;
+
+  &:hover {
+    background-color: var(--warm-bg-secondary);
+  }
+}

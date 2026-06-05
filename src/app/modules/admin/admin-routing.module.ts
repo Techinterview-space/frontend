@@ -31,6 +31,7 @@ import { M2mClientCreateComponent } from "./components/m2m-clients/m2m-client-cr
 import { M2mClientDetailComponent } from "./components/m2m-clients/m2m-client-detail.component";
 import { SurveyRepliesAdminPageComponent } from "./components/surveys/survey-replies-admin-page.component";
 import { ChannelStatsAdminPageComponent } from "./components/channel-stats/channel-stats-admin-page.component";
+import { VacanciesAdminPageComponent } from "./components/vacancies/vacancies-admin-page/vacancies-admin-page.component";
 
 const routes: Routes = [
   { path: "", component: AdminStartPageComponent },
@@ -80,6 +81,8 @@ const routes: Routes = [
     component: ReviewsToApprovePageComponent,
   },
   { path: "companies/:id", component: CompanyAdminPageComponent },
+
+  { path: "vacancies", component: VacanciesAdminPageComponent },
 
   { path: "github/profiles", component: GitHubProfilesPageComponent },
   { path: "github/chats", component: GitHubChatsPageComponent },

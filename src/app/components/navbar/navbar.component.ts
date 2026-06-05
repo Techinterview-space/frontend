@@ -149,6 +149,27 @@ export class NavbarComponent implements OnInit {
         ],
       },
       {
+        title: "Вакансии",
+        show: true,
+        links: [
+          {
+            title: "Все вакансии",
+            url: "/vacancies",
+            show: true,
+          },
+          {
+            title: "Мои вакансии",
+            url: "/vacancies/my",
+            show: hasCurrentUser,
+          },
+          {
+            title: "Создать вакансию",
+            url: "/vacancies/new",
+            show: hasCurrentUser,
+          },
+        ],
+      },
+      {
         title: "Зарплаты",
         show: true,
         links: [

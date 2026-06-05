@@ -23,6 +23,7 @@ import { TelegramSubscriptionsService } from "./telegram-subscriptions.service";
 import { CompaniesService } from "./companies.service";
 import { PublicSurveysService } from "./public-surveys.service";
 import { JsonLdService } from "./json-ld.service";
+import { VacanciesService } from "./vacancies.service";
 
 export * from "./authorization.service";
 export * from "./api.service";
@@ -61,4 +62,5 @@ export const applicationServices = [
   CompaniesService,
   PublicSurveysService,
   JsonLdService,
+  VacanciesService,
 ];

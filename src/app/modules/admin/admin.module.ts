@@ -50,6 +50,7 @@ import { SurveysAdminService } from "./services/surveys-admin.service";
 import { SurveyRepliesAdminPageComponent } from "./components/surveys/survey-replies-admin-page.component";
 import { ChannelStatsAdminPageComponent } from "./components/channel-stats/channel-stats-admin-page.component";
 import { ChannelStatsAdminService } from "@services/channel-stats-admin.service";
+import { VacanciesAdminPageComponent } from "./components/vacancies/vacancies-admin-page/vacancies-admin-page.component";
 
 const adminServices = [
   AdminDashboardService,
@@ -101,6 +102,7 @@ const adminServices = [
     M2mClientDetailComponent,
     SurveyRepliesAdminPageComponent,
     ChannelStatsAdminPageComponent,
+    VacanciesAdminPageComponent,
   ],
   imports: [
     CommonModule,

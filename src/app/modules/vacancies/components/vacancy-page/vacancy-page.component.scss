@@ -1,0 +1,23 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// VACANCY PAGE COMPONENT STYLES
+// Warm & Friendly Theme
+// ═══════════════════════════════════════════════════════════════════════════════
+
+:host {
+  display: block;
+}
+
+.vacancy-description {
+  color: var(--warm-text-primary);
+  line-height: 1.6;
+
+  ::ng-deep {
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--warm-link, var(--warm-text-heading));
+    }
+  }
+}
