@@ -9,6 +9,8 @@ import express from "express";
 import { join } from "node:path";
 import TurndownService from "turndown";
 import { redirectToCanonicalSitemap } from "./server/sitemap-redirect.util";
+import { sendVisitorHit } from "./server/ga-measurement-protocol.util";
+import { classifyVisitor } from "./server/visitor-type.util";
 import {
   agentSkillsIndex,
   apiCatalog,
@@ -77,6 +79,21 @@ app.use((req, res, next) => {
       '</.well-known/agent-skills/index.json>; rel="agent-skills"; type="application/json"',
     ].join(", "),
   );
+  next();
+});
+
+/**
+ * Classify each request as human / search crawler / AI agent from its
+ * User-Agent and expose it on `res.locals` + the `X-Visitor-Type` header. The
+ * actual measurement (log + GA4 send) happens in the SSR handler so it only
+ * counts page renders, not static assets or well-known/sitemap requests. Note:
+ * behind a CDN the header may be cached, so it is a debug aid, not a per-visitor
+ * source of truth.
+ */
+app.use((req, res, next) => {
+  const visitorType = classifyVisitor(req.headers["user-agent"]);
+  res.locals["visitorType"] = visitorType;
+  res.setHeader("X-Visitor-Type", visitorType);
   next();
 });
 
@@ -150,6 +167,27 @@ app.use(async (req, res, next) => {
     if (!response) {
       next();
       return;
+    }
+
+    // Measure only here, where Angular actually rendered a page — static assets
+    // and well-known/sitemap routes terminate earlier and must not count.
+    const visitorType = res.locals["visitorType"];
+    if (visitorType && visitorType !== "human") {
+      console.log(
+        JSON.stringify({
+          event: "visitor",
+          visitorType,
+          method: req.method,
+          path: req.originalUrl,
+          userAgent: req.headers["user-agent"] ?? "",
+        }),
+      );
+      const host = req.headers["host"] ?? "techinterview.space";
+      sendVisitorHit(
+        visitorType,
+        `https://${host}${req.originalUrl}`,
+        req.headers["user-agent"],
+      );
     }
 
     const wantsMarkdown = clientAcceptsMarkdown(req.headers.accept);

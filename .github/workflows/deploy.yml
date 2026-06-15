@@ -41,11 +41,14 @@ jobs:
           target: "/home/devops/deploy"
       - name: Execute commands
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          GA_MP_API_SECRET: ${{ secrets.GA_MP_API_SECRET }}
         with:
           host: ${{ secrets.IP }}
           username: devops
           key: ${{ secrets.SSH_KEY_PRIVATE }}
           port: ${{ secrets.PORT }}
+          envs: GA_MP_API_SECRET
           script_stop: true
           script: |
             cd ~/deploy

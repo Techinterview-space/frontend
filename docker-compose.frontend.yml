@@ -14,5 +14,6 @@ services:
       - 8080:4000
     environment:
       - NODE_ENV=production
+      - GA_MP_API_SECRET=${GA_MP_API_SECRET}
     networks:
       - interviewer-network
