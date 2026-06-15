@@ -61,6 +61,15 @@ Wired via `ngx-google-analytics`. The provider is **per-environment**:
 
 The CSP in `src/server.ts` allows `googletagmanager.com`, `google-analytics.com`, and `*.analytics.google.com` for `script-src`, `connect-src`, and `img-src`.
 
+### Visitor-type analytics (server-side Measurement Protocol)
+
+To compare human vs search-crawler vs AI-agent traffic, both sides emit a custom GA4 event `visitor_hit` carrying a `visitor_type` param (event-scoped custom dimension registered in GA4):
+
+- **Humans** — `VisitorAnalyticsService` (`src/app/services/visitor-analytics.service.ts`) fires `visitor_hit` with `visitor_type='human'` on each client-side navigation, via the existing `GoogleAnalyticsService`. Active only when GA is configured (production).
+- **Bots** — client-side GA never runs for non-JS clients, so the SSR server sends `visitor_hit` for search-crawler / ai-agent requests via the **GA4 Measurement Protocol** — an outbound `POST https://www.google-analytics.com/mp/collect` from `src/server/ga-measurement-protocol.util.ts`. Fire-and-forget, env-gated on `GA_MP_API_SECRET` (no-op when unset). The bot User-Agent is deliberately NOT forwarded, otherwise GA4's automatic bot filter drops the hit. This is a server→server call, not subject to the browser CSP.
+
+Manual GA4 setup (Measurement Protocol API secret + `visitor_type` custom dimension) is documented in [`ga-ssr-visitor-type.md`](ga-ssr-visitor-type.md).
+
 ## Express SSR server (`src/server.ts`)
 
 In production the Angular app is served from this Node process. It is also an external surface in its own right, since it sets the headers that ship to browsers:
@@ -79,6 +88,7 @@ In production the Angular app is served from this Node process. It is also an ex
 - **`/.well-known/agent-skills/index.json`** — Agent Skills Discovery RFC v0.2.0 index. Currently exposes one `site-overview` skill. The skill markdown is hashed at startup; bumping the markdown will change the `sha256` automatically.
 - **`/.well-known/agent-skills/site-overview/SKILL.md`** — plain markdown describing site surfaces, served as `text/markdown`.
 - **Markdown content negotiation** — when a client sends `Accept: text/markdown`, the SSR handler converts the rendered HTML to markdown via `turndown` and returns `Content-Type: text/markdown; charset=utf-8` with an `X-Markdown-Tokens` header (byte length, used as a coarse token proxy). Browsers without an explicit markdown accept still get HTML. The handler also sets `Vary: Accept` so caches keep the two representations separate.
+- **Visitor classification** — every request is classified human / search-crawler / ai-agent (`src/server/visitor-type.util.ts`); the result is set on `res.locals.visitorType` and the `X-Visitor-Type` header, logged for non-human visitors, and (for bots) sent to GA4 via the Measurement Protocol (see Google Analytics section).
 - **All other routes** — `Cache-Control: public, max-age=300, s-maxage=3600` and the Angular SSR engine.
 - **Port** — `process.env.PORT || 4000`.
 
@@ -104,5 +114,6 @@ Several runtime dependencies inspect `window`, `document`, or `navigator` at mod
 | Maintenance mode | `environment*.ts` → `isUnderMaintenance` | Hijacks router to `/maintenance` |
 | Active environment | `angular.json` → `architect.build.configurations.<config>.fileReplacements` | Which `environment.ts` is bundled |
 | SSR port | `process.env.PORT` (default `4000`) | Listening port |
+| GA4 Measurement Protocol secret | `process.env.GA_MP_API_SECRET` (GitHub Actions secret → SSH deploy env → `docker-compose` substitution) | Enables server-side `visitor_hit` sends; unset = no-op |
 | CSP / security headers | `src/server.ts` | Allowed third-party origins |
 | Production bundle budgets | `angular.json` → `configurations.production.budgets` | Build fails if exceeded |

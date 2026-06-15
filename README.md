@@ -32,6 +32,16 @@ npm run serve:ssr:interviewer
 
 Opens at `http://localhost:4000`
 
+### Runtime environment variables (SSR server)
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `PORT` | `4000` | SSR server listening port |
+| `GA_MP_API_SECRET` | _(unset)_ | GA4 Measurement Protocol API secret. When set, the SSR server sends a `visitor_hit` event for crawler / AI-agent requests so bot traffic shows in Google Analytics. Unset = no-op (dev/local). See [`docs/ga-ssr-visitor-type.md`](docs/ga-ssr-visitor-type.md). |
+| `GA_MEASUREMENT_ID` | `G-6GS9Y7GJD3` | Optional override for the GA4 measurement ID used by the Measurement Protocol send. |
+
+In production the secret is stored as the `GA_MP_API_SECRET` GitHub Actions secret and forwarded into the deploy SSH session (`appleboy/ssh-action` `envs:` in `.github/workflows/deploy.yml`), where `docker-compose` substitutes it into `${GA_MP_API_SECRET}` in `docker-compose.frontend.yml`. It never enters the repo or image.
+
 ## Docker
 
 ```sh

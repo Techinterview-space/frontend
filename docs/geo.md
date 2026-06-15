@@ -242,6 +242,28 @@ The response also sets:
 
 Implementation: `src/server.ts` (the final `app.use(...)` SSR handler). The turndown instance strips `<script>`, `<style>`, `<noscript>`, and `<iframe>` before conversion.
 
+### 12. Visitor Classification & Bot Analytics
+
+An early Express middleware classifies every request as `human`, `search-crawler`, or `ai-agent` from its `User-Agent`. GA4 is client-side and never fires for non-JS bots, so the SSR server is the only place crawler and AI-agent traffic is countable.
+
+**Files:** `src/server/visitor-type.util.ts` (pure classifier + spec), `src/server.ts` (middleware), `src/server/ga-measurement-protocol.util.ts` (GA4 send), `src/app/services/visitor-analytics.service.ts` (human client-side event).
+
+The `ai-agent` bucket covers both model-training crawlers (`GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `Bytespider`, …) and live on-demand fetchers (`ChatGPT-User`, `OAI-SearchBot`, `Claude-User`, `Perplexity-User`) — the latter mean a real person is reading the page through an AI assistant. AI patterns are matched before search-crawler patterns so `-Extended`/`-User` variants win over their plain counterparts (e.g. `Google-Extended` → `ai-agent`, `Googlebot` → `search-crawler`).
+
+Every request is classified and gets:
+- `res.locals.visitorType` — available to downstream handlers if we ever want to serve different content per visitor type.
+- `X-Visitor-Type` response header — informational; behind a CDN it can be cached, so it is a debug aid (e.g. for `curl` against origin), not a reliable per-visitor signal.
+
+Measurement (the `console.log` line and the GA4 send) happens **only in the Angular SSR handler, for actual page renders**, not for static assets or `/.well-known` / `/sitemap.xml` requests — otherwise a JS-rendering crawler pulling sub-resources would inflate the counts. The `console.log` JSON line (`event: "visitor"`) is emitted only for non-human visitors and is greppable from PM2/stdout.
+
+**GA4 reporting.** Both sides emit a custom event `visitor_hit` with a `visitor_type` param so all three buckets land in one comparable dimension:
+- Humans → `VisitorAnalyticsService` fires it client-side per navigation (only when GA is configured, i.e. production).
+- Bots → the server sends it via the GA4 Measurement Protocol (`POST /mp/collect`), fire-and-forget, gated on `GA_MP_API_SECRET`, with the bot User-Agent omitted so GA4's bot filter does not drop it.
+
+Manual GA4 setup (Measurement Protocol API secret + the `visitor_type` event-scoped custom dimension) and where the secret lives at runtime are documented in [`ga-ssr-visitor-type.md`](ga-ssr-visitor-type.md). View the report in GA4 Explore: event `visitor_hit`, dimension `visitor_type`, metric Event count.
+
+**Best-effort only:** a `User-Agent` is trivially spoofable, so this is for measurement, never access control. Spoof-proof identification (reverse DNS, published IP ranges) is intentionally out of scope.
+
 ### 6. Dynamic Sitemap
 
 **Backend endpoint:** `GET /api/sitemap.xml`
@@ -309,7 +331,10 @@ Signals ranked by strength:
 | `src/app/app.routes.server.ts` | SSR configuration (`RenderMode.Server` for `/salaries/overview`) |
 | `src/app/modules/salaries/components/salaries-overview/` | Bot-friendly salary page (HTML tables, no auth) |
 | `src/server/well-known.ts` | Static payloads for `/.well-known/api-catalog`, agent-skills index, and `site-overview` SKILL.md |
-| `src/server.ts` | Link header, `/.well-known/*` route handlers, markdown content negotiation |
+| `src/server/visitor-type.util.ts` | `User-Agent` classifier: human / search-crawler / ai-agent |
+| `src/server/ga-measurement-protocol.util.ts` | Server-side GA4 `visitor_hit` send (Measurement Protocol) for bots |
+| `src/app/services/visitor-analytics.service.ts` | Client-side GA4 `visitor_hit` (`visitor_type='human'`) per navigation |
+| `src/server.ts` | Link header, `/.well-known/*` route handlers, visitor classification, markdown content negotiation |
 | `web-api/src/Web.Api/Features/Sitemaps/` | Dynamic sitemap endpoint (`GET /api/sitemap.xml`) |
 
 ## Verification
