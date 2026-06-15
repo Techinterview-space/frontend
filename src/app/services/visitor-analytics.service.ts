@@ -3,7 +3,7 @@ import { isPlatformBrowser } from "@angular/common";
 import { NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
 import { GoogleAnalyticsService } from "ngx-google-analytics";
-import { environment } from "src/environments/environment";
+import { environment } from "@environments/environment";
 
 /**
  * Reports a `visitor_hit` event with `visitor_type='human'` on each client-side

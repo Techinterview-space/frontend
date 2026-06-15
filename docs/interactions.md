@@ -114,6 +114,6 @@ Several runtime dependencies inspect `window`, `document`, or `navigator` at mod
 | Maintenance mode | `environment*.ts` → `isUnderMaintenance` | Hijacks router to `/maintenance` |
 | Active environment | `angular.json` → `architect.build.configurations.<config>.fileReplacements` | Which `environment.ts` is bundled |
 | SSR port | `process.env.PORT` (default `4000`) | Listening port |
-| GA4 Measurement Protocol secret | `process.env.GA_MP_API_SECRET` (runtime, via Droplet `.env`) | Enables server-side `visitor_hit` sends; unset = no-op |
+| GA4 Measurement Protocol secret | `process.env.GA_MP_API_SECRET` (GitHub Actions secret → SSH deploy env → `docker-compose` substitution) | Enables server-side `visitor_hit` sends; unset = no-op |
 | CSP / security headers | `src/server.ts` | Allowed third-party origins |
 | Production bundle budgets | `angular.json` → `configurations.production.budgets` | Build fails if exceeded |
