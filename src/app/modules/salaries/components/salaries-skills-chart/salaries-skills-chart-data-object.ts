@@ -1,80 +1,113 @@
 import { Chart } from "chart.js/auto";
-import { RandomRgbColor } from "../random-rgb-color";
-import { SalariesSkillsChartData } from "@services/user-salaries.service";
+import { ChartTheme } from "../chart-theme";
 
+export interface SkillsChartItem {
+  label: string;
+  value: number;
+  percent: number;
+  isAggregate: boolean;
+}
+
+interface SkillsBarDataset {
+  label: string;
+  data: Array<number>;
+  backgroundColor: Array<string>;
+  borderColor: Array<string>;
+  borderWidth: number;
+  borderRadius: number;
+}
+
+// Horizontal sorted bars for the skills drill-down. The "Другие"/"Точнее"
+// aggregate is rendered as a muted, clickable bar; clicking it asks the host
+// component to drill one level deeper. A mutable holder keeps the event
+// closures pointed at the current page's items across re-renders.
 export class SalariesSkillsChartDataObject extends Chart {
-  private readonly datasets: Array<ChartDatasetItem> = [];
+  private readonly state: { items: Array<SkillsChartItem> };
 
   constructor(
     canvasId: string,
-    private readonly chartData: SalariesSkillsChartData,
+    items: Array<SkillsChartItem>,
+    onAggregateClick: () => void,
   ) {
-    const datasets: Array<ChartDatasetItem> = [];
-    datasets.push(new ChartDatasetItem(chartData, false));
+    ChartTheme.applyDefaults();
+    const state: { items: Array<SkillsChartItem> } = { items };
 
     super(canvasId, {
-      type: "polarArea",
-      data: {
-        labels: chartData.items.map((x) => x.skill.title),
-        datasets: datasets,
-      },
+      type: "bar",
+      data: SalariesSkillsChartDataObject.buildData(items),
       options: {
+        indexAxis: "y",
         responsive: true,
         maintainAspectRatio: false,
-        scales: {
-          r: {
-            pointLabels: {
-              display: true,
-              centerPointLabels: true,
-              font: {
-                size: 18,
+        onClick: (_event, elements) => {
+          const el = elements[0];
+          if (el != null && state.items[el.index]?.isAggregate) {
+            onAggregateClick();
+          }
+        },
+        onHover: (event, elements) => {
+          const target = event.native?.target as HTMLElement | null;
+          if (target == null) {
+            return;
+          }
+          const el = elements[0];
+          const overAggregate =
+            el != null && state.items[el.index]?.isAggregate === true;
+          target.style.cursor = overAggregate ? "pointer" : "default";
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const item = state.items[ctx.dataIndex];
+                const percent = item != null ? item.percent : 0;
+                return ` ${ctx.parsed.x ?? 0} анкет (${percent.toFixed(1)}%)`;
               },
             },
           },
         },
-        plugins: {
-          legend: {
-            title: {
-              display: false,
-            },
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: { precision: 0 },
+          },
+          y: {
+            grid: { display: false },
           },
         },
       },
     });
 
-    this.datasets = datasets;
+    this.state = state;
   }
 
-  toggleNoDataArea(show: boolean): void {
-    this.data.labels = this.chartData.items.map((x) => x.skill.title);
-    if (show) {
-      this.data.labels.push("Не указаны данные");
-    }
-
-    this.data.datasets = [new ChartDatasetItem(this.chartData, show)];
-
+  setItems(items: Array<SkillsChartItem>): void {
+    this.state.items = items;
+    const built = SalariesSkillsChartDataObject.buildData(items);
+    this.data.labels = built.labels;
+    this.data.datasets = built.datasets;
     this.update();
   }
-}
 
-class ChartDatasetItem {
-  readonly label: string;
-  readonly data: Array<number>;
-  readonly backgroundColor: Array<string>;
-
-  constructor(chartData: SalariesSkillsChartData, includeNoData: boolean) {
-    this.label = "Указанные ЯП/фреймворки";
-    this.data = [];
-    this.backgroundColor = [];
-
-    chartData.items.forEach((item) => {
-      this.data.push(item.count);
-      this.backgroundColor.push(new RandomRgbColor().toString(0.4));
-    });
-
-    if (includeNoData && chartData.noDataCount > 0) {
-      this.data.push(chartData.noDataCount);
-      this.backgroundColor.push(new RandomRgbColor().toString(0.4));
-    }
+  private static buildData(items: Array<SkillsChartItem>): {
+    labels: Array<string>;
+    datasets: Array<SkillsBarDataset>;
+  } {
+    const accent = ChartTheme.primary();
+    const muted = ChartTheme.gradeUnknown();
+    return {
+      labels: items.map((x) => x.label),
+      datasets: [
+        {
+          label: "Кол-во анкет",
+          data: items.map((x) => x.value),
+          backgroundColor: items.map((x) => (x.isAggregate ? muted : accent)),
+          borderColor: items.map((x) => (x.isAggregate ? muted : accent)),
+          borderWidth: 1,
+          borderRadius: 5,
+        },
+      ],
+    };
   }
 }

@@ -1,20 +1,151 @@
 <div class="">
   <div class="h4 mb-3">Специализация</div>
 
-  <div class="fst-italic">
+  <div class="fst-italic mb-3">
     График показывает распределение респондентов по специальностям в процентном
     соотношении к общему числу
   </div>
-  <div class="row">
-    <div class="col-md-6 mb-3" *ngIf="canvasIdLocal">
-      <div id="canvas-container">
-        <canvas [attr.id]="canvasIdLocal">{{ chartDataLocal }}</canvas>
-      </div>
+
+  <div class="mb-4" *ngIf="local">
+    <div class="drill-nav mb-2">
+      <button
+        *ngIf="local.canGoBack"
+        type="button"
+        class="btn-link-sm"
+        (click)="local.goBack()"
+      >
+        ← Назад
+      </button>
+      <span class="text-muted small" *ngIf="local.rangeLabel">{{
+        local.rangeLabel
+      }}</span>
     </div>
 
-    <div class="col-md-6 mb-3" *ngIf="canvasIdRemote">
-      <div id="canvas-container">
-        <canvas [attr.id]="canvasIdRemote">{{ chartDataRemote }}</canvas>
+    <div class="canvas-container">
+      <canvas [attr.id]="canvasIdLocal"></canvas>
+    </div>
+
+    <div class="text-muted small fst-italic mt-1" *ngIf="local.canDrill">
+      Нажмите на столбец «{{ local.aggregateLabel }}», чтобы раскрыть остальные
+    </div>
+
+    <div class="mt-3">
+      <button
+        type="button"
+        class="table-toggle"
+        (click)="local.showTable = !local.showTable"
+        [attr.aria-expanded]="local.showTable"
+      >
+        <span class="table-toggle__text">
+          <span class="table-toggle__title">{{
+            local.showTable
+              ? "Скрыть таблицу данных"
+              : "Показать таблицу данных"
+          }}</span>
+          <span class="table-toggle__subtitle" *ngIf="!local.showTable">
+            Хотите увидеть исходные данные для графика выше? Раскройте таблицу,
+            нажав тут
+          </span>
+        </span>
+        <span class="table-toggle__chevron" aria-hidden="true">{{
+          local.showTable ? "▾" : "▸"
+        }}</span>
+      </button>
+
+      <div class="table-responsive mt-2" *ngIf="local.showTable">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Специализация</th>
+              <th scope="col">Кол-во анкет</th>
+              <th scope="col">Доля</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of local.tableRows" class="small">
+              <td>{{ item.title }}</td>
+              <td>{{ item.value }}</td>
+              <td>{{ item.percent | number: "1.3" }}%</td>
+            </tr>
+            <tr class="small">
+              <td class="text-muted">Всего анкет</td>
+              <td>{{ local.totalCount }}</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-4" *ngIf="remote">
+    <div class="drill-nav mb-2">
+      <button
+        *ngIf="remote.canGoBack"
+        type="button"
+        class="btn-link-sm"
+        (click)="remote.goBack()"
+      >
+        ← Назад
+      </button>
+      <span class="text-muted small" *ngIf="remote.rangeLabel">{{
+        remote.rangeLabel
+      }}</span>
+    </div>
+
+    <div class="canvas-container">
+      <canvas [attr.id]="canvasIdRemote"></canvas>
+    </div>
+
+    <div class="text-muted small fst-italic mt-1" *ngIf="remote.canDrill">
+      Нажмите на столбец «{{ remote.aggregateLabel }}», чтобы раскрыть остальные
+    </div>
+
+    <div class="mt-3">
+      <button
+        type="button"
+        class="table-toggle"
+        (click)="remote.showTable = !remote.showTable"
+        [attr.aria-expanded]="remote.showTable"
+      >
+        <span class="table-toggle__text">
+          <span class="table-toggle__title">{{
+            remote.showTable
+              ? "Скрыть таблицу данных"
+              : "Показать таблицу данных"
+          }}</span>
+          <span class="table-toggle__subtitle" *ngIf="!remote.showTable">
+            Хотите увидеть исходные данные для графика выше? Раскройте таблицу,
+            нажав тут
+          </span>
+        </span>
+        <span class="table-toggle__chevron" aria-hidden="true">{{
+          remote.showTable ? "▾" : "▸"
+        }}</span>
+      </button>
+
+      <div class="table-responsive mt-2" *ngIf="remote.showTable">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Специализация</th>
+              <th scope="col">Кол-во анкет</th>
+              <th scope="col">Доля</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of remote.tableRows" class="small">
+              <td>{{ item.title }}</td>
+              <td>{{ item.value }}</td>
+              <td>{{ item.percent | number: "1.3" }}%</td>
+            </tr>
+            <tr class="small">
+              <td class="text-muted">Всего анкет</td>
+              <td>{{ remote.totalCount }}</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

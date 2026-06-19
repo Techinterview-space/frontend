@@ -1,6 +1,6 @@
 import { SalariesByMoneyBarChart } from "@services/user-salaries.service";
 import { Chart, ChartType, PointStyle } from "chart.js/auto";
-import { RandomRgbColor } from "../random-rgb-color";
+import { ChartTheme } from "../chart-theme";
 
 interface ChartDatasetType {
   profession: number | null;
@@ -17,7 +17,8 @@ export class SalariesChartJsObject extends Chart {
   private readonly datasets: Array<ChartDatasetType> = [];
 
   constructor(canvasId: string, chartData: SalariesByMoneyBarChart) {
-    const randomColor = new RandomRgbColor();
+    ChartTheme.applyDefaults();
+    const accent = ChartTheme.primary();
     const datasets: Array<ChartDatasetType> = [];
 
     datasets.push({
@@ -26,8 +27,8 @@ export class SalariesChartJsObject extends Chart {
       label: "Все",
       data: chartData.items,
       borderWidth: 1,
-      borderColor: randomColor.toString(1),
-      backgroundColor: randomColor.toString(0.5),
+      borderColor: accent,
+      backgroundColor: accent,
       pointStyle: false as PointStyle,
     });
 

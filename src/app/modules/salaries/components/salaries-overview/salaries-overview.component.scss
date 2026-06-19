@@ -36,8 +36,9 @@
   thead th {
     background-color: var(--warm-bg-accent);
     color: var(--warm-text-heading);
-    font-family: var(--warm-font-heading);
-    font-weight: 600;
+    // Table headers are UI labels, not titles — sans, like the global .table th
+    font-family: var(--warm-font-body);
+    font-weight: 700;
     border-bottom: 2px solid var(--warm-border-strong);
   }
 

@@ -35,13 +35,14 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
+  // Warm-tinted dot grid kept faint so it reads as paper texture, not pattern
   background-image: radial-gradient(
     circle,
-    var(--warm-text-primary) 1px,
+    var(--warm-border-strong) 1px,
     transparent 1px
   );
-  background-size: 20px 20px;
-  opacity: 0.15;
+  background-size: 24px 24px;
+  opacity: 0.5;
   pointer-events: none;
   z-index: -1;
 }
@@ -63,6 +64,8 @@ h6,
   color: var(--warm-text-heading);
   font-weight: 600;
   line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
   margin-bottom: 0.5em;
 }
 
@@ -78,7 +81,9 @@ h6,
 .display-6 {
   font-family: "Lora", Georgia, serif;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-wrap: balance;
   color: var(--warm-text-heading);
 }
 
@@ -86,6 +91,7 @@ h6,
 p {
   color: var(--warm-text-primary);
   margin-bottom: 1rem;
+  text-wrap: pretty;
 }
 
 /* Links */
@@ -97,6 +103,36 @@ a {
   &:hover {
     color: var(--warm-accent-primary-hover);
     text-decoration: underline;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────────
+   MOTION PREFERENCES
+   Honor the OS reduced-motion setting: collapse animation and lift/scale effects
+   to near-instant while leaving theme color crossfades intact.
+   ───────────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hover-lift:hover,
+  .increasable-on-hover:hover,
+  .card:hover,
+  .stats-card:hover,
+  .btn-primary:hover:not(:disabled),
+  .btn-purple:hover:not(:disabled) {
+    transform: none !important;
   }
 }
 
@@ -432,14 +468,16 @@ ul.no-bullets {
 .card {
   background-color: var(--warm-card-bg);
   border: 1px solid var(--warm-card-border);
-  border-radius: $radius-lg;
+  border-radius: $radius-card;
   box-shadow: $shadow-sm;
   color: var(--warm-text-primary);
   transition:
     box-shadow $transition-normal,
+    border-color $transition-normal,
     transform $transition-normal;
 
   &:hover {
+    border-color: var(--warm-border-color);
     box-shadow: $shadow-md;
   }
 }
@@ -460,6 +498,8 @@ ul.no-bullets {
 
 .table {
   color: var(--warm-text-primary);
+  // Tabular figures keep numeric columns vertically aligned
+  font-variant-numeric: tabular-nums;
 
   > :not(caption) > * > * {
     background-color: transparent;
@@ -475,9 +515,11 @@ ul.no-bullets {
     background-color: var(--warm-table-hover);
   }
 
+  // Column headers read as UI labels (sans), not serif titles
   th {
-    font-family: $font-heading;
-    font-weight: 600;
+    font-family: $font-body;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     color: var(--warm-text-heading);
   }
 }
@@ -701,6 +743,14 @@ ul.no-bullets {
 
 .text-accent-secondary {
   color: var(--warm-accent-secondary);
+}
+
+/* Numeric data: sans with aligned, tabular figures (salaries, counts, ratings) */
+.font-numeric {
+  font-family: $font-body;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.01em;
 }
 
 /* Bootstrap text utility overrides for dark mode */
@@ -1000,9 +1050,12 @@ hr {
 }
 
 .stats-value {
-  font-family: $font-heading;
+  // Data reads as a sans figure, not a serif headline; tabular for clean alignment
+  font-family: $font-body;
+  font-variant-numeric: tabular-nums;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--warm-accent-primary);
   line-height: 1.2;
 }

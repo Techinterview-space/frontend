@@ -11,7 +11,11 @@ interface ProgressBarData {
   width: number;
   maxValue: string;
   label: string;
+  showLabel: boolean;
 }
+
+// Narrower than this and the in-bar percentage clips, so it moves to the tooltip.
+const MIN_LABEL_WIDTH_PERCENT = 7;
 
 @Component({
   selector: "app-people-by-grades-chart",
@@ -28,6 +32,8 @@ export class PeopleByGradesChartComponent implements OnInit {
   barsForLocal: Array<ProgressBarData> = [];
   barsForRemote: Array<ProgressBarData> = [];
 
+  legendItems: Array<{ label: string; bg: string; on: string }> = [];
+
   totalCountLocal: number = 0;
   totalCountRemote: number = 0;
 
@@ -37,6 +43,14 @@ export class PeopleByGradesChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCharts();
+    this.legendItems = this.grades.map((grade) => {
+      const ramp = this.gradeRampColors(grade);
+      return {
+        label: DeveloperGradeEnum.getColorData(grade).label,
+        bg: ramp.bg,
+        on: ramp.on,
+      };
+    });
   }
 
   toggleCountAndPercent(): void {
@@ -80,7 +94,7 @@ export class PeopleByGradesChartComponent implements OnInit {
       )
       .sort((a, b) => a.grade - b.grade)
       .map((item, _index) => {
-        const color = DeveloperGradeEnum.getColorData(item.grade);
+        const ramp = this.gradeRampColors(item.grade);
         const width = (item.count / totalCount) * 100;
         const value = showPercents
           ? formatNumber(width, "en-US", "1.0-2") + "%"
@@ -91,12 +105,13 @@ export class PeopleByGradesChartComponent implements OnInit {
           : formatNumber(totalCount, "en-US", "1.0-0");
 
         return {
-          color: color.cssBackground,
-          textColor: color.cssText,
+          color: ramp.bg,
+          textColor: ramp.on,
           value: value,
           maxValue: maxValue,
           width: width,
           label: DeveloperGrade[item.grade],
+          showLabel: width >= MIN_LABEL_WIDTH_PERCENT,
         };
       });
 
@@ -105,7 +120,7 @@ export class PeopleByGradesChartComponent implements OnInit {
     );
 
     if (noGradeData != null) {
-      const color = DeveloperGradeEnum.getColorData(DeveloperGrade.Unknown);
+      const ramp = this.gradeRampColors(DeveloperGrade.Unknown);
       const width = (noGradeData.count / totalCount) * 100;
       const value = showPercents
         ? formatNumber(width, "en-US", "1.0-2") + "%"
@@ -116,15 +131,38 @@ export class PeopleByGradesChartComponent implements OnInit {
         : formatNumber(totalCount, "en-US", "1.0-0");
 
       result.push({
-        color: color.cssBackground,
-        textColor: color.cssText,
+        color: ramp.bg,
+        textColor: ramp.on,
         value: value,
         maxValue: maxValue,
         width: width,
         label: "Грейд не указан",
+        showLabel: width >= MIN_LABEL_WIDTH_PERCENT,
       });
     }
 
     return result;
+  }
+
+  // Grades are an ordered scale, so they map onto the sequential warm ramp
+  // (--warm-grade-*) rather than the categorical grade-badge colors used
+  // elsewhere. CSS variables keep the bars light/dark-mode aware.
+  private gradeRampColors(grade: DeveloperGrade): { bg: string; on: string } {
+    const band = this.gradeBand(grade);
+    return {
+      bg: `var(--warm-grade-${band})`,
+      on: `var(--warm-grade-${band}-on)`,
+    };
+  }
+
+  private gradeBand(
+    grade: DeveloperGrade,
+  ): "trainee" | "junior" | "middle" | "senior" | "lead" | "unknown" {
+    if (grade === DeveloperGrade.Unknown) return "unknown";
+    if (grade === DeveloperGrade.Trainee) return "trainee";
+    if (grade <= DeveloperGrade.JuniorStrong) return "junior";
+    if (grade <= DeveloperGrade.MiddleStrong) return "middle";
+    if (grade <= DeveloperGrade.SeniorStrong) return "senior";
+    return "lead";
   }
 }

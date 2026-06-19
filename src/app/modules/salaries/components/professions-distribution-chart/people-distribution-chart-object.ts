@@ -1,79 +1,118 @@
 import { Chart } from "chart.js/auto";
-import { RandomRgbColor } from "../random-rgb-color";
-import { ProfessionDistributionData } from "@services/user-salaries.service";
+import { ChartTheme } from "../chart-theme";
 
-interface ChartDatasetType {
+// Bars carry a percentage value. "Другие"/"Точнее" are aggregates (muted);
+// only a drillable aggregate is clickable — the backend's pre-aggregated
+// residual renders as a muted but non-clickable terminal bucket.
+export interface ProfessionsChartItem {
+  label: string;
+  value: number;
+  isAggregate: boolean;
+  drillable: boolean;
+}
+
+interface ProfessionsBarDataset {
   label: string;
   data: Array<number>;
   backgroundColor: Array<string>;
+  borderColor: Array<string>;
+  borderWidth: number;
+  borderRadius: number;
 }
 
+// Horizontal sorted bars for one professions chart. Clicking a drillable
+// aggregate asks the host to page one level deeper. A mutable holder keeps the
+// event closures pointed at the current page's items across re-renders.
 export class PeopleDistributionChartObject extends Chart {
-  private readonly datasets: Array<ChartDatasetType> = [];
+  private readonly state: { items: Array<ProfessionsChartItem> };
 
   constructor(
     canvasId: string,
-    data: ProfessionDistributionData,
-    otherLimit: number,
+    items: Array<ProfessionsChartItem>,
     title: string,
+    onDrillClick: () => void,
   ) {
-    const datasets: Array<ChartDatasetType> = [];
-
-    // Filter professions that meet the minimum count threshold
-    const professionsToInclude = data.items.filter((x) => x.count > otherLimit);
-
-    if (data.totalCount > 0) {
-      const dataForDataset = professionsToInclude.map((x) => {
-        return {
-          value: x.percentage,
-          color: new RandomRgbColor().toString(0.8),
-        };
-      });
-
-      // Add "Other" category if there are professions below the threshold
-      if (data.otherCount > 0) {
-        dataForDataset.push({
-          value: data.otherPercentage,
-          color: new RandomRgbColor().toString(0.8),
-        });
-      }
-
-      datasets.push({
-        label: "Процентное соотношение",
-        data: dataForDataset.map((x) => x.value),
-        backgroundColor: dataForDataset.map((x) => x.color),
-      });
-    }
-
-    const labels = professionsToInclude.map((x) => x.profession.title);
-    if (data.otherCount > 0) {
-      labels.push("Другие");
-    }
+    ChartTheme.applyDefaults();
+    const state: { items: Array<ProfessionsChartItem> } = { items };
 
     super(canvasId, {
-      type: "doughnut",
-      data: {
-        labels: labels,
-        datasets: datasets,
-      },
+      type: "bar",
+      data: PeopleDistributionChartObject.buildData(items),
       options: {
+        indexAxis: "y",
         responsive: true,
+        maintainAspectRatio: false,
+        onClick: (_event, elements) => {
+          const el = elements[0];
+          if (el != null && state.items[el.index]?.drillable) {
+            onDrillClick();
+          }
+        },
+        onHover: (event, elements) => {
+          const target = event.native?.target as HTMLElement | null;
+          if (target == null) {
+            return;
+          }
+          const el = elements[0];
+          const overDrillable =
+            el != null && state.items[el.index]?.drillable === true;
+          target.style.cursor = overDrillable ? "pointer" : "default";
+        },
         plugins: {
-          legend: {
-            position: "left",
-            title: {
-              text: title,
-              font: {
-                size: 16,
-              },
-              position: "start",
-              display: true,
+          legend: { display: false },
+          title: {
+            text: title,
+            font: { size: 16, weight: "bold" },
+            align: "start",
+            display: true,
+          },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => ` ${(ctx.parsed.x ?? 0).toFixed(1)}%`,
             },
+          },
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: { callback: (v) => `${v}%` },
+          },
+          y: {
+            grid: { display: false },
           },
         },
       },
     });
 
-    this.datasets = datasets;
+    this.state = state;
+  }
+
+  setItems(items: Array<ProfessionsChartItem>): void {
+    this.state.items = items;
+    const built = PeopleDistributionChartObject.buildData(items);
+    this.data.labels = built.labels;
+    this.data.datasets = built.datasets;
+    this.update();
+  }
+
+  private static buildData(items: Array<ProfessionsChartItem>): {
+    labels: Array<string>;
+    datasets: Array<ProfessionsBarDataset>;
+  } {
+    const accent = ChartTheme.primary();
+    const muted = ChartTheme.gradeUnknown();
+    return {
+      labels: items.map((x) => x.label),
+      datasets: [
+        {
+          label: "Доля, %",
+          data: items.map((x) => x.value),
+          backgroundColor: items.map((x) => (x.isAggregate ? muted : accent)),
+          borderColor: items.map((x) => (x.isAggregate ? muted : accent)),
+          borderWidth: 1,
+          borderRadius: 5,
+        },
+      ],
+    };
   }
 }

@@ -25,13 +25,13 @@ A comprehensive design system for techinterview.space focused on readability, co
 
 ### Core Principles
 
-| Principle | Description |
-|-----------|-------------|
-| **Eye Comfort** | Warm paper tones and soft colors reduce strain for extended reading |
-| **Clear Hierarchy** | Consistent typography and spacing for easy scanning |
-| **Subtle Depth** | Layered warm-tinted shadows create visual layers without harshness |
-| **Warmth** | Terracotta and sage accents create an inviting, approachable feel |
-| **Consistency** | Unified design language across all pages and components |
+| Principle           | Description                                                         |
+| ------------------- | ------------------------------------------------------------------- |
+| **Eye Comfort**     | Warm paper tones and soft colors reduce strain for extended reading |
+| **Clear Hierarchy** | Consistent typography and spacing for easy scanning                 |
+| **Subtle Depth**    | Layered warm-tinted shadows create visual layers without harshness  |
+| **Warmth**          | Terracotta and sage accents create an inviting, approachable feel   |
+| **Consistency**     | Unified design language across all pages and components             |
 
 ### Target Users
 
@@ -53,76 +53,76 @@ Users who spend extended time reading company reviews, analyzing salary charts, 
 
 Warm paper tones that reduce eye strain:
 
-| Variable | Light Mode | Dark Mode | Usage |
-|----------|------------|-----------|-------|
-| `--warm-bg-primary` | `#fffbf7` | `#1a1816` | Main page background |
-| `--warm-bg-secondary` | `#fef7f0` | `#231f1d` | Alternating sections, card headers/footers |
-| `--warm-bg-tertiary` | `#fff9f2` | `#2a2523` | Subtle variations |
-| `--warm-bg-accent` | `#fdf4e8` | `#332d2a` | Highlighted areas, hover states |
-| `--warm-bg-elevated` | `#ffffff` | `#3a3331` | Cards, modals, elevated surfaces |
-| `--warm-bg-inverse` | `#3d3d3d` | `#f5f2f0` | Inverted backgrounds |
+| Variable              | Light Mode | Dark Mode | Usage                                      |
+| --------------------- | ---------- | --------- | ------------------------------------------ |
+| `--warm-bg-primary`   | `#fffbf7`  | `#1a1816` | Main page background                       |
+| `--warm-bg-secondary` | `#fef7f0`  | `#231f1d` | Alternating sections, card headers/footers |
+| `--warm-bg-tertiary`  | `#fff9f2`  | `#2a2523` | Subtle variations                          |
+| `--warm-bg-accent`    | `#fdf4e8`  | `#332d2a` | Highlighted areas, hover states            |
+| `--warm-bg-elevated`  | `#ffffff`  | `#3a3331` | Cards, modals, elevated surfaces           |
+| `--warm-bg-inverse`   | `#3d3d3d`  | `#f5f2f0` | Inverted backgrounds                       |
 
 ### 2.2 Text Colors
 
 Warm grays for reduced eye strain (not pure black):
 
-| Variable | Light Mode | Dark Mode | Usage |
-|----------|------------|-----------|-------|
-| `--warm-text-primary` | `#3d3d3d` | `#e8e4e1` | Body text |
-| `--warm-text-secondary` | `#5c5c5c` | `#b8b2ad` | Secondary text, descriptions |
-| `--warm-text-muted` | `#7a7a7a` | `#8a8480` | Captions, hints, placeholders |
-| `--warm-text-heading` | `#2d2d2d` | `#f5f2f0` | Headings |
-| `--warm-text-inverse` | `#f5f5f5` | `#1a1816` | Text on dark backgrounds |
+| Variable                | Light Mode | Dark Mode | Usage                         |
+| ----------------------- | ---------- | --------- | ----------------------------- |
+| `--warm-text-primary`   | `#3d3d3d`  | `#e8e4e1` | Body text                     |
+| `--warm-text-secondary` | `#5c5c5c`  | `#b8b2ad` | Secondary text, descriptions  |
+| `--warm-text-muted`     | `#7a7a7a`  | `#8a8480` | Captions, hints, placeholders |
+| `--warm-text-heading`   | `#2d2d2d`  | `#f5f2f0` | Headings                      |
+| `--warm-text-inverse`   | `#f5f5f5`  | `#1a1816` | Text on dark backgrounds      |
 
 ### 2.3 Accent Colors
 
 The signature warm palette:
 
-| Variable | Light Mode | Dark Mode | Usage |
-|----------|------------|-----------|-------|
-| `--warm-accent-primary` | `#e07a5f` | `#e8937b` | **Terracotta** - Primary buttons, links, focus states |
-| `--warm-accent-primary-hover` | `#c96a52` | `#f0a892` | Hover state for primary |
-| `--warm-accent-secondary` | `#81b29a` | `#95c4ad` | **Sage** - Success, secondary actions |
-| `--warm-accent-secondary-hover` | `#6fa089` | `#a8d4be` | Hover state for secondary |
-| `--warm-accent-tertiary` | `#f2cc8f` | `#f5d9a8` | **Gold** - Highlights, warnings |
-| `--warm-accent-soft` | `#f4a261` | `#f7b57d` | **Orange** - CTAs, attention elements |
+| Variable                        | Light Mode | Dark Mode | Usage                                                 |
+| ------------------------------- | ---------- | --------- | ----------------------------------------------------- |
+| `--warm-accent-primary`         | `#e07a5f`  | `#e8937b` | **Terracotta** - Primary buttons, links, focus states |
+| `--warm-accent-primary-hover`   | `#c96a52`  | `#f0a892` | Hover state for primary                               |
+| `--warm-accent-secondary`       | `#81b29a`  | `#95c4ad` | **Sage** - Success, secondary actions                 |
+| `--warm-accent-secondary-hover` | `#6fa089`  | `#a8d4be` | Hover state for secondary                             |
+| `--warm-accent-tertiary`        | `#f2cc8f`  | `#f5d9a8` | **Gold** - Highlights, warnings                       |
+| `--warm-accent-soft`            | `#f4a261`  | `#f7b57d` | **Orange** - CTAs, attention elements                 |
 
 ### 2.4 Semantic Colors
 
-| Variable | Light Mode | Dark Mode | Usage |
-|----------|------------|-----------|-------|
-| `--warm-danger` | `#d95550` | `#e57373` | Errors, destructive actions |
-| `--warm-danger-bg` | `#fef2f2` | `rgba(229,115,115,0.15)` | Danger background |
-| `--warm-warning` | `#e9a820` | `#f5bc4c` | Warnings |
-| `--warm-warning-bg` | `#fffbeb` | `rgba(245,188,76,0.15)` | Warning background |
-| `--warm-success` | `#81b29a` | `#95c4ad` | Success states |
-| `--warm-success-bg` | `#f0fdf4` | `rgba(149,196,173,0.15)` | Success background |
-| `--warm-info` | `#6fa8c7` | `#8fc1db` | Information |
-| `--warm-info-bg` | `#eff6ff` | `rgba(143,193,219,0.15)` | Info background |
+| Variable            | Light Mode | Dark Mode                | Usage                       |
+| ------------------- | ---------- | ------------------------ | --------------------------- |
+| `--warm-danger`     | `#d95550`  | `#e57373`                | Errors, destructive actions |
+| `--warm-danger-bg`  | `#fef2f2`  | `rgba(229,115,115,0.15)` | Danger background           |
+| `--warm-warning`    | `#e9a820`  | `#f5bc4c`                | Warnings                    |
+| `--warm-warning-bg` | `#fffbeb`  | `rgba(245,188,76,0.15)`  | Warning background          |
+| `--warm-success`    | `#81b29a`  | `#95c4ad`                | Success states              |
+| `--warm-success-bg` | `#f0fdf4`  | `rgba(149,196,173,0.15)` | Success background          |
+| `--warm-info`       | `#6fa8c7`  | `#8fc1db`                | Information                 |
+| `--warm-info-bg`    | `#eff6ff`  | `rgba(143,193,219,0.15)` | Info background             |
 
 ### 2.5 Border & Divider Colors
 
-| Variable | Light Mode | Dark Mode | Usage |
-|----------|------------|-----------|-------|
-| `--warm-border-color` | `rgba(61,45,35,0.12)` | `rgba(255,251,247,0.08)` | Subtle borders |
-| `--warm-border-strong` | `rgba(61,45,35,0.20)` | `rgba(255,251,247,0.15)` | Prominent borders |
-| `--warm-border-focus` | `rgba(224,122,95,0.5)` | `rgba(232,147,123,0.5)` | Focus rings |
-| `--warm-divider` | `rgba(61,45,35,0.08)` | `rgba(255,251,247,0.06)` | Section dividers |
+| Variable               | Light Mode             | Dark Mode                | Usage             |
+| ---------------------- | ---------------------- | ------------------------ | ----------------- |
+| `--warm-border-color`  | `rgba(61,45,35,0.12)`  | `rgba(255,251,247,0.08)` | Subtle borders    |
+| `--warm-border-strong` | `rgba(61,45,35,0.20)`  | `rgba(255,251,247,0.15)` | Prominent borders |
+| `--warm-border-focus`  | `rgba(224,122,95,0.5)` | `rgba(232,147,123,0.5)`  | Focus rings       |
+| `--warm-divider`       | `rgba(61,45,35,0.08)`  | `rgba(255,251,247,0.06)` | Section dividers  |
 
 ### 2.6 Chart Colors
 
 Consistent palette for data visualization:
 
-| Variable | Light Mode | Dark Mode | Usage |
-|----------|------------|-----------|-------|
-| `--warm-chart-1` | `#e07a5f` | `#e8937b` | Primary chart color |
-| `--warm-chart-2` | `#81b29a` | `#95c4ad` | Secondary chart color |
-| `--warm-chart-3` | `#f2cc8f` | `#f5d9a8` | Tertiary chart color |
-| `--warm-chart-4` | `#f4a261` | `#f7b57d` | Quaternary chart color |
-| `--warm-chart-5` | `#6fa8c7` | `#8fc1db` | Quinary chart color |
-| `--warm-chart-6` | `#c4a1d4` | `#d4b8e0` | Senary chart color |
-| `--warm-chart-grid` | `rgba(61,45,35,0.08)` | `rgba(255,251,247,0.06)` | Grid lines |
-| `--warm-chart-text` | `#5c5c5c` | `#b8b2ad` | Axis labels |
+| Variable            | Light Mode            | Dark Mode                | Usage                  |
+| ------------------- | --------------------- | ------------------------ | ---------------------- |
+| `--warm-chart-1`    | `#e07a5f`             | `#e8937b`                | Primary chart color    |
+| `--warm-chart-2`    | `#81b29a`             | `#95c4ad`                | Secondary chart color  |
+| `--warm-chart-3`    | `#f2cc8f`             | `#f5d9a8`                | Tertiary chart color   |
+| `--warm-chart-4`    | `#f4a261`             | `#f7b57d`                | Quaternary chart color |
+| `--warm-chart-5`    | `#6fa8c7`             | `#8fc1db`                | Quinary chart color    |
+| `--warm-chart-6`    | `#c4a1d4`             | `#d4b8e0`                | Senary chart color     |
+| `--warm-chart-grid` | `rgba(61,45,35,0.08)` | `rgba(255,251,247,0.06)` | Grid lines             |
+| `--warm-chart-text` | `#5c5c5c`             | `#b8b2ad`                | Axis labels            |
 
 ---
 
@@ -132,36 +132,43 @@ Consistent palette for data visualization:
 
 ```scss
 // Headings - Elegant serif for warmth and personality
-$font-heading: 'Lora', Georgia, serif;
+$font-heading: "Lora", Georgia, serif;
 
 // Body - Rounded sans-serif for excellent readability
-$font-body: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-body:
+  "Nunito",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
 
 // Monospace - For code and data
-$font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+$font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
 ```
 
 ### 3.2 Type Scale
 
-| Element | Font | Size | Weight | Line Height |
-|---------|------|------|--------|-------------|
-| Display (hero) | Lora | calc(1.625rem + 4.5vw) | 600 | 1.2 |
-| h1 | Lora | 2.5rem | 700 | 1.15 |
-| h2 | Lora | 2rem | 600 | 1.2 |
-| h3 | Lora | 1.5rem | 600 | 1.25 |
-| h4 | Lora | 1.25rem | 600 | 1.3 |
-| Body | Nunito | 1rem | 400 | 1.6 |
-| Body Large | Nunito | 1.1rem | 400 | 1.7 |
-| Small | Nunito | 0.875rem | 400 | 1.5 |
-| Caption | Nunito | 0.75rem | 400 | 1.4 |
+| Element        | Font   | Size                   | Weight | Line Height |
+| -------------- | ------ | ---------------------- | ------ | ----------- |
+| Display (hero) | Lora   | calc(1.625rem + 4.5vw) | 600    | 1.2         |
+| h1             | Lora   | 2.5rem                 | 700    | 1.15        |
+| h2             | Lora   | 2rem                   | 600    | 1.2         |
+| h3             | Lora   | 1.5rem                 | 600    | 1.25        |
+| h4             | Lora   | 1.25rem                | 600    | 1.3         |
+| Body           | Nunito | 1rem                   | 400    | 1.6         |
+| Body Large     | Nunito | 1.1rem                 | 400    | 1.7         |
+| Small          | Nunito | 0.875rem               | 400    | 1.5         |
+| Caption        | Nunito | 0.75rem                | 400    | 1.4         |
 
 ### 3.3 Usage Guidelines
 
-- **Headings**: Always use Lora for h1-h6 and display titles
+- **Headings**: Always use Lora for h1-h6 and display titles. Serif is reserved for **display/heading** roles only.
 - **Body text**: Nunito for all paragraph and UI text
-- **Code/Data**: JetBrains Mono for code blocks, data tables, and monospace needs
+- **Data & numbers**: Nunito with `font-variant-numeric: tabular-nums` (use the `.font-numeric` helper). **Do not** render stats, salaries, table headers, or other data in the serif heading font — serif is for titles, not figures.
+- **Code/Data**: JetBrains Mono for code blocks and monospace needs
 - **Color**: Use `--warm-text-heading` for headings, `--warm-text-primary` for body
-- **Letter spacing**: Add `0.02em` for display headings
+- **Letter spacing**: Headings and display titles use `-0.01em` (tighter, modern); avoid positive tracking on Lora display type
+- **Wrapping**: `text-wrap: balance` on headings, `text-wrap: pretty` on body paragraphs
 
 ---
 
@@ -170,27 +177,30 @@ $font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 ### 4.1 Spacing Scale
 
 ```scss
-$space-1: 0.25rem;  // 4px
-$space-2: 0.5rem;   // 8px
-$space-3: 0.75rem;  // 12px
-$space-4: 1rem;     // 16px
-$space-5: 1.5rem;   // 24px
-$space-6: 2rem;     // 32px
-$space-7: 2.5rem;   // 40px
-$space-8: 3rem;     // 48px
-$space-9: 4rem;     // 64px
-$space-10: 5rem;    // 80px
+$space-1: 0.25rem; // 4px
+$space-2: 0.5rem; // 8px
+$space-3: 0.75rem; // 12px
+$space-4: 1rem; // 16px
+$space-5: 1.5rem; // 24px
+$space-6: 2rem; // 32px
+$space-7: 2.5rem; // 40px
+$space-8: 3rem; // 48px
+$space-9: 4rem; // 64px
+$space-10: 5rem; // 80px
 ```
 
 ### 4.2 Border Radius
 
 ```scss
-$radius-sm: 6px;    // Small elements, badges
-$radius-md: 10px;   // Buttons, inputs, small cards
-$radius-lg: 16px;   // Cards, modals
-$radius-xl: 24px;   // Large containers, hero sections
+$radius-sm: 6px; // Small elements, badges
+$radius-md: 10px; // Buttons, inputs, small cards
+$radius-card: 14px; // Cards (crisper than $radius-lg)
+$radius-lg: 16px; // Modals, large containers
+$radius-xl: 24px; // Hero sections
 $radius-full: 9999px; // Pills, avatars
 ```
+
+Cards use `$radius-card` (14px) for a tighter, more modern edge; modals keep `$radius-lg`.
 
 ### 4.3 Container Widths
 
@@ -208,7 +218,7 @@ Layered, warm-tinted shadows for natural depth:
 
 ```scss
 // Shadow colors (warm-tinted)
---warm-shadow-color: rgba(61, 45, 35, 0.08);        // Light mode
+--warm-shadow-color: rgba(61, 45, 35, 0.08); // Light mode
 --warm-shadow-color-medium: rgba(61, 45, 35, 0.12);
 --warm-shadow-color-strong: rgba(61, 45, 35, 0.16);
 
@@ -220,12 +230,14 @@ Layered, warm-tinted shadows for natural depth:
 
 ### 5.2 Shadow Levels
 
-| Level | Definition | Usage |
-|-------|------------|-------|
-| `$shadow-sm` | `0 1px 2px, 0 2px 4px` | Subtle elevation, buttons at rest |
-| `$shadow-md` | `0 2px 4px, 0 4px 8px, 0 8px 16px` | Cards, elevated content |
-| `$shadow-lg` | `0 4px 8px, 0 8px 16px, 0 16px 32px` | Dropdowns, hover states |
-| `$shadow-xl` | `0 8px 16px, 0 16px 32px, 0 32px 64px` | Modals, dialogs |
+Two-layer elevation — a tight contact shadow plus a contained ambient layer with negative spread, so depth reads defined rather than diffuse.
+
+| Level        | Definition                    | Usage                                   |
+| ------------ | ----------------------------- | --------------------------------------- |
+| `$shadow-sm` | `0 1px 2px`                   | Subtle elevation, cards/buttons at rest |
+| `$shadow-md` | `0 1px 2px, 0 4px 8px -2px`   | Card/button hover, elevated content     |
+| `$shadow-lg` | `0 2px 4px, 0 10px 20px -4px` | Dropdowns, lifted hover states          |
+| `$shadow-xl` | `0 4px 8px, 0 18px 36px -6px` | Modals, dialogs                         |
 
 ### 5.3 Usage Example
 
@@ -253,11 +265,12 @@ Layered, warm-tinted shadows for natural depth:
 .card {
   background-color: var(--warm-card-bg);
   border: 1px solid var(--warm-card-border);
-  border-radius: $radius-lg;  // 16px
-  box-shadow: $shadow-sm;
+  border-radius: $radius-card; // 14px
+  box-shadow: $shadow-sm; // hairline border + minimal contact shadow at rest
 
   &:hover {
-    box-shadow: $shadow-md;
+    border-color: var(--warm-border-color);
+    box-shadow: $shadow-md; // lifts on hover
   }
 }
 
@@ -270,6 +283,7 @@ Layered, warm-tinted shadows for natural depth:
 ### 6.2 Buttons
 
 #### Primary Button (Terracotta)
+
 ```scss
 .btn-primary {
   background-color: var(--warm-accent-primary);
@@ -287,6 +301,7 @@ Layered, warm-tinted shadows for natural depth:
 ```
 
 #### Secondary Button (Sage)
+
 ```scss
 .btn-secondary {
   background-color: var(--warm-accent-secondary);
@@ -296,6 +311,7 @@ Layered, warm-tinted shadows for natural depth:
 ```
 
 #### Outline Buttons
+
 ```scss
 .btn-outline-primary {
   color: var(--warm-accent-primary);
@@ -348,10 +364,13 @@ Layered, warm-tinted shadows for natural depth:
 ```scss
 .table {
   color: var(--warm-text-primary);
+  font-variant-numeric: tabular-nums; // aligned numeric columns
 
   th {
-    font-family: $font-heading;
-    font-weight: 600;
+    // Column headers are UI labels (sans), not serif titles
+    font-family: $font-body;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     color: var(--warm-text-heading);
   }
 
@@ -397,9 +416,11 @@ Layered, warm-tinted shadows for natural depth:
 
 ```scss
 .stats-card {
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     var(--warm-bg-elevated) 0%,
-    var(--warm-bg-secondary) 100%);
+    var(--warm-bg-secondary) 100%
+  );
   border: 1px solid var(--warm-card-border);
   border-radius: $radius-md;
   padding: 1.25rem;
@@ -412,9 +433,12 @@ Layered, warm-tinted shadows for natural depth:
 }
 
 .stats-value {
-  font-family: $font-heading;
+  // Data reads as a tabular sans figure, never a serif headline
+  font-family: $font-body;
+  font-variant-numeric: tabular-nums;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--warm-accent-primary);
 }
 
@@ -455,18 +479,18 @@ Dark mode is implemented using CSS custom properties with three detection method
 
 ```typescript
 // theme.service.ts
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class ThemeService {
-  private readonly THEME_KEY = 'preferred-theme';
-  currentTheme$ = new BehaviorSubject<'light' | 'dark' | 'system'>('system');
+  private readonly THEME_KEY = "preferred-theme";
+  currentTheme$ = new BehaviorSubject<"light" | "dark" | "system">("system");
 
-  setTheme(theme: 'light' | 'dark' | 'system'): void {
+  setTheme(theme: "light" | "dark" | "system"): void {
     const root = document.documentElement;
 
-    if (theme === 'system') {
-      root.removeAttribute('data-theme');
+    if (theme === "system") {
+      root.removeAttribute("data-theme");
     } else {
-      root.setAttribute('data-theme', theme);
+      root.setAttribute("data-theme", theme);
     }
 
     localStorage.setItem(this.THEME_KEY, theme);
@@ -504,9 +528,7 @@ export class ThemeService {
 
 // Theme transition variable
 --theme-transition:
-  background-color 0.3s ease,
-  color 0.3s ease,
-  border-color 0.3s ease,
+  background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease,
   box-shadow 0.3s ease;
 
 // Disable on initial load
@@ -531,6 +553,11 @@ export class ThemeService {
 
 ```scss
 :root {
+  // Fonts (mirror the $font-* SCSS vars; consumed via var() in components)
+  --warm-font-heading: "Lora", Georgia, serif; // titles / headings only
+  --warm-font-body: "Nunito", -apple-system, ...; // body, labels, and data
+  --warm-font-mono: "JetBrains Mono", ...; // code, monospace data
+
   // Backgrounds
   --warm-bg-primary: #fffbf7;
   --warm-bg-secondary: #fef7f0;
@@ -624,8 +651,9 @@ export class ThemeService {
   --warm-scrollbar-thumb-hover: rgba(61, 45, 35, 0.35);
 
   // Transition
-  --theme-transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease, box-shadow 0.3s ease;
+  --theme-transition:
+    background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 ```
 
@@ -633,21 +661,31 @@ export class ThemeService {
 
 ```scss
 // Typography
-$font-heading: 'Lora', Georgia, serif;
-$font-body: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-$font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+$font-heading: "Lora", Georgia, serif;
+$font-body:
+  "Nunito",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
+$font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
 
 // Border radius
 $radius-sm: 6px;
 $radius-md: 10px;
+$radius-card: 14px;
 $radius-lg: 16px;
 $radius-xl: 24px;
 $radius-full: 9999px;
 
-// Transitions
-$transition-fast: 0.15s ease;
-$transition-normal: 0.2s ease;
-$transition-slow: 0.3s ease;
+// Transitions — exponential ease-out for confident, non-bouncy motion
+$transition-fast: 0.16s var(--ease-out-quart);
+$transition-normal: 0.22s var(--ease-out-quart);
+$transition-slow: 0.32s var(--ease-out-quart);
+
+// Easing curves (CSS variables)
+// --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+// --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
 ```
 
 ---
@@ -658,12 +696,12 @@ $transition-slow: 0.3s ease;
 
 All color combinations meet WCAG AA standards (4.5:1 minimum):
 
-| Combination | Light Mode | Dark Mode |
-|-------------|------------|-----------|
-| Body text on background | 7.5:1 | 8.2:1 |
-| Muted text on background | 4.8:1 | 4.5:1 |
-| Links on background | 4.6:1 | 5.1:1 |
-| Heading text | 10.2:1 | 11.5:1 |
+| Combination              | Light Mode | Dark Mode |
+| ------------------------ | ---------- | --------- |
+| Body text on background  | 7.5:1      | 8.2:1     |
+| Muted text on background | 4.8:1      | 4.5:1     |
+| Links on background      | 4.6:1      | 5.1:1     |
+| Heading text             | 10.2:1     | 11.5:1    |
 
 ### 9.2 Focus States
 
@@ -681,11 +719,30 @@ All color combinations meet WCAG AA standards (4.5:1 minimum):
 
 ### 9.3 Reduced Motion
 
+Implemented globally in `styles.scss`. Animations and transitions collapse to near-instant and lift/scale hover effects are disabled, while theme color crossfades stay intact.
+
 ```scss
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  // Lift / scale effects are flattened
+  .hover-lift:hover,
+  .increasable-on-hover:hover,
+  .card:hover,
+  .stats-card:hover,
+  .btn-primary:hover:not(:disabled) {
+    transform: none !important;
   }
 }
 ```
@@ -762,6 +819,9 @@ All color combinations meet WCAG AA standards (4.5:1 minimum):
 <p class="text-warm-muted">Muted text</p>
 <p class="text-accent-primary">Accent text (terracotta)</p>
 
+<!-- Numeric data: tabular sans figures (salaries, counts, ratings) -->
+<span class="font-numeric">847 000.00</span>
+
 <!-- Shadow utilities -->
 <div class="shadow-warm-sm">...</div>
 <div class="shadow-warm-md">...</div>
@@ -819,17 +879,17 @@ src/
 
 ## Quick Reference Card
 
-| Element | Background | Text | Accent | Radius |
-|---------|------------|------|--------|--------|
-| Page | `--warm-bg-primary` | `--warm-text-primary` | - | - |
-| Card | `--warm-card-bg` | `--warm-text-primary` | - | 16px |
-| Button Primary | `--warm-accent-primary` | white | - | 10px |
-| Button Secondary | `--warm-accent-secondary` | white | - | 10px |
-| Input | `--warm-input-bg` | `--warm-text-primary` | Focus: terracotta | 10px |
-| Heading | - | `--warm-text-heading` | - | - |
-| Link | - | `--warm-accent-primary` | Hover: darker | - |
-| Badge | `--warm-accent-*` | white | - | full |
-| Modal | `--warm-modal-bg` | `--warm-text-primary` | - | 16px |
+| Element          | Background                | Text                    | Accent            | Radius |
+| ---------------- | ------------------------- | ----------------------- | ----------------- | ------ |
+| Page             | `--warm-bg-primary`       | `--warm-text-primary`   | -                 | -      |
+| Card             | `--warm-card-bg`          | `--warm-text-primary`   | -                 | 14px   |
+| Button Primary   | `--warm-accent-primary`   | white                   | -                 | 10px   |
+| Button Secondary | `--warm-accent-secondary` | white                   | -                 | 10px   |
+| Input            | `--warm-input-bg`         | `--warm-text-primary`   | Focus: terracotta | 10px   |
+| Heading          | -                         | `--warm-text-heading`   | -                 | -      |
+| Link             | -                         | `--warm-accent-primary` | Hover: darker     | -      |
+| Badge            | `--warm-accent-*`         | white                   | -                 | full   |
+| Modal            | `--warm-modal-bg`         | `--warm-text-primary`   | -                 | 16px   |
 
 ---
 
@@ -838,3 +898,4 @@ src/
 - **Initial Version**: Warm & Friendly theme implementation
 - **Dark Mode**: Full dark mode support with system preference detection
 - **Components**: Cards, buttons, forms, tables, charts styled consistently
+- **2026 Refresh** (identity-preserving): serif reserved for display/headings — data, stats, and table headers moved to tabular sans (`.font-numeric`); cards tightened to `$radius-card` (14px) with hairline-border + defined-shadow elevation; two-layer shadow ramp; exponential ease-out transition curves (`--ease-out-quart/expo`); softer warm paper-grain background; `prefers-reduced-motion` guard added in code. Defined the previously-undefined `--warm-font-heading` / `--warm-font-body` / `--warm-font-mono` CSS variables (referenced across components but never declared); data values that referenced the heading var (ratings, stat values, salary table headers) repointed to `--warm-font-body`.

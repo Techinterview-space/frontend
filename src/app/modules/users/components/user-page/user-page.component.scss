@@ -78,7 +78,8 @@
       text-align: center;
 
       .stat-value {
-        font-family: var(--warm-font-heading);
+        // Data figure, not a title — sans
+        font-family: var(--warm-font-body);
         font-size: 1.5rem;
         font-weight: 700;
         color: var(--warm-accent-primary);

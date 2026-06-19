@@ -1,85 +1,113 @@
 import { Chart } from "chart.js/auto";
-import { RandomRgbColor } from "../random-rgb-color";
-import { CitiesDoughnutChartData } from "@services/user-salaries.service";
-import { KazakhstanCityEnum } from "@models/salaries/kazakhstan-city";
+import { ChartTheme } from "../chart-theme";
 
-interface ChartDatasetType {
+export interface CitiesChartItem {
+  label: string;
+  value: number;
+  percent: number;
+  isAggregate: boolean;
+}
+
+interface CitiesBarDataset {
   label: string;
   data: Array<number>;
   backgroundColor: Array<string>;
-  hoverOffset: number;
+  borderColor: Array<string>;
+  borderWidth: number;
+  borderRadius: number;
 }
 
+// Horizontal sorted bars for the cities drill-down. The "Другие"/"Точнее"
+// aggregate is rendered as a muted, clickable bar; clicking it asks the host
+// component to drill one level deeper. A mutable holder keeps the event
+// closures pointed at the current page's items across re-renders.
 export class CitiesDoughnutChartDataObject extends Chart {
-  private readonly datasets: Array<ChartDatasetType> = [];
+  private readonly state: { items: Array<CitiesChartItem> };
 
   constructor(
     canvasId: string,
-    private readonly chartData: CitiesDoughnutChartData,
+    items: Array<CitiesChartItem>,
+    onAggregateClick: () => void,
   ) {
-    const datasets: Array<ChartDatasetType> = [];
-    datasets.push(new ChartDatasetItem(chartData, false));
+    ChartTheme.applyDefaults();
+    const state: { items: Array<CitiesChartItem> } = { items };
 
     super(canvasId, {
-      type: "doughnut",
-      data: {
-        labels: chartData.items.map(
-          (x) => KazakhstanCityEnum.label(x.city) + ` (${x.count})`,
-        ),
-        datasets: datasets,
-      },
+      type: "bar",
+      data: CitiesDoughnutChartDataObject.buildData(items),
       options: {
-        aspectRatio: 1,
+        indexAxis: "y",
         responsive: true,
+        maintainAspectRatio: false,
+        onClick: (_event, elements) => {
+          const el = elements[0];
+          if (el != null && state.items[el.index]?.isAggregate) {
+            onAggregateClick();
+          }
+        },
+        onHover: (event, elements) => {
+          const target = event.native?.target as HTMLElement | null;
+          if (target == null) {
+            return;
+          }
+          const el = elements[0];
+          const overAggregate =
+            el != null && state.items[el.index]?.isAggregate === true;
+          target.style.cursor = overAggregate ? "pointer" : "default";
+        },
         plugins: {
-          legend: {
-            position: "bottom",
-            title: {
-              display: false,
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const item = state.items[ctx.dataIndex];
+                const percent = item != null ? item.percent : 0;
+                return ` ${ctx.parsed.x ?? 0} анкет (${percent.toFixed(1)}%)`;
+              },
             },
+          },
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: { precision: 0 },
+          },
+          y: {
+            grid: { display: false },
           },
         },
       },
     });
 
-    this.datasets = datasets;
+    this.state = state;
   }
 
-  toggleNoDataArea(show: boolean): void {
-    this.data.labels = this.chartData.items.map(
-      (x) => KazakhstanCityEnum.label(x.city) + ` (${x.count})`,
-    );
-
-    if (show && this.chartData.noDataCount > 0) {
-      this.data.labels.push(`Нет данных (${this.chartData.noDataCount})`);
-    }
-
-    this.data.datasets = [new ChartDatasetItem(this.chartData, show)];
-
+  setItems(items: Array<CitiesChartItem>): void {
+    this.state.items = items;
+    const built = CitiesDoughnutChartDataObject.buildData(items);
+    this.data.labels = built.labels;
+    this.data.datasets = built.datasets;
     this.update();
   }
-}
 
-class ChartDatasetItem implements ChartDatasetType {
-  readonly label: string;
-  readonly data: Array<number>;
-  readonly backgroundColor: Array<string>;
-  readonly hoverOffset: number;
-
-  constructor(chartData: CitiesDoughnutChartData, includeNoData: boolean) {
-    this.label = "Город проживания";
-    this.data = [];
-    this.backgroundColor = [];
-    this.hoverOffset = 4;
-
-    chartData.items.forEach((item) => {
-      this.data.push(item.count);
-      this.backgroundColor.push(new RandomRgbColor().toString(0.4));
-    });
-
-    if (includeNoData && chartData.noDataCount > 0) {
-      this.data.push(chartData.noDataCount);
-      this.backgroundColor.push(new RandomRgbColor().toString(0.4));
-    }
+  private static buildData(items: Array<CitiesChartItem>): {
+    labels: Array<string>;
+    datasets: Array<CitiesBarDataset>;
+  } {
+    const accent = ChartTheme.primary();
+    const muted = ChartTheme.gradeUnknown();
+    return {
+      labels: items.map((x) => x.label),
+      datasets: [
+        {
+          label: "Кол-во анкет",
+          data: items.map((x) => x.value),
+          backgroundColor: items.map((x) => (x.isAggregate ? muted : accent)),
+          borderColor: items.map((x) => (x.isAggregate ? muted : accent)),
+          borderWidth: 1,
+          borderRadius: 5,
+        },
+      ],
+    };
   }
 }
