@@ -93,6 +93,23 @@
   --warm-chart-grid: rgba(61, 45, 35, 0.08);
   --warm-chart-text: #5c5c5c;
 
+  // Sequential grade ramp (Trainee -> Lead): light to deep terracotta so
+  // seniority reads as deepening color. Used by salary grade visualizations.
+  --warm-grade-trainee: #f3d3c6;
+  --warm-grade-junior: #e8a98f;
+  --warm-grade-middle: #e07a5f;
+  --warm-grade-senior: #c1573c;
+  --warm-grade-lead: #97402a;
+  --warm-grade-unknown: #c9bdb2;
+
+  // Readable text color for a label sitting on each ramp step (AA for bold)
+  --warm-grade-trainee-on: #3d3d3d;
+  --warm-grade-junior-on: #3d3d3d;
+  --warm-grade-middle-on: #3d3d3d;
+  --warm-grade-senior-on: #ffffff;
+  --warm-grade-lead-on: #ffffff;
+  --warm-grade-unknown-on: #3d3d3d;
+
   // Code/monospace
   --warm-code-bg: #fef7f0;
   --warm-code-text: #3d3d3d;
@@ -118,6 +135,10 @@
   --theme-transition:
     background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease,
     box-shadow 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
+
+  // Easing curves — exponential ease-out for confident, non-bouncy motion
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -205,6 +226,22 @@
     --warm-chart-6: #d4b8e0;
     --warm-chart-grid: rgba(255, 251, 247, 0.06);
     --warm-chart-text: #b8b2ad;
+
+    // Grade ramp — on dark, seniority reads as increasing brightness
+    --warm-grade-trainee: #6e4034;
+    --warm-grade-junior: #a85f49;
+    --warm-grade-middle: #cf6f54;
+    --warm-grade-senior: #e8937b;
+    --warm-grade-lead: #f3b39d;
+    --warm-grade-unknown: #8a8078;
+
+    // Text on each ramp step (dark steps -> white, light steps -> ink)
+    --warm-grade-trainee-on: #ffffff;
+    --warm-grade-junior-on: #ffffff;
+    --warm-grade-middle-on: #2a2523;
+    --warm-grade-senior-on: #2a2523;
+    --warm-grade-lead-on: #2a2523;
+    --warm-grade-unknown-on: #ffffff;
 
     // Code/monospace
     --warm-code-bg: #2a2523;
@@ -314,6 +351,22 @@
   --warm-chart-grid: rgba(255, 251, 247, 0.06);
   --warm-chart-text: #b8b2ad;
 
+  // Grade ramp — on dark, seniority reads as increasing brightness
+  --warm-grade-trainee: #6e4034;
+  --warm-grade-junior: #a85f49;
+  --warm-grade-middle: #cf6f54;
+  --warm-grade-senior: #e8937b;
+  --warm-grade-lead: #f3b39d;
+  --warm-grade-unknown: #8a8078;
+
+  // Text on each ramp step (dark steps -> white, light steps -> ink)
+  --warm-grade-trainee-on: #ffffff;
+  --warm-grade-junior-on: #ffffff;
+  --warm-grade-middle-on: #2a2523;
+  --warm-grade-senior-on: #2a2523;
+  --warm-grade-lead-on: #2a2523;
+  --warm-grade-unknown-on: #ffffff;
+
   // Code
   --warm-code-bg: #2a2523;
   --warm-code-text: #e8e4e1;
@@ -351,6 +404,15 @@ $font-body:
   sans-serif;
 $font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
 
+// Expose the font stacks as CSS custom properties so component stylesheets can
+// reference them via var(--warm-font-*). Fonts don't vary by theme, so one
+// :root block (not duplicated in the dark-mode blocks) is enough.
+:root {
+  --warm-font-heading: #{$font-heading};
+  --warm-font-body: #{$font-body};
+  --warm-font-mono: #{$font-mono};
+}
+
 // Border radius
 $radius-sm: 6px;
 $radius-md: 10px;
@@ -370,30 +432,29 @@ $space-8: 3rem; // 48px
 $space-9: 4rem; // 64px
 $space-10: 5rem; // 80px
 
-// Transitions
-$transition-fast: 0.15s ease;
-$transition-normal: 0.2s ease;
-$transition-slow: 0.3s ease;
+// Transitions — exponential ease-out so interactions decelerate naturally
+$transition-fast: 0.16s var(--ease-out-quart);
+$transition-normal: 0.22s var(--ease-out-quart);
+$transition-slow: 0.32s var(--ease-out-quart);
 
-// Shadow definitions (using CSS variables)
-$shadow-sm:
-  0 1px 2px var(--warm-shadow-color),
-  0 2px 4px var(--warm-shadow-color);
+// Border radius — cards sit tighter than the legacy $radius-lg for a crisper feel
+$radius-card: 14px;
+
+// Shadow definitions — two-layer (tight contact + contained ambient) with negative
+// spread so elevation reads defined rather than diffuse
+$shadow-sm: 0 1px 2px var(--warm-shadow-color);
 
 $shadow-md:
-  0 2px 4px var(--warm-shadow-color),
-  0 4px 8px var(--warm-shadow-color),
-  0 8px 16px var(--warm-shadow-color);
+  0 1px 2px var(--warm-shadow-color),
+  0 4px 8px -2px var(--warm-shadow-color-medium);
 
 $shadow-lg:
-  0 4px 8px var(--warm-shadow-color),
-  0 8px 16px var(--warm-shadow-color),
-  0 16px 32px var(--warm-shadow-color-medium);
+  0 2px 4px var(--warm-shadow-color),
+  0 10px 20px -4px var(--warm-shadow-color-medium);
 
 $shadow-xl:
-  0 8px 16px var(--warm-shadow-color),
-  0 16px 32px var(--warm-shadow-color-medium),
-  0 32px 64px var(--warm-shadow-color-strong);
+  0 4px 8px var(--warm-shadow-color-medium),
+  0 18px 36px -6px var(--warm-shadow-color-strong);
 
 // ─────────────────────────────────────────────────────────────────────────────────
 // GLOBAL STYLES

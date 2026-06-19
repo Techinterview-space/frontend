@@ -8,15 +8,16 @@
 }
 
 canvas {
-  min-height: 350px;
+  min-height: 480px;
 }
 
 #canvas-container {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 350px;
-  max-height: 550px;
+  // Taller bands give the boxes ~30% more height plus room for zone padding.
+  min-height: 500px;
+  max-height: 780px;
   background-color: var(--warm-card-bg);
   border-radius: 12px;
   padding: 1rem;

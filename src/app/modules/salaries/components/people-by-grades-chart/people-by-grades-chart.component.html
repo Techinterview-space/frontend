@@ -9,17 +9,17 @@
     <div class="progress" (click)="toggleCountAndPercent()">
       <div
         *ngFor="let item of barsForLocal"
-        class="progress-bar progress-bar-striped {{ item.color }}"
+        class="progress-bar"
         role="progressbar"
-        [attr.aria-label]="item.label"
-        [ngStyle]="{ width: item.width + '%' }"
-        [attr.aria-label]="item.value"
+        [ngStyle]="{ width: item.width + '%', 'background-color': item.color }"
+        [attr.aria-label]="item.label + ' ' + item.value"
         aria-valuemin="0"
         aria-valuemax="100"
       >
         <strong
+          *ngIf="item.showLabel"
           title="{{ item.label }} - {{ item.value }}"
-          class="{{ item.textColor }}"
+          [ngStyle]="{ color: item.textColor }"
           >{{ item.value }}</strong
         >
       </div>
@@ -34,17 +34,17 @@
     <div class="progress" (click)="toggleCountAndPercent()">
       <div
         *ngFor="let item of barsForRemote"
-        class="progress-bar progress-bar-striped {{ item.color }}"
+        class="progress-bar"
         role="progressbar"
-        [attr.aria-label]="item.label"
-        [ngStyle]="{ width: item.width + '%' }"
-        [attr.aria-label]="item.value"
+        [ngStyle]="{ width: item.width + '%', 'background-color': item.color }"
+        [attr.aria-label]="item.label + ' ' + item.value"
         aria-valuemin="0"
         aria-valuemax="100"
       >
         <strong
+          *ngIf="item.showLabel"
           title="{{ item.label }} - {{ item.value }}"
-          class="{{ item.textColor }}"
+          [ngStyle]="{ color: item.textColor }"
           >{{ item.value }}</strong
         >
       </div>
@@ -53,8 +53,11 @@
 
   <div class="">
     <span>Значения цветов</span>
-    <span *ngFor="let grade of grades" class="ms-2">
-      <app-developer-grade-label [grade]="grade"></app-developer-grade-label>
-    </span>
+    <span
+      *ngFor="let item of legendItems"
+      class="grade-legend-chip ms-2"
+      [ngStyle]="{ 'background-color': item.bg, color: item.on }"
+      >{{ item.label }}</span
+    >
   </div>
 </div>

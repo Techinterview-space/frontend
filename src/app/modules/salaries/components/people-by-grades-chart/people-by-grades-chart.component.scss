@@ -24,3 +24,14 @@
     box-shadow: 0 2px 8px var(--warm-shadow-color);
   }
 }
+
+// Legend chips share the bars' sequential grade ramp
+.grade-legend-chip {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+}

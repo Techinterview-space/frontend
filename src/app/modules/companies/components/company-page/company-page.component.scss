@@ -60,7 +60,8 @@
   margin-bottom: 2rem;
 
   .rating-value {
-    font-family: var(--warm-font-heading);
+    // Data figure, not a title — sans
+    font-family: var(--warm-font-body);
     font-size: 3rem;
     font-weight: 700;
     color: var(--warm-accent-primary);

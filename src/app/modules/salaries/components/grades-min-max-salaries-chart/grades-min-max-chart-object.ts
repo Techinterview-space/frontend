@@ -1,4 +1,4 @@
-import { RandomRgbColor } from "../random-rgb-color";
+import { ChartTheme } from "../chart-theme";
 import { DeveloperGrade } from "@models/enums";
 import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";
 import {
@@ -30,17 +30,30 @@ export class GradesMinMaxSalariesChartObject extends BoxPlotChart {
   private readonly datasets: Array<ChartDataset> = [];
 
   constructor(canvasId: string, chartData: GradesMinMaxChartData) {
+    ChartTheme.applyDefaults();
+    const pair = ChartTheme.comparisonPair();
+    const itemColor = ChartTheme.withAlpha(ChartTheme.axis().text, 0.35);
     const datasets: Array<ChartDataset> = [];
 
     if (chartData.localData.length > 0) {
       datasets.push(
-        new ChartDataset(chartData.localData, "Казахстанская компания"),
+        new ChartDataset(
+          chartData.localData,
+          "Казахстанская компания",
+          pair.local,
+          itemColor,
+        ),
       );
     }
 
     if (chartData.remoteData.length > 0) {
       datasets.push(
-        new ChartDataset(chartData.remoteData, "Иностранная компания"),
+        new ChartDataset(
+          chartData.remoteData,
+          "Иностранная компания",
+          pair.foreign,
+          itemColor,
+        ),
       );
     }
 
@@ -75,17 +88,25 @@ class ChartDataset {
   readonly backgroundColor: string;
   readonly borderRadius = 5;
   readonly borderWidth = 2;
-  readonly itemRadius = 1;
+  readonly itemRadius = 2;
   readonly itemStyle = "circle";
-  readonly itemBackgroundColor = "#000";
+  readonly itemBackgroundColor: string;
+  readonly outlierBackgroundColor: string;
+  // Gap between the two boxes within a grade; smaller categoryPercentage leaves
+  // a larger gap between grade zones.
+  readonly barPercentage = 0.8;
+  readonly categoryPercentage = 0.6;
 
   constructor(
     gradeData: Array<GradeBoxPlotData>,
     readonly label: string,
+    colors: { bg: string; border: string },
+    itemColor: string,
   ) {
-    const color = new RandomRgbColor();
-    this.borderColor = color.toString(1);
-    this.backgroundColor = color.toString(0.7);
+    this.borderColor = colors.border;
+    this.backgroundColor = colors.bg;
+    this.itemBackgroundColor = itemColor;
+    this.outlierBackgroundColor = itemColor;
 
     this.data = GradesMinMaxSalariesChartObject.grades.map((g) => {
       const gradeBoxPlot = gradeData.find((data) => data.grade === g.grade);

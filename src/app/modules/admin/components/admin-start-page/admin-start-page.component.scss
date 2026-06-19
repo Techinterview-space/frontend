@@ -80,7 +80,8 @@
     font-size: 2rem;
     font-weight: 700;
     color: var(--warm-accent-primary);
-    font-family: var(--warm-font-heading);
+    // Data figure, not a title — sans
+    font-family: var(--warm-font-body);
   }
 
   .stat-label {
