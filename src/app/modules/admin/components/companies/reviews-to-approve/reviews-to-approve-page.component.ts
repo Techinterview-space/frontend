@@ -16,6 +16,8 @@ export class ReviewsToApprovePageComponent implements OnInit, OnDestroy {
   reviews: Array<CompanyReview> | null = null;
   confirmMessage: DialogMessage<ConfirmMsg> | null = null;
   reviewToShow: CompanyReview | null = null;
+  reviewToReject: CompanyReview | null = null;
+  rejectComment = "";
 
   constructor(
     private readonly service: CompaniesService,
@@ -68,21 +70,29 @@ export class ReviewsToApprovePageComponent implements OnInit, OnDestroy {
   }
 
   deleteReview(review: CompanyReview): void {
-    this.confirmMessage = new DialogMessage(
-      new ConfirmMsg(
-        "Удалить отзыв",
-        "Вы уверены, что удалить отзыв? Его нельзя будет восстановить.",
-        () => {
-          this.service
-            .deleteReview(review.companyId, review.id)
-            .pipe(untilDestroyed(this))
-            .subscribe(() => {
-              this.alert.success("Отзыв был удален");
-              this.confirmMessage = null;
-              this.ngOnInit();
-            });
-        },
-      ),
-    );
+    this.reviewToReject = review;
+    this.rejectComment = "";
+  }
+
+  closeRejectDialog(): void {
+    this.reviewToReject = null;
+    this.rejectComment = "";
+  }
+
+  confirmReject(): void {
+    const review = this.reviewToReject;
+    if (review == null) {
+      return;
+    }
+
+    const comment = this.rejectComment.trim();
+    this.service
+      .deleteReview(review.companyId, review.id, comment.length > 0 ? comment : null)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.alert.success("Отзыв был удален");
+        this.closeRejectDialog();
+        this.ngOnInit();
+      });
   }
 }

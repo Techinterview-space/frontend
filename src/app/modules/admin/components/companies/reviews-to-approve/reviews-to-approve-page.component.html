@@ -85,6 +85,33 @@
 ></app-confirm-dialog>
 
 <app-dialog
+  [show]="reviewToReject !== null"
+  (closed)="closeRejectDialog()"
+  [header]="'Удалить отзыв'"
+>
+  <div *ngIf="reviewToReject">
+    <p>Вы уверены, что удалить отзыв? Его нельзя будет восстановить.</p>
+    <div class="mb-3">
+      <label class="form-label" for="reject-comment">
+        Комментарий автору (необязательно)
+      </label>
+      <textarea
+        id="reject-comment"
+        class="form-control"
+        rows="4"
+        [(ngModel)]="rejectComment"
+        placeholder="Причина отклонения — будет отправлена автору по email"
+      ></textarea>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-outline-danger" (click)="confirmReject()">
+        Удалить и уведомить автора
+      </button>
+    </div>
+  </div>
+</app-dialog>
+
+<app-dialog
   [show]="reviewToShow !== null"
   (closed)="onReviewModalDlgClose()"
   [header]="'Отзыв ' + reviewToShow?.id"
