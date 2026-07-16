@@ -9,6 +9,7 @@ import { environment } from "@environments/environment";
 export interface HttpOptions {
   headers?: HttpHeaders | { [key: string]: string | string[] };
   params?: HttpParams | { [key: string]: string | string[] };
+  body?: any;
   responseType?: "json";
   observe?: "body";
   reportProgress?: boolean;

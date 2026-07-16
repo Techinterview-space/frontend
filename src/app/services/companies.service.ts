@@ -144,8 +144,14 @@ export class CompaniesService {
     );
   }
 
-  deleteReview(companyId: string, reviewId: string): Observable<void> {
-    return this.api.delete(this.apiUrl + companyId + "/reviews/" + reviewId);
+  deleteReview(
+    companyId: string,
+    reviewId: string,
+    comment: string | null = null,
+  ): Observable<void> {
+    return this.api.delete(this.apiUrl + companyId + "/reviews/" + reviewId, {
+      body: { comment },
+    });
   }
 
   recentReviews(params: PageParams): Observable<PaginatedList<CompanyReview>> {
